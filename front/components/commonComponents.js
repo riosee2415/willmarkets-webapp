@@ -1,5 +1,6 @@
-import { Row, Col, Button } from "antd";
+import { Row, Col, Button, Modal } from "antd";
 import styled from "styled-components";
+import Theme from "./Theme";
 
 export const RowWrapper = styled(Row)`
   width: ${(props) => props.width || `100%`};
@@ -195,46 +196,43 @@ export const CommonButton = styled(Button)`
   height: ${(props) => props.height};
   margin: ${(props) => props.margin};
   padding: ${(props) => props.padding};
-  font-size: ${(props) => props.fontSize || `1rem`};
-  color: ${(props) => props.color || props.theme.subTheme2_C};
-  border-radius: ${(props) => props.radius || `7px`};
+  font-size: ${(props) => props.fontSize || `15px`};
+  color: ${(props) => props.color || props.theme.grey_C};
+  border-radius: ${(props) => props.radius};
 
   ${(props) => !props.kindOf && `background : ${props.theme.white_C};`}
+  ${(props) => props.kindOf === `red` && `background : ${props.theme.red_C};`}
+  ${(props) => props.kindOf === `red` && `color : ${props.theme.white_C};`}
+  ${(props) => props.kindOf === `blue` && `background : ${props.theme.blue_C};`}
+  ${(props) => props.kindOf === `blue` && `color : ${props.theme.white_C};`}
   ${(props) =>
-    props.kindOf === `white` && `background : ${props.theme.basicTheme_C};`}
-  ${(props) => props.kindOf === `white` && `color : ${props.theme.subTheme_C};`}
-      ${(props) =>
-    props.kindOf === `white` && `border : 1px solid ${props.theme.subTheme_C};`}
-     ${(props) =>
     props.kindOf === `black` && `background : ${props.theme.black_C};`}
   ${(props) => props.kindOf === `black` && `color : ${props.theme.white_C};`}
-  
-    ${(props) =>
-    props.kindOf === `subTheme` && `background : ${props.theme.subTheme_C};`}
-  ${(props) => props.kindOf === `subTheme` && `color : ${props.theme.white_C};`}
-      ${(props) =>
-    props.kindOf === `subTheme` &&
-    `border : 1px solid ${props.theme.subTheme_C};`}
-
-
-
-&:hover {
+  ${(props) =>
+    props.kindOf === `white` && `border : 1px solid ${props.theme.black_C};`}
+     
+ 
+  &:hover {
     background: ${(props) => props.theme.white_C};
-    color: ${(props) => props.theme.basicTheme_C};
+    color: ${(props) => props.theme.grey_C};
+    ${(props) => !props.kindOf && `border :1px solid ${props.theme.grey_C};`}
     ${(props) =>
-      !props.kindOf && `border :1px solid ${props.theme.basicTheme_C};`}
-    ${(props) =>
-      props.kindOf === `white` && `background ${props.theme.basicTheme_C};`}
+      props.kindOf === `white` && `background ${props.theme.white_C};`}
          ${(props) =>
-      props.kindOf === `white` && `color ${props.theme.white_C};`}
-${(props) => props.kindOf === `black` && `background : ${props.theme.white_C};`}
-  ${(props) => props.kindOf === `black` && `color : ${props.theme.black_C};`}
+      props.kindOf === `white` && `color ${props.theme.grey_C};`}
+
+  ${(props) => props.kindOf === `red` && `color : ${props.theme.red_C};`}
+  ${(props) =>
+      props.kindOf === `red` && `border : 1px solid ${props.theme.red_C};`}
+  ${(props) => props.kindOf === `blue` && `color : ${props.theme.blue_C};`}
+  ${(props) =>
+      props.kindOf === `blue` && `border : 1px solid ${props.theme.blue_C};`}
   ${(props) =>
       props.kindOf === `black` && `border : 1px solid ${props.theme.black_C};`}
-        ${(props) =>
-      props.kindOf === `subTheme` && `color ${props.theme.subTheme_C};`}
-          ${(props) =>
-      props.kindOf === `subTheme` && `background ${props.theme.white_C};`}
+  }
+
+  @media (max-width: 700px) {
+    font-size: ${(props) => props.fontSize || `16px`};
   }
 `;
 

@@ -30,11 +30,6 @@ const Provider = () => {
   );
 };
 
-import wrapper from "../../store/configureStore";
-import { LOAD_MY_INFO_REQUEST } from "../../reducers/user";
-import { END } from "redux-saga";
-import axios from "axios";
-
 export const getServerSideProps = wrapper.getServerSideProps(
   async (context) => {
     // SSR Cookie Settings For Data Load/////////////////////////////////////

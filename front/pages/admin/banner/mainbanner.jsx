@@ -19,8 +19,8 @@ import useInput from "../../../hooks/useInput";
 import wrapper from "../../../store/configureStore";
 import { END } from "redux-saga";
 import axios from "axios";
-import { useRouter } from "next/router";
 import { LOAD_MY_INFO_REQUEST } from "../../../reducers/user";
+import { useRouter } from "next/router";
 
 const BANNER_WIDTH = `1200`;
 const BANNER_HEIGHT = `440`;
@@ -354,8 +354,7 @@ const Mainbanner = () => {
         <Button
           onClick={deletePopToggle(data.id)}
           type="danger"
-          loading={st_bannerDeleteLoading}
-        >
+          loading={st_bannerDeleteLoading}>
           DEL
         </Button>
       ),
@@ -387,8 +386,7 @@ const Mainbanner = () => {
         width={`1300px`}
         title={`메인베너 상세보기`}
         onCancel={viewClick()}
-        onOk={updateClick}
-      >
+        onOk={updateClick}>
         <BannerWrapper>
           <GuideWrapper>
             <GuideText>
@@ -428,8 +426,7 @@ const Mainbanner = () => {
             <Button
               type="primary"
               onClick={clickImageUpload}
-              loading={st_bannerUploadLoading}
-            >
+              loading={st_bannerUploadLoading}>
               UPLOAD
             </Button>
           </UploadWrapper>
@@ -448,8 +445,7 @@ const Mainbanner = () => {
         width={`1300px`}
         title={`메인베너 생성하기`}
         onCancel={createClick}
-        onOk={bannerCreate}
-      >
+        onOk={bannerCreate}>
         <BannerWrapper>
           <GuideWrapper>
             <GuideText>
@@ -489,8 +485,7 @@ const Mainbanner = () => {
             <Button
               type="primary"
               onClick={clickImageUpload}
-              loading={st_bannerUploadLoading}
-            >
+              loading={st_bannerUploadLoading}>
               UPLOAD
             </Button>
           </UploadWrapper>
@@ -507,8 +502,7 @@ const Mainbanner = () => {
         visible={deletePopVisible}
         onOk={deleteHandler}
         onCancel={deletePopToggle(null)}
-        title="정말 삭제하시겠습니까?"
-      >
+        title="정말 삭제하시겠습니까?">
         <div>삭제 된 데이터는 다시 복구할 수 없습니다.</div>
         <div>정말 삭제하시겠습니까?</div>
       </Modal>

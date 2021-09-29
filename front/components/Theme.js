@@ -8,11 +8,13 @@ export default {
   // yellow
   subTheme4_C: "#FFD321",
 
+  red_C: "#ec3434",
+  blue_C: "#2755df",
   // white
   white_C: "#ffffff",
   // black
   black_C: "#000000",
   // grey
-  grey_C: "#747474",
+  grey_C: "#595959",
   lightGrey_C: "#E2E2E2",
 };

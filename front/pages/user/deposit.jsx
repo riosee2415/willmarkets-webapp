@@ -18,12 +18,12 @@ import {
 import ClientLayout from "../../components/ClientLayout";
 import Theme from "../../components/Theme";
 
-const Intro = () => {
+const Deposit = () => {
   return (
     <ClientLayout>
-      <div>Hello Intro</div>
+      <div>Hello Deposit</div>
     </ClientLayout>
   );
 };
 
-export default Intro;
+export default Deposit;

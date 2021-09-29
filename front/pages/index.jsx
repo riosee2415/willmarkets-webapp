@@ -13,7 +13,8 @@ import Theme from "../components/Theme";
 const Home = ({ width }) => {
   return (
     <ClientLayout>
-      <RowWrapper>
+      index
+      {/* <RowWrapper>
         <ColWrapper
           span={24}
           height={`100vh`}
@@ -96,7 +97,7 @@ const Home = ({ width }) => {
             </RowWrapper>
           </ColWrapper>
         </ColWrapper>
-      </RowWrapper>
+      </RowWrapper> */}
     </ClientLayout>
   );
 };

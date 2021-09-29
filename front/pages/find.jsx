@@ -3,8 +3,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { withRouter } from "next/router";
 import styled from "styled-components";
 import { Result, message } from "antd";
-import useInput from "../../hooks/useInput";
-import { emptyCheck } from "../../components/commonUtils";
+import useInput from "../hooks/useInput";
+import { emptyCheck } from "../components/commonUtils";
 import {} from "@ant-design/icons";
 import {
   ColWrapper,
@@ -14,16 +14,16 @@ import {
   WholeWrapper,
   RsWrapper,
   CommonButton,
-} from "../../components/commonComponents";
-import ClientLayout from "../../components/ClientLayout";
-import Theme from "../../components/Theme";
+} from "../components/commonComponents";
+import ClientLayout from "../components/ClientLayout";
+import Theme from "../components/Theme";
 
-const Intro = () => {
+const Find = () => {
   return (
     <ClientLayout>
-      <div>Hello Intro</div>
+      <div>Hello Find</div>
     </ClientLayout>
   );
 };
 
-export default Intro;
+export default Find;

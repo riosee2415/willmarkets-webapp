@@ -18,12 +18,12 @@ import {
 import ClientLayout from "../../components/ClientLayout";
 import Theme from "../../components/Theme";
 
-const Intro = () => {
+const Pc = () => {
   return (
     <ClientLayout>
-      <div>Hello Intro</div>
+      <div>Hello Pc</div>
     </ClientLayout>
   );
 };
 
-export default Intro;
+export default Pc;

@@ -140,7 +140,7 @@ const AppHeader = ({ children, width }) => {
   }, [pageY]);
   return (
     <>
-      <WebRow
+      {/* <WebRow
         justify={`center`}
         position={`fixed`}
         top={`0`}
@@ -150,7 +150,7 @@ const AppHeader = ({ children, width }) => {
       >
         <ColWrapper span={20}>
           {/* web */}
-          <ColWrapper>
+      {/* <ColWrapper>
             <ColWrapper width={`100%`} padding={`10px 0`}>
               <ATag href="/">
                 <Image
@@ -159,7 +159,6 @@ const AppHeader = ({ children, width }) => {
                 />
               </ATag>
             </ColWrapper>
-
             <RowWrapper justify={`center`}>
               <MenuCol>
                 한의원 소개
@@ -194,10 +193,11 @@ const AppHeader = ({ children, width }) => {
               </ATag>
             </RowWrapper>
           </ColWrapper>
-        </ColWrapper>
-      </WebRow>
+        </ColWrapper> */}
+      {/* </WebRow>  */}
+
       {/* mobile */}
-      <MobileRow justify={`center`} className={headerScroll && "background"}>
+      {/* <MobileRow justify={`center`} className={headerScroll && "background"}>
         <ColWrapper span={11} al={`flex-start`}>
           <ATag width={`auto`} href="/">
             <Image
@@ -289,7 +289,7 @@ const AppHeader = ({ children, width }) => {
             </ColWrapper>
           </Drawer>
         )}
-      </MobileRow>
+      </MobileRow> */}
     </>
   );
 };

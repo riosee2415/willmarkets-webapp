@@ -13,7 +13,7 @@ const Fourleaf = ({ Component }) => {
       <ThemeProvider theme={Theme}>
         <GlobalStyles />
         <Head>
-          <title>[[**4LEAF GEAR SAMPLE**]]</title>
+          <title>Willmarket</title>
 
           <meta name="subject" content="[[**4LEAF GEAR SAMPLE**]]" />
           <meta name="title" content="[[**4LEAF GEAR SAMPLE**]]" />

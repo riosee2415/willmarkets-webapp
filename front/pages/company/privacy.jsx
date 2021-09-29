@@ -5,7 +5,7 @@ import styled from "styled-components";
 import { Result, message } from "antd";
 import useInput from "../../hooks/useInput";
 import { emptyCheck } from "../../components/commonUtils";
-import {} from "@ant-design/icons";
+
 import {
   ColWrapper,
   RowWrapper,
@@ -18,12 +18,12 @@ import {
 import ClientLayout from "../../components/ClientLayout";
 import Theme from "../../components/Theme";
 
-const Intro = () => {
+const Privacy = () => {
   return (
     <ClientLayout>
-      <div>Hello Intro</div>
+      <div>Hello Privacy</div>
     </ClientLayout>
   );
 };
 
-export default Intro;
+export default Privacy;

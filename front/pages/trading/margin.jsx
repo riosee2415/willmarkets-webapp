@@ -18,12 +18,12 @@ import {
 import ClientLayout from "../../components/ClientLayout";
 import Theme from "../../components/Theme";
 
-const Intro = () => {
+const Margin = () => {
   return (
     <ClientLayout>
-      <div>Hello Intro</div>
+      <div>Hello Margin</div>
     </ClientLayout>
   );
 };
 
-export default Intro;
+export default Margin;

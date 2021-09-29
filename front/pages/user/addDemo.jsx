@@ -18,12 +18,12 @@ import {
 import ClientLayout from "../../components/ClientLayout";
 import Theme from "../../components/Theme";
 
-const Intro = () => {
+const AddDemo = () => {
   return (
     <ClientLayout>
-      <div>Hello Intro</div>
+      <div>Hello AddDemo</div>
     </ClientLayout>
   );
 };
 
-export default Intro;
+export default AddDemo;

@@ -3,9 +3,13 @@ import { useDispatch, useSelector } from "react-redux";
 import { withRouter } from "next/router";
 import styled from "styled-components";
 import { Result, message } from "antd";
+import ReCAPTCHA from "react-google-recaptcha";
 import useInput from "../hooks/useInput";
 import { emptyCheck } from "../components/commonUtils";
-import {} from "@ant-design/icons";
+import wrapper from "../store/configureStore";
+import { END } from "redux-saga";
+import axios from "axios";
+import { LOAD_MY_INFO_REQUEST } from "../reducers/user";
 import {
   ColWrapper,
   RowWrapper,
@@ -22,8 +26,33 @@ const Login = () => {
   return (
     <ClientLayout>
       <div>Hello Login</div>
+
+      {/* <Wrapper>
+        <ReCAPTCHA sitekey={process.env["CAPTCHA_SITE_KEY"]}></ReCAPTCHA>
+      </Wrapper> */}
     </ClientLayout>
   );
 };
 
+export const getServerSideProps = wrapper.getServerSideProps(
+  async (context) => {
+    // SSR Cookie Settings For Data Load/////////////////////////////////////
+    const cookie = context.req ? context.req.headers.cookie : "";
+    axios.defaults.headers.Cookie = "";
+    if (context.req && cookie) {
+      axios.defaults.headers.Cookie = cookie;
+    }
+    ////////////////////////////////////////////////////////////////////////
+    // 구현부
+
+    context.store.dispatch({
+      type: LOAD_MY_INFO_REQUEST,
+    });
+
+    // 구현부 종료
+    context.store.dispatch(END);
+    console.log("🍀 SERVER SIDE PROPS END");
+    await context.store.sagaTask.toPromise();
+  }
+);
 export default Login;

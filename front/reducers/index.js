@@ -8,6 +8,7 @@ import notice from "./notice";
 import gallery from "./gallery";
 import question from "./question";
 import accept from "./accept";
+import locale from "./locale";
 
 const rootReducer = (state, action) => {
   switch (action.type) {
@@ -25,6 +26,7 @@ const rootReducer = (state, action) => {
           gallery,
           question,
           accept,
+          locale,
         });
         return combinedReducer(state, action);
       }

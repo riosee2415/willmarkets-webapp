@@ -1,12 +1,14 @@
 import React, { useCallback, useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { withRouter } from "next/router";
+import { withRouter, useRouter } from "next/router";
+import Link from "next/link";
 import styled from "styled-components";
 import { Result, message } from "antd";
 import useInput from "../../hooks/useInput";
 import { emptyCheck } from "../../components/commonUtils";
 import wrapper from "../../store/configureStore";
 import { LOAD_MY_INFO_REQUEST } from "../../reducers/user";
+import { CHANGE_LOCALE } from "../../reducers/locale";
 import { END } from "redux-saga";
 import axios from "axios";
 import {} from "@ant-design/icons";
@@ -21,11 +23,25 @@ import {
 } from "../../components/commonComponents";
 import ClientLayout from "../../components/ClientLayout";
 import Theme from "../../components/Theme";
+import { useTranslation } from "react-i18next";
 
 const AddDemo = () => {
+  const { t, i18n } = useTranslation();
+
   return (
     <ClientLayout>
-      <div>Hello AddDemo</div>
+      asdasd
+      <div>asdasdas</div>
+      <div>{t("test")}</div>
+      <div>{t("test")}</div>
+      <div>{t("test")}</div>
+      <button
+        onClick={() => {
+          i18n.changeLanguage(i18n.language === "en" ? "ko" : "en");
+        }}
+      >
+        Change Language
+      </button>
     </ClientLayout>
   );
 };

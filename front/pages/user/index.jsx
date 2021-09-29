@@ -1,34 +1,17 @@
-import React, { useCallback, useEffect, useRef, useState } from "react";
+import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { withRouter } from "next/router";
-import styled from "styled-components";
-import { Result, message } from "antd";
-import useInput from "../../hooks/useInput";
-import { emptyCheck } from "../../components/commonUtils";
-import {} from "@ant-design/icons";
-import wrapper from "../../store/configureStore";
 import { LOAD_MY_INFO_REQUEST } from "../../reducers/user";
-import { END } from "redux-saga";
+import UserLayout from "../../components/user/UserLayout";
 import axios from "axios";
-import {
-  ColWrapper,
-  RowWrapper,
-  Image,
-  Wrapper,
-  WholeWrapper,
-  RsWrapper,
-  CommonButton,
-} from "../../components/commonComponents";
-import ClientLayout from "../../components/ClientLayout";
-import Theme from "../../components/Theme";
+import wrapper from "../../store/configureStore";
+import { END } from "redux-saga";
+import {} from "../../components/commonComponents";
+import { withResizeDetector } from "react-resize-detector";
 
-const User = () => {
-  return (
-    <ClientLayout>
-      <div>Hello User</div>
-    </ClientLayout>
-  );
+const User = ({ width }) => {
+  return <UserLayout>index</UserLayout>;
 };
+
 export const getServerSideProps = wrapper.getServerSideProps(
   async (context) => {
     // SSR Cookie Settings For Data Load/////////////////////////////////////
@@ -50,5 +33,4 @@ export const getServerSideProps = wrapper.getServerSideProps(
     await context.store.sagaTask.toPromise();
   }
 );
-
-export default User;
+export default withResizeDetector(User);

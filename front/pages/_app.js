@@ -6,6 +6,7 @@ import { ThemeProvider } from "styled-components";
 import Theme from "../components/Theme";
 import GlobalStyles from "../components/GlobalStyles";
 import wrapper from "../store/configureStore";
+import i18n from "../i18n";
 
 const Fourleaf = ({ Component }) => {
   return (

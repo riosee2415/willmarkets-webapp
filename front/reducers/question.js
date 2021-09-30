@@ -24,19 +24,17 @@ export const initailState = {
 export const QUESTION_LIST_REQUEST = "QUESTION_LIST_REQUEST";
 export const QUESTION_LIST_SUCCESS = "QUESTION_LIST_SUCCESS";
 export const QUESTION_LIST_FAILURE = "QUESTION_LIST_FAILURE";
-
+//
 export const QUESTION_UPDATE_COMPLETE_REQUEST =
   "QUESTION_UPDATE_COMPLETE_REQUEST";
 export const QUESTION_UPDATE_COMPLETE_SUCCESS =
   "QUESTION_UPDATE_COMPLETE_SUCCESS";
 export const QUESTION_UPDATE_COMPLETE_FAILURE =
   "QUESTION_UPDATE_COMPLETE_FAILURE";
-
+//
 export const QUESTION_CREATE_REQUEST = "QUESTION_CREATE_REQUEST";
 export const QUESTION_CREATE_SUCCESS = "QUESTION_CREATE_SUCCESS";
 export const QUESTION_CREATE_FAILURE = "QUESTION_CREATE_FAILURE";
-
-// ************************************************
 
 const reducer = (state = initailState, action) =>
   produce(state, (draft) => {
@@ -76,6 +74,7 @@ const reducer = (state = initailState, action) =>
         draft.st_questionUpdateCompleteError = action.error;
         break;
       }
+      //
       case QUESTION_CREATE_REQUEST: {
         draft.st_questionCreateLoading = true;
         draft.st_questionCreateDone = null;
@@ -92,9 +91,7 @@ const reducer = (state = initailState, action) =>
         draft.st_questionCreateDone = false;
         break;
       }
-
-      ///////////////////////////////////////////////////////
-
+      //
       default:
         break;
     }

@@ -2,7 +2,6 @@ import { HYDRATE } from "next-redux-wrapper";
 import { combineReducers } from "redux";
 
 import user from "./user";
-import company from "./company";
 import question from "./question";
 import deposit from "./deposit";
 import withdraw from "./withdraw";
@@ -17,7 +16,6 @@ const rootReducer = (state, action) => {
     default: {
       const combinedReducer = combineReducers({
         user,
-        company,
         question,
         deposit,
         withdraw,

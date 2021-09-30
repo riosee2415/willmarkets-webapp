@@ -1,6 +1,5 @@
 import { all, fork } from "redux-saga/effects";
 import userSaga from "./user";
-import companySaga from "./company";
 import questionSage from "./question";
 import depositSage from "./deposit";
 import withdrawSage from "./withdraw";
@@ -16,7 +15,6 @@ axios.defaults.withCredentials = true;
 export default function* rootSaga() {
   yield all([
     fork(userSaga),
-    fork(companySaga),
     fork(questionSage),
     fork(depositSage),
     fork(withdrawSage),

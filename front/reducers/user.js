@@ -8,8 +8,6 @@ export const initailState = {
   email: null,
   userImagePath: null,
 
-  updateModal: false,
-
   st_userListLoading: false,
   st_userListDone: false,
   st_userListError: null,
@@ -396,16 +394,6 @@ const reducer = (state = initailState, action) =>
 
         break;
       }
-
-      //////////////////////////////////////////////
-
-      case UPDATE_MODAL_OPEN_REQUEST:
-        draft.updateModal = true;
-        break;
-
-      case UPDATE_MODAL_CLOSE_REQUEST:
-        draft.updateModal = false;
-        break;
 
       default:
         break;

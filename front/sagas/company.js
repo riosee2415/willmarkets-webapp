@@ -144,7 +144,7 @@ function* watchCompanyUpdate() {
 }
 
 //////////////////////////////////////////////////////////////
-export default function* bannerSaga() {
+export default function* CompanySaga() {
   yield all([
     fork(watchCompanyGet),
     fork(watchCompanyCreate),

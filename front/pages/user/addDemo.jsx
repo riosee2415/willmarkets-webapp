@@ -38,8 +38,7 @@ const AddDemo = () => {
       <button
         onClick={() => {
           i18n.changeLanguage(i18n.language === "en" ? "ko" : "en");
-        }}
-      >
+        }}>
         Change Language
       </button>
     </ClientLayout>

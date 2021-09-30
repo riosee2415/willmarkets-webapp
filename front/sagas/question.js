@@ -1,48 +1,28 @@
 import { all, call, delay, fork, put, takeLatest } from "redux-saga/effects";
 import axios from "axios";
 import {
-  QUESTION_GET_REQUEST,
-  QUESTION_GET_SUCCESS,
-  QUESTION_GET_FAILURE,
+  QUESTION_LIST_REQUEST,
+  QUESTION_LIST_SUCCESS,
+  QUESTION_LIST_FAILURE,
+  //
+  QUESTION_UPDATE_COMPLETE_REQUEST,
+  QUESTION_UPDATE_COMPLETE_SUCCESS,
+  QUESTION_UPDATE_COMPLETE_FAILURE,
   //
   QUESTION_CREATE_REQUEST,
   QUESTION_CREATE_SUCCESS,
   QUESTION_CREATE_FAILURE,
-  //
-  QUESTION_DELETE_REQUEST,
-  QUESTION_DELETE_SUCCESS,
-  QUESTION_DELETE_FAILURE,
-  //
-  QUESTION_UPDATE_REQUEST,
-  QUESTION_UPDATE_SUCCESS,
-  QUESTION_UPDATE_FAILURE,
-  // ************************************************
-  QUESTION_TYPE_GET_REQUEST,
-  QUESTION_TYPE_GET_SUCCESS,
-  QUESTION_TYPE_GET_FAILURE,
-  //
-  QUESTION_TYPE_CREATE_REQUEST,
-  QUESTION_TYPE_CREATE_SUCCESS,
-  QUESTION_TYPE_CREATE_FAILURE,
-  //
-  QUESTION_TYPE_DELETE_REQUEST,
-  QUESTION_TYPE_DELETE_SUCCESS,
-  QUESTION_TYPE_DELETE_FAILURE,
-  //
-  QUESTION_TYPE_UPDATE_REQUEST,
-  QUESTION_TYPE_UPDATE_SUCCESS,
-  QUESTION_TYPE_UPDATE_FAILURE,
 } from "../reducers/question";
 
 // SAGA AREA ********************************************************************************************************
 // ******************************************************************************************************************
-function questionGetAPI(data) {
+function questionListAPI(data) {
   return axios.get(`/api/question/list/${data.listType}`);
 }
 
-function* questionGet(action) {
+function* questionList(action) {
   try {
-    const result = yield call(questionGetAPI, action.data);
+    const result = yield call(questionListAPI, action.data);
 
     yield put({
       type: QUESTION_GET_SUCCESS,
@@ -56,74 +36,19 @@ function* questionGet(action) {
     });
   }
 }
-
 // ******************************************************************************************************************
 // ******************************************************************************************************************
 // ******************************************************************************************************************
 
 // SAGA AREA ********************************************************************************************************
 // ******************************************************************************************************************
-function questionCreateAPI(data) {
-  return axios.post(`/api/question/create`, data);
+function updatequestionAPI(data) {
+  return axios.patch(`/api/question/updateComplete`, data);
 }
 
-function* questionCreate(action) {
+function* updatequestion(action) {
   try {
-    const result = yield call(questionCreateAPI, action.data);
-
-    yield put({
-      type: QUESTION_CREATE_SUCCESS,
-      data: result.data,
-    });
-  } catch (err) {
-    console.error(err);
-    yield put({
-      type: QUESTION_CREATE_FAILURE,
-      error: err.response.data,
-    });
-  }
-}
-
-// ******************************************************************************************************************
-// ******************************************************************************************************************
-// ******************************************************************************************************************
-
-// SAGA AREA ********************************************************************************************************
-// ******************************************************************************************************************
-function questionDeleteAPI(data) {
-  return axios.delete(`/api/question/delete/${data.questionId}`);
-}
-
-function* questionDelete(action) {
-  try {
-    const result = yield call(questionDeleteAPI, action.data);
-
-    yield put({
-      type: QUESTION_DELETE_SUCCESS,
-      data: result.data,
-    });
-  } catch (err) {
-    console.error(err);
-    yield put({
-      type: QUESTION_DELETE_FAILURE,
-      error: err.response.data,
-    });
-  }
-}
-
-// ******************************************************************************************************************
-// ******************************************************************************************************************
-// ******************************************************************************************************************
-
-// SAGA AREA ********************************************************************************************************
-// ******************************************************************************************************************
-function questionUpdateAPI(data) {
-  return axios.patch(`/api/question/update`, data);
-}
-
-function* questionUpdate(action) {
-  try {
-    const result = yield call(questionUpdateAPI, action.data);
+    const result = yield call(updatequestionAPI, action.data);
 
     yield put({
       type: QUESTION_UPDATE_SUCCESS,
@@ -142,110 +67,24 @@ function* questionUpdate(action) {
 // ******************************************************************************************************************
 // ******************************************************************************************************************
 
-// ******************************************************************************************************************
-// ******************************************************************************************************************
-// ******************************************************************************************************************
-// ******************************************************************************************************************
-
 // SAGA AREA ********************************************************************************************************
 // ******************************************************************************************************************
-function questionTypeGetAPI() {
-  return axios.get(`/api/question/type/list`);
+function createquestionAPI(data) {
+  return axios.post(`/api/question/create`, data);
 }
 
-function* questionTypeGet() {
+function* createquestion(action) {
   try {
-    const result = yield call(questionTypeGetAPI);
+    const result = yield call(createquestionAPI, action.data);
 
     yield put({
-      type: QUESTION_TYPE_GET_SUCCESS,
+      type: QUESTION_CREATE_SUCCESS,
       data: result.data,
     });
   } catch (err) {
     console.error(err);
     yield put({
-      type: QUESTION_TYPE_GET_FAILURE,
-      error: err.response.data,
-    });
-  }
-}
-
-// ******************************************************************************************************************
-// ******************************************************************************************************************
-// ******************************************************************************************************************
-
-// SAGA AREA ********************************************************************************************************
-// ******************************************************************************************************************
-function questionTypeCreateAPI(data) {
-  return axios.post(`/api/question/type/create`, data);
-}
-
-function* questionTypeCreate(action) {
-  try {
-    const result = yield call(questionTypeCreateAPI, action.data);
-
-    yield put({
-      type: QUESTION_TYPE_CREATE_SUCCESS,
-      data: result.data,
-    });
-  } catch (err) {
-    console.error(err);
-    yield put({
-      type: QUESTION_TYPE_CREATE_FAILURE,
-      error: err.response.data,
-    });
-  }
-}
-
-// ******************************************************************************************************************
-// ******************************************************************************************************************
-// ******************************************************************************************************************
-
-// SAGA AREA ********************************************************************************************************
-// ******************************************************************************************************************
-function questionTypeDeleteAPI(data) {
-  return axios.delete(`/api/question/type/delete/${data.questionTypeId}`);
-}
-
-function* questionTypeDelete(action) {
-  try {
-    const result = yield call(questionTypeDeleteAPI, action.data);
-
-    yield put({
-      type: QUESTION_TYPE_DELETE_SUCCESS,
-      data: result.data,
-    });
-  } catch (err) {
-    console.error(err);
-    yield put({
-      type: QUESTION_TYPE_DELETE_FAILURE,
-      error: err.response.data,
-    });
-  }
-}
-
-// ******************************************************************************************************************
-// ******************************************************************************************************************
-// ******************************************************************************************************************
-
-// SAGA AREA ********************************************************************************************************
-// ******************************************************************************************************************
-function questionTypeUpdateAPI(data) {
-  return axios.patch(`/api/question/type/update`, data);
-}
-
-function* questionTypeUpdate(action) {
-  try {
-    const result = yield call(questionTypeUpdateAPI, action.data);
-
-    yield put({
-      type: QUESTION_TYPE_UPDATE_SUCCESS,
-      data: result.data,
-    });
-  } catch (err) {
-    console.error(err);
-    yield put({
-      type: QUESTION_TYPE_UPDATE_FAILURE,
+      type: QUESTION_CREATE_FAILURE,
       error: err.response.data,
     });
   }
@@ -257,54 +96,27 @@ function* questionTypeUpdate(action) {
 
 //////////////////////////////////////////////////////////////
 
-function* watchQuestionGet() {
-  yield takeLatest(QUESTION_GET_REQUEST, questionGet);
+function* watchQuestionList() {
+  yield takeLatest(QUESTION_LIST_REQUEST, questionList);
 }
 
-function* watchQuestionCreate() {
-  yield takeLatest(QUESTION_CREATE_REQUEST, questionCreate);
+function* watchUpdateQuestion() {
+  yield takeLatest(QUESTION_UPDATE_COMPLETE_REQUEST, updatequestion);
 }
 
-function* watchQuestionDelete() {
-  yield takeLatest(QUESTION_DELETE_REQUEST, questionDelete);
-}
-
-function* watchQuestionUpdate() {
-  yield takeLatest(QUESTION_UPDATE_REQUEST, questionUpdate);
-}
-
-// ****************************************************************
-
-function* watchQuestionTypeGet() {
-  yield takeLatest(QUESTION_TYPE_GET_REQUEST, questionTypeGet);
-}
-
-function* watchQuestionTypeCreate() {
-  yield takeLatest(QUESTION_TYPE_CREATE_REQUEST, questionTypeCreate);
-}
-
-function* watchQuestionTypeDelete() {
-  yield takeLatest(QUESTION_TYPE_DELETE_REQUEST, questionTypeDelete);
-}
-
-function* watchQuestionTypeUpdate() {
-  yield takeLatest(QUESTION_TYPE_UPDATE_REQUEST, questionTypeUpdate);
+function* watchCreateQuestion() {
+  yield takeLatest(QUESTION_CREATE_REQUEST, createquestion);
 }
 
 //////////////////////////////////////////////////////////////
-export default function* bannerSaga() {
+export default function* questionSaga() {
   yield all([
-    fork(watchQuestionGet),
-    fork(watchQuestionCreate),
-    fork(watchQuestionDelete),
-    fork(watchQuestionUpdate),
+    fork(watchQuestionList),
+    fork(watchUpdateQuestion),
+    fork(watchCreateQuestion),
 
     // ****************************************************************
 
-    fork(watchQuestionTypeGet),
-    fork(watchQuestionTypeCreate),
-    fork(watchQuestionTypeDelete),
-    fork(watchQuestionTypeUpdate),
     //
   ]);
 }

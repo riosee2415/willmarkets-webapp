@@ -1,12 +1,11 @@
 import { all, fork } from "redux-saga/effects";
-import bannerSaga from "./banner";
 import userSaga from "./user";
-import popupSaga from "./popup";
 import companySaga from "./company";
-import noticeSage from "./notice";
-import gallerySage from "./gallery";
 import questionSage from "./question";
-import accept from "./accept";
+import depositSage from "./deposit";
+import withdrawSage from "./withdraw";
+import liveAccount from "./liveAccount";
+import demoAccount from "./demoAccount";
 //
 import axios from "axios";
 import backURL from "../config/config";
@@ -16,13 +15,12 @@ axios.defaults.withCredentials = true;
 
 export default function* rootSaga() {
   yield all([
-    fork(bannerSaga),
     fork(userSaga),
-    fork(popupSaga),
     fork(companySaga),
-    fork(noticeSage),
-    fork(gallerySage),
     fork(questionSage),
-    fork(accept),
+    fork(depositSage),
+    fork(withdrawSage),
+    fork(liveAccount),
+    fork(demoAccount),
   ]);
 }

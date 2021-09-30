@@ -8,6 +8,10 @@ const notice = require("./notice");
 const gallary = require("./gallary");
 const question = require("./question");
 const questiontype = require("./questiontype");
+const deposit = require("./deposit");
+const demoAccount = require("./demoAccount");
+const liveAccount = require("./liveAccount");
+const withdraw = require("./withdraw");
 
 const env = process.env.NODE_ENV || "development";
 const config = require("../config/config")[env];
@@ -29,6 +33,10 @@ db.Notice = notice;
 db.Gallary = gallary;
 db.Question = question;
 db.QuestionType = questiontype;
+db.Deposit = deposit;
+db.DemoAccount = demoAccount;
+db.LiveAccount = liveAccount;
+db.Withdraw = withdraw;
 
 Object.keys(db).forEach((modelName) => {
   db[modelName].init(sequelize);

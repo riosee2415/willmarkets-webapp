@@ -151,6 +151,12 @@ router.patch("/updatePermit", isAdminCheck, async (req, res, next) => {
     );
 
     if (updateResult[0] > 0) {
+      sendSecretMail(
+        "4leaf.sjh@gmai.com",
+        "test Title",
+        "<h1>Test Mail Send</h1>"
+      );
+
       return res.status(200).json({ result: true });
     } else {
       return res.status(200).json({ result: false });

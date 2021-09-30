@@ -1,297 +1,200 @@
 import React, { useState, useEffect, useCallback } from "react";
-import {
-  RowWrapper,
-  ColWrapper,
-  CommonButton,
-  Image,
-  ATag,
-} from "../commonComponents";
+import { Wrapper, Image } from "../commonComponents";
 import { withResizeDetector } from "react-resize-detector";
 import styled from "styled-components";
 import Theme from "../Theme";
-import { AlignRightOutlined } from "@ant-design/icons";
-import { Drawer } from "antd";
-import Link from "next/link";
+import { useRouter } from "next/router";
+import {
+  DollarOutlined,
+  HomeOutlined,
+  CaretUpOutlined,
+  CaretDownOutlined,
+  UserOutlined,
+} from "@ant-design/icons";
 
-const WebRow = styled(RowWrapper)`
-  background: transparent;
-  position: fixed;
-  top: 0;
-  left: 0;
-  z-index: 10000;
-  transition: 0.5s;
+const Submenu = styled(Wrapper)``;
 
-  &.background {
-    background: rgba(0, 0, 0, 0.5);
-    backdrop-filter: blur(3px);
-  }
-
-  @media (max-width: 700px) {
-    display: none;
-  }
-`;
-
-const MobileRow = styled(RowWrapper)`
-  display: none;
-
-  background: transparent;
-  position: fixed;
-  top: 0;
-  left: 0;
-  z-index: 10000;
-  transition: 0.5s;
-  padding: 10px 0;
-
-  &.background {
-    background: rgba(0, 0, 0, 0.5);
-    backdrop-filter: blur(3px);
-  }
-
-  @media (max-width: 700px) {
-    display: flex;
-  }
-`;
-
-const MenuCol = styled(ColWrapper)`
-  color: ${Theme.white_C};
-  width: 170px;
-  height: 60px;
-  background: transparent;
+const SubmenuTitle = styled(Wrapper)`
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 15px 20px 13px 30px;
+  color: #fff;
+  font-size: 14px;
+  background-color: #201f1f;
+  border-bottom: 1px solid #2b2b2b;
   cursor: pointer;
-  transition: 0.5s;
-  font-weight: 700;
-  position: relative;
-
-  & .submenu {
-    display: none;
-  }
 
   &:hover {
-    background: ${Theme.white_C};
-    color: ${Theme.black_C};
-    & .submenu {
-      display: flex;
-    }
+    color: #f7b1ff;
+  }
+
+  ${(props) =>
+    props.isActive &&
+    `
+     color: #f7b1ff;
+  `}
+
+  & > div {
+    flex-direction: row;
+    width: auto;
+    cursor: pointer;
+  }
+
+  & > div span {
+    margin: 0 10px 0 0;
+    position: relative;
+    bottom: 1px;
+  }
+
+  & > span {
+    font-size: 12px;
   }
 `;
 
-const SubMenuCol = styled(ColWrapper)`
-  position: absolute;
-  width: 100%;
-  height: auto;
-  background: ${Theme.black_C};
-  padding: 10px 30px;
-  text-align: center;
-  top: 60px;
+const SubmenuList = styled(Wrapper)`
+  overflow: hidden;
+  max-height: 0;
+
+  ${(props) =>
+    props.isOpen
+      ? `
+    max-height: 999px;
+    transition: max-height 0.25s ease-in;
+  `
+      : `
+    max-height: 0;
+    transition: max-height 0.25s ease-out;
+  `}
 `;
 
-const SubMenuTextCol = styled(ColWrapper)`
-  color: ${Theme.white_C};
-  font-weight: 300;
-  position: relative;
-  padding: 10px 0 3px;
-
-  &:before {
-    content: "";
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 0;
-    height: 1px;
-    background: ${Theme.white_C};
-    transition: 0.5s;
-  }
+const SubmenuListItem = styled(Wrapper)`
+  flex-direction: row;
+  justify-content: flex-start;
+  padding: 12px 20px 10px 55px;
+  color: #272525;
+  font-size: 15px;
+  background-color: #fcf0f6;
+  border-bottom: 1px solid #dedede;
+  box-shadow: 0 1px 4px #c5c5c5;
+  cursor: pointer;
 
   &:hover {
-    font-weight: 700;
-    &:before {
-      width: 100%;
-    }
+    background-color: #ffe8fe;
   }
+
+  ${(props) =>
+    props.isActive &&
+    `
+     background-color: #FFE8FE;
+  `}
 `;
 
-const AppHeader = ({ children, width }) => {
-  ////////////// - USE STATE- ///////////////
-  const [headerScroll, setHeaderScroll] = useState(false);
-  const [pageY, setPageY] = useState(0);
-  // const documentRef = useRef(document);
+const UserSide = () => {
+  const router = useRouter();
 
-  const [drawar, setDrawar] = useState(false);
-  const [subMenu, setSubMenu] = useState(``);
+  const [toggleSubmenu, setToggleSubmenu] = useState(-1);
 
-  ///////////// - EVENT HANDLER- ////////////
+  const moveLinkHandler = (link) => {
+    router.push(link);
+  };
 
-  const drawarToggle = useCallback(() => {
-    setDrawar(!drawar);
-  });
+  const toggleSubmenuHandler = (idx) => {
+    if (toggleSubmenu === idx) {
+      setToggleSubmenu(-1);
+    } else {
+      setToggleSubmenu(-1);
 
-  const handleScroll = useCallback(() => {
-    const { pageYOffset } = window;
-    const deltaY = pageYOffset - pageY;
-    const headerScroll = pageY && pageYOffset !== 0 && pageYOffset !== pageY;
-    setHeaderScroll(headerScroll);
-    setPageY(pageYOffset);
-  });
+      setTimeout(() => {
+        setToggleSubmenu(idx);
+      }, 250);
+    }
+  };
 
-  ////////////// - USE EFFECT- //////////////
-  useEffect(() => {
-    document.addEventListener("scroll", handleScroll);
-    return () => document.removeEventListener("scroll", handleScroll);
-  }, [pageY]);
   return (
-    <>
-      {/* <WebRow
-        justify={`center`}
-        position={`fixed`}
-        top={`0`}
-        left={`0`}
-        index={`10000`}
-        className={headerScroll && "background"}
-      >
-        <ColWrapper span={20}>
-          {/* web */}
-      {/* <ColWrapper>
-            <ColWrapper width={`100%`} padding={`10px 0`}>
-              <ATag href="/">
-                <Image
-                  width={`100px`}
-                  src={`https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/SOUL/assets/images/logo/soul_logo.png`}
-                />
-              </ATag>
-            </ColWrapper>
-            <RowWrapper justify={`center`}>
-              <MenuCol>
-                한의원 소개
-                <ATag href="about">
-                  <SubMenuCol className="submenu">
-                    <SubMenuTextCol>의료진 소개 및 진료 시간표</SubMenuTextCol>
-                  </SubMenuCol>
-                </ATag>
-              </MenuCol>
-              <MenuCol>
-                <Link href="/diagnosis?type=0">진료 과목</Link>
-                <SubMenuCol className="submenu">
-                  <SubMenuTextCol>
-                    <Link href="/diagnosis?type=1">체질 의학</Link>
-                  </SubMenuTextCol>
-                  <SubMenuTextCol>
-                    <Link href="/diagnosis?type=2">소울 다이어트</Link>
-                  </SubMenuTextCol>
-                  <SubMenuTextCol>
-                    <Link href="/diagnosis?type=3">만성 난치 클리닉</Link>
-                  </SubMenuTextCol>
-                  <SubMenuTextCol>
-                    <Link href="/diagnosis?type=4">통증 클리닉</Link>
-                  </SubMenuTextCol>
-                </SubMenuCol>
-              </MenuCol>
-              <ATag width={`auto`} href="/notice">
-                <MenuCol>공지사항</MenuCol>
-              </ATag>
-              <ATag width={`auto`} href="location">
-                <MenuCol>오시는 길</MenuCol>
-              </ATag>
-            </RowWrapper>
-          </ColWrapper>
-        </ColWrapper> */}
-      {/* </WebRow>  */}
+    <Wrapper>
+      <Wrapper margin={`20px 0 40px`} cursor={`pointer`}>
+        <Image
+          width={`40%`}
+          src={`https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/willmarkets/assets/images/logo/logo_2.png`}
+        />
+      </Wrapper>
 
-      {/* mobile */}
-      {/* <MobileRow justify={`center`} className={headerScroll && "background"}>
-        <ColWrapper span={11} al={`flex-start`}>
-          <ATag width={`auto`} href="/">
-            <Image
-              width={`110px`}
-              src={`https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/SOUL/assets/images/logo/logo_long_white.png`}
-            />
-          </ATag>
-        </ColWrapper>
-        <ColWrapper
-          span={11}
-          al={`flex-end`}
-          fontSize={`2rem`}
-          color={Theme.white_C}
-        >
-          <AlignRightOutlined onClick={drawarToggle} />
-        </ColWrapper>
-
-        {drawar && (
-          <Drawer
-            placement="right"
-            closable={true}
-            onClose={drawarToggle}
-            visible={drawarToggle}
-            getContainer={false}
+      <Wrapper>
+        <Submenu>
+          <SubmenuTitle
+            isActive={router.pathname === `/user`}
+            onClick={() => moveLinkHandler(`/user`)}
           >
-            <ColWrapper al={`flex-start`}>
-              <ColWrapper
-                fontSize={`1.2rem`}
-                onClick={() => {
-                  setSubMenu(0);
-                }}
-              >
-                한의원 소개
-              </ColWrapper>
-              {subMenu === 0 && (
-                <>
-                  <ATag href="about" width={`auto`} color={`initial`}>
-                    <ColWrapper margin={`5px 10px 20px`}>
-                      의료진 소개 및 진료 시간표
-                    </ColWrapper>
-                  </ATag>
-                </>
-              )}
-              <ColWrapper
-                fontSize={`1.2rem`}
-                onClick={() => {
-                  setSubMenu(1);
-                }}
-              >
-                진료 과목
-              </ColWrapper>
-              {subMenu === 1 && (
-                <>
-                  <ColWrapper margin={`5px 10px 0`}>
-                    <Link href="/diagnosis?type=1">체질 의학</Link>
-                  </ColWrapper>
+            <Wrapper>
+              <HomeOutlined />
+              홈페이지
+            </Wrapper>
+          </SubmenuTitle>
+        </Submenu>
 
-                  <ColWrapper margin={`5px 10px 0`}>
-                    <Link href="/diagnosis?type=2">소울 다이어트</Link>
-                  </ColWrapper>
-                  <ColWrapper margin={`5px 10px 0`}>
-                    <Link href="/diagnosis?type=3">만성 난치 클리닉</Link>
-                  </ColWrapper>
-                  <ColWrapper margin={`5px 10px 20px`}>
-                    <Link href="/diagnosis?type=4">통증 클리닉</Link>
-                  </ColWrapper>
-                </>
-              )}
-              <ATag width={`auto`} href="notice" color={`initial`}>
-                <ColWrapper
-                  fontSize={`1.2rem`}
-                  onClick={() => {
-                    setSubMenu(2);
-                  }}
-                >
-                  공지사항
-                </ColWrapper>
-              </ATag>
-              <ATag href="location" width={`auto`} color={`initial`}>
-                <ColWrapper
-                  fontSize={`1.2rem`}
-                  onClick={() => {
-                    setSubMenu(3);
-                  }}
-                >
-                  오시는 길
-                </ColWrapper>
-              </ATag>
-            </ColWrapper>
-          </Drawer>
-        )}
-      </MobileRow> */}
-    </>
+        <Submenu>
+          <SubmenuTitle
+            isActive={[
+              `/user/deposit`,
+              `/user/withdraw`,
+              `/user/record`,
+            ].includes(router.pathname)}
+            onClick={() => toggleSubmenuHandler(1)}
+          >
+            <Wrapper>
+              <DollarOutlined />
+              자금
+            </Wrapper>
+
+            {toggleSubmenu === 1 ? <CaretUpOutlined /> : <CaretDownOutlined />}
+          </SubmenuTitle>
+
+          <SubmenuList isOpen={toggleSubmenu === 1}>
+            <SubmenuListItem
+              isActive={router.pathname === `/user/deposit`}
+              onClick={() => moveLinkHandler(`/user/deposit`)}
+            >
+              입금
+            </SubmenuListItem>
+            <SubmenuListItem
+              isActive={router.pathname === `/user/withdraw`}
+              onClick={() => moveLinkHandler(`/user/withdraw`)}
+            >
+              출금
+            </SubmenuListItem>
+            <SubmenuListItem
+              isActive={router.pathname === `/user/record`}
+              onClick={() => moveLinkHandler(`/user/record`)}
+            >
+              심사기록
+            </SubmenuListItem>
+          </SubmenuList>
+        </Submenu>
+
+        <Submenu>
+          <SubmenuTitle
+            isActive={[`/user/info`].includes(router.pathname)}
+            onClick={() => toggleSubmenuHandler(2)}
+          >
+            <Wrapper>
+              <UserOutlined />내 계정
+            </Wrapper>
+
+            {toggleSubmenu === 2 ? <CaretUpOutlined /> : <CaretDownOutlined />}
+          </SubmenuTitle>
+
+          <SubmenuList isOpen={toggleSubmenu === 2}>
+            <SubmenuListItem
+              isActive={router.pathname === `/user/info`}
+              onClick={() => moveLinkHandler(`/user/info`)}
+            >
+              내 정보 관리
+            </SubmenuListItem>
+          </SubmenuList>
+        </Submenu>
+      </Wrapper>
+    </Wrapper>
   );
 };
 
-export default withResizeDetector(AppHeader);
+export default withResizeDetector(UserSide);

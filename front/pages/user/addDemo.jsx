@@ -21,7 +21,7 @@ import {
   RsWrapper,
   CommonButton,
 } from "../../components/commonComponents";
-import ClientLayout from "../../components/ClientLayout";
+import UserLayout from "../../components/user/UserLayout";
 import Theme from "../../components/Theme";
 import { useTranslation } from "react-i18next";
 
@@ -29,7 +29,7 @@ const AddDemo = () => {
   const { t, i18n } = useTranslation();
 
   return (
-    <ClientLayout>
+    <UserLayout>
       asdasd
       <div>asdasdas</div>
       <div>{t("test")}</div>
@@ -42,7 +42,7 @@ const AddDemo = () => {
       >
         Change Language
       </button>
-    </ClientLayout>
+    </UserLayout>
   );
 };
 

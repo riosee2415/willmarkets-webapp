@@ -1,15 +1,11 @@
 import produce from "../util/produce";
 
 export const initailState = {
-  questions: null,
-  types: null,
-
-  createTypeModal: false, // 문의 유형 create 모달 실행
-  updateModal: false, // 문의 update 모달 실행
+  questionList: null,
   //
-  st_questionLoading: false,
-  st_questionDone: false,
-  st_questionError: null,
+  st_questionListLoading: false,
+  st_questionListDone: false,
+  st_questionListError: null,
   //
   st_questionUpdateCompleteLoading: false,
   st_questionUpdateCompleteDone: false,
@@ -40,23 +36,24 @@ const reducer = (state = initailState, action) =>
   produce(state, (draft) => {
     switch (action.type) {
       case QUESTION_LIST_REQUEST: {
-        draft.st_questionLoading = true;
-        draft.st_questionDone = null;
-        draft.st_questionError = false;
+        draft.st_questionListLoading = true;
+        draft.st_questionListDone = null;
+        draft.st_questionListError = false;
         break;
       }
       case QUESTION_LIST_SUCCESS: {
-        draft.st_questionLoading = false;
-        draft.st_questionDone = true;
-        draft.questions = action.data;
+        draft.st_questionListLoading = false;
+        draft.st_questionListDone = true;
+        draft.questionList = action.data;
         break;
       }
       case QUESTION_LIST_FAILURE: {
-        draft.st_questionLoading = false;
-        draft.st_questionDone = false;
-        draft.st_questionError = action.error;
+        draft.st_questionListLoading = false;
+        draft.st_questionListDone = false;
+        draft.st_questionListError = action.error;
         break;
       }
+      //
       case QUESTION_UPDATE_COMPLETE_REQUEST: {
         draft.st_questionUpdateCompleteLoading = true;
         draft.st_questionUpdateCompleteDone = null;
@@ -89,9 +86,9 @@ const reducer = (state = initailState, action) =>
       case QUESTION_CREATE_FAILURE: {
         draft.st_questionCreateLoading = false;
         draft.st_questionCreateDone = false;
+        draft.st_questionCreateError = false;
         break;
       }
-      //
       default:
         break;
     }

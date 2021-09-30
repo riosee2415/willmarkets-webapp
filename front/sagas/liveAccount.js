@@ -17,15 +17,15 @@ import {
 
 // SAGA AREA ********************************************************************************************************
 // ******************************************************************************************************************
-function liveListAPI(data) {
+function liveAccountListAPI(data) {
   return axios.get(
     `/api/liveAccount/list/?page=${data.page}&search=${data.search}`
   );
 }
 
-function* liveList(action) {
+function* liveAccountList(action) {
   try {
-    const result = yield call(liveListAPI, action.data);
+    const result = yield call(liveAccountListAPI, action.data);
 
     yield put({
       type: LIVE_ACCOUNT_LIST_SUCCESS,
@@ -42,13 +42,13 @@ function* liveList(action) {
 
 // SAGA AREA ********************************************************************************************************
 // ******************************************************************************************************************
-function updateLivePermitAPI(data) {
-  return axios.patch(`/api/liveAccount/updatePermit`);
+function liveAccountUpdatePermitAPI(data) {
+  return axios.patch(`/api/liveAccount/updatePermit`, data);
 }
 
-function* updateLivePermit(action) {
+function* liveAccountUpdatePermit(action) {
   try {
-    const result = yield call(updateLivePermitAPI, action.data);
+    const result = yield call(liveAccountUpdatePermitAPI, action.data);
 
     yield put({
       type: LIVE_ACCOUNT_UPDATE_PERMIT_SUCCESS,
@@ -65,13 +65,13 @@ function* updateLivePermit(action) {
 
 // SAGA AREA ********************************************************************************************************
 // ******************************************************************************************************************
-function createLiveAPI(data) {
-  return axios.patch(`/api/liveAccount/create`);
+function liveAccountCreateAPI(data) {
+  return axios.post(`/api/liveAccount/create`, data);
 }
 
-function* createLive(action) {
+function* liveAccountCreate(action) {
   try {
-    const result = yield call(createLiveAPI, action.data);
+    const result = yield call(liveAccountCreateAPI, action.data);
 
     yield put({
       type: LIVE_ACCOUNT_CREATE_SUCCESS,
@@ -91,22 +91,20 @@ function* createLive(action) {
 // ******************************************************************************************************************
 
 //////////////////////////////////////////////////////////////
-function* watchLiveList() {
-  yield takeLatest(LIVE_ACCOUNT_LIST_REQUEST, liveList);
+function* watchLiveAccountList() {
+  yield takeLatest(LIVE_ACCOUNT_LIST_REQUEST, liveAccountList);
 }
-function* watchUpdateLivePermit() {
-  yield takeLatest(LIVE_ACCOUNT_UPDATE_PERMIT_REQUEST, updateLivePermit);
+function* watchLiveAccountUpdatePermit() {
+  yield takeLatest(LIVE_ACCOUNT_UPDATE_PERMIT_REQUEST, liveAccountUpdatePermit);
 }
-function* watchCreateLive() {
-  yield takeLatest(LIVE_ACCOUNT_CREATE_REQUEST, createLive);
+function* watchLiveAccountCreate() {
+  yield takeLatest(LIVE_ACCOUNT_CREATE_REQUEST, liveAccountCreate);
 }
 //////////////////////////////////////////////////////////////
 export default function* liveAccountSaga() {
   yield all([
-    fork(watchLiveList),
-    fork(watchUpdateLivePermit),
-    fork(watchCreateLive),
-
-    //
+    fork(watchLiveAccountList),
+    fork(watchLiveAccountUpdatePermit),
+    fork(watchLiveAccountCreate),
   ]);
 }

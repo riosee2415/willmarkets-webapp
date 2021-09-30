@@ -49,13 +49,13 @@ function* depositList(action) {
 
 // SAGA AREA ********************************************************************************************************
 // ******************************************************************************************************************
-function updateDepositPermitAPI(data) {
-  return axios.patch(`/api/deposit/updatePermit`);
+function depositUpdatePermitAPI(data) {
+  return axios.patch(`/api/deposit/updatePermit`, data);
 }
 
-function* updateDepositPermit(action) {
+function* depositUpdatePermit(action) {
   try {
-    const result = yield call(updateDepositPermitAPI, action.data);
+    const result = yield call(depositUpdatePermitAPI, action.data);
 
     yield put({
       type: DEPOSIT_UPDATE_PERMIT_SUCCESS,
@@ -72,13 +72,13 @@ function* updateDepositPermit(action) {
 
 // SAGA AREA ********************************************************************************************************
 // ******************************************************************************************************************
-function createDepositAPI(data) {
-  return axios.patch(`/api/deposit/create`, data);
+function depositCreateAPI(data) {
+  return axios.post(`/api/deposit/create`, data);
 }
 
-function* createDeposit(action) {
+function* depositCreate(action) {
   try {
-    const result = yield call(createDepositAPI, action.data);
+    const result = yield call(depositCreateAPI, action.data);
 
     yield put({
       type: DEPOSIT_CREATE_SUCCESS,
@@ -95,35 +95,13 @@ function* createDeposit(action) {
 
 // SAGA AREA ********************************************************************************************************
 // ******************************************************************************************************************
-function createDepositImageFileAPI(data) {
-  return axios.patch(`/api/deposit/createImage`, data);
+function depositImageFileCreateAPI(data) {
+  return axios.post(`/api/deposit/createImage`, data);
 }
 
-function* createDepositImageFile(action) {
+function* depositImageFileCreate(action) {
   try {
-    const result = yield call(createDepositImageFileAPI, action.data);
-
-    yield put({
-      type: DEPOSIT_IMAGE_FILE_SUCCESS,
-      data: result.data,
-    });
-  } catch (err) {
-    console.error(err);
-    yield put({
-      type: DEPOSIT_IMAGE_FILE_FAILURE,
-      error: err.response.data,
-    });
-  }
-}
-// SAGA AREA ********************************************************************************************************
-// ******************************************************************************************************************
-function depositImageFileAPI(data) {
-  return axios.patch(`/api/deposit/image`, data);
-}
-
-function* depositImageFile(action) {
-  try {
-    const result = yield call(depositImageFileAPI, action.data);
+    const result = yield call(depositImageFileCreateAPI, action.data);
 
     yield put({
       type: DEPOSIT_IMAGE_FILE_CREATE_SUCCESS,
@@ -133,6 +111,28 @@ function* depositImageFile(action) {
     console.error(err);
     yield put({
       type: DEPOSIT_IMAGE_FILE_CREATE_FAILURE,
+      error: err.response.data,
+    });
+  }
+}
+// SAGA AREA ********************************************************************************************************
+// ******************************************************************************************************************
+function depositImageFileAPI(data) {
+  return axios.post(`/api/deposit/image`, data);
+}
+
+function* depositImageFile(action) {
+  try {
+    const result = yield call(depositImageFileAPI, action.data);
+
+    yield put({
+      type: DEPOSIT_IMAGE_FILE_SUCCESS,
+      data: result.data,
+    });
+  } catch (err) {
+    console.error(err);
+    yield put({
+      type: DEPOSIT_IMAGE_FILE_FAILURE,
       error: err.response.data,
     });
   }
@@ -147,16 +147,16 @@ function* watchDepositList() {
   yield takeLatest(DEPOSIT_LIST_REQUEST, depositList);
 }
 
-function* watchUpdateDepositPermit() {
-  yield takeLatest(DEPOSIT_UPDATE_PERMIT_REQUEST, updateDepositPermit);
+function* watchDepositUpdatePermit() {
+  yield takeLatest(DEPOSIT_UPDATE_PERMIT_REQUEST, depositUpdatePermit);
 }
 
-function* watchCreateDeposit() {
-  yield takeLatest(DEPOSIT_CREATE_REQUEST, createDeposit);
+function* watchDepositCreate() {
+  yield takeLatest(DEPOSIT_CREATE_REQUEST, depositCreate);
 }
 
-function* watchCreateDepositImageFile() {
-  yield takeLatest(DEPOSIT_IMAGE_FILE_CREATE_REQUEST, createDepositImageFile);
+function* watchDepositImageFileCreate() {
+  yield takeLatest(DEPOSIT_IMAGE_FILE_CREATE_REQUEST, depositImageFileCreate);
 }
 
 function* watchDepositImageFile() {
@@ -166,11 +166,9 @@ function* watchDepositImageFile() {
 export default function* depositSaga() {
   yield all([
     fork(watchDepositList),
-    fork(watchUpdateDepositPermit),
-    fork(watchCreateDeposit),
-    fork(watchCreateDepositImageFile),
+    fork(watchDepositUpdatePermit),
+    fork(watchDepositCreate),
+    fork(watchDepositImageFileCreate),
     fork(watchDepositImageFile),
-
-    //
   ]);
 }

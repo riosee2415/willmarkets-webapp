@@ -4,51 +4,63 @@ import {
   USER_LIST_REQUEST,
   USER_LIST_SUCCESS,
   USER_LIST_FAILURE,
-  /////////////////////////////
-  USER_MY_REQUEST,
-  USER_MY_SUCCESS,
-  USER_MY_FAILURE,
-  /////////////////////////////
+  //
+  USER_ME_REQUEST,
+  USER_ME_SUCCESS,
+  USER_ME_FAILURE,
+  //
   USER_SIGNUP_REQUEST,
   USER_SIGNUP_SUCCESS,
   USER_SIGNUP_FAILURE,
-  /////////////////////////////
+  //
   USER_ID_IMAGE_FILE_REQUEST,
   USER_ID_IMAGE_FILE_SUCCESS,
   USER_ID_IMAGE_FILE_FAILURE,
-  /////////////////////////////
-  USER_MY_UPDATE_REQUEST,
-  USER_MY_UPDATE_SUCCESS,
-  USER_MY_UPDATE_FAILURE,
-  /////////////////////////////
-  USER_SIGN_IN_REQUEST,
-  USER_SIGN_IN_SUCCESS,
-  USER_SIGN_IN_FAILURE,
-  ///////////////////////////
+  //
+  USER_ME_UPDATE_REQUEST,
+  USER_ME_UPDATE_SUCCESS,
+  USER_ME_UPDATE_FAILURE,
+  //
+  USER_SIGNIN_REQUEST,
+  USER_SIGNIN_SUCCESS,
+  USER_SIGNIN_FAILURE,
+  //
   SIGNIN_ADMIN_REQUEST,
   SIGNIN_ADMIN_SUCCESS,
   SIGNIN_ADMIN_FAILURE,
-  /////////////////////////////
-  UPDATE_PRICE_REQUEST,
-  UPDATE_PRICE_SUCCESS,
-  UPDATE_PRICE_FAILURE,
-  /////////////////////////////
+  //
+  USER_UPDATE_PRICE_REQUEST,
+  USER_UPDATE_PRICE_SUCCESS,
+  USER_UPDATE_PRICE_FAILURE,
+  //
   USER_UPDATE_PERMIT_REQUEST,
   USER_UPDATE_PERMIT_SUCCESS,
   USER_UPDATE_PERMIT_FAILURE,
-  /////////////////////////////
+  //
   USER_FIND_EMAIL_REQUEST,
   USER_FIND_EMAIL_SUCCESS,
   USER_FIND_EMAIL_FAILURE,
-  /////////////////////////////
+  //
   USER_MODIFY_PASSWORD_REQUEST,
   USER_MODIFY_PASSWORD_SUCCESS,
   USER_MODIFY_PASSWORD_FAILURE,
-  /////////////////////////////
+  //
   USER_MODIFY_PASSWORD_UPDATE_REQUEST,
   USER_MODIFY_PASSWORD_UPDATE_SUCCESS,
   USER_MODIFY_PASSWORD_UPDATE_FAILURE,
-  ////////////////////////////
+  //
+  USER_FIND_PASSWORD_REQUEST,
+  USER_FIND_PASSWORD_SUCCESS,
+  USER_FIND_PASSWORD_FAILURE,
+  //
+  USER_FIND_PASSWORD_CONFIRM_REQUEST,
+  USER_FIND_PASSWORD_CONFIRM_SUCCESS,
+  USER_FIND_PASSWORD_CONFIRM_FAILURE,
+  //
+  USER_FIND_PASSWORD_UPDATE_REQUEST,
+  USER_FIND_PASSWORD_UPDATE_SUCCESS,
+  USER_FIND_PASSWORD_UPDATE_FAILURE,
+  //
   LOAD_MY_INFO_REQUEST,
   LOAD_MY_INFO_SUCCESS,
   LOAD_MY_INFO_FAILURE,
@@ -76,35 +88,27 @@ function* loadMyInfo(action) {
   }
 }
 
-// ******************************************************************************************************************
-// ******************************************************************************************************************
-// *****
-
 // SAGA AREA ********************************************************************************************************
 // ******************************************************************************************************************
-function usersigninAPI(data) {
+function userSigninAPI(data) {
   return axios.post(`/api/user/signin`, data);
 }
 
-function* usersignin(action) {
+function* userSignin(action) {
   try {
-    const result = yield call(usersigninAPI, action.data);
+    const result = yield call(userSigninAPI, action.data);
     yield put({
-      type: USER_SIGN_IN_SUCCESS,
+      type: USER_SIGNIN_SUCCESS,
       data: result.data,
     });
   } catch (err) {
     console.error(err);
     yield put({
-      type: USER_SIGN_IN_FAILURE,
+      type: USER_SIGNIN_FAILURE,
       error: err.response.data,
     });
   }
 }
-
-// ******************************************************************************************************************
-// ******************************************************************************************************************
-// ******************************************************************************************************************
 
 // SAGA AREA ********************************************************************************************************
 // ******************************************************************************************************************
@@ -128,19 +132,15 @@ function* signinAdmin(action) {
   }
 }
 
-// ******************************************************************************************************************
-// ******************************************************************************************************************
-// ******************************************************************************************************************
-
 // SAGA AREA ********************************************************************************************************
 // ******************************************************************************************************************
-function usersignUpAPI(data) {
+function userSignUpAPI(data) {
   return axios.post(`/api/user/signup`, data);
 }
 
-function* usersignUp(action) {
+function* userSignUp(action) {
   try {
-    const result = yield call(usersignUpAPI, action.data);
+    const result = yield call(userSignUpAPI, action.data);
     yield put({
       type: USER_SIGNUP_SUCCESS,
       data: result.data,
@@ -154,15 +154,11 @@ function* usersignUp(action) {
   }
 }
 
-// ******************************************************************************************************************
-// ******************************************************************************************************************
-// ******************************************************************************************************************
-
 // SAGA AREA ********************************************************************************************************
 // ******************************************************************************************************************
 function userListAPI(data) {
   return axios.get(
-    `/api/user/list/${data.listType}?name=${data.name}&email=${data.email}`
+    `/api/user/list/${data.listType}/${data.listType2}?page=${data.name}&search=${data.email}`
   );
 }
 
@@ -182,79 +178,67 @@ function* userList(action) {
   }
 }
 
-// ******************************************************************************************************************
-// ******************************************************************************************************************
-// ******************************************************************************************************************
-
 // SAGA AREA ********************************************************************************************************
 // ******************************************************************************************************************
-function userMyAPI(data) {
+function userMeAPI(data) {
   return axios.get(`/api/user/me`, data);
 }
 
-function* userMy(action) {
+function* userMe(action) {
   try {
-    const result = yield call(userMyAPI, action.data);
+    const result = yield call(userMeAPI, action.data);
     yield put({
-      type: USER_MY_SUCCESS,
+      type: USER_ME_SUCCESS,
       data: result.data,
     });
   } catch (err) {
     console.error(err);
     yield put({
-      type: USER_MY_FAILURE,
+      type: USER_ME_FAILURE,
       error: err.response.data,
     });
   }
 }
 
-// ******************************************************************************************************************
-// ******************************************************************************************************************
-// ******************************************************************************************************************
-
 // SAGA AREA ********************************************************************************************************
 // ******************************************************************************************************************
-function userMyUpdateAPI(data) {
+function userMeUpdateAPI(data) {
   return axios.patch(`/api/user/me/update`, data);
 }
 
-function* userMyUpdate(action) {
+function* userMeUpdate(action) {
   try {
-    const result = yield call(userMyUpdateAPI, action.data);
+    const result = yield call(userMeUpdateAPI, action.data);
     yield put({
-      type: USER_MY_UPDATE_SUCCESS,
+      type: USER_ME_UPDATE_SUCCESS,
       data: result.data,
     });
   } catch (err) {
     console.error(err);
     yield put({
-      type: USER_MY_UPDATE_FAILURE,
+      type: USER_ME_UPDATE_FAILURE,
       error: err.response.data,
     });
   }
 }
 
-// ******************************************************************************************************************
-// ******************************************************************************************************************
-// ******************************************************************************************************************
-
 // SAGA AREA ********************************************************************************************************
 // ******************************************************************************************************************
-function updatePriceAPI(data) {
+function userUpdatePriceAPI(data) {
   return axios.patch(`/api/user/updatePrice`, data);
 }
 
-function* updatePrice(action) {
+function* userUpdatePrice(action) {
   try {
-    const result = yield call(updatePriceAPI, action.data);
+    const result = yield call(userUpdatePriceAPI, action.data);
     yield put({
-      type: UPDATE_PRICE_SUCCESS,
+      type: USER_UPDATE_PRICE_SUCCESS,
       data: result.data,
     });
   } catch (err) {
     console.error(err);
     yield put({
-      type: UPDATE_PRICE_FAILURE,
+      type: USER_UPDATE_PRICE_FAILURE,
       error: err.response.data,
     });
   }
@@ -367,6 +351,70 @@ function* userIdImageFile(action) {
     });
   }
 }
+// SAGA AREA ********************************************************************************************************
+// ******************************************************************************************************************
+function userFindPasswordAPI(data) {
+  return axios.post(`/api/user/findPass`, data);
+}
+
+function* userFindPassword(action) {
+  try {
+    const result = yield call(userFindPasswordAPI, action.data);
+    yield put({
+      type: USER_FIND_PASSWORD_SUCCESS,
+      data: result.data,
+    });
+  } catch (err) {
+    console.error(err);
+    yield put({
+      type: USER_FIND_PASSWORD_FAILURE,
+      error: err.response.data,
+    });
+  }
+}
+
+// SAGA AREA ********************************************************************************************************
+// ******************************************************************************************************************
+function userFindPasswordUpdateAPI(data) {
+  return axios.patcha(`/api/user/findPass/update`, data);
+}
+
+function* userFindPasswordUpdate(action) {
+  try {
+    const result = yield call(userFindPasswordUpdateAPI, action.data);
+    yield put({
+      type: USER_FIND_PASSWORD_UPDATE_SUCCESS,
+      data: result.data,
+    });
+  } catch (err) {
+    console.error(err);
+    yield put({
+      type: USER_FIND_PASSWORD_UPDATE_FAILURE,
+      error: err.response.data,
+    });
+  }
+}
+// SAGA AREA ********************************************************************************************************
+// ******************************************************************************************************************
+function userFindPasswordConfirmAPI(data) {
+  return axios.post(`/api/user/findPass/confirm`, data);
+}
+
+function* userFindPasswordConfirm(action) {
+  try {
+    const result = yield call(userFindPasswordConfirmAPI, action.data);
+    yield put({
+      type: USER_FIND_PASSWORD_CONFIRM_SUCCESS,
+      data: result.data,
+    });
+  } catch (err) {
+    console.error(err);
+    yield put({
+      type: USER_FIND_PASSWORD_CONFIRM_FAILURE,
+      error: err.response.data,
+    });
+  }
+}
 // ******************************************************************************************************************
 // ******************************************************************************************************************
 // ******************************************************************************************************************
@@ -378,7 +426,7 @@ function* watchLoadMyInfo() {
 }
 
 function* watchUserSignin() {
-  yield takeLatest(USER_SIGN_IN_REQUEST, usersignin);
+  yield takeLatest(USER_SIGNIN_REQUEST, userSignin);
 }
 
 function* watchSigninAdmin() {
@@ -386,22 +434,23 @@ function* watchSigninAdmin() {
 }
 
 function* watchUserSignUp() {
-  yield takeLatest(USER_SIGNUP_REQUEST, usersignUp);
+  yield takeLatest(USER_SIGNUP_REQUEST, userSignUp);
 }
 
 function* watchUserList() {
   yield takeLatest(USER_LIST_REQUEST, userList);
 }
 
-function* watchUserMy() {
-  yield takeLatest(USER_MY_REQUEST, userMy);
-}
-function* watchUserMyUpdate() {
-  yield takeLatest(USER_MY_UPDATE_REQUEST, userMyUpdate);
+function* watchUserMe() {
+  yield takeLatest(USER_ME_REQUEST, userMe);
 }
 
-function* watchUpdatePrice() {
-  yield takeLatest(UPDATE_PRICE_REQUEST, updatePrice);
+function* watchUserMeUpdate() {
+  yield takeLatest(USER_ME_UPDATE_REQUEST, userMeUpdate);
+}
+
+function* watchUserUpdatePrice() {
+  yield takeLatest(USER_UPDATE_PRICE_REQUEST, userUpdatePrice);
 }
 
 function* watchUserUpdatePermit() {
@@ -422,9 +471,22 @@ function* watchUserModifyPasswordUpdate() {
     userModifyPasswordUpdate
   );
 }
+function* watchUserFindPassword() {
+  yield takeLatest(USER_FIND_PASSWORD_REQUEST, userFindPassword);
+}
+
+function* watchUserFindPasswordConfirm() {
+  yield takeLatest(USER_FIND_PASSWORD_CONFIRM_REQUEST, userFindPasswordConfirm);
+}
+
+function* watchUserFindPasswordUpdate() {
+  yield takeLatest(USER_FIND_PASSWORD_UPDATE_REQUEST, userFindPasswordUpdate);
+}
+
 function* watchUserIdImageFile() {
   yield takeLatest(USER_ID_IMAGE_FILE_REQUEST, userIdImageFile);
 }
+userIdImageFile;
 //////////////////////////////////////////////////////////////
 export default function* userSaga() {
   yield all([
@@ -433,14 +495,16 @@ export default function* userSaga() {
     fork(watchSigninAdmin),
     fork(watchUserSignUp),
     fork(watchUserList),
-    fork(watchUserMy),
-    fork(watchUserMyUpdate),
-    fork(watchUpdatePrice),
+    fork(watchUserMe),
+    fork(watchUserMeUpdate),
+    fork(watchUserUpdatePrice),
     fork(watchUserUpdatePermit),
     fork(watchUserUserFindEmail),
     fork(watchUserModifyPassword),
     fork(watchUserModifyPasswordUpdate),
+    fork(watchUserFindPassword),
+    fork(watchUserFindPasswordConfirm),
+    fork(watchUserFindPasswordUpdate),
     fork(watchUserIdImageFile),
-    //
   ]);
 }

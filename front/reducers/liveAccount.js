@@ -1,16 +1,15 @@
 import produce from "../util/produce";
-
 export const initailState = {
   liveList: null,
-
-  st_liveAccountLoading: false,
-  st_liveAccountDone: false,
-  st_liveAccountError: null,
-
+  //
+  st_liveAccountListLoading: false,
+  st_liveAccountListDone: false,
+  st_liveAccountListError: null,
+  //
   st_liveAccountUpdatePermitLoading: false,
   st_liveAccountUpdatePermitDone: false,
   st_liveAccountUpdatePermitError: null,
-
+  //
   st_liveAccountCreateLoading: false,
   st_liveAccountCreateDone: false,
   st_liveAccountCreateError: null,
@@ -35,26 +34,28 @@ const reducer = (state = initailState, action) =>
   produce(state, (draft) => {
     switch (action.type) {
       case LIVE_ACCOUNT_LIST_REQUEST: {
-        draft.st_liveAccountLoading = true;
-        draft.st_liveAccountDone = null;
-        draft.st_liveAccountError = false;
+        draft.st_liveAccountListLoading = true;
+        draft.st_liveAccountListDone = null;
+        draft.st_liveAccountListError = false;
         break;
       }
       case LIVE_ACCOUNT_LIST_SUCCESS: {
-        draft.st_liveAccountLoading = false;
-        draft.st_liveAccountDone = true;
+        draft.st_liveAccountListLoading = false;
+        draft.st_liveAccountListDone = true;
         draft.liveList = action.data;
         break;
       }
       case LIVE_ACCOUNT_LIST_FAILURE: {
-        draft.st_liveAccountLoading = false;
-        draft.st_liveAccountDone = false;
-        draft.st_liveAccountError = action.error;
+        draft.st_liveAccountListLoading = false;
+        draft.st_liveAccountListDone = false;
+        draft.st_liveAccountListError = action.error;
         break;
       }
+      //
       case LIVE_ACCOUNT_UPDATE_PERMIT_REQUEST: {
         draft.st_liveAccountUpdatePermitLoading = true;
         draft.st_liveAccountUpdatePermitDone = null;
+        draft.st_liveAccountUpdatePermitError = false;
         break;
       }
       case LIVE_ACCOUNT_UPDATE_PERMIT_SUCCESS: {
@@ -68,9 +69,11 @@ const reducer = (state = initailState, action) =>
         draft.st_liveAccountUpdatePermitError = action.error;
         break;
       }
+      //
       case LIVE_ACCOUNT_CREATE_REQUEST: {
         draft.st_liveAccountCreateLoading = true;
         draft.st_liveAccountCreateDone = null;
+        draft.st_liveAccountCreateError = false;
         break;
       }
       case LIVE_ACCOUNT_CREATE_SUCCESS: {

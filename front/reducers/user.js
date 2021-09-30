@@ -1,49 +1,48 @@
 import produce from "../util/produce";
 
 export const initailState = {
-  me: null,
-  currentAdminMenu: [],
-  users: null,
-
-  email: null,
-  userImagePath: null,
-
+  userList: null,
+  userMe: null,
+  userSingup: null,
+  userImageFilePath: null,
+  userImageFileOriginName: null,
+  //
   st_userListLoading: false,
   st_userListDone: false,
   st_userListError: null,
   //
-  st_userMyLoading: false,
-  st_userMyDone: false,
-  st_userMyError: null,
+  st_userMeLoading: false,
+  st_userMeDone: false,
+  st_userMeError: null,
   //
-  st_signUpLoading: false,
-  st_signUpDone: false,
-  st_signUpError: null,
+  st_userSignUpLoading: false,
+  st_userSignUpDone: false,
+  st_userSignUpError: null,
   //
   st_userIdImageFileLoading: false,
   st_userIdImageFileDone: false,
   st_userIdImageFileError: null,
   //
-  st_userMyUpdateLoading: false,
-  st_userMyUpdateDone: false,
-  st_userMyUpdateError: null,
+  st_userMeUpdateLoading: false,
+  st_userMeUpdateDone: false,
+  st_userMeUpdateError: null,
   //
-  st_signinLoading: false,
-  st_signinDone: false,
-  st_signinError: null,
+  st_userSigninLoading: false,
+  st_userSigninDone: false,
+  st_userSigninError: null,
   //
   st_signinAdminLoading: false,
   st_signinAdminDone: false,
   st_signinAdminError: null,
   //
-  st_updatePriceLoading: false,
-  st_updatePriceDone: false,
-  st_updatePriceError: null,
+  st_userUpdatePriceLoading: false,
+  st_userUpdatePriceDone: false,
+  st_userUpdatePriceError: null,
   //
   st_userUpdatePermitLoading: false,
   st_userUpdatePermitDone: false,
   st_userUpdatePermitError: null,
-
+  //
   st_userListUpdateLoading: false,
   st_userListUpdateDone: false,
   st_userListUpdateError: null,
@@ -60,7 +59,19 @@ export const initailState = {
   st_userModifyPasswordUpdateDone: false,
   st_userModifyPasswordUpdateError: null,
   //
-  st_loadMyInfoLoading: false, // 로그인 정보 가져오기 시도 중
+  st_userFindPasswordLoading: false,
+  st_userFindPasswordDone: false,
+  st_userFindPasswordError: null,
+  //
+  st_userFindPasswordConfirmLoading: false,
+  st_userFindPasswordConfirmDone: false,
+  st_userFindPasswordConfirmError: null,
+  //
+  st_userFindPasswordUpdateLoading: false,
+  st_userFindPasswordUpdateDone: false,
+  st_userFindPasswordUpdateError: null,
+  //
+  st_loadMyInfoLoading: false,
   st_loadMyInfoDone: false,
   st_loadMyInfoError: null,
 };
@@ -68,62 +79,75 @@ export const initailState = {
 export const USER_LIST_REQUEST = "USER_LIST_REQUEST";
 export const USER_LIST_SUCCESS = "USER_LIST_SUCCESS";
 export const USER_LIST_FAILURE = "USER_LIST_FAILURE";
-
-export const USER_MY_REQUEST = "USER_MY_REQUEST";
-export const USER_MY_SUCCESS = "USER_MY_SUCCESS";
-export const USER_MY_FAILURE = "USER_MY_FAILURE";
-
+//
+export const USER_ME_REQUEST = "USER_ME_REQUEST";
+export const USER_ME_SUCCESS = "USER_ME_SUCCESS";
+export const USER_ME_FAILURE = "USER_ME_FAILURE";
+//
 export const USER_SIGNUP_REQUEST = "USER_SIGNUP_REQUEST";
 export const USER_SIGNUP_SUCCESS = "USER_SIGNUP_SUCCESS";
 export const USER_SIGNUP_FAILURE = "USER_SIGNUP_FAILURE";
-
+//
 export const USER_ID_IMAGE_FILE_REQUEST = "USER_ID_IMAGE_FILE_REQUEST";
 export const USER_ID_IMAGE_FILE_SUCCESS = "USER_ID_IMAGE_FILE_SUCCESS";
 export const USER_ID_IMAGE_FILE_FAILURE = "USER_ID_IMAGE_FILE_FAILURE";
-
-export const USER_SIGN_IN_REQUEST = "USER_SIGN_IN_REQUEST";
-export const USER_SIGN_IN_SUCCESS = "USER_SIGN_IN_SUCCESS";
-export const USER_SIGN_IN_FAILURE = "USER_SIGN_IN_FAILURE";
-
+//
+export const USER_SIGNIN_REQUEST = "USER_SIGNIN_REQUEST";
+export const USER_SIGNIN_SUCCESS = "USER_SIGNIN_SUCCESS";
+export const USER_SIGNIN_FAILURE = "USER_SIGNIN_FAILURE";
+//
 export const SIGNIN_ADMIN_REQUEST = "SIGNIN_ADMIN_REQUEST";
 export const SIGNIN_ADMIN_SUCCESS = "SIGNIN_ADMIN_SUCCESS";
 export const SIGNIN_ADMIN_FAILURE = "SIGNIN_ADMIN_FAILURE";
-
-export const UPDATE_PRICE_REQUEST = "UPDATE_PRICE_REQUEST";
-export const UPDATE_PRICE_SUCCESS = "UPDATE_PRICE_SUCCESS";
-export const UPDATE_PRICE_FAILURE = "UPDATE_PRICE_FAILURE";
-
-export const USER_MY_UPDATE_REQUEST = "USER_MY_UPDATE_REQUEST";
-export const USER_MY_UPDATE_SUCCESS = "USER_MY_UPDATE_SUCCESS";
-export const USER_MY_UPDATE_FAILURE = "USER_MY_UPDATE_FAILURE";
-
+//
+export const USER_UPDATE_PRICE_REQUEST = "USER_UPDATE_PRICE_REQUEST";
+export const USER_UPDATE_PRICE_SUCCESS = "USER_UPDATE_PRICE_SUCCESS";
+export const USER_UPDATE_PRICE_FAILURE = "USER_UPDATE_PRICE_FAILURE";
+//
+export const USER_ME_UPDATE_REQUEST = "USER_ME_UPDATE_REQUEST";
+export const USER_ME_UPDATE_SUCCESS = "USER_ME_UPDATE_SUCCESS";
+export const USER_ME_UPDATE_FAILURE = "USER_ME_UPDATE_FAILURE";
+//
 export const USER_UPDATE_PERMIT_REQUEST = "USER_UPDATE_PERMIT_REQUEST";
 export const USER_UPDATE_PERMIT_SUCCESS = "USER_UPDATE_PERMIT_SUCCESS";
 export const USER_UPDATE_PERMIT_FAILURE = "USER_UPDATE_PERMIT_FAILURE";
-
+//
 export const USER_FIND_EMAIL_REQUEST = "USER_FIND_EMAIL_REQUEST";
 export const USER_FIND_EMAIL_SUCCESS = "USER_FIND_EMAIL_SUCCESS";
 export const USER_FIND_EMAIL_FAILURE = "USER_FIND_EMAIL_FAILURE";
-
+//
 export const USER_MODIFY_PASSWORD_REQUEST = "USER_MODIFY_PASSWORD_REQUEST";
 export const USER_MODIFY_PASSWORD_SUCCESS = "USER_MODIFY_PASSWORD_SUCCESS";
 export const USER_MODIFY_PASSWORD_FAILURE = "USER_MODIFY_PASSWORD_FAILURE";
-
+//
 export const USER_MODIFY_PASSWORD_UPDATE_REQUEST =
   "USER_MODIFY_PASSWORD_UPDATE_REQUEST";
 export const USER_MODIFY_PASSWORD_UPDATE_SUCCESS =
   "USER_MODIFY_PASSWORD_UPDATE_SUCCESS";
 export const USER_MODIFY_PASSWORD_UPDATE_FAILURE =
   "USER_MODIFY_PASSWORD_UPDATEFAILURE";
-
+//
+export const USER_FIND_PASSWORD_REQUEST = "USER_FIND_PASSWORD_REQUEST";
+export const USER_FIND_PASSWORD_SUCCESS = "USER_FIND_PASSWORD_SUCCESS";
+export const USER_FIND_PASSWORD_FAILURE = "USER_FIND_PASSWORD_FAILURE";
+//
+export const USER_FIND_PASSWORD_CONFIRM_REQUEST =
+  "USER_FIND_PASSWORD_CONFIRM_REQUEST";
+export const USER_FIND_PASSWORD_CONFIRM_SUCCESS =
+  "USER_FIND_PASSWORD_CONFIRM_SUCCESS";
+export const USER_FIND_PASSWORD_CONFIRM_FAILURE =
+  "USER_FIND_PASSWORD_CONFIRM_FAILURE";
+//
+export const USER_FIND_PASSWORD_UPDATE_REQUEST =
+  "USER_FIND_PASSWORD_UPDATE_REQUEST";
+export const USER_FIND_PASSWORD_UPDATE_SUCCESS =
+  "USER_FIND_PASSWORD_UPDATE_SUCCESS";
+export const USER_FIND_PASSWORD_UPDATE_FAILURE =
+  "USER_FIND_PASSWORD_UPDATE_SUCCESS";
+//
 export const LOAD_MY_INFO_REQUEST = "LOAD_MY_INFO_REQUEST";
 export const LOAD_MY_INFO_SUCCESS = "LOAD_MY_INFO_SUCCESS";
 export const LOAD_MY_INFO_FAILURE = "LOAD_MY_INFO_FAILURE";
-
-export const UPDATE_MODAL_OPEN_REQUEST = "UPDATE_MODAL_OPEN_REQUEST";
-export const UPDATE_MODAL_CLOSE_REQUEST = "UPDATE_MODAL_CLOSE_REQUEST";
-
-export const CURRENT_ADMINMENU_STATUS = "CURRENT_ADMINMENU_STATUS";
 
 const reducer = (state = initailState, action) =>
   produce(state, (draft) => {
@@ -137,7 +161,7 @@ const reducer = (state = initailState, action) =>
       case USER_LIST_SUCCESS: {
         draft.st_userListLoading = false;
         draft.st_userListDone = true;
-        draft.users = action.data;
+        draft.userList = action.data;
         break;
       }
       case USER_LIST_FAILURE: {
@@ -146,85 +170,76 @@ const reducer = (state = initailState, action) =>
         draft.st_userListError = action.error;
         break;
       }
-      ///////////////////////////////////////////////////////
-      case USER_MY_REQUEST:
-        draft.st_userMyLoading = true;
-        draft.st_userMyError = null;
-        draft.st_userMyDone = false;
+      //
+      case USER_ME_REQUEST:
+        draft.st_userMeLoading = true;
+        draft.st_userMeError = null;
+        draft.st_userMeDone = false;
         break;
-
-      case USER_MY_SUCCESS:
-        draft.st_userMyLoading = false;
-        draft.st_userMyDone = true;
-        draft.me = action.data;
+      case USER_ME_SUCCESS:
+        draft.st_userMeLoading = false;
+        draft.st_userMeDone = true;
+        draft.userMe = action.data;
         break;
-      case USER_MY_FAILURE:
-        draft.st_userMyLoading = false;
-        draft.st_userMyDone = false;
-        draft.st_userMyError = action.error;
+      case USER_ME_FAILURE:
+        draft.st_userMeLoading = false;
+        draft.st_userMeDone = false;
+        draft.st_userMeError = action.error;
         break;
-      ///////////////////////////////////////////////////////
-      case USER_MY_UPDATE_REQUEST:
-        draft.st_userMyUpdateLoading = false;
-        draft.st_userMyUpdateDone = false;
-        draft.st_userMyUpdateError = action.error;
+      //
+      case USER_ME_UPDATE_REQUEST:
+        draft.st_userMeUpdateLoading = false;
+        draft.st_userMeUpdateDone = false;
+        draft.st_userMeUpdateError = action.error;
         break;
-
-      case USER_MY_UPDATE_SUCCESS:
-        draft.st_userMyUpdateLoading = true;
-        draft.st_userMyUpdateDone = false;
-
+      case USER_ME_UPDATE_SUCCESS:
+        draft.st_userMeUpdateLoading = true;
+        draft.st_userMeUpdateDone = false;
         break;
-
-      case USER_MY_UPDATE_FAILURE:
-        draft.st_userMyUpdateLoading = false;
-        draft.st_userMyUpdateDone = true;
-        draft.st_userMyUpdateError = action.error;
+      case USER_ME_UPDATE_FAILURE:
+        draft.st_userMeUpdateLoading = false;
+        draft.st_userMeUpdateDone = true;
+        draft.st_userMeUpdateError = action.error;
         break;
-
-      ///////////////////////////////////////////////////////
-
+      //
       case USER_ID_IMAGE_FILE_REQUEST: {
         draft.st_userIdImageFileLoading = true;
         draft.st_userIdImageFileDone = null;
         draft.st_userIdImageFileError = false;
         break;
       }
-
       case USER_ID_IMAGE_FILE_SUCCESS: {
         draft.st_userIdImageFileLoading = false;
         draft.st_userIdImageFileDone = true;
-        draft.userImagePath = action.data;
+        draft.userImageFilePath = action.data.path;
+        draft.userImageFileOriginName = action.data.originName;
         break;
       }
       case USER_ID_IMAGE_FILE_FAILURE: {
-        draft.st_signinLoading = false;
-        draft.st_signinDone = false;
+        draft.st_userIdImageFileLoading = false;
+        draft.st_userIdImageFileDone = false;
         draft.st_signinError = action.error;
         break;
       }
-      ///////////////////////////////////////////////////////
-
-      case USER_SIGN_IN_REQUEST: {
-        draft.st_signinLoading = true;
-        draft.st_signinDone = null;
-        draft.st_signinError = false;
+      //
+      case USER_SIGNIN_REQUEST: {
+        draft.st_userSigninLoading = true;
+        draft.st_userSigninDone = null;
+        draft.st_userSigninError = false;
         break;
       }
-
-      case USER_SIGN_IN_SUCCESS: {
-        draft.st_loginLoading = false;
-        draft.st_loginDone = true;
-        draft.me = action.data;
+      case USER_SIGNIN_SUCCESS: {
+        draft.st_userSigninLoading = false;
+        draft.st_userSigninDone = true;
         break;
       }
-      case USER_SIGN_IN_FAILURE: {
-        draft.st_signinLoading = false;
-        draft.st_signinDone = false;
-        draft.st_signinError = action.error;
+      case USER_SIGNIN_FAILURE: {
+        draft.st_userSigninLoading = false;
+        draft.st_userSigninDone = false;
+        draft.st_userSigninError = action.error;
         break;
       }
-      //////////////////////////////////////////////
+      //
       case SIGNIN_ADMIN_REQUEST: {
         draft.st_signinAdminLoading = true;
         draft.st_signinAdminDone = null;
@@ -234,7 +249,6 @@ const reducer = (state = initailState, action) =>
       case SIGNIN_ADMIN_SUCCESS: {
         draft.st_signinAdminLoading = false;
         draft.st_signinAdminDone = true;
-        draft.me = action.data;
         break;
       }
       case SIGNIN_ADMIN_FAILURE: {
@@ -243,65 +257,61 @@ const reducer = (state = initailState, action) =>
         draft.st_signinAdminError = action.error;
         break;
       }
-      //////////////////////////////////////////////
-
+      //
       case USER_SIGNUP_REQUEST: {
-        draft.st_signUpLoading = true;
-        draft.st_signUpDone = null;
-        draft.st_signUpError = false;
+        draft.st_userSignUpLoading = true;
+        draft.st_userSignUpDone = null;
+        draft.st_userSignUpError = false;
         break;
       }
       case USER_SIGNUP_SUCCESS: {
-        draft.st_signUpLoading = false;
-        draft.st_signUpDone = true;
+        draft.st_userSignUpLoading = false;
+        draft.st_userSignUpDone = true;
         break;
       }
       case USER_SIGNUP_FAILURE: {
-        draft.st_signUpLoading = false;
-        draft.st_signUpDone = false;
-        draft.st_signUpError = action.error;
+        draft.st_userSignUpLoading = false;
+        draft.st_userSignUpDone = false;
+        draft.st_userSignUpError = action.error;
         break;
       }
-      //////////////////////////////////////////////
-
+      //
       case USER_UPDATE_PERMIT_REQUEST: {
-        draft.st_updatePriceLoading = true;
-        draft.st_updatePriceDone = null;
-        draft.st_updatePriceError = false;
+        draft.st_userUpdatePermitLoading = true;
+        draft.st_userUPdatePermitDone = null;
+        draft.st_userUPdatePermitError = false;
         break;
       }
       case USER_UPDATE_PERMIT_SUCCESS: {
-        draft.st_updatePriceLoading = false;
-        draft.st_updatePriceDone = true;
+        draft.st_userUPdatePermitLoading = false;
+        draft.st_userUPdatePermitDone = true;
         break;
       }
       case USER_UPDATE_PERMIT_FAILURE: {
-        draft.st_updatePriceLoading = false;
-        draft.st_updatePriceDone = false;
-        draft.st_updatePriceError = action.error;
+        draft.st_userUPdatePermitLoading = false;
+        draft.st_userUPdatePermitDone = false;
+        draft.st_userUPdatePermitError = action.error;
         break;
       }
-      //////////////////////////////////////////////
-
-      case UPDATE_PRICE_REQUEST: {
-        draft.st_userUpdatePermitLoading = true;
-        draft.st_userUpdatePermitDone = null;
-        draft.st_userUpdatePermitError = false;
+      //
+      case USER_UPDATE_PRICE_REQUEST: {
+        draft.st_userUpdatePriceLoading = true;
+        draft.st_userUpdatePriceDone = null;
+        draft.st_userUpdatePriceError = false;
         break;
       }
-      case UPDATE_PRICE_SUCCESS: {
-        draft.st_userUpdatePermitLoading = false;
-        draft.st_userUpdatePermitDone = true;
+      case USER_UPDATE_PRICE_SUCCESS: {
+        draft.st_userUpdatePriceLoading = false;
+        draft.st_userUpdatePriceDone = true;
         break;
       }
-      case UPDATE_PRICE_FAILURE: {
-        draft.st_userUpdatePermitLoading = false;
-        draft.st_userUpdatePermitDone = false;
-        draft.st_userUpdatePermitError = action.error;
+      case USER_UPDATE_PRICE_FAILURE: {
+        draft.st_userUpdatePriceLoading = false;
+        draft.st_userUpdatePriceDone = false;
+        draft.st_userUpdatePriceError = action.error;
         break;
       }
-      //////////////////////////////////////////////
-
+      //
       case USER_FIND_EMAIL_REQUEST: {
         draft.st_userFindEmailLoading = true;
         draft.st_userFindEmailDone = null;
@@ -311,7 +321,6 @@ const reducer = (state = initailState, action) =>
       case USER_FIND_EMAIL_SUCCESS: {
         draft.st_userFindEmailLoading = false;
         draft.st_userFindEmailDone = true;
-        draft.email = action.email;
         break;
       }
       case USER_FIND_EMAIL_FAILURE: {
@@ -320,9 +329,7 @@ const reducer = (state = initailState, action) =>
         draft.st_userFindEmailError = action.error;
         break;
       }
-
-      //////////////////////////////////////////////
-
+      //
       case USER_MODIFY_PASSWORD_REQUEST: {
         draft.st_userModifyPasswordLoading = true;
         draft.st_userModifyPasswordDone = null;
@@ -340,7 +347,7 @@ const reducer = (state = initailState, action) =>
         draft.st_userModifyPasswordError = action.error;
         break;
       }
-      //////////////////////////////////////////////
+      //
       case USER_MODIFY_PASSWORD_UPDATE_REQUEST: {
         draft.st_userModifyPasswordUpdateLoading = true;
         draft.st_userModifyPasswordUpdateDone = null;
@@ -358,6 +365,61 @@ const reducer = (state = initailState, action) =>
         draft.st_userModifyPasswordUpdateError = action.error;
         break;
       }
+      //
+      case USER_FIND_PASSWORD_UPDATE_REQUEST: {
+        draft.st_userFindPasswordLoading = true;
+        draft.st_userFindPasswordDone = null;
+        draft.st_userFindPasswordError = false;
+        break;
+      }
+      case USER_FIND_PASSWORD_UPDATE_SUCCESS: {
+        draft.st_userFindPasswordLoading = false;
+        draft.st_userFindPasswordDone = true;
+        break;
+      }
+      case USER_FIND_PASSWORD_UPDATE_FAILURE: {
+        draft.st_userFindPasswordLoading = false;
+        draft.st_userFindPasswordDone = false;
+        draft.st_userFindPasswordError = action.error;
+        break;
+      }
+      //
+      case USER_FIND_PASSWORD_CONFIRM_REQUEST: {
+        draft.st_userFindPasswordConfirmLoading = true;
+        draft.st_userFindPasswordConfirmDone = null;
+        draft.st_userFindPasswordConfirmError = false;
+        break;
+      }
+      case USER_FIND_PASSWORD_CONFIRM_SUCCESS: {
+        draft.st_userFindPasswordConfirmLoading = false;
+        draft.st_userFindPasswordConfirmDone = true;
+        break;
+      }
+      case USER_FIND_PASSWORD_CONFIRM_FAILURE: {
+        draft.st_userFindPasswordConfirmLoading = false;
+        draft.st_userFindPasswordConfirmDone = false;
+        draft.st_userFindPasswordConfirmError = action.error;
+        break;
+      }
+      //
+      case USER_FIND_PASSWORD_UPDATE_REQUEST: {
+        draft.st_userFindPasswordUpdateLoading = true;
+        draft.st_userFindPasswordUpdateDone = null;
+        draft.st_userFindPasswordUpdateError = false;
+        break;
+      }
+      case USER_FIND_PASSWORD_UPDATE_SUCCESS: {
+        draft.st_userFindPasswordUpdateLoading = false;
+        draft.st_userFindPasswordUpdateDone = true;
+        break;
+      }
+      case USER_FIND_PASSWORD_UPDATE_FAILURE: {
+        draft.st_userFindPasswordUpdateLoading = false;
+        draft.st_userFindPasswordUpdateDone = false;
+        draft.st_userFindPasswordUpdateError = action.error;
+        break;
+      }
+      //
       case LOAD_MY_INFO_REQUEST:
         draft.st_loadMyInfoLoading = true;
         draft.st_loadMyInfoError = null;
@@ -375,25 +437,6 @@ const reducer = (state = initailState, action) =>
         draft.st_loadMyInfoDone = false;
         draft.st_loadMyInfoError = action.error;
         break;
-
-      //////////////////////////////////////////////
-      //
-
-      case CURRENT_ADMINMENU_STATUS: {
-        const exist = draft.currentAdminMenu.filter(
-          (data) => data === action.data.key
-        );
-
-        if (exist.length > 0) {
-          draft.currentAdminMenu = draft.currentAdminMenu.filter(
-            (data) => data !== action.data.key
-          );
-        } else {
-          draft.currentAdminMenu = [...draft.currentAdminMenu, action.data.key];
-        }
-
-        break;
-      }
 
       default:
         break;

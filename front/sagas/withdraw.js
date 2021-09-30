@@ -2,17 +2,17 @@ import { all, call, delay, fork, put, takeLatest } from "redux-saga/effects";
 import axios from "axios";
 
 import {
-  WITHDRAW_LIST_FAILURE,
   WITHDRAW_LIST_REQUEST,
   WITHDRAW_LIST_SUCCESS,
+  WITHDRAW_LIST_FAILURE,
   //
-  UPDATE_WITHDRAW_PERMIT_SUCCESS,
-  UPDATE_WITHDRAW_PERMIT_FAILURE,
+  WITHDRAW_UPDATE_PERMIT_REQUEST,
+  WITHDRAW_UPDATE_PERMIT_SUCCESS,
+  WITHDRAW_UPDATE_PERMIT_FAILURE,
   //
-  CREATE_WITHDRAW_SUCCESS,
-  CREATE_WITHDRAW_FAILURE,
-  UPDATE_WITHDRAW_PERMIT_REQUEST,
-  CREATE_WITHDRAW_REQUEST,
+  WITHDRAW_CREATE_REQUEST,
+  WITHDRAW_CREATE_SUCCESS,
+  WITHDRAW_CREATE_FAILURE,
 } from "../reducers/withdraw";
 
 // SAGA AREA ********************************************************************************************************
@@ -42,22 +42,22 @@ function* withdrawList(action) {
 
 // SAGA AREA ********************************************************************************************************
 // ******************************************************************************************************************
-function updatewithdrawPermitAPI(data) {
-  return axios.patch(`/api/withdraw/withdrawPermit`);
+function withdrawUpdatePermitAPI(data) {
+  return axios.patch(`/api/withdraw/updatePermit`, data);
 }
 
-function* updatewithdrawPermit(action) {
+function* withdrawUpdatePermit(action) {
   try {
-    const result = yield call(updatewithdrawPermitAPI, action.data);
+    const result = yield call(withdrawUpdatePermitAPI, action.data);
 
     yield put({
-      type: UPDATE_WITHDRAW_PERMIT_SUCCESS,
+      type: WITHDRAW_UPDATE_PERMIT_SUCCESS,
       data: result.data,
     });
   } catch (err) {
     console.error(err);
     yield put({
-      type: UPDATE_WITHDRAW_PERMIT_FAILURE,
+      type: WITHDRAW_UPDATE_PERMIT_FAILURE,
       error: err.response.data,
     });
   }
@@ -65,22 +65,22 @@ function* updatewithdrawPermit(action) {
 
 // SAGA AREA ********************************************************************************************************
 // ******************************************************************************************************************
-function createWithdrawAPI(data) {
-  return axios.patch(`/api/withdraw/create`);
+function withdrawCreateAPI(data) {
+  return axios.post(`/api/withdraw/create`, data);
 }
 
-function* createWithdraw(action) {
+function* withdrawCreate(action) {
   try {
-    const result = yield call(createWithdrawAPI, action.data);
+    const result = yield call(withdrawCreateAPI, action.data);
 
     yield put({
-      type: CREATE_WITHDRAW_SUCCESS,
+      type: WITHDRAW_CREATE_SUCCESS,
       data: result.data,
     });
   } catch (err) {
     console.error(err);
     yield put({
-      type: CREATE_WITHDRAW_FAILURE,
+      type: WITHDRAW_CREATE_FAILURE,
       error: err.response.data,
     });
   }
@@ -94,19 +94,17 @@ function* createWithdraw(action) {
 function* watchWithdrawList() {
   yield takeLatest(WITHDRAW_LIST_REQUEST, withdrawList);
 }
-function* watchUpdateWithdrawPermit() {
-  yield takeLatest(UPDATE_WITHDRAW_PERMIT_REQUEST, updatewithdrawPermit);
+function* watchWithdrawUpdatePermit() {
+  yield takeLatest(WITHDRAW_UPDATE_PERMIT_REQUEST, withdrawUpdatePermit);
 }
-function* watchCreateWithdraw() {
-  yield takeLatest(CREATE_WITHDRAW_REQUEST, createWithdraw);
+function* watchWithdrawCreate() {
+  yield takeLatest(WITHDRAW_CREATE_REQUEST, withdrawCreate);
 }
 //////////////////////////////////////////////////////////////
 export default function* withdrawSaga() {
   yield all([
     fork(watchWithdrawList),
-    fork(watchUpdateWithdrawPermit),
-    fork(watchCreateWithdraw),
-
-    //
+    fork(watchWithdrawUpdatePermit),
+    fork(watchWithdrawCreate),
   ]);
 }

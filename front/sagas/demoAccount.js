@@ -1,39 +1,39 @@
 import { all, call, delay, fork, put, takeLatest } from "redux-saga/effects";
 import axios from "axios";
 import {
-  DEPOSIT_LIST_REQUEST,
-  DEPOSIT_LIST_SUCCESS,
-  DEPOSIT_LIST_FAILURE,
+  DEMO_ACCOUNT_LIST_REQUEST,
+  DEMO_ACCOUNT_LIST_SUCCESS,
+  DEMO_ACCOUNT_LIST_FAILURE,
   //
-  DEPOSIT_UPDATE_PERMIT_REQUEST,
-  DEPOSIT_UPDATE_PERMIT_SUCCESS,
-  DEPOSIT_UPDATE_PERMIT_FAILURE,
+  DEMO_ACCOUNT_UPDATE_PERMIT_REQUEST,
+  DEMO_ACCOUNT_UPDATE_PERMIT_SUCCESS,
+  DEMO_ACCOUNT_UPDATE_PERMIT_FAILURE,
   //
-  DEPOSIT_CREATE_REQUEST,
-  DEPOSIT_CREATE_SUCCESS,
-  DEPOSIT_CREATE_FAILURE,
-} from "../reducers/deposit";
+  DEMO_ACCOUNT_CREATE_REQUEST,
+  DEMO_ACCOUNT_CREATE_SUCCESS,
+  DEMO_ACCOUNT_CREATE_FAILURE,
+} from "../reducers/demoAccount";
 
 // SAGA AREA ********************************************************************************************************
 // ******************************************************************************************************************
-function demoListAPI(data) {
+function demoAccountListAPI(data) {
   return axios.get(
     `/api/demoAccount/list/?page=${data.page}&search=${data.search}`
   );
 }
 
-function* demoList(action) {
+function* demoAccountList(action) {
   try {
-    const result = yield call(demoListAPI, action.data);
+    const result = yield call(demoAccountListAPI, action.data);
 
     yield put({
-      type: DEPOSIT_LIST_SUCCESS,
+      type: DEMO_ACCOUNT_LIST_SUCCESS,
       data: result.data,
     });
   } catch (err) {
     console.error(err);
     yield put({
-      type: DEPOSIT_LIST_FAILURE,
+      type: DEMO_ACCOUNT_LIST_FAILURE,
       error: err.response.data,
     });
   }
@@ -41,22 +41,22 @@ function* demoList(action) {
 
 // SAGA AREA ********************************************************************************************************
 // ******************************************************************************************************************
-function updateDemoPermitAPI(data) {
-  return axios.patch(`/api/demoAccount/updatePermit`);
+function demoAccountUpdatePermitAPI(data) {
+  return axios.patch(`/api/demoAccount/updatePermit`, data);
 }
 
-function* updateDemoPermit(action) {
+function* demoAccountUpdatePermit(action) {
   try {
-    const result = yield call(updateDemoPermitAPI, action.data);
+    const result = yield call(demoAccountUpdatePermitAPI, action.data);
 
     yield put({
-      type: DEPOSIT_UPDATE_PERMIT_SUCCESS,
+      type: DEMO_ACCOUNT_UPDATE_PERMIT_SUCCESS,
       data: result.data,
     });
   } catch (err) {
     console.error(err);
     yield put({
-      type: DEPOSIT_UPDATE_PERMIT_FAILURE,
+      type: DEMO_ACCOUNT_UPDATE_PERMIT_FAILURE,
       error: err.response.data,
     });
   }
@@ -64,22 +64,22 @@ function* updateDemoPermit(action) {
 
 // SAGA AREA ********************************************************************************************************
 // ******************************************************************************************************************
-function createDemoAPI(data) {
-  return axios.patch(`/api/demoAccount/create`);
+function demoAccountCreateAPI(data) {
+  return axios.post(`/api/demoAccount/create`, data);
 }
 
-function* createDemo(action) {
+function* demoAccountCreate(action) {
   try {
-    const result = yield call(createDemoAPI, action.data);
+    const result = yield call(demoAccountCreateAPI, action.data);
 
     yield put({
-      type: DEPOSIT_CREATE_SUCCESS,
+      type: DEMO_ACCOUNT_CREATE_SUCCESS,
       data: result.data,
     });
   } catch (err) {
     console.error(err);
     yield put({
-      type: DEPOSIT_CREATE_FAILURE,
+      type: DEMO_ACCOUNT_CREATE_FAILURE,
       error: err.response.data,
     });
   }
@@ -90,22 +90,20 @@ function* createDemo(action) {
 // ******************************************************************************************************************
 
 //////////////////////////////////////////////////////////////
-function* watchDemoList() {
-  yield takeLatest(DEPOSIT_LIST_REQUEST, demoList);
+function* watchDemoAccountList() {
+  yield takeLatest(DEMO_ACCOUNT_LIST_REQUEST, demoAccountList);
 }
-function* watchUpdateDemoPermit() {
-  yield takeLatest(DEPOSIT_UPDATE_PERMIT_REQUEST, updateDemoPermit);
+function* watchDemoAccountUpdatePermit() {
+  yield takeLatest(DEMO_ACCOUNT_UPDATE_PERMIT_REQUEST, demoAccountUpdatePermit);
 }
-function* watchCreateDemo() {
-  yield takeLatest(DEPOSIT_CREATE_REQUEST, createDemo);
+function* watchDemoAccountCreate() {
+  yield takeLatest(DEMO_ACCOUNT_CREATE_REQUEST, demoAccountCreate);
 }
 //////////////////////////////////////////////////////////////
 export default function* demoAccountSaga() {
   yield all([
-    fork(watchDemoList),
-    fork(watchUpdateDemoPermit),
-    fork(watchCreateDemo),
-
-    //
+    fork(watchDemoAccountList),
+    fork(watchDemoAccountUpdatePermit),
+    fork(watchDemoAccountCreate),
   ]);
 }

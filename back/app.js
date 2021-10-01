@@ -13,12 +13,6 @@ const passport = require("passport");
 const cron = require("node-cron");
 
 const userRouter = require("./routers/userRouter");
-const bannerRouter = require("./routers/bannerRouter");
-const popupRouter = require("./routers/popupRouter");
-const companyRouter = require("./routers/companyRouter");
-const acceptRouter = require("./routers/acceptRouter");
-const noticeRouter = require("./routers/noticeRouter");
-const galleryRouter = require("./routers/galleryRouter");
 const questionRouter = require("./routers/questionRouter");
 
 // Config Settings
@@ -87,12 +81,6 @@ app.get("/", (req, res) => {
 
 // Routes Settings
 app.use("/api/user", userRouter);
-app.use("/api/banner", bannerRouter);
-app.use("/api/popup", popupRouter);
-app.use("/api/company", companyRouter);
-app.use("/api/accept", acceptRouter);
-app.use("/api/notice", noticeRouter);
-app.use("/api/gallery", galleryRouter);
 app.use("/api/question", questionRouter);
 
 // second minute hour day-of-month month day-of-week

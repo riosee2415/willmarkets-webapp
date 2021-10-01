@@ -119,3 +119,5 @@ router.patch("/updatePermit", isAdminCheck, async (req, res, next) => {
     console.error(error);
   }
 });
+
+// 메일기능 추가, 유저이름으로 서치

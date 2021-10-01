@@ -10,7 +10,7 @@ module.exports = class Deposit extends Model {
           allowNull: false,
         },
         bankNo: {
-          type: DataTypes.INTEGER,
+          type: DataTypes.STRING(200),
           allowNull: false,
         },
         swiftCode: {
@@ -18,11 +18,11 @@ module.exports = class Deposit extends Model {
           allowNull: false,
         },
         willAddress: {
-          type: DataTypes.STRING(200),
+          type: DataTypes.STRING(500),
           allowNull: false,
         },
         bankAddress: {
-          type: DataTypes.STRING(200),
+          type: DataTypes.STRING(500),
           allowNull: false,
         },
         selectBank: {
@@ -47,10 +47,12 @@ module.exports = class Deposit extends Model {
         modelName: "Deposit",
         tableName: "deposits",
         charset: "utf8mb4",
-        collate: "utf8mb4_general_ci", // 한글 저장
+        collate: "utf8mb4_general_ci",
         sequelize,
       }
     );
   }
-  static associate(db) {}
+  static associate(db) {
+    db.Deposit.belongsTo(db.User);
+  }
 };

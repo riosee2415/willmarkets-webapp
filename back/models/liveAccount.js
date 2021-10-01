@@ -5,6 +5,10 @@ module.exports = class LiveAccount extends Model {
   static init(sequelize) {
     return super.init(
       {
+        bankNo: {
+          type: DataTypes.STRING(200),
+          allowNull: false,
+        },
         platform: {
           type: DataTypes.STRING(200),
           allowNull: false,
@@ -17,7 +21,7 @@ module.exports = class LiveAccount extends Model {
           type: DataTypes.STRING(200),
           allowNull: false,
         },
-        tragePassword: {
+        tradePassword: {
           type: DataTypes.STRING(200),
           allowNull: false,
         },
@@ -39,10 +43,12 @@ module.exports = class LiveAccount extends Model {
         modelName: "LiveAccount",
         tableName: "liveAccounts",
         charset: "utf8mb4",
-        collate: "utf8mb4_general_ci", // 한글 저장
+        collate: "utf8mb4_general_ci",
         sequelize,
       }
     );
   }
-  static associate(db) {}
+  static associate(db) {
+    db.LiveAccount.belongsTo(db.User);
+  }
 };

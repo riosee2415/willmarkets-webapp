@@ -5,56 +5,100 @@ module.exports = class User extends Model {
   static init(sequelize) {
     return super.init(
       {
-        // id가 기본적으로 들어있다.
+        type: {
+          type: DataTypes.STRING(100),
+          allowNull: false,
+        },
         email: {
-          type: DataTypes.STRING(60), // STRING, TEXT, BOOLEAN, INTEGER, FLOAT, DATETIME
-          allowNull: false, // 필수
-          unique: true, // 고유한 값
-        },
-        username: {
-          type: DataTypes.STRING(30), // STRING, TEXT, BOOLEAN, INTEGER, FLOAT, DATETIME
-          allowNull: false, // 필수
-        },
-        nickname: {
-          type: DataTypes.STRING(30),
-          allowNull: false, // 필수
-          unique: true, // 고유한 값
-        },
-        mobile: {
-          type: DataTypes.STRING(30),
-          allowNull: false, // 필수
+          type: DataTypes.STRING(100),
+          allowNull: false,
+          unique: true,
         },
         password: {
           type: DataTypes.STRING(100),
-          allowNull: false, // 필수
+          allowNull: false,
         },
-        level: {
-          // 사용자 권한 [1 : 일반회원, 2 : 비어있음, 3: 운영자, 4: 최고관리자, 5: 개발사]
-          type: DataTypes.INTEGER,
-          allowNull: false, //
-          defaultValue: 1,
+        username: {
+          type: DataTypes.STRING(30),
+          allowNull: false,
+        },
+        gender: {
+          type: DataTypes.STRING(30),
+          allowNull: false,
+        },
+        zoneCode: {
+          type: DataTypes.STRING(10),
+          allowNull: false,
+        },
+        address: {
+          type: DataTypes.STRING(200),
+          allowNull: false,
+        },
+        detailAddress: {
+          type: DataTypes.STRING(200),
+          allowNull: false,
+        },
+        idType: {
+          type: DataTypes.STRING(150),
+          allowNull: true,
+        },
+        idDate1: {
+          type: DataTypes.DATE,
+          allowNull: true,
+        },
+        idDate2: {
+          type: DataTypes.DATE,
+          allowNull: true,
+        },
+        idFilePath: {
+          type: DataTypes.STRING(600),
+          allowNull: true,
+        },
+        idFileOriginName: {
+          type: DataTypes.STRING(300),
+          allowNull: true,
+        },
+        addrType: {
+          type: DataTypes.STRING(150),
+          allowNull: true,
+        },
+        addrFilePath: {
+          type: DataTypes.STRING(600),
+          allowNull: true,
+        },
+        addrFileOriginName: {
+          type: DataTypes.STRING(300),
+          allowNull: true,
         },
         secret: {
           type: DataTypes.STRING(10),
           allowNull: true,
           defaultValue: null,
         },
-        terms: {
-          // 이용약관동의
+        isComplete: {
           type: DataTypes.BOOLEAN,
           allowNull: false,
+          defaultValue: false,
+        },
+        completedAt: {
+          type: DataTypes.DATE,
+          allowNull: true,
         },
       },
       {
         modelName: "User",
         tableName: "users",
         charset: "utf8mb4",
-        collate: "utf8mb4_general_ci", // 한글 저장
+        collate: "utf8mb4_general_ci",
         sequelize,
       }
     );
   }
   static associate(db) {
-    db.User.hasMany(db.Question);
+    db.User.hasMany(db.Deposit);
+    db.User.hasMany(db.DepositImage);
+    db.User.hasMany(db.Withdraw);
+    db.User.hasMany(db.LiveAccount);
+    db.User.hasMany(db.DemoAccount);
   }
 };

@@ -1,14 +1,8 @@
 const Sequelize = require("sequelize");
 const user = require("./user");
-const mainbanner = require("./mainbanner");
-const companyinfo = require("./companyinfo");
-const popup = require("./popup");
-const acceptrecord = require("./acceptrecord");
-const notice = require("./notice");
-const gallary = require("./gallary");
 const question = require("./question");
-const questiontype = require("./questiontype");
 const deposit = require("./deposit");
+const depositImage = require("./depositImage");
 const demoAccount = require("./demoAccount");
 const liveAccount = require("./liveAccount");
 const withdraw = require("./withdraw");
@@ -25,15 +19,9 @@ const sequelize = new Sequelize(
 );
 
 db.User = user;
-db.MainBanner = mainbanner;
-db.CompanyInfo = companyinfo;
-db.Popup = popup;
-db.AcceptRecord = acceptrecord;
-db.Notice = notice;
-db.Gallary = gallary;
 db.Question = question;
-db.QuestionType = questiontype;
 db.Deposit = deposit;
+db.DepositImage = depositImage;
 db.DemoAccount = demoAccount;
 db.LiveAccount = liveAccount;
 db.Withdraw = withdraw;

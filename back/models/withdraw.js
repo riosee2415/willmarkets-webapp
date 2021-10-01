@@ -18,15 +18,16 @@ module.exports = class Withdraw extends Model {
           allowNull: false,
         },
         bankAddress: {
-          type: DataTypes.STRING(200),
+          type: DataTypes.STRING(500),
           allowNull: false,
         },
         selectBank: {
+          // 출금 계좌 -> 출금 계좌는 내 지갑과 내 라이브 계좌중 선택합니다.
           type: DataTypes.STRING(200),
           allowNull: false,
         },
         bankNo: {
-          type: DataTypes.INTEGER,
+          type: DataTypes.STRING(200),
           allowNull: false,
         },
         isComplete: {
@@ -43,10 +44,12 @@ module.exports = class Withdraw extends Model {
         modelName: "Withdraw",
         tableName: "withdraws",
         charset: "utf8mb4",
-        collate: "utf8mb4_general_ci", // 한글 저장
+        collate: "utf8mb4_general_ci",
         sequelize,
       }
     );
   }
-  static associate(db) {}
+  static associate(db) {
+    db.Withdraw.belongsTo(db.User);
+  }
 };

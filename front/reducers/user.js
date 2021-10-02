@@ -194,7 +194,7 @@ const reducer = (state = initailState, action) =>
         break;
       case USER_ME_UPDATE_SUCCESS:
         draft.st_userMeUpdateLoading = true;
-        draft.st_userMeUpdateDone = false;
+        draft.st_userMeUpdateDone = true;
         break;
       case USER_ME_UPDATE_FAILURE:
         draft.st_userMeUpdateLoading = false;
@@ -429,7 +429,7 @@ const reducer = (state = initailState, action) =>
       case LOAD_MY_INFO_SUCCESS:
         draft.st_loadMyInfoLoading = false;
         draft.st_loadMyInfoDone = true;
-        draft.me = action.data;
+        draft.userMe = action.data;
         break;
 
       case LOAD_MY_INFO_FAILURE:

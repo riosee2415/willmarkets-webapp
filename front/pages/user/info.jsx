@@ -129,9 +129,6 @@ const Info = () => {
 
   useEffect(() => {
     if (st_userMeUpdateDone) {
-      dispatch({
-        type: USER_ME_REQUEST,
-      });
     }
   }, [st_userMeUpdateDone]);
 

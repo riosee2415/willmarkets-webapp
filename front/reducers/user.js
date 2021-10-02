@@ -24,10 +24,6 @@ export const initailState = {
   st_userIdImageFileDone: false,
   st_userIdImageFileError: null,
   //
-  st_userMeUpdateLoading: false,
-  st_userMeUpdateDone: false,
-  st_userMeUpdateError: null,
-  //
   st_userSigninLoading: false,
   st_userSigninDone: false,
   st_userSigninError: null,
@@ -77,9 +73,9 @@ export const initailState = {
   st_loadMyInfoError: null,
 };
 
-export const USER_ME_REQUEST = "USER_ME_REQUEST";
-export const USER_ME_SUCCESS = "USER_ME_SUCCESS";
-export const USER_ME_FAILURE = "USER_ME_FAILURE";
+export const USER_LIST_REQUEST = "USER_LIST_REQUEST";
+export const USER_LIST_SUCCESS = "USER_LIST_SUCCESS";
+export const USER_LIST_FAILURE = "USER_LIST_FAILURE";
 //
 export const USER_SIGNUP_REQUEST = "USER_SIGNUP_REQUEST";
 export const USER_SIGNUP_SUCCESS = "USER_SIGNUP_SUCCESS";
@@ -170,22 +166,6 @@ const reducer = (state = initailState, action) =>
         break;
       }
       //
-      case USER_ME_REQUEST:
-        draft.st_userMeLoading = true;
-        draft.st_userMeError = null;
-        draft.st_userMeDone = false;
-        break;
-      case USER_ME_SUCCESS:
-        draft.st_userMeLoading = false;
-        draft.st_userMeDone = true;
-        draft.userMe = action.data;
-        break;
-      case USER_ME_FAILURE:
-        draft.st_userMeLoading = false;
-        draft.st_userMeDone = false;
-        draft.st_userMeError = action.error;
-        break;
-      //
       case USER_ME_UPDATE_REQUEST:
         draft.st_userMeUpdateLoading = false;
         draft.st_userMeUpdateDone = false;
@@ -210,8 +190,8 @@ const reducer = (state = initailState, action) =>
       case USER_ID_IMAGE_FILE_SUCCESS: {
         draft.st_userIdImageFileLoading = false;
         draft.st_userIdImageFileDone = true;
-        draft.filePath = action.data.path;
-        draft.fileOriginName = action.data.originName;
+        draft.userImageFilePath = action.data.path;
+        draft.userImageFileOriginName = action.data.originName;
         break;
       }
       case USER_ID_IMAGE_FILE_FAILURE: {
@@ -428,7 +408,7 @@ const reducer = (state = initailState, action) =>
       case LOAD_MY_INFO_SUCCESS:
         draft.st_loadMyInfoLoading = false;
         draft.st_loadMyInfoDone = true;
-        draft.userMe = action.data;
+        draft.me = action.data;
         break;
 
       case LOAD_MY_INFO_FAILURE:

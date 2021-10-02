@@ -101,9 +101,6 @@ const AddDemo = () => {
 
   useEffect(() => {
     if (st_demoAccountCreateDone) {
-      dispatch({
-        type: USER_ME_REQUEST,
-      });
       inputPrice.setValue("");
       inputTragePassword.setValue("");
       inputViewPassword.setValue("");

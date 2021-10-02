@@ -13,7 +13,7 @@ import {
   PlusCircleOutlined,
 } from "@ant-design/icons";
 import wrapper from "../../store/configureStore";
-import { LOAD_MY_INFO_REQUEST, USER_ME_REQUEST } from "../../reducers/user";
+import { LOAD_MY_INFO_REQUEST } from "../../reducers/user";
 import { END } from "redux-saga";
 import axios from "axios";
 import {
@@ -115,10 +115,6 @@ const AddLive = () => {
 
   useEffect(() => {
     if (st_liveAccountCreateDone) {
-      dispatch({
-        type: USER_ME_REQUEST,
-      });
-
       inputTragePassword.setValue("");
       inputViewPassword.setValue("");
       setCurrentFocus(-1);

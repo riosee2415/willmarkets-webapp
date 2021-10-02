@@ -6,6 +6,7 @@ export const initailState = {
   userSingup: null,
   userImageFilePath: null,
   userImageFileOriginName: null,
+  currentAdminMenu: [],
   //
   st_userListLoading: false,
   st_userListDone: false,
@@ -437,6 +438,22 @@ const reducer = (state = initailState, action) =>
         draft.st_loadMyInfoDone = false;
         draft.st_loadMyInfoError = action.error;
         break;
+
+      case CURRENT_ADMINMENU_STATUS: {
+        const exist = draft.currentAdminMenu.filter(
+          (data) => data === action.data.key
+        );
+
+        if (exist.length > 0) {
+          draft.currentAdminMenu = draft.currentAdminMenu.filter(
+            (data) => data !== action.data.key
+          );
+        } else {
+          draft.currentAdminMenu = [...draft.currentAdminMenu, action.data.key];
+        }
+
+        break;
+      }
 
       default:
         break;

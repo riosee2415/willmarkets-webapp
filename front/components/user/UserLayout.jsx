@@ -29,7 +29,8 @@ const UserLayout = ({ children }) => {
           bgColor={`#f9f9f9`}
         >
           <UserHeader />
-          {children}
+
+          <Wrapper padding={`20px`}>{children}</Wrapper>
         </Wrapper>
       </Wrapper>
     </section>

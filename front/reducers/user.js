@@ -150,6 +150,8 @@ export const LOAD_MY_INFO_REQUEST = "LOAD_MY_INFO_REQUEST";
 export const LOAD_MY_INFO_SUCCESS = "LOAD_MY_INFO_SUCCESS";
 export const LOAD_MY_INFO_FAILURE = "LOAD_MY_INFO_FAILURE";
 
+export const CURRENT_ADMINMENU_STATUS = "CURRENT_ADMINMENU_STATUS";
+
 const reducer = (state = initailState, action) =>
   produce(state, (draft) => {
     switch (action.type) {

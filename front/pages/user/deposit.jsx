@@ -47,7 +47,13 @@ const Deposit = () => {
   ////// HOOKS //////
   const dispatch = useDispatch();
 
-  const { me } = useSelector((state) => state.user);
+  const {
+    me,
+    st_userFindPasswordDone,
+    st_userFindPasswordError,
+    st_userFindPasswordConfirmDone,
+    st_userFindPasswordConfirmError,
+  } = useSelector((state) => state.user);
 
   const { st_depositCreateDone, st_depositCreateError } = useSelector(
     (state) => state.deposit
@@ -62,10 +68,12 @@ const Deposit = () => {
   const inputPrice = useOnlyNumberInput("");
   const inputFilePath = useInput("");
   const inputFileOriginName = useInput("");
+  const inputSecret = useInput("");
 
   ////// TOGGLE //////
 
   ////// HANDLER //////
+
   const moveLinkHandler = useCallback((link) => {
     router.push(link);
   }, []);
@@ -94,23 +102,71 @@ const Deposit = () => {
     }
 
     dispatch({
-      type: DEPOSIT_CREATE_REQUEST,
+      type: USER_FIND_PASSWORD_REQUEST,
       data: {
-        userId: me.id,
-        bankName: currentBank.bankName,
-        bankNo: currentBank.bankNo,
-        swiftCode: currentBank.swiftCode,
-        willAddress: currentBank.willAddress,
-        bankAddress: currentBank.bankAddress,
-        selectBank: inputSelectBank.value,
-        price: inputPrice.value,
+        email: me.inputEmail,
       },
     });
   }, [currentBank, inputPrice, inputSelectBank]);
 
-  const depositFileHandler = () => {};
+  const confirmSecretHandler = useCallback(() => {
+    if (!emptyCheck(inputSecret.value)) {
+      return message.error("인증번호를 입력해주세요.");
+    }
+
+    dispatch({
+      type: USER_FIND_PASSWORD_CONFIRM_REQUEST,
+      data: {
+        email: inputEmail.value,
+        secret: inputSecret.value,
+      },
+    });
+  }, [inputSecret]);
 
   ////// USEEFFECT //////
+
+  useEffect(() => {
+    if (st_userFindPasswordConfirmDone) {
+      if (secret) {
+        message.success("이메일 인증이 완료되었습니다.");
+        dispatch({
+          type: DEPOSIT_CREATE_REQUEST,
+          data: {
+            userId: me.id,
+            bankName: currentBank.bankName,
+            bankNo: currentBank.bankNo,
+            swiftCode: currentBank.swiftCode,
+            willAddress: currentBank.willAddress,
+            bankAddress: currentBank.bankAddress,
+            selectBank: inputSelectBank.value,
+            price: inputPrice.value,
+          },
+        });
+        return;
+      } else {
+        return message.error("이메일 인증에 실패했습니다.");
+      }
+    }
+  }, [st_userFindPasswordConfirmDone]);
+
+  useEffect(() => {
+    if (st_userFindPasswordConfirmError) {
+      message.error(st_userFindPasswordConfirmError);
+    }
+  }, [st_userFindPasswordConfirmError]);
+
+  useEffect(() => {
+    if (st_userFindPasswordDone) {
+      message.success("이메일로 인증코드가 전송되었습니다.");
+    }
+  }, [st_userFindPasswordDone]);
+
+  useEffect(() => {
+    if (st_userFindPasswordError) {
+      message.success(st_userFindPasswordError);
+    }
+  }, [st_userFindPasswordError]);
+
   useEffect(() => {
     if (st_depositCreateDone) {
       message.success("입금신청이 완료되었습니다.");

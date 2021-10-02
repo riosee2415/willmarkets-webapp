@@ -65,7 +65,6 @@ const AddLive = () => {
       type: LIVE_ACCOUNT_CREATE_REQUEST,
       data: {
         userId: me.id,
-        bankNo: inputBank.value,
         platform: inputPlatform.value,
         type: inputType.value,
         leverage: inputLeverage.value,

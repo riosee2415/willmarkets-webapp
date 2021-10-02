@@ -10,7 +10,10 @@ import {} from "@ant-design/icons";
 import wrapper from "../../store/configureStore";
 import { END } from "redux-saga";
 import axios from "axios";
-import { LOAD_MY_INFO_REQUEST } from "../../reducers/user";
+import {
+  LOAD_MY_INFO_REQUEST,
+  USER_FIND_EMAIL_FAILURE,
+} from "../../reducers/user";
 import {
   ColWrapper,
   RowWrapper,
@@ -22,45 +25,57 @@ import {
 } from "../../components/commonComponents";
 import ClientLayout from "../../components/ClientLayout";
 import Theme from "../../components/Theme";
-import { WITHDRAW_CREATE_SUCCESS } from "../../reducers/withdraw";
+import { WITHDRAW_CREATE_REQUEST } from "../../reducers/withdraw";
 
 const Withdraw = () => {
-  const [currentTab, setCurrentTab] = useState(0);
-  const [currentFocus, setCurrentFocus] = useState(-1);
+  ////// VARIABLES //////
 
+  ////// HOOKS //////
   const dispatch = useDispatch();
 
   const { me } = useSelector((state) => state.user);
-
-  const inputBankName = useInput("");
-  const inputBankNo = useOnlyNumberInput("");
-  const inputPrice = useOnlyNumberInput("");
-  const inputSwiftCode = useInput("");
-  const inputBankAddress = useInput("");
-  const inputSelectBank = useInput("");
 
   const { st_withdrawCreateDone, st_withdrawCreateError } = useSelector(
     (state) => state.withdraw
   );
 
-  const withDrawSubmitHanlder = useCallback(() => {
-    if (!emptyCheck(inputBankNo.value)) {
-      return message.error("계좌번호를 입력해주세요.");
-    }
+  const inputBankName = useInput("");
+  const inputPrice = useOnlyNumberInput("");
+  const inputSwiftCode = useInput("");
+  const inputBankAddress = useInput("");
+  const inputSelectBank = useInput("");
+  const inputBankNo = useInput("");
+
+  ////// TOGGLE //////
+
+  ////// HANDLER //////
+  const createWithdrawHanlder = useCallback(() => {
     if (!emptyCheck(inputBankName.value)) {
-      return message.error("은행이름을 입력해주세요.");
+      return message.error("출금은행을 입력해주세요.");
     }
+
     if (!emptyCheck(inputPrice.value)) {
-      return message.error("금액을 입력해주세요.");
+      return message.error("출금금액을 입력해주세요.");
     }
+
     if (!emptyCheck(inputSwiftCode.value)) {
-      return message.error("은행 식별코드를 입력해주세요.");
+      return message.error("Swift Code를 입력해주세요.");
     }
+
     if (!emptyCheck(inputBankAddress.value)) {
       return message.error("은행주소를 입력해주세요.");
     }
+
+    if (!emptyCheck(inputSelectBank.value)) {
+      return message.error("출금계좌를 선택해주세요.");
+    }
+
+    if (!emptyCheck(inputBankNo.value)) {
+      return message.error("계좌번호를 입력해주세요.");
+    }
+
     dispatch({
-      type: WITHDRAW_CREATE_SUCCESS,
+      type: WITHDRAW_CREATE_REQUEST,
       data: {
         userId: me.id,
         bankName: inputBankName.value,
@@ -72,24 +87,24 @@ const Withdraw = () => {
       },
     });
   }, [
-    ,
-    inputBankNo,
     inputBankName,
     inputPrice,
     inputSwiftCode,
     inputBankAddress,
     inputSelectBank,
+    inputBankNo,
   ]);
 
   useEffect(() => {
     if (st_withdrawCreateDone) {
-      inputBankNo.setValue(""),
-        inputBankName.setValue(""),
-        inputPrice.setValue(""),
-        inputSwiftCode.setValue(""),
-        inputBankAddress.setValue(""),
-        inputSelectBank.setValue(""),
-        message.success("..?");
+      message.success("출금신청이 완료되었습니다.");
+
+      inputBankName.setValue("");
+      inputPrice.setValue("");
+      inputSwiftCode.setValue("");
+      inputBankAddress.setValue("");
+      inputSelectBank.setValue("");
+      inputBankNo.setValue("");
     }
   }, [st_withdrawCreateDone]);
 

@@ -16,49 +16,53 @@ import wrapper from "../../store/configureStore";
 import { LOAD_MY_INFO_REQUEST } from "../../reducers/user";
 import { END } from "redux-saga";
 import axios from "axios";
-import {
-  ColWrapper,
-  RowWrapper,
-  Image,
-  Wrapper,
-  WholeWrapper,
-  RsWrapper,
-  CommonButton,
-} from "../../components/commonComponents";
-import ClientLayout from "../../components/ClientLayout";
+import {} from "../../components/commonComponents";
+import UserLayout from "../../components/user/UserLayout";
 import Theme from "../../components/Theme";
 import { LIVE_ACCOUNT_CREATE_REQUEST } from "../../reducers/liveAccount";
 
 const AddLive = () => {
+  ////// VARIABLES //////
+  const platformList = ["MetaTrader 4"];
+
+  const typeList = [
+    {
+      type: "STP Account",
+      leverage: ["1:500", "1:400"],
+    },
+    {
+      type: "ECN Account",
+      leverage: ["1:500", "1:400"],
+    },
+  ];
+
+  ////// HOOKS //////
   const router = useRouter();
 
-  const [currentTab, setCurrentTab] = useState(0);
-  const [currentFocus, setCurrentFocus] = useState(-1);
-  const [testTab, setTab] = useState(0);
-
-  console.log(testTab, router);
+  const dispatch = useDispatch();
 
   const { me } = useSelector((state) => state.user);
 
   const { st_liveAccountCreateDone, st_liveAccountCreateError } = useSelector(
     (state) => state.liveAccount
   );
-  const dispatch = useDispatch();
-  const inputBank = useInput("");
+
   const inputPlatform = useInput("MetaTrader 4");
-  const inputType = useInput("Aaccount");
+  const inputType = useInput("");
   const inputLeverage = useInput("");
-  const inputTragePassword = useInput("");
+  const inputTradePassword = useInput("");
   const inputViewPassword = useInput("");
 
-  console.log(inputTragePassword, inputViewPassword);
+  ////// TOGGLE //////
 
-  const liveAccountCreateSubmit = useCallback(() => {
-    if (!emptyCheck(inputTragePassword.value)) {
-      return message.error("거래 비밀번호를 입력해주세요.");
+  ////// HANDLER //////
+  const createLiveAccountHandler = useCallback(() => {
+    if (!emptyCheck(inputTradePassword.value)) {
+      return message.error("거래용 비밀번호를 입력해주세요.");
     }
+
     if (!emptyCheck(inputViewPassword.value)) {
-      return message.error("보기 비밀번호를 입력해주세요.");
+      return message.error("보기용 비밀번호를 입력해주세요.");
     }
 
     dispatch({
@@ -68,59 +72,36 @@ const AddLive = () => {
         platform: inputPlatform.value,
         type: inputType.value,
         leverage: inputLeverage.value,
-        tradePassword: inputTragePassword,
-        viewPassword: inputViewPassword,
+        tradePassword: inputTradePassword.value,
+        viewPassword: inputViewPassword.value,
       },
     });
-  }, [inputTragePassword, inputViewPassword]);
+  }, [
+    inputPlatform,
+    inputType,
+    inputLeverage,
+    inputTradePassword,
+    inputViewPassword,
+  ]);
 
-  const platformHandler = useCallback(
-    (value) => {
-      if (value === "MetaTrader 4") {
-        inputPlatform.setValue(value);
-      }
-    },
-    [inputPlatform]
-  );
+  const changeSelectBoxHandler = useCallback((value, setValue) => {
+    setValue(value);
+  }, []);
 
-  console.log(inputPlatform.value, "inputPlatform");
-
-  const AccountTypeHandler = (Account) => {
-    console.log(Account);
-
-    if (Account === "STP Account") {
-      inputType.setValue(Account);
-      setTab(0);
-    } else if (Account === "ECN Account") {
-      inputType.setValue(Account);
-      setTab(1);
-    } else if (Account === "Myfxbook AutoTrade") {
-      inputType.setValue(Account);
-    }
-  };
-
-  const lerverageHanlder = (value) => {
-    console.log(value);
-    if (value === "1:200") {
-      inputLeverage.setValue(value);
-    } else if (value === "1:300") {
-      inputLeverage.setValue(value);
-    } else if (value === "1:500") {
-      inputLeverage.setValue(value);
-    }
-  };
-
-  console.log(inputType.value, "aaaa");
+  ////// USEEFFECT //////
+  useEffect(() => {
+    inputType.setValue(typeList[0].type);
+    inputLeverage.setValue(typeList[0].leverage[0]);
+  }, []);
 
   useEffect(() => {
     if (st_liveAccountCreateDone) {
-      inputTragePassword.setValue("");
-      inputViewPassword.setValue("");
-      setCurrentFocus(-1);
-
       message.success("라이브 계좌가 생성되었습니다.");
 
-      // setCurrentTab()
+      inputType.setValue("");
+      inputLeverage.setValue("");
+      inputTradePassword.setValue("");
+      inputViewPassword.setValue("");
     }
   }, [st_liveAccountCreateDone]);
 
@@ -130,68 +111,7 @@ const AddLive = () => {
     }
   }, [st_liveAccountCreateError]);
 
-  return (
-    <ClientLayout>
-      <div>Hello AddLive</div>
-
-      <Wrapper onClick={() => setCurrentTab(1)} cursor={`pointer`}>
-        <PlusCircleOutlined />
-      </Wrapper>
-
-      <Wrapper>
-        <Wrapper>
-          <label>거래 플랫폼</label>
-        </Wrapper>
-        <Wrapper>
-          <div onClick={() => platformHandler("MetaTrader 4")}>
-            MetaTrader 4
-          </div>
-        </Wrapper>
-      </Wrapper>
-
-      <Wrapper dr={`row`}>
-        <Wrapper>
-          <label>계좌유형</label>
-        </Wrapper>
-        <div onClick={() => AccountTypeHandler("STP Account")}>STP Account</div>
-        <div onClick={() => AccountTypeHandler("ECN Account")}>ECN Account</div>
-        <div onClick={() => AccountTypeHandler("Myfxbook AutoTrade")}>
-          Myfxbook AutoTrade
-        </div>
-      </Wrapper>
-      <Wrapper>
-        <Wrapper>
-          <label>레버리지</label>
-        </Wrapper>
-
-        {testTab === 0 ? (
-          <Wrapper dr={`row`}>
-            <Wrapper margin={`10px`} width={`auto`}>
-              <div onClick={() => lerverageHanlder(`1:500`)}>1:500</div>
-            </Wrapper>
-            <Wrapper width={`auto`}>
-              <div onClick={() => lerverageHanlder(`1:200`)}>1:200</div>
-            </Wrapper>
-          </Wrapper>
-        ) : (
-          <Wrapper dr={`row`}>
-            <Wrapper width={`auto`}>
-              <div onClick={() => lerverageHanlder(`1:300`)}>1:300</div>
-            </Wrapper>
-          </Wrapper>
-        )}
-      </Wrapper>
-
-      <Wrapper>
-        <Input style={{ width: `20%` }} {...inputTragePassword} />
-        <Input style={{ width: `20%` }} {...inputViewPassword} />
-
-        <Button type="primary" danger onClick={liveAccountCreateSubmit}>
-          계좌 계설
-        </Button>
-      </Wrapper>
-    </ClientLayout>
-  );
+  return <UserLayout></UserLayout>;
 };
 
 export const getServerSideProps = wrapper.getServerSideProps(

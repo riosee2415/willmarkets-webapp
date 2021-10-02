@@ -26,89 +26,94 @@ import { useTranslation } from "react-i18next";
 import { DEMO_ACCOUNT_CREATE_REQUEST } from "../../reducers/demoAccount";
 
 const AddDemo = () => {
-  const { t, i18n } = useTranslation();
+  ////// VARIABLES //////
+  const platformList = ["MetaTrader 4"];
 
-  const [currentTab, setCurrentTab] = useState(0);
-  const [currentFocus, setCurrentFocus] = useState(-1);
+  const typeList = [
+    {
+      type: "STP Account",
+      leverage: ["1:500", "1:400"],
+    },
+    {
+      type: "ECN Account",
+      leverage: ["1:500", "1:400", "1:300"],
+    },
+  ];
+
+  ////// HOOKS //////
+  // const { t, i18n } = useTranslation();
+
+  const dispatch = useDispatch();
 
   const { me } = useSelector((state) => state.user);
 
   const { st_demoAccountCreateDone, st_demoAccountCreateError } = useSelector(
     (state) => state.demoAccount
   );
-  const dispatch = useDispatch();
 
-  const inputBankNo = useInput("");
   const inputPlatform = useInput("MetaTrader 4");
-  const inputType = useInput("Aaccount");
+  const inputType = useInput("");
   const inputLeverage = useInput("");
   const inputPrice = useInput("");
-  const inputTragePassword = useInput("");
+  const inputTradePassword = useInput("");
   const inputViewPassword = useInput("");
 
-  const demoAccountCreateSubmit = useCallback(() => {
+  ////// TOGGLE //////
+
+  ////// HANDLER //////
+  const createDemoAccountHandler = useCallback(() => {
     if (!emptyCheck(inputPrice.value)) {
       return message.error("환율 금액을 입력해주세요.");
     }
-    if (!emptyCheck(inputTragePassword.value)) {
-      return message.error("거래 비밀번호를 입력해주세요.");
+
+    if (!emptyCheck(inputTradePassword.value)) {
+      return message.error("거래용 비밀번호를 입력해주세요.");
     }
+
     if (!emptyCheck(inputViewPassword.value)) {
-      return message.error("보기 비밀번호를 입력해주세요.");
+      return message.error("보기용 비밀번호를 입력해주세요.");
     }
 
     dispatch({
       type: DEMO_ACCOUNT_CREATE_REQUEST,
       data: {
         userId: me.id,
-        bankNo: inputBankNo.value,
         platform: inputPlatform.value,
         type: inputType.value,
         leverage: inputLeverage.value,
         price: inputPrice.value,
-        tradePassword: inputTragePassword,
-        viewPassword: inputViewPassword,
+        tradePassword: inputTradePassword.value,
+        viewPassword: inputViewPassword.value,
       },
     });
-  }, [inputTragePassword, inputViewPassword]);
+  }, [
+    inputPlatform,
+    inputType,
+    inputLeverage,
+    inputPrice,
+    inputTradePassword,
+    inputViewPassword,
+  ]);
 
-  const platformHandler = useCallback(
-    (value) => {
-      if (value === "MetaTrader 4") {
-        inputPlatform.setValue(value);
-      }
-    },
-    [inputPlatform]
-  );
+  const changeSelectBoxHandler = useCallback((value, setValue) => {
+    setValue(value);
+  }, []);
 
-  console.log(inputPlatform.value, "inputPlatform");
-
-  const AccountTypeHandler = (Account) => {
-    console.log(Account);
-
-    if (Account === "STP Account") {
-      inputType.setValue(Account);
-      setTab(0);
-    } else if (Account === "ECN Account") {
-      inputType.setValue(Account);
-      setTab(1);
-    } else if (Account === "Myfxbook AutoTrade") {
-      inputType.setValue(Account);
-    }
-  };
-
-  console.log(inputType.value, "aaaa");
+  ////// USEEFFECT //////
+  useEffect(() => {
+    inputType.setValue(typeList[0].type);
+    inputLeverage.setValue(typeList[0].leverage[0]);
+  }, []);
 
   useEffect(() => {
     if (st_demoAccountCreateDone) {
+      message.success("데모 계좌가 생성되었습니다.");
+
+      inputType.setValue("");
+      inputLeverage.setValue("");
       inputPrice.setValue("");
-      inputTragePassword.setValue("");
+      inputTradePassword.setValue("");
       inputViewPassword.setValue("");
-      setCurrentFocus(-1);
-
-      message.success("데모 계좌가 개설 되었습니다.");
-
-      // setCurrentTab()
     }
   }, [st_demoAccountCreateDone]);
 
@@ -121,7 +126,7 @@ const AddDemo = () => {
   return (
     <>
       <UserLayout>
-        asdasd
+        {/* asdasd
         <div>asdasdas</div>
         <div>{t("test")}</div>
         <div>{t("test")}</div>
@@ -129,9 +134,43 @@ const AddDemo = () => {
         <button
           onClick={() => {
             i18n.changeLanguage(i18n.language === "en" ? "ko" : "en");
-          }}>
+          }}
+        >
           Change Language
-        </button>
+        </button> */}
+        {typeList.map((data) => {
+          return (
+            <Wrapper
+              onClick={() => {
+                changeSelectBoxHandler(data.type, inputType.setValue);
+
+                inputLeverage.setValue(
+                  typeList.find((data2) => data.type === data2.type).leverage[0]
+                );
+              }}
+            >
+              {data.type}
+            </Wrapper>
+          );
+        })}
+
+        {inputType.value &&
+          typeList
+            .find((data) => data.type === inputType.value)
+            .leverage.map((data) => {
+              return (
+                <Wrapper
+                  key={data}
+                  onClick={() =>
+                    changeSelectBoxHandler(data, inputLeverage.setValue)
+                  }
+                >
+                  {data}
+                </Wrapper>
+              );
+            })}
+
+        {console.log(inputType.value, inputLeverage.value)}
       </UserLayout>
     </>
   );

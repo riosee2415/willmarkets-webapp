@@ -26,158 +26,101 @@ import { DEPOSIT_CREATE_REQUEST } from "../../reducers/deposit";
 import { LIVE_ACCOUNT_LIST_REQUEST } from "../../reducers/liveAccount";
 
 const Deposit = () => {
-  const [currentTab, setCurrentTab] = useState(0);
-  const [currentFocus, setCurrentFocus] = useState(-1);
+  ////// VARIABLES //////
+  const bankList = [
+    {
+      bankName: "은행명",
+      bankNo: "계좌번호",
+      swiftCode: "Swift Code",
+      willAddress: "윌마켓 주소",
+      bankAddress: "은행 주소",
+    },
+    {
+      bankName: "은행명2",
+      bankNo: "계좌번호2",
+      swiftCode: "Swift Code2",
+      willAddress: "윌마켓 주소2",
+      bankAddress: "은행 주소2",
+    },
+  ];
 
-  const imageRef = useRef();
-
+  ////// HOOKS //////
   const dispatch = useDispatch();
 
   const { me } = useSelector((state) => state.user);
-
-  const inputBankName = useInput(null);
-  const inputBankNo = useOnlyNumberInput(null);
-  const inputSwiftCode = useInput(null);
-  const inputWillAddress = useInput(null);
-  const inputBankAddress = useInput(null);
-  const inputSelectBank = useInput("");
-  const inputPrice = useOnlyNumberInput("");
-  const inputFilePath = useInput("");
-  const inputFileOriginName = useInput("");
-
-  const dataList = [
-    {
-      "001": "한국은행",
-      "002": "산업은행",
-      "003": "기업은행",
-      "004": "국민은행",
-      "005": "외환은행",
-      "006": "국민은행",
-      "007": "수협중앙회",
-      "008": "수출입은행",
-      "009": "수협중앙회",
-      "010": "농협은행",
-      "011": "농협중앙회",
-      "020": "우리은행",
-      "023": "제일은행",
-      "027": "씨티은행",
-      "031": "대구은행",
-      "032": "부산은행",
-      "034": "광주은행",
-      "035": "제주은행",
-      "037": "전북은행",
-      "039": "경남은행",
-    },
-    {
-      IBK기업은행: "IBKOKRSE",
-      NH농협은행: "KODBKRSE",
-      한국수출입은행: "EXIKKRSE",
-    },
-    {
-      address: "www.kigkm.com",
-    },
-    {
-      bankAdderss: "주소",
-    },
-  ];
 
   const { st_depositCreateDone, st_depositCreateError } = useSelector(
     (state) => state.deposit
   );
 
-  const depositFileHandler = () => {};
+  const [currentTab, setCurrentTab] = useState(0);
+  const [currentStep, setCurrentStep] = useState(0);
 
+  const [currentBank, setCurrentBank] = useState(null);
+
+  const inputSelectBank = useInput("");
+  const inputPrice = useOnlyNumberInput("");
+  const inputFilePath = useInput("");
+  const inputFileOriginName = useInput("");
+
+  ////// TOGGLE //////
+
+  ////// HANDLER //////
   const moveLinkHandler = useCallback((link) => {
     router.push(link);
   }, []);
 
   const moveBackHandler = useCallback(() => {
-    const tab = currentTab - 1;
-
-    setCurrentFocus(-1);
-
-    if (tab < 0) {
-      router.back();
-    } else {
-      setCurrentTab(tab);
-    }
+    setCurrentStep(currentTab - 1);
   }, [currentTab]);
 
-  const dePositSubmitHanlder = useCallback(() => {
-    setCurrentFocus(-1);
+  const selectBankHandler = useCallback((data) => {
+    setCurrentBank(data);
+    setCurrentStep(1);
+  }, []);
 
-    if (currentTab === 0) {
-      if (!emptyCheck(inputBankName.value)) {
-        return message.error("은행이름을 입력해주세요.");
-      }
-      if (!emptyCheck(inputBankNo.value)) {
-        return message.error("계좌번호를 입력해주세요.");
-      }
-      if (!emptyCheck(inputSwiftCode.value)) {
-        return message.error("은행 식별코드를 입력해주세요.");
-      }
-      if (!emptyCheck(inputWillAddress.value)) {
-        return message.error("주소를 입력해주세요.");
-      }
-      if (!emptyCheck(inputBankAddress.value)) {
-        return message.error("은행주소를 입력해주세요.");
-      }
-      setCurrentTab(1);
-    } else if (currentTab === 1) {
-      if (!emptyCheck(inputSelectBank.value)) {
-        return message.error("계좌를 선택 해주세요.");
-      }
-      if (!emptyCheck(inputPrice.value)) {
-        return message.error("금액을 입력해주세요.");
-      }
+  const createDepositHanlder = useCallback(() => {
+    if (!currentBank) {
+      setCurrentStep(0);
+      return message.error("입금은행을 선택 해주세요.");
+    }
+
+    if (!emptyCheck(inputSelectBank.value)) {
+      return message.error("입금계좌를 선택해주세요.");
+    }
+
+    if (!emptyCheck(inputPrice.value)) {
+      return message.error("입금금액을 입력해주세요.");
     }
 
     dispatch({
       type: DEPOSIT_CREATE_REQUEST,
       data: {
         userId: me.id,
-        bankName: inputBankName.value,
-        price: inputPrice.value,
-        swiftCode: inputSwiftCode.value,
-        bankAddress: inputBankAddress.value,
+        bankName: currentBank.bankName,
+        bankNo: currentBank.bankNo,
+        swiftCode: currentBank.swiftCode,
+        willAddress: currentBank.willAddress,
+        bankAddress: currentBank.bankAddress,
         selectBank: inputSelectBank.value,
-        bankNo: inputBankNo.value,
-        inputWillAddress: inputWillAddress.value,
-        filePath: inputFilePath.value,
-        fileOriginName: inputFileOriginName.value,
+        price: inputPrice.value,
       },
     });
-  }, [
-    inputWillAddress,
-    inputBankNo,
-    inputBankName,
-    inputPrice,
-    inputSwiftCode,
-    inputBankAddress,
-    inputSelectBank,
-    inputFilePath,
-    inputFileOriginName,
-  ]);
+  }, [currentBank, inputPrice, inputSelectBank]);
 
+  const depositFileHandler = () => {};
+
+  ////// USEEFFECT //////
   useEffect(() => {
     if (st_depositCreateDone) {
-      inputBankName.setValue(""),
-        inputPrice.setValue(""),
-        inputBankNo.setValue(""),
-        inputSwiftCode.setValue(""),
-        inputBankAddress.setValue(""),
-        inputSelectBank.setValue(""),
-        inputFilePath.setValue(""),
-        inputFileOriginName.setValue(""),
-        message.success("..?");
+      message.success("입금신청이 완료되었습니다.");
+
+      setCurrentBank(null);
+
+      inputPrice.setValue("");
+      inputSelectBank.setValue("");
     }
   }, [st_depositCreateDone]);
-
-  useEffect(() => {
-    dispatch({
-      type: LIVE_ACCOUNT_LIST_REQUEST,
-    });
-  }, []);
 
   useEffect(() => {
     if (st_depositCreateError) {
@@ -185,7 +128,6 @@ const Deposit = () => {
     }
   }, [st_depositCreateError]);
 
-  useEffect(() => {}, []);
   return (
     <ClientLayout>
       <div>Hello Deposit</div>

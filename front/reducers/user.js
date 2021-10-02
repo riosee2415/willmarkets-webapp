@@ -2,10 +2,10 @@ import produce from "../util/produce";
 
 export const initailState = {
   userList: null,
-  userMe: null,
-  userSingup: null,
-  userImageFilePath: null,
-  userImageFileOriginName: null,
+  me: null,
+
+  filePath: null,
+  fileOriginName: null,
   currentAdminMenu: [],
   //
   st_userListLoading: false,
@@ -77,10 +77,6 @@ export const initailState = {
   st_loadMyInfoError: null,
 };
 
-export const USER_LIST_REQUEST = "USER_LIST_REQUEST";
-export const USER_LIST_SUCCESS = "USER_LIST_SUCCESS";
-export const USER_LIST_FAILURE = "USER_LIST_FAILURE";
-//
 export const USER_ME_REQUEST = "USER_ME_REQUEST";
 export const USER_ME_SUCCESS = "USER_ME_SUCCESS";
 export const USER_ME_FAILURE = "USER_ME_FAILURE";
@@ -214,8 +210,8 @@ const reducer = (state = initailState, action) =>
       case USER_ID_IMAGE_FILE_SUCCESS: {
         draft.st_userIdImageFileLoading = false;
         draft.st_userIdImageFileDone = true;
-        draft.userImageFilePath = action.data.path;
-        draft.userImageFileOriginName = action.data.originName;
+        draft.filePath = action.data.path;
+        draft.fileOriginName = action.data.originName;
         break;
       }
       case USER_ID_IMAGE_FILE_FAILURE: {

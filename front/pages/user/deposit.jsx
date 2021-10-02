@@ -33,7 +33,7 @@ const Deposit = () => {
 
   const dispatch = useDispatch();
 
-  const { userme } = useSelector((state) => state.user);
+  const { me } = useSelector((state) => state.user);
 
   const inputBankName = useInput(null);
   const inputBankNo = useOnlyNumberInput(null);
@@ -85,6 +85,8 @@ const Deposit = () => {
     (state) => state.deposit
   );
 
+  const depositFileHandler = () => {};
+
   const moveLinkHandler = useCallback((link) => {
     router.push(link);
   }, []);
@@ -133,7 +135,7 @@ const Deposit = () => {
     dispatch({
       type: DEPOSIT_CREATE_REQUEST,
       data: {
-        userId: userme,
+        userId: me.id,
         bankName: inputBankName.value,
         price: inputPrice.value,
         swiftCode: inputSwiftCode.value,

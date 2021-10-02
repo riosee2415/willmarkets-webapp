@@ -38,7 +38,7 @@ const AddLive = () => {
 
   console.log(testTab, router);
 
-  const { userme } = useSelector((state) => state.user);
+  const { me } = useSelector((state) => state.user);
 
   const { st_liveAccountCreateDone, st_liveAccountCreateError } = useSelector(
     (state) => state.liveAccount
@@ -64,7 +64,7 @@ const AddLive = () => {
     dispatch({
       type: LIVE_ACCOUNT_CREATE_REQUEST,
       data: {
-        userId: userme.id,
+        userId: me.id,
         bankNo: inputBank.value,
         platform: inputPlatform.value,
         type: inputType.value,

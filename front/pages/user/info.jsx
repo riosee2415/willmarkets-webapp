@@ -27,7 +27,7 @@ import ClientLayout from "../../components/ClientLayout";
 import Theme from "../../components/Theme";
 
 const Info = () => {
-  const { userMe } = useSelector((state) => state.user);
+  const { me } = useSelector((state) => state.user);
 
   const inputType = useInput("");
   const inputEmail = useInput("");
@@ -87,7 +87,7 @@ const Info = () => {
     dispatch({
       type: USER_ME_UPDATE_REQUEST,
       data: {
-        id: userMe.id.value,
+        id: me.id,
         type: inputType.value,
         email: inputEmail,
         password: inputPassword.value,
@@ -137,6 +137,7 @@ const Info = () => {
 
   useEffect(() => {
     if (st_userIdImageFileDone) {
+      input;
     }
   }, [st_userMeUpdateDone]);
 

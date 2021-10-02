@@ -1,10 +1,6 @@
 import { all, call, fork, put, takeLatest } from "redux-saga/effects";
 import axios from "axios";
 import {
-  USER_LIST_REQUEST,
-  USER_LIST_SUCCESS,
-  USER_LIST_FAILURE,
-  //
   USER_ME_REQUEST,
   USER_ME_SUCCESS,
   USER_ME_FAILURE,
@@ -173,28 +169,6 @@ function* userList(action) {
     console.error(err);
     yield put({
       type: USER_LIST_FAILURE,
-      error: err.response.data,
-    });
-  }
-}
-
-// SAGA AREA ********************************************************************************************************
-// ******************************************************************************************************************
-function userMeAPI(data) {
-  return axios.get(`/api/user/me`, data);
-}
-
-function* userMe(action) {
-  try {
-    const result = yield call(userMeAPI, action.data);
-    yield put({
-      type: USER_ME_SUCCESS,
-      data: result.data,
-    });
-  } catch (err) {
-    console.error(err);
-    yield put({
-      type: USER_ME_FAILURE,
       error: err.response.data,
     });
   }
@@ -441,10 +415,6 @@ function* watchUserList() {
   yield takeLatest(USER_LIST_REQUEST, userList);
 }
 
-function* watchUserMe() {
-  yield takeLatest(USER_ME_REQUEST, userMe);
-}
-
 function* watchUserMeUpdate() {
   yield takeLatest(USER_ME_UPDATE_REQUEST, userMeUpdate);
 }
@@ -495,7 +465,6 @@ export default function* userSaga() {
     fork(watchSigninAdmin),
     fork(watchUserSignUp),
     fork(watchUserList),
-    fork(watchUserMe),
     fork(watchUserMeUpdate),
     fork(watchUserUpdatePrice),
     fork(watchUserUpdatePermit),

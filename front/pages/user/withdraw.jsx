@@ -30,7 +30,7 @@ const Withdraw = () => {
 
   const dispatch = useDispatch();
 
-  const { userme } = useSelector((state) => state.user);
+  const { me } = useSelector((state) => state.user);
 
   const inputBankName = useInput("");
   const inputBankNo = useOnlyNumberInput("");
@@ -62,7 +62,7 @@ const Withdraw = () => {
     dispatch({
       type: WITHDRAW_CREATE_SUCCESS,
       data: {
-        userId: userme,
+        userId: me.id,
         bankName: inputBankName.value,
         price: inputPrice.value,
         swiftCode: inputSwiftCode.value,

@@ -31,7 +31,7 @@ const AddDemo = () => {
   const [currentTab, setCurrentTab] = useState(0);
   const [currentFocus, setCurrentFocus] = useState(-1);
 
-  const { userme } = useSelector((state) => state.user);
+  const { me } = useSelector((state) => state.user);
 
   const { st_demoAccountCreateDone, st_demoAccountCreateError } = useSelector(
     (state) => state.demoAccount
@@ -60,7 +60,7 @@ const AddDemo = () => {
     dispatch({
       type: DEMO_ACCOUNT_CREATE_REQUEST,
       data: {
-        userId: userme.id,
+        userId: me.id,
         bankNo: inputBankNo.value,
         platform: inputPlatform.value,
         type: inputType.value,

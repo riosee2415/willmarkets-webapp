@@ -10,7 +10,10 @@ import {
   ColWrapper,
 } from "../../components/commonComponents";
 import useInput from "../../hooks/useInput";
-import { LOAD_MY_INFO_REQUEST, LOGIN_ADMIN_REQUEST } from "../../reducers/user";
+import {
+  LOAD_MY_INFO_REQUEST,
+  SIGNIN_ADMIN_REQUEST,
+} from "../../reducers/user";
 import { ACCEPT_LOG_REQUEST } from "../../reducers/accept";
 import Theme from "../../components/Theme";
 import wrapper from "../../store/configureStore";
@@ -43,7 +46,7 @@ const AdminHome = () => {
 
   const onLoginHandler = () => {
     dispatch({
-      type: LOGIN_ADMIN_REQUEST,
+      type: SIGNIN_ADMIN_REQUEST,
       data: { email: inputId.value, password: inputPw.value },
     });
   };

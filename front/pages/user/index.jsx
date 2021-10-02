@@ -9,7 +9,7 @@ import {} from "../../components/commonComponents";
 import { withResizeDetector } from "react-resize-detector";
 
 const User = ({ width }) => {
-  return <UserLayout>index</UserLayout>;
+  return <UserLayout>indexasd</UserLayout>;
 };
 
 export const getServerSideProps = wrapper.getServerSideProps(

@@ -4,6 +4,12 @@ import { withResizeDetector } from "react-resize-detector";
 import styled from "styled-components";
 import Theme from "../Theme";
 
+const Combo = styled(Wrapper)``;
+
+const ComboTitle = styled(Wrapper)``;
+
+const ComboOption = styled(Wrapper)``;
+
 const UserHeader = ({ children, width }) => {
   ////////////// - USE STATE- ///////////////
 

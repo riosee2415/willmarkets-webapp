@@ -128,13 +128,17 @@ const Info = () => {
   ]);
 
   useEffect(() => {
+    if (me) {
+    }
+  }, [me]);
+
+  useEffect(() => {
     if (st_userMeUpdateDone) {
     }
   }, [st_userMeUpdateDone]);
 
   useEffect(() => {
     if (st_userIdImageFileDone) {
-      input;
     }
   }, [st_userMeUpdateDone]);
 

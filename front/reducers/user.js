@@ -7,6 +7,8 @@ export const initailState = {
   filePath: null,
   fileOriginName: null,
   currentAdminMenu: [],
+  fileType: null,
+  secret: null,
   //
   st_userListLoading: false,
   st_userListDone: false,
@@ -190,8 +192,8 @@ const reducer = (state = initailState, action) =>
       case USER_ID_IMAGE_FILE_SUCCESS: {
         draft.st_userIdImageFileLoading = false;
         draft.st_userIdImageFileDone = true;
-        draft.userImageFilePath = action.data.path;
-        draft.userImageFileOriginName = action.data.originName;
+        draft.filePath = action.data.path;
+        draft.fileOriginName = action.data.originName;
         break;
       }
       case USER_ID_IMAGE_FILE_FAILURE: {
@@ -345,18 +347,18 @@ const reducer = (state = initailState, action) =>
         break;
       }
       //
-      case USER_FIND_PASSWORD_UPDATE_REQUEST: {
+      case USER_FIND_PASSWORD_REQUEST: {
         draft.st_userFindPasswordLoading = true;
         draft.st_userFindPasswordDone = null;
         draft.st_userFindPasswordError = false;
         break;
       }
-      case USER_FIND_PASSWORD_UPDATE_SUCCESS: {
+      case USER_FIND_PASSWORD_SUCCESS: {
         draft.st_userFindPasswordLoading = false;
         draft.st_userFindPasswordDone = true;
         break;
       }
-      case USER_FIND_PASSWORD_UPDATE_FAILURE: {
+      case USER_FIND_PASSWORD_FAILURE: {
         draft.st_userFindPasswordLoading = false;
         draft.st_userFindPasswordDone = false;
         draft.st_userFindPasswordError = action.error;
@@ -372,6 +374,7 @@ const reducer = (state = initailState, action) =>
       case USER_FIND_PASSWORD_CONFIRM_SUCCESS: {
         draft.st_userFindPasswordConfirmLoading = false;
         draft.st_userFindPasswordConfirmDone = true;
+        draft.secret = action.data;
         break;
       }
       case USER_FIND_PASSWORD_CONFIRM_FAILURE: {

@@ -221,6 +221,17 @@ const AddDemo = () => {
           shadow={`2px 2px 10px #e6e6e6`}
         >
           <Wrapper al={`flex-start`}>
+            <Wrapper
+              al={`flex-start`}
+              margin={`0 0 30px`}
+              padding={`0 8px 20px`}
+              fontSize={`19px`}
+              fontWeight={`700`}
+              borderBottom={`1px solid #ebebeb`}
+            >
+              데모 계좌 추가
+            </Wrapper>
+
             <CustomLabel margin={`0 0 15px`}>
               <Wrapper className={`required`}>*</Wrapper>
               거래 플랫폼

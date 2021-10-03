@@ -514,3 +514,75 @@ export const TextInput = styled.input`
   outline: none;
 `;
 /////////////////////////////////////////////////////////////
+
+////////////////////////// TABLE ////////////////////////////
+export const TableWrapper = styled(Wrapper)`
+  align-items: normal;
+  justify-content: normal;
+  margin: 10px 0 30px;
+  overflow-x: auto;
+  overflow-y: hidden;
+`;
+
+export const TableRow = styled(Wrapper)`
+  flex-direction: row;
+  align-items: normal;
+  justify-content: normal;
+  flex-wrap: nowrap;
+  width: 100%;
+  cursor: pointer;
+`;
+
+export const TableCol = styled(Wrapper)`
+  width: ${(props) => props.width || `auto`};
+  min-width: ${(props) => props.minWidth || props.width || `auto`};
+  font-size: 12px;
+  text-align: ${(props) => props.textAlign || `center`};
+  line-height: ${(props) => props.lineHeight || `1.5`};
+`;
+
+export const TableHeader = styled(Wrapper)`
+  flex-wrap: nowrap;
+  justify-content: normal;
+  align-items: normal;
+
+  ${TableCol} {
+    padding: 15px 10px;
+    background: #eeeeee;
+    border-top: 1px solid #e4e4e4;
+    border-bottom: 1px solid #e4e4e4;
+    border-right: 1px solid #e4e4e4;
+    color: #363333;
+  }
+
+  ${TableCol}:first-child {
+    border-left: 1px solid #e4e4e4;
+  }
+`;
+
+export const TableBody = styled(Wrapper)`
+  max-height: ${(props) => props.maxHeight || `auto`};
+  flex-wrap: nowrap;
+  justify-content: normal;
+  align-items: normal;
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding: 0 0 15px;
+  width: auto;
+
+  ${TableCol} {
+    padding: 8px 10px;
+    border-bottom: 1px solid #e4e4e4;
+    border-right: 1px solid #e4e4e4;
+    color: #363333;
+  }
+
+  ${TableCol}:first-child {
+    border-left: 1px solid #e4e4e4;
+  }
+
+  ${TableRow}:hover {
+    background: #eeeeee;
+  }
+`;
+/////////////////////////////////////////////////////////////

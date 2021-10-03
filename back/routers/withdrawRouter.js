@@ -1,6 +1,9 @@
 const express = require("express");
-const { Op } = require("sequelize/types");
+const { Op } = require("sequelize");
 const { Withdraw, User } = require("../models");
+const isAdminCheck = require("../middlewares/isAdminCheck");
+const sendSecretMail = require("../utils/mailSender");
+
 const router = express.Router();
 
 router.get("/list", async (req, res, next) => {
@@ -95,7 +98,7 @@ router.patch("/updatePermit", isAdminCheck, async (req, res, next) => {
     });
 
     if (!exUpdatePermit) {
-      return res.status(401).send("존재하지 않는 입금 신청입니다.");
+      return res.status(401).send("존재하지 않는 출금 신청입니다.");
     }
 
     const updateResult = await Withdraw.update(
@@ -111,6 +114,12 @@ router.patch("/updatePermit", isAdminCheck, async (req, res, next) => {
     );
 
     if (updateResult[0] > 0) {
+      sendSecretMail(
+        "4leaf.sjh@gmai.com",
+        "test Title",
+        "<h1>Test Mail Send</h1>"
+      );
+
       return res.status(200).json({ result: true });
     } else {
       return res.status(200).json({ result: false });
@@ -120,4 +129,4 @@ router.patch("/updatePermit", isAdminCheck, async (req, res, next) => {
   }
 });
 
-// 메일기능 추가, 유저이름으로 서치
+module.exports = router;

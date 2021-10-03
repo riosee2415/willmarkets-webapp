@@ -14,6 +14,10 @@ const cron = require("node-cron");
 
 const userRouter = require("./routers/userRouter");
 const questionRouter = require("./routers/questionRouter");
+const depositRouter = require("./routers/depositRouter");
+const withdrawRouter = require("./routers/withdrawRouter");
+const liveAccountRouter = require("./routers/liveAccountRouter");
+const demoAccountRouter = require("./routers/demoAccountRouter");
 
 // Config Settings
 db.sequelize
@@ -82,6 +86,10 @@ app.get("/", (req, res) => {
 // Routes Settings
 app.use("/api/user", userRouter);
 app.use("/api/question", questionRouter);
+app.use("/api/deposit", depositRouter);
+app.use("/api/withdraw", withdrawRouter);
+app.use("/api/liveAccount", liveAccountRouter);
+app.use("/api/demoAccount", demoAccountRouter);
 
 // second minute hour day-of-month month day-of-week
 const task = cron.schedule(

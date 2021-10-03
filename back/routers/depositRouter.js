@@ -1,8 +1,35 @@
 const express = require("express");
-const { Op } = require("sequelize/types");
+const { Op } = require("sequelize");
 const isAdminCheck = require("../middlewares/isAdminCheck");
-const { Deposit, User } = require("../models");
+const { Deposit, User, DepositImage } = require("../models");
 const sendSecretMail = require("../utils/mailSender");
+const fs = require("fs");
+const multer = require("multer");
+const path = require("path");
+const AWS = require("aws-sdk");
+const multerS3 = require("multer-s3");
+
+AWS.config.update({
+  accessKeyId: process.env.S3_ACCESS_KEY_Id,
+  secretAccessKey: process.env.S3_SECRET_ACCESS_KEY,
+  region: "ap-northeast-2",
+});
+
+const upload = multer({
+  storage: multerS3({
+    s3: new AWS.S3(),
+    bucket: process.env.S3_BUCKET_NAME,
+    key(req, file, cb) {
+      cb(
+        null,
+        `${
+          process.env.S3_STORAGE_FOLDER_NAME
+        }/original/${Date.now()}_${path.basename(file.originalname)}`
+      );
+    },
+  }),
+  limits: { fileSize: 5 * 1024 * 1024 }, // 5MB
+});
 
 const router = express.Router();
 
@@ -83,6 +110,49 @@ router.get(["/list/:listType", "/list"], async (req, res, next) => {
   }
 });
 
+router.post("/image", async (req, res, next) => {
+  const uploadImage = upload.single("image");
+
+  await uploadImage(req, res, (err) => {
+    if (err instanceof multer.MulterError) {
+      return res.status(401).send("첨부 가능한 용량을 초과했습니다.");
+    } else if (err) {
+      return res.status(401).send("업로드 중 문제가 발생했습니다.");
+    }
+    return res.json({
+      path: req.file.location,
+      originName: req.file.originalname,
+    });
+  });
+});
+
+router.post("/createImage", async (req, res, next) => {
+  const { userId, filePath, fileOriginName } = req.body;
+  try {
+    const exUser = await User.findOne({
+      where: { id: parseInt(userId) },
+    });
+
+    if (!exUser) {
+      return res.status(401).send("존재하지 않는 사용자입니다.");
+    }
+    const createResult = await DepositImage.create({
+      userId: parseInt(exUser.id),
+      filePath,
+      fileOriginName,
+    });
+
+    if (!createResult) {
+      return res.status(401).send("이미지를 생성할 수 없습니다.");
+    }
+
+    return res.status(201).json({ result: true });
+  } catch (error) {
+    console.error(error);
+    return res.status(401).send("이미지를 생성할 수 없습니다.");
+  }
+});
+
 router.post("/create", async (req, res, next) => {
   const {
     userId,
@@ -104,7 +174,7 @@ router.post("/create", async (req, res, next) => {
     }
 
     const createResult = await Deposit.create({
-      userId,
+      userId: parseInt(exUser.id),
       bankName,
       bankNo,
       swiftCode,
@@ -165,3 +235,5 @@ router.patch("/updatePermit", isAdminCheck, async (req, res, next) => {
     console.error(error);
   }
 });
+
+module.exports = router;

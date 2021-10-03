@@ -1,63 +1,15 @@
 import React, { useState, useEffect, useCallback } from "react";
-import { Wrapper } from "../commonComponents";
+import {
+  Wrapper,
+  Combo,
+  ComboTitle,
+  ComboList,
+  ComboListItem,
+} from "../commonComponents";
 import { withResizeDetector } from "react-resize-detector";
 import styled from "styled-components";
 import Theme from "../Theme";
 import { CaretDownOutlined, UserOutlined } from "@ant-design/icons";
-
-const ComboTitle = styled(Wrapper)`
-  flex-direction: row;
-  justify-content: space-between;
-  font-size: ${(props) => props.fontSize || `14px`};
-
-  & > div {
-    display: inline-block;
-    width: calc(100% - 20px);
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-  }
-
-  & span {
-    font-size: 14px;
-  }
-
-  &:hover {
-    color: #f32478;
-    cursor: pointer;
-  }
-`;
-
-const ComboList = styled(Wrapper)`
-  display: none;
-  position: absolute;
-  top: 27px;
-  left: 0;
-  background: #fff;
-  box-shadow: 0 2px 8px rgb(0 0 0 / 15%);
-
-  ${(props) =>
-    props.isView &&
-    `
-    display: flex;
-  `}
-`;
-
-const ComboListItem = styled(Wrapper)`
-  padding: 8px 0;
-  font-size: 14px;
-  cursor: pointer;
-
-  &:hover {
-    background: #f7f7f7;
-  }
-`;
-
-const Combo = styled(Wrapper)`
-  position: relative;
-  padding: 0 0 5px;
-  width: ${(props) => props.width || `auto`};
-`;
 
 const UserHeader = ({ children, width }) => {
   ////////////// - USE STATE- ///////////////

@@ -12,18 +12,59 @@ import { END } from "redux-saga";
 import axios from "axios";
 import {} from "@ant-design/icons";
 import {
-  ColWrapper,
-  RowWrapper,
-  Image,
   Wrapper,
-  WholeWrapper,
-  RsWrapper,
+  SelectBox,
+  Label,
+  TextInput,
   CommonButton,
 } from "../../components/commonComponents";
 import UserLayout from "../../components/user/UserLayout";
 import Theme from "../../components/Theme";
 import { useTranslation } from "react-i18next";
 import { DEMO_ACCOUNT_CREATE_REQUEST } from "../../reducers/demoAccount";
+
+const CustomLabel = styled(Label)`
+  display: flex;
+
+  & .required {
+    width: auto;
+    margin: 0 5px 0 0;
+    color: #a06ec6;
+  }
+`;
+
+const InputBox = styled(SelectBox)`
+  width: ${(props) => props.width || `250px`};
+  height: ${(props) => props.height || `70px`};
+  margin: 0 20px 0 0;
+  font-size: ${(props) => props.fontSize || `18px`};
+  color: #8b2373;
+  border: 1px solid #f3e4fa;
+
+  &:hover {
+    border: 1px solid #d7a6ed;
+  }
+
+  ${(props) =>
+    props.isActive &&
+    `
+     border: 1px solid #c96cf4;
+     box-shadow: 3px 3px 8px rgb(0 0 0 / 20%);
+  `}
+`;
+
+const CustomInput = styled(TextInput)`
+  width: 250px;
+  height: 40px;
+  border: 1px solid #f3e4fa;
+  box-shadow: 0 2px 8px rgb(0 0 0 / 9%);
+
+  &:hover,
+  &:focus {
+    border: 1px solid #d7a6ed;
+    box-shadow: 0 3px 8px rgb(0 0 0 / 12%);
+  }
+`;
 
 const AddDemo = () => {
   ////// VARIABLES //////
@@ -138,7 +179,7 @@ const AddDemo = () => {
         >
           Change Language
         </button> */}
-        {typeList.map((data) => {
+        {/* {typeList.map((data) => {
           return (
             <Wrapper
               onClick={() => {
@@ -168,9 +209,86 @@ const AddDemo = () => {
                   {data}
                 </Wrapper>
               );
-            })}
+            })} */}
 
-        {console.log(inputType.value, inputLeverage.value)}
+        <Wrapper
+          al={`flex-start`}
+          ju={`space-between`}
+          minHeight={`calc(100vh - 110px)`}
+          padding={`20px 30px`}
+          bgColor={`#fff`}
+          border={`1px solid #ededed`}
+          shadow={`2px 2px 10px #e6e6e6`}
+        >
+          <Wrapper al={`flex-start`}>
+            <CustomLabel margin={`0 0 15px`}>
+              <Wrapper className={`required`}>*</Wrapper>
+              거래 플랫폼
+            </CustomLabel>
+
+            <Wrapper dr={`row`} ju={`flex-start`}>
+              <InputBox>Meta Trader 4</InputBox>
+            </Wrapper>
+
+            <CustomLabel margin={`40px 0 15px`}>
+              <Wrapper className={`required`}>*</Wrapper>
+              계좌 유형
+            </CustomLabel>
+
+            <Wrapper dr={`row`} ju={`flex-start`}>
+              <InputBox>STP Account</InputBox>
+              <InputBox>ECN Account</InputBox>
+            </Wrapper>
+
+            <CustomLabel margin={`40px 0 15px`}>
+              <Wrapper className={`required`}>*</Wrapper>
+              레버리지
+            </CustomLabel>
+
+            <Wrapper dr={`row`} ju={`flex-start`}>
+              <InputBox width={`110px`} height={`50px`} fontSize={`17px`}>
+                1:500
+              </InputBox>
+            </Wrapper>
+
+            <CustomLabel for={`inp-trade-password`} margin={`40px 0 15px`}>
+              <Wrapper className={`required`}>*</Wrapper>
+              환율금액
+            </CustomLabel>
+
+            <Wrapper dr={`row`} ju={`flex-start`}>
+              <CustomInput id={`inp-trade-password`} />
+            </Wrapper>
+
+            <CustomLabel for={`inp-trade-password`} margin={`40px 0 15px`}>
+              <Wrapper className={`required`}>*</Wrapper>
+              거래용 비번
+            </CustomLabel>
+
+            <Wrapper dr={`row`} ju={`flex-start`}>
+              <CustomInput id={`inp-trade-password`} />
+            </Wrapper>
+
+            <CustomLabel for={`inp-view-password`} margin={`40px 0 15px`}>
+              <Wrapper className={`required`}>*</Wrapper>
+              보기용 비번
+            </CustomLabel>
+
+            <Wrapper dr={`row`} ju={`flex-start`}>
+              <CustomInput id={`inp-view-password`} />
+            </Wrapper>
+          </Wrapper>
+
+          <Wrapper
+            dr={`row`}
+            ju={`flex-start`}
+            margin={`50px 0 0`}
+            padding={`20px 0 0`}
+            borderTop={`1px solid #ebebeb`}
+          >
+            <CommonButton kindOf={`red`}>계좌 개설</CommonButton>
+          </Wrapper>
+        </Wrapper>
       </UserLayout>
     </>
   );

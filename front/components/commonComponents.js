@@ -373,3 +373,144 @@ export const ATag = styled.a`
   background: ${(props) => props.bgColor};
   color: ${(props) => props.color};
 `;
+
+/////////////////////////////////////////////////////////////
+///////////////// COMSTOM COMMON COMPONENT //////////////////
+/////////////////////////////////////////////////////////////
+
+//////////////////////// SELECT BOX /////////////////////////
+export const SelectBox = styled(Wrapper)`
+  width: ${(props) => props.width || `auto`};
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgb(0 0 0 / 9%);
+
+  &:hover {
+    box-shadow: 3px 3px 8px rgb(0 0 0 / 20%);
+  }
+`;
+/////////////////////////////////////////////////////////////
+
+////////////////////////// COMBO ////////////////////////////
+export const Combo = styled(Wrapper)`
+  position: relative;
+  padding: 0 0 5px;
+  width: ${(props) => props.width || `auto`};
+`;
+
+export const ComboTitle = styled(Wrapper)`
+  flex-direction: row;
+  justify-content: space-between;
+  font-size: ${(props) => props.fontSize || `14px`};
+
+  & > div {
+    display: inline-block;
+    width: calc(100% - 20px);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  & span {
+    font-size: 14px;
+  }
+
+  &:hover {
+    color: #f32478;
+    cursor: pointer;
+  }
+`;
+
+export const ComboList = styled(Wrapper)`
+  display: none;
+  position: absolute;
+  top: 27px;
+  left: 0;
+  background: #fff;
+  box-shadow: 0 2px 8px rgb(0 0 0 / 15%);
+
+  ${(props) =>
+    props.isView &&
+    `
+    display: flex;
+  `}
+`;
+
+export const ComboListItem = styled(Wrapper)`
+  padding: 8px 0;
+  font-size: 14px;
+  cursor: pointer;
+
+  &:hover {
+    background: #f7f7f7;
+  }
+`;
+/////////////////////////////////////////////////////////////
+
+/////////////////////////// LABEL ///////////////////////////
+export const Label = styled.label`
+  width: ${(props) => props.width};
+  height: ${(props) => props.height};
+  min-height: ${(props) => props.minHeight};
+  max-height: ${(props) => props.maxHeight};
+  display: ${(props) => props.display};
+  flex-direction: ${(props) => props.dr};
+  align-items: ${(props) => props.al};
+  justify-content: ${(props) => props.ju};
+  font-size: ${(props) => props.fontSize};
+  font-weight: ${(props) => props.fontWeight || `500`};
+  line-height: ${(props) => props.lineHeight};
+  color: ${(props) => props.color};
+  margin: ${(props) => props.margin};
+  padding: ${(props) => props.padding};
+  background: ${(props) => props.bgColor};
+  text-align: ${(props) => props.textAlign};
+  overflow: ${(props) => props.overflow};
+  position: ${(props) => props.position};
+  top: ${(props) => props.top};
+  bottom: ${(props) => props.bottom};
+  left: ${(props) => props.left};
+  right: ${(props) => props.right};
+  font-style: ${(props) => props.fontStyle};
+  cursor: ${(props) => props.cursor};
+  z-index: 1;
+  white-space: pre-wrap;
+  border-bottom: ${(props) => props.borderBottom};
+  opacity: ${(props) => props.opacity};
+  letter-spacing: ${(props) => props.letterSpacing};
+`;
+/////////////////////////////////////////////////////////////
+
+/////////////////////// TEXT INPUT //////////////////////////
+export const TextInput = styled.input`
+  display: ${(props) => props.display};
+  flex-direction: ${(props) => props.dr};
+  align-items: ${(props) => props.al};
+  justify-content: ${(props) => props.ju};
+  width: ${(props) => props.width || `100%`};
+  height: ${(props) => props.height || `35px`};
+  min-height: ${(props) => props.minHeight};
+  max-height: ${(props) => props.maxHeight};
+  margin: ${(props) => props.margin};
+  padding: ${(props) => props.padding || `0 10px`};
+  font-size: ${(props) => props.fontSize || `15px`};
+  font-weight: ${(props) => props.fontWeight || `500`};
+  line-height: ${(props) => props.lineHeight};
+  color: ${(props) => props.color || `#292727`};
+  background: ${(props) => props.bgColor};
+  text-align: ${(props) => props.textAlign};
+  overflow: ${(props) => props.overflow};
+  position: ${(props) => props.position};
+  top: ${(props) => props.top};
+  bottom: ${(props) => props.bottom};
+  left: ${(props) => props.left};
+  right: ${(props) => props.right};
+  font-style: ${(props) => props.fontStyle};
+  cursor: ${(props) => props.cursor};
+  z-index: 1;
+  white-space: pre-wrap;
+  border: ${(props) => props.border || `1px solid #e3e3e3`};
+  opacity: ${(props) => props.opacity};
+  letter-spacing: ${(props) => props.letterSpacing};
+  outline: none;
+`;
+/////////////////////////////////////////////////////////////

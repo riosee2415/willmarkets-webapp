@@ -5,22 +5,12 @@ import UserLayout from "../../components/user/UserLayout";
 import axios from "axios";
 import wrapper from "../../store/configureStore";
 import { END } from "redux-saga";
-import { Wrapper } from "../../components/commonComponents";
+import { Wrapper, SelectBox } from "../../components/commonComponents";
 import { withResizeDetector } from "react-resize-detector";
 import styled from "styled-components";
 import { useRouter } from "next/router";
 import { MdAttachMoney } from "react-icons/md";
 import { AiOutlineCreditCard, AiOutlinePlus } from "react-icons/ai";
-
-const SelectBox = styled(Wrapper)`
-  width: ${(props) => props.width || `auto`};
-  cursor: pointer;
-  box-shadow: 0 2px 8px rgb(0 0 0 / 9%);
-
-  &:hover {
-    box-shadow: 3px 3px 8px rgb(0 0 0 / 20%);
-  }
-`;
 
 const MenuBox = styled(SelectBox)`
   margin: ${(props) => props.margin || `0 20px 0 0`};

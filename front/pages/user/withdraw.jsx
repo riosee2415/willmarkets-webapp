@@ -35,9 +35,15 @@ const Withdraw = () => {
 
   const { me } = useSelector((state) => state.user);
 
-  const { st_withdrawCreateDone, st_withdrawCreateError } = useSelector(
-    (state) => state.withdraw
-  );
+  const {
+    st_withdrawCreateDone,
+    st_withdrawCreateError,
+    st_userFindPasswordConfirmDone,
+    st_userFindPasswordConfirmError,
+    st_userFindPasswordDone,
+    st_userFindPasswordError,
+    secret,
+  } = useSelector((state) => state.withdraw);
 
   const inputBankName = useInput("");
   const inputPrice = useOnlyNumberInput("");
@@ -45,10 +51,36 @@ const Withdraw = () => {
   const inputBankAddress = useInput("");
   const inputSelectBank = useInput("");
   const inputBankNo = useInput("");
+  const inputSecret = useInput("");
 
   ////// TOGGLE //////
 
   ////// HANDLER //////
+
+  const sendEmailSecretCodeHandler = useCallback(() => {
+    //이메일로 인증번호 보내기
+    dispatch({
+      type: USER_FIND_PASSWORD_REQUEST,
+      data: {
+        email: me.email,
+      },
+    });
+  }, []);
+
+  const confirmSecretHandler = useCallback(() => {
+    if (!emptyCheck(inputSecret.value)) {
+      return message.error("인증번호를 입력해주세요.");
+    }
+
+    dispatch({
+      type: USER_FIND_PASSWORD_CONFIRM_REQUEST,
+      data: {
+        email: inputEmail.value,
+        secret: inputSecret.value,
+      },
+    });
+  }, [inputSecret]);
+
   const createWithdrawHanlder = useCallback(() => {
     if (!emptyCheck(inputBankName.value)) {
       return message.error("출금은행을 입력해주세요.");
@@ -73,19 +105,6 @@ const Withdraw = () => {
     if (!emptyCheck(inputBankNo.value)) {
       return message.error("계좌번호를 입력해주세요.");
     }
-
-    dispatch({
-      type: WITHDRAW_CREATE_REQUEST,
-      data: {
-        userId: me.id,
-        bankName: inputBankName.value,
-        price: inputPrice.value,
-        swiftCode: inputSwiftCode.value,
-        bankAddress: inputBankAddress.value,
-        selectBank: inputSelectBank.value,
-        bankNo: inputBankNo.value,
-      },
-    });
   }, [
     inputBankName,
     inputPrice,
@@ -113,6 +132,47 @@ const Withdraw = () => {
       message.error(st_withdrawCreateError);
     }
   }, [st_withdrawCreateError]);
+
+  useEffect(() => {
+    if (st_userFindPasswordDone) {
+      message.success("이메일로 인증코드가 전송되었습니다.");
+    }
+  }, [st_userFindPasswordDone]);
+
+  useEffect(() => {
+    if (st_userFindPasswordError) {
+      message.success(st_userFindPasswordError);
+    }
+  }, [st_userFindPasswordError]);
+
+  useEffect(() => {
+    if (st_userFindPasswordConfirmDone) {
+      if (secret) {
+        message.success("이메일 인증이 완료되었습니다.");
+        dispatch({
+          type: WITHDRAW_CREATE_REQUEST,
+          data: {
+            userId: me.id,
+            bankName: inputBankName.value,
+            price: inputPrice.value,
+            swiftCode: inputSwiftCode.value,
+            bankAddress: inputBankAddress.value,
+            selectBank: inputSelectBank.value,
+            bankNo: inputBankNo.value,
+          },
+        });
+        return;
+      } else {
+        return message.error("이메일 인증에 실패했습니다.");
+      }
+    }
+  }, [st_userFindPasswordConfirmError]);
+
+  useEffect(() => {
+    if (st_userFindPasswordConfirmError) {
+      message.error(st_userFindPasswordConfirmError);
+    }
+  }, [st_userFindPasswordConfirmError]);
 
   return (
     <ClientLayout>

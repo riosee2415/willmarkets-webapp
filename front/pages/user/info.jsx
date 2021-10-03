@@ -96,10 +96,10 @@ const Info = () => {
     dispatch({
       type: USER_FIND_PASSWORD_REQUEST,
       data: {
-        email: inputEmail.value,
+        email: me.email,
       },
     });
-  }, [inputEmail]);
+  }, []);
 
   const confirmSecretHandler = useCallback(() => {
     if (!emptyCheck(inputSecret.value)) {

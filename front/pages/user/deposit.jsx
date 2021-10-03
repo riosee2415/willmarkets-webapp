@@ -9,7 +9,11 @@ import { emptyCheck } from "../../components/commonUtils";
 import {} from "@ant-design/icons";
 import { END } from "redux-saga";
 import axios from "axios";
-import { LOAD_MY_INFO_REQUEST } from "../../reducers/user";
+import {
+  LOAD_MY_INFO_REQUEST,
+  USER_FIND_PASSWORD_REQUEST,
+  USER_FIND_PASSWORD_CONFIRM_REQUEST,
+} from "../../reducers/user";
 import wrapper from "../../store/configureStore";
 import {
   ColWrapper,
@@ -47,12 +51,20 @@ const Deposit = () => {
   ////// HOOKS //////
   const dispatch = useDispatch();
 
+  const fileRef = useRef();
+
   const {
     me,
     st_userFindPasswordDone,
     st_userFindPasswordError,
     st_userFindPasswordConfirmDone,
     st_userFindPasswordConfirmError,
+    st_userIdImageFileDone,
+    st_userIdImageFileError,
+    filePath,
+    fileOriginName,
+    inputEmail,
+    secret,
   } = useSelector((state) => state.user);
 
   const { st_depositCreateDone, st_depositCreateError } = useSelector(
@@ -101,13 +113,18 @@ const Deposit = () => {
       return message.error("입금금액을 입력해주세요.");
     }
 
+    // currentStep()
+  }, [currentBank, inputPrice, inputSelectBank]);
+
+  const sendEmailSecretCodeHandler = useCallback(() => {
+    //이메일로 인증번호 보내기
     dispatch({
       type: USER_FIND_PASSWORD_REQUEST,
       data: {
-        email: me.inputEmail,
+        email: me.email,
       },
     });
-  }, [currentBank, inputPrice, inputSelectBank]);
+  }, [me]);
 
   const confirmSecretHandler = useCallback(() => {
     if (!emptyCheck(inputSecret.value)) {
@@ -117,11 +134,47 @@ const Deposit = () => {
     dispatch({
       type: USER_FIND_PASSWORD_CONFIRM_REQUEST,
       data: {
-        email: inputEmail.value,
+        email: me.email,
         secret: inputSecret.value,
       },
     });
   }, [inputSecret]);
+
+  const clickImageUpload = useCallback(() => {
+    fileRef.current.click();
+  }, [fileRef.current]);
+
+  const onChangeImages = useCallback((e, type) => {
+    const file = e.target.files[0];
+
+    if (!file) return;
+
+    const ext = file.name.slice(file.name.lastIndexOf(".") + 1).toLowerCase();
+
+    if (
+      !(
+        ext === "jpg" ||
+        ext === "jpeg" ||
+        ext === "png" ||
+        ext === "gif" ||
+        ext === "pdf"
+      )
+    ) {
+      message.error("지원되지 않는 파일 형식입니다.");
+      return;
+    }
+
+    const formData = new FormData();
+
+    [].forEach.call(e.target.files, (file) => {
+      formData.append("image", file);
+    });
+
+    dispatch({
+      type: USER_ID_IMAGE_FILE_REQUEST,
+      data: formData,
+    });
+  }, []);
 
   ////// USEEFFECT //////
 
@@ -184,9 +237,23 @@ const Deposit = () => {
     }
   }, [st_depositCreateError]);
 
+  useEffect(() => {
+    if (st_userIdImageFileDone) {
+      inputFilePath.setValue(filePath);
+      inputFileOriginName.setValue(fileOriginName);
+    }
+  }, [st_userIdImageFileDone]);
+
   return (
     <ClientLayout>
       <div>Hello Deposit</div>
+      <div>
+        <input type="text" {...inputSecret} />
+        <button onClick={sendEmailSecretCodeHandler}>인증코드</button>
+        <button onClick={confirmSecretHandler}>확인</button>
+      </div>
+
+      <button onClick={createDepositHanlder}>신청확인</button>
     </ClientLayout>
   );
 };

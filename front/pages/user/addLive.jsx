@@ -40,7 +40,8 @@ const CustomLabel = styled(Label)`
 const InputBox = styled(SelectBox)`
   width: ${(props) => props.width || `250px`};
   height: ${(props) => props.height || `70px`};
-  margin: 0 20px 0 0;
+  margin: ${(props) => props.margin || `0 20px 0 0`};
+
   font-size: ${(props) => props.fontSize || `18px`};
   color: #8b2373;
   border: 1px solid #f3e4fa;
@@ -81,7 +82,7 @@ const AddLive = () => {
     },
     {
       type: "ECN Account",
-      leverage: ["1:500", "1:400"],
+      leverage: ["1:500", "1:400", "1:100", "1:200"],
     },
   ];
 
@@ -137,6 +138,8 @@ const AddLive = () => {
     setValue(value);
   }, []);
 
+  console.log(inputType, inputLeverage);
+
   ////// USEEFFECT //////
   useEffect(() => {
     inputType.setValue(typeList[0].type);
@@ -169,8 +172,7 @@ const AddLive = () => {
         padding={`20px 30px`}
         bgColor={`#fff`}
         border={`1px solid #ededed`}
-        shadow={`2px 2px 10px #e6e6e6`}
-      >
+        shadow={`2px 2px 10px #e6e6e6`}>
         <Wrapper al={`flex-start`}>
           <Wrapper
             al={`flex-start`}
@@ -178,8 +180,7 @@ const AddLive = () => {
             padding={`0 8px 20px`}
             fontSize={`19px`}
             fontWeight={`700`}
-            borderBottom={`1px solid #ebebeb`}
-          >
+            borderBottom={`1px solid #ebebeb`}>
             라이브 계좌 추가
           </Wrapper>
 
@@ -198,19 +199,54 @@ const AddLive = () => {
           </CustomLabel>
 
           <Wrapper dr={`row`} ju={`flex-start`}>
-            <InputBox>STP Account</InputBox>
-            <InputBox>ECN Account</InputBox>
+            {typeList.map((data, idx) => {
+              return (
+                <Wrapper
+                  dr={`row`}
+                  ju={`flex-start`}
+                  width={`auto`}
+                  key={idx}
+                  onClick={() => {
+                    changeSelectBoxHandler(data.type, inputType.setValue);
+
+                    inputLeverage.setValue(
+                      typeList.find((data2) => data.type === data2.type)
+                        .leverage[0]
+                    );
+                  }}>
+                  <InputBox>{data.type}</InputBox>
+                </Wrapper>
+              );
+            })}
           </Wrapper>
 
           <CustomLabel margin={`40px 0 15px`}>
             <Wrapper className={`required`}>*</Wrapper>
             레버리지
           </CustomLabel>
-
           <Wrapper dr={`row`} ju={`flex-start`}>
-            <InputBox width={`110px`} height={`50px`} fontSize={`17px`}>
-              1:500
-            </InputBox>
+            {inputType.value &&
+              typeList
+                .find((data) => data.type === inputType.value)
+                .leverage.map((data) => {
+                  return (
+                    <Wrapper
+                      dr={`row`}
+                      ju={`flex-start`}
+                      width={`auto`}
+                      key={data}
+                      onClick={() =>
+                        changeSelectBoxHandler(data, inputLeverage.setValue)
+                      }>
+                      <InputBox
+                        width={`110px`}
+                        height={`50px`}
+                        fontSize={`17px`}>
+                        {data}
+                      </InputBox>
+                    </Wrapper>
+                  );
+                })}
           </Wrapper>
 
           <CustomLabel for={`inp-trade-password`} margin={`40px 0 15px`}>
@@ -219,7 +255,7 @@ const AddLive = () => {
           </CustomLabel>
 
           <Wrapper dr={`row`} ju={`flex-start`}>
-            <CustomInput id={`inp-trade-password`} />
+            <CustomInput id={`inp-trade-password`} {...inputTradePassword} />
           </Wrapper>
 
           <CustomLabel for={`inp-view-password`} margin={`40px 0 15px`}>
@@ -228,7 +264,7 @@ const AddLive = () => {
           </CustomLabel>
 
           <Wrapper dr={`row`} ju={`flex-start`}>
-            <CustomInput id={`inp-view-password`} />
+            <CustomInput id={`inp-view-password`} {...inputViewPassword} />
           </Wrapper>
         </Wrapper>
 
@@ -237,9 +273,10 @@ const AddLive = () => {
           ju={`flex-start`}
           margin={`50px 0 0`}
           padding={`20px 0 0`}
-          borderTop={`1px solid #ebebeb`}
-        >
-          <CommonButton kindOf={`red`}>계좌 개설</CommonButton>
+          borderTop={`1px solid #ebebeb`}>
+          <CommonButton kindOf={`red`} onClick={createLiveAccountHandler}>
+            계좌 개설
+          </CommonButton>
         </Wrapper>
       </Wrapper>
     </UserLayout>

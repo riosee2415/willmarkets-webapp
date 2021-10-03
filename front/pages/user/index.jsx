@@ -46,24 +46,21 @@ const User = ({ width }) => {
         <MenuBox
           width={`100px`}
           height={`100px`}
-          onClick={() => moveLinkHandler(`/user/deposit`)}
-        >
+          onClick={() => moveLinkHandler(`/user/deposit`)}>
           입 금
         </MenuBox>
 
         <MenuBox
           width={`100px`}
           height={`100px`}
-          onClick={() => moveLinkHandler(`/user/withdraw`)}
-        >
+          onClick={() => moveLinkHandler(`/user/withdraw`)}>
           출 금
         </MenuBox>
 
         <MenuBox
           width={`100px`}
           height={`100px`}
-          onClick={() => moveLinkHandler(`/user/record`)}
-        >
+          onClick={() => moveLinkHandler(`/user/record`)}>
           심사기록
         </MenuBox>
       </Wrapper>
@@ -80,8 +77,7 @@ const User = ({ width }) => {
             bgColor={`#a06ec6`}
             color={`#fff`}
             fontSize={`38px`}
-            radius={`50%`}
-          >
+            radius={`50%`}>
             <MdAttachMoney />
           </Wrapper>
 
@@ -90,16 +86,14 @@ const User = ({ width }) => {
               width={`auto`}
               color={`#7c1a81`}
               fontSize={`13px`}
-              lineHeight={`1.3`}
-            >
+              lineHeight={`1.3`}>
               지갑금액
             </Wrapper>
             <Wrapper
               width={`auto`}
               fontSize={`26px`}
               fontWeight={`900`}
-              lineHeight={`1.3`}
-            >
+              lineHeight={`1.3`}>
               50,000
             </Wrapper>
           </Wrapper>
@@ -114,16 +108,14 @@ const User = ({ width }) => {
         <SelectBox
           dr={`row`}
           margin={`0 20px 20px 0`}
-          padding={`15px 70px 15px 25px`}
-        >
+          padding={`15px 70px 15px 25px`}>
           <Wrapper
             width={`auto`}
             padding={`9px`}
             bgColor={`#a06ec6`}
             color={`#fff`}
             fontSize={`30px`}
-            radius={`50%`}
-          >
+            radius={`50%`}>
             <AiOutlineCreditCard />
           </Wrapper>
 
@@ -132,16 +124,14 @@ const User = ({ width }) => {
               width={`auto`}
               color={`#7c1a81`}
               fontSize={`13px`}
-              lineHeight={`1.3`}
-            >
+              lineHeight={`1.3`}>
               계좌번호
             </Wrapper>
             <Wrapper
               width={`auto`}
               fontSize={`26px`}
               fontWeight={`900`}
-              lineHeight={`1.3`}
-            >
+              lineHeight={`1.3`}>
               11111
             </Wrapper>
           </Wrapper>
@@ -151,16 +141,14 @@ const User = ({ width }) => {
           dr={`row`}
           margin={`0 20px 20px 0`}
           padding={`15px 70px 15px 25px`}
-          onClick={() => moveLinkHandler(`/user/addLive`)}
-        >
+          onClick={() => moveLinkHandler(`/user/addLive`)}>
           <Wrapper
             width={`auto`}
             padding={`9px`}
             bgColor={`#a06ec6`}
             color={`#fff`}
             fontSize={`30px`}
-            radius={`50%`}
-          >
+            radius={`50%`}>
             <AiOutlinePlus />
           </Wrapper>
 
@@ -168,8 +156,7 @@ const User = ({ width }) => {
             al={`center`}
             margin={`0 0 0 15px`}
             width={`auto`}
-            color={`#7c1a81`}
-          >
+            color={`#7c1a81`}>
             계좌 추가
           </Wrapper>
         </SelectBox>
@@ -183,16 +170,14 @@ const User = ({ width }) => {
         <SelectBox
           dr={`row`}
           margin={`0 20px 20px 0`}
-          padding={`15px 70px 15px 25px`}
-        >
+          padding={`15px 70px 15px 25px`}>
           <Wrapper
             width={`auto`}
             padding={`9px`}
             bgColor={`#a06ec6`}
             color={`#fff`}
             fontSize={`30px`}
-            radius={`50%`}
-          >
+            radius={`50%`}>
             <AiOutlineCreditCard />
           </Wrapper>
 
@@ -201,16 +186,14 @@ const User = ({ width }) => {
               width={`auto`}
               color={`#7c1a81`}
               fontSize={`13px`}
-              lineHeight={`1.3`}
-            >
+              lineHeight={`1.3`}>
               계좌번호
             </Wrapper>
             <Wrapper
               width={`auto`}
               fontSize={`26px`}
               fontWeight={`900`}
-              lineHeight={`1.3`}
-            >
+              lineHeight={`1.3`}>
               11111
             </Wrapper>
           </Wrapper>
@@ -220,16 +203,14 @@ const User = ({ width }) => {
           dr={`row`}
           margin={`0 20px 20px 0`}
           padding={`15px 70px 15px 25px`}
-          onClick={() => moveLinkHandler(`/user/addDemo`)}
-        >
+          onClick={() => moveLinkHandler(`/user/addDemo`)}>
           <Wrapper
             width={`auto`}
             padding={`9px`}
             bgColor={`#a06ec6`}
             color={`#fff`}
             fontSize={`30px`}
-            radius={`50%`}
-          >
+            radius={`50%`}>
             <AiOutlinePlus />
           </Wrapper>
 
@@ -237,8 +218,7 @@ const User = ({ width }) => {
             al={`center`}
             margin={`0 0 0 15px`}
             width={`auto`}
-            color={`#7c1a81`}
-          >
+            color={`#7c1a81`}>
             계좌 추가
           </Wrapper>
         </SelectBox>

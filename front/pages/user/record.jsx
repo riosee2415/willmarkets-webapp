@@ -57,8 +57,7 @@ const Record = () => {
         padding={`20px 30px`}
         bgColor={`#fff`}
         border={`1px solid #ededed`}
-        shadow={`2px 2px 10px #e6e6e6`}
-      >
+        shadow={`2px 2px 10px #e6e6e6`}>
         <Wrapper al={`flex-start`}>
           <Wrapper
             al={`flex-start`}
@@ -66,8 +65,7 @@ const Record = () => {
             padding={`0 8px 20px`}
             fontSize={`19px`}
             fontWeight={`700`}
-            borderBottom={`1px solid #ebebeb`}
-          >
+            borderBottom={`1px solid #ebebeb`}>
             심사기록
           </Wrapper>
 
@@ -79,8 +77,7 @@ const Record = () => {
                 <TableCol width={`200px`}>유형</TableCol>
                 <TableCol
                   width={`calc(100% - 50px - 130px - 200px - 120px - 130px)`}
-                  minWidth={`200px`}
-                >
+                  minWidth={`200px`}>
                   금액
                 </TableCol>
                 <TableCol width={`120px`}>심사상태</TableCol>
@@ -115,8 +112,7 @@ const Record = () => {
                       <TableCol width={`200px`}>{data.type}</TableCol>
                       <TableCol
                         width={`calc(100% - 50px - 130px - 200px - 120px - 130px)`}
-                        minWidth={`200px`}
-                      >
+                        minWidth={`200px`}>
                         {numberWithCommas(data.price)}
                       </TableCol>
                       <TableCol width={`120px`}>
@@ -124,8 +120,7 @@ const Record = () => {
                           <Wrapper
                             width={`auto`}
                             fontSize={`inherit`}
-                            color={`#c71919`}
-                          >
+                            color={`#c71919`}>
                             승인
                           </Wrapper>
                         ) : (

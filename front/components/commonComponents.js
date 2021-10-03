@@ -391,15 +391,10 @@ export const SelectBox = styled(Wrapper)`
 /////////////////////////////////////////////////////////////
 
 ////////////////////////// COMBO ////////////////////////////
-export const Combo = styled(Wrapper)`
-  position: relative;
-  padding: 0 0 5px;
-  width: ${(props) => props.width || `auto`};
-`;
-
 export const ComboTitle = styled(Wrapper)`
   flex-direction: row;
   justify-content: space-between;
+  height: 100%;
   font-size: ${(props) => props.fontSize || `14px`};
 
   & > div {
@@ -413,17 +408,11 @@ export const ComboTitle = styled(Wrapper)`
   & span {
     font-size: 14px;
   }
-
-  &:hover {
-    color: #f32478;
-    cursor: pointer;
-  }
 `;
 
 export const ComboList = styled(Wrapper)`
   display: none;
   position: absolute;
-  top: 27px;
   left: 0;
   background: #fff;
   box-shadow: 0 2px 8px rgb(0 0 0 / 15%);
@@ -436,12 +425,61 @@ export const ComboList = styled(Wrapper)`
 `;
 
 export const ComboListItem = styled(Wrapper)`
-  padding: 8px 0;
+  padding: 8px 10px;
   font-size: 14px;
   cursor: pointer;
 
   &:hover {
     background: #f7f7f7;
+  }
+`;
+
+export const Combo = styled(Wrapper)`
+  position: relative;
+  padding: 0 10px 5px;
+  width: ${(props) => props.width || `auto`};
+  cursor: pointer;
+  z-index: 9999;
+
+  ${(props) =>
+    props.isBorder &&
+    `
+    border: ${props.border || `1px solid #e3e3e3`};
+    box-shadow: ${props.shadow};
+
+    &:hover {
+      border: ${props.hoverBorder};
+      box-shadow: ${props.hoverShadow};
+    }
+  `}
+
+  ${(props) =>
+    props.height &&
+    `
+    & ${ComboTitle} {
+      line-height: ${props.height};
+    }
+  `}
+
+  ${(props) =>
+    props.isTitleHover &&
+    `
+    & ${ComboTitle}:hover {
+      color: #f32478;
+      cursor: pointer;
+    }
+  `}
+
+  ${(props) =>
+    props.itemAlign &&
+    `
+    & ${ComboListItem} {
+      align-items: ${props.itemAlign};
+    }
+  `}
+
+  & ${ComboList} {
+    top: ${(props) => props.height || `27px`};
   }
 `;
 /////////////////////////////////////////////////////////////

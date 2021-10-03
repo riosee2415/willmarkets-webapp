@@ -9,7 +9,7 @@ import { emptyCheck } from "../components/commonUtils";
 import wrapper from "../store/configureStore";
 import { END } from "redux-saga";
 import axios from "axios";
-import { LOAD_MY_INFO_REQUEST } from "../reducers/user";
+import { LOAD_MY_INFO_REQUEST, USER_SIGNIN_REQUEST } from "../reducers/user";
 import {
   Image,
   Wrapper,
@@ -226,8 +226,24 @@ const Label = styled.label`
 `;
 
 const Login = () => {
+  const dispatch = useDispatch();
+
+  const { me } = useSelector((state) => state.user);
+
   const changeCaptchaHandler = useCallback((value) => {
     console.log(value);
+  }, []);
+
+  useEffect(() => {
+    if (!me) {
+      dispatch({
+        type: USER_SIGNIN_REQUEST,
+        data: {
+          email: "4leaf.njm@gmail.com",
+          password: "fourleaf0309!!",
+        },
+      });
+    }
   }, []);
 
   return (

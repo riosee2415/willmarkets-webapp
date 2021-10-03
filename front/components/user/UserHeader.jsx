@@ -10,15 +10,19 @@ import { withResizeDetector } from "react-resize-detector";
 import styled from "styled-components";
 import Theme from "../Theme";
 import { CaretDownOutlined, UserOutlined } from "@ant-design/icons";
+import { useDispatch, useSelector } from "react-redux";
 
 const UserHeader = ({ children, width }) => {
-  ////////////// - USE STATE- ///////////////
+  ////// HOOKS //////
+  const { me } = useSelector((state) => state.user);
+
   const [comboUser, setComboUser] = useState(false);
   const [comboLanguage, setComboLanguage] = useState(false);
 
-  ///////////// - EVENT HANDLER- ////////////
+  ////// HANDLER //////
 
-  ////////////// - USE EFFECT- //////////////
+  ////// USEEFFECT //////
+
   return (
     <Wrapper dr={`row`} ju={`flex-end`} height={`70px`} padding={`0 30px`}>
       <Wrapper dr={`row`} width={`auto`} margin={`0 20px 0 0`}>
@@ -37,26 +41,26 @@ const UserHeader = ({ children, width }) => {
         </Wrapper>
 
         <Combo
-          type={`2`}
-          width={`100px`}
+          isTitleHover={true}
+          width={`150px`}
           onMouseOver={() => setComboUser(true)}
           onMouseOut={() => setComboUser(false)}
         >
           <ComboTitle>
-            <Wrapper>아이디</Wrapper>
+            <Wrapper>{me && me.username}</Wrapper>
             <CaretDownOutlined />
           </ComboTitle>
 
           <ComboList isView={comboUser} onClick={() => setComboUser(false)}>
-            <ComboListItem>내정보수정</ComboListItem>
+            {me && me.type === "2" && <ComboListItem>내정보수정</ComboListItem>}
             <ComboListItem>로그아웃</ComboListItem>
           </ComboList>
         </Combo>
       </Wrapper>
 
       <Combo
-        type={`2`}
-        width={`100px`}
+        isTitleHover={true}
+        width={`120px`}
         onMouseOver={() => setComboLanguage(true)}
         onMouseOut={() => setComboLanguage(false)}
       >

@@ -30,7 +30,9 @@ const UserLayout = ({ children }) => {
         >
           <UserHeader />
 
-          <Wrapper padding={`20px`}>{children}</Wrapper>
+          <Wrapper position={`relative`} padding={`20px`}>
+            {children}
+          </Wrapper>
         </Wrapper>
       </Wrapper>
     </section>

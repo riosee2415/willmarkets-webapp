@@ -620,7 +620,7 @@ export const TableRow = styled(Wrapper)`
 export const TableCol = styled(Wrapper)`
   width: ${(props) => props.width || `auto`};
   min-width: ${(props) => props.minWidth || props.width || `auto`};
-  font-size: 12px;
+  font-size: 13px;
   text-align: ${(props) => props.textAlign || `center`};
   line-height: ${(props) => props.lineHeight || `1.5`};
 `;
@@ -632,7 +632,7 @@ export const TableHeader = styled(Wrapper)`
 
   ${TableCol} {
     padding: 15px 10px;
-    background: #eeeeee;
+    background: #fff8fe;
     border-top: 1px solid #e4e4e4;
     border-bottom: 1px solid #e4e4e4;
     border-right: 1px solid #e4e4e4;
@@ -666,7 +666,7 @@ export const TableBody = styled(Wrapper)`
   }
 
   ${TableRow}:hover {
-    background: #eeeeee;
+    background: #fffcfd;
   }
 `;
 /////////////////////////////////////////////////////////////

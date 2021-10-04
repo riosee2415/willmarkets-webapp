@@ -74,8 +74,8 @@ router.get(
       findType2 = parseInt(1);
     }
 
-    if (validation >= 2) {
-      findType = 2;
+    if (validation >= 3) {
+      findType = 3;
     } else {
       findType = 1;
     }
@@ -108,6 +108,28 @@ router.get(
             offset: OFFSET,
             limit: LIMIT,
             where: {
+              username: {
+                [Op.like]: `%${searchName}%`,
+              },
+            },
+            include: [
+              { model: Deposit },
+              { model: Withdraw },
+              { model: LiveAccount },
+              { model: DemoAccount },
+            ],
+            attributes: {
+              exclude: ["password"],
+            },
+            order: [["createdAt", "DESC"]],
+          });
+
+          break;
+        case 2:
+          users = await User.findAll({
+            offset: OFFSET,
+            limit: LIMIT,
+            where: {
               type: "1",
               username: {
                 [Op.like]: `%${searchName}%`,
@@ -124,9 +146,10 @@ router.get(
             },
             order: [["createdAt", "DESC"]],
           });
+
           break;
 
-        case 2:
+        case 3:
           users = await User.findAll({
             offset: OFFSET,
             limit: LIMIT,

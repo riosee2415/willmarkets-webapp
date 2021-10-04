@@ -97,7 +97,7 @@ router.post("/create", async (req, res, next) => {
 });
 
 router.patch("/updatePermit", isAdminCheck, async (req, res, next) => {
-  const { id, bankNo } = req.body;
+  const { id, bankNo, userId } = req.body;
   try {
     const exUpdatePermit = await DemoAccount.findOne({
       where: {
@@ -107,6 +107,14 @@ router.patch("/updatePermit", isAdminCheck, async (req, res, next) => {
 
     if (!exUpdatePermit) {
       return res.status(401).send("존재하지 않는 데모 계좌입니다.");
+    }
+
+    const exUser = await User.findOne({
+      where: { id: parseInt(userId) },
+    });
+
+    if (!exUser) {
+      return res.status(401).send("존재하지 않는 사용자입니다.");
     }
 
     const updateResult = await DemoAccount.update(
@@ -123,11 +131,7 @@ router.patch("/updatePermit", isAdminCheck, async (req, res, next) => {
     );
 
     if (updateResult[0] > 0) {
-      sendSecretMail(
-        "4leaf.sts@gmail.com",
-        "test Title",
-        "<h1>Test Mail Send</h1>"
-      );
+      sendSecretMail(exUser.email, "test Title", "<h1>Test Mail Send</h1>");
 
       return res.status(200).json({ result: true });
     } else {

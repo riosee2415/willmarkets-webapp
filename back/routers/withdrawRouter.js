@@ -19,9 +19,12 @@ router.get("/list", async (req, res, next) => {
 
   try {
     const totalWithDraw = await Withdraw.findAll({
-      where: {
-        usernane: {
-          [Op.like]: `%${search}%`,
+      include: {
+        model: User,
+        where: {
+          username: {
+            [Op.like]: `%${_search}%`,
+          },
         },
       },
     });
@@ -34,9 +37,12 @@ router.get("/list", async (req, res, next) => {
     const withdraws = await Withdraw.findAll({
       offset: OFFSET,
       limit: LIMIT,
-      where: {
-        usernane: {
-          [Op.like]: `%${search}%`,
+      include: {
+        model: User,
+        where: {
+          username: {
+            [Op.like]: `%${_search}%`,
+          },
         },
       },
     });
@@ -69,6 +75,7 @@ router.post("/create", async (req, res, next) => {
     }
 
     const createResult = await Withdraw.create({
+      UserId: parseInt(userId),
       bankName,
       price,
       swiftCode,
@@ -115,7 +122,7 @@ router.patch("/updatePermit", isAdminCheck, async (req, res, next) => {
 
     if (updateResult[0] > 0) {
       sendSecretMail(
-        "4leaf.sjh@gmai.com",
+        "4leaf.sts@gmail.com",
         "test Title",
         "<h1>Test Mail Send</h1>"
       );

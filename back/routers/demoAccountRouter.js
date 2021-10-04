@@ -18,9 +18,12 @@ router.get(["/list/:listType", "/list"], async (req, res, next) => {
 
   try {
     const totalDemo = await DemoAccount.findAll({
-      where: {
-        username: {
-          [Op.like]: `%${search}%`,
+      include: {
+        model: User,
+        where: {
+          username: {
+            [Op.like]: `%${_search}%`,
+          },
         },
       },
     });
@@ -33,9 +36,12 @@ router.get(["/list/:listType", "/list"], async (req, res, next) => {
     const demoAccounts = await DemoAccount.findAll({
       offset: OFFSET,
       limit: LIMIT,
-      where: {
-        username: {
-          [Op.like]: `%${_search}%`,
+      include: {
+        model: User,
+        where: {
+          username: {
+            [Op.like]: `%${_search}%`,
+          },
         },
       },
       order: [["createdAt", "DESC"]],
@@ -69,18 +75,21 @@ router.post("/create", async (req, res, next) => {
     }
 
     const createResult = await DemoAccount.create({
-      userId: parseInt(userId),
+      UserId: parseInt(userId),
       platform,
       type,
       price,
       leverage,
       tradePassword,
       viewPassword,
+      isComplete: false,
     });
 
     if (!createResult) {
       return res.status(401).send("데모 계좌를 생성할 수 없습니다.");
     }
+
+    return res.status(201).json({ result: true });
   } catch (error) {
     console.error(error);
     return res.status(401).send("데모 계좌를 생성할 수 없습니다.");
@@ -104,6 +113,7 @@ router.patch("/updatePermit", isAdminCheck, async (req, res, next) => {
       {
         isComplete: true,
         completedAt: new Date(),
+        bankNo,
       },
       {
         where: {
@@ -113,11 +123,11 @@ router.patch("/updatePermit", isAdminCheck, async (req, res, next) => {
     );
 
     if (updateResult[0] > 0) {
-      //   sendSecretMail(
-      //     "4leaf.sjh@gmai.com",
-      //     "test Title",
-      //     "<h1>Test Mail Send</h1>"
-      //   );
+      sendSecretMail(
+        "4leaf.sts@gmail.com",
+        "test Title",
+        "<h1>Test Mail Send</h1>"
+      );
 
       return res.status(200).json({ result: true });
     } else {

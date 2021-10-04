@@ -235,96 +235,73 @@ router.post("/me/update", isLoggedIn, async (req, res, next) => {
   }
 });
 
-router.post("/findemail", async (req, res, next) => {
-  const { nickname, mobile } = req.body;
+router.post("/findPass", async (req, res, next) => {
+  const { email } = req.body;
 
   try {
-    const exUser = await User.findOne({
-      where: {
-        nickname,
-        mobile,
-      },
-    });
+    const UUID = generateUUID();
 
-    if (exUser) {
-      return res.status(200).json({ email: exUser.email });
-    } else {
-      return res.status(200).json({ email: false });
-    }
-  } catch (error) {
-    console.error(error);
-    return res.status(401).send("아이디를 찾을 수 없습니다.");
-  }
-});
+    const updateResult = await User.update(
+      { secret: UUID },
+      {
+        where: { email },
+      }
+    );
 
-router.post("/modifypass", isLoggedIn, async (req, res, next) => {
-  const { email, nickname, mobile } = req.body;
+    if (updateResult[0] > 0) {
+      // 이메일 전송
+      await sendSecretMail(
+        email,
+        `🔐 [보안 인증코드 입니다.] SHOWPRISE 에서 비밀번호 변경을 위한 보안인증 코드를 발송했습니다.`,
+        `
+        <div>
+          <h3>SHOWPRISE</h3>
+          <hr />
+          <p>보안 인증코드를 발송해드립니다. SHOWPRISE 홈페이지의 인증코드 입력란에 정확히 입력해주시기 바랍니다.</p>
+          <p>인증코드는 [<strong>${UUID}</strong>] 입니다. </p>
 
-  try {
-    const cookieEmail = req.user.dataValues.email;
-    const cookieNickname = req.user.dataValues.nickname;
-    const cookieMobile = req.user.dataValues.mobile;
-
-    if (
-      email === cookieEmail &&
-      nickname === cookieNickname &&
-      mobile === cookieMobile
-    ) {
-      const currentUserId = req.user.dataValues.id;
-
-      const UUID = generateUUID();
-
-      const updateResult = await User.update(
-        { secret: UUID },
-        {
-          where: { id: parseInt(currentUserId) },
-        }
+          <br /><hr />
+          <article>
+            발송해드린 인증코드는 외부로 유출하시거나, 유출 될 경우 개인정보 침해의 위험이 있으니, 필히 본인만 사용하며 타인에게 양도하거나 알려주지 마십시오.
+          </article>
+        </div>
+        `
       );
 
-      if (updateResult[0] > 0) {
-        // 이메일 전송
-
-        await sendSecretMail(
-          cookieEmail,
-          `🔐 [보안 인증코드 입니다.] ㅁㅁㅁㅁ 에서 비밀번호 변경을 위한 보안인증 코드를 발송했습니다.`,
-          `
-          <div>
-            <h3>ㅁㅁㅁㅁ</h3>
-            <hr />
-            <p>보안 인증코드를 발송해드립니다. ㅁㅁㅁㅁ 홈페이지의 인증코드 입력란에 정확히 입력해주시기 바랍니다.</p>
-            <p>인증코드는 [<strong>${UUID}</strong>] 입니다. </p>
-
-            <br /><hr />
-            <article>
-              발송해드린 인증코드는 외부로 유출하시거나, 유출 될 경우 개인정보 침해의 위험이 있으니, 필히 본인만 사용하며 타인에게 양도하거나 알려주지 마십시오.
-            </article>
-          </div>
-          `
-        );
-
-        return res.status(200).json({ result: true });
-      } else {
-        return res
-          .status(401)
-          .send("요청이 올바르지 않습니다. 다시 시도해주세요.");
-      }
+      return res.status(200).json({ result: true });
     } else {
-      return res
-        .status(401)
-        .send("입력하신 정보가 잘못되었습니다. 다시 확인해주세요.");
+      return res.status(401).send("가입되지 않은 이메일입니다.");
     }
   } catch (error) {
     console.error(error);
-    return res.status(401).send("잘못된 요청 입니다. [CODE097]");
+    return res.status(401).send("가입되지 않은 이메일입니다.");
   }
 });
 
-router.patch("/modifypass/update", isLoggedIn, async (req, res, next) => {
-  const { secret, password } = req.body;
+router.post("/findPass/confirm", async (req, res, next) => {
+  const { secret, email } = req.body;
+  try {
+    const exUser = await User.findOne({
+      where: { email },
+    });
+
+    if (secret === exUser.secret) {
+      return res.status(200).json({ result: true });
+    } else {
+      return res.status(401).send("올바르지 않은 인증코드입니다.");
+    }
+  } catch (error) {
+    console.error(error);
+    return res.status(401).send("올바르지 않은 인증코드입니다.");
+  }
+});
+
+router.patch("/findPass/update", async (req, res, next) => {
+  const { email, password } = req.body;
 
   try {
     const exUser = await User.findOne({
-      where: { id: req.user.dataValues.id },
+      where: { email },
     });
 
     if (!exUser) {
@@ -338,7 +315,7 @@ router.patch("/modifypass/update", isLoggedIn, async (req, res, next) => {
     const updateResult = await User.update(
       { password: hashPassord },
       {
-        where: { id: req.user.dataValues.id },
+        where: { email },
       }
     );
 

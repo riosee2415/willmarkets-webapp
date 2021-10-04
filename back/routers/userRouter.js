@@ -501,7 +501,7 @@ router.patch("/updatePrice", async (req, res, next) => {
 router.post("/checkEmail", async (req, res, next) => {
   const { email } = req.body;
   try {
-    const exEmail = await User.findAll({
+    const exEmail = await User.findOne({
       where: { email: email },
     });
 

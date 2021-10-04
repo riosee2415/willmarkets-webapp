@@ -62,9 +62,12 @@ router.get(["/list/:listType", "/list"], async (req, res, next) => {
   const OFFSET = __page * 10;
   try {
     const totalDeposit = await Deposit.findAll({
-      where: {
-        username: {
-          [Op.like]: `%${search}%`,
+      include: {
+        model: User,
+        where: {
+          username: {
+            [Op.like]: `%${_search}%`,
+          },
         },
       },
     });
@@ -79,9 +82,12 @@ router.get(["/list/:listType", "/list"], async (req, res, next) => {
         deposits = await Deposit.findAll({
           offset: OFFSET,
           limit: LIMIT,
-          where: {
-            username: {
-              [Op.like]: `%${search}%`,
+          include: {
+            model: User,
+            where: {
+              username: {
+                [Op.like]: `%${_search}%`,
+              },
             },
           },
           order: [["createdAt", "DESC"]],
@@ -91,9 +97,12 @@ router.get(["/list/:listType", "/list"], async (req, res, next) => {
         deposits = await Deposit.findAll({
           offset: OFFSET,
           limit: LIMIT,
-          where: {
-            username: {
-              [Op.like]: `%${search}%`,
+          include: {
+            model: User,
+            where: {
+              username: {
+                [Op.like]: `%${_search}%`,
+              },
             },
           },
           order: [["createdAt", "DESC"]],
@@ -174,7 +183,7 @@ router.post("/create", async (req, res, next) => {
     }
 
     const createResult = await Deposit.create({
-      userId: parseInt(exUser.id),
+      UserId: parseInt(userId),
       bankName,
       bankNo,
       swiftCode,
@@ -222,7 +231,7 @@ router.patch("/updatePermit", isAdminCheck, async (req, res, next) => {
 
     if (updateResult[0] > 0) {
       sendSecretMail(
-        "4leaf.sjh@gmai.com",
+        "4leaf.sts@gmail.com",
         "test Title",
         "<h1>Test Mail Send</h1>"
       );

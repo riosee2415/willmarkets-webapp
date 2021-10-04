@@ -77,6 +77,7 @@ router.get(["/list/:listType", "/list"], async (req, res, next) => {
     const lastPage =
       depositLen % LIMIT > 0 ? depositLen / LIMIT + 1 : depositLen / LIMIT;
 
+    let deposits = [];
     switch (_listType) {
       case 1:
         deposits = await Deposit.findAll({
@@ -97,9 +98,11 @@ router.get(["/list/:listType", "/list"], async (req, res, next) => {
         deposits = await Deposit.findAll({
           offset: OFFSET,
           limit: LIMIT,
+          // attributes: ["createdAt"],
           include: {
             model: User,
             where: {
+              attribute: ["username"],
               username: {
                 [Op.like]: `%${_search}%`,
               },
@@ -128,6 +131,7 @@ router.post("/image", async (req, res, next) => {
     } else if (err) {
       return res.status(401).send("업로드 중 문제가 발생했습니다.");
     }
+
     return res.json({
       path: req.file.location,
       originName: req.file.originalname,
@@ -146,7 +150,7 @@ router.post("/createImage", async (req, res, next) => {
       return res.status(401).send("존재하지 않는 사용자입니다.");
     }
     const createResult = await DepositImage.create({
-      userId: parseInt(exUser.id),
+      UserId: parseInt(userId),
       filePath,
       fileOriginName,
     });
@@ -191,6 +195,7 @@ router.post("/create", async (req, res, next) => {
       bankAddress,
       selectBank,
       price,
+      isComplete: false,
     });
 
     if (!createResult) {

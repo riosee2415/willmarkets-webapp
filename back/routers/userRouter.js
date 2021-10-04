@@ -1,29 +1,77 @@
 const express = require("express");
 const passport = require("passport");
 const bcrypt = require("bcrypt");
-const { User } = require("../models");
+const {
+  User,
+  Deposit,
+  Withdraw,
+  LiveAccount,
+  DemoAccount,
+} = require("../models");
 const isAdminCheck = require("../middlewares/isAdminCheck");
 const isLoggedIn = require("../middlewares/isLoggedIn");
 const { Op } = require("sequelize");
 const generateUUID = require("../utils/generateUUID");
 const sendSecretMail = require("../utils/mailSender");
+const fs = require("fs");
+const multer = require("multer");
+const path = require("path");
+const AWS = require("aws-sdk");
+const multerS3 = require("multer-s3");
+
+AWS.config.update({
+  accessKeyId: process.env.S3_ACCESS_KEY_Id,
+  secretAccessKey: process.env.S3_SECRET_ACCESS_KEY,
+  region: "ap-northeast-2",
+});
+
+const upload = multer({
+  storage: multerS3({
+    s3: new AWS.S3(),
+    bucket: process.env.S3_BUCKET_NAME,
+    key(req, file, cb) {
+      cb(
+        null,
+        `${
+          process.env.S3_STORAGE_FOLDER_NAME
+        }/original/${Date.now()}_${path.basename(file.originalname)}`
+      );
+    },
+  }),
+  limits: { fileSize: 5 * 1024 * 1024 }, // 5MB
+});
 
 const router = express.Router();
 
 router.get(
-  ["/list", "/list/:listType"],
+  ["/list", "/list/:listType", "list/:listType2"],
   isAdminCheck,
   async (req, res, next) => {
     let findType = 1;
+    let findType2 = 1;
 
-    const { listType } = req.params;
-    const { name, email } = req.query;
+    const { listType, listType2 } = req.params;
+    const { page, search } = req.query;
+
+    const LIMIT = 10;
+
+    const _page = page ? page : 1;
+    const searchName = search ? search : "";
+
+    const __page = _page - 1;
+    const OFFSET = __page * 10;
 
     const validation = Number(listType);
+    const validation2 = Number(listType2);
+
     const numberFlag = isNaN(validation);
+    const numberFlag2 = isNaN(validation2);
 
     if (numberFlag) {
       findType = parseInt(1);
+    }
+    if (numberFlag2) {
+      findType2 = parseInt(1);
     }
 
     if (validation >= 2) {
@@ -32,23 +80,45 @@ router.get(
       findType = 1;
     }
 
+    if (validation2 >= 3) {
+      findType2 = 3;
+    } else {
+      findType2 = 1;
+    }
+
     try {
       let users = [];
 
-      const searchName = name ? name : "";
-      const searchEmail = email ? email : "";
+      const totalUser = await User.findAll({
+        where: {
+          username: {
+            [Op.like]: `%${searchName}%`,
+          },
+        },
+      });
+
+      const userLen = totalUser.length;
+
+      const lastPage =
+        userLen % LIMIT > 0 ? userLen / LIMIT + 1 : userLen / LIMIT;
 
       switch (parseInt(findType)) {
         case 1:
           users = await User.findAll({
+            offset: OFFSET,
+            limit: LIMIT,
             where: {
               username: {
                 [Op.like]: `%${searchName}%`,
               },
-              email: {
-                [Op.like]: `%${searchEmail}%`,
-              },
+              type: 1,
             },
+            include: [
+              { model: Deposit },
+              { model: Withdraw },
+              { model: LiveAccount },
+              { model: DemoAccount },
+            ],
             attributes: {
               exclude: ["password"],
             },
@@ -57,14 +127,20 @@ router.get(
           break;
         case 2:
           users = await User.findAll({
+            offset: OFFSET,
+            limit: LIMIT,
             where: {
               username: {
                 [Op.like]: `%${searchName}%`,
               },
-              email: {
-                [Op.like]: `%${searchEmail}%`,
-              },
+              type: "2",
             },
+            include: [
+              { model: Deposit },
+              { model: Withdraw },
+              { model: LiveAccount },
+              { model: DemoAccount },
+            ],
             attributes: {
               exclude: ["password"],
             },
@@ -76,7 +152,78 @@ router.get(
           break;
       }
 
-      return res.status(200).json(users);
+      switch (parseInt(findType2)) {
+        case 1:
+          users = await User.findAll({
+            offset: OFFSET,
+            limit: LIMIT,
+            where: {
+              username: {
+                [Op.like]: `%${searchName}%`,
+              },
+            },
+            include: [
+              { model: Deposit },
+              { model: Withdraw },
+              { model: LiveAccount },
+              { model: DemoAccount },
+            ],
+            attributes: {
+              exclude: ["password"],
+            },
+            order: [["createdAt", "DESC"]],
+          });
+          break;
+        case 2:
+          users = await User.findAll({
+            offset: OFFSET,
+            limit: LIMIT,
+            where: {
+              username: {
+                [Op.like]: `%${searchName}%`,
+              },
+              isComplete: false,
+            },
+            include: [
+              { model: Deposit },
+              { model: Withdraw },
+              { model: LiveAccount },
+              { model: DemoAccount },
+            ],
+            attributes: {
+              exclude: ["password"],
+            },
+            order: [["createdAt", "DESC"]],
+          });
+          break;
+        case 3:
+          users = await User.findAll({
+            offset: OFFSET,
+            limit: LIMIT,
+            where: {
+              username: {
+                [Op.like]: `%${searchName}%`,
+              },
+              isComplete: true,
+            },
+            include: [
+              { model: Deposit },
+              { model: Withdraw },
+              { model: LiveAccount },
+              { model: DemoAccount },
+            ],
+            attributes: {
+              exclude: ["password"],
+            },
+            order: [["createdAt", "DESC"]],
+          });
+          break;
+
+        default:
+          break;
+      }
+
+      return res.status(200).json({ users, lastPage: parseInt(lastPage) });
     } catch (error) {
       console.error(error);
       return res.status(401).send("사용자 목록을 불러올 수 없습니다.");
@@ -92,7 +239,7 @@ router.get("/signin", async (req, res, next) => {
     if (req.user) {
       const fullUserWithoutPassword = await User.findOne({
         where: { id: req.user.id },
-        attributes: ["id", "email", "type", "username"],
+        exclude: ["password"],
       });
 
       console.log("🍀🍀🍀🍀🍀🍀🍀🍀🍀🍀🍀🍀🍀🍀🍀🍀🍀🍀🍀🍀🍀🍀");
@@ -128,7 +275,7 @@ router.post("/signin", (req, res, next) => {
 
       const fullUserWithoutPassword = await User.findOne({
         where: { id: user.id },
-        attributes: ["id", "email", "type", "username"],
+        exclude: ["password"],
       });
 
       return res.status(200).json(fullUserWithoutPassword);
@@ -161,7 +308,7 @@ router.post("/signin/admin", isAdminCheck, (req, res, next) => {
 
       const fullUserWithoutPassword = await User.findOne({
         where: { id: user.id },
-        attributes: ["id", "email", "level", "username"],
+        exclude: ["password"],
       });
 
       return res.status(200).json(fullUserWithoutPassword);
@@ -169,12 +316,42 @@ router.post("/signin/admin", isAdminCheck, (req, res, next) => {
   })(req, res, next);
 });
 
-router.post("/signup", async (req, res, next) => {
-  const { email, username, mobile, password, terms } = req.body;
+router.post("/image", async (req, res, next) => {
+  const uploadImage = upload.single("image");
 
-  if (!terms) {
-    return res.status(401).send("이용약관에 동의해주세요.");
-  }
+  await uploadImage(req, res, (err) => {
+    if (err instanceof multer.MulterError) {
+      return res.status(401).send("첨부 가능한 용량을 초과했습니다.");
+    } else if (err) {
+      return res.status(401).send("업로드 중 문제가 발생했습니다.");
+    }
+
+    return res.json({
+      path: req.file.location,
+      originName: req.file.originalname,
+    });
+  });
+});
+
+router.post("/signup", async (req, res, next) => {
+  const {
+    type,
+    email,
+    password,
+    username,
+    gender,
+    zoneCode,
+    address,
+    detailAddress,
+    idType,
+    idDate1,
+    idDate2,
+    idFilePath,
+    idFileOriginName,
+    addrType,
+    addrFilePath,
+    addrFileOriginName,
+  } = req.body;
 
   try {
     const exUser = await User.findOne({
@@ -188,11 +365,22 @@ router.post("/signup", async (req, res, next) => {
     const hashedPassword = await bcrypt.hash(password, 12);
 
     const result = await User.create({
+      type,
       email,
-      username,
-      mobile,
-      terms,
       password: hashedPassword,
+      username,
+      gender,
+      zoneCode,
+      address,
+      detailAddress,
+      idType,
+      idDate1,
+      idDate2,
+      idFilePath,
+      idFileOriginName,
+      addrType,
+      addrFilePath,
+      addrFileOriginName,
     });
 
     res.status(201).send("SUCCESS");
@@ -212,7 +400,24 @@ router.get("/me", isLoggedIn, async (req, res, next) => {
 });
 
 router.post("/me/update", isLoggedIn, async (req, res, next) => {
-  const { id, mobile } = req.body;
+  const {
+    id,
+    email,
+    password,
+    username,
+    gender,
+    zoneCode,
+    address,
+    detailAddress,
+    idType,
+    idDate1,
+    idDate2,
+    idFilePath,
+    idFileOriginName,
+    addrType,
+    addrFilePath,
+    addrFileOriginName,
+  } = req.body;
 
   try {
     const exUser = await User.findOne({ where: { id: parseInt(id) } });
@@ -221,17 +426,59 @@ router.post("/me/update", isLoggedIn, async (req, res, next) => {
       return res.status(401).send("존재하지 않는 사용자 입니다.");
     }
 
-    const updateUser = await User.update(
-      { mobile },
-      {
-        where: { id: parseInt(id) },
-      }
-    );
+    if (exUser.email !== email) {
+      const exEmail = await User.findOne({
+        where: { email: email },
+      });
 
+      if (exEmail) {
+        return res.status(401).send("이미 사용중인 이메일 입니다.");
+      }
+    }
+
+    const hashedPassword = await bcrypt.hash(password, 12);
+
+    const updatedata = {
+      email,
+      username,
+      gender,
+      zoneCode,
+      address,
+      detailAddress,
+      idType,
+      idDate1,
+      idDate2,
+      idFilePath,
+      idFileOriginName,
+      addrType,
+      addrFilePath,
+      addrFileOriginName,
+    };
+    const updateUser = await User.update(updatedata, {
+      where: { id: parseInt(id) },
+    });
     return res.status(200).json({ result: true });
   } catch (error) {
     console.error(error);
     return res.status(401).send("정보를 수정할 수 없습니다.");
+  }
+});
+
+router.post("/checkEmail", async (req, res, next) => {
+  const { email } = req.body;
+  try {
+    const exEmail = await User.findAll({
+      where: { email: email },
+    });
+
+    if (exEmail) {
+      return res.status(401).send({ return: false });
+    } else {
+      return res.status(200).json({ return: true });
+    }
+  } catch (error) {
+    console.error(error);
+    return res.status(401).send("이미 사용중이인 이메일 입니다.");
   }
 });
 
@@ -252,12 +499,12 @@ router.post("/findPass", async (req, res, next) => {
       // 이메일 전송
       await sendSecretMail(
         email,
-        `🔐 [보안 인증코드 입니다.] SHOWPRISE 에서 비밀번호 변경을 위한 보안인증 코드를 발송했습니다.`,
+        `🔐 [보안 인증코드 입니다.] WILLMARKET 에서 보안인증 코드를 발송했습니다.`,
         `
         <div>
-          <h3>SHOWPRISE</h3>
+          <h3>WILLMARKET</h3>
           <hr />
-          <p>보안 인증코드를 발송해드립니다. SHOWPRISE 홈페이지의 인증코드 입력란에 정확히 입력해주시기 바랍니다.</p>
+          <p>보안 인증코드를 발송해드립니다. WILLMARKET 홈페이지의 인증코드 입력란에 정확히 입력해주시기 바랍니다.</p>
           <p>인증코드는 [<strong>${UUID}</strong>] 입니다. </p>
 
           <br /><hr />
@@ -327,6 +574,47 @@ router.patch("/findPass/update", async (req, res, next) => {
   } catch (error) {
     console.error(error);
     return res.status(401).send("잘못된 요청 입니다.");
+  }
+});
+
+router.patch("/updatePermit", isAdminCheck, async (req, res, next) => {
+  const { id } = req.body;
+  try {
+    const exUpdatePermit = await User.findOne({
+      where: {
+        id: parseInt(id),
+      },
+    });
+
+    if (!exUpdatePermit) {
+      return res.status(401).send("존재하지 않는 사용자입니다.");
+    }
+
+    const updateResult = await User.update(
+      {
+        isComplete: true,
+        completedAt: new Date(),
+      },
+      {
+        where: {
+          id: parseInt(id),
+        },
+      }
+    );
+
+    if (updateResult[0] > 0) {
+      sendSecretMail(
+        "4leaf.sts@gmail.com",
+        "test Title",
+        "<h1>Test Mail Send</h1>"
+      );
+
+      return res.status(200).json({ result: true });
+    } else {
+      return res.status(200).json({ result: false });
+    }
+  } catch (error) {
+    console.error(error);
   }
 });
 

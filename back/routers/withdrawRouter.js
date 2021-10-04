@@ -64,10 +64,9 @@ router.post("/create", async (req, res, next) => {
     bankNo,
   } = req.body;
   try {
+    console.log(userId);
     const exUser = await User.findOne({
-      where: {
-        id: parseInt(userId),
-      },
+      where: { id: parseInt(userId) },
     });
 
     if (!exUser) {
@@ -82,6 +81,7 @@ router.post("/create", async (req, res, next) => {
       bankAddress,
       selectBank,
       bankNo,
+      isComplete: false,
     });
 
     if (!createResult) {

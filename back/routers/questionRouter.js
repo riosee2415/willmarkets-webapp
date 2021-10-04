@@ -9,7 +9,15 @@ router.get(
   ["/list/:listType", "/list"],
   isAdminCheck,
   async (req, res, next) => {
+    const { page, search } = req.query;
     const { listType } = req.params;
+    const LIMIT = 10;
+
+    const _page = page ? page : 1;
+    const _search = search ? search : "";
+
+    const __page = _page - 1;
+    const OFFSET = __page * 10;
 
     let nanFlag = isNaN(listType);
 
@@ -28,27 +36,83 @@ router.get(
     }
 
     try {
+      const totalQuestion = await Question.findAll({
+        include: {
+          model: User,
+          where: {
+            username: {
+              [Op.like]: `%${_search}%`,
+            },
+          },
+        },
+      });
+
+      const questionLen = totalQuestion.length;
+
+      const lastPage =
+        questionLen % LIMIT > 0 ? questionLen / LIMIT + 1 : questionLen / LIMIT;
+
       let questions = [];
 
       switch (_listType) {
         case 1:
           questions = await Question.findAll({
-            where: { isComplete: false },
+            where: {
+              isComplete: false,
+              offset: OFFSET,
+              limit: LIMIT,
+              include: {
+                model: User,
+                where: {
+                  username: {
+                    [Op.like]: `%${_search}%`,
+                  },
+                },
+              },
+              order: [["createdAt", "DESC"]],
+            },
           });
           break;
         case 2:
           questions = await Question.findAll({
-            where: { isComplete: true },
+            where: {
+              isComplete: true,
+              offset: OFFSET,
+              limit: LIMIT,
+              include: {
+                model: User,
+                where: {
+                  username: {
+                    [Op.like]: `%${_search}%`,
+                  },
+                },
+              },
+              order: [["createdAt", "DESC"]],
+            },
           });
           break;
         case 3:
-          questions = await Question.findAll({});
+          questions = await Question.findAll({
+            where: {
+              offset: OFFSET,
+              limit: LIMIT,
+              include: {
+                model: User,
+                where: {
+                  username: {
+                    [Op.like]: `%${_search}%`,
+                  },
+                },
+              },
+              order: [["createdAt", "DESC"]],
+            },
+          });
           break;
         default:
           break;
       }
 
-      return res.status(200).json(questions);
+      return res.status(200).json({ questions, lastPage: parseInt(lastPage) });
     } catch (error) {
       console.error(error);
       return res
@@ -68,6 +132,8 @@ router.post("/create", isLoggedIn, async (req, res, next) => {
       email,
       content,
     });
+
+    console.log(createResult);
 
     return res.status(201).json({ result: true });
   } catch (error) {

@@ -5,6 +5,7 @@ export const initailState = {
   me: null,
   filePath: null,
   fileOriginName: null,
+  secretCode: null,
   currentAdminMenu: [],
   //
   st_userListLoading: false,
@@ -50,6 +51,14 @@ export const initailState = {
   st_userFindPasswordUpdateLoading: false,
   st_userFindPasswordUpdateDone: false,
   st_userFindPasswordUpdateError: null,
+  //
+  st_userCheckEmailLoading: false,
+  st_userCheckEmailDone: false,
+  st_userCheckEmailError: null,
+  //
+  st_userSecretEmailLoading: false,
+  st_userSecretEmailDone: false,
+  st_userSecretEmailError: null,
   //
   st_loadMyInfoLoading: false,
   st_loadMyInfoDone: false,
@@ -105,6 +114,14 @@ export const USER_FIND_PASSWORD_UPDATE_SUCCESS =
   "USER_FIND_PASSWORD_UPDATE_SUCCESS";
 export const USER_FIND_PASSWORD_UPDATE_FAILURE =
   "USER_FIND_PASSWORD_UPDATE_SUCCESS";
+//
+export const USER_CHECK_EMAIL_REQUEST = "USER_CHECK_EMAIL_REQUEST";
+export const USER_CHECK_EMAIL_SUCCESS = "USER_CHECK_EMAIL_SUCCESS";
+export const USER_CHECK_EMAIL_FAILURE = "USER_CHECK_EMAIL_FAILURE";
+//
+export const USER_SECRET_EMAIL_REQUEST = "USER_SECRET_EMAIL_REQUEST";
+export const USER_SECRET_EMAIL_SUCCESS = "USER_SECRET_EMAIL_SUCCESS";
+export const USER_SECRET_EMAIL_FAILURE = "USER_SECRET_EMAIL_FAILURE";
 //
 export const LOAD_MY_INFO_REQUEST = "LOAD_MY_INFO_REQUEST";
 export const LOAD_MY_INFO_SUCCESS = "LOAD_MY_INFO_SUCCESS";
@@ -268,6 +285,7 @@ const reducer = (state = initailState, action) =>
       case USER_FIND_PASSWORD_SUCCESS: {
         draft.st_userFindPasswordLoading = false;
         draft.st_userFindPasswordDone = true;
+        draft.secretCode = action.data;
         break;
       }
       case USER_FIND_PASSWORD_FAILURE: {
@@ -312,6 +330,36 @@ const reducer = (state = initailState, action) =>
         draft.st_userFindPasswordUpdateError = action.error;
         break;
       }
+      //
+      case USER_CHECK_EMAIL_REQUEST:
+        draft.st_userCheckEmailLoading = true;
+        draft.st_userCheckEmailError = null;
+        draft.st_userCheckEmailDone = false;
+        break;
+      case USER_CHECK_EMAIL_SUCCESS:
+        draft.st_userCheckEmailLoading = false;
+        draft.st_userCheckEmailDone = true;
+        break;
+      case USER_CHECK_EMAIL_FAILURE:
+        draft.st_userCheckEmailLoading = false;
+        draft.st_userCheckEmailDone = false;
+        draft.st_userCheckEmailError = action.error;
+        break;
+      //
+      case USER_SECRET_EMAIL_REQUEST:
+        draft.st_userSecretEmailLoading = true;
+        draft.st_userSecretEmailError = null;
+        draft.st_userSecretEmailDone = false;
+        break;
+      case USER_SECRET_EMAIL_SUCCESS:
+        draft.st_userSecretEmailLoading = false;
+        draft.st_userSecretEmailDone = true;
+        break;
+      case USER_SECRET_EMAIL_FAILURE:
+        draft.st_userSecretEmailLoading = false;
+        draft.st_userSecretEmailDone = false;
+        draft.st_userSecretEmailError = action.error;
+        break;
       //
       case LOAD_MY_INFO_REQUEST:
         draft.st_loadMyInfoLoading = true;

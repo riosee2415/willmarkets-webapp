@@ -1,4 +1,4 @@
-import { Row, Col, Modal } from "antd";
+import { Row, Col, Modal, Radio } from "antd";
 import styled from "styled-components";
 import Theme from "./Theme";
 
@@ -449,6 +449,9 @@ export const ComboList = styled(Wrapper)`
   display: none;
   position: absolute;
   left: 0;
+  flex-wrap: nowrap;
+  justify-content: flex-start;
+  overflow: auto;
   background: #fff;
   box-shadow: 0 2px 8px rgb(0 0 0 / 15%);
 
@@ -521,6 +524,7 @@ export const Combo = styled(Wrapper)`
 
   & ${ComboList} {
     top: ${(props) => props.height || `27px`};
+    height: ${(props) => props.listHeight || `auto`};
   }
 `;
 /////////////////////////////////////////////////////////////
@@ -591,6 +595,26 @@ export const TextInput = styled.input`
   opacity: ${(props) => props.opacity};
   letter-spacing: ${(props) => props.letterSpacing};
   outline: none;
+`;
+
+export const RadioInput = styled(Radio)`
+  & .ant-radio-checked .ant-radio-inner {
+    border-color: ${(props) => props.color || `#473f4f`};
+  }
+
+  & .ant-radio-checked::after {
+    border-color: ${(props) => props.color || `#473f4f`};
+  }
+
+  & .ant-radio-inner::after {
+    background-color: ${(props) => props.color || `#473f4f`};
+  }
+
+  & .ant-radio-wrapper:hover .ant-radio,
+  .ant-radio:hover .ant-radio-inner,
+  .ant-radio-input:focus + .ant-radio-inner {
+    border-color: ${(props) => props.color || `#473f4f`};
+  }
 `;
 
 export const FileInput = styled.input`
@@ -668,5 +692,82 @@ export const TableBody = styled(Wrapper)`
   ${TableRow}:hover {
     background: #fffcfd;
   }
+`;
+/////////////////////////////////////////////////////////////
+
+//////////////////////////// TAB ////////////////////////////
+export const TabWrapper = styled(Wrapper)`
+  flex-direction: row;
+  align-items: normal;
+  justify-content: flex-start;
+`;
+
+export const Tab = styled(Wrapper)`
+  padding: 8px 20px;
+  width: auto;
+  border: 1px solid #dedede;
+  border-left: none;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  font-size: ${(props) => props.fontSize || `15px`};
+  color: ${(props) => props.color || `#312f2f`};
+  cursor: pointer;
+
+  &:first-child {
+    border-left: 1px solid #dedede;
+  }
+
+  &:hover {
+    background: #f4f4f4;
+  }
+
+  ${(props) =>
+    props.isActive &&
+    `
+    background: #f9edf8 !important;
+    box-shadow: 0px 0px 8px #f0d4ef;
+
+  `}
+`;
+/////////////////////////////////////////////////////////////
+
+//////////////////////// ACCORDION //////////////////////////
+export const AccordionWrapper = styled(Wrapper)`
+  border: ${(props) => props.border || `1px solid #efefef`};
+  box-shadow: ${(props) => props.shadow || `1px 1px 5px #dedede`};
+`;
+
+export const AccordionHeader = styled(Wrapper)`
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: normal;
+  padding: 12px 18px;
+  font-size: 15px;
+  color: #221d22;
+  background: #fed5d5;
+  box-shadow: 1px 1px 5px #deabab;
+  cursor: pointer;
+
+  & * {
+    font-size: inherit;
+  }
+`;
+
+export const AccordionBody = styled(Wrapper)`
+  overflow: hidden;
+  flex-wrap: nowrap;
+  align-items: ${(props) => props.al || `flex-start`};
+  padding: ${(props) => props.padding || `20px`};
+
+  ${(props) =>
+    props.isOpen
+      ? `
+    max-height: 999px;
+    transition: max-height 0.25s ease-in;
+  `
+      : `   
+    max-height: 0;
+    transition: max-height 0.25s ease-out;
+  `}
 `;
 /////////////////////////////////////////////////////////////

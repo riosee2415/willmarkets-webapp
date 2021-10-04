@@ -45,6 +45,14 @@ import {
   USER_FIND_PASSWORD_UPDATE_SUCCESS,
   USER_FIND_PASSWORD_UPDATE_FAILURE,
   //
+  USER_CHECK_EMAIL_REQUEST,
+  USER_CHECK_EMAIL_SUCCESS,
+  USER_CHECK_EMAIL_FAILURE,
+  //
+  USER_SECRET_EMAIL_REQUEST,
+  USER_SECRET_EMAIL_SUCCESS,
+  USER_SECRET_EMAIL_FAILURE,
+  //
   LOAD_MY_INFO_REQUEST,
   LOAD_MY_INFO_SUCCESS,
   LOAD_MY_INFO_FAILURE,
@@ -293,6 +301,7 @@ function* userFindPasswordUpdate(action) {
     });
   }
 }
+
 // SAGA AREA ********************************************************************************************************
 // ******************************************************************************************************************
 function userFindPasswordConfirmAPI(data) {
@@ -310,6 +319,56 @@ function* userFindPasswordConfirm(action) {
     console.error(err);
     yield put({
       type: USER_FIND_PASSWORD_CONFIRM_FAILURE,
+      error: err.response.data,
+    });
+  }
+}
+// ******************************************************************************************************************
+// ******************************************************************************************************************
+// ******************************************************************************************************************
+
+// SAGA AREA ********************************************************************************************************
+// ******************************************************************************************************************
+function userCheckEmailAPI(data) {
+  return axios.post(`/api/user/checkEmail`, data);
+}
+
+function* userCheckEmail(action) {
+  try {
+    const result = yield call(userCheckEmailAPI, action.data);
+    yield put({
+      type: USER_CHECK_EMAIL_SUCCESS,
+      data: result.data,
+    });
+  } catch (err) {
+    console.error(err);
+    yield put({
+      type: USER_CHECK_EMAIL_FAILURE,
+      error: err.response.data,
+    });
+  }
+}
+// ******************************************************************************************************************
+// ******************************************************************************************************************
+// ******************************************************************************************************************
+
+// SAGA AREA ********************************************************************************************************
+// ******************************************************************************************************************
+function userSecretEmailAPI(data) {
+  return axios.post(`/api/user/secretEmail`, data);
+}
+
+function* userSecretEmail(action) {
+  try {
+    const result = yield call(userSecretEmailAPI, action.data);
+    yield put({
+      type: USER_SECRET_EMAIL_SUCCESS,
+      data: result.data,
+    });
+  } catch (err) {
+    console.error(err);
+    yield put({
+      type: USER_SECRET_EMAIL_FAILURE,
       error: err.response.data,
     });
   }
@@ -368,6 +427,14 @@ function* watchUserIdImageFile() {
   yield takeLatest(USER_ID_IMAGE_FILE_REQUEST, userIdImageFile);
 }
 
+function* watchUserCheckEmail() {
+  yield takeLatest(USER_CHECK_EMAIL_REQUEST, userCheckEmail);
+}
+
+function* watchUserSecretEmail() {
+  yield takeLatest(USER_SECRET_EMAIL_REQUEST, userSecretEmail);
+}
+
 //////////////////////////////////////////////////////////////
 export default function* userSaga() {
   yield all([
@@ -383,5 +450,7 @@ export default function* userSaga() {
     fork(watchUserFindPasswordConfirm),
     fork(watchUserFindPasswordUpdate),
     fork(watchUserIdImageFile),
+    fork(watchUserCheckEmail),
+    fork(watchUserSecretEmail),
   ]);
 }

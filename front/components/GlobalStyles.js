@@ -38,10 +38,6 @@ const GlobalStyles = createGlobalStyle`
       font-family: "NanumBarunGothic", sans-serif;
   }
 
-  .ant-modal-content{
-    border:5px solid ${(props) => props.theme.basicTheme_C};
-  }
-
   .ant-modal-body{
     padding:0;
   }

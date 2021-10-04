@@ -29,8 +29,10 @@ import {
 } from "../../components/commonComponents";
 import UserLayout from "../../components/user/UserLayout";
 import Theme from "../../components/Theme";
-import { DEPOSIT_CREATE_REQUEST } from "../../reducers/deposit";
-import { LIVE_ACCOUNT_LIST_REQUEST } from "../../reducers/liveAccount";
+import {
+  DEPOSIT_IMAGE_FILE_REQUEST,
+  DEPOSIT_CREATE_REQUEST,
+} from "../../reducers/deposit";
 
 const TabWrapper = styled(Wrapper)`
   flex-direction: row;
@@ -119,12 +121,6 @@ const Deposit = () => {
     st_userFindPasswordError,
     st_userFindPasswordConfirmDone,
     st_userFindPasswordConfirmError,
-    st_userIdImageFileDone,
-    st_userIdImageFileError,
-    filePath,
-    fileOriginName,
-    inputEmail,
-    secret,
   } = useSelector((state) => state.user);
 
   const { st_depositCreateDone, st_depositCreateError } = useSelector(
@@ -137,6 +133,9 @@ const Deposit = () => {
   const [currentBank, setCurrentBank] = useState(null);
 
   const [comboSelectBank, setComboSelectBank] = useState(false);
+
+  const [isSendEmail, setIsSendEmail] = useState(false);
+  const [isConfirmEmail, setIsConfirmEmail] = useState(false);
 
   const inputSelectBank = useInput("");
   const inputPrice = useOnlyNumberInput("");
@@ -161,6 +160,23 @@ const Deposit = () => {
     setCurrentStep(1);
   }, []);
 
+  const initValueHandler = useCallback(() => {
+    setCurrentStep(0);
+
+    setCurrentBank(null);
+
+    setComboSelectBank(false);
+
+    setIsSendEmail(false);
+    setIsConfirmEmail(false);
+
+    inputPrice.setValue("");
+    inputSelectBank.setValue("");
+    inputFilePath.setValue("");
+    inputFileOriginName.setValue("");
+    inputSecret.setValue("");
+  }, []);
+
   const createDepositHanlder = useCallback(() => {
     if (!currentBank) {
       setCurrentStep(0);
@@ -175,38 +191,58 @@ const Deposit = () => {
       return message.error("입금금액을 입력해주세요.");
     }
 
-    // currentStep()
-  }, [currentBank, inputPrice, inputSelectBank]);
+    if (!isSendEmail) {
+      dispatch({
+        type: USER_FIND_PASSWORD_REQUEST,
+        data: {
+          email: me.email,
+        },
+      });
+      return;
+    }
 
-  const sendEmailSecretCodeHandler = useCallback(() => {
-    //이메일로 인증번호 보내기
-    dispatch({
-      type: USER_FIND_PASSWORD_REQUEST,
-      data: {
-        email: me.email,
-      },
-    });
-  }, [me]);
+    if (isSendEmail && !isConfirmEmail) {
+      if (!emptyCheck(inputSecret.value)) {
+        return message.error("인증번호를 입력해주세요.");
+      }
 
-  const confirmSecretHandler = useCallback(() => {
-    if (!emptyCheck(inputSecret.value)) {
-      return message.error("인증번호를 입력해주세요.");
+      dispatch({
+        type: USER_FIND_PASSWORD_CONFIRM_REQUEST,
+        data: {
+          email: me.email,
+          secret: inputSecret.value,
+        },
+      });
+      return;
     }
 
     dispatch({
-      type: USER_FIND_PASSWORD_CONFIRM_REQUEST,
+      type: DEPOSIT_CREATE_REQUEST,
       data: {
-        email: me.email,
-        secret: inputSecret.value,
+        userId: me.id,
+        bankName: currentBank.bankName,
+        bankNo: currentBank.bankNo,
+        swiftCode: currentBank.swiftCode,
+        willAddress: currentBank.willAddress,
+        bankAddress: currentBank.bankAddress,
+        selectBank: inputSelectBank.value,
+        price: inputPrice.value,
       },
     });
-  }, [inputSecret]);
+  }, [
+    currentBank,
+    inputPrice,
+    inputSelectBank,
+    inputSecret,
+    isSendEmail,
+    isConfirmEmail,
+  ]);
 
   const clickImageUpload = useCallback(() => {
     fileRef.current.click();
   }, [fileRef.current]);
 
-  const onChangeImages = useCallback((e, type) => {
+  const fileChangeHandler = useCallback((e) => {
     const file = e.target.files[0];
 
     if (!file) return;
@@ -228,9 +264,7 @@ const Deposit = () => {
 
     const formData = new FormData();
 
-    [].forEach.call(e.target.files, (file) => {
-      formData.append("image", file);
-    });
+    formData.append("image", file);
 
     dispatch({
       type: USER_ID_IMAGE_FILE_REQUEST,
@@ -240,64 +274,43 @@ const Deposit = () => {
 
   ////// USEEFFECT //////
   useEffect(() => {
-    setCurrentStep(0);
-
-    setCurrentBank(null);
-
-    inputPrice.setValue("");
-    inputSelectBank.setValue("");
+    initValueHandler();
   }, [currentTab]);
 
   useEffect(() => {
-    if (st_userFindPasswordConfirmDone) {
-      if (secret) {
-        message.success("이메일 인증이 완료되었습니다.");
-        dispatch({
-          type: DEPOSIT_CREATE_REQUEST,
-          data: {
-            userId: me.id,
-            bankName: currentBank.bankName,
-            bankNo: currentBank.bankNo,
-            swiftCode: currentBank.swiftCode,
-            willAddress: currentBank.willAddress,
-            bankAddress: currentBank.bankAddress,
-            selectBank: inputSelectBank.value,
-            price: inputPrice.value,
-          },
-        });
-        return;
-      } else {
-        return message.error("이메일 인증에 실패했습니다.");
-      }
-    }
-  }, [st_userFindPasswordConfirmDone]);
-
-  useEffect(() => {
-    if (st_userFindPasswordConfirmError) {
-      message.error(st_userFindPasswordConfirmError);
-    }
-  }, [st_userFindPasswordConfirmError]);
-
-  useEffect(() => {
     if (st_userFindPasswordDone) {
+      setIsSendEmail(true);
       message.success("이메일로 인증코드가 전송되었습니다.");
     }
   }, [st_userFindPasswordDone]);
 
   useEffect(() => {
     if (st_userFindPasswordError) {
-      message.success(st_userFindPasswordError);
+      setIsSendEmail(false);
+      message.error(st_userFindPasswordError);
     }
   }, [st_userFindPasswordError]);
 
   useEffect(() => {
+    if (st_userFindPasswordConfirmDone) {
+      setIsConfirmEmail(true);
+
+      setTimeout(() => {
+        createDepositHanlder();
+      }, 100);
+    }
+  }, [st_userFindPasswordConfirmDone]);
+
+  useEffect(() => {
+    if (st_userFindPasswordConfirmError) {
+      setIsConfirmEmail(false);
+      message.error(st_userFindPasswordConfirmError);
+    }
+  }, [st_userFindPasswordConfirmError]);
+
+  useEffect(() => {
     if (st_depositCreateDone) {
-      message.success("입금신청이 완료되었습니다.");
-
-      setCurrentBank(null);
-
-      inputPrice.setValue("");
-      inputSelectBank.setValue("");
+      setCurrentStep(2);
     }
   }, [st_depositCreateDone]);
 
@@ -736,13 +749,26 @@ const Deposit = () => {
                       onClick={() => setComboSelectBank(!comboSelectBank)}
                     >
                       <ComboTitle>
-                        <Wrapper>아이디</Wrapper>
+                        <Wrapper>{inputSelectBank.value}</Wrapper>
                         <CaretDownOutlined />
                       </ComboTitle>
 
                       <ComboList isView={comboSelectBank}>
-                        <ComboListItem>내정보수정</ComboListItem>
-                        <ComboListItem>로그아웃</ComboListItem>
+                        <ComboListItem>입금계좌 선택</ComboListItem>
+
+                        {me &&
+                          me.LiveAccount &&
+                          me.LiveAccount.map((data) => {
+                            <ComboListItem
+                              key={data.id}
+                              isActive={inputSelectBank.value === data.bankNo}
+                              onClick={() =>
+                                inputSelectBank.setValue(data.bankNo)
+                              }
+                            >
+                              {data.bankNo}
+                            </ComboListItem>;
+                          })}
                       </ComboList>
                     </Combo>
                   </Wrapper>
@@ -753,13 +779,129 @@ const Deposit = () => {
                   </CustomLabel>
 
                   <Wrapper dr={`row`} ju={`flex-start`}>
-                    <CustomInput id={`inp-price`} />
+                    <CustomInput id={`inp-price`} {...inputPrice} />
+                  </Wrapper>
+
+                  {isSendEmail && (
+                    <Wrapper al={`flex-start`}>
+                      <CustomLabel for={`inp-secret`} margin={`40px 0 15px`}>
+                        <Wrapper className={`required`}>*</Wrapper>
+                        인증코드
+                      </CustomLabel>
+
+                      <Wrapper dr={`row`} ju={`flex-start`}>
+                        <CustomInput id={`inp-secret`} {...inputSecret} />
+                      </Wrapper>
+                    </Wrapper>
+                  )}
+                </Wrapper>
+              )}
+
+              {currentStep === 2 && (
+                <Wrapper al={`flex-start`}>
+                  <Wrapper
+                    dr={`row`}
+                    ju={`flex-start`}
+                    margin={`0 0 20px`}
+                    fontSize={`18px`}
+                    fontWeight={`700`}
+                  >
+                    <Wrapper
+                      width={`auto`}
+                      margin={`0 10px 0 0`}
+                      padding={`5px 10px`}
+                      fontSize={`14px`}
+                      fontWeight={`700`}
+                      bgColor={`#aa28c9`}
+                      color={`#fff`}
+                    >
+                      Step 03
+                    </Wrapper>
+                    입금신청 완료
+                  </Wrapper>
+
+                  <Wrapper margin={`80px 0 0`}>
+                    <Result
+                      status="success"
+                      title={
+                        <Wrapper
+                          fontSize={`25px`}
+                          width={`auto`}
+                          borderBottom={`1px solid #c9c9c9`}
+                        >
+                          입금신청 완료 !
+                        </Wrapper>
+                      }
+                      subTitle={
+                        <Wrapper
+                          margin={`10px 0 0`}
+                          padding={`0 15px`}
+                          width={`auto`}
+                          lineHeight={`1.8`}
+                        >
+                          정상적으로 입금신청이 완료되었습니다.
+                          <br />
+                          관리자 승인 후 입금될 예정이오니, 잠시만 기다려주세요.
+                        </Wrapper>
+                      }
+                      extra={[
+                        <CommonButton
+                          key="1"
+                          kindOf={`white`}
+                          width={`180px`}
+                          height={`40px`}
+                          margin={`0 5px`}
+                          onClick={initValueHandler}
+                        >
+                          처음으로
+                        </CommonButton>,
+
+                        <CommonButton
+                          key="1"
+                          kindOf={`blue`}
+                          width={`180px`}
+                          height={`40px`}
+                          margin={`0 5px`}
+                          onClick={() => setCurrentTab(1)}
+                        >
+                          입금영수 첨부
+                        </CommonButton>,
+                      ]}
+                    />
                   </Wrapper>
                 </Wrapper>
               )}
             </Wrapper>
           )}
-          {currentTab === 1 && <Wrapper al={`flex-start`}></Wrapper>}
+
+          {currentTab === 1 && (
+            <Wrapper al={`flex-start`}>
+              {currentStep === 0 && (
+                <Wrapper al={`flex-start`}>
+                  <Wrapper
+                    dr={`row`}
+                    ju={`flex-start`}
+                    margin={`0 0 20px`}
+                    fontSize={`18px`}
+                    fontWeight={`700`}
+                  >
+                    <Wrapper
+                      width={`auto`}
+                      margin={`0 10px 0 0`}
+                      padding={`5px 10px`}
+                      fontSize={`14px`}
+                      fontWeight={`700`}
+                      bgColor={`#aa28c9`}
+                      color={`#fff`}
+                    >
+                      Step 01
+                    </Wrapper>
+                    파일첨부 하기
+                  </Wrapper>
+                </Wrapper>
+              )}
+            </Wrapper>
+          )}
         </Wrapper>
 
         {currentTab === 0 && currentStep === 1 && (
@@ -777,7 +919,23 @@ const Deposit = () => {
             >
               이전
             </CommonButton>
-            <CommonButton kindOf={`red`}>입금 신청</CommonButton>
+            <CommonButton kindOf={`red`} onClick={createDepositHanlder}>
+              입금 신청
+            </CommonButton>
+          </Wrapper>
+        )}
+
+        {currentTab === 1 && currentStep === 0 && (
+          <Wrapper
+            dr={`row`}
+            ju={`flex-start`}
+            margin={`50px 0 0`}
+            padding={`20px 0 0`}
+            borderTop={`1px solid #ebebeb`}
+          >
+            <CommonButton kindOf={`red`} onClick={createDepositHanlder}>
+              첨부하기
+            </CommonButton>
           </Wrapper>
         )}
       </Wrapper>

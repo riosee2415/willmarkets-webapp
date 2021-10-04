@@ -1,4 +1,4 @@
-import { Row, Col, Button, Modal } from "antd";
+import { Row, Col, Modal } from "antd";
 import styled from "styled-components";
 import Theme from "./Theme";
 
@@ -191,48 +191,83 @@ export const RsWrapper = styled.article`
   }
 `;
 
-export const CommonButton = styled(Button)`
+export const CommonButton = styled.button`
   width: ${(props) => props.width};
   height: ${(props) => props.height};
   margin: ${(props) => props.margin};
-  padding: ${(props) => props.padding};
+  padding: ${(props) => props.padding || `4px 12px 3px`};
   font-size: ${(props) => props.fontSize || `15px`};
-  color: ${(props) => props.color || props.theme.grey_C};
   border-radius: ${(props) => props.radius};
+  border: none;
+  outline: none;
+  cursor: pointer;
 
-  ${(props) => !props.kindOf && `background : ${props.theme.white_C};`}
-  ${(props) => props.kindOf === `red` && `background : ${props.theme.red_C};`}
-  ${(props) => props.kindOf === `red` && `color : ${props.theme.white_C};`}
-  ${(props) => props.kindOf === `blue` && `background : ${props.theme.blue_C};`}
-  ${(props) => props.kindOf === `blue` && `color : ${props.theme.white_C};`}
   ${(props) =>
-    props.kindOf === `black` && `background : ${props.theme.black_C};`}
-  ${(props) => props.kindOf === `black` && `color : ${props.theme.white_C};`}
-  ${(props) =>
-    props.kindOf === `white` && `border : 1px solid ${props.theme.black_C};`}
-     
- 
-  &:hover {
-    background: ${(props) => props.theme.white_C};
-    color: ${(props) => props.theme.grey_C};
-    ${(props) => !props.kindOf && `border :1px solid ${props.theme.grey_C};`}
-    ${(props) =>
-      props.kindOf === `white` && `background ${props.theme.white_C};`}
-         ${(props) =>
-      props.kindOf === `white` && `color ${props.theme.grey_C};`}
+    props.kindOf === `white` &&
+    `
+    background: ${props.theme.white_C};
+    color: #1f1d1d;
+    border: 1px solid #e5e5e5;
+    box-shadow: 1px 1px 8px #e5e5e5;
 
-  ${(props) => props.kindOf === `red` && `color : ${props.theme.red_C};`}
+    &:hover {
+      background: #4d4d4d;
+      color: #f5f5f5;
+      border: 1px solid #4f4f4f;
+      box-shadow: 1px 1px 8px #767676;
+    }
+  `};
+
   ${(props) =>
-      props.kindOf === `red` && `border : 1px solid ${props.theme.red_C};`}
-  ${(props) => props.kindOf === `blue` && `color : ${props.theme.blue_C};`}
+    props.kindOf === `black` &&
+    `
+    background: #4d4d4d;
+    color: #f5f5f5;
+    border: 1px solid #4f4f4f;
+    box-shadow: 1px 1px 8px #767676;
+   
+    &:hover {
+      background: ${props.theme.white_C};
+      color: #414141;
+      border: 1px solid #d3d3d3;
+      box-shadow: 1px 1px 8px #e1e1e1;
+    }
+  `};
+
   ${(props) =>
-      props.kindOf === `blue` && `border : 1px solid ${props.theme.blue_C};`}
+    props.kindOf === `red` &&
+    `
+    background: #eb3b3b;
+    color: #f5f5f5;
+    border: 1px solid #f13636;
+    box-shadow: 1px 1px 8px #ff5151;
+   
+    &:hover {
+      background: #fbeeee;
+      color: #1b1919;
+      border: 1px solid #ffc3c3;
+      box-shadow: 1px 1px 8px #ffbbbb;
+    }
+  `};
+
   ${(props) =>
-      props.kindOf === `black` && `border : 1px solid ${props.theme.black_C};`}
-  }
+    props.kindOf === `blue` &&
+    `
+    background: #4147f0;
+    color: #f5f5f5;
+    border: 1px solid #4147ec;
+    box-shadow: 1px 1px 8px #2d34f0;
+   
+    &:hover {
+      background: #FBFBFF;
+      color: #1b1919;
+      border: 1px solid #9a9df7;
+      box-shadow: 1px 1px 8px #898df3;
+    }
+  `};
 
   @media (max-width: 700px) {
-    font-size: ${(props) => props.fontSize || `16px`};
+    font-size: ${(props) => props.fontSize || `14px`};
   }
 `;
 
@@ -432,6 +467,12 @@ export const ComboListItem = styled(Wrapper)`
   &:hover {
     background: #f7f7f7;
   }
+
+  ${(props) =>
+    props.isActive &&
+    `
+    background: #f7f7f7;
+  `}
 `;
 
 export const Combo = styled(Wrapper)`

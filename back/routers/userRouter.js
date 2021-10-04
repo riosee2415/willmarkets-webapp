@@ -445,6 +445,7 @@ router.post("/me/update", isLoggedIn, async (req, res, next) => {
       zoneCode,
       address,
       detailAddress,
+      // password ? hashedPassword : password,
       idType,
       idDate1,
       idDate2,
@@ -549,7 +550,7 @@ router.post("/findPass", async (req, res, next) => {
         `
       );
 
-      return res.status(200).json({ result: true });
+      return res.status(200).json({ result: true, UUID });
     } else {
       return res.status(401).send("가입되지 않은 이메일입니다.");
     }

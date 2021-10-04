@@ -74,8 +74,8 @@ router.get(
       findType2 = parseInt(1);
     }
 
-    if (validation >= 2) {
-      findType = 2;
+    if (validation >= 3) {
+      findType = 3;
     } else {
       findType = 1;
     }
@@ -108,6 +108,28 @@ router.get(
             offset: OFFSET,
             limit: LIMIT,
             where: {
+              username: {
+                [Op.like]: `%${searchName}%`,
+              },
+            },
+            include: [
+              { model: Deposit },
+              { model: Withdraw },
+              { model: LiveAccount },
+              { model: DemoAccount },
+            ],
+            attributes: {
+              exclude: ["password"],
+            },
+            order: [["createdAt", "DESC"]],
+          });
+
+          break;
+        case 2:
+          users = await User.findAll({
+            offset: OFFSET,
+            limit: LIMIT,
+            where: {
               type: "1",
               username: {
                 [Op.like]: `%${searchName}%`,
@@ -124,8 +146,10 @@ router.get(
             },
             order: [["createdAt", "DESC"]],
           });
+
           break;
-        case 2:
+
+        case 3:
           users = await User.findAll({
             offset: OFFSET,
             limit: LIMIT,
@@ -174,6 +198,7 @@ router.get(
             order: [["createdAt", "DESC"]],
           });
           break;
+
         case 2:
           users = await User.findAll({
             offset: OFFSET,
@@ -196,6 +221,7 @@ router.get(
             order: [["createdAt", "DESC"]],
           });
           break;
+
         case 3:
           users = await User.findAll({
             offset: OFFSET,
@@ -275,7 +301,9 @@ router.post("/signin", (req, res, next) => {
 
       const fullUserWithoutPassword = await User.findOne({
         where: { id: user.id },
-        exclude: ["password"],
+        attributes: {
+          exclude: ["password"],
+        },
       });
 
       return res.status(200).json(fullUserWithoutPassword);
@@ -308,7 +336,9 @@ router.post("/signin/admin", isAdminCheck, (req, res, next) => {
 
       const fullUserWithoutPassword = await User.findOne({
         where: { id: user.id },
-        exclude: ["password"],
+        attributes: {
+          exclude: ["password"],
+        },
       });
 
       return res.status(200).json(fullUserWithoutPassword);
@@ -445,7 +475,6 @@ router.post("/me/update", isLoggedIn, async (req, res, next) => {
       zoneCode,
       address,
       detailAddress,
-      // password ? hashedPassword : password,
       idType,
       idDate1,
       idDate2,

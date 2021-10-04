@@ -98,14 +98,16 @@ router.get(["/list/:listType", "/list"], async (req, res, next) => {
         deposits = await Deposit.findAll({
           offset: OFFSET,
           limit: LIMIT,
-          include: {
-            model: User,
-            where: {
-              username: {
-                [Op.like]: `%${_search}%`,
+          include: [
+            {
+              model: User,
+              where: {
+                username: {
+                  [Op.like]: `%${_search}%`,
+                },
               },
             },
-          },
+          ],
           order: [["createdAt", "DESC"]],
         });
         break;

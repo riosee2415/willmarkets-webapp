@@ -7,7 +7,7 @@ module.exports = class DemoAccount extends Model {
       {
         bankNo: {
           type: DataTypes.STRING(200),
-          allowNull: false,
+          allowNull: true,
         },
         platform: {
           type: DataTypes.STRING(200),

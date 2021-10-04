@@ -33,18 +33,6 @@ import {
   USER_UPDATE_PERMIT_SUCCESS,
   USER_UPDATE_PERMIT_FAILURE,
   //
-  USER_FIND_EMAIL_REQUEST,
-  USER_FIND_EMAIL_SUCCESS,
-  USER_FIND_EMAIL_FAILURE,
-  //
-  USER_MODIFY_PASSWORD_REQUEST,
-  USER_MODIFY_PASSWORD_SUCCESS,
-  USER_MODIFY_PASSWORD_FAILURE,
-  //
-  USER_MODIFY_PASSWORD_UPDATE_REQUEST,
-  USER_MODIFY_PASSWORD_UPDATE_SUCCESS,
-  USER_MODIFY_PASSWORD_UPDATE_FAILURE,
-  //
   USER_FIND_PASSWORD_REQUEST,
   USER_FIND_PASSWORD_SUCCESS,
   USER_FIND_PASSWORD_FAILURE,
@@ -239,70 +227,6 @@ function* userUpdatePermit(action) {
     });
   }
 }
-// SAGA AREA ********************************************************************************************************
-// ******************************************************************************************************************
-function userUserFindEmailAPI(data) {
-  return axios.post(`/api/user/findemail`, data);
-}
-
-function* userUserFindEmail(action) {
-  try {
-    const result = yield call(userUserFindEmailAPI, action.data);
-    yield put({
-      type: USER_FIND_EMAIL_SUCCESS,
-      data: result.data,
-    });
-  } catch (err) {
-    console.error(err);
-    yield put({
-      type: USER_FIND_EMAIL_FAILURE,
-      error: err.response.data,
-    });
-  }
-}
-// SAGA AREA ********************************************************************************************************
-// ******************************************************************************************************************
-function userModifyPasswordAPI(data) {
-  return axios.post(`/api/user/modifypass`, data);
-}
-
-function* userModifyPassword(action) {
-  try {
-    const result = yield call(userModifyPasswordAPI, action.data);
-    yield put({
-      type: USER_MODIFY_PASSWORD_SUCCESS,
-      data: result.data,
-    });
-  } catch (err) {
-    console.error(err);
-    yield put({
-      type: USER_MODIFY_PASSWORD_FAILURE,
-      error: err.response.data,
-    });
-  }
-}
-
-// SAGA AREA ********************************************************************************************************
-// ******************************************************************************************************************
-function userModifyPasswordUpdateAPI(data) {
-  return axios.patch(`/api/user/modifypass/update`, data);
-}
-
-function* userModifyPasswordUpdate(action) {
-  try {
-    const result = yield call(userModifyPasswordUpdateAPI, action.data);
-    yield put({
-      type: USER_MODIFY_PASSWORD_UPDATE_SUCCESS,
-      data: result.data,
-    });
-  } catch (err) {
-    console.error(err);
-    yield put({
-      type: USER_MODIFY_PASSWORD_UPDATE_FAILURE,
-      error: err.response.data,
-    });
-  }
-}
 
 // SAGA AREA ********************************************************************************************************
 // ******************************************************************************************************************
@@ -325,6 +249,7 @@ function* userIdImageFile(action) {
     });
   }
 }
+
 // SAGA AREA ********************************************************************************************************
 // ******************************************************************************************************************
 function userFindPasswordAPI(data) {
@@ -427,20 +352,6 @@ function* watchUserUpdatePermit() {
   yield takeLatest(USER_UPDATE_PERMIT_REQUEST, userUpdatePermit);
 }
 
-function* watchUserUserFindEmail() {
-  yield takeLatest(USER_FIND_EMAIL_REQUEST, userUserFindEmail);
-}
-
-function* watchUserModifyPassword() {
-  yield takeLatest(USER_MODIFY_PASSWORD_REQUEST, userModifyPassword);
-}
-
-function* watchUserModifyPasswordUpdate() {
-  yield takeLatest(
-    USER_MODIFY_PASSWORD_UPDATE_REQUEST,
-    userModifyPasswordUpdate
-  );
-}
 function* watchUserFindPassword() {
   yield takeLatest(USER_FIND_PASSWORD_REQUEST, userFindPassword);
 }
@@ -456,7 +367,7 @@ function* watchUserFindPasswordUpdate() {
 function* watchUserIdImageFile() {
   yield takeLatest(USER_ID_IMAGE_FILE_REQUEST, userIdImageFile);
 }
-userIdImageFile;
+
 //////////////////////////////////////////////////////////////
 export default function* userSaga() {
   yield all([
@@ -468,9 +379,6 @@ export default function* userSaga() {
     fork(watchUserMeUpdate),
     fork(watchUserUpdatePrice),
     fork(watchUserUpdatePermit),
-    fork(watchUserUserFindEmail),
-    fork(watchUserModifyPassword),
-    fork(watchUserModifyPasswordUpdate),
     fork(watchUserFindPassword),
     fork(watchUserFindPasswordConfirm),
     fork(watchUserFindPasswordUpdate),

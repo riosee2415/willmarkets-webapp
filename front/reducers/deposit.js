@@ -2,8 +2,8 @@ import produce from "../util/produce";
 
 export const initailState = {
   depositList: null,
-  depositFilePath: null,
-  depositFileOriginName: null,
+  filePath: null,
+  fileOriginName: null,
   //
   st_depositListLoading: false,
   st_depositListDone: false,
@@ -134,8 +134,8 @@ const reducer = (state = initailState, action) =>
       case DEPOSIT_IMAGE_FILE_SUCCESS: {
         draft.st_depositImageFileLoading = false;
         draft.st_depositImageFileDone = true;
-        draft.depositFilePath = action.data.path;
-        draft.depositFileOriginName = action.data.originName;
+        draft.filePath = action.data.path;
+        draft.fileOriginName = action.data.originName;
         break;
       }
       case DEPOSIT_IMAGE_FILE_FAILURE: {
@@ -144,6 +144,7 @@ const reducer = (state = initailState, action) =>
         draft.st_depositImageFileError = action.error;
         break;
       }
+      //
       default:
         break;
     }

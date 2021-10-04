@@ -88,6 +88,7 @@ const reducer = (state = initailState, action) =>
         draft.st_demoAccountCreateError = action.error;
         break;
       }
+      //
       default:
         break;
     }

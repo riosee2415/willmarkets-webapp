@@ -559,7 +559,7 @@ export const Label = styled.label`
 `;
 /////////////////////////////////////////////////////////////
 
-/////////////////////// TEXT INPUT //////////////////////////
+/////////////////////// INPUT //////////////////////////
 export const TextInput = styled.input`
   display: ${(props) => props.display};
   flex-direction: ${(props) => props.dr};
@@ -592,6 +592,11 @@ export const TextInput = styled.input`
   letter-spacing: ${(props) => props.letterSpacing};
   outline: none;
 `;
+
+export const FileInput = styled.input`
+  display: none;
+`;
+
 /////////////////////////////////////////////////////////////
 
 ////////////////////////// TABLE ////////////////////////////

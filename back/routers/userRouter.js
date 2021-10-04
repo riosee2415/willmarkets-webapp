@@ -92,7 +92,7 @@ router.get("/signin", async (req, res, next) => {
     if (req.user) {
       const fullUserWithoutPassword = await User.findOne({
         where: { id: req.user.id },
-        attributes: ["id", "nickname", "email", "level"],
+        attributes: ["id", "email", "type", "username"],
       });
 
       console.log("🍀🍀🍀🍀🍀🍀🍀🍀🍀🍀🍀🍀🍀🍀🍀🍀🍀🍀🍀🍀🍀🍀");
@@ -128,7 +128,7 @@ router.post("/signin", (req, res, next) => {
 
       const fullUserWithoutPassword = await User.findOne({
         where: { id: user.id },
-        attributes: ["id", "nickname", "email", "level", "username"],
+        attributes: ["id", "email", "type", "username"],
       });
 
       return res.status(200).json(fullUserWithoutPassword);
@@ -161,7 +161,7 @@ router.post("/signin/admin", isAdminCheck, (req, res, next) => {
 
       const fullUserWithoutPassword = await User.findOne({
         where: { id: user.id },
-        attributes: ["id", "nickname", "email", "level", "username"],
+        attributes: ["id", "email", "level", "username"],
       });
 
       return res.status(200).json(fullUserWithoutPassword);
@@ -170,7 +170,7 @@ router.post("/signin/admin", isAdminCheck, (req, res, next) => {
 });
 
 router.post("/signup", async (req, res, next) => {
-  const { email, username, nickname, mobile, password, terms } = req.body;
+  const { email, username, mobile, password, terms } = req.body;
 
   if (!terms) {
     return res.status(401).send("이용약관에 동의해주세요.");
@@ -190,7 +190,6 @@ router.post("/signup", async (req, res, next) => {
     const result = await User.create({
       email,
       username,
-      nickname,
       mobile,
       terms,
       password: hashedPassword,
@@ -213,7 +212,7 @@ router.get("/me", isLoggedIn, async (req, res, next) => {
 });
 
 router.post("/me/update", isLoggedIn, async (req, res, next) => {
-  const { id, nickname, mobile } = req.body;
+  const { id, mobile } = req.body;
 
   try {
     const exUser = await User.findOne({ where: { id: parseInt(id) } });
@@ -223,7 +222,7 @@ router.post("/me/update", isLoggedIn, async (req, res, next) => {
     }
 
     const updateUser = await User.update(
-      { nickname, mobile },
+      { mobile },
       {
         where: { id: parseInt(id) },
       }

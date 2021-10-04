@@ -20,6 +20,7 @@ import {
   SelectBox,
   Label,
   TextInput,
+  FileInput,
   Text,
   Combo,
   ComboTitle,
@@ -30,8 +31,9 @@ import {
 import UserLayout from "../../components/user/UserLayout";
 import Theme from "../../components/Theme";
 import {
-  DEPOSIT_IMAGE_FILE_REQUEST,
   DEPOSIT_CREATE_REQUEST,
+  DEPOSIT_IMAGE_FILE_REQUEST,
+  DEPOSIT_IMAGE_FILE_CREATE_REQUEST,
 } from "../../reducers/deposit";
 
 const TabWrapper = styled(Wrapper)`
@@ -79,7 +81,7 @@ const CustomLabel = styled(Label)`
 `;
 
 const CustomInput = styled(TextInput)`
-  width: 250px;
+  width: ${(props) => props.width || `250px`};
   height: 40px;
   border: 1px solid #f3e4fa;
   box-shadow: 0 2px 8px rgb(0 0 0 / 9%);
@@ -111,9 +113,9 @@ const Deposit = () => {
   ];
 
   ////// HOOKS //////
-  const dispatch = useDispatch();
-
   const fileRef = useRef();
+
+  const dispatch = useDispatch();
 
   const {
     me,
@@ -123,9 +125,17 @@ const Deposit = () => {
     st_userFindPasswordConfirmError,
   } = useSelector((state) => state.user);
 
-  const { st_depositCreateDone, st_depositCreateError } = useSelector(
-    (state) => state.deposit
-  );
+  const {
+    filePath,
+    fileOriginName,
+    st_depositCreateDone,
+    st_depositCreateError,
+    st_depositImageFileLoading,
+    st_depositImageFileDone,
+    st_depositImageFileError,
+    st_depositImageFileCreateDone,
+    st_depositImageFileCreateError,
+  } = useSelector((state) => state.deposit);
 
   const [currentTab, setCurrentTab] = useState(0);
   const [currentStep, setCurrentStep] = useState(0);
@@ -238,10 +248,6 @@ const Deposit = () => {
     isConfirmEmail,
   ]);
 
-  const clickImageUpload = useCallback(() => {
-    fileRef.current.click();
-  }, [fileRef.current]);
-
   const fileChangeHandler = useCallback((e) => {
     const file = e.target.files[0];
 
@@ -267,10 +273,30 @@ const Deposit = () => {
     formData.append("image", file);
 
     dispatch({
-      type: USER_ID_IMAGE_FILE_REQUEST,
+      type: DEPOSIT_IMAGE_FILE_REQUEST,
       data: formData,
     });
   }, []);
+
+  const createImageFileHandler = useCallback(() => {
+    setCurrentStep(1);
+    if (!emptyCheck(inputFilePath.value)) {
+      return message.error("첨부파일을 업로드 해주세요.");
+    }
+
+    if (st_depositImageFileLoading) {
+      return message.error("첨부파일을 업로드 중입니다. 잠시만 기다려주세요.");
+    }
+
+    dispatch({
+      type: DEPOSIT_IMAGE_FILE_CREATE_REQUEST,
+      data: {
+        userId: me.id,
+        filePath: inputFilePath.value,
+        fileOriginName: inputFileOriginName.value,
+      },
+    });
+  }, [inputFilePath, inputFileOriginName]);
 
   ////// USEEFFECT //////
   useEffect(() => {
@@ -321,11 +347,29 @@ const Deposit = () => {
   }, [st_depositCreateError]);
 
   useEffect(() => {
-    if (st_userIdImageFileDone) {
+    if (st_depositImageFileDone) {
       inputFilePath.setValue(filePath);
       inputFileOriginName.setValue(fileOriginName);
     }
-  }, [st_userIdImageFileDone]);
+  }, [st_depositImageFileDone]);
+
+  useEffect(() => {
+    if (st_depositImageFileError) {
+      message.error(st_depositImageFileError);
+    }
+  }, [st_depositImageFileError]);
+
+  useEffect(() => {
+    if (st_depositImageFileCreateDone) {
+      setCurrentStep(1);
+    }
+  }, [st_depositImageFileCreateDone]);
+
+  useEffect(() => {
+    if (st_depositImageFileCreateError) {
+      message.error(st_depositImageFileCreateError);
+    }
+  }, [st_depositImageFileCreateError]);
 
   return (
     <UserLayout>
@@ -841,7 +885,8 @@ const Deposit = () => {
                         >
                           정상적으로 입금신청이 완료되었습니다.
                           <br />
-                          관리자 승인 후 입금될 예정이오니, 잠시만 기다려주세요.
+                          입금 후, 입금 영수증을 첨부해주시면 입금 처리가
+                          완료됩니다.
                         </Wrapper>
                       }
                       extra={[
@@ -898,6 +943,121 @@ const Deposit = () => {
                     </Wrapper>
                     파일첨부 하기
                   </Wrapper>
+
+                  <CustomLabel for={`inp-price`} margin={`40px 0 15px`}>
+                    <Wrapper className={`required`}>*</Wrapper>
+                    입금 영수증 파일
+                  </CustomLabel>
+
+                  <Wrapper dr={`row`} ju={`flex-start`}>
+                    <FileInput
+                      type={`file`}
+                      ref={fileRef}
+                      onChange={fileChangeHandler}
+                    />
+
+                    <CustomInput
+                      id={`inp-price`}
+                      width={`300px`}
+                      value={inputFileOriginName.value}
+                      readOnly
+                    />
+
+                    <CommonButton
+                      kindOf={`black`}
+                      height={`38px`}
+                      margin={`0 0 0 10px`}
+                      onClick={() => fileRef.current.click()}
+                    >
+                      첨부
+                    </CommonButton>
+                  </Wrapper>
+
+                  <Wrapper
+                    al={`flex-start`}
+                    margin={`10px 0 0`}
+                    fontSize={`13px`}
+                    color={`#e91448`}
+                    lineHeight={`1.8`}
+                  >
+                    * 지원되는 파일 형식은 JPG, PNG, GIF, PDF 입니다.
+                    <br />* 첨부파일의 크기는 5MB 까지 허용됩니다.
+                  </Wrapper>
+                </Wrapper>
+              )}
+
+              {currentStep === 1 && (
+                <Wrapper al={`flex-start`}>
+                  <Wrapper
+                    dr={`row`}
+                    ju={`flex-start`}
+                    margin={`0 0 20px`}
+                    fontSize={`18px`}
+                    fontWeight={`700`}
+                  >
+                    <Wrapper
+                      width={`auto`}
+                      margin={`0 10px 0 0`}
+                      padding={`5px 10px`}
+                      fontSize={`14px`}
+                      fontWeight={`700`}
+                      bgColor={`#aa28c9`}
+                      color={`#fff`}
+                    >
+                      Step 02
+                    </Wrapper>
+                    파일첨부 완료
+                  </Wrapper>
+
+                  <Wrapper margin={`80px 0 0`}>
+                    <Result
+                      status="success"
+                      title={
+                        <Wrapper
+                          fontSize={`25px`}
+                          width={`auto`}
+                          borderBottom={`1px solid #c9c9c9`}
+                        >
+                          파일첨부 완료 !
+                        </Wrapper>
+                      }
+                      subTitle={
+                        <Wrapper
+                          margin={`10px 0 0`}
+                          padding={`0 15px`}
+                          width={`auto`}
+                          lineHeight={`1.8`}
+                        >
+                          정상적으로 파일첨부가 완료되었습니다.
+                          <br />
+                          관리자 확인 후 입금될 예정이오니, 잠시만 기다려주세요.
+                        </Wrapper>
+                      }
+                      extra={[
+                        <CommonButton
+                          key="1"
+                          kindOf={`white`}
+                          width={`180px`}
+                          height={`40px`}
+                          margin={`0 5px`}
+                          onClick={initValueHandler}
+                        >
+                          처음으로
+                        </CommonButton>,
+
+                        <CommonButton
+                          key="1"
+                          kindOf={`blue`}
+                          width={`180px`}
+                          height={`40px`}
+                          margin={`0 5px`}
+                          onClick={() => moveLinkHandler(`/user`)}
+                        >
+                          홈으로
+                        </CommonButton>,
+                      ]}
+                    />
+                  </Wrapper>
                 </Wrapper>
               )}
             </Wrapper>
@@ -933,7 +1093,7 @@ const Deposit = () => {
             padding={`20px 0 0`}
             borderTop={`1px solid #ebebeb`}
           >
-            <CommonButton kindOf={`red`} onClick={createDepositHanlder}>
+            <CommonButton kindOf={`red`} onClick={createImageFileHandler}>
               첨부하기
             </CommonButton>
           </Wrapper>

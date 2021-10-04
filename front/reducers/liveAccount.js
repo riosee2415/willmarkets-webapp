@@ -87,6 +87,7 @@ const reducer = (state = initailState, action) =>
         draft.st_liveAccountCreateError = action.error;
         break;
       }
+      //
       default:
         break;
     }

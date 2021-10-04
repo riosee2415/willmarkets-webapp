@@ -6,7 +6,7 @@ import { Result, message } from "antd";
 import useInput from "../../hooks/useInput";
 import useOnlyNumberInput from "../../hooks//useOnlyNumberInput";
 import { emptyCheck } from "../../components/commonUtils";
-import {} from "@ant-design/icons";
+import { CaretDownOutlined } from "@ant-design/icons";
 import wrapper from "../../store/configureStore";
 import { END } from "redux-saga";
 import axios from "axios";
@@ -15,20 +15,94 @@ import {
   USER_FIND_EMAIL_FAILURE,
 } from "../../reducers/user";
 import {
-  ColWrapper,
-  RowWrapper,
-  Image,
   Wrapper,
-  WholeWrapper,
-  RsWrapper,
+  SelectBox,
+  Label,
+  TextInput,
+  Text,
+  Combo,
+  ComboTitle,
+  ComboList,
+  ComboListItem,
   CommonButton,
 } from "../../components/commonComponents";
-import ClientLayout from "../../components/ClientLayout";
+import UserLayout from "../../components/user/UserLayout";
 import Theme from "../../components/Theme";
 import { WITHDRAW_CREATE_REQUEST } from "../../reducers/withdraw";
 
+const TabWrapper = styled(Wrapper)`
+  flex-direction: row;
+  align-items: normal;
+  justify-content: flex-start;
+`;
+
+const Tab = styled(Wrapper)`
+  padding: 8px 20px;
+  width: auto;
+  border: 1px solid #dedede;
+  border-left: none;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  font-size: ${(props) => props.fontSize || `15px`};
+  color: ${(props) => props.color || `#312f2f`};
+  cursor: pointer;
+
+  &:first-child {
+    border-left: 1px solid #dedede;
+  }
+
+  &:hover {
+    background: #f4f4f4;
+  }
+
+  ${(props) =>
+    props.isActive &&
+    `
+    background: #f9edf8 !important;
+    box-shadow: 0px 0px 8px #f0d4ef;
+
+  `}
+`;
+
+const CustomLabel = styled(Label)`
+  display: flex;
+
+  & .required {
+    width: auto;
+    margin: 0 5px 0 0;
+    color: #a06ec6;
+  }
+`;
+
+const CustomInput = styled(TextInput)`
+  width: ${(props) => props.width || `250px`};
+  height: 40px;
+  border: 1px solid #f3e4fa;
+  box-shadow: 0 2px 8px rgb(0 0 0 / 9%);
+
+  &:hover,
+  &:focus {
+    border: 1px solid #d7a6ed;
+    box-shadow: 0 3px 8px rgb(0 0 0 / 12%);
+  }
+`;
+
 const Withdraw = () => {
   ////// VARIABLES //////
+  const bankList = [
+    {
+      bankName: "은행명",
+      bankNo: "계좌번호",
+      swiftCode: "Swift Code",
+      bankAddress: "은행 주소",
+    },
+    {
+      bankName: "은행명2",
+      bankNo: "계좌번호2",
+      swiftCode: "Swift Code2",
+      bankAddress: "은행 주소2",
+    },
+  ];
 
   ////// HOOKS //////
   const dispatch = useDispatch();
@@ -42,56 +116,72 @@ const Withdraw = () => {
     st_userFindPasswordConfirmError,
     st_userFindPasswordDone,
     st_userFindPasswordError,
-    secret,
   } = useSelector((state) => state.withdraw);
 
+  const [currentTab, setCurrentTab] = useState(0);
+  const [currentStep, setCurrentStep] = useState(0);
+
+  const [currentBank, setCurrentBank] = useState(null);
+
+  const [comboSelectBank, setComboSelectBank] = useState(false);
+
+  const [isSendEmail, setIsSendEmail] = useState(false);
+  const [isConfirmEmail, setIsConfirmEmail] = useState(false);
+
   const inputBankName = useInput("");
-  const inputPrice = useOnlyNumberInput("");
+  const inputBankNo = useInput("");
   const inputSwiftCode = useInput("");
   const inputBankAddress = useInput("");
   const inputSelectBank = useInput("");
-  const inputBankNo = useInput("");
+  const inputPrice = useOnlyNumberInput("");
   const inputSecret = useInput("");
+  const comboText = useInput("");
 
   ////// TOGGLE //////
 
   ////// HANDLER //////
 
-  const sendEmailSecretCodeHandler = useCallback(() => {
-    //이메일로 인증번호 보내기
-    dispatch({
-      type: USER_FIND_PASSWORD_REQUEST,
-      data: {
-        email: me.email,
-      },
-    });
+  const moveLinkHandler = useCallback((link) => {
+    router.push(link);
   }, []);
 
-  const confirmSecretHandler = useCallback(() => {
-    if (!emptyCheck(inputSecret.value)) {
-      return message.error("인증번호를 입력해주세요.");
-    }
+  const moveBackHandler = useCallback(() => {
+    setCurrentStep(currentStep - 1);
+  }, [currentStep]);
 
-    dispatch({
-      type: USER_FIND_PASSWORD_CONFIRM_REQUEST,
-      data: {
-        email: inputEmail.value,
-        secret: inputSecret.value,
-      },
-    });
-  }, [inputSecret]);
+  // const selectBankHandler = useCallback((data) => {
+  //   setCurrentBank(data);
+  //   setCurrentStep(1);
+  // }, []);
+
+  const initValueHandler = useCallback(() => {
+    setCurrentStep(0);
+
+    setComboSelectBank(false);
+
+    setIsSendEmail(false);
+    setIsConfirmEmail(false);
+
+    inputBankName.setValue("");
+    inputBankNo.setValue("");
+    inputSwiftCode.setValue("");
+    inputBankAddress.setValue("");
+    inputSelectBank.setValue("");
+    inputPrice.setValue("");
+    inputSecret.setValue("");
+  }, []);
 
   const createWithdrawHanlder = useCallback(() => {
     if (!emptyCheck(inputBankName.value)) {
       return message.error("출금은행을 입력해주세요.");
     }
 
-    if (!emptyCheck(inputPrice.value)) {
-      return message.error("출금금액을 입력해주세요.");
+    if (!emptyCheck(inputBankNo.value)) {
+      return message.error("계좌번호를 입력해주세요.");
     }
 
     if (!emptyCheck(inputSwiftCode.value)) {
-      return message.error("Swift Code를 입력해주세요.");
+      return message.error("SwiftCode를 입력해주세요.");
     }
 
     if (!emptyCheck(inputBankAddress.value)) {
@@ -102,28 +192,94 @@ const Withdraw = () => {
       return message.error("출금계좌를 선택해주세요.");
     }
 
-    if (!emptyCheck(inputBankNo.value)) {
-      return message.error("계좌번호를 입력해주세요.");
+    if (!emptyCheck(inputPrice.value)) {
+      return message.error("출금금액을 입력해주세요.");
     }
+
+    if (!isSendEmail) {
+      dispatch({
+        type: USER_FIND_PASSWORD_REQUEST,
+        data: {
+          email: me.email,
+        },
+      });
+      return;
+    }
+
+    if (isSendEmail && !isConfirmEmail) {
+      if (!emptyCheck(inputSecret.value)) {
+        return message.error("인증번호를 입력해주세요.");
+      }
+
+      dispatch({
+        type: USER_FIND_PASSWORD_CONFIRM_REQUEST,
+        data: {
+          email: me.email,
+          secret: inputSecret.value,
+        },
+      });
+      return;
+    }
+
+    dispatch({
+      type: WITHDRAW_CREATE_REQUEST,
+      data: {
+        userId: me.id,
+        bankName: inputBankName.value,
+        bankNo: inputBankNo.value,
+        swiftCode: inputSwiftCode.value,
+        bankAddress: inputBankAddress.value,
+        selectBank: inputSelectBank.value,
+        price: inputPrice.value,
+      },
+    });
   }, [
-    inputBankName,
+    currentBank,
     inputPrice,
-    inputSwiftCode,
-    inputBankAddress,
     inputSelectBank,
-    inputBankNo,
+    inputSecret,
+    isSendEmail,
+    isConfirmEmail,
   ]);
 
   useEffect(() => {
-    if (st_withdrawCreateDone) {
-      message.success("출금신청이 완료되었습니다.");
+    initValueHandler();
+  }, [currentTab]);
 
-      inputBankName.setValue("");
-      inputPrice.setValue("");
-      inputSwiftCode.setValue("");
-      inputBankAddress.setValue("");
-      inputSelectBank.setValue("");
-      inputBankNo.setValue("");
+  useEffect(() => {
+    if (st_userFindPasswordDone) {
+      setIsSendEmail(true);
+      message.success("이메일로 인증코드가 전송되었습니다.");
+    }
+  }, [st_userFindPasswordDone]);
+
+  useEffect(() => {
+    if (st_userFindPasswordError) {
+      setIsSendEmail(false);
+      message.error(st_userFindPasswordError);
+    }
+  }, [st_userFindPasswordError]);
+
+  useEffect(() => {
+    if (st_userFindPasswordConfirmDone) {
+      setIsConfirmEmail(true);
+
+      setTimeout(() => {
+        createDepositHanlder();
+      }, 100);
+    }
+  }, [st_userFindPasswordConfirmDone]);
+
+  useEffect(() => {
+    if (st_userFindPasswordConfirmError) {
+      setIsConfirmEmail(false);
+      message.error(st_userFindPasswordConfirmError);
+    }
+  }, [st_userFindPasswordConfirmError]);
+
+  useEffect(() => {
+    if (st_withdrawCreateDone) {
+      setCurrentStep(1);
     }
   }, [st_withdrawCreateDone]);
 
@@ -133,51 +289,203 @@ const Withdraw = () => {
     }
   }, [st_withdrawCreateError]);
 
-  useEffect(() => {
-    if (st_userFindPasswordDone) {
-      message.success("이메일로 인증코드가 전송되었습니다.");
-    }
-  }, [st_userFindPasswordDone]);
-
-  useEffect(() => {
-    if (st_userFindPasswordError) {
-      message.success(st_userFindPasswordError);
-    }
-  }, [st_userFindPasswordError]);
-
-  useEffect(() => {
-    if (st_userFindPasswordConfirmDone) {
-      if (secret) {
-        message.success("이메일 인증이 완료되었습니다.");
-        dispatch({
-          type: WITHDRAW_CREATE_REQUEST,
-          data: {
-            userId: me.id,
-            bankName: inputBankName.value,
-            price: inputPrice.value,
-            swiftCode: inputSwiftCode.value,
-            bankAddress: inputBankAddress.value,
-            selectBank: inputSelectBank.value,
-            bankNo: inputBankNo.value,
-          },
-        });
-        return;
-      } else {
-        return message.error("이메일 인증에 실패했습니다.");
-      }
-    }
-  }, [st_userFindPasswordConfirmError]);
-
-  useEffect(() => {
-    if (st_userFindPasswordConfirmError) {
-      message.error(st_userFindPasswordConfirmError);
-    }
-  }, [st_userFindPasswordConfirmError]);
-
   return (
-    <ClientLayout>
-      <div>Hello Withdraw</div>
-    </ClientLayout>
+    <UserLayout>
+      <TabWrapper position={`absolute`} top={`-21px`} left={`20px`}>
+        <Tab isActive={currentTab === 0} onClick={() => setCurrentTab(0)}>
+          출금신청
+        </Tab>
+      </TabWrapper>
+
+      <Wrapper
+        al={`flex-start`}
+        ju={`space-between`}
+        minHeight={`calc(100vh - 110px)`}
+        padding={`20px 30px`}
+        bgColor={`#fff`}
+        border={`1px solid #ededed`}
+        shadow={`2px 2px 10px #e6e6e6`}>
+        <Wrapper al={`flex-start`}>
+          <Wrapper
+            al={`flex-start`}
+            margin={`0 0 30px`}
+            padding={`0 8px 20px`}
+            fontSize={`19px`}
+            fontWeight={`700`}
+            borderBottom={`1px solid #ebebeb`}>
+            출금
+          </Wrapper>
+
+          {currentTab === 0 && (
+            <Wrapper al={`flex-start`}>
+              {currentStep === 0 && (
+                <Wrapper al={`flex-start`}>
+                  <CustomLabel for={`inp-price`} margin={`40px 0 15px`}>
+                    <Wrapper className={`required`}>*</Wrapper>
+                    출금 은행
+                  </CustomLabel>
+                  <Wrapper dr={`row`} ju={`flex-start`}>
+                    <CustomInput id={`inp-price`} {...inputBankName} />
+                  </Wrapper>
+
+                  <CustomLabel for={`inp-price`} margin={`40px 0 15px`}>
+                    <Wrapper className={`required`}>*</Wrapper>
+                    계좌 번호
+                  </CustomLabel>
+                  <Wrapper dr={`row`} ju={`flex-start`}>
+                    <CustomInput id={`inp-price`} {...inputBankNo} />
+                  </Wrapper>
+
+                  <CustomLabel for={`inp-price`} margin={`40px 0 15px`}>
+                    <Wrapper className={`required`}>*</Wrapper>
+                    Swift Code
+                  </CustomLabel>
+                  <Wrapper dr={`row`} ju={`flex-start`}>
+                    <CustomInput id={`inp-price`} {...inputSwiftCode} />
+                  </Wrapper>
+
+                  <CustomLabel for={`inp-price`} margin={`40px 0 15px`}>
+                    <Wrapper className={`required`}>*</Wrapper>
+                    은행 주소
+                  </CustomLabel>
+                  <Wrapper dr={`row`} ju={`flex-start`}>
+                    <CustomInput id={`inp-price`} {...inputBankAddress} />
+                  </Wrapper>
+
+                  <CustomLabel for={`inp-price`} margin={`40px 0 15px`}>
+                    <Wrapper className={`required`}>*</Wrapper>
+                    출금 계좌
+                  </CustomLabel>
+                  <Wrapper dr={`row`} ju={`flex-start`}>
+                    <Combo
+                      isBorder={true}
+                      itemAlign={`flex-start`}
+                      width={`250px`}
+                      height={`40px`}
+                      border={`1px solid #f3e4fa`}
+                      shadow={`0 2px 8px rgb(0 0 0 / 9%)`}
+                      hoverBorder={`1px solid #d7a6ed`}
+                      hoverShadow={`0 3px 8px rgb(0 0 0 / 12%)`}
+                      onClick={() => setComboSelectBank(!comboSelectBank)}>
+                      <ComboTitle>
+                        <Wrapper>{inputSelectBank.value}</Wrapper>
+                        <CaretDownOutlined />
+                      </ComboTitle>
+
+                      <ComboList isView={comboSelectBank}>
+                        <ComboListItem
+                          onClick={() => comboText.setValue("내 지갑 선택")}>
+                          내 지갑 선택
+                        </ComboListItem>
+
+                        {me &&
+                          me.LiveAccount &&
+                          me.LiveAccount.map((data) => {
+                            <ComboListItem
+                              key={data.id}
+                              isActive={inputSelectBank.value === data.bankNo}
+                              onClick={() =>
+                                inputSelectBank.setValue(data.bankNo)
+                              }>
+                              {data.bankNo}
+                            </ComboListItem>;
+                          })}
+                      </ComboList>
+                    </Combo>
+                  </Wrapper>
+
+                  <CustomLabel for={`inp-price`} margin={`40px 0 15px`}>
+                    <Wrapper className={`required`}>*</Wrapper>
+                    출금 금액
+                  </CustomLabel>
+                  <Wrapper dr={`row`} ju={`flex-start`}>
+                    <CustomInput id={`inp-price`} {...inputPrice} />
+                  </Wrapper>
+
+                  {isSendEmail && (
+                    <Wrapper al={`flex-start`}>
+                      <CustomLabel for={`inp-secret`} margin={`40px 0 15px`}>
+                        <Wrapper className={`required`}>*</Wrapper>
+                        인증코드
+                      </CustomLabel>
+
+                      <Wrapper dr={`row`} ju={`flex-start`}>
+                        <CustomInput id={`inp-secret`} {...inputSecret} />
+                      </Wrapper>
+                    </Wrapper>
+                  )}
+                </Wrapper>
+              )}
+
+              {currentStep === 1 && (
+                <Wrapper margin={`80px 0 0`}>
+                  <Result
+                    status="success"
+                    title={
+                      <Wrapper
+                        fontSize={`25px`}
+                        width={`auto`}
+                        borderBottom={`1px solid #c9c9c9`}>
+                        출금신청 완료 !
+                      </Wrapper>
+                    }
+                    subTitle={
+                      <Wrapper
+                        margin={`10px 0 0`}
+                        padding={`0 15px`}
+                        width={`auto`}
+                        lineHeight={`1.8`}>
+                        정상적으로 출금신청이 완료되었습니다.
+                      </Wrapper>
+                    }
+                    extra={[
+                      <CommonButton
+                        key="1"
+                        kindOf={`white`}
+                        width={`180px`}
+                        height={`40px`}
+                        margin={`0 5px`}
+                        onClick={initValueHandler}>
+                        처음으로
+                      </CommonButton>,
+
+                      <CommonButton
+                        key="1"
+                        kindOf={`blue`}
+                        width={`180px`}
+                        height={`40px`}
+                        margin={`0 5px`}
+                        onClick={() => moveLinkHandler(`/user`)}>
+                        홈으로
+                      </CommonButton>,
+                    ]}
+                  />
+                </Wrapper>
+              )}
+            </Wrapper>
+          )}
+        </Wrapper>
+
+        {currentTab === 0 && currentStep === 0 && (
+          <Wrapper
+            dr={`row`}
+            ju={`flex-start`}
+            margin={`50px 0 0`}
+            padding={`20px 0 0`}
+            borderTop={`1px solid #ebebeb`}>
+            <CommonButton
+              kindOf={`white`}
+              margin={`0 10px 0 0`}
+              onClick={moveBackHandler}>
+              이전
+            </CommonButton>
+            <CommonButton kindOf={`red`} onClick={createWithdrawHanlder}>
+              출금 신청
+            </CommonButton>
+          </Wrapper>
+        )}
+      </Wrapper>
+    </UserLayout>
   );
 };
 export const getServerSideProps = wrapper.getServerSideProps(

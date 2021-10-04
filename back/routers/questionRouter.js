@@ -1,7 +1,8 @@
 const express = require("express");
 const isAdminCheck = require("../middlewares/isAdminCheck");
 const isLoggedIn = require("../middlewares/isLoggedIn");
-const { Question } = require("../models");
+const { Question, User } = require("../models");
+const { Op } = require("sequelize");
 
 const router = express.Router();
 
@@ -37,12 +38,9 @@ router.get(
 
     try {
       const totalQuestion = await Question.findAll({
-        include: {
-          model: User,
-          where: {
-            username: {
-              [Op.like]: `%${_search}%`,
-            },
+        where: {
+          name: {
+            [Op.like]: `%${_search}%`,
           },
         },
       });
@@ -57,55 +55,40 @@ router.get(
       switch (_listType) {
         case 1:
           questions = await Question.findAll({
+            offset: OFFSET,
+            limit: LIMIT,
             where: {
               isComplete: false,
-              offset: OFFSET,
-              limit: LIMIT,
-              include: {
-                model: User,
-                where: {
-                  username: {
-                    [Op.like]: `%${_search}%`,
-                  },
-                },
+              name: {
+                [Op.like]: `%${_search}%`,
               },
-              order: [["createdAt", "DESC"]],
             },
+            order: [["createdAt", "DESC"]],
           });
           break;
         case 2:
           questions = await Question.findAll({
+            offset: OFFSET,
+            limit: LIMIT,
             where: {
               isComplete: true,
-              offset: OFFSET,
-              limit: LIMIT,
-              include: {
-                model: User,
-                where: {
-                  username: {
-                    [Op.like]: `%${_search}%`,
-                  },
-                },
+              name: {
+                [Op.like]: `%${_search}%`,
               },
-              order: [["createdAt", "DESC"]],
             },
+            order: [["createdAt", "DESC"]],
           });
           break;
         case 3:
           questions = await Question.findAll({
+            offset: OFFSET,
+            limit: LIMIT,
             where: {
-              offset: OFFSET,
-              limit: LIMIT,
-              include: {
-                model: User,
-                where: {
-                  username: {
-                    [Op.like]: `%${_search}%`,
-                  },
-                },
+              name: {
+                [Op.like]: `%${_search}%`,
               },
-              order: [["createdAt", "DESC"]],
             },
+            order: [["createdAt", "DESC"]],
           });
           break;
         default:
@@ -117,12 +100,12 @@ router.get(
       console.error(error);
       return res
         .status(401)
-        .send("문의 데이터를 가져올 수 없습니다. [CODE 036]");
+        .send("문의 데이터를 불러올 수 없습니다. [CODE 036]");
     }
   }
 );
 
-router.post("/create", isLoggedIn, async (req, res, next) => {
+router.post("/create", async (req, res, next) => {
   const { name, mobile, email, content } = req.body;
 
   try {
@@ -139,29 +122,6 @@ router.post("/create", isLoggedIn, async (req, res, next) => {
   } catch (error) {
     console.error(error);
     return res.status(401).send("문의 데이터를 생성할 수 없습니다. [CODE 037]");
-  }
-});
-
-router.delete("/delete/:questionId", isAdminCheck, async (req, res, next) => {
-  const { questionId } = req.params;
-
-  try {
-    const exQuestion = await Question.findOne({
-      where: { id: parseInt(questionId) },
-    });
-
-    if (!exQuestion) {
-      return res.status(401).send("존재하지 않는 문의 입니다.");
-    }
-
-    await Question.destroy({
-      where: { id: parseInt(questionId) },
-    });
-
-    return res.status(200).json({ result: true });
-  } catch (error) {
-    console.error(error);
-    return res.status(401).send("문의내용을 삭제할 수 없습니다. [CODE 036]");
   }
 });
 

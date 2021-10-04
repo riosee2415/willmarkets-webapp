@@ -44,7 +44,7 @@ const upload = multer({
 const router = express.Router();
 
 router.get(
-  ["/list", "/list/:listType", "list/:listType2"],
+  ["/list/:listType", "/list/:listType/:listType2", "/list"],
   isAdminCheck,
   async (req, res, next) => {
     let findType = 1;
@@ -108,10 +108,10 @@ router.get(
             offset: OFFSET,
             limit: LIMIT,
             where: {
+              type: "1",
               username: {
                 [Op.like]: `%${searchName}%`,
               },
-              type: 1,
             },
             include: [
               { model: Deposit },
@@ -130,10 +130,10 @@ router.get(
             offset: OFFSET,
             limit: LIMIT,
             where: {
+              type: "2",
               username: {
                 [Op.like]: `%${searchName}%`,
               },
-              type: "2",
             },
             include: [
               { model: Deposit },
@@ -179,10 +179,10 @@ router.get(
             offset: OFFSET,
             limit: LIMIT,
             where: {
+              isComplete: false,
               username: {
                 [Op.like]: `%${searchName}%`,
               },
-              isComplete: false,
             },
             include: [
               { model: Deposit },
@@ -201,10 +201,10 @@ router.get(
             offset: OFFSET,
             limit: LIMIT,
             where: {
+              isComplete: true,
               username: {
                 [Op.like]: `%${searchName}%`,
               },
-              isComplete: true,
             },
             include: [
               { model: Deposit },
@@ -464,6 +464,40 @@ router.post("/me/update", isLoggedIn, async (req, res, next) => {
   }
 });
 
+router.patch("/updatePrice", async (req, res, next) => {
+  const { id, price } = req.body;
+
+  try {
+    const exUser = await User.findOne({
+      where: { id: parseInt(id) },
+    });
+
+    if (!exUser) {
+      return res.status(401).send("존재하지 않는 사용자입니다.");
+    }
+
+    const updateResult = await User.update(
+      {
+        priceWallet: exUser.priceWallet + parseInt(price),
+      },
+      {
+        where: { id: parseInt(id) },
+      }
+    );
+
+    if (updateResult[0] > 0) {
+      return res.status(200).json({ result: true });
+    } else {
+      return res.status(200).json({ result: false });
+    }
+  } catch (error) {
+    console.error(error);
+    return res
+      .status(401)
+      .send("잘못된 요청입니다. 개발사에 문의하여 주십시오.");
+  }
+});
+
 router.post("/checkEmail", async (req, res, next) => {
   const { email } = req.body;
   try {
@@ -472,13 +506,13 @@ router.post("/checkEmail", async (req, res, next) => {
     });
 
     if (exEmail) {
-      return res.status(401).send({ return: false });
+      return res.status(401).send("이미 사용중인 이메일 입니다.");
     } else {
-      return res.status(200).json({ return: true });
+      return res.status(200).json({ result: true });
     }
   } catch (error) {
     console.error(error);
-    return res.status(401).send("이미 사용중이인 이메일 입니다.");
+    return res.status(401).send("이미 사용중인 이메일 입니다.");
   }
 });
 

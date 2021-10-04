@@ -38,6 +38,11 @@ module.exports = class User extends Model {
           type: DataTypes.STRING(200),
           allowNull: false,
         },
+        priceWallet: {
+          type: DataTypes.INTEGER,
+          allowNull: true,
+          defaultValue: 0,
+        },
         idType: {
           type: DataTypes.STRING(150),
           allowNull: true,

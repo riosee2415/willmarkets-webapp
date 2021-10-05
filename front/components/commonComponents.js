@@ -194,6 +194,7 @@ export const RsWrapper = styled.article`
 export const CommonButton = styled.button`
   width: ${(props) => props.width};
   height: ${(props) => props.height};
+  line-height: ${(props) => props.lineHeight};
   margin: ${(props) => props.margin};
   padding: ${(props) => props.padding || `4px 12px 3px`};
   font-size: ${(props) => props.fontSize || `15px`};
@@ -270,26 +271,72 @@ export const CommonButton = styled.button`
   ${(props) =>
     props.kindOf === `pink` &&
     `
+      position: relative;
       background: none;
       color: #d8449a;
       border: 2px solid #811757;
 
+      & div {
+        display: none;
+      }
+
       &:hover {
+        background: #d84697;
         color: #fff;
-        background: #000;
+      }
+
+      &:hover div {
+        display: flex;
+        width: 14px;
+        height: 14px;
+        font-size: 14px;
+        color: #fff;
       }
   `}
 
   ${(props) =>
     props.kindOf === `yellow` &&
     `
+      position: relative;
       background: none;
       color: #ffea73;
       border: 2px solid #f4e68d;
 
+      & div {
+        display: none;
+      }
+
       &:hover {
-        color: #fff;
-        background: #000;
+        background: #f9e96f;
+        color: #2c2535;
+      }
+
+      &:hover div {
+        display: flex;
+        width: 14px;
+        height: 14px;
+        font-size: 14px;
+        color: #2c2535;
+      }
+  `}
+
+  ${(props) =>
+    props.kindOf === `white2` &&
+    `
+      position: relative;
+      background: none;
+      color: #fff;
+      border: 1px solid #fff;
+
+      & div {
+        display: none;
+      }
+
+      &:hover div {
+        display: flex;
+        width: 12px;
+        height: 12px;
+        font-size: 12px;
       }
   `}
 

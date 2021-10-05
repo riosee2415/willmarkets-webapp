@@ -4,6 +4,7 @@ import { Image, RsWrapper, Wrapper, CommonButton } from "../commonComponents";
 import { Swiper, SwiperSlide } from "swiper/react";
 import SwiperCore, { Navigation } from "swiper";
 import "swiper/swiper-bundle.min.css";
+import { DoubleRightOutlined } from "@ant-design/icons";
 
 SwiperCore.use([Navigation]);
 
@@ -67,25 +68,43 @@ export default ({ width }) => {
                 <Wrapper dr={`row`} ju={`flex-end`} margin={`60px 0 0`}>
                   <CommonButton
                     kindOf={`pink`}
-                    padding={`6px 0 8px`}
-                    width={`180px`}
-                    radius={`25px`}
+                    padding={`10px 0 12px`}
+                    width={`200px`}
+                    radius={`30px`}
                     fontSize={`18px`}
                     fontWeight={`700`}
                   >
                     실거래 계정 개설
+                    <Wrapper
+                      position={`absolute`}
+                      right={`15px`}
+                      top={`50%`}
+                      margin={`-7px 0 0 0`}
+                      width={`auto`}
+                    >
+                      <DoubleRightOutlined />
+                    </Wrapper>
                   </CommonButton>
 
                   <CommonButton
                     kindOf={`yellow`}
-                    padding={`6px 0 8px`}
                     margin={`0 0 0 30px`}
-                    width={`180px`}
-                    radius={`25px`}
+                    padding={`10px 0 12px`}
+                    width={`200px`}
+                    radius={`30px`}
                     fontSize={`18px`}
                     fontWeight={`700`}
                   >
                     모의 계정 개설
+                    <Wrapper
+                      position={`absolute`}
+                      right={`23px`}
+                      top={`50%`}
+                      margin={`-7px 0 0 0`}
+                      width={`auto`}
+                    >
+                      <DoubleRightOutlined />
+                    </Wrapper>
                   </CommonButton>
                 </Wrapper>
               </Wrapper>
@@ -95,7 +114,7 @@ export default ({ width }) => {
 
         <SwiperSlide>
           <Wrapper position={`relative`} height={`100vh`}>
-            <Wrapper position={`absolute`} left={`0`} top={`0`}>
+            <Wrapper position={`absolute`} left={`0`} top={`0`} height={`100%`}>
               <Image
                 width={`100%`}
                 height={`100%`}
@@ -133,25 +152,43 @@ export default ({ width }) => {
                 <Wrapper dr={`row`} ju={`flex-end`} margin={`60px 0 0`}>
                   <CommonButton
                     kindOf={`pink`}
-                    padding={`6px 0 8px`}
-                    width={`180px`}
-                    radius={`25px`}
+                    padding={`10px 0 12px`}
+                    width={`200px`}
+                    radius={`30px`}
                     fontSize={`18px`}
                     fontWeight={`700`}
                   >
                     실거래 계정 개설
+                    <Wrapper
+                      position={`absolute`}
+                      right={`15px`}
+                      top={`50%`}
+                      margin={`-7px 0 0 0`}
+                      width={`auto`}
+                    >
+                      <DoubleRightOutlined />
+                    </Wrapper>
                   </CommonButton>
 
                   <CommonButton
                     kindOf={`yellow`}
-                    padding={`6px 0 8px`}
                     margin={`0 0 0 30px`}
-                    width={`180px`}
-                    radius={`25px`}
+                    padding={`10px 0 12px`}
+                    width={`200px`}
+                    radius={`30px`}
                     fontSize={`18px`}
                     fontWeight={`700`}
                   >
                     모의 계정 개설
+                    <Wrapper
+                      position={`absolute`}
+                      right={`23px`}
+                      top={`50%`}
+                      margin={`-7px 0 0 0`}
+                      width={`auto`}
+                    >
+                      <DoubleRightOutlined />
+                    </Wrapper>
                   </CommonButton>
                 </Wrapper>
               </Wrapper>

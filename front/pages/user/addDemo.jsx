@@ -23,6 +23,40 @@ import Theme from "../../components/Theme";
 import { useTranslation } from "react-i18next";
 import { DEMO_ACCOUNT_CREATE_REQUEST } from "../../reducers/demoAccount";
 
+const TabWrapper = styled(Wrapper)`
+  flex-direction: row;
+  align-items: normal;
+  justify-content: flex-start;
+`;
+
+const Tab = styled(Wrapper)`
+  padding: 8px 20px;
+  width: auto;
+  border: 1px solid #dedede;
+  border-left: none;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  font-size: ${(props) => props.fontSize || `15px`};
+  color: ${(props) => props.color || `#312f2f`};
+  cursor: pointer;
+
+  &:first-child {
+    border-left: 1px solid #dedede;
+  }
+
+  &:hover {
+    background: #f4f4f4;
+  }
+
+  ${(props) =>
+    props.isActive &&
+    `
+    background: #f9edf8 !important;
+    box-shadow: 0px 0px 8px #f0d4ef;
+
+  `}
+`;
+
 const CustomLabel = styled(Label)`
   display: flex;
 
@@ -92,6 +126,9 @@ const AddDemo = () => {
     (state) => state.demoAccount
   );
 
+  const [currentTab, setCurrentTab] = useState(0);
+  const [currentStep, setCurrentStep] = useState(0);
+
   const inputPlatform = useInput("MetaTrader 4");
   const inputType = useInput("");
   const inputLeverage = useInput("");
@@ -102,6 +139,17 @@ const AddDemo = () => {
   ////// TOGGLE //////
 
   ////// HANDLER //////
+
+  const initValueHandler = useCallback(() => {
+    setCurrentStep(0);
+
+    inputType.setValue("");
+    inputLeverage.setValue("");
+    inputTradePassword.setValue("");
+    inputViewPassword.setValue("");
+    inputPrice.setValue("");
+  }, []);
+
   const createDemoAccountHandler = useCallback(() => {
     if (!emptyCheck(inputPrice.value)) {
       return message.error("환율 금액을 입력해주세요.");
@@ -148,7 +196,7 @@ const AddDemo = () => {
 
   useEffect(() => {
     if (st_demoAccountCreateDone) {
-      message.success("데모 계좌가 생성되었습니다.");
+      setCurrentStep(1);
 
       inputType.setValue("");
       inputLeverage.setValue("");
@@ -167,49 +215,11 @@ const AddDemo = () => {
   return (
     <>
       <UserLayout>
-        {/* asdasd
-        <div>asdasdas</div>
-        <div>{t("test")}</div>
-        <div>{t("test")}</div>
-        <div>{t("test")}</div>
-        <button
-          onClick={() => {
-            i18n.changeLanguage(i18n.language === "en" ? "ko" : "en");
-          }}
-        >
-          Change Language
-        </button> */}
-        {/* {typeList.map((data) => {
-          return (
-            <Wrapper
-              onClick={() => {
-                changeSelectBoxHandler(data.type, inputType.setValue);
-
-                inputLeverage.setValue(
-                  typeList.find((data2) => data.type === data2.type).leverage[0]
-                );
-              }}
-            >
-              {data.type}
-            </Wrapper>
-          );
-        })}
-
-        {inputType.value &&
-          typeList
-            .find((data) => data.type === inputType.value)
-            .leverage.map((data) => {
-              return (
-                <Wrapper
-                  key={data}
-                  onClick={() =>
-                    changeSelectBoxHandler(data, inputLeverage.setValue)
-                  }
-                >
-                  {data}
-                </Wrapper>
-              );
-            })} */}
+        <TabWrapper position={`absolute`} top={`-21px`} left={`20px`}>
+          <Tab isActive={currentTab === 0} onClick={() => setCurrentTab(0)}>
+            데모 계좌 추가
+          </Tab>
+        </TabWrapper>
 
         <Wrapper
           al={`flex-start`}
@@ -218,8 +228,7 @@ const AddDemo = () => {
           padding={`20px 30px`}
           bgColor={`#fff`}
           border={`1px solid #ededed`}
-          shadow={`2px 2px 10px #e6e6e6`}
-        >
+          shadow={`2px 2px 10px #e6e6e6`}>
           <Wrapper al={`flex-start`}>
             <Wrapper
               al={`flex-start`}
@@ -227,77 +236,178 @@ const AddDemo = () => {
               padding={`0 8px 20px`}
               fontSize={`19px`}
               fontWeight={`700`}
-              borderBottom={`1px solid #ebebeb`}
-            >
-              데모 계좌 추가
+              borderBottom={`1px solid #ebebeb`}>
+              데모 계좌
             </Wrapper>
+            {currentTab === 0 && (
+              <Wrapper al={`flex-start`}>
+                {currentStep === 0 && (
+                  <>
+                    <CustomLabel margin={`0 0 15px`}>
+                      <Wrapper className={`required`}>*</Wrapper>
+                      거래 플랫폼
+                    </CustomLabel>
 
-            <CustomLabel margin={`0 0 15px`}>
-              <Wrapper className={`required`}>*</Wrapper>
-              거래 플랫폼
-            </CustomLabel>
+                    <Wrapper dr={`row`} ju={`flex-start`}>
+                      <InputBox>Meta Trader 4</InputBox>
+                    </Wrapper>
 
-            <Wrapper dr={`row`} ju={`flex-start`}>
-              <InputBox>Meta Trader 4</InputBox>
-            </Wrapper>
+                    <CustomLabel margin={`40px 0 15px`}>
+                      <Wrapper className={`required`}>*</Wrapper>
+                      계좌 유형
+                    </CustomLabel>
 
-            <CustomLabel margin={`40px 0 15px`}>
-              <Wrapper className={`required`}>*</Wrapper>
-              계좌 유형
-            </CustomLabel>
+                    <Wrapper dr={`row`} ju={`flex-start`}>
+                      {typeList.map((data, idx) => {
+                        return (
+                          <InputBox
+                            key={idx}
+                            isActive={inputType.value === data.type}
+                            onClick={() => {
+                              changeSelectBoxHandler(
+                                data.type,
+                                inputType.setValue
+                              );
 
-            <Wrapper dr={`row`} ju={`flex-start`}>
-              <InputBox>STP Account</InputBox>
-              <InputBox>ECN Account</InputBox>
-            </Wrapper>
+                              inputLeverage.setValue(
+                                typeList.find(
+                                  (data2) => data.type === data2.type
+                                ).leverage[0]
+                              );
+                            }}>
+                            {data.type}
+                          </InputBox>
+                        );
+                      })}
+                    </Wrapper>
 
-            <CustomLabel margin={`40px 0 15px`}>
-              <Wrapper className={`required`}>*</Wrapper>
-              레버리지
-            </CustomLabel>
+                    <CustomLabel margin={`40px 0 15px`}>
+                      <Wrapper className={`required`}>*</Wrapper>
+                      레버리지
+                    </CustomLabel>
 
-            <Wrapper dr={`row`} ju={`flex-start`}>
-              <InputBox width={`110px`} height={`50px`} fontSize={`17px`}>
-                1:500
-              </InputBox>
-            </Wrapper>
+                    <Wrapper dr={`row`} ju={`flex-start`}>
+                      {inputType.value &&
+                        typeList
+                          .find((data) => data.type === inputType.value)
+                          .leverage.map((data, idx) => {
+                            return (
+                              <InputBox
+                                key={idx}
+                                isActive={inputLeverage.value === data}
+                                width={`110px`}
+                                height={`50px`}
+                                fontSize={`17px`}
+                                onClick={() =>
+                                  changeSelectBoxHandler(
+                                    data,
+                                    inputLeverage.setValue
+                                  )
+                                }>
+                                {data}
+                              </InputBox>
+                            );
+                          })}
+                    </Wrapper>
 
-            <CustomLabel for={`inp-trade-password`} margin={`40px 0 15px`}>
-              <Wrapper className={`required`}>*</Wrapper>
-              환율금액
-            </CustomLabel>
+                    <CustomLabel
+                      for={`inp-trade-password`}
+                      margin={`40px 0 15px`}>
+                      <Wrapper className={`required`}>*</Wrapper>
+                      환율금액
+                    </CustomLabel>
 
-            <Wrapper dr={`row`} ju={`flex-start`}>
-              <CustomInput id={`inp-trade-password`} />
-            </Wrapper>
+                    <Wrapper dr={`row`} ju={`flex-start`}>
+                      <CustomInput id={`inp-trade-password`} {...inputPrice} />
+                    </Wrapper>
 
-            <CustomLabel for={`inp-trade-password`} margin={`40px 0 15px`}>
-              <Wrapper className={`required`}>*</Wrapper>
-              거래용 비번
-            </CustomLabel>
+                    <CustomLabel
+                      for={`inp-trade-password`}
+                      margin={`40px 0 15px`}>
+                      <Wrapper className={`required`}>*</Wrapper>
+                      거래용 비번
+                    </CustomLabel>
 
-            <Wrapper dr={`row`} ju={`flex-start`}>
-              <CustomInput id={`inp-trade-password`} />
-            </Wrapper>
+                    <Wrapper dr={`row`} ju={`flex-start`}>
+                      <CustomInput
+                        id={`inp-trade-password`}
+                        {...inputTradePassword}
+                      />
+                    </Wrapper>
 
-            <CustomLabel for={`inp-view-password`} margin={`40px 0 15px`}>
-              <Wrapper className={`required`}>*</Wrapper>
-              보기용 비번
-            </CustomLabel>
+                    <CustomLabel
+                      for={`inp-view-password`}
+                      margin={`40px 0 15px`}>
+                      <Wrapper className={`required`}>*</Wrapper>
+                      보기용 비번
+                    </CustomLabel>
 
-            <Wrapper dr={`row`} ju={`flex-start`}>
-              <CustomInput id={`inp-view-password`} />
-            </Wrapper>
-          </Wrapper>
+                    <Wrapper dr={`row`} ju={`flex-start`}>
+                      <CustomInput
+                        id={`inp-view-password`}
+                        {...inputViewPassword}
+                      />
+                    </Wrapper>
 
-          <Wrapper
-            dr={`row`}
-            ju={`flex-start`}
-            margin={`50px 0 0`}
-            padding={`20px 0 0`}
-            borderTop={`1px solid #ebebeb`}
-          >
-            <CommonButton kindOf={`red`}>계좌 개설</CommonButton>
+                    <Wrapper
+                      dr={`row`}
+                      ju={`flex-start`}
+                      margin={`50px 0 0`}
+                      padding={`20px 0 0`}
+                      borderTop={`1px solid #ebebeb`}>
+                      <CommonButton
+                        kindOf={`white`}
+                        margin={`0 10px 0 0`}
+                        onClick={() => moveLinkHandler(`/user`)}>
+                        이전
+                      </CommonButton>
+
+                      <CommonButton
+                        kindOf={`red`}
+                        onClick={createDemoAccountHandler}>
+                        계좌 개설
+                      </CommonButton>
+                    </Wrapper>
+                  </>
+                )}
+
+                {currentStep === 1 && (
+                  <Wrapper margin={`80px 0 0`}>
+                    <Result
+                      status="success"
+                      title={
+                        <Wrapper
+                          fontSize={`25px`}
+                          width={`auto`}
+                          borderBottom={`1px solid #c9c9c9`}>
+                          데모계좌 생성 완료 !
+                        </Wrapper>
+                      }
+                      subTitle={
+                        <Wrapper
+                          margin={`10px 0 0`}
+                          padding={`0 15px`}
+                          width={`auto`}
+                          lineHeight={`1.8`}>
+                          정상적으로 데모 계좌가 생성되었습니다.
+                        </Wrapper>
+                      }
+                      extra={[
+                        <CommonButton
+                          key="1"
+                          kindOf={`white`}
+                          width={`180px`}
+                          height={`40px`}
+                          margin={`0 5px`}
+                          onClick={initValueHandler}>
+                          처음으로
+                        </CommonButton>,
+                      ]}
+                    />
+                  </Wrapper>
+                )}
+              </Wrapper>
+            )}
           </Wrapper>
         </Wrapper>
       </UserLayout>

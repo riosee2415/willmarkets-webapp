@@ -144,6 +144,10 @@ const AddLive = () => {
 
   ////// HANDLER //////
 
+  const moveLinkHandler = useCallback((link) => {
+    router.push(link);
+  }, []);
+
   const initValueHandler = useCallback(() => {
     setCurrentStep(0);
 
@@ -193,7 +197,7 @@ const AddLive = () => {
 
   useEffect(() => {
     if (st_liveAccountCreateDone) {
-      setCurrentTab(1);
+      setCurrentStep(1);
 
       inputType.setValue("");
       inputLeverage.setValue("");
@@ -346,6 +350,13 @@ const AddLive = () => {
                     padding={`20px 0 0`}
                     borderTop={`1px solid #ebebeb`}>
                     <CommonButton
+                      kindOf={`white`}
+                      margin={`0 10px 0 0`}
+                      onClick={() => moveLinkHandler(`/user`)}>
+                      이전
+                    </CommonButton>
+
+                    <CommonButton
                       kindOf={`red`}
                       onClick={createLiveAccountHandler}>
                       계좌 개설
@@ -363,7 +374,7 @@ const AddLive = () => {
                         fontSize={`25px`}
                         width={`auto`}
                         borderBottom={`1px solid #c9c9c9`}>
-                        입금신청 완료 !
+                        라이브계좌 생성 완료 !
                       </Wrapper>
                     }
                     subTitle={

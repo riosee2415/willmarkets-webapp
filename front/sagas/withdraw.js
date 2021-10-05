@@ -19,7 +19,8 @@ import {
 // ******************************************************************************************************************
 function withdrawListAPI(data) {
   return axios.get(
-    `/api/withdraw/list/?page=${data.page}&search=${data.search}`
+    `/api/withdraw/list?page=${data.page}&search${data.search}`,
+    data
   );
 }
 
@@ -101,7 +102,7 @@ function* watchWithdrawCreate() {
   yield takeLatest(WITHDRAW_CREATE_REQUEST, withdrawCreate);
 }
 //////////////////////////////////////////////////////////////
-export default function* withdrawSaga() {
+export default function* withdrawSage() {
   yield all([
     fork(watchWithdrawList),
     fork(watchWithdrawUpdatePermit),

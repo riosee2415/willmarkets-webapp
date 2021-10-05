@@ -35,7 +35,7 @@ const GlobalStyles = createGlobalStyle`
   ${fontStyle}
 
   body {
-      font-family: "NanumBarunGothic", sans-serif;
+      font-family: 'Noto Sans KR', sans-serif;
   }
 
   .ant-modal-body{

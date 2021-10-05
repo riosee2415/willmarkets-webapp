@@ -26,7 +26,6 @@ function liveAccountListAPI(data) {
 function* liveAccountList(action) {
   try {
     const result = yield call(liveAccountListAPI, action.data);
-
     yield put({
       type: LIVE_ACCOUNT_LIST_SUCCESS,
       data: result.data,

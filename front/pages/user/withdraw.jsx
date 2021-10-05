@@ -1,18 +1,18 @@
 import React, { useCallback, useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { withRouter } from "next/router";
+import { withRouter, useRouter } from "next/router";
 import styled from "styled-components";
 import { Result, message } from "antd";
 import useInput from "../../hooks/useInput";
 import useOnlyNumberInput from "../../hooks//useOnlyNumberInput";
 import { emptyCheck } from "../../components/commonUtils";
-import { CaretDownOutlined } from "@ant-design/icons";
+import { CaretDownOutlined, CodeSandboxCircleFilled } from "@ant-design/icons";
 import wrapper from "../../store/configureStore";
 import { END } from "redux-saga";
 import axios from "axios";
 import {
   LOAD_MY_INFO_REQUEST,
-  USER_FIND_EMAIL_FAILURE,
+  USER_FIND_PASSWORD_REQUEST,
 } from "../../reducers/user";
 import {
   Wrapper,
@@ -29,6 +29,7 @@ import {
 import UserLayout from "../../components/user/UserLayout";
 import Theme from "../../components/Theme";
 import { WITHDRAW_CREATE_REQUEST } from "../../reducers/withdraw";
+import { USER_FIND_PASSWORD_CONFIRM_REQUEST } from "../../reducers/user";
 
 const TabWrapper = styled(Wrapper)`
   flex-direction: row;
@@ -89,39 +90,28 @@ const CustomInput = styled(TextInput)`
 
 const Withdraw = () => {
   ////// VARIABLES //////
-  const bankList = [
-    {
-      bankName: "은행명",
-      bankNo: "계좌번호",
-      swiftCode: "Swift Code",
-      bankAddress: "은행 주소",
-    },
-    {
-      bankName: "은행명2",
-      bankNo: "계좌번호2",
-      swiftCode: "Swift Code2",
-      bankAddress: "은행 주소2",
-    },
-  ];
 
   ////// HOOKS //////
   const dispatch = useDispatch();
 
-  const { me } = useSelector((state) => state.user);
-
   const {
-    st_withdrawCreateDone,
-    st_withdrawCreateError,
-    st_userFindPasswordConfirmDone,
-    st_userFindPasswordConfirmError,
+    me,
     st_userFindPasswordDone,
     st_userFindPasswordError,
-  } = useSelector((state) => state.withdraw);
+    st_userFindPasswordConfirmDone,
+    st_userFindPasswordConfirmError,
+  } = useSelector((state) => state.user);
+
+  const { st_withdrawCreateDone, st_withdrawCreateError } = useSelector(
+    (state) => state.withdraw
+  );
+
+  console.log(st_withdrawCreateDone, st_withdrawCreateError);
+
+  const router = useRouter();
 
   const [currentTab, setCurrentTab] = useState(0);
   const [currentStep, setCurrentStep] = useState(0);
-
-  const [currentBank, setCurrentBank] = useState(null);
 
   const [comboSelectBank, setComboSelectBank] = useState(false);
 
@@ -135,7 +125,6 @@ const Withdraw = () => {
   const inputSelectBank = useInput("");
   const inputPrice = useOnlyNumberInput("");
   const inputSecret = useInput("");
-  const comboText = useInput("");
 
   ////// TOGGLE //////
 
@@ -144,10 +133,6 @@ const Withdraw = () => {
   const moveLinkHandler = useCallback((link) => {
     router.push(link);
   }, []);
-
-  const moveBackHandler = useCallback(() => {
-    setCurrentStep(currentStep - 1);
-  }, [currentStep]);
 
   // const selectBankHandler = useCallback((data) => {
   //   setCurrentBank(data);
@@ -234,9 +219,12 @@ const Withdraw = () => {
       },
     });
   }, [
-    currentBank,
-    inputPrice,
+    inputBankName,
+    inputBankNo,
+    inputSwiftCode,
+    inputBankAddress,
     inputSelectBank,
+    inputPrice,
     inputSecret,
     isSendEmail,
     isConfirmEmail,
@@ -265,7 +253,7 @@ const Withdraw = () => {
       setIsConfirmEmail(true);
 
       setTimeout(() => {
-        createDepositHanlder();
+        createWithdrawHanlder();
       }, 100);
     }
   }, [st_userFindPasswordConfirmDone]);
@@ -320,6 +308,24 @@ const Withdraw = () => {
             <Wrapper al={`flex-start`}>
               {currentStep === 0 && (
                 <Wrapper al={`flex-start`}>
+                  <Wrapper
+                    dr={`row`}
+                    ju={`flex-start`}
+                    margin={`0 0 20px`}
+                    fontSize={`18px`}
+                    fontWeight={`700`}>
+                    <Wrapper
+                      width={`auto`}
+                      margin={`0 10px 0 0`}
+                      padding={`5px 10px`}
+                      fontSize={`14px`}
+                      fontWeight={`700`}
+                      bgColor={`#aa28c9`}
+                      color={`#fff`}>
+                      Step 01
+                    </Wrapper>
+                    출금신청 완료
+                  </Wrapper>
                   <CustomLabel for={`inp-price`} margin={`40px 0 15px`}>
                     <Wrapper className={`required`}>*</Wrapper>
                     출금 은행
@@ -368,14 +374,19 @@ const Withdraw = () => {
                       hoverShadow={`0 3px 8px rgb(0 0 0 / 12%)`}
                       onClick={() => setComboSelectBank(!comboSelectBank)}>
                       <ComboTitle>
-                        <Wrapper>{inputSelectBank.value}</Wrapper>
+                        <Wrapper>{inputSelectBank.value || `내 지갑`}</Wrapper>
                         <CaretDownOutlined />
                       </ComboTitle>
 
                       <ComboList isView={comboSelectBank}>
                         <ComboListItem
-                          onClick={() => comboText.setValue("내 지갑 선택")}>
-                          내 지갑 선택
+                          onClick={() => inputSelectBank.setValue("")}>
+                          내 지갑
+                        </ComboListItem>
+
+                        <ComboListItem
+                          onClick={() => inputSelectBank.setValue("2525")}>
+                          2525
                         </ComboListItem>
 
                         {me &&
@@ -416,50 +427,69 @@ const Withdraw = () => {
                   )}
                 </Wrapper>
               )}
-
               {currentStep === 1 && (
-                <Wrapper margin={`80px 0 0`}>
-                  <Result
-                    status="success"
-                    title={
-                      <Wrapper
-                        fontSize={`25px`}
-                        width={`auto`}
-                        borderBottom={`1px solid #c9c9c9`}>
-                        출금신청 완료 !
-                      </Wrapper>
-                    }
-                    subTitle={
-                      <Wrapper
-                        margin={`10px 0 0`}
-                        padding={`0 15px`}
-                        width={`auto`}
-                        lineHeight={`1.8`}>
-                        정상적으로 출금신청이 완료되었습니다.
-                      </Wrapper>
-                    }
-                    extra={[
-                      <CommonButton
-                        key="1"
-                        kindOf={`white`}
-                        width={`180px`}
-                        height={`40px`}
-                        margin={`0 5px`}
-                        onClick={initValueHandler}>
-                        처음으로
-                      </CommonButton>,
+                <Wrapper al={`flex-start`}>
+                  <Wrapper
+                    dr={`row`}
+                    ju={`flex-start`}
+                    margin={`0 0 20px`}
+                    fontSize={`18px`}
+                    fontWeight={`700`}>
+                    <Wrapper
+                      width={`auto`}
+                      margin={`0 10px 0 0`}
+                      padding={`5px 10px`}
+                      fontSize={`14px`}
+                      fontWeight={`700`}
+                      bgColor={`#aa28c9`}
+                      color={`#fff`}>
+                      Step 02
+                    </Wrapper>
+                    출금신청 완료
+                  </Wrapper>
+                  <Wrapper margin={`80px 0 0`}>
+                    <Result
+                      status="success"
+                      title={
+                        <Wrapper
+                          fontSize={`25px`}
+                          width={`auto`}
+                          borderBottom={`1px solid #c9c9c9`}>
+                          출금신청 완료 !
+                        </Wrapper>
+                      }
+                      subTitle={
+                        <Wrapper
+                          margin={`10px 0 0`}
+                          padding={`0 15px`}
+                          width={`auto`}
+                          lineHeight={`1.8`}>
+                          정상적으로 출금신청이 완료되었습니다.
+                        </Wrapper>
+                      }
+                      extra={[
+                        <CommonButton
+                          key="1"
+                          kindOf={`white`}
+                          width={`180px`}
+                          height={`40px`}
+                          margin={`0 5px`}
+                          onClick={initValueHandler}>
+                          처음으로
+                        </CommonButton>,
 
-                      <CommonButton
-                        key="1"
-                        kindOf={`blue`}
-                        width={`180px`}
-                        height={`40px`}
-                        margin={`0 5px`}
-                        onClick={() => moveLinkHandler(`/user`)}>
-                        홈으로
-                      </CommonButton>,
-                    ]}
-                  />
+                        <CommonButton
+                          key="1"
+                          kindOf={`blue`}
+                          width={`180px`}
+                          height={`40px`}
+                          margin={`0 5px`}
+                          onClick={() => moveLinkHandler(`/`)}>
+                          홈으로
+                        </CommonButton>,
+                      ]}
+                    />
+                  </Wrapper>
                 </Wrapper>
               )}
             </Wrapper>
@@ -476,9 +506,10 @@ const Withdraw = () => {
             <CommonButton
               kindOf={`white`}
               margin={`0 10px 0 0`}
-              onClick={moveBackHandler}>
+              onClick={() => moveLinkHandler("/user")}>
               이전
             </CommonButton>
+
             <CommonButton kindOf={`red`} onClick={createWithdrawHanlder}>
               출금 신청
             </CommonButton>

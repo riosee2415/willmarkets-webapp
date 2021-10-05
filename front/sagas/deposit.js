@@ -25,6 +25,7 @@ import {
 // SAGA AREA ********************************************************************************************************
 // ******************************************************************************************************************
 function depositListAPI(data) {
+  console.log(data, "data");
   return axios.get(
     `/api/deposit/list/${data.listType}?page=${data.page}&search=${data.search}`
   );

@@ -11,6 +11,8 @@ import styled from "styled-components";
 import { useRouter } from "next/router";
 import { MdAttachMoney } from "react-icons/md";
 import { AiOutlineCreditCard, AiOutlinePlus } from "react-icons/ai";
+import { LIVE_ACCOUNT_LIST_REQUEST } from "../../reducers/liveAccount";
+import { DEMO_ACCOUNT_LIST_REQUEST } from "../../reducers/demoAccount";
 
 const MenuBox = styled(SelectBox)`
   margin: ${(props) => props.margin || `0 20px 0 0`};
@@ -25,9 +27,35 @@ const User = ({ width }) => {
   ////// VARIABLES //////
 
   ////// HOOKS //////
+  const dispatch = useDispatch();
+
+  const { me } = useSelector((state) => state.user);
+
+  console.log(me);
+
+  const { liveList, st_liveAccountCreateDone } = useSelector(
+    (state) => state.liveAccount
+  );
+
+  const { demoAccountList } = useSelector((state) => state.demoAccount);
+
+  st_liveAccountCreateDone;
+
+  // console.log(me, "me");
+  // console.log(liveList && liveList.liveAccounts, "liveList");
+
   const router = useRouter();
 
   ////// TOGGLE //////
+
+  // {
+  //   liveList &&
+  //     liveList.liveAccounts
+  //       .find((data1) => data1.UserId === me.id)
+  //       .map((data2) => {
+  //         console.log(data2);
+  //       });
+  // }
 
   ////// HANDLER //////
   const moveLinkHandler = (link) => {
@@ -36,12 +64,39 @@ const User = ({ width }) => {
 
   ////// USEEFFECT //////
 
+  useEffect(() => {
+    const query = router.query;
+    dispatch({
+      type: LIVE_ACCOUNT_LIST_REQUEST,
+      data: {
+        page: query.page ? query.page : "",
+        search: query.search ? query.search : "",
+      },
+    });
+  }, []);
+
+  useEffect(() => {
+    const query = router.query;
+    dispatch({
+      type: DEMO_ACCOUNT_LIST_REQUEST,
+      data: {
+        page: query.page ? query.page : "",
+        search: query.search ? query.search : "",
+      },
+    });
+  }, []);
+
+  useEffect(() => {
+    dispatch({
+      type: LOAD_MY_INFO_REQUEST,
+    });
+  }, []);
+
   return (
     <UserLayout>
       <Wrapper al={`flex-start`} margin={`0 0 10px`} fontWeight={`700`}>
         메뉴
       </Wrapper>
-
       <Wrapper dr={`row`} ju={`flex-start`}>
         <MenuBox
           width={`100px`}
@@ -64,11 +119,9 @@ const User = ({ width }) => {
           심사기록
         </MenuBox>
       </Wrapper>
-
       <Wrapper al={`flex-start`} margin={`50px 0 10px`} fontWeight={`700`}>
         내 지갑
       </Wrapper>
-
       <Wrapper al={`flex-start`}>
         <SelectBox dr={`row`} padding={`15px 70px 15px 25px`}>
           <Wrapper
@@ -94,48 +147,56 @@ const User = ({ width }) => {
               fontSize={`26px`}
               fontWeight={`900`}
               lineHeight={`1.3`}>
-              50,000
+              {me && me.priceWallet}
             </Wrapper>
           </Wrapper>
         </SelectBox>
       </Wrapper>
-
       <Wrapper al={`flex-start`} margin={`50px 0 10px`} fontWeight={`700`}>
         라이브 계좌
       </Wrapper>
 
       <Wrapper dr={`row`} ju={`flex-start`}>
-        <SelectBox
-          dr={`row`}
-          margin={`0 20px 20px 0`}
-          padding={`15px 70px 15px 25px`}>
-          <Wrapper
-            width={`auto`}
-            padding={`9px`}
-            bgColor={`#a06ec6`}
-            color={`#fff`}
-            fontSize={`30px`}
-            radius={`50%`}>
-            <AiOutlineCreditCard />
-          </Wrapper>
+        {liveList &&
+          liveList.liveAccounts.map((data) => {
+            if (!data.isComplete) {
+              return null;
+            }
 
-          <Wrapper al={`flex-start`} margin={`0 0 0 15px`} width={`auto`}>
-            <Wrapper
-              width={`auto`}
-              color={`#7c1a81`}
-              fontSize={`13px`}
-              lineHeight={`1.3`}>
-              계좌번호
-            </Wrapper>
-            <Wrapper
-              width={`auto`}
-              fontSize={`26px`}
-              fontWeight={`900`}
-              lineHeight={`1.3`}>
-              11111
-            </Wrapper>
-          </Wrapper>
-        </SelectBox>
+            return (
+              <SelectBox
+                dr={`row`}
+                margin={`0 20px 20px 0`}
+                padding={`15px 70px 15px 25px`}>
+                <Wrapper
+                  width={`auto`}
+                  padding={`9px`}
+                  bgColor={`#a06ec6`}
+                  color={`#fff`}
+                  fontSize={`30px`}
+                  radius={`50%`}>
+                  <AiOutlineCreditCard />
+                </Wrapper>
+
+                <Wrapper al={`flex-start`} margin={`0 0 0 15px`} width={`auto`}>
+                  <Wrapper
+                    width={`auto`}
+                    color={`#7c1a81`}
+                    fontSize={`13px`}
+                    lineHeight={`1.3`}>
+                    계좌번호
+                  </Wrapper>
+                  <Wrapper
+                    width={`auto`}
+                    fontSize={`26px`}
+                    fontWeight={`900`}
+                    lineHeight={`1.3`}>
+                    {data.bankNo}
+                  </Wrapper>
+                </Wrapper>
+              </SelectBox>
+            );
+          })}
 
         <SelectBox
           dr={`row`}
@@ -161,43 +222,50 @@ const User = ({ width }) => {
           </Wrapper>
         </SelectBox>
       </Wrapper>
-
       <Wrapper al={`flex-start`} margin={`30px 0 10px`} fontWeight={`700`}>
         데모 계좌
       </Wrapper>
-
       <Wrapper dr={`row`} ju={`flex-start`}>
-        <SelectBox
-          dr={`row`}
-          margin={`0 20px 20px 0`}
-          padding={`15px 70px 15px 25px`}>
-          <Wrapper
-            width={`auto`}
-            padding={`9px`}
-            bgColor={`#a06ec6`}
-            color={`#fff`}
-            fontSize={`30px`}
-            radius={`50%`}>
-            <AiOutlineCreditCard />
-          </Wrapper>
+        {demoAccountList &&
+          demoAccountList.demoAccounts.map((data) => {
+            if (!data.isComplete) {
+              return null;
+            }
 
-          <Wrapper al={`flex-start`} margin={`0 0 0 15px`} width={`auto`}>
-            <Wrapper
-              width={`auto`}
-              color={`#7c1a81`}
-              fontSize={`13px`}
-              lineHeight={`1.3`}>
-              계좌번호
-            </Wrapper>
-            <Wrapper
-              width={`auto`}
-              fontSize={`26px`}
-              fontWeight={`900`}
-              lineHeight={`1.3`}>
-              11111
-            </Wrapper>
-          </Wrapper>
-        </SelectBox>
+            return (
+              <SelectBox
+                dr={`row`}
+                margin={`0 20px 20px 0`}
+                padding={`15px 70px 15px 25px`}>
+                <Wrapper
+                  width={`auto`}
+                  padding={`9px`}
+                  bgColor={`#a06ec6`}
+                  color={`#fff`}
+                  fontSize={`30px`}
+                  radius={`50%`}>
+                  <AiOutlineCreditCard />
+                </Wrapper>
+
+                <Wrapper al={`flex-start`} margin={`0 0 0 15px`} width={`auto`}>
+                  <Wrapper
+                    width={`auto`}
+                    color={`#7c1a81`}
+                    fontSize={`13px`}
+                    lineHeight={`1.3`}>
+                    계좌번호
+                  </Wrapper>
+                  <Wrapper
+                    width={`auto`}
+                    fontSize={`26px`}
+                    fontWeight={`900`}
+                    lineHeight={`1.3`}>
+                    {data.bankNo}
+                  </Wrapper>
+                </Wrapper>
+              </SelectBox>
+            );
+          })}
 
         <SelectBox
           dr={`row`}

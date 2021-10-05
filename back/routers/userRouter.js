@@ -265,7 +265,15 @@ router.get("/signin", async (req, res, next) => {
     if (req.user) {
       const fullUserWithoutPassword = await User.findOne({
         where: { id: req.user.id },
-        exclude: ["password"],
+        attributes: {
+          exclude: ["password"],
+        },
+        include: [
+          { model: Deposit },
+          { model: Withdraw },
+          { model: LiveAccount },
+          { model: DemoAccount },
+        ],
       });
 
       console.log("🍀🍀🍀🍀🍀🍀🍀🍀🍀🍀🍀🍀🍀🍀🍀🍀🍀🍀🍀🍀🍀🍀");
@@ -304,6 +312,12 @@ router.post("/signin", (req, res, next) => {
         attributes: {
           exclude: ["password"],
         },
+        include: [
+          { model: Deposit },
+          { model: Withdraw },
+          { model: LiveAccount },
+          { model: DemoAccount },
+        ],
       });
 
       return res.status(200).json(fullUserWithoutPassword);
@@ -429,7 +443,7 @@ router.get("/me", isLoggedIn, async (req, res, next) => {
   }
 });
 
-router.post("/me/update", isLoggedIn, async (req, res, next) => {
+router.post("/me/update", async (req, res, next) => {
   const {
     id,
     email,
@@ -466,8 +480,6 @@ router.post("/me/update", isLoggedIn, async (req, res, next) => {
       }
     }
 
-    const hashedPassword = await bcrypt.hash(password, 12);
-
     const updatedata = {
       email,
       username,
@@ -484,6 +496,12 @@ router.post("/me/update", isLoggedIn, async (req, res, next) => {
       addrFilePath,
       addrFileOriginName,
     };
+
+    if (password) {
+      const hashedPassword = await bcrypt.hash(password, 12);
+      updatedata.password = hashedPassword;
+    }
+
     const updateUser = await User.update(updatedata, {
       where: { id: parseInt(id) },
     });
@@ -668,7 +686,7 @@ router.patch("/updatePermit", isAdminCheck, async (req, res, next) => {
 
     if (updateResult[0] > 0) {
       sendSecretMail(
-        "4leaf.sts@gmail.com",
+        exUpdatePermit.email,
         "test Title",
         "<h1>Test Mail Send</h1>"
       );
@@ -728,6 +746,14 @@ router.patch("/level/update", isAdminCheck, async (req, res, next) => {
     console.error(error);
     return res.status(401).send("잘못된 요청 입니다. 개발사에 문의해주세요.");
   }
+});
+
+router.get("/logout", function (req, res) {
+  req.logout();
+  req.session.save(() => {
+    res.clearCookie("connect.sid");
+    res.redirect("/");
+  });
 });
 
 module.exports = router;

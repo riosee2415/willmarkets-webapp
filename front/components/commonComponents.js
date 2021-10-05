@@ -197,6 +197,7 @@ export const CommonButton = styled.button`
   margin: ${(props) => props.margin};
   padding: ${(props) => props.padding || `4px 12px 3px`};
   font-size: ${(props) => props.fontSize || `15px`};
+  font-weight: ${(props) => props.fontWeight};
   border-radius: ${(props) => props.radius};
   border: none;
   outline: none;
@@ -265,6 +266,32 @@ export const CommonButton = styled.button`
       box-shadow: 1px 1px 8px #898df3;
     }
   `};
+
+  ${(props) =>
+    props.kindOf === `pink` &&
+    `
+      background: none;
+      color: #d8449a;
+      border: 2px solid #811757;
+
+      &:hover {
+        color: #fff;
+        background: #000;
+      }
+  `}
+
+  ${(props) =>
+    props.kindOf === `yellow` &&
+    `
+      background: none;
+      color: #ffea73;
+      border: 2px solid #f4e68d;
+
+      &:hover {
+        color: #fff;
+        background: #000;
+      }
+  `}
 
   @media (max-width: 700px) {
     font-size: ${(props) => props.fontSize || `14px`};

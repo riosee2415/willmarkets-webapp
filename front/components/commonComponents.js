@@ -137,7 +137,7 @@ export const Wrapper = styled.div`
   background-attachment: ${(props) => props.attachment};
   background-position: ${(props) => props.bgPosition || `center`};
 
-  transition: ${(props) => props.transition || `0.2s`};
+  transition: ${(props) => props.transition || `0.1s`};
   cursor: ${(props) => props.cursor};
   line-height: ${(props) => props.lineHeight};
   text-align: ${(props) => props.textAlign};

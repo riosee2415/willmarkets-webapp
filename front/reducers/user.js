@@ -354,6 +354,7 @@ const reducer = (state = initailState, action) =>
       case USER_SECRET_EMAIL_SUCCESS:
         draft.st_userSecretEmailLoading = false;
         draft.st_userSecretEmailDone = true;
+        draft.secretCode = action.data;
         break;
       case USER_SECRET_EMAIL_FAILURE:
         draft.st_userSecretEmailLoading = false;

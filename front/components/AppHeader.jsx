@@ -5,6 +5,12 @@ import {
   CommonButton,
   Image,
   ATag,
+  RsWrapper,
+  Wrapper,
+  Combo,
+  ComboTitle,
+  ComboList,
+  ComboListItem,
 } from "./commonComponents";
 import { withResizeDetector } from "react-resize-detector";
 import styled from "styled-components";
@@ -12,6 +18,8 @@ import Theme from "./Theme";
 import { AlignRightOutlined } from "@ant-design/icons";
 import { Drawer } from "antd";
 import Link from "next/link";
+import { CaretDownOutlined } from "@ant-design/icons";
+import { useRouter } from "next/router";
 
 const WebRow = styled(RowWrapper)`
   background: transparent;
@@ -52,65 +60,61 @@ const MobileRow = styled(RowWrapper)`
   }
 `;
 
-const MenuCol = styled(ColWrapper)`
-  color: ${Theme.white_C};
-  width: 170px;
-  height: 60px;
-  background: transparent;
+const MenuTextWrapper = styled(Wrapper)`
+  width: auto;
+  height: 100%;
+  padding: 0 45px;
+  font-size: 17px;
+  color: inherit;
+  transition: none !important;
   cursor: pointer;
-  transition: 0.5s;
-  font-weight: 700;
-  position: relative;
+`;
 
-  & .submenu {
-    display: none;
-  }
+const MenuListWrapper = styled(Wrapper)`
+  overflow: hidden;
+  position: absolute;
+  top: 85px;
+  display: none;
+  background: #fff;
+  border-radius: 5px;
+  box-shadow: 1px 1px 10px #d2d2d2;
+`;
+
+const MenuListItemWrapper = styled(Wrapper)`
+  padding: 12px 0;
+  color: inherit;
+  font-size: 16px;
+  cursor: pointer;
+  transition: none !important;
 
   &:hover {
-    background: ${Theme.white_C};
-    color: ${Theme.black_C};
-    & .submenu {
+    background: #f4f2f3;
+    font-weight: 500;
+  }
+`;
+
+const MenuWrapper = styled(Wrapper)`
+  position: relative;
+  width: auto;
+  height: 100%;
+  transition: none !important;
+
+  ${(props) =>
+    props.isOpen &&
+    `
+    & ${MenuTextWrapper} {
+      font-weight: 500;
+    }
+
+    & ${MenuListWrapper} {
       display: flex;
     }
-  }
-`;
-
-const SubMenuCol = styled(ColWrapper)`
-  position: absolute;
-  width: 100%;
-  height: auto;
-  background: ${Theme.black_C};
-  padding: 10px 30px;
-  text-align: center;
-  top: 60px;
-`;
-
-const SubMenuTextCol = styled(ColWrapper)`
-  color: ${Theme.white_C};
-  font-weight: 300;
-  position: relative;
-  padding: 10px 0 3px;
-
-  &:before {
-    content: "";
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 0;
-    height: 1px;
-    background: ${Theme.white_C};
-    transition: 0.5s;
-  }
-
-  &:hover {
-    font-weight: 700;
-    &:before {
-      width: 100%;
-    }
-  }
+  `}
 `;
 
 const AppHeader = ({ children, width }) => {
+  const router = useRouter();
+
   ////////////// - USE STATE- ///////////////
   const [headerScroll, setHeaderScroll] = useState(false);
   const [pageY, setPageY] = useState(0);
@@ -119,8 +123,15 @@ const AppHeader = ({ children, width }) => {
   const [drawar, setDrawar] = useState(false);
   const [subMenu, setSubMenu] = useState(``);
 
-  ///////////// - EVENT HANDLER- ////////////
+  const [comboLanguage, setComboLanguage] = useState(false);
 
+  const [toggleMenu01, setToggleMenu01] = useState(false);
+  const [toggleMenu02, setToggleMenu02] = useState(false);
+  const [toggleMenu03, setToggleMenu03] = useState(false);
+  const [toggleMenu04, setToggleMenu04] = useState(false);
+  const [toggleMenu05, setToggleMenu05] = useState(false);
+
+  ///////////// - EVENT HANDLER- ////////////
   const drawarToggle = useCallback(() => {
     setDrawar(!drawar);
   });
@@ -133,6 +144,10 @@ const AppHeader = ({ children, width }) => {
     setPageY(pageYOffset);
   });
 
+  const moveLinkHandler = useCallback((link) => {
+    router.push(link);
+  }, []);
+
   ////////////// - USE EFFECT- //////////////
   useEffect(() => {
     document.addEventListener("scroll", handleScroll);
@@ -140,7 +155,7 @@ const AppHeader = ({ children, width }) => {
   }, [pageY]);
   return (
     <>
-      {/* <WebRow
+      <WebRow
         justify={`center`}
         position={`fixed`}
         top={`0`}
@@ -148,53 +163,254 @@ const AppHeader = ({ children, width }) => {
         index={`10000`}
         className={headerScroll && "background"}
       >
-        <ColWrapper span={20}>
-          {/* web */}
-      {/* <ColWrapper>
-            <ColWrapper width={`100%`} padding={`10px 0`}>
-              <ATag href="/">
-                <Image
-                  width={`100px`}
-                  src={`https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/SOUL/assets/images/logo/soul_logo.png`}
-                />
-              </ATag>
-            </ColWrapper>
-            <RowWrapper justify={`center`}>
-              <MenuCol>
-                한의원 소개
-                <ATag href="about">
-                  <SubMenuCol className="submenu">
-                    <SubMenuTextCol>의료진 소개 및 진료 시간표</SubMenuTextCol>
-                  </SubMenuCol>
-                </ATag>
-              </MenuCol>
-              <MenuCol>
-                <Link href="/diagnosis?type=0">진료 과목</Link>
-                <SubMenuCol className="submenu">
-                  <SubMenuTextCol>
-                    <Link href="/diagnosis?type=1">체질 의학</Link>
-                  </SubMenuTextCol>
-                  <SubMenuTextCol>
-                    <Link href="/diagnosis?type=2">소울 다이어트</Link>
-                  </SubMenuTextCol>
-                  <SubMenuTextCol>
-                    <Link href="/diagnosis?type=3">만성 난치 클리닉</Link>
-                  </SubMenuTextCol>
-                  <SubMenuTextCol>
-                    <Link href="/diagnosis?type=4">통증 클리닉</Link>
-                  </SubMenuTextCol>
-                </SubMenuCol>
-              </MenuCol>
-              <ATag width={`auto`} href="/notice">
-                <MenuCol>공지사항</MenuCol>
-              </ATag>
-              <ATag width={`auto`} href="location">
-                <MenuCol>오시는 길</MenuCol>
-              </ATag>
-            </RowWrapper>
-          </ColWrapper>
-        </ColWrapper> */}
-      {/* </WebRow>  */}
+        <Wrapper padding={`5px 0`} bgColor={`#231d21`}>
+          <RsWrapper al={`flex-end`}>
+            <Wrapper dr={`row`} width={`auto`}>
+              <Wrapper
+                margin={`0 0 0 30px`}
+                width={`auto`}
+                fontSize={`13px`}
+                color={`#fff`}
+                cursor={`pointer`}
+              >
+                로그인
+              </Wrapper>
+
+              <Wrapper
+                margin={`0 0 0 30px`}
+                width={`auto`}
+                fontSize={`13px`}
+                color={`#fff`}
+                cursor={`pointer`}
+              >
+                회원가입
+              </Wrapper>
+
+              <Wrapper
+                position={`relative`}
+                top={`2.5px`}
+                margin={`0 0 0 30px`}
+                width={`auto`}
+                fontSize={`13px`}
+                cursor={`pointer`}
+              >
+                <Combo
+                  width={`110px`}
+                  padding={`0`}
+                  onMouseOver={() => setComboLanguage(true)}
+                  onMouseOut={() => setComboLanguage(false)}
+                >
+                  <ComboTitle color={`#fff`}>
+                    <Wrapper fontSize={`13px`}>Language</Wrapper>
+                    <CaretDownOutlined />
+                  </ComboTitle>
+
+                  <ComboList
+                    isView={comboLanguage}
+                    onClick={() => setComboLanguage(false)}
+                  >
+                    <ComboListItem>한국어</ComboListItem>
+                    <ComboListItem>English</ComboListItem>
+                  </ComboList>
+                </Combo>
+              </Wrapper>
+            </Wrapper>
+          </RsWrapper>
+        </Wrapper>
+
+        <Wrapper
+          bgColor={
+            toggleMenu01 ||
+            toggleMenu02 ||
+            toggleMenu03 ||
+            toggleMenu04 ||
+            toggleMenu05
+              ? `#fff`
+              : `none`
+          }
+          color={
+            toggleMenu01 ||
+            toggleMenu02 ||
+            toggleMenu03 ||
+            toggleMenu04 ||
+            toggleMenu05
+              ? `#2c2c2c`
+              : `#fff`
+          }
+        >
+          <RsWrapper>
+            <Wrapper
+              dr={`row`}
+              ju={`space-between`}
+              padding={`5px 0`}
+              height={`85px`}
+            >
+              <Image
+                width={`80px`}
+                src={`https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/willmarkets/assets/images/logo/logo.png`}
+              />
+
+              <Wrapper dr={`row`} width={`auto`} height={`100%`}>
+                <MenuWrapper
+                  isOpen={toggleMenu01}
+                  onMouseOver={() => {
+                    setToggleMenu01(true);
+                    setToggleMenu02(false);
+                    setToggleMenu03(false);
+                    setToggleMenu04(false);
+                    setToggleMenu05(false);
+                  }}
+                >
+                  <MenuTextWrapper
+                    onClick={() => moveLinkHandler(`/company/intro`)}
+                  >
+                    회사 소개
+                  </MenuTextWrapper>
+
+                  <MenuListWrapper
+                    onMouseOut={() => setToggleMenu01(false)}
+                    onClick={() => setToggleMenu01(false)}
+                  >
+                    <MenuListItemWrapper
+                      onClick={() => moveLinkHandler(`/company/intro`)}
+                    >
+                      회사소개
+                    </MenuListItemWrapper>
+                    <MenuListItemWrapper
+                      onClick={() => moveLinkHandler(`/company/terms`)}
+                    >
+                      이용약관
+                    </MenuListItemWrapper>
+                    <MenuListItemWrapper
+                      onClick={() => moveLinkHandler(`/company/privacy`)}
+                    >
+                      개인정보 보호정책
+                    </MenuListItemWrapper>
+                  </MenuListWrapper>
+                </MenuWrapper>
+
+                <MenuWrapper
+                  isOpen={toggleMenu02}
+                  onMouseOver={() => {
+                    setToggleMenu02(true);
+                    setToggleMenu01(false);
+                    setToggleMenu03(false);
+                    setToggleMenu04(false);
+                    setToggleMenu05(false);
+                  }}
+                >
+                  <MenuTextWrapper
+                    onClick={() => moveLinkHandler(`/trading/forex`)}
+                  >
+                    트레이딩
+                  </MenuTextWrapper>
+
+                  <MenuListWrapper
+                    onMouseOut={() => setToggleMenu02(false)}
+                    onClick={() => setToggleMenu02(false)}
+                  >
+                    <MenuListItemWrapper
+                      onClick={() => moveLinkHandler(`/trading/forex`)}
+                    >
+                      Forex
+                    </MenuListItemWrapper>
+                    <MenuListItemWrapper
+                      onClick={() => moveLinkHandler(`/trading/ecn`)}
+                    >
+                      ECN
+                    </MenuListItemWrapper>
+                    <MenuListItemWrapper
+                      onClick={() => moveLinkHandler(`/trading/stp`)}
+                    >
+                      STP
+                    </MenuListItemWrapper>
+                    <MenuListItemWrapper
+                      onClick={() => moveLinkHandler(`/trading/spread`)}
+                    >
+                      스프레드와 스왑
+                    </MenuListItemWrapper>
+                    <MenuListItemWrapper
+                      onClick={() => moveLinkHandler(`/trading/margin`)}
+                    >
+                      마진과 레버리지
+                    </MenuListItemWrapper>
+                    <MenuListItemWrapper
+                      onClick={() => moveLinkHandler(`/trading/provider`)}
+                    >
+                      호가 제공사
+                    </MenuListItemWrapper>
+                  </MenuListWrapper>
+                </MenuWrapper>
+
+                <MenuWrapper
+                  isOpen={toggleMenu03}
+                  onMouseOver={() => {
+                    setToggleMenu03(true);
+                    setToggleMenu01(false);
+                    setToggleMenu02(false);
+                    setToggleMenu04(false);
+                    setToggleMenu05(false);
+                  }}
+                >
+                  <MenuTextWrapper
+                    onClick={() => moveLinkHandler(`/platform/pc`)}
+                  >
+                    거래플랫폼
+                  </MenuTextWrapper>
+
+                  <MenuListWrapper
+                    onMouseOut={() => setToggleMenu03(false)}
+                    onClick={() => setToggleMenu03(false)}
+                  >
+                    <MenuListItemWrapper
+                      onClick={() => moveLinkHandler(`/platform/pc`)}
+                    >
+                      PC 버전
+                    </MenuListItemWrapper>
+                    <MenuListItemWrapper
+                      onClick={() => moveLinkHandler(`/platform/mobile`)}
+                    >
+                      모바일 버전
+                    </MenuListItemWrapper>
+                  </MenuListWrapper>
+                </MenuWrapper>
+
+                <MenuWrapper
+                  isOpen={toggleMenu04}
+                  onMouseOver={() => {
+                    setToggleMenu04(true);
+                    setToggleMenu01(false);
+                    setToggleMenu02(false);
+                    setToggleMenu03(false);
+                    setToggleMenu05(false);
+                  }}
+                  onMouseOut={() => setToggleMenu04(false)}
+                >
+                  <MenuTextWrapper onClick={() => moveLinkHandler(`/user`)}>
+                    입출금
+                  </MenuTextWrapper>
+                </MenuWrapper>
+
+                <MenuWrapper
+                  isOpen={toggleMenu05}
+                  onMouseOver={() => {
+                    setToggleMenu05(true);
+                    setToggleMenu01(false);
+                    setToggleMenu02(false);
+                    setToggleMenu03(false);
+                    setToggleMenu04(false);
+                  }}
+                  onMouseOut={() => setToggleMenu05(false)}
+                >
+                  <MenuTextWrapper onClick={() => moveLinkHandler(`/support`)}>
+                    고객지원
+                  </MenuTextWrapper>
+                </MenuWrapper>
+              </Wrapper>
+            </Wrapper>
+          </RsWrapper>
+        </Wrapper>
+      </WebRow>
 
       {/* mobile */}
       {/* <MobileRow justify={`center`} className={headerScroll && "background"}>

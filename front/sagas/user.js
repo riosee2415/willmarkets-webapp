@@ -173,7 +173,7 @@ function* userList(action) {
 // SAGA AREA ********************************************************************************************************
 // ******************************************************************************************************************
 function userMeUpdateAPI(data) {
-  return axios.patch(`/api/user/me/update`, data);
+  return axios.patch("/api/user/me/update", data);
 }
 
 function* userMeUpdate(action) {

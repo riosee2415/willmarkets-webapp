@@ -13,7 +13,9 @@ import axios from "axios";
 import {
   LOAD_MY_INFO_REQUEST,
   USER_FIND_PASSWORD_REQUEST,
+  INIT_STATE_REQUEST,
 } from "../../reducers/user";
+
 import {
   Wrapper,
   SelectBox,
@@ -268,6 +270,9 @@ const Withdraw = () => {
   useEffect(() => {
     if (st_withdrawCreateDone) {
       setCurrentStep(1);
+      dispatch({
+        type: INIT_STATE_REQUEST,
+      });
     }
   }, [st_withdrawCreateDone]);
 
@@ -384,22 +389,22 @@ const Withdraw = () => {
                           내 지갑
                         </ComboListItem>
 
-                        <ComboListItem
-                          onClick={() => inputSelectBank.setValue("2525")}>
-                          2525
-                        </ComboListItem>
-
                         {me &&
-                          me.LiveAccount &&
-                          me.LiveAccount.map((data) => {
-                            <ComboListItem
-                              key={data.id}
-                              isActive={inputSelectBank.value === data.bankNo}
-                              onClick={() =>
-                                inputSelectBank.setValue(data.bankNo)
-                              }>
-                              {data.bankNo}
-                            </ComboListItem>;
+                          me.LiveAccounts &&
+                          me.LiveAccounts.map((data) => {
+                            if (!data.isComplete) {
+                              return null;
+                            }
+                            return (
+                              <ComboListItem
+                                key={data.id}
+                                isActive={inputSelectBank.value === data.bankNo}
+                                onClick={() =>
+                                  inputSelectBank.setValue(data.bankNo)
+                                }>
+                                {data.bankNo}
+                              </ComboListItem>
+                            );
                           })}
                       </ComboList>
                     </Combo>
@@ -422,6 +427,14 @@ const Withdraw = () => {
 
                       <Wrapper dr={`row`} ju={`flex-start`}>
                         <CustomInput id={`inp-secret`} {...inputSecret} />
+
+                        <CommonButton
+                          kindOf={`black`}
+                          height={`38px`}
+                          margin={`0 0 0 10px`}
+                          onClick={confirmSecretHandler}>
+                          인증
+                        </CommonButton>
                       </Wrapper>
                     </Wrapper>
                   )}

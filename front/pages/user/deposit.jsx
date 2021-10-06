@@ -8,6 +8,7 @@ import useOnlyNumberInput from "../../hooks/useOnlyNumberInput";
 import { emptyCheck } from "../../components/commonUtils";
 import { CaretDownOutlined } from "@ant-design/icons";
 import { END } from "redux-saga";
+import { useRouter } from "next/router";
 import axios from "axios";
 import {
   LOAD_MY_INFO_REQUEST,
@@ -37,6 +38,7 @@ import {
   DEPOSIT_IMAGE_FILE_REQUEST,
   DEPOSIT_IMAGE_FILE_CREATE_REQUEST,
 } from "../../reducers/deposit";
+import { INIT_STATE_REQUEST } from "../../reducers/user";
 
 const CustomLabel = styled(Label)`
   display: flex;
@@ -82,6 +84,8 @@ const Deposit = () => {
 
   ////// HOOKS //////
   const fileRef = useRef();
+
+  const router = useRouter();
 
   const dispatch = useDispatch();
 
@@ -270,6 +274,7 @@ const Deposit = () => {
   }, [inputFilePath, inputFileOriginName]);
 
   ////// USEEFFECT //////
+
   useEffect(() => {
     initValueHandler();
   }, [currentTab]);
@@ -308,6 +313,9 @@ const Deposit = () => {
   useEffect(() => {
     if (st_depositCreateDone) {
       setCurrentStep(2);
+      dispatch({
+        type: INIT_STATE_REQUEST,
+      });
     }
   }, [st_depositCreateDone]);
 
@@ -740,23 +748,22 @@ const Deposit = () => {
                           입금계좌 선택
                         </ComboListItem>
 
-                        <ComboListItem
-                          isActive={!inputSelectBank.value}
-                          onClick={() => inputSelectBank.setValue("2525")}>
-                          2525
-                        </ComboListItem>
-
                         {me &&
-                          me.LiveAccount &&
-                          me.LiveAccount.map((data) => {
-                            <ComboListItem
-                              key={data.id}
-                              isActive={inputSelectBank.value === data.bankNo}
-                              onClick={() =>
-                                inputSelectBank.setValue(data.bankNo)
-                              }>
-                              {data.bankNo}
-                            </ComboListItem>;
+                          me.LiveAccounts &&
+                          me.LiveAccounts.map((data) => {
+                            if (!data.isComplete) {
+                              return null;
+                            }
+                            return (
+                              <ComboListItem
+                                key={data.id}
+                                isActive={inputSelectBank.value === data.bankNo}
+                                onClick={() =>
+                                  inputSelectBank.setValue(data.bankNo)
+                                }>
+                                {data.bankNo}
+                              </ComboListItem>
+                            );
                           })}
                       </ComboList>
                     </Combo>

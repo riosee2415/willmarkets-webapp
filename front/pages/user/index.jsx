@@ -31,7 +31,7 @@ const User = ({ width }) => {
 
   const { me } = useSelector((state) => state.user);
 
-  console.log(me);
+  console.log(me, "mememememe");
 
   const { liveList, st_liveAccountCreateDone } = useSelector(
     (state) => state.liveAccount
@@ -63,28 +63,6 @@ const User = ({ width }) => {
   };
 
   ////// USEEFFECT //////
-
-  useEffect(() => {
-    const query = router.query;
-    dispatch({
-      type: LIVE_ACCOUNT_LIST_REQUEST,
-      data: {
-        page: query.page ? query.page : "",
-        search: query.search ? query.search : "",
-      },
-    });
-  }, []);
-
-  useEffect(() => {
-    const query = router.query;
-    dispatch({
-      type: DEMO_ACCOUNT_LIST_REQUEST,
-      data: {
-        page: query.page ? query.page : "",
-        search: query.search ? query.search : "",
-      },
-    });
-  }, []);
 
   useEffect(() => {
     dispatch({
@@ -145,7 +123,7 @@ const User = ({ width }) => {
             <Wrapper
               width={`auto`}
               fontSize={`26px`}
-              fontWeight={`900`}
+              fontWeight={`400`}
               lineHeight={`1.3`}>
               {me && me.priceWallet}
             </Wrapper>
@@ -157,8 +135,8 @@ const User = ({ width }) => {
       </Wrapper>
 
       <Wrapper dr={`row`} ju={`flex-start`}>
-        {liveList &&
-          liveList.liveAccounts.map((data) => {
+        {me &&
+          me.LiveAccounts.map((data) => {
             if (!data.isComplete) {
               return null;
             }
@@ -189,7 +167,7 @@ const User = ({ width }) => {
                   <Wrapper
                     width={`auto`}
                     fontSize={`26px`}
-                    fontWeight={`900`}
+                    fontWeight={`400`}
                     lineHeight={`1.3`}>
                     {data.bankNo}
                   </Wrapper>
@@ -226,8 +204,8 @@ const User = ({ width }) => {
         데모 계좌
       </Wrapper>
       <Wrapper dr={`row`} ju={`flex-start`}>
-        {demoAccountList &&
-          demoAccountList.demoAccounts.map((data) => {
+        {me &&
+          me.DemoAccounts.map((data) => {
             if (!data.isComplete) {
               return null;
             }
@@ -258,7 +236,7 @@ const User = ({ width }) => {
                   <Wrapper
                     width={`auto`}
                     fontSize={`26px`}
-                    fontWeight={`900`}
+                    fontWeight={`400`}
                     lineHeight={`1.3`}>
                     {data.bankNo}
                   </Wrapper>

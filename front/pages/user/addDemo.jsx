@@ -120,6 +120,8 @@ const AddDemo = () => {
 
   const dispatch = useDispatch();
 
+  const router = useRouter();
+
   const { me } = useSelector((state) => state.user);
 
   const { st_demoAccountCreateDone, st_demoAccountCreateError } = useSelector(
@@ -139,6 +141,10 @@ const AddDemo = () => {
   ////// TOGGLE //////
 
   ////// HANDLER //////
+
+  const moveLinkHandler = useCallback((link) => {
+    router.push(link);
+  }, []);
 
   const initValueHandler = useCallback(() => {
     setCurrentStep(0);

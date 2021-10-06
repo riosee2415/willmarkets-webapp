@@ -245,10 +245,16 @@ const AppHeader = ({ children, width }) => {
               padding={`5px 0`}
               height={`85px`}
             >
-              <Image
-                width={`80px`}
-                src={`https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/willmarkets/assets/images/logo/logo.png`}
-              />
+              <Wrapper
+                width={`auto`}
+                cursor={`pointer`}
+                onClick={() => moveLinkHandler(`/`)}
+              >
+                <Image
+                  width={`80px`}
+                  src={`https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/willmarkets/assets/images/logo/logo.png`}
+                />
+              </Wrapper>
 
               <Wrapper dr={`row`} width={`auto`} height={`100%`}>
                 <MenuWrapper

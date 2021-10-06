@@ -21,11 +21,12 @@ import {
 } from "../components/commonComponents";
 import ClientLayout from "../components/ClientLayout";
 import Theme from "../components/Theme";
+import SubBanner from "../components/SubBanner";
 
 const Support = () => {
   return (
     <ClientLayout>
-      <div>Hello Support</div>
+      <SubBanner />
     </ClientLayout>
   );
 };

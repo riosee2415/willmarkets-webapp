@@ -205,6 +205,22 @@ export const CommonButton = styled.button`
   cursor: pointer;
 
   ${(props) =>
+    !props.kindOf &&
+    `
+    background: ${props.bgColor};
+    color: ${props.color};
+    border: ${props.border};
+    box-shadow: ${props.shadow};
+
+    &:hover {
+      background: ${props.hoverBgColor};
+      color: ${props.hoverColor};
+      border: ${props.hoverBorder};
+      box-shadow: ${props.hoverShadow};
+    }
+  `}
+
+  ${(props) =>
     props.kindOf === `white` &&
     `
     background: ${props.theme.white_C};

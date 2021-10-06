@@ -21,11 +21,12 @@ import {
 } from "../../components/commonComponents";
 import ClientLayout from "../../components/ClientLayout";
 import Theme from "../../components/Theme";
+import SubBanner from "../../components/SubBanner";
 
 const Provider = () => {
   return (
     <ClientLayout>
-      <div>Hello Provider</div>
+      <SubBanner />
     </ClientLayout>
   );
 };

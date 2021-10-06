@@ -118,7 +118,7 @@ export default ({ width }) => {
               <Image
                 width={`100%`}
                 height={`100%`}
-                src={`https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/willmarkets/assets/images/main/main_banner01.png`}
+                src={`https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/willmarkets/assets/images/main/main_banner02.png`}
               />
             </Wrapper>
 

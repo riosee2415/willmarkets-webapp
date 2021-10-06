@@ -141,7 +141,20 @@ const Home = ({ width }) => {
         </Wrapper>
 
         <RsWrapper>
-          <Image src={``} />
+          <Image
+            width={`auto`}
+            src={`https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/willmarkets/assets/images/main/icon_warning.png`}
+          />
+
+          <Wrapper
+            margin={`15px 0`}
+            width={`auto`}
+            color={`#ffea6b`}
+            fontSize={`18px`}
+            fontWeight={`500`}
+          >
+            ※주의사항※
+          </Wrapper>
 
           <Wrapper
             fontWeight={`300`}

@@ -22,11 +22,12 @@ import {
 } from "../../components/commonComponents";
 import ClientLayout from "../../components/ClientLayout";
 import Theme from "../../components/Theme";
+import SubBanner from "../../components/SubBanner";
 
 const Pc = () => {
   return (
     <ClientLayout>
-      <div>Hello Pc</div>
+      <SubBanner />
     </ClientLayout>
   );
 };

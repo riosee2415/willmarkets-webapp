@@ -21,11 +21,12 @@ import {
 } from "../../components/commonComponents";
 import ClientLayout from "../../components/ClientLayout";
 import Theme from "../../components/Theme";
+import SubBanner from "../../components/SubBanner";
 
 const Forex = () => {
   return (
     <ClientLayout>
-      <div>Hello Forex</div>
+      <SubBanner />
     </ClientLayout>
   );
 };

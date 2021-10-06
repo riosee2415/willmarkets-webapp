@@ -36,7 +36,7 @@ const Mobile = () => {
               dr={`row`}
               padding={`0 10px`}
               width={`auto`}
-              fontSize={`22px`}
+              fontSize={`24px`}
             >
               Android에서
               <Text padding={`0 5px`} fontWeight={`400`} color={`#ec5bac`}>
@@ -103,7 +103,7 @@ const Mobile = () => {
               dr={`row`}
               padding={`0 10px`}
               width={`auto`}
-              fontSize={`22px`}
+              fontSize={`24px`}
             >
               IOS에서
               <Text padding={`0 5px`} fontWeight={`400`} color={`#ec5bac`}>
@@ -278,7 +278,7 @@ const Mobile = () => {
                 <Wrapper
                   margin={`20px 0 50px`}
                   width={`auto`}
-                  lineHeight={`1.6`}
+                  lineHeight={`1.8`}
                 >
                   IronFX는 MT4 거래의 선구자입니다.
                   <br />

@@ -36,7 +36,7 @@ const Pc = () => {
               dr={`row`}
               padding={`0 10px`}
               width={`auto`}
-              fontSize={`22px`}
+              fontSize={`24px`}
             >
               Windows에서
               <Text padding={`0 5px`} fontWeight={`400`} color={`#ec5bac`}>

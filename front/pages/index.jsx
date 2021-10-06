@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { LOAD_MY_INFO_REQUEST, LOGIN_REQUEST } from "../reducers/user";
 import useInput from "../hooks/useInput";
@@ -6,6 +6,7 @@ import ClientLayout from "../components/ClientLayout";
 import axios from "axios";
 import wrapper from "../store/configureStore";
 import { END } from "redux-saga";
+import { CloseOutlined } from "@ant-design/icons";
 import {
   RsWrapper,
   Wrapper,
@@ -20,6 +21,8 @@ import { useRouter } from "next/router";
 
 const Home = ({ width }) => {
   const router = useRouter();
+
+  const [togle, setTogle] = useState(true);
 
   const moveLinkHandler = useCallback((link) => {
     router.push(link);
@@ -39,8 +42,7 @@ const Home = ({ width }) => {
           width={`100%`}
           height={`100%`}
           bgImg={`url('https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/willmarkets/assets/images/main/back_download.png')`}
-          zIndex={`-2`}
-        ></Wrapper>
+          zIndex={`-2`}></Wrapper>
 
         <Wrapper
           position={`absolute`}
@@ -49,8 +51,7 @@ const Home = ({ width }) => {
           width={`100%`}
           height={`100%`}
           bgColor={`rgba(0, 0, 0, 0.5)`}
-          zIndex={`-1`}
-        ></Wrapper>
+          zIndex={`-1`}></Wrapper>
 
         <Wrapper fontSize={`30px`} fontWeight={`500`} color={`#f776be`}>
           MT4 다운로드
@@ -60,8 +61,7 @@ const Home = ({ width }) => {
           margin={`15px 0 0`}
           fontSize={`19px`}
           fontWeight={`400`}
-          color={`#fff`}
-        >
+          color={`#fff`}>
           Android와 Ios 모두 호환하는 완벽한 거래 플랫폼
         </Wrapper>
 
@@ -79,8 +79,7 @@ const Home = ({ width }) => {
             width={`auto`}
             margin={`0 80px`}
             color={`#fff`}
-            fontSize={`34px`}
-          >
+            fontSize={`34px`}>
             <PlusOutlined />
           </Wrapper>
 
@@ -97,8 +96,7 @@ const Home = ({ width }) => {
             width={`auto`}
             margin={`0 80px`}
             color={`#fff`}
-            fontSize={`34px`}
-          >
+            fontSize={`34px`}>
             <PlusOutlined />
           </Wrapper>
 
@@ -122,16 +120,14 @@ const Home = ({ width }) => {
             radius={`30px`}
             fontSize={`17px`}
             fontWeight={`500`}
-            onClick={() => moveLinkHandler(`/platform/pc`)}
-          >
+            onClick={() => moveLinkHandler(`/platform/pc`)}>
             다운로드
             <Wrapper
               position={`absolute`}
               right={`40px`}
               top={`50%`}
               margin={`-6px 0 0 0`}
-              width={`auto`}
-            >
+              width={`auto`}>
               <RightOutlined />
             </Wrapper>
           </CommonButton>
@@ -141,8 +137,7 @@ const Home = ({ width }) => {
           position={`absolute`}
           right={`180px`}
           bottom={`40px`}
-          width={`auto`}
-        >
+          width={`auto`}>
           <Image
             src={`https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/willmarkets/assets/images/main/iphone.png`}
           />
@@ -167,8 +162,7 @@ const Home = ({ width }) => {
             width={`auto`}
             color={`#ffea6b`}
             fontSize={`18px`}
-            fontWeight={`500`}
-          >
+            fontWeight={`500`}>
             ※주의사항※
           </Wrapper>
 
@@ -176,22 +170,19 @@ const Home = ({ width }) => {
             fontWeight={`300`}
             color={`#fff`}
             textAlign={`center`}
-            lineHeight={`1.8`}
-          >
+            lineHeight={`1.8`}>
             <Wrapper
               dr={`row`}
               width={`auto`}
               color={`inherit`}
-              fontSize={`inherit`}
-            >
+              fontSize={`inherit`}>
               외환 및 레버리지 금융상패 거래는
               <Wrapper
                 padding={`0 0 0 5px`}
                 width={`auto`}
                 fontWeight={`500`}
                 color={`inherit`}
-                fontSize={`inherit`}
-              >
+                fontSize={`inherit`}>
                 투자 위험도가 높아 투자의 일부 또는 저부의 손실 위험
               </Wrapper>
               이 있습니다.

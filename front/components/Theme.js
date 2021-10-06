@@ -1,5 +1,5 @@
 export default {
-  basicTheme_C: "#1879B8",
+  basicTheme_C: "##FF3C8E",
   // blue
   subTheme_C: "#31A5F0",
   subTheme2_C: "#106BDC",

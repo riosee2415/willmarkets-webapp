@@ -483,6 +483,7 @@ export const Image = styled.img`
   left: ${(props) => props.left};
   bottom: ${(props) => props.bottom};
   right: ${(props) => props.right};
+  opacity: ${(props) => props.opacity};
 `;
 
 export const ATag = styled.a`

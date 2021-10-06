@@ -106,11 +106,16 @@ const Intro = () => {
       </Wrapper>
 
       <Wrapper color={`#fff`} bgColor={`#000105`}>
-        <RsWrapper dr={`row`}>
+        <RsWrapper dr={`row`} al={`normal`}>
           <Wrapper al={`flex-start`} width={`50%`} padding={`70px 0 60px`}>
             <Wrapper dr={`row`} width={`auto`} fontSize={`25px`}>
               윌마켓의 궁극적인
-              <Text margin={`0 0 0 8px`} padding={`0 2px`} bgColor={`#ea5db1`}>
+              <Text
+                margin={`0 0 0 8px`}
+                padding={`0 2px`}
+                bgColor={`#ea5db1`}
+                lineHeight={`1.3`}
+              >
                 목표
               </Text>
             </Wrapper>
@@ -141,7 +146,89 @@ const Intro = () => {
             </Wrapper>
           </Wrapper>
 
-          <Wrapper width={`50%`}></Wrapper>
+          <Wrapper position={`relative`} width={`50%`} padding={`30px 0 0`}>
+            <Wrapper
+              position={`absolute`}
+              top={`-50px`}
+              left={`-60px`}
+              width={`auto`}
+              zIndex={`0`}
+            >
+              <Image
+                width={`auto`}
+                opacity={`0.3`}
+                src={`https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/willmarkets/assets/images/introduce/image_logo_large_opacity30%25.png`}
+              />
+            </Wrapper>
+
+            <Wrapper position={`relative`} zIndex={`1`} width={`auto`}>
+              <Image
+                width={`auto`}
+                src={`https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/willmarkets/assets/images/introduce/image_worldwide.png`}
+              />
+            </Wrapper>
+          </Wrapper>
+        </RsWrapper>
+      </Wrapper>
+
+      <Wrapper color={`#282828`} bgColor={`#eeeeee`}>
+        <RsWrapper dr={`row`} al={`normal`}>
+          <Wrapper
+            position={`relative`}
+            al={`flex-start`}
+            width={`50%`}
+            padding={`70px 0`}
+          >
+            <Wrapper position={`relative`} zIndex={`1`} width={`auto`}>
+              <Image
+                width={`auto`}
+                src={`https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/willmarkets/assets/images/introduce/image_phone.png`}
+              />
+            </Wrapper>
+          </Wrapper>
+
+          <Wrapper al={`flex-end`} width={`50%`} padding={`70px 0 60px`}>
+            <Wrapper
+              dr={`row`}
+              width={`auto`}
+              fontSize={`25px`}
+              fontWeight={`500`}
+              lineHeight={`1.3`}
+            >
+              최고의
+              <Text
+                margin={`0 0 0 8px`}
+                padding={`0 2px`}
+                color={`#fff`}
+                bgColor={`#ea5db1`}
+              >
+                고객 혜택
+              </Text>
+            </Wrapper>
+
+            <Wrapper
+              dr={`row`}
+              width={`auto`}
+              margin={`30px 0 0`}
+              padding={`0 0 0 240px`}
+              fontWeight={`300`}
+              textAlign={`right`}
+            >
+              <Wrapper display={`block`} width={`auto`}>
+                고객의 자금은 신뢰도와 안정성이 높은
+                <Text
+                  display={`inline`}
+                  padding={`0 0 0 5px`}
+                  fontWeight={`500`}
+                >
+                  금융 선진국인 영국은행
+                </Text>
+                과 거래를 하고 있으며 엄격하게 관리, 보호되고 있습니다.
+              </Wrapper>
+              안정적이고 편리한 시스템을 통해 최적의 거래 환경 제공과 더불어
+              가능한 모든 지원을 아끼지 않을 것을 약속드립니다.
+            </Wrapper>
+          </Wrapper>
         </RsWrapper>
       </Wrapper>
     </ClientLayout>

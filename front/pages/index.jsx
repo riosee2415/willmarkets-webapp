@@ -31,12 +31,28 @@ const Home = ({ width }) => {
         <MainSlider />
       </Wrapper>
 
-      <Wrapper
-        position={`relative`}
-        minHeight={`100vh`}
-        bgImg={`url('https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/willmarkets/assets/images/main/back_download.png')`}
-      >
-        <Wrapper fontSize={`30px`} fontWeight={`500`} color={`#ff7cc2`}>
+      <Wrapper position={`relative`} minHeight={`100vh`}>
+        <Wrapper
+          position={`absolute`}
+          left={`0`}
+          top={`0`}
+          width={`100%`}
+          height={`100%`}
+          bgImg={`url('https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/willmarkets/assets/images/main/back_download.png')`}
+          zIndex={`-2`}
+        ></Wrapper>
+
+        <Wrapper
+          position={`absolute`}
+          left={`0`}
+          top={`0`}
+          width={`100%`}
+          height={`100%`}
+          bgColor={`rgba(0, 0, 0, 0.5)`}
+          zIndex={`-1`}
+        ></Wrapper>
+
+        <Wrapper fontSize={`30px`} fontWeight={`500`} color={`#f776be`}>
           MT4 다운로드
         </Wrapper>
 

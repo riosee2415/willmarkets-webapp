@@ -1,6 +1,6 @@
 import React, { useCallback, useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { withRouter } from "next/router";
+import { withRouter, useRouter } from "next/router";
 import styled from "styled-components";
 import { Result, message, Modal, Button } from "antd";
 import ReCAPTCHA from "react-google-recaptcha";
@@ -226,13 +226,51 @@ const Label = styled.label`
 `;
 
 const Login = () => {
+  ////// VARIABLES //////
+
+  ////// HOOKS //////
   const dispatch = useDispatch();
 
-  const { me } = useSelector((state) => state.user);
+  const router = useRouter();
+
+  const { me, st_userSigninDone, st_userSigninError } = useSelector(
+    (state) => state.user
+  );
+
+  const inputEmail = useInput("");
+  const inputPassword = useInput("");
+
+  console.log(inputEmail, inputPassword);
+
+  ////// TOGGLE //////
+
+  ////// HANDLER //////
+  const moveLinkHandler = useCallback((link) => {
+    router.push(link);
+  }, []);
+
+  const loginHandler = useCallback(() => {
+    if (!emptyCheck(inputEmail.value)) {
+      return message.error("이메일을 입력해주세요.");
+    }
+    if (!emptyCheck(inputPassword.value)) {
+      return message.error("비밀번호를 입력해주세요.");
+    }
+
+    dispatch({
+      type: USER_SIGNIN_REQUEST,
+      data: {
+        email: inputEmail.value,
+        password: inputPassword.value,
+      },
+    });
+  }, [inputEmail, inputPassword]);
 
   const changeCaptchaHandler = useCallback((value) => {
     console.log(value);
   }, []);
+
+  ////// USEEFFECT //////
 
   useEffect(() => {
     if (!me) {
@@ -240,15 +278,29 @@ const Login = () => {
         type: USER_SIGNIN_REQUEST,
         data: {
           email: "4leaf.lsh@gmail.com",
-          password: "fourleaf0309!!",
+          password: "1234",
         },
       });
     }
   }, []);
 
+  useEffect(() => {
+    if (st_userSigninDone) {
+      message.success("로그인이 되었습니다.");
+      moveLinkHandler(`/user`);
+    }
+  }, [st_userSigninDone]);
+
+  useEffect(() => {
+    if (st_userSigninError) {
+      message.success(st_userSigninError);
+    }
+  }, [st_userSigninError]);
+
   return (
     <ClientLayout>
       <div>Hello Login</div>
+
       <Wrapper>
         <ReCAPTCHA
           sitekey={`6LfrU5kcAAAAAPksd-pntn_n9L8LEof76kCO8_ED`}
@@ -256,40 +308,15 @@ const Login = () => {
           onChange={changeCaptchaHandler}
         />
       </Wrapper>
-      <Wrapper dr={`row`}>
-        <TextInput placeholder={`주문 번호를 입력해주세요.`} />
 
-        <CommonButton kindOf={`blue`} placeholder="주문번호를 입력해주세요.">
-          버튼
-        </CommonButton>
-        <CommonButton kindOf={`red`} placeholder="주문번호를 입력해주세요.">
-          버튼
-        </CommonButton>
-        <CommonButton kindOf={`black`} placeholder="주문번호를 입력해주세요.">
-          버튼
-        </CommonButton>
-        <CommonButton>버튼</CommonButton>
-      </Wrapper>
-      <Tab isActive>자금</Tab>
-      <Tab>거래</Tab>
-      <Tab>분석</Tab>
-
-      <CommonModal visible={false}>
-        <p>모달</p>
-      </CommonModal>
       <Wrapper>
-        <Label>라벨</Label>
-      </Wrapper>
-      <Wrapper>
-        <SelecetBox>
-          <option>모든</option>
-          <option>하나</option>
-          <option>둘이</option>
-        </SelecetBox>
-      </Wrapper>
+        <TextInput {...inputEmail} />
+        <TextInput {...inputPassword} />
 
-      <Pagenation className={`active`}>1</Pagenation>
-      <Pagenation>2</Pagenation>
+        <CommonButton kindOf={`blue`} onClick={loginHandler}>
+          버튼
+        </CommonButton>
+      </Wrapper>
     </ClientLayout>
   );
 };

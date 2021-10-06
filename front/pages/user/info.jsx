@@ -3,7 +3,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { withRouter, useRouter } from "next/router";
 import styled from "styled-components";
 import { Result, message, Modal, Input, Button } from "antd";
-import DaumPostCode from "react-daum-postcode";
 import useInput from "../../hooks/useInput";
 import { emptyCheck } from "../../components/commonUtils";
 import { UpOutlined, DownOutlined, CaretDownOutlined } from "@ant-design/icons";
@@ -18,6 +17,7 @@ import {
   LOAD_MY_INFO_REQUEST,
   USER_ME_REQUEST,
   USER_ME_UPDATE_REQUEST,
+  INIT_STATE_REQUEST,
 } from "../../reducers/user";
 import { END } from "redux-saga";
 import axios from "axios";
@@ -200,6 +200,7 @@ const Info = () => {
 
   const fileChangeHandler = useCallback((e, type) => {
     const file = e.target.files[0];
+    console.log(e, type);
 
     if (!file) return;
 
@@ -297,7 +298,7 @@ const Info = () => {
         idType: inputIdType.value,
         idDate1: inputIdDate1.value,
         idDate2: inputIdDate2.value,
-        idFilePath: inputIdFilePath,
+        idFilePath: inputIdFilePath.value,
         idFileOriginName: inputIdFileOriginName.value,
         addrType: inputAddrType.value,
         addrFilePath: inputAddrFilePath.value,
@@ -327,6 +328,14 @@ const Info = () => {
   ]);
 
   ////// USEEFFECT //////
+  useEffect(() => {
+    if (st_userMeUpdateDone) {
+      dispatch({
+        type: LOAD_MY_INFO_REQUEST,
+      });
+    }
+  }, [st_userMeUpdateDone]);
+
   useEffect(() => {
     if (me) {
       inputEmail.setValue(me.email);
@@ -412,6 +421,10 @@ const Info = () => {
       setIsChangeEmail(false);
       setIsSendEmail(false);
       setIsConfirmEmail(false);
+
+      // dispatch({
+      //   type: INIT_STATE_REQUEST,
+      // });
     }
   }, [st_userMeUpdateDone]);
 
@@ -430,8 +443,7 @@ const Info = () => {
         padding={`20px 30px`}
         bgColor={`#fff`}
         border={`1px solid #ededed`}
-        shadow={`2px 2px 10px #e6e6e6`}
-      >
+        shadow={`2px 2px 10px #e6e6e6`}>
         <Wrapper al={`flex-start`}>
           <Wrapper
             al={`flex-start`}
@@ -439,8 +451,7 @@ const Info = () => {
             padding={`0 8px 20px`}
             fontSize={`19px`}
             fontWeight={`700`}
-            borderBottom={`1px solid #ebebeb`}
-          >
+            borderBottom={`1px solid #ebebeb`}>
             내 정보수정
           </Wrapper>
 
@@ -458,8 +469,7 @@ const Info = () => {
                 dr={`row`}
                 al={`normal`}
                 padding={`15px 0`}
-                borderBottom={`1px solid #f6f6f6`}
-              >
+                borderBottom={`1px solid #f6f6f6`}>
                 <Wrapper al={`flex-start`} width={`120px`}>
                   <CustomLabel for={`inp-email`}>
                     {isChangeEmail ? `변경할 이메일` : `이메일`}
@@ -469,8 +479,7 @@ const Info = () => {
                 <Wrapper
                   dr={`row`}
                   ju={`flex-start`}
-                  width={`calc(100% - 120px)`}
-                >
+                  width={`calc(100% - 120px)`}>
                   <CustomInput
                     id={`inp-email`}
                     {...inputEmail}
@@ -486,8 +495,7 @@ const Info = () => {
                     kindOf={isChangeEmail ? `white` : `black`}
                     height={`38px`}
                     margin={`0 0 0 10px`}
-                    onClick={() => setIsChangeEmail(!isChangeEmail)}
-                  >
+                    onClick={() => setIsChangeEmail(!isChangeEmail)}>
                     {isChangeEmail ? `취소` : `변경`}
                   </CommonButton>
 
@@ -496,8 +504,7 @@ const Info = () => {
                       kindOf={`black`}
                       height={`38px`}
                       margin={`0 0 0 10px`}
-                      onClick={checkEmailHandler}
-                    >
+                      onClick={checkEmailHandler}>
                       확인
                     </CommonButton>
                   )}
@@ -509,8 +516,7 @@ const Info = () => {
                   dr={`row`}
                   al={`normal`}
                   padding={`15px 0`}
-                  borderBottom={`1px solid #f6f6f6`}
-                >
+                  borderBottom={`1px solid #f6f6f6`}>
                   <Wrapper al={`flex-start`} width={`120px`}>
                     <CustomLabel for={`inp-email`}>인증코드</CustomLabel>
                   </Wrapper>
@@ -518,16 +524,14 @@ const Info = () => {
                   <Wrapper
                     dr={`row`}
                     ju={`flex-start`}
-                    width={`calc(100% - 120px)`}
-                  >
+                    width={`calc(100% - 120px)`}>
                     <CustomInput id={`inp-email`} {...inputSecret} />
 
                     <CommonButton
                       kindOf={`black`}
                       height={`38px`}
                       margin={`0 0 0 10px`}
-                      onClick={confirmSecretHandler}
-                    >
+                      onClick={confirmSecretHandler}>
                       인증
                     </CommonButton>
                   </Wrapper>
@@ -538,8 +542,7 @@ const Info = () => {
                 dr={`row`}
                 al={`normal`}
                 padding={`15px 0`}
-                borderBottom={`1px solid #f6f6f6`}
-              >
+                borderBottom={`1px solid #f6f6f6`}>
                 <Wrapper al={`flex-start`} width={`120px`}>
                   <CustomLabel for={`inp-password`}>비밀번호</CustomLabel>
                 </Wrapper>
@@ -547,8 +550,7 @@ const Info = () => {
                 <Wrapper
                   dr={`row`}
                   ju={`flex-start`}
-                  width={`calc(100% - 120px)`}
-                >
+                  width={`calc(100% - 120px)`}>
                   <CustomInput
                     type={`password`}
                     id={`inp-password`}
@@ -561,8 +563,7 @@ const Info = () => {
                 dr={`row`}
                 al={`normal`}
                 padding={`15px 0`}
-                borderBottom={`1px solid #f6f6f6`}
-              >
+                borderBottom={`1px solid #f6f6f6`}>
                 <Wrapper al={`flex-start`} width={`120px`}>
                   <CustomLabel for={`inp-userName`}>이름</CustomLabel>
                 </Wrapper>
@@ -570,8 +571,7 @@ const Info = () => {
                 <Wrapper
                   dr={`row`}
                   ju={`flex-start`}
-                  width={`calc(100% - 120px)`}
-                >
+                  width={`calc(100% - 120px)`}>
                   <CustomInput id={`inp-userName`} {...inputUserName} />
                 </Wrapper>
               </Wrapper>
@@ -580,8 +580,7 @@ const Info = () => {
                 dr={`row`}
                 al={`normal`}
                 padding={`15px 0`}
-                borderBottom={`1px solid #f6f6f6`}
-              >
+                borderBottom={`1px solid #f6f6f6`}>
                 <Wrapper al={`flex-start`} width={`120px`}>
                   <CustomLabel>성별</CustomLabel>
                 </Wrapper>
@@ -589,8 +588,7 @@ const Info = () => {
                 <Wrapper
                   dr={`row`}
                   ju={`flex-start`}
-                  width={`calc(100% - 120px)`}
-                >
+                  width={`calc(100% - 120px)`}>
                   <Wrapper dr={`row`} width={`auto`} margin={`0 10px`}>
                     <RadioInput
                       id={`inp-gender-1`}
@@ -602,8 +600,7 @@ const Info = () => {
                     <Label
                       for={`inp-gender-1`}
                       fontSize={`15px`}
-                      cursor={`pointer`}
-                    >
+                      cursor={`pointer`}>
                       남자
                     </Label>
                   </Wrapper>
@@ -619,8 +616,7 @@ const Info = () => {
                     <Label
                       for={`inp-gender-2`}
                       fontSize={`15px`}
-                      cursor={`pointer`}
-                    >
+                      cursor={`pointer`}>
                       여자
                     </Label>
                   </Wrapper>
@@ -631,8 +627,7 @@ const Info = () => {
                 dr={`row`}
                 al={`normal`}
                 padding={`15px 0`}
-                borderBottom={`1px solid #f6f6f6`}
-              >
+                borderBottom={`1px solid #f6f6f6`}>
                 <Wrapper al={`flex-start`} width={`120px`}>
                   <CustomLabel for={`inp-address`}>주소</CustomLabel>
                 </Wrapper>
@@ -649,8 +644,7 @@ const Info = () => {
                       kindOf={`black`}
                       height={`38px`}
                       margin={`0 0 0 10px`}
-                      onClick={toggleAddressModalHandler}
-                    >
+                      onClick={toggleAddressModalHandler}>
                       검색
                     </CommonButton>
                   </Wrapper>
@@ -677,8 +671,7 @@ const Info = () => {
                 dr={`row`}
                 al={`normal`}
                 padding={`15px 0`}
-                borderBottom={`1px solid #f6f6f6`}
-              >
+                borderBottom={`1px solid #f6f6f6`}>
                 <Wrapper al={`flex-start`} width={`120px`}>
                   <CustomLabel>유형선택</CustomLabel>
                 </Wrapper>
@@ -686,8 +679,7 @@ const Info = () => {
                 <Wrapper
                   dr={`row`}
                   ju={`flex-start`}
-                  width={`calc(100% - 120px)`}
-                >
+                  width={`calc(100% - 120px)`}>
                   <Combo
                     isBorder={true}
                     itemAlign={`flex-start`}
@@ -697,8 +689,7 @@ const Info = () => {
                     shadow={`0 2px 8px rgb(0 0 0 / 9%)`}
                     hoverBorder={`1px solid #d7a6ed`}
                     hoverShadow={`0 3px 8px rgb(0 0 0 / 12%)`}
-                    onClick={() => setComboIdType(!comboIdType)}
-                  >
+                    onClick={() => setComboIdType(!comboIdType)}>
                     <ComboTitle>
                       <Wrapper>{inputIdType.value || `유형 선택`}</Wrapper>
                       <CaretDownOutlined />
@@ -707,26 +698,22 @@ const Info = () => {
                     <ComboList isView={comboIdType}>
                       <ComboListItem
                         isActive={!inputIdType.value}
-                        onClick={() => inputIdType.setValue("")}
-                      >
+                        onClick={() => inputIdType.setValue("")}>
                         유형 선택
                       </ComboListItem>
                       <ComboListItem
                         isActive={inputIdType.value === `신분증`}
-                        onClick={() => inputIdType.setValue(`신분증`)}
-                      >
+                        onClick={() => inputIdType.setValue(`신분증`)}>
                         신분증
                       </ComboListItem>
                       <ComboListItem
                         isActive={inputIdType.value === `여권`}
-                        onClick={() => inputIdType.setValue(`여권`)}
-                      >
+                        onClick={() => inputIdType.setValue(`여권`)}>
                         여권
                       </ComboListItem>
                       <ComboListItem
                         isActive={inputIdType.value === `운전면허증`}
-                        onClick={() => inputIdType.setValue(`운전면허증`)}
-                      >
+                        onClick={() => inputIdType.setValue(`운전면허증`)}>
                         운전면허증
                       </ComboListItem>
                     </ComboList>
@@ -738,8 +725,7 @@ const Info = () => {
                 dr={`row`}
                 al={`normal`}
                 padding={`15px 0`}
-                borderBottom={`1px solid #f6f6f6`}
-              >
+                borderBottom={`1px solid #f6f6f6`}>
                 <Wrapper al={`flex-start`} width={`120px`}>
                   <CustomLabel for={`inp-idDate1`}>문제날짜</CustomLabel>
                 </Wrapper>
@@ -747,8 +733,7 @@ const Info = () => {
                 <Wrapper
                   dr={`row`}
                   ju={`flex-start`}
-                  width={`calc(100% - 120px)`}
-                >
+                  width={`calc(100% - 120px)`}>
                   <CustomInput
                     id={`inp-idDate1`}
                     placeholder={`YYYY-MM-DD`}
@@ -761,8 +746,7 @@ const Info = () => {
                 dr={`row`}
                 al={`normal`}
                 padding={`15px 0`}
-                borderBottom={`1px solid #f6f6f6`}
-              >
+                borderBottom={`1px solid #f6f6f6`}>
                 <Wrapper al={`flex-start`} width={`120px`}>
                   <CustomLabel for={`inp-idDate2`}>만료날짜</CustomLabel>
                 </Wrapper>
@@ -770,8 +754,7 @@ const Info = () => {
                 <Wrapper
                   dr={`row`}
                   ju={`flex-start`}
-                  width={`calc(100% - 120px)`}
-                >
+                  width={`calc(100% - 120px)`}>
                   <CustomInput
                     id={`inp-idDate2`}
                     placeholder={`YYYY-MM-DD`}
@@ -784,8 +767,7 @@ const Info = () => {
                 dr={`row`}
                 al={`normal`}
                 padding={`15px 0`}
-                borderBottom={`1px solid #f6f6f6`}
-              >
+                borderBottom={`1px solid #f6f6f6`}>
                 <Wrapper al={`flex-start`} width={`120px`}>
                   <CustomLabel for={`inp-idFile`}>파일첨부</CustomLabel>
                 </Wrapper>
@@ -793,8 +775,7 @@ const Info = () => {
                 <Wrapper
                   dr={`row`}
                   ju={`flex-start`}
-                  width={`calc(100% - 120px)`}
-                >
+                  width={`calc(100% - 120px)`}>
                   <FileInput
                     type={`file`}
                     ref={fileRef}
@@ -809,8 +790,7 @@ const Info = () => {
                     kindOf={`black`}
                     height={`38px`}
                     margin={`0 0 0 10px`}
-                    onClick={() => fileRef.current.click()}
-                  >
+                    onClick={() => fileRef.current.click()}>
                     첨부
                   </CommonButton>
                 </Wrapper>
@@ -832,8 +812,7 @@ const Info = () => {
                 dr={`row`}
                 al={`normal`}
                 padding={`15px 0`}
-                borderBottom={`1px solid #f6f6f6`}
-              >
+                borderBottom={`1px solid #f6f6f6`}>
                 <Wrapper al={`flex-start`} width={`120px`}>
                   <CustomLabel>유형선택</CustomLabel>
                 </Wrapper>
@@ -841,8 +820,7 @@ const Info = () => {
                 <Wrapper
                   dr={`row`}
                   ju={`flex-start`}
-                  width={`calc(100% - 120px)`}
-                >
+                  width={`calc(100% - 120px)`}>
                   <Combo
                     isBorder={true}
                     itemAlign={`flex-start`}
@@ -853,8 +831,7 @@ const Info = () => {
                     shadow={`0 2px 8px rgb(0 0 0 / 9%)`}
                     hoverBorder={`1px solid #d7a6ed`}
                     hoverShadow={`0 3px 8px rgb(0 0 0 / 12%)`}
-                    onClick={() => setComboAddrType(!comboAddrType)}
-                  >
+                    onClick={() => setComboAddrType(!comboAddrType)}>
                     <ComboTitle>
                       <Wrapper>{inputAddrType.value || `유형 선택`}</Wrapper>
                       <CaretDownOutlined />
@@ -863,32 +840,27 @@ const Info = () => {
                     <ComboList isView={comboAddrType}>
                       <ComboListItem
                         isActive={!inputAddrType.value}
-                        onClick={() => inputAddrType.setValue("")}
-                      >
+                        onClick={() => inputAddrType.setValue("")}>
                         유형 선택
                       </ComboListItem>
                       <ComboListItem
                         isActive={inputAddrType.value === `가스 요금`}
-                        onClick={() => inputAddrType.setValue(`가스 요금`)}
-                      >
+                        onClick={() => inputAddrType.setValue(`가스 요금`)}>
                         가스 요금
                       </ComboListItem>
                       <ComboListItem
                         isActive={inputAddrType.value === `전기 빌`}
-                        onClick={() => inputAddrType.setValue(`전기 빌`)}
-                      >
+                        onClick={() => inputAddrType.setValue(`전기 빌`)}>
                         전기 빌
                       </ComboListItem>
                       <ComboListItem
                         isActive={inputAddrType.value === `워터 빌`}
-                        onClick={() => inputAddrType.setValue(`워터 빌`)}
-                      >
+                        onClick={() => inputAddrType.setValue(`워터 빌`)}>
                         워터 빌
                       </ComboListItem>
                       <ComboListItem
                         isActive={inputAddrType.value === `은행 명세서`}
-                        onClick={() => inputAddrType.setValue(`은행 명세서`)}
-                      >
+                        onClick={() => inputAddrType.setValue(`은행 명세서`)}>
                         은행 명세서
                       </ComboListItem>
                     </ComboList>
@@ -900,8 +872,7 @@ const Info = () => {
                 dr={`row`}
                 al={`normal`}
                 padding={`15px 0`}
-                borderBottom={`1px solid #f6f6f6`}
-              >
+                borderBottom={`1px solid #f6f6f6`}>
                 <Wrapper al={`flex-start`} width={`120px`}>
                   <CustomLabel for={`inp-addrFile`}>파일첨부</CustomLabel>
                 </Wrapper>
@@ -909,8 +880,7 @@ const Info = () => {
                 <Wrapper
                   dr={`row`}
                   ju={`flex-start`}
-                  width={`calc(100% - 120px)`}
-                >
+                  width={`calc(100% - 120px)`}>
                   <FileInput
                     type={`file`}
                     ref={fileRef2}
@@ -925,8 +895,7 @@ const Info = () => {
                     kindOf={`black`}
                     height={`38px`}
                     margin={`0 0 0 10px`}
-                    onClick={() => fileRef2.current.click()}
-                  >
+                    onClick={() => fileRef2.current.click()}>
                     첨부
                   </CommonButton>
                 </Wrapper>
@@ -940,8 +909,7 @@ const Info = () => {
           ju={`flex-start`}
           margin={`50px 0 0`}
           padding={`20px 0 0`}
-          borderTop={`1px solid #ebebeb`}
-        >
+          borderTop={`1px solid #ebebeb`}>
           <CommonButton kindOf={`red`} onClick={updateUserMeHandler}>
             정보 수정
           </CommonButton>

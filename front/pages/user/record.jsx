@@ -30,41 +30,34 @@ const Record = () => {
   ////// HOOKS //////
   const { me } = useSelector((state) => state.user);
 
-  const { depositList } = useSelector((state) => state.deposit);
+  const [viewData, setViewData] = useState(null);
 
-  const { withdrawList } = useSelector((state) => state.withdraw);
-
-  console.log(me);
   ////// TOGGLE //////
 
   ////// HANDLER //////
 
   ////// USEEFFECT //////
-  useEffect(() => {
-    if (me) {
-    }
-  }, [me]);
-  useEffect(() => {
-    const query = router.query;
-    dispatch({
-      type: DEPOSIT_LIST_REQUEST,
-      data: {
-        page: query.page ? query.page : "",
-        search: query.search ? query.search : "",
-        listType: query.sort ? query.sort : 1,
-      },
-    });
-  }, []);
 
   useEffect(() => {
-    const query = router.query;
-    dispatch({
-      type: WITHDRAW_LIST_REQUEST,
-      data: {
-        page: query.page ? query.page : "",
-        search: query.search ? query.search : "",
-      },
+    const deposits = me.Deposits.map((data) => {
+      return {
+        type: "입금",
+        ...data,
+      };
     });
+
+    const withdraws = me.Withdraws.map((data) => {
+      return {
+        type: "출금",
+        ...data,
+      };
+    });
+
+    const dataList = [...deposits, ...withdraws];
+    dataList.sort(function (a, b) {
+      return b["id"] - a["id"];
+    });
+    setViewData(dataList);
   }, []);
 
   return (
@@ -105,10 +98,8 @@ const Record = () => {
               </TableRow>
             </TableHeader>
 
-            <TableBody>
-              {[] ? (
-                [
-                  {
+            {/*                                          
+                        {
                     _id: 1,
                     createdAt: "2021-01-01 12:00:00",
                     type: "입금",
@@ -135,7 +126,12 @@ const Record = () => {
                     isComplete: false,
                     completedAt: "",
                   },
-                ].map((data, idx) => {
+                ] */}
+
+            <TableBody>
+              {me ? (
+                viewData &&
+                viewData.map((data, idx) => {
                   return (
                     <TableRow key={data._id}>
                       <TableCol width={`50px`}>{idx + 1}</TableCol>

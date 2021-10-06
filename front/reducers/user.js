@@ -127,6 +127,8 @@ export const LOAD_MY_INFO_REQUEST = "LOAD_MY_INFO_REQUEST";
 export const LOAD_MY_INFO_SUCCESS = "LOAD_MY_INFO_SUCCESS";
 export const LOAD_MY_INFO_FAILURE = "LOAD_MY_INFO_FAILURE";
 //
+export const INIT_STATE_REQUEST = "INIT_STATE_REQUEST";
+//
 export const CURRENT_ADMINMENU_STATUS = "CURRENT_ADMINMENU_STATUS";
 
 const reducer = (state = initailState, action) =>
@@ -244,17 +246,17 @@ const reducer = (state = initailState, action) =>
       }
       //
       case USER_ME_UPDATE_REQUEST:
-        draft.st_userMeUpdateLoading = false;
-        draft.st_userMeUpdateDone = false;
-        draft.st_userMeUpdateError = action.error;
+        draft.st_userMeUpdateLoading = true;
+        draft.st_userMeUpdateDone = null;
+        draft.st_userMeUpdateError = false;
         break;
       case USER_ME_UPDATE_SUCCESS:
-        draft.st_userMeUpdateLoading = true;
+        draft.st_userMeUpdateLoading = false;
         draft.st_userMeUpdateDone = true;
         break;
       case USER_ME_UPDATE_FAILURE:
         draft.st_userMeUpdateLoading = false;
-        draft.st_userMeUpdateDone = true;
+        draft.st_userMeUpdateDone = false;
         draft.st_userMeUpdateError = action.error;
         break;
       //
@@ -378,6 +380,12 @@ const reducer = (state = initailState, action) =>
         draft.st_loadMyInfoError = action.error;
         break;
       //
+      case INIT_STATE_REQUEST:
+        draft.st_userFindPasswordDone = false;
+        draft.st_userFindPasswordError = false;
+        draft.st_userFindPasswordConfirmDone = false;
+        draft.st_userFindPasswordConfirmError = false;
+        break;
       case CURRENT_ADMINMENU_STATUS: {
         const exist = draft.currentAdminMenu.filter(
           (data) => data === action.data.key

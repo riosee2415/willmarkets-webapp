@@ -43,262 +43,229 @@ const upload = multer({
 
 const router = express.Router();
 
-router.get(
-  ["/list/:listType", "/list/:listType/:listType2", "/list"],
-  isAdminCheck,
-  async (req, res, next) => {
-    const { listType, listType2 } = req.params;
-    const { page, search, searchType, searchComplete } = req.query;
+router.get("/list", isAdminCheck, async (req, res, next) => {
+  const { listType, listType2 } = req.params;
+  const { page, search, searchType, searchComplete } = req.query;
 
-    const LIMIT = 10;
+  const LIMIT = 10;
 
-    const _page = page ? page : 1;
-    const searchName = search ? search : "";
-    const searchTypes = searchType ? searchType : "";
-    const searchCompletes = searchComplete ? searchComplete : "";
+  const _page = page ? page : 1;
+  const searchName = search ? search : "";
+  const searchTypes = searchType ? searchType : "";
+  const searchCompletes = searchComplete ? searchComplete : "";
 
-    const __page = _page - 1;
-    const OFFSET = __page * 10;
+  const __page = _page - 1;
+  const OFFSET = __page * 10;
 
-    let findType = 1;
-    let findType2 = 1;
+  let findType = 1;
+  let findType2 = 1;
 
-    const validation = Number(listType);
-    const validation2 = Number(listType2);
+  try {
+    let users = [];
 
-    const numberFlag = isNaN(validation);
-    const numberFlag2 = isNaN(validation2);
-
-    if (numberFlag) {
-      findType = parseInt(1);
-    }
-    if (numberFlag2) {
-      findType2 = parseInt(1);
-    }
-
-    if (validation === 1) {
-      findType = 1;
-    } else if (validation === 2) {
-      findType = 2;
-    } else if (validation === 3) {
-      findType = 3;
-    }
-
-    if (validation2 === 1) {
-      findType2 = 1;
-    } else if (validation2 === 2) {
-      findType2 = 2;
-    } else if (validation2 === 3) {
-      findType2 = 3;
-    }
-
-    try {
-      let users = [];
-
-      const totalUser = await User.findAll({
-        where: {
-          username: {
-            [Op.like]: `%${searchName}%`,
-          },
+    const totalUser = await User.findAll({
+      where: {
+        username: {
+          [Op.like]: `%${searchName}%`,
         },
-      });
+      },
+    });
 
-      const userLen = totalUser.length;
+    const userLen = totalUser.length;
 
-      const lastPage =
-        userLen % LIMIT > 0 ? userLen / LIMIT + 1 : userLen / LIMIT;
+    const lastPage =
+      userLen % LIMIT > 0 ? userLen / LIMIT + 1 : userLen / LIMIT;
 
-      switch (parseInt(findType)) {
-        case 1:
-          users = await User.findAll({
-            offset: OFFSET,
-            limit: LIMIT,
-            where: {
-              username: {
-                [Op.like]: `%${searchName}%`,
-              },
+    switch (parseInt(findType)) {
+      case 1:
+        users = await User.findAll({
+          offset: OFFSET,
+          limit: LIMIT,
+          where: {
+            username: {
+              [Op.like]: `%${searchName}%`,
             },
-            include: [
-              { model: Deposit },
-              { model: Withdraw },
-              { model: LiveAccount },
-              { model: DemoAccount },
-            ],
-            attributes: {
-              exclude: ["password"],
+          },
+          include: [
+            { model: Deposit },
+            { model: Withdraw },
+            { model: LiveAccount },
+            { model: DemoAccount },
+          ],
+          attributes: {
+            exclude: ["password"],
+          },
+          order: [["createdAt", "DESC"]],
+        });
+
+        findType = 1;
+        break;
+
+      case 2:
+        users = await User.findAll({
+          offset: OFFSET,
+          limit: LIMIT,
+          where: {
+            isComplete: {
+              [Op.like]: `%${searchCompletes}%`,
             },
-            order: [["createdAt", "DESC"]],
-          });
-
-          findType = 1;
-          break;
-
-        case 2:
-          users = await User.findAll({
-            offset: OFFSET,
-            limit: LIMIT,
-            where: {
-              isComplete: {
-                [Op.like]: `%${searchCompletes}%`,
-              },
-              userType: {
-                [Op.like]: `%${searchTypes}%`,
-              },
-              username: {
-                [Op.like]: `%${searchName}%`,
-              },
+            userType: {
+              [Op.like]: `%${searchTypes}%`,
             },
-            include: [
-              { model: Deposit },
-              { model: Withdraw },
-              { model: LiveAccount },
-              { model: DemoAccount },
-            ],
-            attributes: {
-              exclude: ["password"],
+            username: {
+              [Op.like]: `%${searchName}%`,
             },
-            order: [["createdAt", "DESC"]],
-          });
-          findType = 1;
+          },
+          include: [
+            { model: Deposit },
+            { model: Withdraw },
+            { model: LiveAccount },
+            { model: DemoAccount },
+          ],
+          attributes: {
+            exclude: ["password"],
+          },
+          order: [["createdAt", "DESC"]],
+        });
+        findType = 1;
 
-          break;
+        break;
 
-        case 3:
-          users = await User.findAll({
-            offset: OFFSET,
-            limit: LIMIT,
-            where: {
-              isComplete: {
-                [Op.like]: `%${searchCompletes}%`,
-              },
-              userType: {
-                [Op.like]: `%${searchTypes}%`,
-              },
-              username: {
-                [Op.like]: `%${searchName}%`,
-              },
+      case 3:
+        users = await User.findAll({
+          offset: OFFSET,
+          limit: LIMIT,
+          where: {
+            isComplete: {
+              [Op.like]: `%${searchCompletes}%`,
             },
-            include: [
-              { model: Deposit },
-              { model: Withdraw },
-              { model: LiveAccount },
-              { model: DemoAccount },
-            ],
-            attributes: {
-              exclude: ["password"],
+            userType: {
+              [Op.like]: `%${searchTypes}%`,
             },
-            order: [["createdAt", "DESC"]],
-          });
-          findType = 1;
-
-          break;
-
-        default:
-          break;
-      }
-
-      switch (parseInt(findType2)) {
-        case 1:
-          users = await User.findAll({
-            offset: OFFSET,
-            limit: LIMIT,
-            where: {
-              isComplete: {
-                [Op.like]: `%${searchCompletes}%`,
-              },
-              userType: {
-                [Op.like]: `%${searchTypes}%`,
-              },
-              username: {
-                [Op.like]: `%${searchName}%`,
-              },
+            username: {
+              [Op.like]: `%${searchName}%`,
             },
-            include: [
-              { model: Deposit },
-              { model: Withdraw },
-              { model: LiveAccount },
-              { model: DemoAccount },
-            ],
-            attributes: {
-              exclude: ["password"],
-            },
-            order: [["createdAt", "DESC"]],
-          });
-          findType2 = 1;
+          },
+          include: [
+            { model: Deposit },
+            { model: Withdraw },
+            { model: LiveAccount },
+            { model: DemoAccount },
+          ],
+          attributes: {
+            exclude: ["password"],
+          },
+          order: [["createdAt", "DESC"]],
+        });
+        findType = 1;
 
-          break;
+        break;
 
-        case 2:
-          users = await User.findAll({
-            offset: OFFSET,
-            limit: LIMIT,
-            where: {
-              isComplete: {
-                [Op.like]: `%${searchCompletes}%`,
-              },
-              userType: {
-                [Op.like]: `%${searchTypes}%`,
-              },
-              username: {
-                [Op.like]: `%${searchName}%`,
-              },
-            },
-            include: [
-              { model: Deposit },
-              { model: Withdraw },
-              { model: LiveAccount },
-              { model: DemoAccount },
-            ],
-            attributes: {
-              exclude: ["password"],
-            },
-            order: [["createdAt", "DESC"]],
-          });
-          findType2 = 1;
-
-          break;
-
-        case 3:
-          users = await User.findAll({
-            offset: OFFSET,
-            limit: LIMIT,
-            where: {
-              isComplete: {
-                [Op.like]: `%${searchCompletes}%`,
-              },
-              userType: {
-                [Op.like]: `%${searchTypes}%`,
-              },
-              username: {
-                [Op.like]: `%${searchName}%`,
-              },
-            },
-            include: [
-              { model: Deposit },
-              { model: Withdraw },
-              { model: LiveAccount },
-              { model: DemoAccount },
-            ],
-            attributes: {
-              exclude: ["password"],
-            },
-            order: [["createdAt", "DESC"]],
-          });
-          findType2 = 1;
-
-          break;
-
-        default:
-          break;
-      }
-
-      return res.status(200).json({ users, lastPage: parseInt(lastPage) });
-    } catch (error) {
-      console.error(error);
-      return res.status(401).send("사용자 목록을 불러올 수 없습니다.");
+      default:
+        break;
     }
+
+    switch (parseInt(findType2)) {
+      case 1:
+        users = await User.findAll({
+          offset: OFFSET,
+          limit: LIMIT,
+          where: {
+            isComplete: {
+              [Op.like]: `%${searchCompletes}%`,
+            },
+            userType: {
+              [Op.like]: `%${searchTypes}%`,
+            },
+            username: {
+              [Op.like]: `%${searchName}%`,
+            },
+          },
+          include: [
+            { model: Deposit },
+            { model: Withdraw },
+            { model: LiveAccount },
+            { model: DemoAccount },
+          ],
+          attributes: {
+            exclude: ["password"],
+          },
+          order: [["createdAt", "DESC"]],
+        });
+        findType2 = 1;
+
+        break;
+
+      case 2:
+        users = await User.findAll({
+          offset: OFFSET,
+          limit: LIMIT,
+          where: {
+            isComplete: {
+              [Op.like]: `%${searchCompletes}%`,
+            },
+            userType: {
+              [Op.like]: `%${searchTypes}%`,
+            },
+            username: {
+              [Op.like]: `%${searchName}%`,
+            },
+          },
+          include: [
+            { model: Deposit },
+            { model: Withdraw },
+            { model: LiveAccount },
+            { model: DemoAccount },
+          ],
+          attributes: {
+            exclude: ["password"],
+          },
+          order: [["createdAt", "DESC"]],
+        });
+        findType2 = 1;
+
+        break;
+
+      case 3:
+        users = await User.findAll({
+          offset: OFFSET,
+          limit: LIMIT,
+          where: {
+            isComplete: {
+              [Op.like]: `%${searchCompletes}%`,
+            },
+            userType: {
+              [Op.like]: `%${searchTypes}%`,
+            },
+            username: {
+              [Op.like]: `%${searchName}%`,
+            },
+          },
+          include: [
+            { model: Deposit },
+            { model: Withdraw },
+            { model: LiveAccount },
+            { model: DemoAccount },
+          ],
+          attributes: {
+            exclude: ["password"],
+          },
+          order: [["createdAt", "DESC"]],
+        });
+        findType2 = 1;
+
+        break;
+
+      default:
+        break;
+    }
+
+    return res.status(200).json({ users, lastPage: parseInt(lastPage) });
+  } catch (error) {
+    console.error(error);
+    return res.status(401).send("사용자 목록을 불러올 수 없습니다.");
   }
-);
+});
 
 router.get("/signin", async (req, res, next) => {
   console.log("❌❌❌❌❌❌❌❌❌❌❌❌❌❌");

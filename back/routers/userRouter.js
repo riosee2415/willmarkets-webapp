@@ -47,9 +47,6 @@ router.get(
   ["/list/:listType", "/list/:listType/:listType2", "/list"],
   isAdminCheck,
   async (req, res, next) => {
-    let findType = 1;
-    let findType2 = 1;
-
     const { listType, listType2 } = req.params;
     const { page, search } = req.query;
 
@@ -60,6 +57,9 @@ router.get(
 
     const __page = _page - 1;
     const OFFSET = __page * 10;
+
+    let findType = 1;
+    let findType2 = 1;
 
     const validation = Number(listType);
     const validation2 = Number(listType2);
@@ -74,16 +74,19 @@ router.get(
       findType2 = parseInt(1);
     }
 
-    if (validation >= 3) {
-      findType = 3;
-    } else {
+    if (validation === 1) {
       findType = 1;
-    }
-
-    if (validation2 >= 3) {
-      findType2 = 3;
+    } else if (validation === 2) {
+      findType = 2;
     } else {
+      findType = 3;
+    }
+    if (validation2 === 1) {
       findType2 = 1;
+    } else if (validation2 === 2) {
+      findType2 = 2;
+    } else {
+      findType2 = 3;
     }
 
     try {
@@ -124,13 +127,15 @@ router.get(
             order: [["createdAt", "DESC"]],
           });
 
+          findType = 1;
           break;
+
         case 2:
           users = await User.findAll({
             offset: OFFSET,
             limit: LIMIT,
             where: {
-              type: "1",
+              userType: "1",
               username: {
                 [Op.like]: `%${searchName}%`,
               },
@@ -146,7 +151,8 @@ router.get(
             },
             order: [["createdAt", "DESC"]],
           });
-
+          findType = 1;
+          console.log(" listType1 모의계좌");
           break;
 
         case 3:
@@ -154,7 +160,7 @@ router.get(
             offset: OFFSET,
             limit: LIMIT,
             where: {
-              type: "2",
+              userType: "2",
               username: {
                 [Op.like]: `%${searchName}%`,
               },
@@ -168,8 +174,10 @@ router.get(
             attributes: {
               exclude: ["password"],
             },
-            order: [["username", "ASC"]],
+            order: [["createdAt", "DESC"]],
           });
+          findType = 1;
+          console.log("listType1 실거래계좌");
           break;
 
         default:
@@ -197,6 +205,8 @@ router.get(
             },
             order: [["createdAt", "DESC"]],
           });
+          findType2 = 1;
+          console.log("listType2 전체");
           break;
 
         case 2:
@@ -220,6 +230,8 @@ router.get(
             },
             order: [["createdAt", "DESC"]],
           });
+          findType2 = 1;
+          console.log("listType2 미승인");
           break;
 
         case 3:
@@ -243,6 +255,8 @@ router.get(
             },
             order: [["createdAt", "DESC"]],
           });
+          findType2 = 1;
+          console.log("listType2 승인");
           break;
 
         default:

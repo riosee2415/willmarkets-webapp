@@ -443,7 +443,7 @@ router.get("/me", isLoggedIn, async (req, res, next) => {
   }
 });
 
-router.post("/me/update", async (req, res, next) => {
+router.patch("/me/update", async (req, res, next) => {
   const {
     id,
     email,

@@ -270,7 +270,11 @@ const Mobile = () => {
               <Wrapper al={`flex-start`} width={`auto`}>
                 <Wrapper display={`block`} fontSize={`25px`} fontWeight={`500`}>
                   윌마켓 MT4의
-                  <Text display={`inline`} bgColor={`#f253a8`}>
+                  <Text
+                    display={`inline`}
+                    margin={`0 0 0 5px`}
+                    bgColor={`#f253a8`}
+                  >
                     장점
                   </Text>
                 </Wrapper>

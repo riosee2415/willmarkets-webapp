@@ -1,27 +1,16 @@
-import React, { useCallback, useEffect, useRef, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { withRouter } from "next/router";
-import styled from "styled-components";
-import { Result, message } from "antd";
-import useInput from "../../hooks/useInput";
-import { emptyCheck } from "../../components/commonUtils";
+import React from "react";
 import wrapper from "../../store/configureStore";
 import { LOAD_MY_INFO_REQUEST } from "../../reducers/user";
 import { END } from "redux-saga";
 import axios from "axios";
 import {} from "@ant-design/icons";
 import {
-  ColWrapper,
-  RowWrapper,
   Image,
   Wrapper,
-  WholeWrapper,
   RsWrapper,
-  CommonButton,
   Text,
 } from "../../components/commonComponents";
 import ClientLayout from "../../components/ClientLayout";
-import Theme from "../../components/Theme";
 import SubBanner from "../../components/SubBanner";
 
 const Ecn = () => {

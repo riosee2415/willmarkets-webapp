@@ -148,6 +148,7 @@ export const Wrapper = styled.div`
 export const RsWrapper = styled.article`
   width: 1350px;
   height: ${(props) => props.height || `100%`};
+  min-height: ${(props) => props.minHeight};
   ${(props) => props.minHeight}
   color: ${(props) => props.color};
   display: ${(props) => props.display || `flex`};

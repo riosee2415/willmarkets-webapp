@@ -173,6 +173,7 @@ const AppHeader = ({ children, width }) => {
                 fontSize={`13px`}
                 color={`#fff`}
                 cursor={`pointer`}
+                onClick={() => moveLinkHandler(`/login`)}
               >
                 로그인
               </Wrapper>
@@ -183,6 +184,7 @@ const AppHeader = ({ children, width }) => {
                 fontSize={`13px`}
                 color={`#fff`}
                 cursor={`pointer`}
+                onClick={() => moveLinkHandler(`/signup`)}
               >
                 회원가입
               </Wrapper>
@@ -345,6 +347,11 @@ const AppHeader = ({ children, width }) => {
                       onClick={() => moveLinkHandler(`/trading/provider`)}
                     >
                       호가 제공사
+                    </MenuListItemWrapper>
+                    <MenuListItemWrapper
+                      onClick={() => moveLinkHandler(`/trading/time`)}
+                    >
+                      거래시간
                     </MenuListItemWrapper>
                   </MenuListWrapper>
                 </MenuWrapper>

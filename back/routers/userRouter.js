@@ -564,6 +564,36 @@ router.post("/checkEmail", async (req, res, next) => {
   }
 });
 
+router.post("/secretEmail", async (req, res, next) => {
+  const { email } = req.body;
+  try {
+    const UUID = generateUUID();
+
+    await sendSecretMail(
+      email,
+      `🔐 [보안 인증코드 입니다.] WILLMARKET 에서 보안인증 코드를 발송했습니다.`,
+      `
+        <div>
+          <h3>WILLMARKET</h3>
+          <hr />
+          <p>보안 인증코드를 발송해드립니다. WILLMARKET 홈페이지의 인증코드 입력란에 정확히 입력해주시기 바랍니다.</p>
+          <p>인증코드는 [<strong>${UUID}</strong>] 입니다. </p>
+
+          <br /><hr />
+          <article>
+            발송해드린 인증코드는 외부로 유출하시거나, 유출 될 경우 개인정보 침해의 위험이 있으니, 필히 본인만 사용하며 타인에게 양도하거나 알려주지 마십시오.
+          </article>
+        </div>
+        `
+    );
+
+    return res.status(200).json(UUID);
+  } catch (error) {
+    console.error(error);
+    return res.status(401).send("처리중 문제가 발생하였습니다.");
+  }
+});
+
 router.post("/findPass", async (req, res, next) => {
   const { email } = req.body;
 

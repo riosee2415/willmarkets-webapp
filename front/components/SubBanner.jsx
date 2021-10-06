@@ -63,6 +63,10 @@ const SubBanner = ({
           subMenuName: "호가 제공사",
           subMenuLink: "/trading/provider",
         },
+        {
+          subMenuName: "거래시간",
+          subMenuLink: "/trading/time",
+        },
       ],
     },
     {
@@ -151,7 +155,8 @@ const SubBanner = ({
           top={`20px`}
           width={`auto`}
           color={`#fff`}
-          fontSize={`38px`}
+          fontSize={`40px`}
+          fontWeight={`500`}
           borderBottom={`2px solid #b12774`}
           lineHeight={`1.3`}
           zIndex={`2`}

@@ -36,7 +36,7 @@ const Pc = () => {
               dr={`row`}
               padding={`0 10px`}
               width={`auto`}
-              fontSize={`22px`}
+              fontSize={`24px`}
             >
               Windows에서
               <Text padding={`0 5px`} fontWeight={`400`} color={`#ec5bac`}>
@@ -196,7 +196,11 @@ const Pc = () => {
             <Wrapper al={`flex-start`} ju={`flex-start`} width={`50%`}>
               <Wrapper display={`block`} fontSize={`25px`} fontWeight={`500`}>
                 윌마켓 MT4의
-                <Text display={`inline`} bgColor={`#f253a8`}>
+                <Text
+                  display={`inline`}
+                  margin={`0 0 0 5px`}
+                  bgColor={`#f253a8`}
+                >
                   장점
                 </Text>
               </Wrapper>

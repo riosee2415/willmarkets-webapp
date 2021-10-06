@@ -1,9 +1,16 @@
-import React from "react";
+import React, { useCallback } from "react";
 import { Wrapper, RsWrapper } from "./commonComponents";
 import Theme from "./Theme";
 import styled from "styled-components";
+import { useRouter } from "next/router";
 
 const AppFooter = () => {
+  const router = useRouter();
+
+  const moveLinkHandler = useCallback((link) => {
+    router.push(link);
+  });
+
   return (
     <Wrapper>
       <Wrapper height={`60px`} bgColor={`#222222`}>
@@ -20,6 +27,8 @@ const AppFooter = () => {
               width={`auto`}
               color={`inherit`}
               fontSize={`inherit`}
+              cursor={`pointer`}
+              onClick={() => moveLinkHandler(`/company/intro`)}
             >
               Willmarkets 소개
             </Wrapper>
@@ -28,6 +37,8 @@ const AppFooter = () => {
               width={`auto`}
               color={`inherit`}
               fontSize={`inherit`}
+              cursor={`pointer`}
+              onClick={() => moveLinkHandler(`/signup`)}
             >
               계좌 개설
             </Wrapper>
@@ -36,6 +47,8 @@ const AppFooter = () => {
               width={`auto`}
               color={`inherit`}
               fontSize={`inherit`}
+              cursor={`pointer`}
+              onClick={() => moveLinkHandler(`/support`)}
             >
               고객지원
             </Wrapper>

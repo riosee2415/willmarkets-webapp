@@ -52,7 +52,11 @@ const GlobalStyles = createGlobalStyle`
     }
   
   a:hover {
-  color : inherit;
+    color : inherit;
+  }
+  
+  .ant-message {
+    z-index: 99999;
   }
   
   @media (max-width : 576px) {

@@ -49,7 +49,7 @@ router.get(["/list/:listType", "/list"], async (req, res, next) => {
 
   let _listType = Number(listType);
 
-  if (_listType > 2 || !!listType) {
+  if (_listType > 2 || !listType) {
     _listType = 2;
   }
 
@@ -78,6 +78,7 @@ router.get(["/list/:listType", "/list"], async (req, res, next) => {
       depositLen % LIMIT > 0 ? depositLen / LIMIT + 1 : depositLen / LIMIT;
 
     let deposits = [];
+    let images = [];
     switch (_listType) {
       case 1:
         deposits = await Deposit.findAll({
@@ -90,32 +91,42 @@ router.get(["/list/:listType", "/list"], async (req, res, next) => {
                 [Op.like]: `%${_search}%`,
               },
             },
+            attributes: ["username"],
           },
-          order: [["createdAt", "DESC"]],
-        });
-        break;
-      case 2:
-        deposits = await Deposit.findAll({
-          offset: OFFSET,
-          limit: LIMIT,
-          include: [
-            {
-              model: User,
-              where: {
-                username: {
-                  [Op.like]: `%${_search}%`,
-                },
-              },
-            },
+          attributes: [
+            "createdAt",
+            "selectBank",
+            "bankNo",
+            "isComplete",
+            "completedAt",
           ],
           order: [["createdAt", "DESC"]],
         });
+
+        images = [];
+        break;
+      case 2:
+        deposits = [];
+
+        images = await DepositImage.findAll({
+          attributes: ["createdAt"],
+          order: [["createdAt", "DESC"]],
+          include: [
+            {
+              model: User,
+              attributes: ["username"],
+            },
+          ],
+        });
+
         break;
       default:
         break;
     }
 
-    return res.status(200).json({ deposits, lastPage: parseInt(lastPage) });
+    return res
+      .status(200)
+      .json({ deposits, images, lastPage: parseInt(lastPage) });
   } catch (error) {
     console.error(error);
     return res.status(401).send("입금 신청 목록을 불러올 수 없습니다.");

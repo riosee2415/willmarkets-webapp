@@ -192,6 +192,10 @@ export const RsWrapper = styled.article`
 `;
 
 export const CommonButton = styled.button`
+  display: ${(props) => props.display || `flex`};
+  justify-content: ${(props) => props.ju || `center`};
+  align-items: ${(props) => props.al || `center`};
+  flex-direction: ${(props) => props.dr};
   width: ${(props) => props.width};
   height: ${(props) => props.height};
   line-height: ${(props) => props.lineHeight};

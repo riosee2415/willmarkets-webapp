@@ -153,6 +153,7 @@ const AppHeader = ({ children, width }) => {
     document.addEventListener("scroll", handleScroll);
     return () => document.removeEventListener("scroll", handleScroll);
   }, [pageY]);
+
   return (
     <>
       <WebRow

@@ -48,12 +48,14 @@ router.get(
   isAdminCheck,
   async (req, res, next) => {
     const { listType, listType2 } = req.params;
-    const { page, search } = req.query;
+    const { page, search, searchType, searchComplete } = req.query;
 
     const LIMIT = 10;
 
     const _page = page ? page : 1;
     const searchName = search ? search : "";
+    const searchTypes = searchType ? searchType : "";
+    const searchCompletes = searchComplete ? searchComplete : "";
 
     const __page = _page - 1;
     const OFFSET = __page * 10;
@@ -78,14 +80,15 @@ router.get(
       findType = 1;
     } else if (validation === 2) {
       findType = 2;
-    } else {
+    } else if (validation === 3) {
       findType = 3;
     }
+
     if (validation2 === 1) {
       findType2 = 1;
     } else if (validation2 === 2) {
       findType2 = 2;
-    } else {
+    } else if (validation2 === 3) {
       findType2 = 3;
     }
 
@@ -135,7 +138,12 @@ router.get(
             offset: OFFSET,
             limit: LIMIT,
             where: {
-              userType: "1",
+              isComplete: {
+                [Op.like]: `%${searchCompletes}%`,
+              },
+              userType: {
+                [Op.like]: `%${searchTypes}%`,
+              },
               username: {
                 [Op.like]: `%${searchName}%`,
               },
@@ -152,7 +160,7 @@ router.get(
             order: [["createdAt", "DESC"]],
           });
           findType = 1;
-          console.log(" listType1 모의계좌");
+
           break;
 
         case 3:
@@ -160,7 +168,12 @@ router.get(
             offset: OFFSET,
             limit: LIMIT,
             where: {
-              userType: "2",
+              isComplete: {
+                [Op.like]: `%${searchCompletes}%`,
+              },
+              userType: {
+                [Op.like]: `%${searchTypes}%`,
+              },
               username: {
                 [Op.like]: `%${searchName}%`,
               },
@@ -177,7 +190,7 @@ router.get(
             order: [["createdAt", "DESC"]],
           });
           findType = 1;
-          console.log("listType1 실거래계좌");
+
           break;
 
         default:
@@ -190,6 +203,12 @@ router.get(
             offset: OFFSET,
             limit: LIMIT,
             where: {
+              isComplete: {
+                [Op.like]: `%${searchCompletes}%`,
+              },
+              userType: {
+                [Op.like]: `%${searchTypes}%`,
+              },
               username: {
                 [Op.like]: `%${searchName}%`,
               },
@@ -206,7 +225,7 @@ router.get(
             order: [["createdAt", "DESC"]],
           });
           findType2 = 1;
-          console.log("listType2 전체");
+
           break;
 
         case 2:
@@ -214,7 +233,12 @@ router.get(
             offset: OFFSET,
             limit: LIMIT,
             where: {
-              isComplete: false,
+              isComplete: {
+                [Op.like]: `%${searchCompletes}%`,
+              },
+              userType: {
+                [Op.like]: `%${searchTypes}%`,
+              },
               username: {
                 [Op.like]: `%${searchName}%`,
               },
@@ -231,7 +255,7 @@ router.get(
             order: [["createdAt", "DESC"]],
           });
           findType2 = 1;
-          console.log("listType2 미승인");
+
           break;
 
         case 3:
@@ -239,7 +263,12 @@ router.get(
             offset: OFFSET,
             limit: LIMIT,
             where: {
-              isComplete: true,
+              isComplete: {
+                [Op.like]: `%${searchCompletes}%`,
+              },
+              userType: {
+                [Op.like]: `%${searchTypes}%`,
+              },
               username: {
                 [Op.like]: `%${searchName}%`,
               },
@@ -256,7 +285,7 @@ router.get(
             order: [["createdAt", "DESC"]],
           });
           findType2 = 1;
-          console.log("listType2 승인");
+
           break;
 
         default:

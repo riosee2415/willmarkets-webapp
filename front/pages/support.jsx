@@ -69,8 +69,6 @@ const Support = () => {
   const inputContent = useInput("");
   const inputAgree = useInput(false);
 
-  console.log(inputAgree.value);
-
   ////// TOGGLE //////
 
   ////// HANDLER //////

@@ -1,8 +1,8 @@
 import React, { useCallback, useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { withRouter, useRouter } from "next/router";
+import { useRouter } from "next/router";
 import styled from "styled-components";
-import { message, Modal, Button } from "antd";
+import { message } from "antd";
 import ReCAPTCHA from "react-google-recaptcha";
 import useInput from "../hooks/useInput";
 import { emptyCheck } from "../components/commonUtils";
@@ -13,9 +13,7 @@ import { LOAD_MY_INFO_REQUEST, USER_SIGNIN_REQUEST } from "../reducers/user";
 import {
   Image,
   Wrapper,
-  WholeWrapper,
   RsWrapper,
-  Combo,
   TextInput,
   CommonButton,
 } from "../components/commonComponents";
@@ -43,8 +41,6 @@ const Login = () => {
 
   const inputEmail = useInput("");
   const inputPassword = useInput("");
-
-  console.log(inputEmail, inputPassword);
 
   ////// TOGGLE //////
 
@@ -77,8 +73,8 @@ const Login = () => {
   ////// USEEFFECT //////
   useEffect(() => {
     if (st_userSigninDone) {
-      message.success("로그인이 되었습니다.");
       moveLinkHandler(`/user`);
+      message.success("로그인 되었습니다.");
     }
   }, [st_userSigninDone]);
 
@@ -112,9 +108,10 @@ const Login = () => {
         >
           <Wrapper
             margin={`0 45px 0 0`}
-            padding={`80px 70px`}
+            padding={`60px 50px`}
             width={`500px`}
             bgColor={`#fff`}
+            shadow={`1px 1px 8px #dedede`}
           >
             <Image
               width={`auto`}

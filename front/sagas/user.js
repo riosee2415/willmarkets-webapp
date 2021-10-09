@@ -283,7 +283,7 @@ function* userFindPassword(action) {
 // SAGA AREA ********************************************************************************************************
 // ******************************************************************************************************************
 function userFindPasswordUpdateAPI(data) {
-  return axios.patcha(`/api/user/findPass/update`, data);
+  return axios.patch(`/api/user/findPass/update`, data);
 }
 
 function* userFindPasswordUpdate(action) {

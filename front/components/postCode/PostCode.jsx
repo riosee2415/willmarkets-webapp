@@ -10,6 +10,8 @@ const PostCodeModal = styled(Modal)`
   & .ant-modal-footer {
     display: none;
   }
+  top: 50%;
+  margin-top: -215px;
 `;
 
 const style = {

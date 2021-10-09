@@ -48,11 +48,11 @@ module.exports = class User extends Model {
           allowNull: true,
         },
         idDate1: {
-          type: DataTypes.DATE,
+          type: DataTypes.STRING(200),
           allowNull: true,
         },
         idDate2: {
-          type: DataTypes.DATE,
+          type: DataTypes.STRING(200),
           allowNull: true,
         },
         idFilePath: {

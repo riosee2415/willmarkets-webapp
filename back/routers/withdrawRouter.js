@@ -18,7 +18,7 @@ router.get("/list", async (req, res, next) => {
   const OFFSET = __page * 10;
 
   try {
-    const totalWithDraw = await Withdraw.findAll({
+    const totalWithdraw = await Withdraw.findAll({
       include: {
         model: User,
         where: {
@@ -29,10 +29,10 @@ router.get("/list", async (req, res, next) => {
       },
     });
 
-    const withDrawLen = totalWithDraw.length;
+    const withdrawLen = totalWithdraw.length;
 
     const lastPage =
-      withDrawLen % LIMIT > 0 ? withDrawLen / LIMIT + 1 : withDrawLen / LIMIT;
+      withdrawLen % LIMIT > 0 ? withdrawLen / LIMIT + 1 : withdrawLen / LIMIT;
 
     const withdraws = await Withdraw.findAll({
       offset: OFFSET,
@@ -46,7 +46,9 @@ router.get("/list", async (req, res, next) => {
         },
       },
     });
-    return res.status(200).json({ withdraws, lastPage: parseInt(lastPage) });
+    return res
+      .status(200)
+      .json({ withdraws, lastPage: parseInt(lastPage), withdrawLen });
   } catch (error) {
     console.error(error);
     return res.status(401).send("출금 신청 목록을 불러올 수 없습니다.");

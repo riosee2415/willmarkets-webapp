@@ -61,26 +61,31 @@ router.get(["/list/:listType", "/list"], async (req, res, next) => {
   const __page = _page - 1;
   const OFFSET = __page * 10;
   try {
-    const totalDeposit = await Deposit.findAll({
-      include: {
-        model: User,
-        where: {
-          username: {
-            [Op.like]: `%${_search}%`,
-          },
-        },
-      },
-    });
-
-    const depositLen = totalDeposit.length;
-
-    const lastPage =
-      depositLen % LIMIT > 0 ? depositLen / LIMIT + 1 : depositLen / LIMIT;
+    let depositLen = 0;
+    let lastPage = 0;
 
     let deposits = [];
-    let images = [];
+
+    let totalDeposit;
+
     switch (_listType) {
       case 1:
+        totalDeposit = await Deposit.findAll({
+          include: {
+            model: User,
+            where: {
+              username: {
+                [Op.like]: `%${_search}%`,
+              },
+            },
+          },
+        });
+
+        depositLen = totalDeposit.length;
+
+        lastPage =
+          depositLen % LIMIT > 0 ? depositLen / LIMIT + 1 : depositLen / LIMIT;
+
         deposits = await Deposit.findAll({
           offset: OFFSET,
           limit: LIMIT,
@@ -91,30 +96,40 @@ router.get(["/list/:listType", "/list"], async (req, res, next) => {
                 [Op.like]: `%${_search}%`,
               },
             },
-            attributes: ["username"],
+            attributes: ["id", "username"],
           },
-          attributes: [
-            "createdAt",
-            "selectBank",
-            "bankNo",
-            "isComplete",
-            "completedAt",
-          ],
           order: [["createdAt", "DESC"]],
         });
 
-        images = [];
         break;
       case 2:
-        deposits = [];
+        totalDeposit = await DepositImage.findAll({
+          include: {
+            model: User,
+            where: {
+              username: {
+                [Op.like]: `%${_search}%`,
+              },
+            },
+          },
+        });
 
-        images = await DepositImage.findAll({
-          attributes: ["createdAt"],
+        depositLen = totalDeposit.length;
+
+        lastPage =
+          depositLen % LIMIT > 0 ? depositLen / LIMIT + 1 : depositLen / LIMIT;
+
+        deposits = await DepositImage.findAll({
           order: [["createdAt", "DESC"]],
           include: [
             {
               model: User,
-              attributes: ["username"],
+              where: {
+                username: {
+                  [Op.like]: `%${_search}%`,
+                },
+              },
+              attributes: ["id", "username"],
             },
           ],
         });
@@ -126,7 +141,7 @@ router.get(["/list/:listType", "/list"], async (req, res, next) => {
 
     return res
       .status(200)
-      .json({ deposits, images, lastPage: parseInt(lastPage) });
+      .json({ deposits, lastPage: parseInt(lastPage), depositLen });
   } catch (error) {
     console.error(error);
     return res.status(401).send("입금 신청 목록을 불러올 수 없습니다.");

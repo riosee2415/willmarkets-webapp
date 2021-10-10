@@ -2,6 +2,7 @@ import produce from "../util/produce";
 
 export const initailState = {
   depositList: null,
+  depositLen: 0,
   filePath: null,
   fileOriginName: null,
   //
@@ -61,7 +62,8 @@ const reducer = (state = initailState, action) =>
       case DEPOSIT_LIST_SUCCESS: {
         draft.st_depositListLoading = false;
         draft.st_depositListDone = true;
-        draft.depositList = action.data;
+        draft.depositList = action.data.deposits;
+        draft.depositLen = action.data.depositLen;
         break;
       }
       case DEPOSIT_LIST_FAILURE: {

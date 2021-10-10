@@ -47,7 +47,9 @@ router.get(["/list/:listType", "/list"], async (req, res, next) => {
       order: [["createdAt", "DESC"]],
     });
 
-    return res.status(200).json({ demoAccounts, lastPage: parseInt(lastPage) });
+    return res
+      .status(200)
+      .json({ demoAccounts, lastPage: parseInt(lastPage), demoLen });
   } catch (error) {
     console.error(error);
     return res.status(401).send("데모 계좌 목록을 불러올 수 없습니다.");

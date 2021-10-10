@@ -47,7 +47,9 @@ router.get(["/list/:listType", "/list"], async (req, res, next) => {
       order: [["createdAt", "DESC"]],
     });
 
-    return res.status(200).json({ liveAccounts, lastPage: parseInt(lastPage) });
+    return res
+      .status(200)
+      .json({ liveAccounts, lastPage: parseInt(lastPage), liveLen });
   } catch (error) {
     console.error(error);
     return res.status(401).send("라이브 계좌 목록을 불러올 수 없습니다.");

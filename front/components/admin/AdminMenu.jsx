@@ -8,6 +8,7 @@ import {
   UserOutlined,
   BookOutlined,
   PhoneOutlined,
+  DollarOutlined,
 } from "@ant-design/icons";
 import styled from "styled-components";
 import { useRouter } from "next/router";
@@ -146,6 +147,25 @@ const AdminMenu = () => {
         >
           <Menu.Item key="/admin/user/userList">
             <MenuName>회원 리스트</MenuName>
+          </Menu.Item>
+        </SubMenu>
+        <SubMenu
+          key="sub7"
+          icon={<DollarOutlined />}
+          title="입출금 관리"
+          onTitleClick={titleClickHandler("sub7")}
+        >
+          <Menu.Item key="/admin/account/deposit">
+            <MenuName>입금 관리</MenuName>
+          </Menu.Item>
+          <Menu.Item key="/admin/account/withdraw">
+            <MenuName>출금 관리</MenuName>
+          </Menu.Item>
+          <Menu.Item key="/admin/account/live">
+            <MenuName>라이브계좌 관리</MenuName>
+          </Menu.Item>
+          <Menu.Item key="/admin/account/demo">
+            <MenuName>데모계좌 관리</MenuName>
           </Menu.Item>
         </SubMenu>
         <SubMenu

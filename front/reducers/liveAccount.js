@@ -1,6 +1,7 @@
 import produce from "../util/produce";
 export const initailState = {
   liveList: null,
+  liveLen: 0,
   //
   st_liveAccountListLoading: false,
   st_liveAccountListDone: false,
@@ -42,7 +43,8 @@ const reducer = (state = initailState, action) =>
       case LIVE_ACCOUNT_LIST_SUCCESS: {
         draft.st_liveAccountListLoading = false;
         draft.st_liveAccountListDone = true;
-        draft.liveList = action.data;
+        draft.liveList = action.data.liveAccounts;
+        draft.liveLen = action.data.liveLen;
         break;
       }
       case LIVE_ACCOUNT_LIST_FAILURE: {

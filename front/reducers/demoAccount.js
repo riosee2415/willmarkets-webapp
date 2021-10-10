@@ -1,7 +1,7 @@
 import produce from "../util/produce";
 
 export const initailState = {
-  demoAccountList: null,
+  demoList: null,
   //
   st_demoAccountListLoading: false,
   st_demoAccountListDone: false,
@@ -43,7 +43,8 @@ const reducer = (state = initailState, action) =>
       case DEMO_ACCOUNT_LIST_SUCCESS: {
         draft.st_demoAccountListLoading = false;
         draft.st_demoAccountListDone = true;
-        draft.demoAccountList = action.data;
+        draft.demoList = action.data.demoAccounts;
+        draft.demoLen = action.data.demoLen;
         break;
       }
       case DEMO_ACCOUNT_LIST_FAILURE: {

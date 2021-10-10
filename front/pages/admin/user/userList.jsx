@@ -93,20 +93,6 @@ const UserList = ({}) => {
 
   ////// USEEFFECT //////
   useEffect(() => {
-    const query = router.query;
-
-    dispatch({
-      type: USER_LIST_REQUEST,
-      data: {
-        page: 1,
-        search: query.search || ``,
-        searchType: currentTab1 === 1 ? `2` : currentTab1 === 2 ? `1` : ``,
-        searchComplete: currentTab2 === 1 ? `0` : currentTab2 === 2 ? `1` : ``,
-      },
-    });
-  }, [router.query]);
-
-  useEffect(() => {
     searchDataHandler();
   }, [currentTab1, currentTab2]);
 
@@ -134,7 +120,16 @@ const UserList = ({}) => {
 
   useEffect(() => {
     if (st_userUpdatePermitDone) {
-      searchDataHandler();
+      dispatch({
+        type: USER_LIST_REQUEST,
+        data: {
+          page: currentPage,
+          search: inputSearch.value || ``,
+          searchType: currentTab1 === 1 ? `2` : currentTab1 === 2 ? `1` : ``,
+          searchComplete:
+            currentTab2 === 1 ? `0` : currentTab2 === 2 ? `1` : ``,
+        },
+      });
       toggleModalHandler2();
 
       message.success("정상적으로 처리되었습니다.");
@@ -178,15 +173,13 @@ const UserList = ({}) => {
   ////// HANDLER //////
   const otherPageCall = useCallback(
     (changePage) => {
-      const query = router.query;
-
       setCurrentPage(changePage);
 
       dispatch({
         type: USER_LIST_REQUEST,
         data: {
           page: changePage,
-          search: query.search || ``,
+          search: inputSearch.value || ``,
           searchType: currentTab1 === 1 ? `2` : currentTab1 === 2 ? `1` : ``,
           searchComplete:
             currentTab2 === 1 ? `0` : currentTab2 === 2 ? `1` : ``,
@@ -358,7 +351,7 @@ const UserList = ({}) => {
   return (
     <AdminLayout>
       <PageHeader
-        breadcrumbs={["회원 관리", "관리"]}
+        breadcrumbs={["회원 관리"]}
         title={`회원 리스트`}
         subTitle={`홈페이지에 가입한 회원를 확인할 수 있습니다.`}
       />
@@ -445,9 +438,38 @@ const UserList = ({}) => {
         onOk={updatePermitHandler}
       >
         <Wrapper padding={`20px`} al={`flex-start`}>
-          <Wrapper width={`auto`} fontSize={`15px`} margin={`0 0 4px`}>
-            해당 회원을 승인하시겠습니까 ?
+          <Wrapper
+            al={`flex-start`}
+            padding={`0 0 5px`}
+            margin={`0 0 10px`}
+            fontSize={`15px`}
+            fontWeight={`500`}
+            borderBottom={`1px solid #eee`}
+          >
+            해당 입금신청을 승인하시겠습니까 ?
           </Wrapper>
+
+          <Wrapper
+            width={`auto`}
+            fontSize={`14px`}
+            margin={`8px 0 4px`}
+          ></Wrapper>
+          <Input style={{ width: "100%" }} />
+
+          <Wrapper width={`auto`} fontSize={`14px`} margin={`8px 0 4px`}>
+            지갑금액
+          </Wrapper>
+          <Input style={{ width: "100%" }} />
+
+          <Wrapper width={`auto`} fontSize={`14px`} margin={`8px 0 4px`}>
+            지갑금액
+          </Wrapper>
+          <Input style={{ width: "100%" }} />
+
+          <Wrapper width={`auto`} fontSize={`14px`} margin={`8px 0 4px`}>
+            지갑금액
+          </Wrapper>
+          <Input style={{ width: "100%" }} />
         </Wrapper>
       </Modal>
 

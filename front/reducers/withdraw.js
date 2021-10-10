@@ -2,6 +2,7 @@ import produce from "../util/produce";
 
 export const initailState = {
   withdrawList: null,
+  withdrawLen: 0,
   //
   st_withdrawListLoading: false,
   st_withdrawListDone: false,
@@ -40,7 +41,8 @@ const reducer = (state = initailState, action) =>
       case WITHDRAW_LIST_SUCCESS: {
         draft.st_withdrawListLoading = false;
         draft.st_withdrawListDone = true;
-        draft.withdrawList = action.data;
+        draft.withdrawList = action.data.withdraws;
+        draft.withdrawLen = action.data.withdrawLen;
         break;
       }
       case WITHDRAW_LIST_FAILURE: {

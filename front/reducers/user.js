@@ -61,6 +61,10 @@ export const initailState = {
   st_userSecretEmailDone: false,
   st_userSecretEmailError: null,
   //
+  st_userLogoutLoading: false,
+  st_userLogoutDone: false,
+  st_userLogoutError: null,
+  //
   st_loadMyInfoLoading: false,
   st_loadMyInfoDone: false,
   st_loadMyInfoError: null,
@@ -123,6 +127,10 @@ export const USER_CHECK_EMAIL_FAILURE = "USER_CHECK_EMAIL_FAILURE";
 export const USER_SECRET_EMAIL_REQUEST = "USER_SECRET_EMAIL_REQUEST";
 export const USER_SECRET_EMAIL_SUCCESS = "USER_SECRET_EMAIL_SUCCESS";
 export const USER_SECRET_EMAIL_FAILURE = "USER_SECRET_EMAIL_FAILURE";
+//
+export const USER_LOGOUT_REQUEST = "USER_LOGOUT_REQUEST";
+export const USER_LOGOUT_SUCCESS = "USER_LOGOUT_SUCCESS";
+export const USER_LOGOUT_FAILURE = "USER_LOGOUT_FAILURE";
 //
 export const LOAD_MY_INFO_REQUEST = "LOAD_MY_INFO_REQUEST";
 export const LOAD_MY_INFO_SUCCESS = "LOAD_MY_INFO_SUCCESS";
@@ -202,6 +210,7 @@ const reducer = (state = initailState, action) =>
       case USER_SIGNIN_SUCCESS: {
         draft.st_userSigninLoading = false;
         draft.st_userSigninDone = true;
+        draft.me = action.data;
         break;
       }
       case USER_SIGNIN_FAILURE: {
@@ -364,6 +373,21 @@ const reducer = (state = initailState, action) =>
         draft.st_userSecretEmailLoading = false;
         draft.st_userSecretEmailDone = false;
         draft.st_userSecretEmailError = action.error;
+        break;
+      //
+      case USER_LOGOUT_REQUEST:
+        draft.st_userLogoutLoading = true;
+        draft.st_userLogoutError = null;
+        draft.st_userLogoutDone = false;
+        break;
+      case USER_LOGOUT_SUCCESS:
+        draft.st_userLogoutLoading = false;
+        draft.st_userLogoutDone = true;
+        break;
+      case USER_LOGOUT_FAILURE:
+        draft.st_userLogoutLoading = false;
+        draft.st_userLogoutDone = false;
+        draft.st_userLogoutError = action.error;
         break;
       //
       case LOAD_MY_INFO_REQUEST:

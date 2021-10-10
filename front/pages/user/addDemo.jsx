@@ -201,6 +201,13 @@ const AddDemo = () => {
   }, []);
 
   useEffect(() => {
+    if (!me) {
+      message.error("로그인 후 이용할 수 있습니다.");
+      router.push("/login");
+    }
+  }, [me]);
+
+  useEffect(() => {
     if (st_demoAccountCreateDone) {
       setCurrentStep(1);
 

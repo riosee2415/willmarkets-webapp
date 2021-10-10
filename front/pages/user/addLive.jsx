@@ -196,6 +196,15 @@ const AddLive = () => {
   }, []);
 
   useEffect(() => {
+    if (!me) {
+      message.error("로그인 후 이용할 수 있습니다.");
+      router.push("/login");
+    } else if (me.userType === `1`) {
+      router.push("/user?access=false");
+    }
+  }, [me]);
+
+  useEffect(() => {
     if (st_liveAccountCreateDone) {
       setCurrentStep(1);
 
@@ -227,7 +236,8 @@ const AddLive = () => {
         padding={`20px 30px`}
         bgColor={`#fff`}
         border={`1px solid #ededed`}
-        shadow={`2px 2px 10px #e6e6e6`}>
+        shadow={`2px 2px 10px #e6e6e6`}
+      >
         <Wrapper al={`flex-start`}>
           <Wrapper
             al={`flex-start`}
@@ -235,7 +245,8 @@ const AddLive = () => {
             padding={`0 8px 20px`}
             fontSize={`19px`}
             fontWeight={`700`}
-            borderBottom={`1px solid #ebebeb`}>
+            borderBottom={`1px solid #ebebeb`}
+          >
             라이브 계좌
           </Wrapper>
           {currentTab === 0 && (
@@ -254,7 +265,8 @@ const AddLive = () => {
                           isActive={inputPlatform.value === data}
                           onClick={() =>
                             changeSelectBoxHandler(data, inputPlatform.setValue)
-                          }>
+                          }
+                        >
                           {data}
                         </InputBox>
                       );
@@ -282,7 +294,8 @@ const AddLive = () => {
                               typeList.find((data2) => data.type === data2.type)
                                 .leverage[0]
                             );
-                          }}>
+                          }}
+                        >
                           {data.type}
                         </InputBox>
                       );
@@ -310,7 +323,8 @@ const AddLive = () => {
                                   data,
                                   inputLeverage.setValue
                                 )
-                              }>
+                              }
+                            >
                               {data}
                             </InputBox>
                           );
@@ -319,7 +333,8 @@ const AddLive = () => {
 
                   <CustomLabel
                     for={`inp-trade-password`}
-                    margin={`40px 0 15px`}>
+                    margin={`40px 0 15px`}
+                  >
                     <Wrapper className={`required`}>*</Wrapper>
                     거래용 비번
                   </CustomLabel>
@@ -348,17 +363,20 @@ const AddLive = () => {
                     ju={`flex-start`}
                     margin={`50px 0 0`}
                     padding={`20px 0 0`}
-                    borderTop={`1px solid #ebebeb`}>
+                    borderTop={`1px solid #ebebeb`}
+                  >
                     <CommonButton
                       kindOf={`white`}
                       margin={`0 10px 0 0`}
-                      onClick={() => moveLinkHandler(`/user`)}>
+                      onClick={() => moveLinkHandler(`/user`)}
+                    >
                       이전
                     </CommonButton>
 
                     <CommonButton
                       kindOf={`red`}
-                      onClick={createLiveAccountHandler}>
+                      onClick={createLiveAccountHandler}
+                    >
                       계좌 개설
                     </CommonButton>
                   </Wrapper>
@@ -373,7 +391,8 @@ const AddLive = () => {
                       <Wrapper
                         fontSize={`25px`}
                         width={`auto`}
-                        borderBottom={`1px solid #c9c9c9`}>
+                        borderBottom={`1px solid #c9c9c9`}
+                      >
                         라이브계좌 생성 완료 !
                       </Wrapper>
                     }
@@ -382,7 +401,8 @@ const AddLive = () => {
                         margin={`10px 0 0`}
                         padding={`0 15px`}
                         width={`auto`}
-                        lineHeight={`1.8`}>
+                        lineHeight={`1.8`}
+                      >
                         정상적으로 라이브 계좌가 생성되었습니다.
                       </Wrapper>
                     }
@@ -393,7 +413,8 @@ const AddLive = () => {
                         width={`180px`}
                         height={`40px`}
                         margin={`0 5px`}
-                        onClick={initValueHandler}>
+                        onClick={initValueHandler}
+                      >
                         처음으로
                       </CommonButton>,
                     ]}

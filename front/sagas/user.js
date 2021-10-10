@@ -53,6 +53,10 @@ import {
   USER_SECRET_EMAIL_SUCCESS,
   USER_SECRET_EMAIL_FAILURE,
   //
+  USER_LOGOUT_REQUEST,
+  USER_LOGOUT_SUCCESS,
+  USER_LOGOUT_FAILURE,
+  //
   LOAD_MY_INFO_REQUEST,
   LOAD_MY_INFO_SUCCESS,
   LOAD_MY_INFO_FAILURE,
@@ -377,6 +381,31 @@ function* userSecretEmail(action) {
 // ******************************************************************************************************************
 // ******************************************************************************************************************
 
+// SAGA AREA ********************************************************************************************************
+// ******************************************************************************************************************
+function userLogoutAPI() {
+  return axios.get(`/api/user/logout`);
+}
+
+function* userLogout(action) {
+  try {
+    const result = yield call(userLogoutAPI);
+    yield put({
+      type: USER_LOGOUT_SUCCESS,
+      data: result.data,
+    });
+  } catch (err) {
+    console.error(err);
+    yield put({
+      type: USER_LOGOUT_FAILURE,
+      error: err.response.data,
+    });
+  }
+}
+// ******************************************************************************************************************
+// ******************************************************************************************************************
+// ******************************************************************************************************************
+
 //////////////////////////////////////////////////////////////
 
 function* watchLoadMyInfo() {
@@ -435,6 +464,10 @@ function* watchUserSecretEmail() {
   yield takeLatest(USER_SECRET_EMAIL_REQUEST, userSecretEmail);
 }
 
+function* watchUserLogout() {
+  yield takeLatest(USER_LOGOUT_REQUEST, userLogout);
+}
+
 //////////////////////////////////////////////////////////////
 export default function* userSaga() {
   yield all([
@@ -452,5 +485,6 @@ export default function* userSaga() {
     fork(watchUserIdImageFile),
     fork(watchUserCheckEmail),
     fork(watchUserSecretEmail),
+    fork(watchUserLogout),
   ]);
 }

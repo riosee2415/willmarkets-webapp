@@ -274,6 +274,14 @@ const Deposit = () => {
   }, [inputFilePath, inputFileOriginName]);
 
   ////// USEEFFECT //////
+  useEffect(() => {
+    if (!me) {
+      message.error("로그인 후 이용할 수 있습니다.");
+      router.push("/login");
+    } else if (me.userType === `1`) {
+      router.push("/user?access=false");
+    }
+  }, [me]);
 
   useEffect(() => {
     initValueHandler();
@@ -368,7 +376,8 @@ const Deposit = () => {
         padding={`20px 30px`}
         bgColor={`#fff`}
         border={`1px solid #ededed`}
-        shadow={`2px 2px 10px #e6e6e6`}>
+        shadow={`2px 2px 10px #e6e6e6`}
+      >
         <Wrapper al={`flex-start`}>
           <Wrapper
             al={`flex-start`}
@@ -376,7 +385,8 @@ const Deposit = () => {
             padding={`0 8px 20px`}
             fontSize={`19px`}
             fontWeight={`700`}
-            borderBottom={`1px solid #ebebeb`}>
+            borderBottom={`1px solid #ebebeb`}
+          >
             입금
           </Wrapper>
 
@@ -389,7 +399,8 @@ const Deposit = () => {
                     ju={`flex-start`}
                     margin={`0 0 20px`}
                     fontSize={`18px`}
-                    fontWeight={`700`}>
+                    fontWeight={`700`}
+                  >
                     <Wrapper
                       width={`auto`}
                       margin={`0 10px 0 0`}
@@ -397,7 +408,8 @@ const Deposit = () => {
                       fontSize={`14px`}
                       fontWeight={`700`}
                       bgColor={`#aa28c9`}
-                      color={`#fff`}>
+                      color={`#fff`}
+                    >
                       Step 01
                     </Wrapper>
                     입금방식 선택
@@ -415,28 +427,32 @@ const Deposit = () => {
                           width={`300px`}
                           height={`225px`}
                           radius={`8px`}
-                          onClick={() => selectBankHandler(data)}>
+                          onClick={() => selectBankHandler(data)}
+                        >
                           <Wrapper
                             dr={`row`}
                             al={`normal`}
                             ju={`flex-start`}
                             padding={`0 0 5px`}
                             margin={`0 0 10px`}
-                            borderBottom={`1px solid #f3f3f3`}>
+                            borderBottom={`1px solid #f3f3f3`}
+                          >
                             <Wrapper
                               al={`flex-start`}
                               ju={`flex-start`}
                               width={`90px`}
                               fontSize={`15px`}
                               fontWeight={`700`}
-                              color={`#a8559e`}>
+                              color={`#a8559e`}
+                            >
                               은행명
                             </Wrapper>
 
                             <Wrapper
                               al={`flex-start`}
                               width={`calc(100% - 90px)`}
-                              fontSize={`14px`}>
+                              fontSize={`14px`}
+                            >
                               <Text isEllipsis={true} width={`100%`}>
                                 {data.bankName}
                               </Text>
@@ -449,21 +465,24 @@ const Deposit = () => {
                             ju={`flex-start`}
                             padding={`0 0 5px`}
                             margin={`0 0 10px`}
-                            borderBottom={`1px solid #f3f3f3`}>
+                            borderBottom={`1px solid #f3f3f3`}
+                          >
                             <Wrapper
                               al={`flex-start`}
                               ju={`flex-start`}
                               width={`90px`}
                               fontSize={`15px`}
                               fontWeight={`700`}
-                              color={`#a8559e`}>
+                              color={`#a8559e`}
+                            >
                               계좌번호
                             </Wrapper>
 
                             <Wrapper
                               al={`flex-start`}
                               width={`calc(100% - 90px)`}
-                              fontSize={`14px`}>
+                              fontSize={`14px`}
+                            >
                               <Text isEllipsis={true} width={`100%`}>
                                 {data.bankNo}
                               </Text>
@@ -476,21 +495,24 @@ const Deposit = () => {
                             ju={`flex-start`}
                             padding={`0 0 5px`}
                             margin={`0 0 10px`}
-                            borderBottom={`1px solid #f3f3f3`}>
+                            borderBottom={`1px solid #f3f3f3`}
+                          >
                             <Wrapper
                               al={`flex-start`}
                               ju={`flex-start`}
                               width={`90px`}
                               fontSize={`15px`}
                               fontWeight={`700`}
-                              color={`#a8559e`}>
+                              color={`#a8559e`}
+                            >
                               Swift Code
                             </Wrapper>
 
                             <Wrapper
                               al={`flex-start`}
                               width={`calc(100% - 90px)`}
-                              fontSize={`14px`}>
+                              fontSize={`14px`}
+                            >
                               <Text isEllipsis={true} width={`100%`}>
                                 {data.swiftCode}
                               </Text>
@@ -503,21 +525,24 @@ const Deposit = () => {
                             ju={`flex-start`}
                             padding={`0 0 5px`}
                             margin={`0 0 10px`}
-                            borderBottom={`1px solid #f3f3f3`}>
+                            borderBottom={`1px solid #f3f3f3`}
+                          >
                             <Wrapper
                               al={`flex-start`}
                               ju={`flex-start`}
                               width={`90px`}
                               fontSize={`15px`}
                               fontWeight={`700`}
-                              color={`#a8559e`}>
+                              color={`#a8559e`}
+                            >
                               윌마켓 주소
                             </Wrapper>
 
                             <Wrapper
                               al={`flex-start`}
                               width={`calc(100% - 90px)`}
-                              fontSize={`14px`}>
+                              fontSize={`14px`}
+                            >
                               <Text isEllipsis={true} width={`100%`}>
                                 {data.willAddress}
                               </Text>
@@ -531,14 +556,16 @@ const Deposit = () => {
                               width={`90px`}
                               fontSize={`15px`}
                               fontWeight={`700`}
-                              color={`#a8559e`}>
+                              color={`#a8559e`}
+                            >
                               은행주소
                             </Wrapper>
 
                             <Wrapper
                               al={`flex-start`}
                               width={`calc(100% - 90px)`}
-                              fontSize={`14px`}>
+                              fontSize={`14px`}
+                            >
                               <Text isEllipsis={true} width={`100%`}>
                                 {data.bankAddress}
                               </Text>
@@ -558,7 +585,8 @@ const Deposit = () => {
                     ju={`flex-start`}
                     margin={`0 0 20px`}
                     fontSize={`18px`}
-                    fontWeight={`700`}>
+                    fontWeight={`700`}
+                  >
                     <Wrapper
                       width={`auto`}
                       margin={`0 10px 0 0`}
@@ -566,7 +594,8 @@ const Deposit = () => {
                       fontSize={`14px`}
                       fontWeight={`700`}
                       bgColor={`#aa28c9`}
-                      color={`#fff`}>
+                      color={`#fff`}
+                    >
                       Step 02
                     </Wrapper>
                     입금정보 입력
@@ -585,28 +614,32 @@ const Deposit = () => {
                         padding={`20px`}
                         width={`300px`}
                         height={`225px`}
-                        radius={`8px`}>
+                        radius={`8px`}
+                      >
                         <Wrapper
                           dr={`row`}
                           al={`normal`}
                           ju={`flex-start`}
                           padding={`0 0 5px`}
                           margin={`0 0 10px`}
-                          borderBottom={`1px solid #f3f3f3`}>
+                          borderBottom={`1px solid #f3f3f3`}
+                        >
                           <Wrapper
                             al={`flex-start`}
                             ju={`flex-start`}
                             width={`90px`}
                             fontSize={`15px`}
                             fontWeight={`700`}
-                            color={`#a8559e`}>
+                            color={`#a8559e`}
+                          >
                             은행명
                           </Wrapper>
 
                           <Wrapper
                             al={`flex-start`}
                             width={`calc(100% - 90px)`}
-                            fontSize={`14px`}>
+                            fontSize={`14px`}
+                          >
                             <Text isEllipsis={true} width={`100%`}>
                               {currentBank.bankName}
                             </Text>
@@ -619,21 +652,24 @@ const Deposit = () => {
                           ju={`flex-start`}
                           padding={`0 0 5px`}
                           margin={`0 0 10px`}
-                          borderBottom={`1px solid #f3f3f3`}>
+                          borderBottom={`1px solid #f3f3f3`}
+                        >
                           <Wrapper
                             al={`flex-start`}
                             ju={`flex-start`}
                             width={`90px`}
                             fontSize={`15px`}
                             fontWeight={`700`}
-                            color={`#a8559e`}>
+                            color={`#a8559e`}
+                          >
                             계좌번호
                           </Wrapper>
 
                           <Wrapper
                             al={`flex-start`}
                             width={`calc(100% - 90px)`}
-                            fontSize={`14px`}>
+                            fontSize={`14px`}
+                          >
                             <Text isEllipsis={true} width={`100%`}>
                               {currentBank.bankNo}
                             </Text>
@@ -646,21 +682,24 @@ const Deposit = () => {
                           ju={`flex-start`}
                           padding={`0 0 5px`}
                           margin={`0 0 10px`}
-                          borderBottom={`1px solid #f3f3f3`}>
+                          borderBottom={`1px solid #f3f3f3`}
+                        >
                           <Wrapper
                             al={`flex-start`}
                             ju={`flex-start`}
                             width={`90px`}
                             fontSize={`15px`}
                             fontWeight={`700`}
-                            color={`#a8559e`}>
+                            color={`#a8559e`}
+                          >
                             Swift Code
                           </Wrapper>
 
                           <Wrapper
                             al={`flex-start`}
                             width={`calc(100% - 90px)`}
-                            fontSize={`14px`}>
+                            fontSize={`14px`}
+                          >
                             <Text isEllipsis={true} width={`100%`}>
                               {currentBank.swiftCode}
                             </Text>
@@ -673,21 +712,24 @@ const Deposit = () => {
                           ju={`flex-start`}
                           padding={`0 0 5px`}
                           margin={`0 0 10px`}
-                          borderBottom={`1px solid #f3f3f3`}>
+                          borderBottom={`1px solid #f3f3f3`}
+                        >
                           <Wrapper
                             al={`flex-start`}
                             ju={`flex-start`}
                             width={`90px`}
                             fontSize={`15px`}
                             fontWeight={`700`}
-                            color={`#a8559e`}>
+                            color={`#a8559e`}
+                          >
                             윌마켓 주소
                           </Wrapper>
 
                           <Wrapper
                             al={`flex-start`}
                             width={`calc(100% - 90px)`}
-                            fontSize={`14px`}>
+                            fontSize={`14px`}
+                          >
                             <Text isEllipsis={true} width={`100%`}>
                               {currentBank.willAddress}
                             </Text>
@@ -701,14 +743,16 @@ const Deposit = () => {
                             width={`90px`}
                             fontSize={`15px`}
                             fontWeight={`700`}
-                            color={`#a8559e`}>
+                            color={`#a8559e`}
+                          >
                             은행주소
                           </Wrapper>
 
                           <Wrapper
                             al={`flex-start`}
                             width={`calc(100% - 90px)`}
-                            fontSize={`14px`}>
+                            fontSize={`14px`}
+                          >
                             <Text isEllipsis={true} width={`100%`}>
                               {currentBank.bankAddress}
                             </Text>
@@ -733,7 +777,8 @@ const Deposit = () => {
                       shadow={`0 2px 8px rgb(0 0 0 / 9%)`}
                       hoverBorder={`1px solid #d7a6ed`}
                       hoverShadow={`0 3px 8px rgb(0 0 0 / 12%)`}
-                      onClick={() => setComboSelectBank(!comboSelectBank)}>
+                      onClick={() => setComboSelectBank(!comboSelectBank)}
+                    >
                       <ComboTitle>
                         <Wrapper>
                           {inputSelectBank.value || `입금계좌 선택`}
@@ -744,7 +789,8 @@ const Deposit = () => {
                       <ComboList isView={comboSelectBank}>
                         <ComboListItem
                           isActive={!inputSelectBank.value}
-                          onClick={() => inputSelectBank.setValue("")}>
+                          onClick={() => inputSelectBank.setValue("")}
+                        >
                           입금계좌 선택
                         </ComboListItem>
 
@@ -760,7 +806,8 @@ const Deposit = () => {
                                 isActive={inputSelectBank.value === data.bankNo}
                                 onClick={() =>
                                   inputSelectBank.setValue(data.bankNo)
-                                }>
+                                }
+                              >
                                 {data.bankNo}
                               </ComboListItem>
                             );
@@ -800,7 +847,8 @@ const Deposit = () => {
                     ju={`flex-start`}
                     margin={`0 0 20px`}
                     fontSize={`18px`}
-                    fontWeight={`700`}>
+                    fontWeight={`700`}
+                  >
                     <Wrapper
                       width={`auto`}
                       margin={`0 10px 0 0`}
@@ -808,7 +856,8 @@ const Deposit = () => {
                       fontSize={`14px`}
                       fontWeight={`700`}
                       bgColor={`#aa28c9`}
-                      color={`#fff`}>
+                      color={`#fff`}
+                    >
                       Step 03
                     </Wrapper>
                     입금신청 완료
@@ -821,7 +870,8 @@ const Deposit = () => {
                         <Wrapper
                           fontSize={`25px`}
                           width={`auto`}
-                          borderBottom={`1px solid #c9c9c9`}>
+                          borderBottom={`1px solid #c9c9c9`}
+                        >
                           입금신청 완료 !
                         </Wrapper>
                       }
@@ -830,7 +880,8 @@ const Deposit = () => {
                           margin={`10px 0 0`}
                           padding={`0 15px`}
                           width={`auto`}
-                          lineHeight={`1.8`}>
+                          lineHeight={`1.8`}
+                        >
                           정상적으로 입금신청이 완료되었습니다.
                           <br />
                           입금 후, 입금 영수증을 첨부해주시면 입금 처리가
@@ -844,7 +895,8 @@ const Deposit = () => {
                           width={`180px`}
                           height={`40px`}
                           margin={`0 5px`}
-                          onClick={initValueHandler}>
+                          onClick={initValueHandler}
+                        >
                           처음으로
                         </CommonButton>,
 
@@ -854,7 +906,8 @@ const Deposit = () => {
                           width={`180px`}
                           height={`40px`}
                           margin={`0 5px`}
-                          onClick={() => setCurrentTab(1)}>
+                          onClick={() => setCurrentTab(1)}
+                        >
                           입금영수 첨부
                         </CommonButton>,
                       ]}
@@ -874,7 +927,8 @@ const Deposit = () => {
                     ju={`flex-start`}
                     margin={`0 0 20px`}
                     fontSize={`18px`}
-                    fontWeight={`700`}>
+                    fontWeight={`700`}
+                  >
                     <Wrapper
                       width={`auto`}
                       margin={`0 10px 0 0`}
@@ -882,7 +936,8 @@ const Deposit = () => {
                       fontSize={`14px`}
                       fontWeight={`700`}
                       bgColor={`#aa28c9`}
-                      color={`#fff`}>
+                      color={`#fff`}
+                    >
                       Step 01
                     </Wrapper>
                     파일첨부 하기
@@ -911,7 +966,8 @@ const Deposit = () => {
                       kindOf={`black`}
                       height={`38px`}
                       margin={`0 0 0 10px`}
-                      onClick={() => fileRef.current.click()}>
+                      onClick={() => fileRef.current.click()}
+                    >
                       첨부
                     </CommonButton>
                   </Wrapper>
@@ -921,7 +977,8 @@ const Deposit = () => {
                     margin={`10px 0 0`}
                     fontSize={`13px`}
                     color={`#e91448`}
-                    lineHeight={`1.8`}>
+                    lineHeight={`1.8`}
+                  >
                     * 지원되는 파일 형식은 JPG, PNG, GIF, PDF 입니다.
                     <br />* 첨부파일의 크기는 5MB 까지 허용됩니다.
                   </Wrapper>
@@ -935,7 +992,8 @@ const Deposit = () => {
                     ju={`flex-start`}
                     margin={`0 0 20px`}
                     fontSize={`18px`}
-                    fontWeight={`700`}>
+                    fontWeight={`700`}
+                  >
                     <Wrapper
                       width={`auto`}
                       margin={`0 10px 0 0`}
@@ -943,7 +1001,8 @@ const Deposit = () => {
                       fontSize={`14px`}
                       fontWeight={`700`}
                       bgColor={`#aa28c9`}
-                      color={`#fff`}>
+                      color={`#fff`}
+                    >
                       Step 02
                     </Wrapper>
                     파일첨부 완료
@@ -956,7 +1015,8 @@ const Deposit = () => {
                         <Wrapper
                           fontSize={`25px`}
                           width={`auto`}
-                          borderBottom={`1px solid #c9c9c9`}>
+                          borderBottom={`1px solid #c9c9c9`}
+                        >
                           파일첨부 완료 !
                         </Wrapper>
                       }
@@ -965,7 +1025,8 @@ const Deposit = () => {
                           margin={`10px 0 0`}
                           padding={`0 15px`}
                           width={`auto`}
-                          lineHeight={`1.8`}>
+                          lineHeight={`1.8`}
+                        >
                           정상적으로 파일첨부가 완료되었습니다.
                           <br />
                           관리자 확인 후 입금될 예정이오니, 잠시만 기다려주세요.
@@ -978,7 +1039,8 @@ const Deposit = () => {
                           width={`180px`}
                           height={`40px`}
                           margin={`0 5px`}
-                          onClick={initValueHandler}>
+                          onClick={initValueHandler}
+                        >
                           처음으로
                         </CommonButton>,
 
@@ -988,7 +1050,8 @@ const Deposit = () => {
                           width={`180px`}
                           height={`40px`}
                           margin={`0 5px`}
-                          onClick={() => moveLinkHandler(`/user`)}>
+                          onClick={() => moveLinkHandler(`/user`)}
+                        >
                           홈으로
                         </CommonButton>,
                       ]}
@@ -1006,11 +1069,13 @@ const Deposit = () => {
             ju={`flex-start`}
             margin={`50px 0 0`}
             padding={`20px 0 0`}
-            borderTop={`1px solid #ebebeb`}>
+            borderTop={`1px solid #ebebeb`}
+          >
             <CommonButton
               kindOf={`white`}
               margin={`0 10px 0 0`}
-              onClick={moveBackHandler}>
+              onClick={moveBackHandler}
+            >
               이전
             </CommonButton>
             <CommonButton kindOf={`red`} onClick={createDepositHanlder}>
@@ -1025,7 +1090,8 @@ const Deposit = () => {
             ju={`flex-start`}
             margin={`50px 0 0`}
             padding={`20px 0 0`}
-            borderTop={`1px solid #ebebeb`}>
+            borderTop={`1px solid #ebebeb`}
+          >
             <CommonButton kindOf={`red`} onClick={createImageFileHandler}>
               첨부하기
             </CommonButton>

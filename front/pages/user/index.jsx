@@ -11,8 +11,7 @@ import styled from "styled-components";
 import { useRouter } from "next/router";
 import { MdAttachMoney } from "react-icons/md";
 import { AiOutlineCreditCard, AiOutlinePlus } from "react-icons/ai";
-import { LIVE_ACCOUNT_LIST_REQUEST } from "../../reducers/liveAccount";
-import { DEMO_ACCOUNT_LIST_REQUEST } from "../../reducers/demoAccount";
+import { message } from "antd";
 
 const MenuBox = styled(SelectBox)`
   margin: ${(props) => props.margin || `0 20px 0 0`};
@@ -31,31 +30,13 @@ const User = ({ width }) => {
 
   const { me } = useSelector((state) => state.user);
 
-  console.log(me, "mememememe");
-
-  const { liveList, st_liveAccountCreateDone } = useSelector(
+  const { st_liveAccountCreateDone } = useSelector(
     (state) => state.liveAccount
   );
-
-  const { demoAccountList } = useSelector((state) => state.demoAccount);
-
-  st_liveAccountCreateDone;
-
-  // console.log(me, "me");
-  // console.log(liveList && liveList.liveAccounts, "liveList");
 
   const router = useRouter();
 
   ////// TOGGLE //////
-
-  // {
-  //   liveList &&
-  //     liveList.liveAccounts
-  //       .find((data1) => data1.UserId === me.id)
-  //       .map((data2) => {
-  //         console.log(data2);
-  //       });
-  // }
 
   ////// HANDLER //////
   const moveLinkHandler = (link) => {
@@ -63,12 +44,21 @@ const User = ({ width }) => {
   };
 
   ////// USEEFFECT //////
+  useEffect(() => {
+    if (!me) {
+      message.error("로그인 후 이용할 수 있습니다.");
+      router.push("/login");
+    }
+  }, [me]);
 
   useEffect(() => {
-    dispatch({
-      type: LOAD_MY_INFO_REQUEST,
-    });
-  }, []);
+    const query = router.query;
+
+    if (query.access === `false`) {
+      message.error("모의계좌 회원은 이용할 수 없습니다.");
+      router.push(`/user`);
+    }
+  }, [router.query]);
 
   return (
     <UserLayout>
@@ -79,21 +69,24 @@ const User = ({ width }) => {
         <MenuBox
           width={`100px`}
           height={`100px`}
-          onClick={() => moveLinkHandler(`/user/deposit`)}>
+          onClick={() => moveLinkHandler(`/user/deposit`)}
+        >
           입 금
         </MenuBox>
 
         <MenuBox
           width={`100px`}
           height={`100px`}
-          onClick={() => moveLinkHandler(`/user/withdraw`)}>
+          onClick={() => moveLinkHandler(`/user/withdraw`)}
+        >
           출 금
         </MenuBox>
 
         <MenuBox
           width={`100px`}
           height={`100px`}
-          onClick={() => moveLinkHandler(`/user/record`)}>
+          onClick={() => moveLinkHandler(`/user/record`)}
+        >
           심사기록
         </MenuBox>
       </Wrapper>
@@ -108,7 +101,8 @@ const User = ({ width }) => {
             bgColor={`#a06ec6`}
             color={`#fff`}
             fontSize={`38px`}
-            radius={`50%`}>
+            radius={`50%`}
+          >
             <MdAttachMoney />
           </Wrapper>
 
@@ -117,14 +111,16 @@ const User = ({ width }) => {
               width={`auto`}
               color={`#7c1a81`}
               fontSize={`13px`}
-              lineHeight={`1.3`}>
+              lineHeight={`1.3`}
+            >
               지갑금액
             </Wrapper>
             <Wrapper
               width={`auto`}
               fontSize={`26px`}
               fontWeight={`400`}
-              lineHeight={`1.3`}>
+              lineHeight={`1.3`}
+            >
               {me && me.priceWallet}
             </Wrapper>
           </Wrapper>
@@ -145,14 +141,16 @@ const User = ({ width }) => {
               <SelectBox
                 dr={`row`}
                 margin={`0 20px 20px 0`}
-                padding={`15px 70px 15px 25px`}>
+                padding={`15px 70px 15px 25px`}
+              >
                 <Wrapper
                   width={`auto`}
                   padding={`9px`}
                   bgColor={`#a06ec6`}
                   color={`#fff`}
                   fontSize={`30px`}
-                  radius={`50%`}>
+                  radius={`50%`}
+                >
                   <AiOutlineCreditCard />
                 </Wrapper>
 
@@ -161,14 +159,16 @@ const User = ({ width }) => {
                     width={`auto`}
                     color={`#7c1a81`}
                     fontSize={`13px`}
-                    lineHeight={`1.3`}>
+                    lineHeight={`1.3`}
+                  >
                     계좌번호
                   </Wrapper>
                   <Wrapper
                     width={`auto`}
                     fontSize={`26px`}
                     fontWeight={`400`}
-                    lineHeight={`1.3`}>
+                    lineHeight={`1.3`}
+                  >
                     {data.bankNo}
                   </Wrapper>
                 </Wrapper>
@@ -180,14 +180,16 @@ const User = ({ width }) => {
           dr={`row`}
           margin={`0 20px 20px 0`}
           padding={`15px 70px 15px 25px`}
-          onClick={() => moveLinkHandler(`/user/addLive`)}>
+          onClick={() => moveLinkHandler(`/user/addLive`)}
+        >
           <Wrapper
             width={`auto`}
             padding={`9px`}
             bgColor={`#a06ec6`}
             color={`#fff`}
             fontSize={`30px`}
-            radius={`50%`}>
+            radius={`50%`}
+          >
             <AiOutlinePlus />
           </Wrapper>
 
@@ -195,7 +197,8 @@ const User = ({ width }) => {
             al={`center`}
             margin={`0 0 0 15px`}
             width={`auto`}
-            color={`#7c1a81`}>
+            color={`#7c1a81`}
+          >
             계좌 추가
           </Wrapper>
         </SelectBox>
@@ -214,14 +217,16 @@ const User = ({ width }) => {
               <SelectBox
                 dr={`row`}
                 margin={`0 20px 20px 0`}
-                padding={`15px 70px 15px 25px`}>
+                padding={`15px 70px 15px 25px`}
+              >
                 <Wrapper
                   width={`auto`}
                   padding={`9px`}
                   bgColor={`#a06ec6`}
                   color={`#fff`}
                   fontSize={`30px`}
-                  radius={`50%`}>
+                  radius={`50%`}
+                >
                   <AiOutlineCreditCard />
                 </Wrapper>
 
@@ -230,14 +235,16 @@ const User = ({ width }) => {
                     width={`auto`}
                     color={`#7c1a81`}
                     fontSize={`13px`}
-                    lineHeight={`1.3`}>
+                    lineHeight={`1.3`}
+                  >
                     계좌번호
                   </Wrapper>
                   <Wrapper
                     width={`auto`}
                     fontSize={`26px`}
                     fontWeight={`400`}
-                    lineHeight={`1.3`}>
+                    lineHeight={`1.3`}
+                  >
                     {data.bankNo}
                   </Wrapper>
                 </Wrapper>
@@ -249,14 +256,16 @@ const User = ({ width }) => {
           dr={`row`}
           margin={`0 20px 20px 0`}
           padding={`15px 70px 15px 25px`}
-          onClick={() => moveLinkHandler(`/user/addDemo`)}>
+          onClick={() => moveLinkHandler(`/user/addDemo`)}
+        >
           <Wrapper
             width={`auto`}
             padding={`9px`}
             bgColor={`#a06ec6`}
             color={`#fff`}
             fontSize={`30px`}
-            radius={`50%`}>
+            radius={`50%`}
+          >
             <AiOutlinePlus />
           </Wrapper>
 
@@ -264,7 +273,8 @@ const User = ({ width }) => {
             al={`center`}
             margin={`0 0 0 15px`}
             width={`auto`}
-            color={`#7c1a81`}>
+            color={`#7c1a81`}
+          >
             계좌 추가
           </Wrapper>
         </SelectBox>

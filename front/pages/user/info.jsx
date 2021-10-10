@@ -329,15 +329,12 @@ const Info = () => {
 
   ////// USEEFFECT //////
   useEffect(() => {
-    if (st_userMeUpdateDone) {
-      dispatch({
-        type: LOAD_MY_INFO_REQUEST,
-      });
-    }
-  }, [st_userMeUpdateDone]);
-
-  useEffect(() => {
-    if (me) {
+    if (!me) {
+      message.error("로그인 후 이용할 수 있습니다.");
+      router.push("/login");
+    } else if (me.userType === `1`) {
+      router.push("/user?access=false");
+    } else {
       inputEmail.setValue(me.email);
       inputUserName.setValue(me.username);
       inputGender.setValue(me.gender);
@@ -354,6 +351,14 @@ const Info = () => {
       inputAddrFileOriginName.setValue(me.addrFileOriginName);
     }
   }, [me]);
+
+  useEffect(() => {
+    if (st_userMeUpdateDone) {
+      dispatch({
+        type: LOAD_MY_INFO_REQUEST,
+      });
+    }
+  }, [st_userMeUpdateDone]);
 
   useEffect(() => {
     if (me && !isChangeEmail) {

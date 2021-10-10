@@ -11,17 +11,45 @@ import styled from "styled-components";
 import Theme from "../Theme";
 import { CaretDownOutlined, UserOutlined } from "@ant-design/icons";
 import { useDispatch, useSelector } from "react-redux";
+import { useRouter } from "next/router";
+import { USER_LOGOUT_REQUEST } from "../../reducers/user";
 
 const UserHeader = ({ children, width }) => {
   ////// HOOKS //////
-  const { me } = useSelector((state) => state.user);
+  const router = useRouter();
+
+  const dispatch = useDispatch();
+
+  const { me, st_userLogoutDone, st_userLogoutError } = useSelector(
+    (state) => state.user
+  );
 
   const [comboUser, setComboUser] = useState(false);
   const [comboLanguage, setComboLanguage] = useState(false);
 
   ////// HANDLER //////
+  const moveLinkHandler = useCallback((link) => {
+    router.push(link);
+  }, []);
+
+  const logoutUserHandler = useCallback(() => {
+    dispatch({
+      type: USER_LOGOUT_REQUEST,
+    });
+  }, []);
 
   ////// USEEFFECT //////
+  useEffect(() => {
+    if (st_userLogoutDone) {
+      router.push("/");
+    }
+  }, [st_userLogoutDone]);
+
+  useEffect(() => {
+    if (st_userLogoutError) {
+      message.error(st_userLogoutError);
+    }
+  }, [st_userLogoutError]);
 
   return (
     <Wrapper dr={`row`} ju={`flex-end`} height={`70px`} padding={`0 30px`}>
@@ -52,8 +80,12 @@ const UserHeader = ({ children, width }) => {
           </ComboTitle>
 
           <ComboList isView={comboUser} onClick={() => setComboUser(false)}>
-            {me && me.type === "2" && <ComboListItem>내정보수정</ComboListItem>}
-            <ComboListItem>로그아웃</ComboListItem>
+            {me && me.type === "2" && (
+              <ComboListItem onClick={() => moveLinkHandler(`/user/info`)}>
+                내정보수정
+              </ComboListItem>
+            )}
+            <ComboListItem onClick={logoutUserHandler}>로그아웃</ComboListItem>
           </ComboList>
         </Combo>
       </Wrapper>

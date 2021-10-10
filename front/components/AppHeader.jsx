@@ -16,10 +16,12 @@ import { withResizeDetector } from "react-resize-detector";
 import styled from "styled-components";
 import Theme from "./Theme";
 import { AlignRightOutlined } from "@ant-design/icons";
-import { Drawer } from "antd";
+import { Drawer, message } from "antd";
 import Link from "next/link";
 import { CaretDownOutlined } from "@ant-design/icons";
 import { useRouter } from "next/router";
+import { USER_LOGOUT_REQUEST } from "../reducers/user";
+import { useDispatch, useSelector } from "react-redux";
 
 const WebRow = styled(RowWrapper)`
   background: transparent;
@@ -115,6 +117,12 @@ const MenuWrapper = styled(Wrapper)`
 const AppHeader = ({ children, width }) => {
   const router = useRouter();
 
+  const dispatch = useDispatch();
+
+  const { me, st_userLogoutDone, st_userLogoutError } = useSelector(
+    (state) => state.user
+  );
+
   ////////////// - USE STATE- ///////////////
   const [headerScroll, setHeaderScroll] = useState(false);
   const [pageY, setPageY] = useState(0);
@@ -148,11 +156,29 @@ const AppHeader = ({ children, width }) => {
     router.push(link);
   }, []);
 
+  const logoutUserHandler = useCallback(() => {
+    dispatch({
+      type: USER_LOGOUT_REQUEST,
+    });
+  }, []);
+
   ////////////// - USE EFFECT- //////////////
   useEffect(() => {
     document.addEventListener("scroll", handleScroll);
     return () => document.removeEventListener("scroll", handleScroll);
   }, [pageY]);
+
+  useEffect(() => {
+    if (st_userLogoutDone) {
+      router.push("/");
+    }
+  }, [st_userLogoutDone]);
+
+  useEffect(() => {
+    if (st_userLogoutError) {
+      message.error(st_userLogoutError);
+    }
+  }, [st_userLogoutError]);
 
   return (
     <>
@@ -167,27 +193,41 @@ const AppHeader = ({ children, width }) => {
         <Wrapper padding={`5px 0`} bgColor={`#231d21`}>
           <RsWrapper al={`flex-end`}>
             <Wrapper dr={`row`} width={`auto`}>
-              <Wrapper
-                margin={`0 0 0 30px`}
-                width={`auto`}
-                fontSize={`13px`}
-                color={`#fff`}
-                cursor={`pointer`}
-                onClick={() => moveLinkHandler(`/login`)}
-              >
-                로그인
-              </Wrapper>
-
-              <Wrapper
-                margin={`0 0 0 30px`}
-                width={`auto`}
-                fontSize={`13px`}
-                color={`#fff`}
-                cursor={`pointer`}
-                onClick={() => moveLinkHandler(`/signup`)}
-              >
-                회원가입
-              </Wrapper>
+              {me ? (
+                <Wrapper
+                  margin={`0 0 0 30px`}
+                  width={`auto`}
+                  fontSize={`13px`}
+                  color={`#fff`}
+                  cursor={`pointer`}
+                  onClick={logoutUserHandler}
+                >
+                  로그아웃
+                </Wrapper>
+              ) : (
+                <>
+                  <Wrapper
+                    margin={`0 0 0 30px`}
+                    width={`auto`}
+                    fontSize={`13px`}
+                    color={`#fff`}
+                    cursor={`pointer`}
+                    onClick={() => moveLinkHandler(`/login`)}
+                  >
+                    로그인
+                  </Wrapper>
+                  <Wrapper
+                    margin={`0 0 0 30px`}
+                    width={`auto`}
+                    fontSize={`13px`}
+                    color={`#fff`}
+                    cursor={`pointer`}
+                    onClick={() => moveLinkHandler(`/signup`)}
+                  >
+                    회원가입
+                  </Wrapper>
+                </>
+              )}
 
               <Wrapper
                 position={`relative`}

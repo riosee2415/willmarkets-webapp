@@ -112,7 +112,11 @@ const UserSide = () => {
 
   return (
     <Wrapper>
-      <Wrapper margin={`20px 0 40px`} cursor={`pointer`}>
+      <Wrapper
+        margin={`20px 0 40px`}
+        cursor={`pointer`}
+        onClick={() => moveLinkHandler(`/`)}
+      >
         <Image
           width={`40%`}
           src={`https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/willmarkets/assets/images/logo/logo_2.png`}

@@ -150,7 +150,7 @@ function* userSignUp(action) {
 // ******************************************************************************************************************
 function userListAPI(data) {
   return axios.get(
-    `/api/user/list/${data.listType}/${data.listType2}?page=${data.name}&search=${data.email}`
+    `/api/user/list?page=${data.page}&search=${data.search}&searchType=${data.searchType}&searchComplete=${data.searchComplete}`
   );
 }
 

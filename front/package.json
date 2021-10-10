@@ -19,6 +19,7 @@
     "apexcharts": "^3.28.1",
     "axios": "^0.21.1",
     "babel-plugin-styled-components": "^1.13.2",
+    "file-saver": "^2.0.5",
     "fs": "0.0.1-security",
     "i18next": "^21.2.0",
     "i18next-browser-languagedetector": "^6.1.2",

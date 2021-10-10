@@ -62,7 +62,8 @@ const AdminMenu = () => {
         selectedKeys={[current]}
         mode="inline"
         selectedKeys={router.pathname}
-        disabled={false}>
+        disabled={false}
+      >
         <Wrapper margin={`20px 0 10px`}>
           <Image
             alt="logo"
@@ -87,7 +88,7 @@ const AdminMenu = () => {
         <Menu.Item key="/admin">
           <MenuName>관리자 메인</MenuName>
         </Menu.Item>
-        <SubMenu
+        {/* <SubMenu
           key="sub1"
           icon={<BarChartOutlined />}
           title="접속자 관리"
@@ -95,12 +96,13 @@ const AdminMenu = () => {
           <Menu.Item key="/admin/logs/acceptLogs">
             <MenuName>접속자 통계</MenuName>
           </Menu.Item>
-        </SubMenu>
-        <SubMenu
+        </SubMenu> */}
+        {/* <SubMenu
           key="sub2"
           icon={<InfoCircleOutlined />}
           title="기초 관리"
-          onTitleClick={titleClickHandler("sub2")}>
+          onTitleClick={titleClickHandler("sub2")}
+        >
           <Menu.Item key="/admin/info/businessInformation">
             <MenuName>사업자정보 관리</MenuName>
           </Menu.Item>
@@ -108,37 +110,40 @@ const AdminMenu = () => {
             <MenuName>팝업 관리</MenuName>
           </Menu.Item>
 
-          {/* <SubMenu key="sub3" title="Submenu">
+         <SubMenu key="sub3" title="Submenu">
             <Menu.Item key="7">Option 7</Menu.Item>
             <Menu.Item key="8">Option 8</Menu.Item>
-          </SubMenu> */}
-        </SubMenu>
-        <SubMenu
+          </SubMenu>
+        </SubMenu> */}
+        {/* <SubMenu
           key="sub3"
           icon={<BookOutlined />}
           title="게시판 관리"
-          onTitleClick={titleClickHandler("sub3")}>
+          onTitleClick={titleClickHandler("sub3")}
+        >
           <Menu.Item key="/admin/board/notice/list">
             <MenuName>공지사항 관리</MenuName>
           </Menu.Item>
           <Menu.Item key="/admin/board/gallery/list">
             <MenuName>갤러리 관리</MenuName>
           </Menu.Item>
-        </SubMenu>
-        <SubMenu
+        </SubMenu> */}
+        {/* <SubMenu
           key="su43"
           icon={<SettingOutlined />}
           title="베너 관리"
-          onTitleClick={titleClickHandler("sub4")}>
+          onTitleClick={titleClickHandler("sub4")}
+        >
           <Menu.Item key="/admin/banner/mainbanner">
             <MenuName>메인베너 관리</MenuName>
           </Menu.Item>
-        </SubMenu>
+        </SubMenu> */}
         <SubMenu
           key="sub5"
           icon={<UserOutlined />}
           title="회원 관리"
-          onTitleClick={titleClickHandler("sub5")}>
+          onTitleClick={titleClickHandler("sub5")}
+        >
           <Menu.Item key="/admin/user/userList">
             <MenuName>회원 리스트</MenuName>
           </Menu.Item>
@@ -147,10 +152,11 @@ const AdminMenu = () => {
           key="sub6"
           icon={<PhoneOutlined />}
           title="문의 관리"
-          onTitleClick={titleClickHandler("sub6")}>
-          <Menu.Item key="/admin/question/type">
+          onTitleClick={titleClickHandler("sub6")}
+        >
+          {/* <Menu.Item key="/admin/question/type">
             <MenuName>문의 유형 리스트</MenuName>
-          </Menu.Item>
+          </Menu.Item> */}
           <Menu.Item key="/admin/question/list">
             <MenuName>문의 리스트</MenuName>
           </Menu.Item>

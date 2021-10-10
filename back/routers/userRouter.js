@@ -44,7 +44,6 @@ const upload = multer({
 const router = express.Router();
 
 router.get("/list", isAdminCheck, async (req, res, next) => {
-  const { listType, listType2 } = req.params;
   const { page, search, searchType, searchComplete } = req.query;
 
   const LIMIT = 10;
@@ -62,6 +61,12 @@ router.get("/list", isAdminCheck, async (req, res, next) => {
       where: {
         username: {
           [Op.like]: `%${searchName}%`,
+        },
+        userType: {
+          [Op.like]: `%${searchTypes}%`,
+        },
+        isComplete: {
+          [Op.like]: `%${searchCompletes}%`,
         },
       },
     });
@@ -96,8 +101,11 @@ router.get("/list", isAdminCheck, async (req, res, next) => {
       },
       order: [["createdAt", "DESC"]],
     });
+    console.log(users);
 
-    return res.status(200).json({ users, lastPage: parseInt(lastPage) });
+    return res
+      .status(200)
+      .json({ users, lastPage: parseInt(lastPage), userLen });
   } catch (error) {
     console.error(error);
     return res.status(401).send("사용자 목록을 불러올 수 없습니다.");

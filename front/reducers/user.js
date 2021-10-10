@@ -2,6 +2,7 @@ import produce from "../util/produce";
 
 export const initailState = {
   userList: null,
+  userLen: 0,
   me: null,
   filePath: null,
   fileOriginName: null,
@@ -143,7 +144,8 @@ const reducer = (state = initailState, action) =>
       case USER_LIST_SUCCESS: {
         draft.st_userListLoading = false;
         draft.st_userListDone = true;
-        draft.userList = action.data;
+        draft.userList = action.data.users;
+        draft.userLen = action.data.userLen;
         break;
       }
       case USER_LIST_FAILURE: {

@@ -4,50 +4,24 @@ import PageHeader from "../../../components/admin/PageHeader";
 import AdminTop from "../../../components/admin/AdminTop";
 import styled from "styled-components";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  Button,
-  Col,
-  Modal,
-  Row,
-  Table,
-  notification,
-  Layout,
-  Input,
-  message,
-} from "antd";
-import {
-  UPDATE_MODAL_CLOSE_REQUEST,
-  UPDATE_MODAL_OPEN_REQUEST,
-  QUESTION_CREATE_REQUEST,
-  QUESTION_UPDATE_REQUEST,
-  QUESTION_DELETE_REQUEST,
-  QUESTION_GET_REQUEST,
-} from "../../../reducers/question";
 import { LOAD_MY_INFO_REQUEST } from "../../../reducers/user";
-import { useRouter } from "next/router";
-import { render } from "react-dom";
+import {
+  QUESTION_LIST_REQUEST,
+  QUESTION_UPDATE_COMPLETE_REQUEST,
+} from "../../../reducers/question";
+import { Table, Button, message, Modal, notification, Input } from "antd";
 import useInput from "../../../hooks/useInput";
+import { SearchOutlined } from "@ant-design/icons";
+import { useRouter, withRouter } from "next/router";
 import wrapper from "../../../store/configureStore";
 import { END } from "redux-saga";
 import axios from "axios";
-
-const { Sider, Content } = Layout;
+import { Wrapper, TabWrapper, Tab } from "../../../components/commonComponents";
+import { numberWithCommas, emptyCheck } from "../../../components/commonUtils";
+import moment from "moment";
 
 const AdminContent = styled.div`
   padding: 20px;
-`;
-
-const FileBox = styled.div`
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: flex-end;
-`;
-
-const Filename = styled.span`
-  margin-right: 15px;
-  color: #555;
-  font-size: 13px;
 `;
 
 const LoadNotification = (msg, content) => {
@@ -58,7 +32,7 @@ const LoadNotification = (msg, content) => {
   });
 };
 
-const List = ({ location }) => {
+const QuestionList = ({}) => {
   // LOAD CURRENT INFO AREA /////////////////////////////////////////////
   const { me, st_loadMyInfoDone } = useSelector((state) => state.user);
 
@@ -75,183 +49,200 @@ const List = ({ location }) => {
       }
     }
   }, [st_loadMyInfoDone]);
+
   /////////////////////////////////////////////////////////////////////////
 
   ////// HOOKS //////
   const dispatch = useDispatch();
 
-  const [updateData, setUpdateData] = useState(null);
-
-  const [deletePopVisible, setDeletePopVisible] = useState(false);
-  const [deleteId, setDeleteId] = useState(null);
-
-  const answer = useInput("");
-
   const {
-    questions,
-    updateModal,
-
-    st_questionUpdateDone,
-    st_questionDeleteDone,
-
-    st_questionUpdateError,
-    st_questionDeleteError,
+    questionList,
+    questionLen,
+    st_questionListError,
+    st_questionUpdateCompleteDone,
+    st_questionUpdateCompleteError,
   } = useSelector((state) => state.question);
+
+  const [currentTab, setCurrentTab] = useState(0);
+  const [currentPage, setCurrentPage] = useState(1);
+
+  const [toggleModal, setToggleModal] = useState(false);
+
+  const [currentData, setCurrentData] = useState(null);
+
+  const inputSearch = useInput("");
 
   ////// USEEFFECT //////
   useEffect(() => {
-    const qs = router.query;
-
-    dispatch({
-      type: QUESTION_GET_REQUEST,
-      data: { listType: qs.type ? qs.type : 3 },
-    });
-  }, [router.query]);
+    searchDataHandler();
+  }, [currentTab]);
 
   useEffect(() => {
-    if (st_questionUpdateDone) {
-      const qs = router.query;
+    if (st_questionListError) {
+      return message.error(st_questionListError);
+    }
+  }, [st_questionListError]);
 
+  useEffect(() => {
+    if (st_questionUpdateCompleteDone) {
       dispatch({
-        type: QUESTION_GET_REQUEST,
-        data: { listType: qs.type ? qs.type : 3 },
+        type: QUESTION_LIST_REQUEST,
+        data: {
+          listType: currentTab === 0 ? `1` : currentTab === 1 ? `2` : `3`,
+          page: currentPage,
+          search: inputSearch.value || ``,
+        },
       });
+      toggleModalHandler();
 
-      dispatch({
-        type: UPDATE_MODAL_CLOSE_REQUEST,
-      });
+      message.success("정상적으로 처리되었습니다.");
     }
-  }, [st_questionUpdateDone]);
+  }, [st_questionUpdateCompleteDone]);
 
   useEffect(() => {
-    if (st_questionUpdateError) {
-      return message.error(st_questionUpdateError);
+    if (st_questionUpdateCompleteError) {
+      message.error(st_questionUpdateCompleteError);
     }
-  }, [st_questionUpdateError]);
-
-  useEffect(() => {
-    if (st_questionDeleteDone) {
-      const qs = router.query;
-
-      dispatch({
-        type: QUESTION_GET_REQUEST,
-        data: { listType: qs.type ? qs.type : 3 },
-      });
-    }
-  }, [st_questionDeleteDone]);
-
-  useEffect(() => {
-    if (st_questionDeleteError) {
-      return message.error(st_questionDeleteError);
-    }
-  }, [st_questionDeleteError]);
+  }, [st_questionUpdateCompleteError]);
 
   ////// TOGGLE //////
-
-  const updateModalOpen = useCallback(
-    (data) => {
-      dispatch({
-        type: UPDATE_MODAL_OPEN_REQUEST,
-      });
-
-      answer.setValue(data.answer);
-
-      setUpdateData(data);
-    },
-    [updateModal]
-  );
-
-  const updateModalClose = useCallback(() => {
-    dispatch({
-      type: UPDATE_MODAL_CLOSE_REQUEST,
-    });
-    setUpdateData(null);
-  }, [updateModal]);
-
-  const deletePopToggle = useCallback(
-    (id) => () => {
-      setDeleteId(id);
-      setDeletePopVisible((prev) => !prev);
-    },
-    [deletePopVisible, deleteId]
-  );
+  const toggleModalHandler = (data) => {
+    if (toggleModal) {
+      setCurrentData(null);
+    } else {
+      setCurrentData(data);
+    }
+    setToggleModal(!toggleModal);
+  };
 
   ////// HANDLER //////
-  const onSubmitUpdate = useCallback(() => {
-    if (!answer.value || answer.value.trim() === "") {
-      return LoadNotification("ADMIN SYSTEM ERRLR", "문의 답변을 입력해주세요");
-    }
+  const otherPageCall = useCallback(
+    (changePage) => {
+      setCurrentPage(changePage);
 
+      dispatch({
+        type: QUESTION_LIST_REQUEST,
+        data: {
+          listType: currentTab === 0 ? `1` : currentTab === 1 ? `2` : `3`,
+          page: changePage,
+          search: inputSearch.value || ``,
+        },
+      });
+    },
+    [currentPage]
+  );
+
+  const searchDataHandler = () => {
     dispatch({
-      type: QUESTION_UPDATE_REQUEST,
+      type: QUESTION_LIST_REQUEST,
       data: {
-        id: updateData.id,
-        answer: answer.value,
-        title: updateData.title,
-        content: updateData.content,
+        listType: currentTab === 0 ? `1` : currentTab === 1 ? `2` : `3`,
+        page: 1,
+        search: inputSearch.value || ``,
       },
     });
-  }, [updateData, answer]);
+  };
 
-  const deleteQuestionHandler = useCallback(() => {
-    if (!deleteId) {
-      return LoadNotification(
-        "ADMIN SYSTEM ERRLR",
-        "일시적인 장애가 발생되었습니다. 잠시 후 다시 시도해주세요."
-      );
-    }
-
+  const updateCompleteHandler = () => {
     dispatch({
-      type: QUESTION_DELETE_REQUEST,
-      data: { questionId: deleteId },
+      type: QUESTION_UPDATE_COMPLETE_REQUEST,
+      data: {
+        id: currentData.id,
+      },
     });
-
-    setDeleteId(null);
-    setDeletePopVisible((prev) => !prev);
-  }, [deleteId]);
+  };
 
   ////// DATAVIEW //////
 
-  // Table
   const columns = [
     {
-      title: "No",
-      dataIndex: "id",
-    },
-
-    {
-      title: "Title",
-      render: (data) => <div>{data.title}</div>,
-    },
-    {
-      title: "isCompleted",
-      render: (data) => <div>{data.isCompleted ? `완료` : `미완료`}</div>,
-    },
-    ,
-    {
-      title: "CreatedAt",
-      render: (data) => {
-        return <div>{data.createdAt.substring(0, 10)}</div>;
-      },
-    },
-    {
-      title: "UpdatedAt",
-      render: (data) => <div>{data.updatedAt.substring(0, 10)}</div>,
-    },
-    {
-      title: "UPDATE",
-      render: (data) => (
-        <Button type="primary" onClick={() => updateModalOpen(data)}>
-          UPDATE
-        </Button>
+      width: 40,
+      title: <Wrapper fontSize={`14px`}>번호</Wrapper>,
+      fixed: "left",
+      render: (data, _, idx) => (
+        <Wrapper fontSize={`14px`}>
+          {questionLen - ((currentPage - 1) * 10 + idx) + ""}
+        </Wrapper>
       ),
     },
     {
-      title: "DELETE",
+      width: 80,
+      title: <Wrapper fontSize={`14px`}>등록일</Wrapper>,
+      fixed: "left",
       render: (data) => (
-        <Button type="danger" onClick={deletePopToggle(data.id)}>
-          DEL
-        </Button>
+        <Wrapper fontSize={`14px`}>
+          {moment(data.createdAt).format(`YYYY-MM-DD HH:mm:ss`)}
+        </Wrapper>
+      ),
+    },
+    {
+      width: 100,
+      title: <Wrapper fontSize={`14px`}>이름</Wrapper>,
+      fixed: "left",
+      render: (data) => <Wrapper fontSize={`14px`}>{data.name}</Wrapper>,
+    },
+    {
+      width: 100,
+      title: <Wrapper fontSize={`14px`}>연락처</Wrapper>,
+      render: (data) => <Wrapper fontSize={`14px`}>{data.mobile}</Wrapper>,
+    },
+    {
+      width: 100,
+      title: <Wrapper fontSize={`14px`}>이메일</Wrapper>,
+      render: (data) => <Wrapper fontSize={`14px`}>{data.email}</Wrapper>,
+    },
+    {
+      width: 200,
+      title: (
+        <Wrapper al={`flex-start`} padding={`0 10px`} fontSize={`14px`}>
+          문의 내용
+        </Wrapper>
+      ),
+      render: (data) => (
+        <Wrapper al={`flex-start`} padding={`0 10px`} fontSize={`14px`}>
+          {data.content.split(`\n`).map((content) => {
+            return (
+              <Wrapper width={`auto`} fontSize={`inherit`}>
+                {content}
+              </Wrapper>
+            );
+          })}
+        </Wrapper>
+      ),
+    },
+    {
+      width: 100,
+      title: <Wrapper fontSize={`14px`}>상태</Wrapper>,
+      fixed: "right",
+      render: (data) => (
+        <Wrapper dr={`row`} fontSize={`14px`}>
+          <Wrapper
+            width={`90px`}
+            fontSize={`inherit`}
+            color={data.isComplete ? `#0d24c4` : `#d62929`}
+          >
+            {data.isComplete ? `처리` : `처리대기`}
+          </Wrapper>
+
+          <Button
+            type="primary"
+            disabled={data.isComplete}
+            onClick={() => toggleModalHandler(data)}
+          >
+            처리
+          </Button>
+        </Wrapper>
+      ),
+    },
+    {
+      width: 70,
+      title: <Wrapper fontSize={`14px`}>처리일</Wrapper>,
+      fixed: "right",
+      render: (data) => (
+        <Wrapper fontSize={`14px`}>
+          {data.isComplete &&
+            moment(data.completedAt).format(`YYYY-MM-DD HH:mm:ss`)}
+        </Wrapper>
       ),
     },
   ];
@@ -259,92 +250,73 @@ const List = ({ location }) => {
   return (
     <AdminLayout>
       <PageHeader
-        breadcrumbs={["문의", "관리"]}
+        breadcrumbs={["문의 관리", "문의 리스트"]}
         title={`문의 리스트`}
-        subTitle={`홈페이지의 문의를 관리할 수 있습니다.`}
+        subTitle={`문의 등록한 목록을 확인할 수 있습니다.`}
       />
       {/* <AdminTop createButton={true} createButtonAction={() => {})} /> */}
-
       <AdminContent>
-        <Row gutter={5}>
-          <Col>
-            <Button
-              onClick={() => moveLinkHandler(`/admin/question/list?type=3`)}
-            >
-              전체
+        <TabWrapper margin={`0 0 10px`}>
+          <Tab isActive={currentTab === 0} onClick={() => setCurrentTab(0)}>
+            전체
+          </Tab>
+
+          <Tab isActive={currentTab === 1} onClick={() => setCurrentTab(1)}>
+            미처리
+          </Tab>
+
+          <Tab isActive={currentTab === 2} onClick={() => setCurrentTab(2)}>
+            처리
+          </Tab>
+        </TabWrapper>
+
+        <Wrapper dr={`row`} ju={`space-between`} margin={`0 0 10px`}>
+          <Input.Group compact style={{ width: `auto` }}>
+            <Input
+              style={{ width: "280px" }}
+              placeholder="이름"
+              {...inputSearch}
+              onKeyDown={(e) => e.keyCode === 13 && searchDataHandler()}
+            />
+
+            <Button onClick={searchDataHandler}>
+              <SearchOutlined />
+              검색
             </Button>
-          </Col>
-          <Col>
-            <Button
-              onClick={() => moveLinkHandler(`/admin/question/list?type=2`)}
-            >
-              처리완료
-            </Button>
-          </Col>
-          <Col>
-            <Button
-              onClick={() => moveLinkHandler(`/admin/question/list?type=1`)}
-            >
-              미처리
-            </Button>
-          </Col>
-        </Row>
+          </Input.Group>
+        </Wrapper>
+
         <Table
           rowKey="id"
           columns={columns}
-          dataSource={questions ? questions : []}
-          size="middle"
+          dataSource={questionList ? questionList : []}
+          size="small"
+          scroll={{ x: 2000 }}
+          pagination={{
+            pageSize: 10,
+            total: questionLen,
+            onChange: (page) => otherPageCall(page),
+          }}
         />
       </AdminContent>
 
       <Modal
-        visible={updateModal}
-        width={`1000px`}
-        title={`문의`}
-        onCancel={updateModalClose}
-        onOk={onSubmitUpdate}
-        okText="Complete"
-        cancelText="Cancel"
+        visible={toggleModal}
+        width={`400px`}
+        title={`처리`}
+        onCancel={toggleModalHandler}
+        onOk={updateCompleteHandler}
       >
-        <Row>
-          <Col span={12}>
-            <Row gutter={5}>
-              <Col>이름</Col>
-              <Col>{`${updateData && updateData.User.nickname}(${
-                updateData && updateData.User.email
-              })`}</Col>
-            </Row>
-            {/*  */}
-            <Row gutter={5}>
-              <Col>문의 유형</Col>
-              <Col>{updateData && updateData.QuestionType.value}</Col>
-            </Row>
-            {/*  */}
-            <Row gutter={5}>
-              <Col>문의 제목</Col>
-              <Col>{updateData && updateData.title}</Col>
-            </Row>
-            {/*  */}
-            <Row gutter={5}>
-              <Col span={24}>문의 내용</Col>
-              <Col>{updateData && updateData.content}</Col>
-            </Row>
-          </Col>
-          <Col span={12}>
-            <div>답변</div>
-            <Input.TextArea
-              allowClear
-              placeholder="Content..."
-              autoSize={{ minRows: 10, maxRows: 10 }}
-              {...answer}
-            />
-          </Col>
-        </Row>
+        <Wrapper padding={`20px`} al={`flex-start`}>
+          <Wrapper al={`flex-start`} fontSize={`15px`} fontWeight={`500`}>
+            해당 문의사항을 처리완료 하시겠습니까 ?
+          </Wrapper>
+        </Wrapper>
       </Modal>
 
       <Modal
-        visible={deletePopVisible}
-        onOk={() => deleteQuestionHandler()}
+        visible={false}
+        onOk={() => {}}
         onCancel={() => {}}
         title="Ask"
       ></Modal>
@@ -374,4 +346,4 @@ export const getServerSideProps = wrapper.getServerSideProps(
   }
 );
 
-export default List;
+export default withRouter(QuestionList);

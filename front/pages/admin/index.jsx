@@ -80,8 +80,8 @@ const AdminHome = () => {
           <Wrapper height={`100%`} padding={`30px`}>
             <Image
               alt="logo"
-              src={`https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/SOUL/assets/images/logo/logo_long_black_W.jpg`}
-              width={`300px`}
+              src={`https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/willmarkets/assets/images/logo/logo.png`}
+              width={`220px`}
             />
             <Wrapper width={`80%`}>
               <Wrapper margin={`20px 0`}>
@@ -93,30 +93,30 @@ const AdminHome = () => {
               </Wrapper>
               <RowWrapper gutter={[10, 10]}>
                 <ColWrapper span={6}>
-                  <Link href={`/admin/logs/acceptLogs`}>
-                    <CommonButton width={`200px`}>
-                      접속자 통계 바로가기
+                  <Link href={`/admin/account/deposit`}>
+                    <CommonButton kindOf={`black`} width={`200px`}>
+                      입금관리 바로가기
                     </CommonButton>
                   </Link>
                 </ColWrapper>
                 <ColWrapper span={6}>
-                  <Link href={`/admin/info/businessInformation`}>
-                    <CommonButton width={`200px`}>
-                      사업자정보 관리 바로가기
+                  <Link href={`/admin/account/withdraw`}>
+                    <CommonButton kindOf={`black`} width={`200px`}>
+                      출금관리 바로가기
                     </CommonButton>
                   </Link>
                 </ColWrapper>
                 <ColWrapper span={6}>
-                  <Link href={`/admin/info/popup`}>
-                    <CommonButton width={`200px`}>
-                      팝업 관리 바로가기
+                  <Link href={`/admin/account/live`}>
+                    <CommonButton kindOf={`black`} width={`200px`}>
+                      라이브계좌 관리 바로가기
                     </CommonButton>
                   </Link>
                 </ColWrapper>
                 <ColWrapper span={6}>
-                  <Link href={`/admin/board/notice/list`}>
-                    <CommonButton width={`200px`}>
-                      공지사항 관리 바로가기
+                  <Link href={`/admin/account/demo`}>
+                    <CommonButton kindOf={`black`} width={`200px`}>
+                      데모계좌 관리 바로가기
                     </CommonButton>
                   </Link>
                 </ColWrapper>

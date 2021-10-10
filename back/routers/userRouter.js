@@ -545,7 +545,16 @@ router.patch("/findPass/update", async (req, res, next) => {
 });
 
 router.patch("/updatePermit", isAdminCheck, async (req, res, next) => {
-  const { id } = req.body;
+  const {
+    id,
+    platform,
+    type,
+    leverage,
+    price,
+    tradePassword,
+    viewPassword,
+    bankNo,
+  } = req.body;
   try {
     const exUpdatePermit = await User.findOne({
       where: {

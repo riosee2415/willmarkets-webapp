@@ -2,6 +2,7 @@ import produce from "../util/produce";
 
 export const initailState = {
   questionList: null,
+  questionLen: 0,
   //
   st_questionListLoading: false,
   st_questionListDone: false,
@@ -44,7 +45,8 @@ const reducer = (state = initailState, action) =>
       case QUESTION_LIST_SUCCESS: {
         draft.st_questionListLoading = false;
         draft.st_questionListDone = true;
-        draft.questionList = action.data;
+        draft.questionList = action.data.questions;
+        draft.questionLen = action.data.questionLen;
         break;
       }
       case QUESTION_LIST_FAILURE: {

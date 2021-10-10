@@ -37,23 +37,59 @@ router.get(
     }
 
     try {
-      const totalQuestion = await Question.findAll({
-        where: {
-          name: {
-            [Op.like]: `%${_search}%`,
-          },
-        },
-      });
+      let totalQuestion;
+      let questionLen;
 
-      const questionLen = totalQuestion.length;
-
-      const lastPage =
-        questionLen % LIMIT > 0 ? questionLen / LIMIT + 1 : questionLen / LIMIT;
+      let lastPage;
 
       let questions = [];
 
       switch (_listType) {
         case 1:
+          totalQuestion = await Question.findAll({
+            where: {
+              name: {
+                [Op.like]: `%${_search}%`,
+              },
+            },
+          });
+
+          questionLen = totalQuestion.length;
+
+          lastPage =
+            questionLen % LIMIT > 0
+              ? questionLen / LIMIT + 1
+              : questionLen / LIMIT;
+
+          questions = await Question.findAll({
+            offset: OFFSET,
+            limit: LIMIT,
+            where: {
+              name: {
+                [Op.like]: `%${_search}%`,
+              },
+            },
+            order: [["createdAt", "DESC"]],
+          });
+
+          break;
+        case 2:
+          totalQuestion = await Question.findAll({
+            where: {
+              isComplete: false,
+              name: {
+                [Op.like]: `%${_search}%`,
+              },
+            },
+          });
+
+          questionLen = totalQuestion.length;
+
+          lastPage =
+            questionLen % LIMIT > 0
+              ? questionLen / LIMIT + 1
+              : questionLen / LIMIT;
+
           questions = await Question.findAll({
             offset: OFFSET,
             limit: LIMIT,
@@ -65,8 +101,25 @@ router.get(
             },
             order: [["createdAt", "DESC"]],
           });
+
           break;
-        case 2:
+        case 3:
+          totalQuestion = await Question.findAll({
+            where: {
+              isComplete: true,
+              name: {
+                [Op.like]: `%${_search}%`,
+              },
+            },
+          });
+
+          questionLen = totalQuestion.length;
+
+          lastPage =
+            questionLen % LIMIT > 0
+              ? questionLen / LIMIT + 1
+              : questionLen / LIMIT;
+
           questions = await Question.findAll({
             offset: OFFSET,
             limit: LIMIT,
@@ -79,23 +132,13 @@ router.get(
             order: [["createdAt", "DESC"]],
           });
           break;
-        case 3:
-          questions = await Question.findAll({
-            offset: OFFSET,
-            limit: LIMIT,
-            where: {
-              name: {
-                [Op.like]: `%${_search}%`,
-              },
-            },
-            order: [["createdAt", "DESC"]],
-          });
-          break;
         default:
           break;
       }
 
-      return res.status(200).json({ questions, lastPage: parseInt(lastPage) });
+      return res
+        .status(200)
+        .json({ questions, lastPage: parseInt(lastPage), questionLen });
     } catch (error) {
       console.error(error);
       return res
@@ -116,8 +159,6 @@ router.post("/create", async (req, res, next) => {
       content,
     });
 
-    console.log(createResult);
-
     return res.status(201).json({ result: true });
   } catch (error) {
     console.error(error);
@@ -125,7 +166,7 @@ router.post("/create", async (req, res, next) => {
   }
 });
 
-router.patch("/update", isAdminCheck, async (req, res, next) => {
+router.patch("/updateComplete", isAdminCheck, async (req, res, next) => {
   const { id } = req.body;
 
   try {
@@ -139,7 +180,7 @@ router.patch("/update", isAdminCheck, async (req, res, next) => {
 
     const updateResult = await Question.update(
       {
-        isCompleted: true,
+        isComplete: true,
         completedAt: new Date(),
       },
       {

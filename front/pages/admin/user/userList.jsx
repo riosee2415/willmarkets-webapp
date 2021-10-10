@@ -13,13 +13,11 @@ import {
 import {
   Table,
   Button,
-  Image,
   message,
   Modal,
-  Select,
   notification,
   Input,
-  Form,
+  Select,
 } from "antd";
 import useInput from "../../../hooks/useInput";
 import useOnlyNumberInput from "../../../hooks/useOnlyNumberInput";
@@ -31,6 +29,8 @@ import axios from "axios";
 import { Wrapper, TabWrapper, Tab } from "../../../components/commonComponents";
 import { numberWithCommas, emptyCheck } from "../../../components/commonUtils";
 import { saveAs } from "file-saver";
+
+const { Option } = Select;
 
 const AdminContent = styled.div`
   padding: 20px;
@@ -64,6 +64,19 @@ const UserList = ({}) => {
 
   /////////////////////////////////////////////////////////////////////////
 
+  const platformList = ["MetaTrader 4"];
+
+  const typeList = [
+    {
+      type: "STP Account",
+      leverage: ["1:500", "1:400"],
+    },
+    {
+      type: "ECN Account",
+      leverage: ["1:500", "1:400", "1:300"],
+    },
+  ];
+
   ////// HOOKS //////
   const dispatch = useDispatch();
 
@@ -90,6 +103,14 @@ const UserList = ({}) => {
 
   const inputSearch = useInput("");
   const inputPrice = useInput("");
+
+  const inputPlatform = useInput();
+  const inputType = useInput("");
+  const inputLeverage = useInput("");
+  const inputPrice2 = useOnlyNumberInput("");
+  const inputTradePassword = useInput("");
+  const inputViewPassword = useInput("");
+  const inputBankNo = useInput("");
 
   ////// USEEFFECT //////
   useEffect(() => {
@@ -155,6 +176,14 @@ const UserList = ({}) => {
   const toggleModalHandler2 = (data) => {
     if (toggleModal2) {
       setCurrentData(null);
+
+      inputPlatform.setValue("");
+      inputType.setValue("");
+      inputLeverage.setValue("");
+      inputPrice2.setValue("");
+      inputTradePassword.setValue("");
+      inputViewPassword.setValue("");
+      inputBankNo.setValue("");
     } else {
       setCurrentData(data);
     }
@@ -223,10 +252,62 @@ const UserList = ({}) => {
   };
 
   const updatePermitHandler = () => {
+    if (!emptyCheck(inputPlatform.value)) {
+      return LoadNotification(
+        "ADMIN SYSTEM ERRLR",
+        "거래 플랫폼을 선택해주세요."
+      );
+    }
+
+    if (!emptyCheck(inputType.value)) {
+      return LoadNotification(
+        "ADMIN SYSTEM ERRLR",
+        "거래 유형을 선택해주세요."
+      );
+    }
+
+    if (!emptyCheck(inputLeverage.value)) {
+      return LoadNotification("ADMIN SYSTEM ERRLR", "레버리지를 선택해주세요.");
+    }
+
+    if (currentData.userType === `1`) {
+      if (!emptyCheck(inputPrice2.value)) {
+        return LoadNotification(
+          "ADMIN SYSTEM ERRLR",
+          "환율금액을 입력해주세요."
+        );
+      }
+    }
+
+    if (!emptyCheck(inputTradePassword.value)) {
+      return LoadNotification(
+        "ADMIN SYSTEM ERRLR",
+        "거래용 비밀번호를 입력해주세요."
+      );
+    }
+
+    if (!emptyCheck(inputViewPassword.value)) {
+      return LoadNotification(
+        "ADMIN SYSTEM ERRLR",
+        "보기용 비밀번호를 입력해주세요."
+      );
+    }
+
+    if (!emptyCheck(inputBankNo.value)) {
+      return LoadNotification("ADMIN SYSTEM ERRLR", "계좌번호를 입력해주세요.");
+    }
+
     dispatch({
       type: USER_UPDATE_PERMIT_REQUEST,
       data: {
         id: currentData.id,
+        platform: inputPlatform.value,
+        type: inputType.value,
+        leverage: inputLeverage.value,
+        price: inputPrice2.value,
+        tradePassword: inputTradePassword.value,
+        viewPassword: inputViewPassword.value,
+        bankNo: inputBankNo.value,
       },
     });
   };
@@ -449,27 +530,96 @@ const UserList = ({}) => {
             해당 입금신청을 승인하시겠습니까 ?
           </Wrapper>
 
-          <Wrapper
-            width={`auto`}
-            fontSize={`14px`}
-            margin={`8px 0 4px`}
-          ></Wrapper>
-          <Input style={{ width: "100%" }} />
+          <Wrapper width={`auto`} fontSize={`14px`} margin={`8px 0 4px`}>
+            거래 플랫폼
+          </Wrapper>
+
+          <Select
+            defaultValue={``}
+            style={{ width: `100%` }}
+            {...inputPlatform}
+            onChange={(value) => inputPlatform.setValue(value)}
+          >
+            <Option value="">선택</Option>
+
+            {platformList.map((data, idx) => {
+              return (
+                <Option key={idx} value={data}>
+                  {data}
+                </Option>
+              );
+            })}
+          </Select>
 
           <Wrapper width={`auto`} fontSize={`14px`} margin={`8px 0 4px`}>
-            지갑금액
+            계좌유형
           </Wrapper>
-          <Input style={{ width: "100%" }} />
+          <Select
+            defaultValue={``}
+            style={{ width: `100%` }}
+            {...inputType}
+            onChange={(value) => {
+              inputType.setValue(value);
+              inputLeverage.setValue("");
+            }}
+          >
+            <Option value="">선택</Option>
+
+            {typeList.map((data, idx) => {
+              return (
+                <Option key={idx} value={data.type}>
+                  {data.type}
+                </Option>
+              );
+            })}
+          </Select>
 
           <Wrapper width={`auto`} fontSize={`14px`} margin={`8px 0 4px`}>
-            지갑금액
+            레버리지
           </Wrapper>
-          <Input style={{ width: "100%" }} />
+          <Select
+            defaultValue={``}
+            style={{ width: `100%` }}
+            {...inputLeverage}
+            onChange={(value) => inputLeverage.setValue(value)}
+          >
+            <Option value="">선택</Option>
+
+            {inputType.value &&
+              typeList
+                .find((data) => data.type === inputType.value)
+                .leverage.map((data, idx) => {
+                  return (
+                    <Option key={idx} value={data}>
+                      {data}
+                    </Option>
+                  );
+                })}
+          </Select>
+
+          {currentData && currentData.userType === `1` && (
+            <>
+              <Wrapper width={`auto`} fontSize={`14px`} margin={`8px 0 4px`}>
+                환율금액
+              </Wrapper>
+              <Input style={{ width: "100%" }} {...inputPrice2} />
+            </>
+          )}
 
           <Wrapper width={`auto`} fontSize={`14px`} margin={`8px 0 4px`}>
-            지갑금액
+            거래용비번
           </Wrapper>
-          <Input style={{ width: "100%" }} />
+          <Input style={{ width: "100%" }} {...inputTradePassword} />
+
+          <Wrapper width={`auto`} fontSize={`14px`} margin={`8px 0 4px`}>
+            보기용비번
+          </Wrapper>
+          <Input style={{ width: "100%" }} {...inputViewPassword} />
+
+          <Wrapper width={`auto`} fontSize={`14px`} margin={`8px 0 4px`}>
+            계좌번호
+          </Wrapper>
+          <Input style={{ width: "100%" }} {...inputBankNo} />
         </Wrapper>
       </Modal>
 

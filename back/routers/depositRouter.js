@@ -269,7 +269,44 @@ router.patch("/updatePermit", isAdminCheck, async (req, res, next) => {
     );
 
     if (updateResult[0] > 0) {
-      sendSecretMail(exUser.email, "test Title", "<h1>Test Mail Send</h1>");
+      sendSecretMail(
+        exUser.email,
+        "입금 신청이 성공적으로 승인되었습니다.",
+        `
+        <div style="width: 100%; padding: 10px;">
+          
+              <img src="https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/willmarkets/assets/images/logo/logo.png"
+              style="width: 80px; height: 80px; background-size: cover; margin-bottom: 50px;  margin-top:30px;"
+              />
+
+              <div style="
+               height: 45px;
+               margin-bottom: 50px;
+               display: flex;
+               background-color:#a06ec6;
+               font-size: 22px;
+               color: #0b0b0b
+              ">
+                  입금 신청이 성공적으로 승인되었습니다.
+              </div>
+
+              <div style="margin-left: 30px; margin-bottom: 50px; color: #0b0b0b;">
+                입금 신청이 성공적으로 승인됐다는데요 ㅋㅋ
+                들어가서 확인해보셈 ㅋㅋㄹㅃㅃ
+              </div>
+
+              <div>
+                <a href="https://www.will-markets.com">
+                  <button style="padding: 10px 20px; color: #fff; background-color:#0b0b0b; 
+                  border: 1px solid #0b0b0b; margin-left:30px;
+                  margin-bottom:30px; ">
+                    윌마켓으로 이동하기
+                  </button>
+                </a>
+              </div>
+         </div>
+         `
+      );
 
       return res.status(200).json({ result: true });
     } else {

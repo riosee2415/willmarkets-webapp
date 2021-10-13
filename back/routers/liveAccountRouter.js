@@ -111,6 +111,12 @@ router.patch("/updatePermit", isAdminCheck, async (req, res, next) => {
       return res.status(401).send("존재하지 않는 사용자입니다.");
     }
 
+    const updateData = await LiveAccount.findOne({
+      where: {
+        id: parseInt(id),
+      },
+    });
+
     const updateResult = await LiveAccount.update(
       {
         isComplete: true,
@@ -125,7 +131,63 @@ router.patch("/updatePermit", isAdminCheck, async (req, res, next) => {
     );
 
     if (updateResult[0] > 0) {
-      sendSecretMail(exUser.email, "test Title", "<h1>Test Mail Send</h1>");
+      sendSecretMail(
+        exUser.email,
+        "라이브 계정이 성공적으로 열렸습니다.",
+        `
+      <div style="width: 50%; padding: 30px; border: 1px solid #eeeeee">
+            <img src="https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/willmarkets/assets/images/logo/logo.png"
+            style="width: 80px; height: 80px; background-size: cover; padding-bottom: 30px;"
+            />
+            
+            <div style="
+             height: 45px;
+             display: flex;
+             border-bottom: 1px solid #f7b1ff;
+             font-size: 22px;
+             color: #0b0b0b;
+             line-height: 2;
+            ">
+            라이브 계정이 성공적으로 열렸습니다.
+            </div>
+
+            <div style="color: #0b0b0b; padding: 50px 0; font-size: 14px;">
+            라이브 계정이 성공적으로 열렸습니다. 다음은 라이브 계정 정보입니다.
+            <br />
+            <br />
+            거래 플랫폼 : ${updateData.platform}
+            <br />
+            유형 : ${updateData.type}
+            <br />
+            레버리지 : ${updateData.leverage}
+            <br />
+            거래용 비밀번호 : ${updateData.tradePassword}
+            <br />
+            보기용 비밀번호 : ${updateData.viewPassword}
+            <br />
+            라이브 계좌 : ${updateData.bankNo}
+            <br />
+            
+            자세한 내용은 홈페이지에서 확인하세요 !
+            <br />
+            </div>
+
+            <div>
+              <a href="https://www.will-markets.com">
+                <button style="padding: 10px 20px; color: #fff; background-color:#0b0b0b; 
+                border: 1px solid #0b0b0b;
+                display: flex;
+                flex-direction: row;
+                align-items: center;
+                justify-content: center;
+                ">
+                  윌마켓으로 이동하기
+                </button>
+              </a>
+            </div>
+       </div>
+       `
+      );
 
       return res.status(200).json({ result: true });
     } else {

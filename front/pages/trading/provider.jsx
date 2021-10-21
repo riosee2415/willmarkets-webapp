@@ -21,11 +21,7 @@ const Provider = () => {
       <Wrapper padding={`80px 0`} bgColor={`#eeeeee`}>
         <RsWrapper>
           <Wrapper display={`block`} width={`auto`} fontSize={`30px`}>
-            <Text
-              display={`inline`}
-              margin={`0 0 0 5px`}
-              borderBottom={`1.5px solid #ff98d4`}
-            >
+            <Text display={`inline`} margin={`0 0 0 5px`}>
               호가제공사
             </Text>
           </Wrapper>

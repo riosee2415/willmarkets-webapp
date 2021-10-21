@@ -21,19 +21,11 @@ const Margin = () => {
       <Wrapper padding={`80px 0`} bgColor={`#eeeeee`}>
         <RsWrapper>
           <Wrapper display={`block`} width={`auto`} fontSize={`30px`}>
-            <Text
-              display={`inline`}
-              margin={`0 0 0 5px`}
-              borderBottom={`1.5px solid #ff98d4`}
-            >
+            <Text display={`inline`} margin={`0 0 0 5px`}>
               마진
             </Text>
             과
-            <Text
-              display={`inline`}
-              margin={`0 0 0 5px`}
-              borderBottom={`1.5px solid #ff98d4`}
-            >
+            <Text display={`inline`} margin={`0 0 0 5px`}>
               레버리지
             </Text>
           </Wrapper>
@@ -59,8 +51,7 @@ const Margin = () => {
           <Wrapper
             margin={`30px 0 50px`}
             textAlign={`center`}
-            lineHeight={`1.8`}
-          >
+            lineHeight={`1.8`}>
             마진과 레버리지는 외환거래에서 매우 밀접한 관계를 가지고 있습니다.
             <br />
             마진은 레버리지를 이용한 거래를 하고자 할 때 필요한 증거금을

@@ -22,11 +22,7 @@ const Forex = () => {
         <RsWrapper>
           <Wrapper display={`block`} width={`auto`} fontSize={`30px`}>
             외환
-            <Text
-              display={`inline`}
-              margin={`0 0 0 5px`}
-              borderBottom={`1.5px solid #ff98d4`}
-            >
+            <Text display={`inline`} margin={`0 0 0 5px`}>
               (FOREX)
             </Text>
           </Wrapper>

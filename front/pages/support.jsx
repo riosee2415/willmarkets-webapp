@@ -75,7 +75,7 @@ const Support = () => {
 
   const createQuestionHandler = useCallback(() => {
     if (!emptyCheck(inputName.value)) {
-      return message.error("이름을 입력해주세요.");
+      return message.error("성명을 입력해주세요.");
     }
 
     if (!emptyCheck(inputNumber.value)) {
@@ -87,7 +87,7 @@ const Support = () => {
     }
 
     if (!emptyCheck(inputContent.value)) {
-      return message.error("내용을 입력해주세요.");
+      return message.error("문의내용을 입력해주세요.");
     }
 
     if (!inputAgree.value) {
@@ -138,9 +138,9 @@ const Support = () => {
             margin={`22px 0 5px`}
             textAlign={`center`}
             fontSize={`20px`}>
-            궁금하거나 불편하신 점이 있으시면 편하게 물어보세요.
-            <br />
-            귀하를 지원하기 위해 최선을 다하는 Willmarkets이 되겠습니다.
+            아래의 정보를 입력하신 후 문의하시기 바랍니다.
+            <br />이 메일은 본사 Help Desk로 전달되며 대부분의 문의는 24시간
+            이내에 처리될 것입니다.
           </Wrapper>
 
           <Wrapper margin={`30px 0`}>
@@ -160,7 +160,7 @@ const Support = () => {
             width={`auto`}>
             <Wrapper dr={`row`} ju={`center`} al={`flex-end`}>
               <Wrapper width={`85px`} al={"flex-start"}>
-                <TextLabel margin={`0 25px 0 0 `}>이름</TextLabel>
+                <TextLabel margin={`0 25px 0 0 `}>성명</TextLabel>
               </Wrapper>
 
               <Wrapper width={`450px`}>
@@ -221,7 +221,7 @@ const Support = () => {
               al={`nomal`}
               margin={`10px 0 0 0`}>
               <Wrapper width={`85px`} al={`flex-start`}>
-                <TextLabel margin={`0 25px 0 0 `}>내용</TextLabel>
+                <TextLabel margin={`0 25px 0 0 `}>문의내용</TextLabel>
               </Wrapper>
               <Wrapper width={`450px`} borderBottom={"1px solid #e3e3e3"}>
                 <Content width={`100%`} {...inputContent} />

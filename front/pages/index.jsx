@@ -147,15 +147,13 @@ const Home = ({ width }) => {
           width={`auto`}
           bgColor={`#EFE4E9`}
           radius={`6px`}
-          shadow={"2px 2px 10px #a9a9b7"}
-        >
+          shadow={"2px 2px 10px #a9a9b7"}>
           <Wrapper
             dr={`row`}
             ju={`space-between`}
             padding={`5px 10px`}
             bgColor={`#fff`}
-            radius={`6px`}
-          >
+            radius={`6px`}>
             <Wrapper width={`auto`} fontSize={`14px`} fontWeight={`600`}>
               고객지원
             </Wrapper>
@@ -168,8 +166,7 @@ const Home = ({ width }) => {
             width={`280px`}
             bgColor={`#fff`}
             padding={`12px`}
-            zIndex={`5`}
-          >
+            zIndex={`5`}>
             <Image
               top={`40px`}
               position={`absolute`}
@@ -186,8 +183,7 @@ const Home = ({ width }) => {
               <Wrapper
                 lineHeight={`18px`}
                 fontSize={`13px`}
-                margin={`24px 0 0 0`}
-              >
+                margin={`24px 0 0 0`}>
                 반갑습니다 언제나 친절하게 응답해드리는 월마켓입니다. 이전
                 채팅과 이어하고 싶다면 정보를 동일하게 입력해주세요.
               </Wrapper>
@@ -196,8 +192,7 @@ const Home = ({ width }) => {
                   fontSize={`12px`}
                   al={`flex-start`}
                   fontWeight={`600`}
-                  margin={`10px 0 4px 0`}
-                >
+                  margin={`10px 0 4px 0`}>
                   성명
                 </Wrapper>
                 <CustomInput {...inputName} />
@@ -208,8 +203,7 @@ const Home = ({ width }) => {
                   fontSize={`12px`}
                   al={`flex-start`}
                   margin={`10px 0 4px 0`}
-                  fontWeight={`600`}
-                >
+                  fontWeight={`600`}>
                   연락처
                 </Wrapper>
                 <CustomInput {...inputPhone} />
@@ -219,8 +213,7 @@ const Home = ({ width }) => {
                   fontSize={`12px`}
                   al={`flex-start`}
                   margin={`10px 0 4px 0`}
-                  fontWeight={`600`}
-                >
+                  fontWeight={`600`}>
                   이메일
                 </Wrapper>
                 <CustomInput {...inputEmail} />
@@ -230,8 +223,7 @@ const Home = ({ width }) => {
                   fontSize={`12px`}
                   al={`flex-start`}
                   margin={`10px 0 4px 0`}
-                  fontWeight={`600`}
-                >
+                  fontWeight={`600`}>
                   문의내용
                 </Wrapper>
                 <Content {...inputText} />
@@ -247,8 +239,7 @@ const Home = ({ width }) => {
               margin={`0 0 10px 0`}
               color={`#fff`}
               bgColor={`#000104`}
-              onClick={createQuestionHandler}
-            >
+              onClick={createQuestionHandler}>
               문의하기
             </CommonButton>
           </Wrapper>
@@ -261,8 +252,7 @@ const Home = ({ width }) => {
           color={`#fff`}
           width={`auto`}
           cursor={`pointer`}
-          onClick={onClickToggleHanlder}
-        >
+          onClick={onClickToggleHanlder}>
           <Wrapper dr={`row`}>
             <Wrapper width={`auto`}>
               <Image
@@ -285,8 +275,7 @@ const Home = ({ width }) => {
           width={`100%`}
           height={`100%`}
           bgImg={`url('https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/willmarkets/assets/images/main/back_download.png')`}
-          zIndex={`-2`}
-        ></Wrapper>
+          zIndex={`-2`}></Wrapper>
 
         <Wrapper
           position={`absolute`}
@@ -295,8 +284,7 @@ const Home = ({ width }) => {
           width={`100%`}
           height={`100%`}
           bgColor={`rgba(0, 0, 0, 0.5)`}
-          zIndex={`-1`}
-        ></Wrapper>
+          zIndex={`-1`}></Wrapper>
 
         <Wrapper fontSize={`30px`} fontWeight={`500`} color={`#f776be`}>
           MT4 다운로드
@@ -306,8 +294,7 @@ const Home = ({ width }) => {
           margin={`15px 0 0`}
           fontSize={`19px`}
           fontWeight={`400`}
-          color={`#fff`}
-        >
+          color={`#fff`}>
           Android와 Ios 모두 호환하는 완벽한 거래 플랫폼
         </Wrapper>
 
@@ -325,8 +312,7 @@ const Home = ({ width }) => {
             width={`auto`}
             margin={`0 80px`}
             color={`#fff`}
-            fontSize={`34px`}
-          >
+            fontSize={`34px`}>
             <PlusOutlined />
           </Wrapper>
 
@@ -343,8 +329,7 @@ const Home = ({ width }) => {
             width={`auto`}
             margin={`0 80px`}
             color={`#fff`}
-            fontSize={`34px`}
-          >
+            fontSize={`34px`}>
             <PlusOutlined />
           </Wrapper>
 
@@ -368,16 +353,14 @@ const Home = ({ width }) => {
             radius={`30px`}
             fontSize={`17px`}
             fontWeight={`500`}
-            onClick={() => moveLinkHandler(`/platform/pc`)}
-          >
+            onClick={() => moveLinkHandler(`/platform/pc`)}>
             다운로드
             <Wrapper
               position={`absolute`}
               right={`40px`}
               top={`50%`}
               margin={`-6px 0 0 0`}
-              width={`auto`}
-            >
+              width={`auto`}>
               <RightOutlined />
             </Wrapper>
           </CommonButton>
@@ -387,8 +370,7 @@ const Home = ({ width }) => {
           position={`absolute`}
           right={`180px`}
           bottom={`40px`}
-          width={`auto`}
-        >
+          width={`auto`}>
           <Image
             src={`https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/willmarkets/assets/images/main/iphone.png`}
           />
@@ -413,32 +395,29 @@ const Home = ({ width }) => {
             width={`auto`}
             color={`#ffea6b`}
             fontSize={`18px`}
-            fontWeight={`500`}
-          >
+            fontWeight={`500`}>
             ※주의사항※
           </Wrapper>
 
           <Wrapper
+            fontSize={`15px`}
             fontWeight={`300`}
             color={`#fff`}
             textAlign={`center`}
-            lineHeight={`1.8`}
-          >
+            lineHeight={`1.8`}>
             <Wrapper
               dr={`row`}
               width={`auto`}
               color={`inherit`}
-              fontSize={`inherit`}
-            >
-              외환 및 레버리지 금융상패 거래는
+              fontSize={`inherit`}>
+              외환 및 레버리지 금융상품 거래는
               <Wrapper
                 padding={`0 0 0 5px`}
                 width={`auto`}
                 fontWeight={`500`}
                 color={`inherit`}
-                fontSize={`inherit`}
-              >
-                투자 위험도가 높아 투자의 일부 또는 저부의 손실 위험
+                fontSize={`inherit`}>
+                투자 위험도가 높아 투자의 일부 또는 전부의 손실 위험
               </Wrapper>
               이 있습니다.
             </Wrapper>

@@ -21,9 +21,7 @@ const Time = () => {
       <Wrapper padding={`80px 0`} bgColor={`#eeeeee`}>
         <RsWrapper>
           <Wrapper display={`block`} width={`auto`} fontSize={`30px`}>
-            <Text display={`inline`} borderBottom={`1.5px solid #ff98d4`}>
-              거래시간
-            </Text>
+            <Text display={`inline`}>거래시간</Text>
           </Wrapper>
 
           <Wrapper margin={`40px 0 20px`} width={`auto`}>

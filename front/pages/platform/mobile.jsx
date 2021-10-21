@@ -23,8 +23,7 @@ const Mobile = () => {
       <Wrapper
         padding={`150px 0`}
         color={`#fff`}
-        bgImg={`url('https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/willmarkets/assets/images/download/back_mobile1_download.png')`}
-      >
+        bgImg={`url('https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/willmarkets/assets/images/download/back_mobile1_download.png')`}>
         <RsWrapper al={`flex-start`}>
           <Wrapper dr={`row`} width={`auto`}>
             <Image
@@ -36,8 +35,7 @@ const Mobile = () => {
               dr={`row`}
               padding={`0 10px`}
               width={`auto`}
-              fontSize={`24px`}
-            >
+              fontSize={`24px`}>
               Android에서
               <Text padding={`0 5px`} fontWeight={`400`} color={`#ec5bac`}>
                 MT4
@@ -51,8 +49,7 @@ const Mobile = () => {
             width={`auto`}
             margin={`15px 0 0`}
             fontWeight={`300`}
-            lineHeight={`1.6`}
-          >
+            lineHeight={`1.6`}>
             가장 신뢰할 수 있는 MT4 플랫폼은 성공적인 온라인 트레이딩을 위해
             <br />
             필요한 다양한 도구들을 제공하고 있습니다. 지금 등록하시고
@@ -81,8 +78,7 @@ const Mobile = () => {
               color={`#2a2925`}
               bgColor={`#f9e96f`}
               hoverBgColor={`#fae648`}
-              radius={`10px`}
-            >
+              radius={`10px`}>
               다운로드
               <RightOutlined
                 style={{ margin: `0 0 0 5px`, fontSize: `12px` }}
@@ -95,16 +91,14 @@ const Mobile = () => {
       <Wrapper
         padding={`150px 0`}
         color={`#fff`}
-        bgImg={`url('https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/willmarkets/assets/images/download/back_mobile2_download.png')`}
-      >
+        bgImg={`url('https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/willmarkets/assets/images/download/back_mobile2_download.png')`}>
         <RsWrapper al={`flex-end`}>
           <Wrapper dr={`row`} width={`auto`}>
             <Wrapper
               dr={`row`}
               padding={`0 10px`}
               width={`auto`}
-              fontSize={`24px`}
-            >
+              fontSize={`24px`}>
               IOS에서
               <Text padding={`0 5px`} fontWeight={`400`} color={`#ec5bac`}>
                 MT4
@@ -124,8 +118,7 @@ const Mobile = () => {
             margin={`15px 0 0`}
             fontWeight={`300`}
             lineHeight={`1.6`}
-            textAlign={`right`}
-          >
+            textAlign={`right`}>
             가장 신뢰할 수 있는 MT4 플랫폼은 성공적인 온라인 트레이딩을 위해
             <br />
             필요한 다양한 도구들을 제공하고 있습니다. 지금 등록하시고
@@ -154,8 +147,7 @@ const Mobile = () => {
               color={`#2a2925`}
               bgColor={`#f9e96f`}
               hoverBgColor={`#fae648`}
-              radius={`10px`}
-            >
+              radius={`10px`}>
               다운로드
               <RightOutlined
                 style={{ margin: `0 0 0 5px`, fontSize: `12px` }}
@@ -171,13 +163,8 @@ const Mobile = () => {
             display={`block`}
             width={`auto`}
             fontSize={`28px`}
-            fontWeight={`500`}
-          >
-            <Text
-              display={`inline-block`}
-              lineHeight={`1.3`}
-              borderBottom={`1px solid #e763ae`}
-            >
+            fontWeight={`500`}>
+            <Text display={`inline-block`} lineHeight={`1.3`}>
               업계를 선도
             </Text>
             하는 MT4 플랫폼으로 외환거래를 시작하세요
@@ -188,8 +175,7 @@ const Mobile = () => {
             margin={`25px 0`}
             width={`auto`}
             textAlign={`center`}
-            fontSize={`17px`}
-          >
+            fontSize={`17px`}>
             업계 최고의 플랫폼으로 자리 매김 한 Metatrader4 거래
             플랫폼(MT4라고도 함)은
             <br />
@@ -201,9 +187,9 @@ const Mobile = () => {
             <br />
             사용자 친화적인 환경으로 온라인 거래 성과에 필요한 필수 도구와
             리소스를 제공합니다.
-            <br />
+            {/* <br />
             Willmarkets의 신뢰할 수 있는 MT4 플랫폼으로 외환 거래에 대해
-            알아보십시오.
+            알아보십시오. */}
           </Wrapper>
 
           <Wrapper
@@ -213,8 +199,7 @@ const Mobile = () => {
             border={`1px solid #707072`}
             radius={`30px`}
             width={`auto`}
-            bgColor={`#fff`}
-          >
+            bgColor={`#fff`}>
             <Wrapper width={`auto`}>
               <Image
                 width={`auto`}
@@ -264,17 +249,12 @@ const Mobile = () => {
             dr={`row`}
             al={`normal`}
             position={`relative`}
-            bottom={`50px`}
-          >
+            bottom={`50px`}>
             <Wrapper al={`flex-start`} ju={`space-between`} width={`50%`}>
               <Wrapper al={`flex-start`} width={`auto`}>
                 <Wrapper display={`block`} fontSize={`25px`} fontWeight={`500`}>
-                  윌마켓 MT4의
-                  <Text
-                    display={`inline`}
-                    margin={`0 0 0 5px`}
-                    bgColor={`#f253a8`}
-                  >
+                  MT4의 기능 및
+                  <Text display={`inline`} margin={`0 0 0 5px`}>
                     장점
                   </Text>
                 </Wrapper>
@@ -282,16 +262,15 @@ const Mobile = () => {
                 <Wrapper
                   margin={`20px 0 50px`}
                   width={`auto`}
-                  lineHeight={`1.8`}
-                >
-                  IronFX는 MT4 거래의 선구자입니다.
+                  lineHeight={`1.8`}>
+                  {/* IronFX는 MT4 거래의 선구자입니다.
                   <br />
                   쉬운 사용성 및 설치 Windows 외에도 복잡한 전략을
                   <br />
                   구현할 수 있습니다. 기능의 이점을 누리고 가격 변동을 따르고
                   <br />
                   차트에서 추측하면서 트렌드를 따라 자신의 위치를 찾을 수
-                  있습니다.
+                  있습니다. */}
                 </Wrapper>
               </Wrapper>
 

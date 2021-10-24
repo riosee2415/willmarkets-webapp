@@ -39,6 +39,7 @@ import {
   DEPOSIT_IMAGE_FILE_CREATE_REQUEST,
 } from "../../reducers/deposit";
 import { INIT_STATE_REQUEST } from "../../reducers/user";
+import { useTranslation } from "react-i18next";
 
 const CustomLabel = styled(Label)`
   display: flex;
@@ -88,6 +89,8 @@ const Deposit = () => {
   const router = useRouter();
 
   const dispatch = useDispatch();
+
+  const { t } = useTranslation(["deposit"]);
 
   const {
     me,
@@ -362,7 +365,7 @@ const Deposit = () => {
     <UserLayout>
       <TabWrapper position={`absolute`} top={`-21px`} left={`20px`}>
         <Tab isActive={currentTab === 0} onClick={() => setCurrentTab(0)}>
-          입금신청
+          {t(`1`)}
         </Tab>
         <Tab isActive={currentTab === 1} onClick={() => setCurrentTab(1)}>
           입금영수 첨부
@@ -1098,14 +1101,6 @@ const Deposit = () => {
           </Wrapper>
         )}
       </Wrapper>
-
-      {/* <div>
-        <input type="text" {...inputSecret} />
-        <button onClick={sendEmailSecretCodeHandler}>인증코드</button>
-        <button onClick={confirmSecretHandler}>확인</button>
-      </div>
-
-      <button onClick={createDepositHanlder}>신청확인</button> */}
     </UserLayout>
   );
 };

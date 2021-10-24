@@ -9,13 +9,16 @@ i18n
   .use(LanguageDetector)
   .use(initReactI18next)
   .init({
-    lng: "ko",
-    fallbackLng: "ko",
+    lng: "en",
+    fallbackLng: "en",
     debug: true,
-    ns: "common",
+    ns: ["common"],
     defaultNS: "common",
     interpolation: {
       escapeValue: false,
+    },
+    react: {
+      useSuspense: false,
     },
   });
 

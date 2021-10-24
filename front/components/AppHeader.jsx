@@ -22,6 +22,7 @@ import { CaretDownOutlined } from "@ant-design/icons";
 import { useRouter } from "next/router";
 import { USER_LOGOUT_REQUEST } from "../reducers/user";
 import { useDispatch, useSelector } from "react-redux";
+import { useTranslation } from "react-i18next";
 
 const WebRow = styled(RowWrapper)`
   background: transparent;
@@ -119,6 +120,8 @@ const AppHeader = ({ children, width }) => {
 
   const dispatch = useDispatch();
 
+  const { t, i18n } = useTranslation();
+
   const { me, st_userLogoutDone, st_userLogoutError } = useSelector(
     (state) => state.user
   );
@@ -188,7 +191,8 @@ const AppHeader = ({ children, width }) => {
         top={`0`}
         left={`0`}
         index={`10000`}
-        className={headerScroll && "background"}>
+        className={headerScroll && "background"}
+      >
         <Wrapper padding={`5px 0`} bgColor={`#231d21`}>
           <RsWrapper al={`flex-end`}>
             <Wrapper dr={`row`} width={`auto`}>
@@ -199,7 +203,8 @@ const AppHeader = ({ children, width }) => {
                   fontSize={`13px`}
                   color={`#fff`}
                   cursor={`pointer`}
-                  onClick={logoutUserHandler}>
+                  onClick={logoutUserHandler}
+                >
                   로그아웃
                 </Wrapper>
               ) : (
@@ -210,7 +215,8 @@ const AppHeader = ({ children, width }) => {
                     fontSize={`13px`}
                     color={`#fff`}
                     cursor={`pointer`}
-                    onClick={() => moveLinkHandler(`/login`)}>
+                    onClick={() => moveLinkHandler(`/login`)}
+                  >
                     로그인
                   </Wrapper>
                   <Wrapper
@@ -219,7 +225,8 @@ const AppHeader = ({ children, width }) => {
                     fontSize={`13px`}
                     color={`#fff`}
                     cursor={`pointer`}
-                    onClick={() => moveLinkHandler(`/signup`)}>
+                    onClick={() => moveLinkHandler(`/signup`)}
+                  >
                     회원가입
                   </Wrapper>
                 </>
@@ -231,12 +238,14 @@ const AppHeader = ({ children, width }) => {
                 margin={`0 0 0 30px`}
                 width={`auto`}
                 fontSize={`13px`}
-                cursor={`pointer`}>
+                cursor={`pointer`}
+              >
                 <Combo
                   width={`110px`}
                   padding={`0`}
                   onMouseOver={() => setComboLanguage(true)}
-                  onMouseOut={() => setComboLanguage(false)}>
+                  onMouseOut={() => setComboLanguage(false)}
+                >
                   <ComboTitle color={`#fff`}>
                     <Wrapper fontSize={`13px`}>Language</Wrapper>
                     <CaretDownOutlined />
@@ -244,9 +253,14 @@ const AppHeader = ({ children, width }) => {
 
                   <ComboList
                     isView={comboLanguage}
-                    onClick={() => setComboLanguage(false)}>
-                    <ComboListItem>English</ComboListItem>
-                    <ComboListItem>한국어</ComboListItem>
+                    onClick={() => setComboLanguage(false)}
+                  >
+                    <ComboListItem onClick={() => i18n.changeLanguage("en")}>
+                      English
+                    </ComboListItem>
+                    <ComboListItem onClick={() => i18n.changeLanguage("ko")}>
+                      한국어
+                    </ComboListItem>
                   </ComboList>
                 </Combo>
               </Wrapper>
@@ -272,17 +286,20 @@ const AppHeader = ({ children, width }) => {
             toggleMenu05
               ? `#2c2c2c`
               : `#fff`
-          }>
+          }
+        >
           <RsWrapper>
             <Wrapper
               dr={`row`}
               ju={`space-between`}
               padding={`5px 0`}
-              height={`85px`}>
+              height={`85px`}
+            >
               <Wrapper
                 width={`auto`}
                 cursor={`pointer`}
-                onClick={() => moveLinkHandler(`/`)}>
+                onClick={() => moveLinkHandler(`/`)}
+              >
                 <Image
                   width={`80px`}
                   src={`https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/willmarkets/assets/images/logo/logo.png`}
@@ -298,29 +315,36 @@ const AppHeader = ({ children, width }) => {
                     setToggleMenu03(false);
                     setToggleMenu04(false);
                     setToggleMenu05(false);
-                  }}>
+                  }}
+                >
                   <MenuTextWrapper
-                    onClick={() => moveLinkHandler(`/company/intro`)}>
+                    onClick={() => moveLinkHandler(`/company/intro`)}
+                  >
                     회사 소개
                   </MenuTextWrapper>
 
                   <MenuListWrapper
                     onMouseOut={() => setToggleMenu01(false)}
-                    onClick={() => setToggleMenu01(false)}>
+                    onClick={() => setToggleMenu01(false)}
+                  >
                     <MenuListItemWrapper
-                      onClick={() => moveLinkHandler(`/company/intro`)}>
+                      onClick={() => moveLinkHandler(`/company/intro`)}
+                    >
                       회사소개
                     </MenuListItemWrapper>
                     <MenuListItemWrapper
-                      onClick={() => moveLinkHandler(`/company/terms`)}>
+                      onClick={() => moveLinkHandler(`/company/terms`)}
+                    >
                       이용약관
                     </MenuListItemWrapper>
                     <MenuListItemWrapper
-                      onClick={() => moveLinkHandler(`/company/privacy`)}>
+                      onClick={() => moveLinkHandler(`/company/privacy`)}
+                    >
                       개인정보 보호정책
                     </MenuListItemWrapper>
                     <MenuListItemWrapper
-                      onClick={() => moveLinkHandler(`/company/moneyPolicy`)}>
+                      onClick={() => moveLinkHandler(`/company/moneyPolicy`)}
+                    >
                       자금세탁 방지정책
                     </MenuListItemWrapper>
                   </MenuListWrapper>
@@ -334,41 +358,51 @@ const AppHeader = ({ children, width }) => {
                     setToggleMenu03(false);
                     setToggleMenu04(false);
                     setToggleMenu05(false);
-                  }}>
+                  }}
+                >
                   <MenuTextWrapper
-                    onClick={() => moveLinkHandler(`/trading/forex`)}>
+                    onClick={() => moveLinkHandler(`/trading/forex`)}
+                  >
                     트레이딩
                   </MenuTextWrapper>
 
                   <MenuListWrapper
                     onMouseOut={() => setToggleMenu02(false)}
-                    onClick={() => setToggleMenu02(false)}>
+                    onClick={() => setToggleMenu02(false)}
+                  >
                     <MenuListItemWrapper
-                      onClick={() => moveLinkHandler(`/trading/forex`)}>
+                      onClick={() => moveLinkHandler(`/trading/forex`)}
+                    >
                       Forex
                     </MenuListItemWrapper>
                     <MenuListItemWrapper
-                      onClick={() => moveLinkHandler(`/trading/ecn`)}>
+                      onClick={() => moveLinkHandler(`/trading/ecn`)}
+                    >
                       ECN
                     </MenuListItemWrapper>
                     <MenuListItemWrapper
-                      onClick={() => moveLinkHandler(`/trading/stp`)}>
+                      onClick={() => moveLinkHandler(`/trading/stp`)}
+                    >
                       STP
                     </MenuListItemWrapper>
                     <MenuListItemWrapper
-                      onClick={() => moveLinkHandler(`/trading/spread`)}>
+                      onClick={() => moveLinkHandler(`/trading/spread`)}
+                    >
                       스프레드와 스왑
                     </MenuListItemWrapper>
                     <MenuListItemWrapper
-                      onClick={() => moveLinkHandler(`/trading/margin`)}>
+                      onClick={() => moveLinkHandler(`/trading/margin`)}
+                    >
                       마진과 레버리지
                     </MenuListItemWrapper>
                     <MenuListItemWrapper
-                      onClick={() => moveLinkHandler(`/trading/provider`)}>
+                      onClick={() => moveLinkHandler(`/trading/provider`)}
+                    >
                       호가 제공사
                     </MenuListItemWrapper>
                     <MenuListItemWrapper
-                      onClick={() => moveLinkHandler(`/trading/time`)}>
+                      onClick={() => moveLinkHandler(`/trading/time`)}
+                    >
                       거래시간
                     </MenuListItemWrapper>
                   </MenuListWrapper>
@@ -382,21 +416,26 @@ const AppHeader = ({ children, width }) => {
                     setToggleMenu02(false);
                     setToggleMenu04(false);
                     setToggleMenu05(false);
-                  }}>
+                  }}
+                >
                   <MenuTextWrapper
-                    onClick={() => moveLinkHandler(`/platform/pc`)}>
+                    onClick={() => moveLinkHandler(`/platform/pc`)}
+                  >
                     거래플랫폼
                   </MenuTextWrapper>
 
                   <MenuListWrapper
                     onMouseOut={() => setToggleMenu03(false)}
-                    onClick={() => setToggleMenu03(false)}>
+                    onClick={() => setToggleMenu03(false)}
+                  >
                     <MenuListItemWrapper
-                      onClick={() => moveLinkHandler(`/platform/pc`)}>
+                      onClick={() => moveLinkHandler(`/platform/pc`)}
+                    >
                       PC 버전
                     </MenuListItemWrapper>
                     <MenuListItemWrapper
-                      onClick={() => moveLinkHandler(`/platform/mobile`)}>
+                      onClick={() => moveLinkHandler(`/platform/mobile`)}
+                    >
                       모바일 버전
                     </MenuListItemWrapper>
                   </MenuListWrapper>
@@ -411,7 +450,8 @@ const AppHeader = ({ children, width }) => {
                     setToggleMenu03(false);
                     setToggleMenu05(false);
                   }}
-                  onMouseOut={() => setToggleMenu04(false)}>
+                  onMouseOut={() => setToggleMenu04(false)}
+                >
                   <MenuTextWrapper onClick={() => moveLinkHandler(`/user`)}>
                     입출금
                   </MenuTextWrapper>
@@ -426,7 +466,8 @@ const AppHeader = ({ children, width }) => {
                     setToggleMenu03(false);
                     setToggleMenu04(false);
                   }}
-                  onMouseOut={() => setToggleMenu05(false)}>
+                  onMouseOut={() => setToggleMenu05(false)}
+                >
                   <MenuTextWrapper onClick={() => moveLinkHandler(`/support`)}>
                     고객지원
                   </MenuTextWrapper>

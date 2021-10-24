@@ -13,12 +13,15 @@ import { CaretDownOutlined, UserOutlined } from "@ant-design/icons";
 import { useDispatch, useSelector } from "react-redux";
 import { useRouter } from "next/router";
 import { USER_LOGOUT_REQUEST } from "../../reducers/user";
+import { useTranslation } from "react-i18next";
 
 const UserHeader = ({ children, width }) => {
   ////// HOOKS //////
   const router = useRouter();
 
   const dispatch = useDispatch();
+
+  const { t, i18n } = useTranslation();
 
   const { me, st_userLogoutDone, st_userLogoutError } = useSelector(
     (state) => state.user
@@ -105,8 +108,12 @@ const UserHeader = ({ children, width }) => {
           isView={comboLanguage}
           onClick={() => setComboLanguage(false)}
         >
-          <ComboListItem>한국어</ComboListItem>
-          <ComboListItem>English</ComboListItem>
+          <ComboListItem onClick={() => i18n.changeLanguage("en")}>
+            English
+          </ComboListItem>
+          <ComboListItem onClick={() => i18n.changeLanguage("ko")}>
+            한국어
+          </ComboListItem>
         </ComboList>
       </Combo>
     </Wrapper>

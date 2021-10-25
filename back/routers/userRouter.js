@@ -179,7 +179,7 @@ router.post("/signin", (req, res, next) => {
   })(req, res, next);
 });
 
-router.post("/signin/admin", isAdminCheck, (req, res, next) => {
+router.post("/signin/admin", (req, res, next) => {
   passport.authenticate("local", (err, user, info) => {
     if (err) {
       console.error(err);

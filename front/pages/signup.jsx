@@ -40,6 +40,7 @@ import ClientLayout from "../components/ClientLayout";
 import Theme from "../components/Theme";
 import PostCode from "../components/postCode/PostCode";
 import useWidth from "../hooks/useWidth";
+import { useTranslation } from "react-i18next";
 
 const TabWrapper = styled(Wrapper)`
   flex-direction: row;
@@ -113,6 +114,8 @@ const Signup = () => {
 
   const dispatch = useDispatch();
 
+  const { t } = useTranslation(["signup"]);
+
   const width = useWidth();
 
   const {
@@ -181,7 +184,7 @@ const Signup = () => {
 
   const checkEmailHandler = useCallback(() => {
     if (!emptyCheck(inputEmail.value)) {
-      return message.error("이메일을 입력해주세요.");
+      return message.error(t(`1`));
     }
 
     dispatch({
@@ -194,7 +197,7 @@ const Signup = () => {
 
   const sendEmailHandler = useCallback(() => {
     if (!emptyCheck(inputEmail.value)) {
-      return message.error("이메일을 입력해주세요.");
+      return message.error(t(`1`));
     }
 
     dispatch({
@@ -207,15 +210,15 @@ const Signup = () => {
 
   const confirmSecretHandler = useCallback(() => {
     if (!emptyCheck(inputSecret.value)) {
-      return message.error("인증번호를 입력해주세요.");
+      return message.error(t(`2`));
     }
 
     if (secretCode !== inputSecret.value) {
       setIsConfirmEmail(false);
-      return message.error("인증번호가 일치하지 않습니다.");
+      return message.error(t(`3`));
     } else {
       setIsConfirmEmail(true);
-      message.success("이메일 인증이 완료되었습니다.");
+      message.success(t(`4`));
     }
   }, [inputSecret]);
 
@@ -235,7 +238,7 @@ const Signup = () => {
         ext === "pdf"
       )
     ) {
-      message.error("지원되지 않는 파일 형식입니다.");
+      message.error(t(`5`));
       return;
     }
 
@@ -254,23 +257,23 @@ const Signup = () => {
   const signupUserHandler = useCallback(() => {
     if (currentStep === 0) {
       if (!emptyCheck(inputEmail.value)) {
-        return message.error("이메일을 입력해주세요.");
+        return message.error(t(`1`));
       }
 
       if (!isConfirmEmail) {
-        return message.error("이메일 인증을 완료해주세요.");
+        return message.error(t(`6`));
       }
 
       if (!emptyCheck(inputUserName.value)) {
-        return message.error("이름을 입력해주세요.");
+        return message.error(t(`7`));
       }
 
       if (!emptyCheck(inputGender.value)) {
-        return message.error("성별을 선택해주세요.");
+        return message.error(t(`8`));
       }
 
       if (!emptyCheck(inputAddress.value)) {
-        return message.error("주소를 선택해주세요.");
+        return message.error(t(`9`));
       }
 
       if (currentTab === 0) {
@@ -281,31 +284,31 @@ const Signup = () => {
 
     if (currentTab === 0) {
       if (!emptyCheck(inputIdType.value)) {
-        return message.error("신분증 유형을 선택해주세요.");
+        return message.error(t(`10`));
       }
 
       if (!emptyCheck(inputIdDate1.value)) {
-        return message.error("신분증 발행일자를 입력해주세요.");
+        return message.error(t(`11`));
       }
 
       if (!emptyCheck(inputIdDate2.value)) {
-        return message.error("신분증 만료일자를 입력해주세요.");
+        return message.error(t(`12`));
       }
 
       if (!emptyCheck(inputIdFilePath.value)) {
-        return message.error("신분증 파일을 첨부해주세요.");
+        return message.error(t(`13`));
       }
 
       if (!emptyCheck(inputAddrType.value)) {
-        return message.error("주소 유형을 선택해주세요.");
+        return message.error(t(`14`));
       }
 
       if (!emptyCheck(inputAddrFilePath.value)) {
-        return message.error("주소 파일을 첨부해주세요.");
+        return message.error(t(`15`));
       }
 
       if (st_userIdImageFileLoading) {
-        return message.error("첨부파일을 업로드 중입니다. 잠시 기다려주세요.");
+        return message.error(t(`16`));
       }
     }
 
@@ -414,7 +417,7 @@ const Signup = () => {
     if (st_userSecretEmailDone) {
       setIsSendEmail(true);
       setIsConfirmEmail(false);
-      message.success("입력하신 이메일로 인증번호가 전송되었습니다.");
+      message.success(t(`17`));
     }
   }, [st_userSecretEmailDone]);
 
@@ -434,8 +437,8 @@ const Signup = () => {
         type: INIT_STATE_REQUEST,
       });
 
-      message.success("정상적으로 회원가입이 완료되었습니다.");
-      message.success("관리자 승인후 이용이 가능합니다.");
+      message.success(t(`18`));
+      message.success(t(`19`));
     }
   }, [st_userSignupDone]);
 
@@ -452,7 +455,8 @@ const Signup = () => {
         top={`0`}
         left={`0`}
         zIndex={`0`}
-        minHeight={`100vh`}>
+        minHeight={`100vh`}
+      >
         <Image
           height={`100vh`}
           src={`https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/willmarkets/assets/images/banner/main_banner02.png`}
@@ -464,13 +468,15 @@ const Signup = () => {
           position={`relative`}
           zIndex={`1`}
           al={`flex-end`}
-          minHeight={`100vh`}>
+          minHeight={`100vh`}
+        >
           <Wrapper
             margin={`0 45px 0 0`}
             padding={`25px 20px`}
             width={`550px`}
             bgColor={`#fff`}
-            shadow={`1px 1px 8px #dedede`}>
+            shadow={`1px 1px 8px #dedede`}
+          >
             <Wrapper dr={`row`} ju={`flex-start`} margin={`0 0 30px`}>
               <Image
                 width={`50px`}
@@ -481,30 +487,32 @@ const Signup = () => {
                 margin={`0 0 0 10px`}
                 fontSize={`20px`}
                 fontWeight={`500`}
-                color={`#242424`}>
-                회원가입
+                color={`#242424`}
+              >
+                {t(`20`)}
               </Wrapper>
             </Wrapper>
 
             <TabWrapper>
               <Tab isActive={currentTab === 0} onClick={() => setCurrentTab(0)}>
-                실거래 계정
+                {t(`21`)}
               </Tab>
 
               <Tab isActive={currentTab === 1} onClick={() => setCurrentTab(1)}>
-                모의 계정
+                {t(`22`)}
               </Tab>
             </TabWrapper>
 
             <Wrapper
               padding={`40px 20px 45px`}
               border={`1px solid #ececec`}
-              shadow={`2px 2px 10px #ebebeb`}>
+              shadow={`2px 2px 10px #ebebeb`}
+            >
               {currentStep === 0 && (
                 <Wrapper>
                   <Wrapper dr={`row`} al={`flex-start`}>
                     <Wrapper al={`flex-start`} width={`100px`}>
-                      <CustomLabel for={`inp-email`}>이메일</CustomLabel>
+                      <CustomLabel for={`inp-email`}>{t(`23`)}</CustomLabel>
                     </Wrapper>
 
                     <Wrapper width={`calc(100% - 100px)`}>
@@ -513,7 +521,7 @@ const Signup = () => {
                           id={`inp-email`}
                           width={`calc(100% - 90px)`}
                           {...inputEmail}
-                          placeholder={`이메일`}
+                          placeholder={t(`23`)}
                           readOnly={isConfirmEmail}
                           onChange={(e) => {
                             setIsSendEmail(false);
@@ -530,8 +538,9 @@ const Signup = () => {
                           color={`#fff`}
                           fontWeight={`500`}
                           radius={`5px`}
-                          onClick={checkEmailHandler}>
-                          {isConfirmEmail ? `재인증` : `인증받기`}
+                          onClick={checkEmailHandler}
+                        >
+                          {isConfirmEmail ? t(`24`) : t(`25`)}
                         </CommonButton>
                       </Wrapper>
 
@@ -539,11 +548,12 @@ const Signup = () => {
                         <Wrapper
                           dr={`row`}
                           ju={`flex-start`}
-                          margin={`10px 0 0`}>
+                          margin={`10px 0 0`}
+                        >
                           <CustomInput
                             width={`calc(100% - 90px)`}
                             {...inputSecret}
-                            placeholder={`인증번호`}
+                            placeholder={t(`26`)}
                           />
                           <CommonButton
                             width={`80px`}
@@ -554,8 +564,9 @@ const Signup = () => {
                             color={`#030303`}
                             fontWeight={`500`}
                             radius={`5px`}
-                            onClick={confirmSecretHandler}>
-                            확인
+                            onClick={confirmSecretHandler}
+                          >
+                            {t(`27`)}
                           </CommonButton>
                         </Wrapper>
                       )}
@@ -563,56 +574,65 @@ const Signup = () => {
 
                     <Wrapper dr={`row`} margin={`10px 0 0`}>
                       <Wrapper al={`flex-start`} width={`100px`}>
-                        <CustomLabel for={`inp-password`}>비밀번호</CustomLabel>
+                        <CustomLabel for={`inp-password`}>
+                          {t(`28`)}
+                        </CustomLabel>
                       </Wrapper>
 
                       <Wrapper
                         dr={`row`}
                         ju={`flex-start`}
-                        width={`calc(100% - 100px)`}>
+                        width={`calc(100% - 100px)`}
+                      >
                         <CustomInput
                           type={`password`}
                           id={`inp-password`}
                           width={`calc(100% - 90px)`}
                           {...inputPassword}
-                          placeholder={`비밀번호`}
+                          placeholder={t(`28`)}
                         />
                       </Wrapper>
                     </Wrapper>
 
                     <Wrapper dr={`row`} margin={`10px 0 0`}>
                       <Wrapper al={`flex-start`} width={`100px`}>
-                        <CustomLabel for={`inp-userName`}>이름</CustomLabel>
+                        <CustomLabel for={`inp-userName`}>
+                          {t(`29`)}
+                        </CustomLabel>
                       </Wrapper>
 
                       <Wrapper
                         dr={`row`}
                         ju={`flex-start`}
-                        width={`calc(100% - 100px)`}>
+                        width={`calc(100% - 100px)`}
+                      >
                         <CustomInput
                           id={`inp-userName`}
                           width={`calc(100% - 90px)`}
                           {...inputUserName}
-                          placeholder={`이름`}
+                          placeholder={t(`29`)}
                         />
                       </Wrapper>
                     </Wrapper>
 
                     <Wrapper dr={`row`} margin={`10px 0 0`}>
                       <Wrapper al={`flex-start`} width={`100px`}>
-                        <CustomLabel for={`inp-userName`}>성별</CustomLabel>
+                        <CustomLabel for={`inp-userName`}>
+                          {t(`30`)}
+                        </CustomLabel>
                       </Wrapper>
 
                       <Wrapper
                         dr={`row`}
                         ju={`flex-start`}
-                        width={`calc(100% - 100px)`}>
+                        width={`calc(100% - 100px)`}
+                      >
                         <Wrapper dr={`row`} width={`auto`} margin={`0 10px`}>
                           <RadioInput
                             id={`inp-gender-1`}
                             color={`#e87f5d`}
-                            value={`남자`}
-                            checked={inputGender.value === `남자`}
+                            value={t(`31`)}
+                            checked={inputGender.value === t(`31`)}
                             onChange={(e) =>
                               inputGender.setValue(e.target.value)
                             }
@@ -620,8 +640,9 @@ const Signup = () => {
                           <Label
                             for={`inp-gender-1`}
                             fontSize={`15px`}
-                            cursor={`pointer`}>
-                            남자
+                            cursor={`pointer`}
+                          >
+                            {t(`31`)}
                           </Label>
                         </Wrapper>
 
@@ -629,8 +650,8 @@ const Signup = () => {
                           <RadioInput
                             id={`inp-gender-2`}
                             color={`#e87f5d`}
-                            value={`여자`}
-                            checked={inputGender.value === `여자`}
+                            value={t(`32`)}
+                            checked={inputGender.value === t(`32`)}
                             onChange={(e) =>
                               inputGender.setValue(e.target.value)
                             }
@@ -638,8 +659,9 @@ const Signup = () => {
                           <Label
                             for={`inp-gender-2`}
                             fontSize={`15px`}
-                            cursor={`pointer`}>
-                            여자
+                            cursor={`pointer`}
+                          >
+                            {t(`32`)}
                           </Label>
                         </Wrapper>
                       </Wrapper>
@@ -647,7 +669,7 @@ const Signup = () => {
 
                     <Wrapper dr={`row`} margin={`10px 0 0`}>
                       <Wrapper al={`flex-start`} width={`100px`}>
-                        <CustomLabel for={`inp-address`}>주소</CustomLabel>
+                        <CustomLabel for={`inp-address`}>{t(`33`)}</CustomLabel>
                       </Wrapper>
 
                       <Wrapper
@@ -655,12 +677,13 @@ const Signup = () => {
                         dr={`row`}
                         ju={`flex-start`}
                         width={`calc(100% - 100px)`}
-                        cursor={`pointer`}>
+                        cursor={`pointer`}
+                      >
                         <CustomInput
                           id={`inp-address`}
                           width={`100%`}
                           {...inputAddress}
-                          placeholder={`주소`}
+                          placeholder={t(`33`)}
                         />
 
                         <Wrapper
@@ -669,14 +692,15 @@ const Signup = () => {
                           top={`50%`}
                           zIndex={`1`}
                           margin={`-10px 0 0`}
-                          width={`auto`}></Wrapper>
+                          width={`auto`}
+                        ></Wrapper>
                       </Wrapper>
                     </Wrapper>
 
                     <Wrapper dr={`row`} margin={`10px 0 0`}>
                       <Wrapper al={`flex-start`} width={`100px`}>
                         <CustomLabel for={`inp-detailAddress`}>
-                          상세 주소
+                          {t(`34`)}
                         </CustomLabel>
                       </Wrapper>
 
@@ -684,12 +708,13 @@ const Signup = () => {
                         dr={`row`}
                         ju={`flex-start`}
                         width={`calc(100% - 100px)`}
-                        cursor={`pointer`}>
+                        cursor={`pointer`}
+                      >
                         <CustomInput
                           id={`inp-detailAddress`}
                           width={`100%`}
                           {...inputDetailAddress}
-                          placeholder={`상세주소`}
+                          placeholder={t(`34`)}
                         />
                       </Wrapper>
                     </Wrapper>
@@ -704,19 +729,21 @@ const Signup = () => {
                     margin={`0 0 5px`}
                     fontSize={`22px`}
                     fontWeight={`500`}
-                    color={`#030303`}>
-                    본인 확인
+                    color={`#030303`}
+                  >
+                    {t(`35`)}
                   </Wrapper>
 
                   <Wrapper dr={`row`}>
                     <Wrapper al={`flex-start`} width={`100px`}>
-                      <CustomLabel>인증 유형</CustomLabel>
+                      <CustomLabel>{t(`36`)}</CustomLabel>
                     </Wrapper>
 
                     <Wrapper
                       dr={`row`}
                       ju={`flex-start`}
-                      width={`calc(100% - 100px)`}>
+                      width={`calc(100% - 100px)`}
+                    >
                       <Combo
                         isBorder={true}
                         itemAlign={`flex-start`}
@@ -724,32 +751,37 @@ const Signup = () => {
                         height={`40px`}
                         border={`none`}
                         borderBottom={`1px solid #dfdfdf !important`}
-                        onClick={() => setComboIdType(!comboIdType)}>
+                        onClick={() => setComboIdType(!comboIdType)}
+                      >
                         <ComboTitle>
-                          <Wrapper>{inputIdType.value || `유형 선택`}</Wrapper>
+                          <Wrapper>{inputIdType.value || t(`37`)}</Wrapper>
                           <CaretDownOutlined />
                         </ComboTitle>
 
                         <ComboList isView={comboIdType}>
                           <ComboListItem
                             isActive={!inputIdType.value}
-                            onClick={() => inputIdType.setValue("")}>
-                            유형 선택
+                            onClick={() => inputIdType.setValue("")}
+                          >
+                            {t(`37`)}
                           </ComboListItem>
                           <ComboListItem
-                            isActive={inputIdType.value === `신분증`}
-                            onClick={() => inputIdType.setValue(`신분증`)}>
-                            신분증
+                            isActive={inputIdType.value === t(`38`)}
+                            onClick={() => inputIdType.setValue(t(`38`))}
+                          >
+                            {t(`38`)}
                           </ComboListItem>
                           <ComboListItem
-                            isActive={inputIdType.value === `여권`}
-                            onClick={() => inputIdType.setValue(`여권`)}>
-                            여권
+                            isActive={inputIdType.value === t(`39`)}
+                            onClick={() => inputIdType.setValue(t(`39`))}
+                          >
+                            {t(`39`)}
                           </ComboListItem>
                           <ComboListItem
-                            isActive={inputIdType.value === `운전면허증`}
-                            onClick={() => inputIdType.setValue(`운전면허증`)}>
-                            운전면허증
+                            isActive={inputIdType.value === t(`40`)}
+                            onClick={() => inputIdType.setValue(t(`40`))}
+                          >
+                            {t(`40`)}
                           </ComboListItem>
                         </ComboList>
                       </Combo>
@@ -758,13 +790,14 @@ const Signup = () => {
 
                   <Wrapper dr={`row`} margin={`10px 0 0`}>
                     <Wrapper al={`flex-start`} width={`100px`}>
-                      <CustomLabel for={`inp-idDate1`}>발행 일자</CustomLabel>
+                      <CustomLabel for={`inp-idDate1`}>{t(`41`)}</CustomLabel>
                     </Wrapper>
 
                     <Wrapper
                       dr={`row`}
                       ju={`flex-start`}
-                      width={`calc(100% - 100px)`}>
+                      width={`calc(100% - 100px)`}
+                    >
                       <CustomInput
                         id={`inp-idDate1`}
                         width={`100%`}
@@ -777,13 +810,14 @@ const Signup = () => {
 
                   <Wrapper dr={`row`} margin={`10px 0 0`}>
                     <Wrapper al={`flex-start`} width={`100px`}>
-                      <CustomLabel for={`inp-idDate2`}>만료 일자</CustomLabel>
+                      <CustomLabel for={`inp-idDate2`}>{t(`42`)}</CustomLabel>
                     </Wrapper>
 
                     <Wrapper
                       dr={`row`}
                       ju={`flex-start`}
-                      width={`calc(100% - 100px)`}>
+                      width={`calc(100% - 100px)`}
+                    >
                       <CustomInput
                         id={`inp-idDate2`}
                         width={`100%`}
@@ -796,13 +830,14 @@ const Signup = () => {
 
                   <Wrapper dr={`row`} margin={`10px 0 0`}>
                     <Wrapper al={`flex-start`} width={`100px`}>
-                      <CustomLabel>문서 파일</CustomLabel>
+                      <CustomLabel>{t(`43`)}</CustomLabel>
                     </Wrapper>
 
                     <Wrapper
                       dr={`row`}
                       ju={`flex-start`}
-                      width={`calc(100% - 100px)`}>
+                      width={`calc(100% - 100px)`}
+                    >
                       <FileInput
                         type={`file`}
                         ref={fileRef}
@@ -813,22 +848,25 @@ const Signup = () => {
                         height={`38px`}
                         margin={`0 10px 0 0`}
                         radius={`5px`}
-                        onClick={() => fileRef.current.click()}>
-                        파일선택
+                        onClick={() => fileRef.current.click()}
+                      >
+                        {t(`44`)}
                       </CommonButton>
 
                       {inputIdFileOriginName.value && (
                         <Wrapper
                           position={`relative`}
                           dr={`row`}
-                          width={`calc(100% - 90px)`}>
+                          width={`calc(100% - 90px)`}
+                        >
                           <Wrapper
                             position={`absolute`}
                             left={`0`}
                             top={`50%`}
                             margin={`-9px 0 0`}
                             zIndex={`2`}
-                            width={`auto`}>
+                            width={`auto`}
+                          >
                             <FileImageOutlined
                               style={{ fontSize: `18px`, color: `#707070` }}
                             />
@@ -837,7 +875,7 @@ const Signup = () => {
                             id={`inp-idFile`}
                             value={inputIdFileOriginName.value}
                             readOnly
-                            placeholder={`파일을 첨부해주세요.`}
+                            placeholder={t(`45`)}
                             padding={`0 0 0 25px`}
                             borderBottom={`none`}
                             hoverBorderBottom={`none`}
@@ -853,19 +891,21 @@ const Signup = () => {
                     margin={`20px 0 5px`}
                     fontSize={`22px`}
                     fontWeight={`500`}
-                    color={`#030303`}>
-                    주소 확인
+                    color={`#030303`}
+                  >
+                    {t(`46`)}
                   </Wrapper>
 
                   <Wrapper dr={`row`}>
                     <Wrapper al={`flex-start`} width={`100px`}>
-                      <CustomLabel>인증 유형</CustomLabel>
+                      <CustomLabel>{t(`36`)}</CustomLabel>
                     </Wrapper>
 
                     <Wrapper
                       dr={`row`}
                       ju={`flex-start`}
-                      width={`calc(100% - 100px)`}>
+                      width={`calc(100% - 100px)`}
+                    >
                       <Combo
                         isBorder={true}
                         itemAlign={`flex-start`}
@@ -873,41 +913,43 @@ const Signup = () => {
                         height={`40px`}
                         border={`none`}
                         borderBottom={`1px solid #dfdfdf !important`}
-                        onClick={() => setComboAddrType(!comboAddrType)}>
+                        onClick={() => setComboAddrType(!comboAddrType)}
+                      >
                         <ComboTitle>
-                          <Wrapper>
-                            {inputAddrType.value || `유형 선택`}
-                          </Wrapper>
+                          <Wrapper>{inputAddrType.value || t(`37`)}</Wrapper>
                           <CaretDownOutlined />
                         </ComboTitle>
 
                         <ComboList isView={comboAddrType}>
                           <ComboListItem
                             isActive={!inputAddrType.value}
-                            onClick={() => inputAddrType.setValue("")}>
-                            유형 선택
+                            onClick={() => inputAddrType.setValue("")}
+                          >
+                            {t(`37`)}
                           </ComboListItem>
                           <ComboListItem
-                            isActive={inputAddrType.value === `가스 요금`}
-                            onClick={() => inputAddrType.setValue(`가스 요금`)}>
-                            가스 요금
+                            isActive={inputAddrType.value === t(`47`)}
+                            onClick={() => inputAddrType.setValue(t(`47`))}
+                          >
+                            {t(`47`)}
                           </ComboListItem>
                           <ComboListItem
-                            isActive={inputAddrType.value === `전기 빌`}
-                            onClick={() => inputAddrType.setValue(`전기 빌`)}>
-                            전기 빌
+                            isActive={inputAddrType.value === t(`48`)}
+                            onClick={() => inputAddrType.setValue(t(`48`))}
+                          >
+                            {t(`48`)}
                           </ComboListItem>
                           <ComboListItem
-                            isActive={inputAddrType.value === `워터 빌`}
-                            onClick={() => inputAddrType.setValue(`워터 빌`)}>
-                            워터 빌
+                            isActive={inputAddrType.value === t(`49`)}
+                            onClick={() => inputAddrType.setValue(t(`49`))}
+                          >
+                            {t(`49`)}
                           </ComboListItem>
                           <ComboListItem
-                            isActive={inputAddrType.value === `은행 명세서`}
-                            onClick={() =>
-                              inputAddrType.setValue(`은행 명세서`)
-                            }>
-                            은행 명세서
+                            isActive={inputAddrType.value === t(`50`)}
+                            onClick={() => inputAddrType.setValue(t(`50`))}
+                          >
+                            {t(`50`)}
                           </ComboListItem>
                         </ComboList>
                       </Combo>
@@ -916,13 +958,14 @@ const Signup = () => {
 
                   <Wrapper dr={`row`} margin={`10px 0 0`}>
                     <Wrapper al={`flex-start`} width={`100px`}>
-                      <CustomLabel>문서 파일</CustomLabel>
+                      <CustomLabel>{t(`43`)}</CustomLabel>
                     </Wrapper>
 
                     <Wrapper
                       dr={`row`}
                       ju={`flex-start`}
-                      width={`calc(100% - 100px)`}>
+                      width={`calc(100% - 100px)`}
+                    >
                       <FileInput
                         type={`file`}
                         ref={fileRef2}
@@ -933,22 +976,25 @@ const Signup = () => {
                         height={`38px`}
                         margin={`0 10px 0 0`}
                         radius={`5px`}
-                        onClick={() => fileRef2.current.click()}>
-                        파일선택
+                        onClick={() => fileRef2.current.click()}
+                      >
+                        {t(`44`)}
                       </CommonButton>
 
                       {inputAddrFileOriginName.value && (
                         <Wrapper
                           position={`relative`}
                           dr={`row`}
-                          width={`calc(100% - 90px)`}>
+                          width={`calc(100% - 90px)`}
+                        >
                           <Wrapper
                             position={`absolute`}
                             left={`0`}
                             top={`50%`}
                             margin={`-9px 0 0`}
                             zIndex={`2`}
-                            width={`auto`}>
+                            width={`auto`}
+                          >
                             <FileImageOutlined
                               style={{ fontSize: `18px`, color: `#707070` }}
                             />
@@ -957,7 +1003,7 @@ const Signup = () => {
                             id={`inp-idFile`}
                             value={inputAddrFileOriginName.value}
                             readOnly
-                            placeholder={`파일을 첨부해주세요.`}
+                            placeholder={t(`45`)}
                             padding={`0 0 0 25px`}
                             borderBottom={`none`}
                             hoverBorderBottom={`none`}
@@ -981,12 +1027,13 @@ const Signup = () => {
                 radius={`8px`}
                 bgColor={`#f8459b`}
                 color={`#fff`}
-                onClick={signupUserHandler}>
+                onClick={signupUserHandler}
+              >
                 {currentTab === 0
                   ? currentStep === 0
-                    ? `다음으로`
-                    : `가입하기`
-                  : `가입하기`}
+                    ? t(`51`)
+                    : t(`52`)
+                  : t(`52`)}
               </CommonButton>
               <CommonButton
                 width={`100px`}
@@ -998,12 +1045,13 @@ const Signup = () => {
                 border={`1px solid #ebebeb`}
                 bgColor={`#ebebeb`}
                 color={`#030303`}
-                onClick={moveBackHandler}>
+                onClick={moveBackHandler}
+              >
                 {currentTab === 0
                   ? currentStep === 0
-                    ? `취소`
-                    : `이전으로`
-                  : `취소`}
+                    ? t(`53`)
+                    : t(`54`)
+                  : t(`53`)}
               </CommonButton>
             </Wrapper>
           </Wrapper>

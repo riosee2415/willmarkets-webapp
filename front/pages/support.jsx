@@ -23,8 +23,8 @@ import {
 import ClientLayout from "../components/ClientLayout";
 import Theme from "../components/Theme";
 import SubBanner from "../components/SubBanner";
-
 import { QUESTION_CREATE_REQUEST } from "../reducers/question";
+import { useTranslation } from "react-i18next";
 
 const TextLabel = styled(Label)``;
 
@@ -57,6 +57,8 @@ const Support = () => {
   ////// HOOKS //////
   const dispatch = useDispatch();
 
+  const { t } = useTranslation(["support"]);
+
   const width = useWidth();
 
   const { st_questionCreateDone, st_questionCreateError } = useSelector(
@@ -75,23 +77,23 @@ const Support = () => {
 
   const createQuestionHandler = useCallback(() => {
     if (!emptyCheck(inputName.value)) {
-      return message.error("성명을 입력해주세요.");
+      return message.error(t(`1`));
     }
 
     if (!emptyCheck(inputNumber.value)) {
-      return message.error("연락처를 입력해주세요.");
+      return message.error(t(`2`));
     }
 
     if (!emptyCheck(inputEmail.value)) {
-      return message.error("이메일을 입력해주세요.");
+      return message.error(t(`3`));
     }
 
     if (!emptyCheck(inputContent.value)) {
-      return message.error("문의내용을 입력해주세요.");
+      return message.error(t(`4`));
     }
 
     if (!inputAgree.value) {
-      return message.error("개인정보 처리 방침을 동의해주세요.");
+      return message.error(t(`5`));
     }
 
     dispatch({
@@ -107,7 +109,7 @@ const Support = () => {
 
   useEffect(() => {
     if (st_questionCreateDone) {
-      message.success("문의신청이 완료되었습니다.");
+      message.success(t(`6`));
 
       inputName.setValue("");
       inputNumber.setValue("");
@@ -130,17 +132,18 @@ const Support = () => {
       <Wrapper bgColor={`#000105`} padding={`80px 0`}>
         <RsWrapper>
           <Wrapper color={"#FF3C8E"} fontSize={`28px`} fontWeight={`500`}>
-            문의하기
+            {t(`7`)}
           </Wrapper>
 
           <Wrapper
             color={`#fff`}
             margin={`22px 0 5px`}
             textAlign={`center`}
-            fontSize={`20px`}>
-            아래의 정보를 입력하신 후 문의하시기 바랍니다.
-            <br />이 메일은 본사 Help Desk로 전달되며 대부분의 문의는 24시간
-            이내에 처리될 것입니다.
+            fontSize={`20px`}
+          >
+            {t(`8`)}
+            <br />
+            {t(`9`)}
           </Wrapper>
 
           <Wrapper margin={`30px 0`}>
@@ -157,10 +160,11 @@ const Support = () => {
             bgColor={Theme.white_C}
             radius={`8px`}
             padding={`40px 70px`}
-            width={`auto`}>
+            width={`auto`}
+          >
             <Wrapper dr={`row`} ju={`center`} al={`flex-end`}>
               <Wrapper width={`85px`} al={"flex-start"}>
-                <TextLabel margin={`0 25px 0 0 `}>성명</TextLabel>
+                <TextLabel margin={`0 25px 0 0 `}>{t(`10`)}</TextLabel>
               </Wrapper>
 
               <Wrapper width={`450px`}>
@@ -179,9 +183,10 @@ const Support = () => {
               dr={`row`}
               ju={`center`}
               al={`flex-end`}
-              margin={`10px 0 0 0`}>
+              margin={`10px 0 0 0`}
+            >
               <Wrapper width={`85px`} al={"flex-start"}>
-                <TextLabel margin={`0 25px 0 0 `}>연락처</TextLabel>
+                <TextLabel margin={`0 25px 0 0 `}>{t(`11`)}</TextLabel>
               </Wrapper>
 
               <Wrapper width={`450px`}>
@@ -200,9 +205,10 @@ const Support = () => {
               dr={`row`}
               ju={`center`}
               al={`flex-end`}
-              margin={`10px 0 0 0`}>
+              margin={`10px 0 0 0`}
+            >
               <Wrapper width={`85px`} al={"flex-start"}>
-                <TextLabel margin={`0 25px 0 0 `}>이메일</TextLabel>
+                <TextLabel margin={`0 25px 0 0 `}>{t(`12`)}</TextLabel>
               </Wrapper>
               <Wrapper width={`450px`}>
                 <InputText
@@ -219,9 +225,10 @@ const Support = () => {
               dr={`row`}
               ju={`center`}
               al={`nomal`}
-              margin={`10px 0 0 0`}>
+              margin={`10px 0 0 0`}
+            >
               <Wrapper width={`85px`} al={`flex-start`}>
-                <TextLabel margin={`0 25px 0 0 `}>문의내용</TextLabel>
+                <TextLabel margin={`0 25px 0 0 `}>{t(`13`)}</TextLabel>
               </Wrapper>
               <Wrapper width={`450px`} borderBottom={"1px solid #e3e3e3"}>
                 <Content width={`100%`} {...inputContent} />
@@ -243,8 +250,9 @@ const Support = () => {
                 width={`auto`}
                 opacity={`0.6`}
                 cursor={`pointer`}
-                onClick={() => inputAgree.setValue(!inputAgree.value)}>
-                개인정보 처리 방침에 동의합니다.
+                onClick={() => inputAgree.setValue(!inputAgree.value)}
+              >
+                {t(`14`)}
               </Wrapper>
               <Wrapper
                 cursor={`pointer`}
@@ -253,8 +261,9 @@ const Support = () => {
                 width={`auto`}
                 radius={`5px`}
                 padding={`0 6px`}
-                bgColor={"#8b8686"}>
-                보기
+                bgColor={"#8b8686"}
+              >
+                {t(`15`)}
               </Wrapper>
             </Wrapper>
           </Wrapper>
@@ -267,8 +276,9 @@ const Support = () => {
               fontSize={`24px`}
               padding={`6px 50px 8px`}
               radius={`6px`}
-              onClick={createQuestionHandler}>
-              문의하기
+              onClick={createQuestionHandler}
+            >
+              {t(`7`)}
             </CommonButton>
           </Wrapper>
         </RsWrapper>

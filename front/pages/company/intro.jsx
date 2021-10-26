@@ -23,9 +23,12 @@ import {
 import ClientLayout from "../../components/ClientLayout";
 import Theme from "../../components/Theme";
 import SubBanner from "../../components/SubBanner";
+import { useTranslation } from "react-i18next";
 
 const Intro = () => {
   const router = useRouter();
+
+  const { t } = useTranslation(["company_intro"]);
 
   const moveLinkHandler = useCallback((link) => {
     router.push(`${link}`);
@@ -41,11 +44,12 @@ const Intro = () => {
             dr={`row`}
             color={`#2c2c2c`}
             fontSize={`28px`}
-            lineHeight={`1.4`}>
+            lineHeight={`1.4`}
+          >
             <Text position={`relative`} top={`1px`}>
-              세계적인 금융 시장
+              {t(`1`).split(`\n`)[0]}
             </Text>
-            을 노리는 윌마켓
+            {t(`1`).split(`\n`)[1]}
           </Wrapper>
 
           <Wrapper
@@ -53,23 +57,25 @@ const Intro = () => {
             margin={`40px 0 10px`}
             color={`#2c2c2c`}
             fontSize={`20px`}
-            lineHeight={`1.4`}>
-            세계적인 금융 및 IT 전문가들의 노하우와 기술력을 기반으로
-            설립되었습니다.
+            lineHeight={`1.4`}
+          >
+            {t(`2`)}
             <Wrapper
               display={`inline`}
               width={`auto`}
               fontSize={`inherit`}
-              color={`inherit`}>
-              고객에게
+              color={`inherit`}
+            >
+              {t(`3`).split(`\n`)[0]}
               <Text
                 display={`inline`}
                 padding={`0 0 0 5px`}
                 color={`inherit`}
-                fontWeight={`700`}>
-                최고의 금융서비스
+                fontWeight={`700`}
+              >
+                {t(`3`).split(`\n`)[1]}
               </Text>
-              를 제공하고 함께 성장하며 나아가 금융시장 발전에 기여하고자 합니다
+              {t(`3`).split(`\n`)[2]}
             </Wrapper>
           </Wrapper>
 
@@ -96,8 +102,9 @@ const Intro = () => {
               radius={`30px`}
               fontSize={`18px`}
               fontWeight={`500`}
-              onClick={() => moveLinkHandler(`/signup`)}>
-              거래 시작
+              onClick={() => moveLinkHandler(`/signup`)}
+            >
+              {t(`4`)}
             </CommonButton>
           </Wrapper>
         </RsWrapper>
@@ -107,9 +114,9 @@ const Intro = () => {
         <RsWrapper dr={`row`} al={`normal`}>
           <Wrapper al={`flex-start`} width={`50%`} padding={`70px 0 60px`}>
             <Wrapper dr={`row`} width={`auto`} fontSize={`25px`}>
-              윌마켓의 궁극적인
+              {t(`5`).split(`\n`)[0]}
               <Text margin={`0 0 0 8px`} padding={`0 2px`} lineHeight={`1.3`}>
-                목표
+                {t(`5`).split(`\n`)[1]}
               </Text>
             </Wrapper>
 
@@ -118,21 +125,21 @@ const Intro = () => {
               width={`auto`}
               margin={`30px 0 0`}
               padding={`0 157px 0 0`}
-              fontWeight={`300`}>
-              Willmarkets은 리테일과 기업 고객 모두에게 최고의 트레이딩 환경을
-              제공해드리는 것을 목표로 하고 있습니다.
+              fontWeight={`300`}
+            >
+              {t(`6`)}
               <br />
-              또한 해외간의 거래 또한 유동적으로 이뤄지고 고객의 편의성에 맞춘
-              글로벌 기업이 되려 합니다.
+              {t(`7`)}
               <Wrapper display={`block`} width={`auto`}>
-                이를 위해 Willmarkets은 고객님들께
+                {t(`8`).split(`\n`)[0]}
                 <Text
                   display={`inline`}
                   padding={`0 0 0 5px`}
-                  fontWeight={`500`}>
-                  안전한 거래 환경, 경쟁력 있는 스프레드, 빠른 업무지원
+                  fontWeight={`500`}
+                >
+                  {t(`8`).split(`\n`)[1]}
                 </Text>
-                을 제공해 드리고자 노력하고 있습니다.
+                {t(`8`).split(`\n`)[2]}
               </Wrapper>
             </Wrapper>
           </Wrapper>
@@ -143,7 +150,8 @@ const Intro = () => {
               top={`-50px`}
               left={`-60px`}
               width={`auto`}
-              zIndex={`0`}>
+              zIndex={`0`}
+            >
               <Image
                 width={`auto`}
                 opacity={`0.3`}
@@ -167,7 +175,8 @@ const Intro = () => {
             position={`relative`}
             al={`flex-start`}
             width={`50%`}
-            padding={`70px 0`}>
+            padding={`70px 0`}
+          >
             <Wrapper position={`relative`} zIndex={`1`} width={`auto`}>
               <Image
                 width={`auto`}
@@ -182,10 +191,11 @@ const Intro = () => {
               width={`auto`}
               fontSize={`25px`}
               fontWeight={`500`}
-              lineHeight={`1.3`}>
-              최고의
+              lineHeight={`1.3`}
+            >
+              {t(`9`).split(`\n`)[0]}
               <Text margin={`0 0 0 8px`} padding={`0 2px`}>
-                고객 혜택
+                {t(`9`).split(`\n`)[1]}
               </Text>
             </Wrapper>
 
@@ -195,19 +205,20 @@ const Intro = () => {
               margin={`30px 0 0`}
               padding={`0 0 0 240px`}
               fontWeight={`300`}
-              textAlign={`right`}>
+              textAlign={`right`}
+            >
               <Wrapper display={`block`} width={`auto`}>
-                고객의 자금은 신뢰도와 안정성이 높은
+                {t(`10`).split(`\n`)[0]}
                 <Text
                   display={`inline`}
                   padding={`0 0 0 5px`}
-                  fontWeight={`500`}>
-                  금융 선진국인 영국은행
+                  fontWeight={`500`}
+                >
+                  {t(`10`).split(`\n`)[1]}
                 </Text>
-                과 거래를 하고 있으며 엄격하게 관리, 보호되고 있습니다.
+                {t(`10`).split(`\n`)[2]}
               </Wrapper>
-              안정적이고 편리한 시스템을 통해 최적의 거래 환경 제공과 더불어
-              가능한 모든 지원을 아끼지 않을 것을 약속드립니다.
+              {t(`11`)}
             </Wrapper>
           </Wrapper>
         </RsWrapper>

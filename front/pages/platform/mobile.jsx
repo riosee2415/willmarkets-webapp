@@ -41,11 +41,11 @@ const Mobile = () => {
               width={`auto`}
               fontSize={`24px`}
             >
-              Android에서
+              {t(`1`).split(`\n`)[0]}
               <Text padding={`0 5px`} fontWeight={`400`} color={`#ec5bac`}>
-                MT4
+                {t(`1`).split(`\n`)[1]}
               </Text>
-              다운로드
+              {t(`1`).split(`\n`)[2]}
             </Wrapper>
           </Wrapper>
 
@@ -56,20 +56,21 @@ const Mobile = () => {
             fontWeight={`300`}
             lineHeight={`1.6`}
           >
-            가장 신뢰할 수 있는 MT4 플랫폼은 성공적인 온라인 트레이딩을 위해
+            {t(`2`).split(`\n`)[0]}
             <br />
-            필요한 다양한 도구들을 제공하고 있습니다. 지금 등록하시고
+            {t(`2`).split(`\n`)[1]} {t(`3`).split(`\n`)[0]}
             <Text display={`inline`} padding={`0 0 0 5px`} fontWeight={`500`}>
-              빠른 주문 체결
+              {t(`3`).split(`\n`)[1]}
             </Text>
-            과<br />
-            0핍부터 시작하는
-            <Text display={`inline`} padding={`0 0 0 5px`} fontWeight={`500`}>
-              저렴한 스프레드
-            </Text>
-            , 트레이더 중심의 친환경적인 플랫폼을 통해
+            {t(`3`).split(`\n`)[2]}
             <br />
-            성공적인 온라인 트레이딩을 경험할 수 있습니다.
+            {t(`3`).split(`\n`)[3]}
+            <Text display={`inline`} padding={`0 0 0 5px`} fontWeight={`500`}>
+              {t(`3`).split(`\n`)[4]}
+            </Text>
+            {t(`3`).split(`\n`)[5]}
+            <br />
+            {t(`3`).split(`\n`)[6]}
           </Wrapper>
 
           <Wrapper margin={`40px 0 0`} width={`auto`}>
@@ -86,7 +87,7 @@ const Mobile = () => {
               hoverBgColor={`#fae648`}
               radius={`10px`}
             >
-              다운로드
+              {t(`4`)}
               <RightOutlined
                 style={{ margin: `0 0 0 5px`, fontSize: `12px` }}
               />
@@ -108,11 +109,11 @@ const Mobile = () => {
               width={`auto`}
               fontSize={`24px`}
             >
-              IOS에서
+              {t(`5`).split(`\n`)[0]}
               <Text padding={`0 5px`} fontWeight={`400`} color={`#ec5bac`}>
-                MT4
+                {t(`5`).split(`\n`)[1]}
               </Text>
-              다운로드
+              {t(`5`).split(`\n`)[2]}
             </Wrapper>
 
             <Image
@@ -129,20 +130,21 @@ const Mobile = () => {
             lineHeight={`1.6`}
             textAlign={`right`}
           >
-            가장 신뢰할 수 있는 MT4 플랫폼은 성공적인 온라인 트레이딩을 위해
+            {t(`2`).split(`\n`)[0]}
             <br />
-            필요한 다양한 도구들을 제공하고 있습니다. 지금 등록하시고
+            {t(`2`).split(`\n`)[1]} {t(`3`).split(`\n`)[0]}
             <Text display={`inline`} padding={`0 0 0 5px`} fontWeight={`500`}>
-              빠른 주문 체결
+              {t(`3`).split(`\n`)[1]}
             </Text>
-            과<br />
-            0핍부터 시작하는
-            <Text display={`inline`} padding={`0 0 0 5px`} fontWeight={`500`}>
-              저렴한 스프레드
-            </Text>
-            , 트레이더 중심의 친환경적인 플랫폼을 통해
+            {t(`3`).split(`\n`)[2]}
             <br />
-            성공적인 온라인 트레이딩을 경험할 수 있습니다.
+            {t(`3`).split(`\n`)[3]}
+            <Text display={`inline`} padding={`0 0 0 5px`} fontWeight={`500`}>
+              {t(`3`).split(`\n`)[4]}
+            </Text>
+            {t(`3`).split(`\n`)[5]}
+            <br />
+            {t(`3`).split(`\n`)[6]}
           </Wrapper>
 
           <Wrapper margin={`40px 0 0`} width={`auto`}>
@@ -159,7 +161,7 @@ const Mobile = () => {
               hoverBgColor={`#fae648`}
               radius={`10px`}
             >
-              다운로드
+              {t(`4`)}
               <RightOutlined
                 style={{ margin: `0 0 0 5px`, fontSize: `12px` }}
               />
@@ -177,9 +179,9 @@ const Mobile = () => {
             fontWeight={`500`}
           >
             <Text display={`inline-block`} lineHeight={`1.3`}>
-              업계를 선도
+              {t(`7`).split(`\n`)[0]}
             </Text>
-            하는 MT4 플랫폼으로 외환거래를 시작하세요
+            {t(`7`).split(`\n`)[1]}
           </Wrapper>
 
           <Wrapper
@@ -189,17 +191,15 @@ const Mobile = () => {
             textAlign={`center`}
             fontSize={`17px`}
           >
-            업계 최고의 플랫폼으로 자리 매김 한 Metatrader4 거래
-            플랫폼(MT4라고도 함)은
+            {t(`8`).split(`\n`)[0]}
             <br />
-            트레이더가 사용할 수 있는
+            {t(`8`).split(`\n`)[1]}
             <Text display={`inline`} margin={`0 0 0 5px`} fontWeight={`700`}>
-              가장 신뢰
+              {t(`8`).split(`\n`)[2]}
             </Text>
-            할 수 있는 플랫폼입니다.
+            {t(`8`).split(`\n`)[3]}
             <br />
-            사용자 친화적인 환경으로 온라인 거래 성과에 필요한 필수 도구와
-            리소스를 제공합니다.
+            {t(`8`).split(`\n`)[4]}
             {/* <br />
             Willmarkets의 신뢰할 수 있는 MT4 플랫폼으로 외환 거래에 대해
             알아보십시오. */}
@@ -268,9 +268,9 @@ const Mobile = () => {
             <Wrapper al={`flex-start`} ju={`space-between`} width={`50%`}>
               <Wrapper al={`flex-start`} width={`auto`}>
                 <Wrapper display={`block`} fontSize={`25px`} fontWeight={`500`}>
-                  MT4의 기능 및
+                  {t(`9`).split(`\n`)[0]}
                   <Text display={`inline`} margin={`0 0 0 5px`}>
-                    장점
+                    {t(`9`).split(`\n`)[1]}
                   </Text>
                 </Wrapper>
 

@@ -20,6 +20,7 @@ import {
 import ClientLayout from "../components/ClientLayout";
 import Theme from "../components/Theme";
 import { UserOutlined, LockOutlined } from "@ant-design/icons";
+import { useTranslation } from "react-i18next";
 
 const CustomInput = styled(TextInput)`
   padding: 0 0 0 15px;
@@ -32,6 +33,8 @@ const Login = () => {
 
   ////// HOOKS //////
   const dispatch = useDispatch();
+
+  const { t } = useTranslation(["login"]);
 
   const router = useRouter();
 
@@ -51,10 +54,10 @@ const Login = () => {
 
   const loginHandler = useCallback(() => {
     if (!emptyCheck(inputEmail.value)) {
-      return message.error("이메일을 입력해주세요.");
+      return message.error(t(`1`));
     }
     if (!emptyCheck(inputPassword.value)) {
-      return message.error("비밀번호를 입력해주세요.");
+      return message.error(t(`2`));
     }
 
     dispatch({
@@ -74,7 +77,7 @@ const Login = () => {
   useEffect(() => {
     if (st_userSigninDone) {
       moveLinkHandler(`/user`);
-      message.success("로그인 되었습니다.");
+      message.success(t(`3`));
     }
   }, [st_userSigninDone]);
 
@@ -158,7 +161,7 @@ const Login = () => {
                 cursor={`pointer`}
                 onClick={() => moveLinkHandler(`/find`)}
               >
-                비밀번호 찾기
+                {t(`4`)}
               </Wrapper>
             </Wrapper>
 
@@ -174,7 +177,7 @@ const Login = () => {
                 color={`#fff`}
                 onClick={loginHandler}
               >
-                로그인
+                {t(`5`)}
               </CommonButton>
               <CommonButton
                 width={`180px`}
@@ -188,7 +191,7 @@ const Login = () => {
                 color={`#f8459b`}
                 onClick={() => moveLinkHandler(`/signup`)}
               >
-                회원가입
+                {t(`6`)}
               </CommonButton>
             </Wrapper>
           </Wrapper>

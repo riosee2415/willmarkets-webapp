@@ -23,6 +23,7 @@ import { PlusOutlined, RightOutlined } from "@ant-design/icons";
 import { useRouter } from "next/router";
 import styled from "styled-components";
 import { QUESTION_CREATE_REQUEST } from "../reducers/question";
+import { useTranslation } from "react-i18next";
 
 const CustomInput = styled(TextInput)`
   border-radius: ${(props) => props.radius};
@@ -67,6 +68,8 @@ const Home = ({ width }) => {
 
   const dispatch = useDispatch();
 
+  const { t } = useTranslation(["main"]);
+
   const [toggle, setToggle] = useState(false);
 
   const inputName = useInput("");
@@ -80,19 +83,19 @@ const Home = ({ width }) => {
 
   const createQuestionHandler = useCallback(() => {
     if (!emptyCheck(inputName.value)) {
-      return message.error("성명을 입력해주세요.");
+      return message.error(t(`1`));
     }
 
     if (!emptyCheck(inputPhone.value)) {
-      return message.error("연락처를 입력해주세요.");
+      return message.error(t(`2`));
     }
 
     if (!emptyCheck(inputEmail.value)) {
-      return message.error("이메일을 입력해주세요.");
+      return message.error(t(`3`));
     }
 
     if (!emptyCheck(inputText.value)) {
-      return message.error("내용을 입력해주세요.");
+      return message.error(t(`4`));
     }
 
     dispatch({
@@ -116,7 +119,7 @@ const Home = ({ width }) => {
 
   useEffect(() => {
     if (st_questionCreateDone) {
-      message.success("문의신청이 완료되었습니다.");
+      message.success(t(`5`));
 
       onClickToggleHanlder();
 
@@ -147,15 +150,17 @@ const Home = ({ width }) => {
           width={`auto`}
           bgColor={`#EFE4E9`}
           radius={`6px`}
-          shadow={"2px 2px 10px #a9a9b7"}>
+          shadow={"2px 2px 10px #a9a9b7"}
+        >
           <Wrapper
             dr={`row`}
             ju={`space-between`}
             padding={`5px 10px`}
             bgColor={`#fff`}
-            radius={`6px`}>
+            radius={`6px`}
+          >
             <Wrapper width={`auto`} fontSize={`14px`} fontWeight={`600`}>
-              고객지원
+              {t(`6`)}
             </Wrapper>
             <CloseOutlined onClick={onClickToggleHanlder} />
           </Wrapper>
@@ -166,7 +171,8 @@ const Home = ({ width }) => {
             width={`280px`}
             bgColor={`#fff`}
             padding={`12px`}
-            zIndex={`5`}>
+            zIndex={`5`}
+          >
             <Image
               top={`40px`}
               position={`absolute`}
@@ -183,17 +189,18 @@ const Home = ({ width }) => {
               <Wrapper
                 lineHeight={`18px`}
                 fontSize={`13px`}
-                margin={`24px 0 0 0`}>
-                반갑습니다 언제나 친절하게 응답해드리는 월마켓입니다. 이전
-                채팅과 이어하고 싶다면 정보를 동일하게 입력해주세요.
+                margin={`24px 0 0 0`}
+              >
+                {t(`7`)}
               </Wrapper>
               <Wrapper>
                 <Wrapper
                   fontSize={`12px`}
                   al={`flex-start`}
                   fontWeight={`600`}
-                  margin={`10px 0 4px 0`}>
-                  성명
+                  margin={`10px 0 4px 0`}
+                >
+                  {t(`8`)}
                 </Wrapper>
                 <CustomInput {...inputName} />
               </Wrapper>
@@ -203,8 +210,9 @@ const Home = ({ width }) => {
                   fontSize={`12px`}
                   al={`flex-start`}
                   margin={`10px 0 4px 0`}
-                  fontWeight={`600`}>
-                  연락처
+                  fontWeight={`600`}
+                >
+                  {t(`9`)}
                 </Wrapper>
                 <CustomInput {...inputPhone} />
               </Wrapper>
@@ -213,8 +221,9 @@ const Home = ({ width }) => {
                   fontSize={`12px`}
                   al={`flex-start`}
                   margin={`10px 0 4px 0`}
-                  fontWeight={`600`}>
-                  이메일
+                  fontWeight={`600`}
+                >
+                  {t(`10`)}
                 </Wrapper>
                 <CustomInput {...inputEmail} />
               </Wrapper>
@@ -223,8 +232,9 @@ const Home = ({ width }) => {
                   fontSize={`12px`}
                   al={`flex-start`}
                   margin={`10px 0 4px 0`}
-                  fontWeight={`600`}>
-                  문의내용
+                  fontWeight={`600`}
+                >
+                  {t(`11`)}
                 </Wrapper>
                 <Content {...inputText} />
               </Wrapper>
@@ -239,8 +249,9 @@ const Home = ({ width }) => {
               margin={`0 0 10px 0`}
               color={`#fff`}
               bgColor={`#000104`}
-              onClick={createQuestionHandler}>
-              문의하기
+              onClick={createQuestionHandler}
+            >
+              {t(`12`)}
             </CommonButton>
           </Wrapper>
         </Wrapper>
@@ -252,7 +263,8 @@ const Home = ({ width }) => {
           color={`#fff`}
           width={`auto`}
           cursor={`pointer`}
-          onClick={onClickToggleHanlder}>
+          onClick={onClickToggleHanlder}
+        >
           <Wrapper dr={`row`}>
             <Wrapper width={`auto`}>
               <Image
@@ -262,7 +274,7 @@ const Home = ({ width }) => {
             </Wrapper>
           </Wrapper>
           <Wrapper fontSize={`15px`} al={`flex-end`} margin={`2px 0 0 0`}>
-            문의하기
+            {t(`12`)}
           </Wrapper>
         </QuestionWrapper>
       )}
@@ -275,7 +287,8 @@ const Home = ({ width }) => {
           width={`100%`}
           height={`100%`}
           bgImg={`url('https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/willmarkets/assets/images/main/back_download.png')`}
-          zIndex={`-2`}></Wrapper>
+          zIndex={`-2`}
+        ></Wrapper>
 
         <Wrapper
           position={`absolute`}
@@ -284,18 +297,20 @@ const Home = ({ width }) => {
           width={`100%`}
           height={`100%`}
           bgColor={`rgba(0, 0, 0, 0.5)`}
-          zIndex={`-1`}></Wrapper>
+          zIndex={`-1`}
+        ></Wrapper>
 
         <Wrapper fontSize={`30px`} fontWeight={`500`} color={`#f776be`}>
-          MT4 다운로드
+          {t(`13`)}
         </Wrapper>
 
         <Wrapper
           margin={`15px 0 0`}
           fontSize={`19px`}
           fontWeight={`400`}
-          color={`#fff`}>
-          Android와 Ios 모두 호환하는 완벽한 거래 플랫폼
+          color={`#fff`}
+        >
+          {t(`14`)}
         </Wrapper>
 
         <Wrapper dr={`row`} margin={`70px 0 0`}>
@@ -312,7 +327,8 @@ const Home = ({ width }) => {
             width={`auto`}
             margin={`0 80px`}
             color={`#fff`}
-            fontSize={`34px`}>
+            fontSize={`34px`}
+          >
             <PlusOutlined />
           </Wrapper>
 
@@ -329,7 +345,8 @@ const Home = ({ width }) => {
             width={`auto`}
             margin={`0 80px`}
             color={`#fff`}
-            fontSize={`34px`}>
+            fontSize={`34px`}
+          >
             <PlusOutlined />
           </Wrapper>
 
@@ -353,14 +370,16 @@ const Home = ({ width }) => {
             radius={`30px`}
             fontSize={`17px`}
             fontWeight={`500`}
-            onClick={() => moveLinkHandler(`/platform/pc`)}>
-            다운로드
+            onClick={() => moveLinkHandler(`/platform/pc`)}
+          >
+            {t(`15`)}
             <Wrapper
               position={`absolute`}
               right={`40px`}
               top={`50%`}
               margin={`-6px 0 0 0`}
-              width={`auto`}>
+              width={`auto`}
+            >
               <RightOutlined />
             </Wrapper>
           </CommonButton>
@@ -370,7 +389,8 @@ const Home = ({ width }) => {
           position={`absolute`}
           right={`180px`}
           bottom={`40px`}
-          width={`auto`}>
+          width={`auto`}
+        >
           <Image
             src={`https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/willmarkets/assets/images/main/iphone.png`}
           />
@@ -395,8 +415,9 @@ const Home = ({ width }) => {
             width={`auto`}
             color={`#ffea6b`}
             fontSize={`18px`}
-            fontWeight={`500`}>
-            ※주의사항※
+            fontWeight={`500`}
+          >
+            ※{t(`16`)}※
           </Wrapper>
 
           <Wrapper
@@ -404,37 +425,37 @@ const Home = ({ width }) => {
             fontWeight={`300`}
             color={`#fff`}
             textAlign={`center`}
-            lineHeight={`1.8`}>
+            lineHeight={`1.8`}
+          >
             <Wrapper
               dr={`row`}
               width={`auto`}
               color={`inherit`}
-              fontSize={`inherit`}>
-              외환 및 레버리지 금융상품 거래는
+              fontSize={`inherit`}
+            >
+              {t(`17`).split(`\n`)[0]}
               <Wrapper
                 padding={`0 0 0 5px`}
                 width={`auto`}
                 fontWeight={`500`}
                 color={`inherit`}
-                fontSize={`inherit`}>
-                투자 위험도가 높아 투자의 일부 또는 전부의 손실 위험
+                fontSize={`inherit`}
+              >
+                {t(`17`).split(`\n`)[1]}
               </Wrapper>
-              이 있습니다.
+              {t(`17`).split(`\n`)[2]}
             </Wrapper>
-            감당할 수 없는 금액 이상으로 투자를 권장하지 않으며, 관련된 투자
-            위험을 충분히 숙지하시길 바랍니다.
+            {t(`18`)}
             <br />
-            일부 투자자는 레버리지 상품 거래가 적합하지 않을 수 있습니다.
+            {t(`19`)}
             <br />
-            거래하기 전에 본인의 투자 경험 및 투자 목적을 고려하되 필요시 별도의
-            투자 자문을 구하는 것을 권장해드립니다.
+            {t(`20`)}
             <br />
-            거주 국가의 법률 규정에서 서비스 이용이 허용되어 있는지 확인하는
-            것은 전적으로 고객의 책임입니다.
+            {t(`21`)}
+
             <br />
             <Wrapper width={`auto`} color={`#c1c1c1`} fontSize={`inherit`}>
-              ※ 미국, 캐나다, 이스라엘 및 이란과 같은 특정 지역 거주자에게
-              서비스를 제공하지 않습니다.
+              ※ {t(`22`)}
             </Wrapper>
           </Wrapper>
         </RsWrapper>

@@ -24,6 +24,7 @@ import {
 } from "../components/commonComponents";
 import ClientLayout from "../components/ClientLayout";
 import Theme from "../components/Theme";
+import { useTranslation } from "react-i18next";
 
 const CustomLabel = styled(Label)`
   display: flex;
@@ -58,6 +59,8 @@ const Find = () => {
   ////// HOOKS //////
   const dispatch = useDispatch();
 
+  const { t } = useTranslation(["find"]);
+
   const router = useRouter();
 
   const {
@@ -89,7 +92,7 @@ const Find = () => {
 
   const findPasswordHandler = useCallback(() => {
     if (!emptyCheck(inputEmail.value)) {
-      return message.error("이메일을 입력해주세요.");
+      return message.error(t(`1`));
     }
 
     dispatch({
@@ -102,7 +105,7 @@ const Find = () => {
 
   const findPasswordConfirmHandler = useCallback(() => {
     if (!emptyCheck(inputSecret.value)) {
-      return message.error("인증번호를 입력해주세요.");
+      return message.error(t(`2`));
     }
 
     dispatch({
@@ -117,25 +120,25 @@ const Find = () => {
   const findPasswordUpdateHandler = useCallback(() => {
     if (currentTab === 0) {
       if (!emptyCheck(inputEmail.value)) {
-        return message.error("이메일을 입력해주세요.");
+        return message.error(t(`1`));
       }
 
       if (!isConfirmEmail) {
-        return message.error("이메일 인증을 완료해주세요.");
+        return message.error(t(`3`));
       }
 
       setCurrentTab(1);
     } else if (currentTab === 1) {
       if (!emptyCheck(inputPassword.value)) {
-        return message.error("비밀번호를 입력해주세요.");
+        return message.error(t(`4`));
       }
 
       if (!emptyCheck(inputPasswordCheck.value)) {
-        return message.error("비밀번호 확인을 입력해주세요.");
+        return message.error(t(`5`));
       }
 
       if (inputPassword.value !== inputPasswordCheck.value) {
-        return message.error("비밀번호가 일치하지 않습니다.");
+        return message.error(t(`6`));
       }
 
       dispatch({
@@ -159,7 +162,7 @@ const Find = () => {
     if (st_userFindPasswordDone) {
       setIsSendEmail(true);
       setIsConfirmEmail(false);
-      message.success("입력하신 이메일로 인증번호가 전송되었습니다.");
+      message.success(t(`7`));
     }
   }, [st_userFindPasswordDone]);
 
@@ -174,7 +177,7 @@ const Find = () => {
   useEffect(() => {
     if (st_userFindPasswordConfirmDone) {
       setIsConfirmEmail(true);
-      message.success("이메일 인증이 완료되었습니다.");
+      message.success(t(`8`));
     }
   }, [st_userFindPasswordConfirmDone]);
 
@@ -188,7 +191,7 @@ const Find = () => {
   useEffect(() => {
     if (st_userFindPasswordUpdateDone) {
       moveLinkHandler(`/login`);
-      message.success("비밀번호 변경이 완료되었습니다.");
+      message.success(t(`9`));
     }
   }, [st_userFindPasswordUpdateDone]);
 
@@ -239,7 +242,7 @@ const Find = () => {
                 fontWeight={`500`}
                 color={`#242424`}
               >
-                비밀번호 찾기
+                {t(`10`)}
               </Wrapper>
             </Wrapper>
 
@@ -247,7 +250,7 @@ const Find = () => {
               <Wrapper>
                 <Wrapper dr={`row`} al={`flex-start`}>
                   <Wrapper al={`flex-start`} width={`120px`}>
-                    <CustomLabel for={`inp-email`}>이메일</CustomLabel>
+                    <CustomLabel for={`inp-email`}>{t(`11`)}</CustomLabel>
                   </Wrapper>
 
                   <Wrapper width={`calc(100% - 120px)`}>
@@ -256,7 +259,7 @@ const Find = () => {
                         id={`inp-email`}
                         width={`calc(100% - 90px)`}
                         {...inputEmail}
-                        placeholder={`이메일`}
+                        placeholder={t(`11`)}
                         readOnly={isConfirmEmail}
                         onChange={(e) => {
                           setIsSendEmail(false);
@@ -275,7 +278,7 @@ const Find = () => {
                         radius={`5px`}
                         onClick={findPasswordHandler}
                       >
-                        {isConfirmEmail ? `재인증` : `인증받기`}
+                        {isConfirmEmail ? t(`12`) : t(`13`)}
                       </CommonButton>
                     </Wrapper>
 
@@ -284,7 +287,7 @@ const Find = () => {
                         <CustomInput
                           width={`calc(100% - 90px)`}
                           {...inputSecret}
-                          placeholder={`인증번호`}
+                          placeholder={t(`14`)}
                         />
                         <CommonButton
                           width={`80px`}
@@ -297,7 +300,7 @@ const Find = () => {
                           radius={`5px`}
                           onClick={findPasswordConfirmHandler}
                         >
-                          확인
+                          {t(`15`)}
                         </CommonButton>
                       </Wrapper>
                     )}
@@ -310,7 +313,7 @@ const Find = () => {
               <Wrapper>
                 <Wrapper dr={`row`}>
                   <Wrapper al={`flex-start`} width={`120px`}>
-                    <CustomLabel for={`inp-password`}>비밀번호</CustomLabel>
+                    <CustomLabel for={`inp-password`}>{t(`16`)}</CustomLabel>
                   </Wrapper>
 
                   <Wrapper
@@ -322,7 +325,7 @@ const Find = () => {
                       type={`password`}
                       id={`inp-password`}
                       {...inputPassword}
-                      placeholder={`비밀번호`}
+                      placeholder={t(`16`)}
                     />
                   </Wrapper>
                 </Wrapper>
@@ -330,7 +333,7 @@ const Find = () => {
                 <Wrapper dr={`row`} margin={`10px 0 0`}>
                   <Wrapper al={`flex-start`} width={`120px`}>
                     <CustomLabel for={`inp-passwordCheck`}>
-                      비밀번호 확인
+                      {t(`17`)}
                     </CustomLabel>
                   </Wrapper>
 
@@ -343,7 +346,7 @@ const Find = () => {
                       type={`password`}
                       id={`inp-passwordCheck`}
                       {...inputPasswordCheck}
-                      placeholder={`비밀번호 확인`}
+                      placeholder={t(`17`)}
                     />
                   </Wrapper>
                 </Wrapper>
@@ -362,7 +365,7 @@ const Find = () => {
                 color={`#fff`}
                 onClick={findPasswordUpdateHandler}
               >
-                {currentTab === 0 ? `비밀번호 찾기` : `비밀번호 변경`}
+                {currentTab === 0 ? t(`10`) : t(`18`)}
               </CommonButton>
             </Wrapper>
           </Wrapper>

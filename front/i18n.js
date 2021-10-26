@@ -9,8 +9,8 @@ i18n
   .use(LanguageDetector)
   .use(initReactI18next)
   .init({
-    lng: "en",
-    fallbackLng: "en",
+    lng: "ko",
+    fallbackLng: "ko",
     debug: true,
     ns: ["common"],
     defaultNS: "common",

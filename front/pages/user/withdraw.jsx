@@ -32,6 +32,7 @@ import UserLayout from "../../components/user/UserLayout";
 import Theme from "../../components/Theme";
 import { WITHDRAW_CREATE_REQUEST } from "../../reducers/withdraw";
 import { USER_FIND_PASSWORD_CONFIRM_REQUEST } from "../../reducers/user";
+import { useTranslation } from "react-i18next";
 
 const TabWrapper = styled(Wrapper)`
   flex-direction: row;
@@ -94,6 +95,9 @@ const Withdraw = () => {
   ////// VARIABLES //////
 
   ////// HOOKS //////
+
+  const { t } = useTranslation(["user_withdraw"]);
+
   const dispatch = useDispatch();
 
   const {
@@ -160,27 +164,27 @@ const Withdraw = () => {
 
   const createWithdrawHanlder = useCallback(() => {
     if (!emptyCheck(inputBankName.value)) {
-      return message.error("출금은행을 입력해주세요.");
+      return message.error(t(`1`));
     }
 
     if (!emptyCheck(inputBankNo.value)) {
-      return message.error("계좌번호를 입력해주세요.");
+      return message.error(t(`2`));
     }
 
     if (!emptyCheck(inputSwiftCode.value)) {
-      return message.error("SwiftCode를 입력해주세요.");
+      return message.error(t(`3`));
     }
 
     if (!emptyCheck(inputBankAddress.value)) {
-      return message.error("은행주소를 입력해주세요.");
+      return message.error(t(`4`));
     }
 
     if (!emptyCheck(inputSelectBank.value)) {
-      return message.error("출금계좌를 선택해주세요.");
+      return message.error(t(`5`));
     }
 
     if (!emptyCheck(inputPrice.value)) {
-      return message.error("출금금액을 입력해주세요.");
+      return message.error(t(`6`));
     }
 
     if (!isSendEmail) {
@@ -195,7 +199,7 @@ const Withdraw = () => {
 
     if (isSendEmail && !isConfirmEmail) {
       if (!emptyCheck(inputSecret.value)) {
-        return message.error("인증번호를 입력해주세요.");
+        return message.error(t(`7`));
       }
 
       dispatch({
@@ -234,14 +238,14 @@ const Withdraw = () => {
 
   const confirmSecretHandler = useCallback(() => {
     if (!emptyCheck(inputSecret.value)) {
-      return message.error("인증번호를 입력해주세요.");
+      return message.error(t(`7`));
     }
     if (secretCode.UUID !== inputSecret.value) {
       setIsConfirmEmail(false);
-      return message.error("인증번호가 일치하지 않습니다.");
+      return message.error(t(`8`));
     } else {
       setIsConfirmEmail(true);
-      message.success("이메일 인증이 완료되었습니다.");
+      message.success(t(`9`));
 
       moveLinkHandler("/user");
       initValueHandler();
@@ -251,7 +255,7 @@ const Withdraw = () => {
   ////// USE EFFECT //////
   useEffect(() => {
     if (!me) {
-      message.error("로그인 후 이용할 수 있습니다.");
+      message.error(t(`10`));
       router.push("/login");
     } else if (me.userType === `1`) {
       router.push("/user?access=false");
@@ -265,7 +269,7 @@ const Withdraw = () => {
   useEffect(() => {
     if (st_userFindPasswordDone) {
       setIsSendEmail(true);
-      message.success("이메일로 인증코드가 전송되었습니다.");
+      message.success("11");
     }
   }, [st_userFindPasswordDone]);
 
@@ -312,7 +316,7 @@ const Withdraw = () => {
     <UserLayout>
       <TabWrapper position={`absolute`} top={`-21px`} left={`20px`}>
         <Tab isActive={currentTab === 0} onClick={() => setCurrentTab(0)}>
-          출금신청
+          {t(`12`)}
         </Tab>
       </TabWrapper>
 
@@ -332,7 +336,7 @@ const Withdraw = () => {
             fontSize={`19px`}
             fontWeight={`700`}
             borderBottom={`1px solid #ebebeb`}>
-            출금
+            {t(`13`)}
           </Wrapper>
 
           {currentTab === 0 && (
@@ -355,11 +359,11 @@ const Withdraw = () => {
                       color={`#fff`}>
                       Step 01
                     </Wrapper>
-                    출금정보 입력
+                    {t(`14`)}
                   </Wrapper>
                   <CustomLabel for={`inp-price`} margin={`40px 0 15px`}>
                     <Wrapper className={`required`}>*</Wrapper>
-                    출금 은행
+                    {t(`15`)}
                   </CustomLabel>
                   <Wrapper dr={`row`} ju={`flex-start`}>
                     <CustomInput id={`inp-price`} {...inputBankName} />
@@ -367,7 +371,7 @@ const Withdraw = () => {
 
                   <CustomLabel for={`inp-price`} margin={`40px 0 15px`}>
                     <Wrapper className={`required`}>*</Wrapper>
-                    계좌 번호
+                    {t(`16`)}
                   </CustomLabel>
                   <Wrapper dr={`row`} ju={`flex-start`}>
                     <CustomInput id={`inp-price`} {...inputBankNo} />
@@ -383,7 +387,7 @@ const Withdraw = () => {
 
                   <CustomLabel for={`inp-price`} margin={`40px 0 15px`}>
                     <Wrapper className={`required`}>*</Wrapper>
-                    은행 주소
+                    {t(`17`)}
                   </CustomLabel>
                   <Wrapper dr={`row`} ju={`flex-start`}>
                     <CustomInput id={`inp-price`} {...inputBankAddress} />
@@ -391,7 +395,7 @@ const Withdraw = () => {
 
                   <CustomLabel for={`inp-price`} margin={`40px 0 15px`}>
                     <Wrapper className={`required`}>*</Wrapper>
-                    출금 계좌
+                    {t(`18`)}
                   </CustomLabel>
                   <Wrapper dr={`row`} ju={`flex-start`}>
                     <Combo
@@ -405,19 +409,19 @@ const Withdraw = () => {
                       hoverShadow={`0 3px 8px rgb(0 0 0 / 12%)`}
                       onClick={() => setComboSelectBank(!comboSelectBank)}>
                       <ComboTitle>
-                        <Wrapper>{inputSelectBank.value || `지갑선택`}</Wrapper>
+                        <Wrapper>{inputSelectBank.value || t(`19`)}</Wrapper>
                         <CaretDownOutlined />
                       </ComboTitle>
 
                       <ComboList isView={comboSelectBank}>
                         <ComboListItem
                           onClick={() => inputSelectBank.setValue("")}>
-                          지갑선택
+                          {t(`19`)}
                         </ComboListItem>
 
                         <ComboListItem
-                          onClick={() => inputSelectBank.setValue("내 지갑")}>
-                          내 지갑
+                          onClick={() => inputSelectBank.setValue(t(`20`))}>
+                          {t(`20`)}
                         </ComboListItem>
 
                         {me &&
@@ -443,7 +447,7 @@ const Withdraw = () => {
 
                   <CustomLabel for={`inp-price`} margin={`40px 0 15px`}>
                     <Wrapper className={`required`}>*</Wrapper>
-                    출금 금액
+                    {t(`21`)}
                   </CustomLabel>
                   <Wrapper dr={`row`} ju={`flex-start`}>
                     <CustomInput id={`inp-price`} {...inputPrice} />
@@ -453,7 +457,7 @@ const Withdraw = () => {
                     <Wrapper al={`flex-start`}>
                       <CustomLabel for={`inp-secret`} margin={`40px 0 15px`}>
                         <Wrapper className={`required`}>*</Wrapper>
-                        인증코드
+                        {t(`22`)}
                       </CustomLabel>
 
                       <Wrapper dr={`row`} ju={`flex-start`}>
@@ -464,7 +468,7 @@ const Withdraw = () => {
                           height={`38px`}
                           margin={`0 0 0 10px`}
                           onClick={confirmSecretHandler}>
-                          인증
+                          {t(`23`)}
                         </CommonButton>
                       </Wrapper>
                     </Wrapper>
@@ -489,7 +493,7 @@ const Withdraw = () => {
                       color={`#fff`}>
                       Step 02
                     </Wrapper>
-                    출금신청 완료
+                    {t(`24`)}
                   </Wrapper>
                   <Wrapper margin={`80px 0 0`}>
                     <Result
@@ -499,7 +503,7 @@ const Withdraw = () => {
                           fontSize={`25px`}
                           width={`auto`}
                           borderBottom={`1px solid #c9c9c9`}>
-                          출금신청 완료 !
+                          {t(`25`)}
                         </Wrapper>
                       }
                       subTitle={
@@ -508,7 +512,7 @@ const Withdraw = () => {
                           padding={`0 15px`}
                           width={`auto`}
                           lineHeight={`1.8`}>
-                          정상적으로 출금신청이 완료되었습니다.
+                          {t(`26`)}
                         </Wrapper>
                       }
                       extra={[
@@ -519,7 +523,7 @@ const Withdraw = () => {
                           height={`40px`}
                           margin={`0 5px`}
                           onClick={initValueHandler}>
-                          처음으로
+                          {t(`27`)}
                         </CommonButton>,
 
                         <CommonButton
@@ -529,7 +533,7 @@ const Withdraw = () => {
                           height={`40px`}
                           margin={`0 5px`}
                           onClick={() => moveLinkHandler(`/`)}>
-                          홈으로
+                          {t(`28`)}
                         </CommonButton>,
                       ]}
                     />
@@ -551,11 +555,11 @@ const Withdraw = () => {
               kindOf={`white`}
               margin={`0 10px 0 0`}
               onClick={() => moveLinkHandler("/user")}>
-              이전
+              {t(`29`)}
             </CommonButton>
 
             <CommonButton kindOf={`red`} onClick={createWithdrawHanlder}>
-              출금 신청
+              {t(`30`)}
             </CommonButton>
           </Wrapper>
         )}

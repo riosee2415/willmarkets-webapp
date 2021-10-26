@@ -20,6 +20,7 @@ import UserLayout from "../../components/user/UserLayout";
 import { DEPOSIT_LIST_REQUEST } from "../../reducers/deposit";
 import { WITHDRAW_LIST_REQUEST } from "../../reducers/withdraw";
 import moment from "moment";
+import { useTranslation } from "react-i18next";
 
 const Record = () => {
   ////// VARIABLES //////
@@ -29,6 +30,9 @@ const Record = () => {
   const router = useRouter();
 
   ////// HOOKS //////
+
+  const { t } = useTranslation(["user_record"]);
+
   const { me } = useSelector((state) => state.user);
 
   const [viewData, setViewData] = useState(null);
@@ -42,14 +46,14 @@ const Record = () => {
   useEffect(() => {
     const deposits = me.Deposits.map((data) => {
       return {
-        type: "입금",
+        type: t(`10`),
         ...data,
       };
     });
 
     const withdraws = me.Withdraws.map((data) => {
       return {
-        type: "출금",
+        type: t(`16`),
         ...data,
       };
     });
@@ -63,7 +67,7 @@ const Record = () => {
 
   useEffect(() => {
     if (!me) {
-      message.error("로그인 후 이용할 수 있습니다.");
+      message.error(t(`1`));
       router.push("/login");
     } else if (me.userType === `1`) {
       router.push("/user?access=false");
@@ -79,8 +83,7 @@ const Record = () => {
         padding={`20px 30px`}
         bgColor={`#fff`}
         border={`1px solid #ededed`}
-        shadow={`2px 2px 10px #e6e6e6`}
-      >
+        shadow={`2px 2px 10px #e6e6e6`}>
         <Wrapper al={`flex-start`}>
           <Wrapper
             al={`flex-start`}
@@ -88,26 +91,24 @@ const Record = () => {
             padding={`0 8px 20px`}
             fontSize={`19px`}
             fontWeight={`700`}
-            borderBottom={`1px solid #ebebeb`}
-          >
-            심사기록
+            borderBottom={`1px solid #ebebeb`}>
+            {t(`2`)}
           </Wrapper>
 
           <TableWrapper>
             <TableHeader>
               <TableRow>
-                <TableCol width={`50px`}>번호</TableCol>
-                <TableCol width={`130px`}>신청일</TableCol>
-                <TableCol width={`200px`}>유형</TableCol>
+                <TableCol width={`50px`}>{t(`3`)}</TableCol>
+                <TableCol width={`130px`}>{t(`4`)}</TableCol>
+                <TableCol width={`200px`}>{t(`5`)}</TableCol>
                 <TableCol
                   width={`calc(100% - 50px - 130px - 200px - 120px - 120px - 130px)`}
-                  minWidth={`250px`}
-                >
-                  상세정보
+                  minWidth={`250px`}>
+                  {t(`6`)}
                 </TableCol>
-                <TableCol width={`120px`}>금액</TableCol>
-                <TableCol width={`120px`}>심사상태</TableCol>
-                <TableCol width={`130px`}>승인일</TableCol>
+                <TableCol width={`120px`}>{t(`7`)}</TableCol>
+                <TableCol width={`120px`}>{t(`8`)}</TableCol>
+                <TableCol width={`130px`}>{t(`9`)}</TableCol>
               </TableRow>
             </TableHeader>
 
@@ -124,23 +125,20 @@ const Record = () => {
                       <TableCol width={`200px`}>{data.type}</TableCol>
                       <TableCol
                         width={`calc(100% - 50px - 130px - 200px - 120px - 120px - 130px)`}
-                        minWidth={`250px`}
-                      >
-                        {data.type === `입금` && (
+                        minWidth={`250px`}>
+                        {data.type === t(`10`) && (
                           <Wrapper al={`flex-start`} fontSize={`12px`}>
                             <Wrapper
                               dr={`row`}
                               margin={`2px 0`}
                               width={`auto`}
-                              fontSize={`inherit`}
-                            >
+                              fontSize={`inherit`}>
                               <Wrapper
                                 margin={`0 5px 0 0`}
                                 width={`auto`}
                                 color={`#8f0a99`}
-                                fontSize={`inherit`}
-                              >
-                                은행명
+                                fontSize={`inherit`}>
+                                {t(`11`)}
                               </Wrapper>
                               : {data.bankName}
                             </Wrapper>
@@ -149,15 +147,13 @@ const Record = () => {
                               dr={`row`}
                               margin={`2px 0`}
                               width={`auto`}
-                              fontSize={`inherit`}
-                            >
+                              fontSize={`inherit`}>
                               <Wrapper
                                 margin={`0 5px 0 0`}
                                 width={`auto`}
                                 color={`#8f0a99`}
-                                fontSize={`inherit`}
-                              >
-                                계좌 번호
+                                fontSize={`inherit`}>
+                                {t(`12`)}
                               </Wrapper>
                               : {data.bankNo}
                             </Wrapper>
@@ -166,14 +162,12 @@ const Record = () => {
                               dr={`row`}
                               margin={`2px 0`}
                               width={`auto`}
-                              fontSize={`inherit`}
-                            >
+                              fontSize={`inherit`}>
                               <Wrapper
                                 margin={`0 5px 0 0`}
                                 width={`auto`}
                                 color={`#8f0a99`}
-                                fontSize={`inherit`}
-                              >
+                                fontSize={`inherit`}>
                                 Swift Code
                               </Wrapper>
                               : {data.swiftCode}
@@ -183,15 +177,13 @@ const Record = () => {
                               dr={`row`}
                               margin={`2px 0`}
                               width={`auto`}
-                              fontSize={`inherit`}
-                            >
+                              fontSize={`inherit`}>
                               <Wrapper
                                 margin={`0 5px 0 0`}
                                 width={`auto`}
                                 color={`#8f0a99`}
-                                fontSize={`inherit`}
-                              >
-                                윌마켓 주소
+                                fontSize={`inherit`}>
+                                {t(`13`)}
                               </Wrapper>
                               : {data.willAddress}
                             </Wrapper>
@@ -200,15 +192,13 @@ const Record = () => {
                               dr={`row`}
                               margin={`2px 0`}
                               width={`auto`}
-                              fontSize={`inherit`}
-                            >
+                              fontSize={`inherit`}>
                               <Wrapper
                                 margin={`0 5px 0 0`}
                                 width={`auto`}
                                 color={`#8f0a99`}
-                                fontSize={`inherit`}
-                              >
-                                은행 주소
+                                fontSize={`inherit`}>
+                                {t(`14`)}
                               </Wrapper>
                               : {data.bankAddress}
                             </Wrapper>
@@ -217,36 +207,32 @@ const Record = () => {
                               dr={`row`}
                               margin={`2px 0`}
                               width={`auto`}
-                              fontSize={`inherit`}
-                            >
+                              fontSize={`inherit`}>
                               <Wrapper
                                 margin={`0 5px 0 0`}
                                 width={`auto`}
                                 color={`#8f0a99`}
-                                fontSize={`inherit`}
-                              >
-                                입금 계좌
+                                fontSize={`inherit`}>
+                                {t(`15`)}
                               </Wrapper>
                               : {data.selectBank}
                             </Wrapper>
                           </Wrapper>
                         )}
 
-                        {data.type === `출금` && (
+                        {data.type === t(`16`) && (
                           <Wrapper al={`flex-start`} fontSize={`12px`}>
                             <Wrapper
                               dr={`row`}
                               margin={`2px 0`}
                               width={`auto`}
-                              fontSize={`inherit`}
-                            >
+                              fontSize={`inherit`}>
                               <Wrapper
                                 margin={`0 5px 0 0`}
                                 width={`auto`}
                                 color={`#8f0a99`}
-                                fontSize={`inherit`}
-                              >
-                                은행명
+                                fontSize={`inherit`}>
+                                {t(`11`)}
                               </Wrapper>
                               : {data.bankName}
                             </Wrapper>
@@ -255,15 +241,13 @@ const Record = () => {
                               dr={`row`}
                               margin={`2px 0`}
                               width={`auto`}
-                              fontSize={`inherit`}
-                            >
+                              fontSize={`inherit`}>
                               <Wrapper
                                 margin={`0 5px 0 0`}
                                 width={`auto`}
                                 color={`#8f0a99`}
-                                fontSize={`inherit`}
-                              >
-                                계좌 번호
+                                fontSize={`inherit`}>
+                                {t(`12`)}
                               </Wrapper>
                               : {data.bankNo}
                             </Wrapper>
@@ -272,14 +256,12 @@ const Record = () => {
                               dr={`row`}
                               margin={`2px 0`}
                               width={`auto`}
-                              fontSize={`inherit`}
-                            >
+                              fontSize={`inherit`}>
                               <Wrapper
                                 margin={`0 5px 0 0`}
                                 width={`auto`}
                                 color={`#8f0a99`}
-                                fontSize={`inherit`}
-                              >
+                                fontSize={`inherit`}>
                                 Swift Code
                               </Wrapper>
                               : {data.swiftCode}
@@ -289,15 +271,13 @@ const Record = () => {
                               dr={`row`}
                               margin={`2px 0`}
                               width={`auto`}
-                              fontSize={`inherit`}
-                            >
+                              fontSize={`inherit`}>
                               <Wrapper
                                 margin={`0 5px 0 0`}
                                 width={`auto`}
                                 color={`#8f0a99`}
-                                fontSize={`inherit`}
-                              >
-                                은행 주소
+                                fontSize={`inherit`}>
+                                {t(`14`)}
                               </Wrapper>
                               : {data.bankAddress}
                             </Wrapper>
@@ -306,15 +286,13 @@ const Record = () => {
                               dr={`row`}
                               margin={`2px 0`}
                               width={`auto`}
-                              fontSize={`inherit`}
-                            >
+                              fontSize={`inherit`}>
                               <Wrapper
                                 margin={`0 5px 0 0`}
                                 width={`auto`}
                                 color={`#8f0a99`}
-                                fontSize={`inherit`}
-                              >
-                                출금 계좌
+                                fontSize={`inherit`}>
+                                {t(`17`)}
                               </Wrapper>
                               : {data.selectBank}
                             </Wrapper>
@@ -329,13 +307,12 @@ const Record = () => {
                           <Wrapper
                             width={`auto`}
                             fontSize={`inherit`}
-                            color={`#c71919`}
-                          >
-                            승인
+                            color={`#c71919`}>
+                            {t(`18`)}
                           </Wrapper>
                         ) : (
                           <Wrapper width={`auto`} fontSize={`inherit`}>
-                            승인대기
+                            {t(`19`)}
                           </Wrapper>
                         )}
                       </TableCol>
@@ -350,7 +327,7 @@ const Record = () => {
                 })
               ) : (
                 <Wrapper margin={`30px 0`}>
-                  <Empty description={`조회할 상품을 선택해주세요.`} />
+                  <Empty description={t(`20`)} />
                 </Wrapper>
               )}
             </TableBody>

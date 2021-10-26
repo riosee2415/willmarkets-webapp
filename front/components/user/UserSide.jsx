@@ -11,6 +11,7 @@ import {
   CaretDownOutlined,
   UserOutlined,
 } from "@ant-design/icons";
+import { useTranslation } from "react-i18next";
 
 const Submenu = styled(Wrapper)``;
 
@@ -92,6 +93,8 @@ const SubmenuListItem = styled(Wrapper)`
 const UserSide = () => {
   const router = useRouter();
 
+  const { t } = useTranslation(["userSide"]);
+
   const [toggleSubmenu, setToggleSubmenu] = useState(-1);
 
   const moveLinkHandler = (link) => {
@@ -131,7 +134,7 @@ const UserSide = () => {
           >
             <Wrapper>
               <HomeOutlined />
-              홈페이지
+              {t(`1`)}
             </Wrapper>
           </SubmenuTitle>
         </Submenu>
@@ -147,7 +150,7 @@ const UserSide = () => {
           >
             <Wrapper>
               <DollarOutlined />
-              자금
+              {t(`2`)}
             </Wrapper>
 
             {toggleSubmenu === 1 ? <CaretUpOutlined /> : <CaretDownOutlined />}
@@ -158,19 +161,19 @@ const UserSide = () => {
               isActive={router.pathname === `/user/deposit`}
               onClick={() => moveLinkHandler(`/user/deposit`)}
             >
-              입금
+              {t(`3`)}
             </SubmenuListItem>
             <SubmenuListItem
               isActive={router.pathname === `/user/withdraw`}
               onClick={() => moveLinkHandler(`/user/withdraw`)}
             >
-              출금
+              {t(`4`)}
             </SubmenuListItem>
             <SubmenuListItem
               isActive={router.pathname === `/user/record`}
               onClick={() => moveLinkHandler(`/user/record`)}
             >
-              심사기록
+              {t(`5`)}
             </SubmenuListItem>
           </SubmenuList>
         </Submenu>
@@ -181,7 +184,7 @@ const UserSide = () => {
             onClick={() => toggleSubmenuHandler(2)}
           >
             <Wrapper>
-              <UserOutlined />내 계정
+              <UserOutlined /> {t(`6`)}
             </Wrapper>
 
             {toggleSubmenu === 2 ? <CaretUpOutlined /> : <CaretDownOutlined />}
@@ -192,7 +195,7 @@ const UserSide = () => {
               isActive={router.pathname === `/user/info`}
               onClick={() => moveLinkHandler(`/user/info`)}
             >
-              내 정보 관리
+              {t(`7`)}
             </SubmenuListItem>
           </SubmenuList>
         </Submenu>

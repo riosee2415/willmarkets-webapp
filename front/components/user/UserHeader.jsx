@@ -21,7 +21,7 @@ const UserHeader = ({ children, width }) => {
 
   const dispatch = useDispatch();
 
-  const { t, i18n } = useTranslation();
+  const { t, i18n } = useTranslation(["userHeader"]);
 
   const { me, st_userLogoutDone, st_userLogoutError } = useSelector(
     (state) => state.user
@@ -85,10 +85,10 @@ const UserHeader = ({ children, width }) => {
           <ComboList isView={comboUser} onClick={() => setComboUser(false)}>
             {me && me.type === "2" && (
               <ComboListItem onClick={() => moveLinkHandler(`/user/info`)}>
-                내정보수정
+                {t(`1`)}
               </ComboListItem>
             )}
-            <ComboListItem onClick={logoutUserHandler}>로그아웃</ComboListItem>
+            <ComboListItem onClick={logoutUserHandler}>{t(`2`)}</ComboListItem>
           </ComboList>
         </Combo>
       </Wrapper>

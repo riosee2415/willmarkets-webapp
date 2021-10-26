@@ -6,6 +6,7 @@ import SwiperCore, { Navigation } from "swiper";
 import "swiper/swiper-bundle.min.css";
 import { DoubleRightOutlined } from "@ant-design/icons";
 import { useRouter } from "next/router";
+import { useTranslation } from "react-i18next";
 
 SwiperCore.use([Navigation]);
 
@@ -16,6 +17,8 @@ const Container = styled.div`
 
 export default ({ width }) => {
   const router = useRouter();
+
+  const { t } = useTranslation(["mainSlider"]);
 
   const moveLinkHandler = (link) => {
     router.push(link);
@@ -32,7 +35,8 @@ export default ({ width }) => {
         navigation={false}
         grabCursor={true}
         loop
-        autoplay>
+        autoplay
+      >
         <SwiperSlide>
           <Wrapper position={`relative`} height={`100vh`}>
             <Wrapper position={`absolute`} left={`0`} top={`0`} height={`100%`}>
@@ -51,7 +55,8 @@ export default ({ width }) => {
                 right={`0`}
                 width={`auto`}
                 height={`100%`}
-                zIndex={`9999`}>
+                zIndex={`9999`}
+              >
                 <Image
                   src={`https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/willmarkets/assets/images/main/text_willmarkets.png`}
                 />
@@ -62,10 +67,11 @@ export default ({ width }) => {
                   fontSize={`30px`}
                   fontWeight={`500`}
                   textAlign={`right`}
-                  lineHeight={`1.4`}>
-                  빠른 주문의 스프레드를
+                  lineHeight={`1.4`}
+                >
+                  {t(`1`).split(`\n`)[0]}
                   <br />
-                  윌마켓에서 경험해보세요
+                  {t(`1`).split(`\n`)[1]}
                 </Wrapper>
 
                 <Wrapper dr={`row`} ju={`flex-end`} margin={`60px 0 0`}>
@@ -76,14 +82,16 @@ export default ({ width }) => {
                     radius={`30px`}
                     fontSize={`18px`}
                     fontWeight={`700`}
-                    onClick={() => moveLinkHandler(`/signup`)}>
-                    실거래 계정 개설
+                    onClick={() => moveLinkHandler(`/signup`)}
+                  >
+                    {t(`2`)}
                     <Wrapper
                       position={`absolute`}
                       right={`15px`}
                       top={`50%`}
                       margin={`-7px 0 0 0`}
-                      width={`auto`}>
+                      width={`auto`}
+                    >
                       <DoubleRightOutlined />
                     </Wrapper>
                   </CommonButton>
@@ -96,14 +104,16 @@ export default ({ width }) => {
                     radius={`30px`}
                     fontSize={`18px`}
                     fontWeight={`700`}
-                    onClick={() => moveLinkHandler(`/signup`)}>
-                    모의 계정 개설
+                    onClick={() => moveLinkHandler(`/signup`)}
+                  >
+                    {t(`3`)}
                     <Wrapper
                       position={`absolute`}
                       right={`23px`}
                       top={`50%`}
                       margin={`-7px 0 0 0`}
-                      width={`auto`}>
+                      width={`auto`}
+                    >
                       <DoubleRightOutlined />
                     </Wrapper>
                   </CommonButton>
@@ -131,7 +141,8 @@ export default ({ width }) => {
                 right={`0`}
                 width={`auto`}
                 height={`100%`}
-                zIndex={`9999`}>
+                zIndex={`9999`}
+              >
                 <Image
                   src={`https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/willmarkets/assets/images/main/text_grobal+stock.png`}
                 />
@@ -143,9 +154,11 @@ export default ({ width }) => {
                   fontWeight={`500`}
                   textAlign={`right`}
                   lineHeight={`1.4`}
-                  borderBottom={`1px solid #92165c`}>
-                  세계로 뻗어나가는 금융 시대에
-                  <br />탑 기술자의 네트워크 연결
+                  borderBottom={`1px solid #92165c`}
+                >
+                  {t(`4`).split(`\n`)[0]}
+                  <br />
+                  {t(`4`).split(`\n`)[1]}
                 </Wrapper>
 
                 <Wrapper dr={`row`} ju={`flex-end`} margin={`60px 0 0`}>
@@ -156,14 +169,16 @@ export default ({ width }) => {
                     radius={`30px`}
                     fontSize={`18px`}
                     fontWeight={`700`}
-                    onClick={() => moveLinkHandler(`/signup`)}>
-                    실거래 계정 개설
+                    onClick={() => moveLinkHandler(`/signup`)}
+                  >
+                    {t(`2`)}
                     <Wrapper
                       position={`absolute`}
                       right={`15px`}
                       top={`50%`}
                       margin={`-7px 0 0 0`}
-                      width={`auto`}>
+                      width={`auto`}
+                    >
                       <DoubleRightOutlined />
                     </Wrapper>
                   </CommonButton>
@@ -176,14 +191,16 @@ export default ({ width }) => {
                     radius={`30px`}
                     fontSize={`18px`}
                     fontWeight={`700`}
-                    onClick={() => moveLinkHandler(`/signup`)}>
-                    모의 계정 개설
+                    onClick={() => moveLinkHandler(`/signup`)}
+                  >
+                    {t(`3`)}
                     <Wrapper
                       position={`absolute`}
                       right={`23px`}
                       top={`50%`}
                       margin={`-7px 0 0 0`}
-                      width={`auto`}>
+                      width={`auto`}
+                    >
                       <DoubleRightOutlined />
                     </Wrapper>
                   </CommonButton>

@@ -120,7 +120,7 @@ const AppHeader = ({ children, width }) => {
 
   const dispatch = useDispatch();
 
-  const { t, i18n } = useTranslation();
+  const { t, i18n } = useTranslation(["appHeader"]);
 
   const { me, st_userLogoutDone, st_userLogoutError } = useSelector(
     (state) => state.user
@@ -205,7 +205,7 @@ const AppHeader = ({ children, width }) => {
                   cursor={`pointer`}
                   onClick={logoutUserHandler}
                 >
-                  로그아웃
+                  {t(`1`)}
                 </Wrapper>
               ) : (
                 <>
@@ -217,7 +217,7 @@ const AppHeader = ({ children, width }) => {
                     cursor={`pointer`}
                     onClick={() => moveLinkHandler(`/login`)}
                   >
-                    로그인
+                    {t(`2`)}
                   </Wrapper>
                   <Wrapper
                     margin={`0 0 0 30px`}
@@ -227,7 +227,7 @@ const AppHeader = ({ children, width }) => {
                     cursor={`pointer`}
                     onClick={() => moveLinkHandler(`/signup`)}
                   >
-                    회원가입
+                    {t(`3`)}
                   </Wrapper>
                 </>
               )}
@@ -320,7 +320,7 @@ const AppHeader = ({ children, width }) => {
                   <MenuTextWrapper
                     onClick={() => moveLinkHandler(`/company/intro`)}
                   >
-                    회사 소개
+                    {t(`4`)}
                   </MenuTextWrapper>
 
                   <MenuListWrapper
@@ -330,23 +330,23 @@ const AppHeader = ({ children, width }) => {
                     <MenuListItemWrapper
                       onClick={() => moveLinkHandler(`/company/intro`)}
                     >
-                      회사소개
+                      {t(`5`)}
                     </MenuListItemWrapper>
                     <MenuListItemWrapper
                       onClick={() => moveLinkHandler(`/company/terms`)}
                     >
-                      이용약관
+                      {t(`6`)}
                     </MenuListItemWrapper>
                     <MenuListItemWrapper
                       onClick={() => moveLinkHandler(`/company/privacy`)}
                     >
-                      개인정보 보호정책
+                      {t(`7`)}
                     </MenuListItemWrapper>
-                    <MenuListItemWrapper
+                    {/* <MenuListItemWrapper
                       onClick={() => moveLinkHandler(`/company/moneyPolicy`)}
                     >
-                      자금세탁 방지정책
-                    </MenuListItemWrapper>
+                    {t(`8`)}
+                    </MenuListItemWrapper> */}
                   </MenuListWrapper>
                 </MenuWrapper>
 
@@ -363,7 +363,7 @@ const AppHeader = ({ children, width }) => {
                   <MenuTextWrapper
                     onClick={() => moveLinkHandler(`/trading/forex`)}
                   >
-                    트레이딩
+                    {t(`9`)}
                   </MenuTextWrapper>
 
                   <MenuListWrapper
@@ -388,22 +388,22 @@ const AppHeader = ({ children, width }) => {
                     <MenuListItemWrapper
                       onClick={() => moveLinkHandler(`/trading/spread`)}
                     >
-                      스프레드와 스왑
+                      {t(`10`)}
                     </MenuListItemWrapper>
                     <MenuListItemWrapper
                       onClick={() => moveLinkHandler(`/trading/margin`)}
                     >
-                      마진과 레버리지
+                      {t(`11`)}
                     </MenuListItemWrapper>
                     <MenuListItemWrapper
                       onClick={() => moveLinkHandler(`/trading/provider`)}
                     >
-                      호가 제공사
+                      {t(`12`)}
                     </MenuListItemWrapper>
                     <MenuListItemWrapper
                       onClick={() => moveLinkHandler(`/trading/time`)}
                     >
-                      거래시간
+                      {t(`13`)}
                     </MenuListItemWrapper>
                   </MenuListWrapper>
                 </MenuWrapper>
@@ -421,7 +421,7 @@ const AppHeader = ({ children, width }) => {
                   <MenuTextWrapper
                     onClick={() => moveLinkHandler(`/platform/pc`)}
                   >
-                    거래플랫폼
+                    {t(`14`)}
                   </MenuTextWrapper>
 
                   <MenuListWrapper
@@ -431,12 +431,12 @@ const AppHeader = ({ children, width }) => {
                     <MenuListItemWrapper
                       onClick={() => moveLinkHandler(`/platform/pc`)}
                     >
-                      PC 버전
+                      {t(`15`)}
                     </MenuListItemWrapper>
                     <MenuListItemWrapper
                       onClick={() => moveLinkHandler(`/platform/mobile`)}
                     >
-                      모바일 버전
+                      {t(`16`)}
                     </MenuListItemWrapper>
                   </MenuListWrapper>
                 </MenuWrapper>
@@ -453,7 +453,7 @@ const AppHeader = ({ children, width }) => {
                   onMouseOut={() => setToggleMenu04(false)}
                 >
                   <MenuTextWrapper onClick={() => moveLinkHandler(`/user`)}>
-                    입출금
+                    {t(`17`)}
                   </MenuTextWrapper>
                 </MenuWrapper>
 
@@ -469,7 +469,7 @@ const AppHeader = ({ children, width }) => {
                   onMouseOut={() => setToggleMenu05(false)}
                 >
                   <MenuTextWrapper onClick={() => moveLinkHandler(`/support`)}>
-                    고객지원
+                    {t(`18`)}
                   </MenuTextWrapper>
                 </MenuWrapper>
               </Wrapper>

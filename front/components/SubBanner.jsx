@@ -11,36 +11,39 @@ import styled from "styled-components";
 import { useRouter } from "next/router";
 import useInput from "../hooks/useInput";
 import { CaretDownOutlined } from "@ant-design/icons";
+import { useTranslation } from "react-i18next";
 
 const SubBanner = ({
   width,
   //
 }) => {
+  const { t } = useTranslation(["appHeader"]);
+
   const menuList = [
     {
-      menuName: "회사소개",
+      menuName: t(`5`),
       menuLink: "/company/intro",
       subMenu: [
         {
-          subMenuName: "회사소개",
+          subMenuName: t(`5`),
           subMenuLink: "/company/intro",
         },
         {
-          subMenuName: "이용약관",
+          subMenuName: t(`6`),
           subMenuLink: "/company/terms",
         },
         {
-          subMenuName: "개인정보 보호정책",
+          subMenuName: t(`7`),
           subMenuLink: "/company/privacy",
         },
         {
-          subMenuName: "자금세탁 방지정책",
+          subMenuName: t(`8`),
           subMenuLink: "/company/moneyPolicy",
         },
       ],
     },
     {
-      menuName: "트레이딩",
+      menuName: t(`9`),
       menuLink: "/trading/forex",
       subMenu: [
         {
@@ -56,43 +59,43 @@ const SubBanner = ({
           subMenuLink: "/trading/stp",
         },
         {
-          subMenuName: "스프레드와 스왑",
+          subMenuName: t(`10`),
           subMenuLink: "/trading/spread",
         },
         {
-          subMenuName: "마진과 레버리지",
+          subMenuName: t(`11`),
           subMenuLink: "/trading/margin",
         },
         {
-          subMenuName: "호가 제공사",
+          subMenuName: t(`12`),
           subMenuLink: "/trading/provider",
         },
         {
-          subMenuName: "거래시간",
+          subMenuName: t(`13`),
           subMenuLink: "/trading/time",
         },
       ],
     },
     {
-      menuName: "거래플랫폼",
+      menuName: t(`14`),
       menuLink: "/platform/pc",
       subMenu: [
         {
-          subMenuName: "PC 버전",
+          subMenuName: t(`15`),
           subMenuLink: "/platform/pc",
         },
         {
-          subMenuName: "모바일 버전",
+          subMenuName: t(`16`),
           subMenuLink: "/platform/mobile",
         },
       ],
     },
     {
-      menuName: "고객지원",
+      menuName: t(`18`),
       menuLink: "/support",
       subMenu: [
         {
-          subMenuName: "고객지원",
+          subMenuName: t(`18`),
           subMenuLink: "/support",
         },
       ],
@@ -142,14 +145,16 @@ const SubBanner = ({
           : router.pathname.includes(`/support`)
           ? `url('https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/willmarkets/assets/images/banner/subbanner_consulting.png')`
           : null
-      }>
+      }
+    >
       <Wrapper
         position={`absolute`}
         left={`0`}
         top={`0`}
         height={`100%`}
         bgColor={`rgba(0, 0, 0, 0.7)`}
-        zIndex={`1`}></Wrapper>
+        zIndex={`1`}
+      ></Wrapper>
 
       <RsWrapper position={`relative`}>
         <Wrapper
@@ -161,7 +166,8 @@ const SubBanner = ({
           fontWeight={`500`}
           borderBottom={`2px solid #b12774`}
           lineHeight={`1.3`}
-          zIndex={`2`}>
+          zIndex={`2`}
+        >
           {inputMenu2.value}
         </Wrapper>
 
@@ -170,7 +176,8 @@ const SubBanner = ({
           left={`0`}
           bottom={`20px`}
           dr={`row`}
-          width={`auto`}>
+          width={`auto`}
+        >
           <Combo
             isBorder={true}
             itemAlign={`flex-start`}
@@ -182,7 +189,8 @@ const SubBanner = ({
             shadow={`0 2px 8px rgb(0 0 0 / 9%)`}
             hoverBorder={`1px solid #ac5a8a`}
             hoverShadow={`0 3px 8px rgb(0 0 0 / 12%)`}
-            onClick={() => setComboMenu1(!comboMenu1)}>
+            onClick={() => setComboMenu1(!comboMenu1)}
+          >
             <ComboTitle color={`#fff`}>
               <Wrapper>{inputMenu1.value}</Wrapper>
               <CaretDownOutlined />
@@ -194,7 +202,8 @@ const SubBanner = ({
                   <ComboListItem
                     key={idx}
                     isActive={inputMenu1.value === data.menuName}
-                    onClick={() => moveLinkHandler(data.menuLink)}>
+                    onClick={() => moveLinkHandler(data.menuLink)}
+                  >
                     {data.menuName}
                   </ComboListItem>
                 );
@@ -212,7 +221,8 @@ const SubBanner = ({
             shadow={`0 2px 8px rgb(0 0 0 / 9%)`}
             hoverBorder={`1px solid #ac5a8a`}
             hoverShadow={`0 3px 8px rgb(0 0 0 / 12%)`}
-            onClick={() => setComboMenu2(!comboMenu2)}>
+            onClick={() => setComboMenu2(!comboMenu2)}
+          >
             <ComboTitle color={`#fff`}>
               <Wrapper>{inputMenu2.value}</Wrapper>
               <CaretDownOutlined />
@@ -227,7 +237,8 @@ const SubBanner = ({
                       <ComboListItem
                         key={idx}
                         isActive={inputMenu2.value === data.subMenuName}
-                        onClick={() => moveLinkHandler(data.subMenuLink)}>
+                        onClick={() => moveLinkHandler(data.subMenuLink)}
+                      >
                         {data.subMenuName}
                       </ComboListItem>
                     );

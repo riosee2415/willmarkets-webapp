@@ -17,7 +17,7 @@ import SubBanner from "../../components/SubBanner";
 import { useTranslation } from "react-i18next";
 
 const Pc = () => {
-  const { t } = useTranslation(["platform_pc"]);
+  const { t } = useTranslation(["platform"]);
 
   return (
     <ClientLayout>
@@ -39,11 +39,11 @@ const Pc = () => {
               padding={`0 10px`}
               width={`auto`}
               fontSize={`24px`}>
-              Windows에서
+              {t(`9`).split(`\n`)[0]}
               <Text padding={`0 5px`} fontWeight={`400`} color={`#ec5bac`}>
-                MT4
+                {t(`9`).split(`\n`)[1]}
               </Text>
-              다운로드
+              {t(`9`).split(`\n`)[2]}
             </Wrapper>
           </Wrapper>
 
@@ -53,20 +53,21 @@ const Pc = () => {
             margin={`15px 0 0`}
             fontWeight={`300`}
             lineHeight={`1.6`}>
-            가장 신뢰할 수 있는 MT4 플랫폼은 성공적인 온라인 트레이딩을 위해
+            {t(`2`).split(`\n`)[0]}
             <br />
-            필요한 다양한 도구들을 제공하고 있습니다. 지금 등록하시고
+            {t(`10`).split(`\n`)[0]}
             <Text display={`inline`} padding={`0 0 0 5px`} fontWeight={`500`}>
-              빠른 주문 체결
+              {t(`10`).split(`\n`)[1]}
             </Text>
-            과<br />
-            0핍부터 시작하는
-            <Text display={`inline`} padding={`0 0 0 5px`} fontWeight={`500`}>
-              저렴한 스프레드
-            </Text>
-            , 트레이더 중심의 친환경적인 플랫폼을 통해
+            {t(`10`).split(`\n`)[2]}
             <br />
-            성공적인 온라인 트레이딩을 경험할 수 있습니다.
+            {t(`10`).split(`\n`)[3]}
+            <Text display={`inline`} padding={`0 0 0 5px`} fontWeight={`500`}>
+              {t(`10`).split(`\n`)[4]}
+            </Text>
+            {t(`10`).split(`\n`)[5]}
+            <br />
+            {t(`10`).split(`\n`)[6]}
           </Wrapper>
 
           <Wrapper margin={`40px 0 0`} width={`auto`}>
@@ -82,7 +83,7 @@ const Pc = () => {
               bgColor={`#f9e96f`}
               hoverBgColor={`#fae648`}
               radius={`10px`}>
-              다운로드
+              {t(`11`)}
               <RightOutlined
                 style={{ margin: `0 0 0 5px`, fontSize: `12px` }}
               />
@@ -99,9 +100,9 @@ const Pc = () => {
             fontSize={`28px`}
             fontWeight={`500`}>
             <Text display={`inline-block`} lineHeight={`1.3`}>
-              업계를 선도
+              {t(`7`).split(`\n`)[0]}
             </Text>
-            하는 MT4 플랫폼으로 외환거래를 시작하세요
+            {t(`7`).split(`\n`)[1]}
           </Wrapper>
 
           <Wrapper
@@ -110,17 +111,16 @@ const Pc = () => {
             width={`auto`}
             textAlign={`center`}
             fontSize={`17px`}>
-            업계 최고의 플랫폼으로 자리 매김 한 Metatrader4 거래
-            플랫폼(MT4라고도 함)은
+            {t(`8`).split(`\n`)[0]}
             <br />
-            트레이더가 사용할 수 있는
+            {t(`8`).split(`\n`)[1]}
             <Text display={`inline`} margin={`0 0 0 5px`} fontWeight={`700`}>
-              가장 신뢰
+              {t(`8`).split(`\n`)[2]}
             </Text>
-            할 수 있는 플랫폼입니다.
+            {t(`8`).split(`\n`)[3]}
             <br />
-            사용자 친화적인 환경으로 온라인 거래 성과에 필요한 필수 도구와
-            리소스를 제공합니다.
+            {t(`8`).split(`\n`)[4]}
+
             <br />
             {/* Willmarkets의 신뢰할 수 있는 MT4 플랫폼으로 외환 거래에 대해
             알아보십시오. */}
@@ -186,9 +186,9 @@ const Pc = () => {
             bottom={`50px`}>
             <Wrapper al={`flex-start`} ju={`flex-start`} width={`50%`}>
               <Wrapper display={`block`} fontSize={`25px`} fontWeight={`500`}>
-                MT4의 기능 및
+                {t(`15`).split(`\n`)[0]}
                 <Text display={`inline`} margin={`0 0 0 5px`}>
-                  장점
+                  {t(`15`).split(`\n`)[1]}
                 </Text>
               </Wrapper>
 
@@ -211,7 +211,7 @@ const Pc = () => {
                   width={`auto`}
                   src={`https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/willmarkets/assets/images/download/icon_check2.png`}
                 />
-                주문, 포지션, 주식 및 익스포져의 온라인 관리
+                {t(`16`)}
               </Wrapper>
 
               <Wrapper dr={`row`} margin={`0 0 20px`} width={`auto`}>
@@ -220,7 +220,7 @@ const Pc = () => {
                   width={`auto`}
                   src={`https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/willmarkets/assets/images/download/icon_check2.png`}
                 />
-                실시간 종목가격 모니터
+                {t(`17`)}
               </Wrapper>
 
               <Wrapper dr={`row`} margin={`0 0 20px`} width={`auto`}>
@@ -229,7 +229,7 @@ const Pc = () => {
                   width={`auto`}
                   src={`https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/willmarkets/assets/images/download/icon_check2.png`}
                 />
-                차트 및 매매 리포트
+                {t(`18`)}
               </Wrapper>
 
               <Wrapper dr={`row`} margin={`0 0 20px`} width={`auto`}>
@@ -238,7 +238,7 @@ const Pc = () => {
                   width={`auto`}
                   src={`https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/willmarkets/assets/images/download/icon_check2.png`}
                 />
-                자동화된 트레이딩 시스템
+                {t(`19`)}
               </Wrapper>
 
               <Wrapper dr={`row`} margin={`0 0 20px`} width={`auto`}>
@@ -247,7 +247,7 @@ const Pc = () => {
                   width={`auto`}
                   src={`https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/willmarkets/assets/images/download/icon_check2.png`}
                 />
-                테크니컬 및 펀더멘털 분석
+                {t(`20`)}
               </Wrapper>
 
               <Wrapper dr={`row`} margin={`0 0 20px`} width={`auto`}>
@@ -256,7 +256,7 @@ const Pc = () => {
                   width={`auto`}
                   src={`https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/willmarkets/assets/images/download/icon_check2.png`}
                 />
-                헷지거래 가능
+                {t(`21`)}
               </Wrapper>
 
               <Wrapper dr={`row`} margin={`0 0 20px`} width={`auto`}>
@@ -265,7 +265,7 @@ const Pc = () => {
                   width={`auto`}
                   src={`https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/willmarkets/assets/images/download/icon_check2.png`}
                 />
-                다중 계정 관리
+                {t(`22`)}
               </Wrapper>
 
               <Wrapper dr={`row`} margin={`0 0 20px`} width={`auto`}>
@@ -274,7 +274,7 @@ const Pc = () => {
                   width={`auto`}
                   src={`https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/willmarkets/assets/images/download/icon_check2.png`}
                 />
-                실시간 종목 모니터링
+                {t(`23`)}
               </Wrapper>
 
               <Wrapper dr={`row`} margin={`0 0 20px`} width={`auto`}>
@@ -283,7 +283,7 @@ const Pc = () => {
                   width={`auto`}
                   src={`https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/willmarkets/assets/images/download/icon_check2.png`}
                 />
-                온라인 뉴스 및 매매 리포트
+                {t(`24`)}
               </Wrapper>
 
               <Wrapper dr={`row`} margin={`0 0 20px`} width={`auto`}>
@@ -292,7 +292,7 @@ const Pc = () => {
                   width={`auto`}
                   src={`https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/willmarkets/assets/images/download/icon_check2.png`}
                 />
-                테크니컬 분석
+                {t(`25`)}
               </Wrapper>
 
               <Wrapper dr={`row`} margin={`0 0 20px`} width={`auto`}>
@@ -301,7 +301,7 @@ const Pc = () => {
                   width={`auto`}
                   src={`https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/willmarkets/assets/images/download/icon_check2.png`}
                 />
-                모든 매매 기록 보존
+                {t(`26`)}
               </Wrapper>
 
               <Wrapper dr={`row`} margin={`0 0 20px`} width={`auto`}>
@@ -310,7 +310,7 @@ const Pc = () => {
                   width={`auto`}
                   src={`https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/willmarkets/assets/images/download/icon_check2.png`}
                 />
-                모든 체결 모드 지원
+                {t(`27`)}
               </Wrapper>
             </Wrapper>
           </Wrapper>

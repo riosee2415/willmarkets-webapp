@@ -17,7 +17,7 @@ import SubBanner from "../../components/SubBanner";
 import { useTranslation } from "react-i18next";
 
 const Mobile = () => {
-  const { t } = useTranslation(["platform_mobile"]);
+  const { t } = useTranslation(["platform"]);
 
   return (
     <ClientLayout>
@@ -26,8 +26,7 @@ const Mobile = () => {
       <Wrapper
         padding={`150px 0`}
         color={`#fff`}
-        bgImg={`url('https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/willmarkets/assets/images/download/back_mobile1_download.png')`}
-      >
+        bgImg={`url('https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/willmarkets/assets/images/download/back_mobile1_download.png')`}>
         <RsWrapper al={`flex-start`}>
           <Wrapper dr={`row`} width={`auto`}>
             <Image
@@ -39,8 +38,7 @@ const Mobile = () => {
               dr={`row`}
               padding={`0 10px`}
               width={`auto`}
-              fontSize={`24px`}
-            >
+              fontSize={`24px`}>
               {t(`1`).split(`\n`)[0]}
               <Text padding={`0 5px`} fontWeight={`400`} color={`#ec5bac`}>
                 {t(`1`).split(`\n`)[1]}
@@ -54,8 +52,7 @@ const Mobile = () => {
             width={`auto`}
             margin={`15px 0 0`}
             fontWeight={`300`}
-            lineHeight={`1.6`}
-          >
+            lineHeight={`1.6`}>
             {t(`2`).split(`\n`)[0]}
             <br />
             {t(`2`).split(`\n`)[1]} {t(`3`).split(`\n`)[0]}
@@ -85,8 +82,7 @@ const Mobile = () => {
               color={`#2a2925`}
               bgColor={`#f9e96f`}
               hoverBgColor={`#fae648`}
-              radius={`10px`}
-            >
+              radius={`10px`}>
               {t(`4`)}
               <RightOutlined
                 style={{ margin: `0 0 0 5px`, fontSize: `12px` }}
@@ -99,16 +95,14 @@ const Mobile = () => {
       <Wrapper
         padding={`150px 0`}
         color={`#fff`}
-        bgImg={`url('https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/willmarkets/assets/images/download/back_mobile2_download.png')`}
-      >
+        bgImg={`url('https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/willmarkets/assets/images/download/back_mobile2_download.png')`}>
         <RsWrapper al={`flex-end`}>
           <Wrapper dr={`row`} width={`auto`}>
             <Wrapper
               dr={`row`}
               padding={`0 10px`}
               width={`auto`}
-              fontSize={`24px`}
-            >
+              fontSize={`24px`}>
               {t(`5`).split(`\n`)[0]}
               <Text padding={`0 5px`} fontWeight={`400`} color={`#ec5bac`}>
                 {t(`5`).split(`\n`)[1]}
@@ -128,8 +122,7 @@ const Mobile = () => {
             margin={`15px 0 0`}
             fontWeight={`300`}
             lineHeight={`1.6`}
-            textAlign={`right`}
-          >
+            textAlign={`right`}>
             {t(`2`).split(`\n`)[0]}
             <br />
             {t(`2`).split(`\n`)[1]} {t(`3`).split(`\n`)[0]}
@@ -159,8 +152,7 @@ const Mobile = () => {
               color={`#2a2925`}
               bgColor={`#f9e96f`}
               hoverBgColor={`#fae648`}
-              radius={`10px`}
-            >
+              radius={`10px`}>
               {t(`4`)}
               <RightOutlined
                 style={{ margin: `0 0 0 5px`, fontSize: `12px` }}
@@ -176,8 +168,7 @@ const Mobile = () => {
             display={`block`}
             width={`auto`}
             fontSize={`28px`}
-            fontWeight={`500`}
-          >
+            fontWeight={`500`}>
             <Text display={`inline-block`} lineHeight={`1.3`}>
               {t(`7`).split(`\n`)[0]}
             </Text>
@@ -189,8 +180,7 @@ const Mobile = () => {
             margin={`25px 0`}
             width={`auto`}
             textAlign={`center`}
-            fontSize={`17px`}
-          >
+            fontSize={`17px`}>
             {t(`8`).split(`\n`)[0]}
             <br />
             {t(`8`).split(`\n`)[1]}
@@ -212,8 +202,7 @@ const Mobile = () => {
             border={`1px solid #707072`}
             radius={`30px`}
             width={`auto`}
-            bgColor={`#fff`}
-          >
+            bgColor={`#fff`}>
             <Wrapper width={`auto`}>
               <Image
                 width={`auto`}
@@ -263,8 +252,7 @@ const Mobile = () => {
             dr={`row`}
             al={`normal`}
             position={`relative`}
-            bottom={`50px`}
-          >
+            bottom={`50px`}>
             <Wrapper al={`flex-start`} ju={`space-between`} width={`50%`}>
               <Wrapper al={`flex-start`} width={`auto`}>
                 <Wrapper display={`block`} fontSize={`25px`} fontWeight={`500`}>
@@ -277,8 +265,7 @@ const Mobile = () => {
                 <Wrapper
                   margin={`20px 0 50px`}
                   width={`auto`}
-                  lineHeight={`1.8`}
-                >
+                  lineHeight={`1.8`}>
                   {/* IronFX는 MT4 거래의 선구자입니다.
                   <br />
                   쉬운 사용성 및 설치 Windows 외에도 복잡한 전략을
@@ -287,62 +274,6 @@ const Mobile = () => {
                   <br />
                   차트에서 추측하면서 트렌드를 따라 자신의 위치를 찾을 수
                   있습니다. */}
-                </Wrapper>
-              </Wrapper>
-
-              <Wrapper al={`flex-start`} width={`auto`}>
-                <Wrapper dr={`row`} margin={`0 0 20px`} width={`auto`}>
-                  <Image
-                    margin={`0 10px 0 0`}
-                    width={`auto`}
-                    src={`https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/willmarkets/assets/images/download/icon_check2.png`}
-                  />
-                  주문, 포지션, 주식 및 익스포져의 온라인 관리
-                </Wrapper>
-
-                <Wrapper dr={`row`} margin={`0 0 20px`} width={`auto`}>
-                  <Image
-                    margin={`0 10px 0 0`}
-                    width={`auto`}
-                    src={`https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/willmarkets/assets/images/download/icon_check2.png`}
-                  />
-                  EA(시스템 매매), 내장된 거래지표 및 맞춤형 거래지표 사용 가능
-                </Wrapper>
-
-                <Wrapper dr={`row`} margin={`0 0 20px`} width={`auto`}>
-                  <Image
-                    margin={`0 10px 0 0`}
-                    width={`auto`}
-                    src={`https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/willmarkets/assets/images/download/icon_check2.png`}
-                  />
-                  온라인 뉴스 및 매매 리포트
-                </Wrapper>
-
-                <Wrapper dr={`row`} margin={`0 0 20px`} width={`auto`}>
-                  <Image
-                    margin={`0 10px 0 0`}
-                    width={`auto`}
-                    src={`https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/willmarkets/assets/images/download/icon_check2.png`}
-                  />
-                  테크니컬 분석. 다중 계정 관리
-                </Wrapper>
-
-                <Wrapper dr={`row`} margin={`0 0 20px`} width={`auto`}>
-                  <Image
-                    margin={`0 10px 0 0`}
-                    width={`auto`}
-                    src={`https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/willmarkets/assets/images/download/icon_check2.png`}
-                  />
-                  모든 매매 기록 보존. 모든 체결 모드 지원
-                </Wrapper>
-
-                <Wrapper dr={`row`} margin={`0 0 20px`} width={`auto`}>
-                  <Image
-                    margin={`0 10px 0 0`}
-                    width={`auto`}
-                    src={`https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/willmarkets/assets/images/download/icon_check2.png`}
-                  />
-                  테크니컬 및 펀더멘털 분석
                 </Wrapper>
               </Wrapper>
             </Wrapper>
@@ -354,7 +285,7 @@ const Mobile = () => {
                   width={`auto`}
                   src={`https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/willmarkets/assets/images/download/icon_check2.png`}
                 />
-                실시간 종목 모니터링
+                {t(`16`)}
               </Wrapper>
 
               <Wrapper dr={`row`} margin={`0 0 20px`} width={`auto`}>
@@ -363,7 +294,7 @@ const Mobile = () => {
                   width={`auto`}
                   src={`https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/willmarkets/assets/images/download/icon_check2.png`}
                 />
-                50가지 지표의 기술적 분석 및 차트 도구
+                {t(`17`)}
               </Wrapper>
 
               <Wrapper dr={`row`} margin={`0 0 20px`} width={`auto`}>
@@ -372,7 +303,7 @@ const Mobile = () => {
                   width={`auto`}
                   src={`https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/willmarkets/assets/images/download/icon_check2.png`}
                 />
-                20가지 거래지표의 기술적 분석 및 차트 도구가 완벽히 구축
+                {t(`18`)}
               </Wrapper>
 
               <Wrapper dr={`row`} margin={`0 0 20px`} width={`auto`}>
@@ -381,7 +312,7 @@ const Mobile = () => {
                   width={`auto`}
                   src={`https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/willmarkets/assets/images/download/icon_check2.png`}
                 />
-                다수의 많은 주문을 관리
+                {t(`19`)}
               </Wrapper>
 
               <Wrapper dr={`row`} margin={`0 0 20px`} width={`auto`}>
@@ -390,7 +321,7 @@ const Mobile = () => {
                   width={`auto`}
                   src={`https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/willmarkets/assets/images/download/icon_check2.png`}
                 />
-                다양한 맞춤형 지표 및 여러 시간대 생성 가능
+                {t(`20`)}
               </Wrapper>
 
               <Wrapper dr={`row`} margin={`0 0 20px`} width={`auto`}>
@@ -399,7 +330,7 @@ const Mobile = () => {
                   width={`auto`}
                   src={`https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/willmarkets/assets/images/download/icon_check2.png`}
                 />
-                거래 내역 데이터 관리 및 데이터 내보내기/불러오기 기능
+                {t(`21`)}
               </Wrapper>
 
               <Wrapper dr={`row`} margin={`0 0 20px`} width={`auto`}>
@@ -408,7 +339,7 @@ const Mobile = () => {
                   width={`auto`}
                   src={`https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/willmarkets/assets/images/download/icon_check2.png`}
                 />
-                데이터 백업 및 보안 철저
+                {t(`22`)}
               </Wrapper>
 
               <Wrapper dr={`row`} margin={`0 0 20px`} width={`auto`}>
@@ -417,7 +348,7 @@ const Mobile = () => {
                   width={`auto`}
                   src={`https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/willmarkets/assets/images/download/icon_check2.png`}
                 />
-                내부 메일 관리 시스템
+                {t(`23`)}
               </Wrapper>
 
               <Wrapper dr={`row`} margin={`0 0 20px`} width={`auto`}>
@@ -426,7 +357,7 @@ const Mobile = () => {
                   width={`auto`}
                   src={`https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/willmarkets/assets/images/download/icon_check2.png`}
                 />
-                실시간 종목가격 모니터
+                {t(`24`)}
               </Wrapper>
 
               <Wrapper dr={`row`} margin={`0 0 20px`} width={`auto`}>
@@ -435,7 +366,7 @@ const Mobile = () => {
                   width={`auto`}
                   src={`https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/willmarkets/assets/images/download/icon_check2.png`}
                 />
-                테크니컬 및 펀더멘털 분석
+                {t(`25`)}
               </Wrapper>
 
               <Wrapper dr={`row`} margin={`0 0 20px`} width={`auto`}>
@@ -444,7 +375,16 @@ const Mobile = () => {
                   width={`auto`}
                   src={`https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/willmarkets/assets/images/download/icon_check2.png`}
                 />
-                헷지거래 가능. 원-클릭 거래
+                {t(`26`)}
+              </Wrapper>
+
+              <Wrapper dr={`row`} margin={`0 0 20px`} width={`auto`}>
+                <Image
+                  margin={`0 10px 0 0`}
+                  width={`auto`}
+                  src={`https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/willmarkets/assets/images/download/icon_check2.png`}
+                />
+                {t(`27`)}
               </Wrapper>
             </Wrapper>
           </Wrapper>

@@ -12,8 +12,11 @@ import {
 } from "../../components/commonComponents";
 import ClientLayout from "../../components/ClientLayout";
 import SubBanner from "../../components/SubBanner";
+import { useTranslation } from "react-i18next";
 
 const Provider = () => {
+  const { t } = useTranslation(["trading_provider"]);
+
   return (
     <ClientLayout>
       <SubBanner />
@@ -22,7 +25,7 @@ const Provider = () => {
         <RsWrapper>
           <Wrapper display={`block`} width={`auto`} fontSize={`30px`}>
             <Text display={`inline`} margin={`0 0 0 5px`}>
-              호가제공사
+              {t(`1`)}
             </Text>
           </Wrapper>
 

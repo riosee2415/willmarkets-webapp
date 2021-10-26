@@ -12,8 +12,11 @@ import {
 } from "../../components/commonComponents";
 import ClientLayout from "../../components/ClientLayout";
 import SubBanner from "../../components/SubBanner";
+import { useTranslation } from "react-i18next";
 
 const Margin = () => {
+  const { t } = useTranslation(["trading_margin"]);
+
   return (
     <ClientLayout>
       <SubBanner />
@@ -22,11 +25,11 @@ const Margin = () => {
         <RsWrapper>
           <Wrapper display={`block`} width={`auto`} fontSize={`30px`}>
             <Text display={`inline`} margin={`0 0 0 5px`}>
-              마진
+              {t(`1`).split(`\n`)[0]}
             </Text>
-            과
+            {t(`1`).split(`\n`)[1]}
             <Text display={`inline`} margin={`0 0 0 5px`}>
-              레버리지
+              {t(`1`).split(`\n`)[2]}
             </Text>
           </Wrapper>
 
@@ -43,46 +46,44 @@ const Margin = () => {
         <RsWrapper>
           <Wrapper display={`block`} width={`auto`} fontSize={`26px`}>
             <Text display={`inline`} padding={`0 0 0 5px`} color={`#ff50b0`}>
-              마진
+              {t(`2`).split(`\n`)[0]}
             </Text>
-            이란 무엇일까요?
+            {t(`2`).split(`\n`)[1]}
           </Wrapper>
 
           <Wrapper
             margin={`30px 0 50px`}
             textAlign={`center`}
-            lineHeight={`1.8`}>
-            마진과 레버리지는 외환거래에서 매우 밀접한 관계를 가지고 있습니다.
+            lineHeight={`1.8`}
+          >
+            {t(`3`)}
             <br />
-            마진은 레버리지를 이용한 거래를 하고자 할 때 필요한 증거금을
-            의미합니다.
+            {t(`4`)}
             <br />
-            예를 들어, 필요마진(Required Margin) 1%는 $1,000,000
+            {t(`5`)}
             <br />
-            거래 시 $10,000의 증거금이 필요하다는 의미입니다.
+            {t(`6`)}
           </Wrapper>
 
           <Wrapper display={`block`} width={`auto`} fontSize={`26px`}>
             <Text display={`inline`} padding={`0 0 0 5px`} color={`#ff50b0`}>
-              레버리지
+              {t(`7`).split(`\n`)[0]}
             </Text>
-            란 무엇일까요?
+            {t(`7`).split(`\n`)[1]}
           </Wrapper>
 
           <Wrapper margin={`30px 0 0`} textAlign={`center`} lineHeight={`1.8`}>
-            레버리지는 거래 시 브로커로부터 빌릴 수 있는 금액의 비율을
-            의미합니다.
+            {t(`8`)}
             <br />
-            일반적으로 주식시장에서 주당 10달러짜리 100주를 매수를 한다고 했을
-            때,
+            {t(`9`).split(`\n`)[0]}
             <br />
-            1,000달러가 필요합니다. 이때 주식브로커가 주식대금 중 50%를 빌려주고
+            {t(`9`).split(`\n`)[1]} {t(`10`).split(`\n`)[0]}
             <br />
-            거래를 지원 한다면, 500달러만으로 주당10달러짜리 100주를 매수하는
+            {t(`10`).split(`\n`)[1]}
             <br />
-            것이 가능해집니다. 이러한 방식으로 트레이더가 보유한 자금 이상으로
+            {t(`10`).split(`\n`)[2]} {t(`11`).split(`\n`)[0]}
             <br />
-            거래할 수 있도록 지원하는 것이 레버리지입니다.
+            {t(`11`).split(`\n`)[1]}
           </Wrapper>
         </RsWrapper>
       </Wrapper>

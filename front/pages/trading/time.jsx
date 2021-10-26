@@ -12,8 +12,11 @@ import {
 } from "../../components/commonComponents";
 import ClientLayout from "../../components/ClientLayout";
 import SubBanner from "../../components/SubBanner";
+import { useTranslation } from "react-i18next";
 
 const Time = () => {
+  const { t } = useTranslation(["trading_time"]);
+
   return (
     <ClientLayout>
       <SubBanner />
@@ -21,7 +24,7 @@ const Time = () => {
       <Wrapper padding={`80px 0`} bgColor={`#eeeeee`}>
         <RsWrapper>
           <Wrapper display={`block`} width={`auto`} fontSize={`30px`}>
-            <Text display={`inline`}>거래시간</Text>
+            <Text display={`inline`}>{t(`1`)}</Text>
           </Wrapper>
 
           <Wrapper margin={`40px 0 20px`} width={`auto`}>
@@ -32,24 +35,22 @@ const Time = () => {
           </Wrapper>
 
           <Wrapper width={`auto`} textAlign={`center`}>
-            시장은 잠들지 않습니다. 하나의 주요 forex 장이 마감되면, 또 다른
-            장이 열립니다.
+            {t(`2`)}
             <br />
-            예를 들어, GMT에 따라 forex 거래시간은 다음과 같이 움직입니다.
+            {t(`3`)}
             <br />
             <br />
-            01:00 pm – 10:00 pm GMT 사이에 뉴욕에서 거래가 가능합니다.
+            {t(`4`)}
             <br />
-            10:00 pm GMT에는 시드니 환시가 열립니다.
+            {t(`5`)}
             <br />
-            도쿄 환시는 00:00 am에 시작하여 9:00 am GMT에 마감합니다.
+            {t(`6`)}
             <br />
-            순환의 고리를 완벽히 하기 위해 런던 장은 8:00 am에 시작하여 5:00 pm
-            GMT에 마감합니다.
+            {t(`7`)}
             <br />
-            이러한 거래 시간은 모든 대륙의 중앙은행들의 참여와 함께 전세계의
+            {t(`8`).split(`\n`)[0]}
             <br />
-            브로커들이 매일 24시간 온라인으로 거래할 수 있도록 해줍니다.
+            {t(`8`).split(`\n`)[0]}
           </Wrapper>
         </RsWrapper>
       </Wrapper>

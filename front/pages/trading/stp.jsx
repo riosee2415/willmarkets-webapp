@@ -12,8 +12,11 @@ import {
 } from "../../components/commonComponents";
 import ClientLayout from "../../components/ClientLayout";
 import SubBanner from "../../components/SubBanner";
+import { useTranslation } from "react-i18next";
 
 const Stp = () => {
+  const { t } = useTranslation(["trading_stp"]);
+
   return (
     <ClientLayout>
       <SubBanner />
@@ -21,7 +24,8 @@ const Stp = () => {
       <Wrapper padding={`80px 0`} bgColor={`#eeeeee`}>
         <RsWrapper>
           <Wrapper display={`block`} width={`auto`} fontSize={`26px`}>
-            <Text display={`inline`}>안정적인 STP</Text>로 거래해보세요
+            <Text display={`inline`}>{t(`1`).split(`\n`)[0]}</Text>
+            {t(`1`).split(`\n`)[1]}
           </Wrapper>
 
           <Wrapper margin={`40px 0 20px`} width={`auto`}>
@@ -32,12 +36,11 @@ const Stp = () => {
           </Wrapper>
 
           <Wrapper width={`auto`} textAlign={`center`}>
-            STP는 다년간 전문적으로 트레이딩을 하는 고객님들이 가장 선호하는
-            계정입니다.
+            {t(`2`)}
             <br />
-            STP 계정은 스프레드만 있고 수수료가 없는 계정으로서
+            {t(`3`).split(`\n`)[0]}
             <br />
-            트레이더들이 수익을 내기 좋은 컨디션입니다.
+            {t(`3`).split(`\n`)[1]}
           </Wrapper>
         </RsWrapper>
       </Wrapper>

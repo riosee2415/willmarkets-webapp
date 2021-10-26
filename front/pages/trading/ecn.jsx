@@ -12,8 +12,11 @@ import {
 } from "../../components/commonComponents";
 import ClientLayout from "../../components/ClientLayout";
 import SubBanner from "../../components/SubBanner";
+import { useTranslation } from "react-i18next";
 
 const Ecn = () => {
+  const { t } = useTranslation(["trading_ecn"]);
+
   return (
     <ClientLayout>
       <SubBanner />
@@ -21,8 +24,8 @@ const Ecn = () => {
       <Wrapper padding={`80px 0`} bgColor={`#eeeeee`}>
         <RsWrapper>
           <Wrapper display={`block`} width={`auto`} fontSize={`26px`}>
-            <Text display={`inline`}>안정적인 ECN</Text>
-            으로 거래해보세요
+            <Text display={`inline`}>{t(`1`).split(`\n`)[0]}</Text>
+            {t(`1`).split(`\n`)[1]}
           </Wrapper>
 
           <Wrapper margin={`40px 0 20px`} width={`auto`}>
@@ -33,13 +36,13 @@ const Ecn = () => {
           </Wrapper>
 
           <Wrapper width={`auto`} textAlign={`center`}>
-            ECN(Electronic Communication Network)은 일반 고객님들이
+            {t(`2`).split(`\n`)[0]}
             <br />
-            기관/증권사들이 제공받는 가장 전문적인 ECN 계정의 거래 조건을
+            {t(`2`).split(`\n`)[1]}
             <br />
-            제공 받으실 수 있습니다. ECN 계정은 낮은 스프레드와 낮은
+            {t(`2`).split(`\n`)[2]} {t(`3`).split(`\n`)[0]}
             <br />
-            수수료로 고객님들의 거래에 최적화된 환경을 제공합니다.
+            {t(`3`).split(`\n`)[1]}
           </Wrapper>
         </RsWrapper>
       </Wrapper>
@@ -47,11 +50,11 @@ const Ecn = () => {
       <Wrapper padding={`60px 0 40px`} color={`#fff`} bgColor={`#000105`}>
         <RsWrapper>
           <Wrapper display={`block`} width={`auto`} fontSize={`26px`}>
-            왜
+            {t(`4`).split(`\n`)[0]}
             <Text display={`inline`} padding={`0 0 0 5px`} color={`#ff50b0`}>
-              ECN
+              {t(`4`).split(`\n`)[1]}
             </Text>
-            으로 거래할까요?
+            {t(`4`).split(`\n`)[2]}
           </Wrapper>
 
           <Wrapper dr={`row`} al={`normal`} margin={`60px 0 0`}>
@@ -59,14 +62,15 @@ const Ecn = () => {
               al={`flex-start`}
               ju={`flex-start`}
               margin={`0 60px`}
-              width={`300px`}>
+              width={`300px`}
+            >
               <Wrapper dr={`row`} margin={`0 0 30px`} width={`auto`}>
                 <Image
                   margin={`0 10px 0 0`}
                   width={`auto`}
                   src={`https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/willmarkets/assets/images/download/icon_check2.png`}
                 />
-                스프레드 : 0.1pip 부터
+                {t(`5`)}
               </Wrapper>
 
               <Wrapper dr={`row`} margin={`0 0 30px`} width={`auto`}>
@@ -75,7 +79,7 @@ const Ecn = () => {
                   width={`auto`}
                   src={`https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/willmarkets/assets/images/download/icon_check2.png`}
                 />
-                Spot Gold : 2pip 부터
+                {t(`6`)}
               </Wrapper>
 
               <Wrapper dr={`row`} margin={`0 0 30px`} width={`auto`}>
@@ -84,7 +88,7 @@ const Ecn = () => {
                   width={`auto`}
                   src={`https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/willmarkets/assets/images/download/icon_check2.png`}
                 />
-                레버리지 : 200:1 까지 선택 가능
+                {t(`7`)}
               </Wrapper>
 
               <Wrapper dr={`row`} margin={`0 0 30px`} width={`auto`}>
@@ -93,7 +97,7 @@ const Ecn = () => {
                   width={`auto`}
                   src={`https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/willmarkets/assets/images/download/icon_check2.png`}
                 />
-                최소 입금금액 : US$2,000
+                {t(`8`)}
               </Wrapper>
             </Wrapper>
 
@@ -101,14 +105,15 @@ const Ecn = () => {
               al={`flex-start`}
               ju={`flex-start`}
               margin={`0 60px`}
-              width={`300px`}>
+              width={`300px`}
+            >
               <Wrapper dr={`row`} margin={`0 0 30px`} width={`auto`}>
                 <Image
                   margin={`0 10px 0 0`}
                   width={`auto`}
                   src={`https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/willmarkets/assets/images/download/icon_check2.png`}
                 />
-                햇지 거래 : 가능
+                {t(`9`)}
               </Wrapper>
 
               <Wrapper dr={`row`} margin={`0 0 30px`} width={`auto`}>
@@ -117,7 +122,7 @@ const Ecn = () => {
                   width={`auto`}
                   src={`https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/willmarkets/assets/images/download/icon_check2.png`}
                 />
-                최소 거래랏 : 0.1 랏부터
+                {t(`10`)}
               </Wrapper>
 
               <Wrapper dr={`row`} margin={`0 0 30px`} width={`auto`}>
@@ -126,7 +131,7 @@ const Ecn = () => {
                   width={`auto`}
                   src={`https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/willmarkets/assets/images/download/icon_check2.png`}
                 />
-                수수료 : 0.3 pip/Lot
+                {t(`11`)}
               </Wrapper>
             </Wrapper>
           </Wrapper>
@@ -136,7 +141,7 @@ const Ecn = () => {
       <Wrapper padding={`50px 0`} bgColor={`#eeeeee`}>
         <RsWrapper>
           <Wrapper fontSize={`24px`} fontWeight={`500`}>
-            ECN과 DDE(Dealing Desk Environment) 비교하기
+            {t(`12`)}
           </Wrapper>
 
           <Wrapper margin={`30px 0`} width={`750px`} bgColor={`#fff`}>
@@ -145,13 +150,15 @@ const Ecn = () => {
               al={`normal`}
               padding={`6px 0`}
               borderTop={`1px solid #db4698`}
-              borderBottom={`1px solid #db4698`}>
+              borderBottom={`1px solid #db4698`}
+            >
               <Wrapper
                 width={`100px`}
                 padding={`5px 10px`}
                 fontSize={`18px`}
                 fontWeight={`500`}
-                color={`#dd459a`}>
+                color={`#dd459a`}
+              >
                 ECN
               </Wrapper>
               <Wrapper
@@ -160,7 +167,8 @@ const Ecn = () => {
                 fontSize={`18px`}
                 fontWeight={`500`}
                 color={`#565656`}
-                borderLeft={`1px solid #6f6f6f`}>
+                borderLeft={`1px solid #6f6f6f`}
+              >
                 DDE
               </Wrapper>
               <Wrapper
@@ -169,8 +177,9 @@ const Ecn = () => {
                 fontSize={`18px`}
                 fontWeight={`500`}
                 color={`#565656`}
-                borderLeft={`1px solid #6f6f6f`}>
-                주요 기능
+                borderLeft={`1px solid #6f6f6f`}
+              >
+                {t(`13`)}
               </Wrapper>
               <Wrapper
                 al={`flex-start`}
@@ -179,8 +188,9 @@ const Ecn = () => {
                 fontSize={`18px`}
                 fontWeight={`500`}
                 color={`#565656`}
-                borderLeft={`1px solid #6f6f6f`}>
-                설명
+                borderLeft={`1px solid #6f6f6f`}
+              >
+                {t(`14`)}
               </Wrapper>
             </Wrapper>
 
@@ -188,7 +198,8 @@ const Ecn = () => {
               dr={`row`}
               al={`normal`}
               padding={`6px 0`}
-              borderBottom={`1px solid #db4698`}>
+              borderBottom={`1px solid #db4698`}
+            >
               <Wrapper width={`100px`} padding={`5px 10px`}>
                 <Image
                   width={`44px`}
@@ -198,7 +209,8 @@ const Ecn = () => {
               <Wrapper
                 width={`100px`}
                 padding={`5px 10px`}
-                borderLeft={`1px solid #6f6f6f`}>
+                borderLeft={`1px solid #6f6f6f`}
+              >
                 <Image
                   width={`44px`}
                   src={`https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/willmarkets/assets/images/trade/icon_disagree.png`}
@@ -210,10 +222,11 @@ const Ecn = () => {
                 fontSize={`18px`}
                 color={`#292929`}
                 borderLeft={`1px solid #6f6f6f`}
-                textAlign={`center`}>
-                국제 은행에
+                textAlign={`center`}
+              >
+                {t(`15`).split(`\n`)[0]}
                 <br />
-                직접 연결
+                {t(`15`).split(`\n`)[1]}
               </Wrapper>
               <Wrapper
                 al={`flex-start`}
@@ -221,10 +234,9 @@ const Ecn = () => {
                 padding={`5px 10px`}
                 fontSize={`15px`}
                 color={`#292929`}
-                borderLeft={`1px solid #6f6f6f`}>
-                DDE(이하 딜링데스크)는 개개 트레이더의 포지션과 스타일을 알고
-                있습니다. 때때로 딜링데스크는 고의적으로 시장으로부터의 연결을
-                끊습니다. Willmarkets은 이런 부정거래를 절대 하지 않습니다.
+                borderLeft={`1px solid #6f6f6f`}
+              >
+                {t(`16`)}
               </Wrapper>
             </Wrapper>
 
@@ -232,7 +244,8 @@ const Ecn = () => {
               dr={`row`}
               al={`normal`}
               padding={`6px 0`}
-              borderBottom={`1px solid #db4698`}>
+              borderBottom={`1px solid #db4698`}
+            >
               <Wrapper width={`100px`} padding={`5px 10px`}>
                 <Image
                   width={`44px`}
@@ -242,7 +255,8 @@ const Ecn = () => {
               <Wrapper
                 width={`100px`}
                 padding={`5px 10px`}
-                borderLeft={`1px solid #6f6f6f`}>
+                borderLeft={`1px solid #6f6f6f`}
+              >
                 <Image
                   width={`44px`}
                   src={`https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/willmarkets/assets/images/trade/icon_disagree.png`}
@@ -254,10 +268,11 @@ const Ecn = () => {
                 fontSize={`18px`}
                 color={`#292929`}
                 borderLeft={`1px solid #6f6f6f`}
-                textAlign={`center`}>
-                Re-order
+                textAlign={`center`}
+              >
+                {t(`17`).split(`\n`)[0]}
                 <br />
-                제공 요청
+                {t(`17`).split(`\n`)[1]}
               </Wrapper>
               <Wrapper
                 al={`flex-start`}
@@ -265,10 +280,9 @@ const Ecn = () => {
                 padding={`5px 10px`}
                 fontSize={`15px`}
                 color={`#292929`}
-                borderLeft={`1px solid #6f6f6f`}>
-                주요 금융 뉴스의 발표 시간에 딜링데스크는 Iot 크기나 스타일의
-                이유로 거래 처리를 하지 않습니다. Willmarkets은 이런 부정을
-                저지르지 않습니다.
+                borderLeft={`1px solid #6f6f6f`}
+              >
+                {t(`18`)}
               </Wrapper>
             </Wrapper>
 
@@ -276,7 +290,8 @@ const Ecn = () => {
               dr={`row`}
               al={`normal`}
               padding={`6px 0`}
-              borderBottom={`1px solid #db4698`}>
+              borderBottom={`1px solid #db4698`}
+            >
               <Wrapper width={`100px`} padding={`5px 10px`}>
                 <Image
                   width={`44px`}
@@ -286,7 +301,8 @@ const Ecn = () => {
               <Wrapper
                 width={`100px`}
                 padding={`5px 10px`}
-                borderLeft={`1px solid #6f6f6f`}>
+                borderLeft={`1px solid #6f6f6f`}
+              >
                 <Image
                   width={`44px`}
                   src={`https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/willmarkets/assets/images/trade/icon_agree.png`}
@@ -298,8 +314,9 @@ const Ecn = () => {
                 fontSize={`18px`}
                 color={`#292929`}
                 borderLeft={`1px solid #6f6f6f`}
-                textAlign={`center`}>
-                금융 뉴스 거래
+                textAlign={`center`}
+              >
+                {t(`19`)}
               </Wrapper>
               <Wrapper
                 al={`flex-start`}
@@ -307,10 +324,9 @@ const Ecn = () => {
                 padding={`5px 10px`}
                 fontSize={`15px`}
                 color={`#292929`}
-                borderLeft={`1px solid #6f6f6f`}>
-                금융 뉴스 시간에 딜링데스크는 Iot 크기나 스타일의 이유로 거래
-                처리를 하지 않습니다. Willmarkets은 이런 부정을 저지르지
-                않습니다.
+                borderLeft={`1px solid #6f6f6f`}
+              >
+                {t(`20`)}
               </Wrapper>
             </Wrapper>
 
@@ -318,7 +334,8 @@ const Ecn = () => {
               dr={`row`}
               al={`normal`}
               padding={`6px 0`}
-              borderBottom={`1px solid #db4698`}>
+              borderBottom={`1px solid #db4698`}
+            >
               <Wrapper width={`100px`} padding={`5px 10px`}>
                 <Image
                   width={`44px`}
@@ -328,7 +345,8 @@ const Ecn = () => {
               <Wrapper
                 width={`100px`}
                 padding={`5px 10px`}
-                borderLeft={`1px solid #6f6f6f`}>
+                borderLeft={`1px solid #6f6f6f`}
+              >
                 <Image
                   width={`44px`}
                   src={`https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/willmarkets/assets/images/trade/icon_disagree.png`}
@@ -340,8 +358,9 @@ const Ecn = () => {
                 fontSize={`18px`}
                 color={`#292929`}
                 borderLeft={`1px solid #6f6f6f`}
-                textAlign={`center`}>
-                처리 지연
+                textAlign={`center`}
+              >
+                {t(`21`)}
               </Wrapper>
               <Wrapper
                 al={`flex-start`}
@@ -349,9 +368,9 @@ const Ecn = () => {
                 padding={`5px 10px`}
                 fontSize={`15px`}
                 color={`#292929`}
-                borderLeft={`1px solid #6f6f6f`}>
-                때때로 딜링 데스크는 Order의 주문 처리지연을 통해 고객의 주문을
-                처리하지 않습니다. Willmarkets은 이런 부정거래를 하지 않습니다.
+                borderLeft={`1px solid #6f6f6f`}
+              >
+                {t(`22`)}
               </Wrapper>
             </Wrapper>
           </Wrapper>

@@ -181,23 +181,84 @@ const Pc = () => {
             al={`normal`}
             position={`relative`}
             bottom={`50px`}>
-            <Wrapper al={`flex-start`} ju={`flex-start`} width={`50%`}>
-              <Wrapper display={`block`} fontSize={`25px`} fontWeight={`500`}>
-                MT4의 기능 및
-                <Text display={`inline`} margin={`0 0 0 5px`}>
-                  장점
-                </Text>
+            <Wrapper al={`flex-start`} ju={`space-between`} width={`50%`}>
+              <Wrapper al={`flex-start`} width={`auto`}>
+                <Wrapper display={`block`} fontSize={`25px`} fontWeight={`500`}>
+                  MT4의 기능 및
+                  <Text display={`inline`} margin={`0 0 0 5px`}>
+                    장점
+                  </Text>
+                </Wrapper>
+
+                <Wrapper
+                  margin={`20px 0 50px`}
+                  width={`auto`}
+                  lineHeight={`1.8`}>
+                  {/* IronFX는 MT4 거래의 선구자입니다.
+                  <br />
+                  쉬운 사용성 및 설치 Windows 외에도 복잡한 전략을
+                  <br />
+                  구현할 수 있습니다. 기능의 이점을 누리고 가격 변동을 따르고
+                  <br />
+                  차트에서 추측하면서 트렌드를 따라 자신의 위치를 찾을 수
+                  있습니다. */}
+                </Wrapper>
               </Wrapper>
 
-              <Wrapper margin={`20px 0 0`} width={`auto`} lineHeight={`1.6`}>
-                {/* IronFX는 MT4 거래의 선구자입니다.
-                <br />
-                쉬운 사용성 및 설치 Windows 외에도 복잡한 전략을
-                <br />
-                구현할 수 있습니다. 기능의 이점을 누리고 가격 변동을 따르고
-                <br />
-                차트에서 추측하면서 트렌드를 따라 자신의 위치를 찾을 수
-                있습니다. */}
+              <Wrapper al={`flex-start`} width={`auto`}>
+                <Wrapper dr={`row`} margin={`0 0 20px`} width={`auto`}>
+                  <Image
+                    margin={`0 10px 0 0`}
+                    width={`auto`}
+                    src={`https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/willmarkets/assets/images/download/icon_check2.png`}
+                  />
+                  주문, 포지션, 주식 및 익스포져의 온라인 관리
+                </Wrapper>
+
+                <Wrapper dr={`row`} margin={`0 0 20px`} width={`auto`}>
+                  <Image
+                    margin={`0 10px 0 0`}
+                    width={`auto`}
+                    src={`https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/willmarkets/assets/images/download/icon_check2.png`}
+                  />
+                  EA(시스템 매매), 내장된 거래지표 및 맞춤형 거래지표 사용 가능
+                </Wrapper>
+
+                <Wrapper dr={`row`} margin={`0 0 20px`} width={`auto`}>
+                  <Image
+                    margin={`0 10px 0 0`}
+                    width={`auto`}
+                    src={`https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/willmarkets/assets/images/download/icon_check2.png`}
+                  />
+                  온라인 뉴스 및 매매 리포트
+                </Wrapper>
+
+                <Wrapper dr={`row`} margin={`0 0 20px`} width={`auto`}>
+                  <Image
+                    margin={`0 10px 0 0`}
+                    width={`auto`}
+                    src={`https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/willmarkets/assets/images/download/icon_check2.png`}
+                  />
+                  테크니컬 분석. 다중 계정 관리
+                </Wrapper>
+
+                <Wrapper dr={`row`} margin={`0 0 20px`} width={`auto`}>
+                  <Image
+                    margin={`0 10px 0 0`}
+                    width={`auto`}
+                    src={`https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/willmarkets/assets/images/download/icon_check2.png`}
+                  />
+                  모든 매매 기록 보존. 모든 체결 모드 지원
+                </Wrapper>
+
+                <Wrapper dr={`row`} margin={`0 0 20px`} width={`auto`}>
+                  <Image
+                    margin={`0 10px 0 0`}
+                    width={`auto`}
+                    src={`https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/willmarkets/assets/images/download/icon_check2.png`}
+                  />
+                  테크니컬 및 펀더멘털 분석
+                </Wrapper>
               </Wrapper>
             </Wrapper>
 
@@ -208,7 +269,70 @@ const Pc = () => {
                   width={`auto`}
                   src={`https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/willmarkets/assets/images/download/icon_check2.png`}
                 />
-                주문, 포지션, 주식 및 익스포져의 온라인 관리
+                실시간 종목 모니터링
+              </Wrapper>
+
+              <Wrapper dr={`row`} margin={`0 0 20px`} width={`auto`}>
+                <Image
+                  margin={`0 10px 0 0`}
+                  width={`auto`}
+                  src={`https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/willmarkets/assets/images/download/icon_check2.png`}
+                />
+                50가지 지표의 기술적 분석 및 차트 도구
+              </Wrapper>
+
+              <Wrapper dr={`row`} margin={`0 0 20px`} width={`auto`}>
+                <Image
+                  margin={`0 10px 0 0`}
+                  width={`auto`}
+                  src={`https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/willmarkets/assets/images/download/icon_check2.png`}
+                />
+                20가지 거래지표의 기술적 분석 및 차트 도구가 완벽히 구축
+              </Wrapper>
+
+              <Wrapper dr={`row`} margin={`0 0 20px`} width={`auto`}>
+                <Image
+                  margin={`0 10px 0 0`}
+                  width={`auto`}
+                  src={`https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/willmarkets/assets/images/download/icon_check2.png`}
+                />
+                다수의 많은 주문을 관리
+              </Wrapper>
+
+              <Wrapper dr={`row`} margin={`0 0 20px`} width={`auto`}>
+                <Image
+                  margin={`0 10px 0 0`}
+                  width={`auto`}
+                  src={`https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/willmarkets/assets/images/download/icon_check2.png`}
+                />
+                다양한 맞춤형 지표 및 여러 시간대 생성 가능
+              </Wrapper>
+
+              <Wrapper dr={`row`} margin={`0 0 20px`} width={`auto`}>
+                <Image
+                  margin={`0 10px 0 0`}
+                  width={`auto`}
+                  src={`https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/willmarkets/assets/images/download/icon_check2.png`}
+                />
+                거래 내역 데이터 관리 및 데이터 내보내기/불러오기 기능
+              </Wrapper>
+
+              <Wrapper dr={`row`} margin={`0 0 20px`} width={`auto`}>
+                <Image
+                  margin={`0 10px 0 0`}
+                  width={`auto`}
+                  src={`https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/willmarkets/assets/images/download/icon_check2.png`}
+                />
+                데이터 백업 및 보안 철저
+              </Wrapper>
+
+              <Wrapper dr={`row`} margin={`0 0 20px`} width={`auto`}>
+                <Image
+                  margin={`0 10px 0 0`}
+                  width={`auto`}
+                  src={`https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/willmarkets/assets/images/download/icon_check2.png`}
+                />
+                내부 메일 관리 시스템
               </Wrapper>
 
               <Wrapper dr={`row`} margin={`0 0 20px`} width={`auto`}>
@@ -226,24 +350,6 @@ const Pc = () => {
                   width={`auto`}
                   src={`https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/willmarkets/assets/images/download/icon_check2.png`}
                 />
-                차트 및 매매 리포트
-              </Wrapper>
-
-              <Wrapper dr={`row`} margin={`0 0 20px`} width={`auto`}>
-                <Image
-                  margin={`0 10px 0 0`}
-                  width={`auto`}
-                  src={`https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/willmarkets/assets/images/download/icon_check2.png`}
-                />
-                자동화된 트레이딩 시스템
-              </Wrapper>
-
-              <Wrapper dr={`row`} margin={`0 0 20px`} width={`auto`}>
-                <Image
-                  margin={`0 10px 0 0`}
-                  width={`auto`}
-                  src={`https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/willmarkets/assets/images/download/icon_check2.png`}
-                />
                 테크니컬 및 펀더멘털 분석
               </Wrapper>
 
@@ -253,61 +359,7 @@ const Pc = () => {
                   width={`auto`}
                   src={`https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/willmarkets/assets/images/download/icon_check2.png`}
                 />
-                헷지거래 가능
-              </Wrapper>
-
-              <Wrapper dr={`row`} margin={`0 0 20px`} width={`auto`}>
-                <Image
-                  margin={`0 10px 0 0`}
-                  width={`auto`}
-                  src={`https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/willmarkets/assets/images/download/icon_check2.png`}
-                />
-                다중 계정 관리
-              </Wrapper>
-
-              <Wrapper dr={`row`} margin={`0 0 20px`} width={`auto`}>
-                <Image
-                  margin={`0 10px 0 0`}
-                  width={`auto`}
-                  src={`https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/willmarkets/assets/images/download/icon_check2.png`}
-                />
-                실시간 종목 모니터링
-              </Wrapper>
-
-              <Wrapper dr={`row`} margin={`0 0 20px`} width={`auto`}>
-                <Image
-                  margin={`0 10px 0 0`}
-                  width={`auto`}
-                  src={`https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/willmarkets/assets/images/download/icon_check2.png`}
-                />
-                온라인 뉴스 및 매매 리포트
-              </Wrapper>
-
-              <Wrapper dr={`row`} margin={`0 0 20px`} width={`auto`}>
-                <Image
-                  margin={`0 10px 0 0`}
-                  width={`auto`}
-                  src={`https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/willmarkets/assets/images/download/icon_check2.png`}
-                />
-                테크니컬 분석
-              </Wrapper>
-
-              <Wrapper dr={`row`} margin={`0 0 20px`} width={`auto`}>
-                <Image
-                  margin={`0 10px 0 0`}
-                  width={`auto`}
-                  src={`https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/willmarkets/assets/images/download/icon_check2.png`}
-                />
-                모든 매매 기록 보존
-              </Wrapper>
-
-              <Wrapper dr={`row`} margin={`0 0 20px`} width={`auto`}>
-                <Image
-                  margin={`0 10px 0 0`}
-                  width={`auto`}
-                  src={`https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/willmarkets/assets/images/download/icon_check2.png`}
-                />
-                모든 체결 모드 지원
+                헷지거래 가능. 원-클릭 거래
               </Wrapper>
             </Wrapper>
           </Wrapper>

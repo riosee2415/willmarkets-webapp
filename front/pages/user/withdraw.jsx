@@ -102,13 +102,12 @@ const Withdraw = () => {
     st_userFindPasswordError,
     st_userFindPasswordConfirmDone,
     st_userFindPasswordConfirmError,
+    secretCode,
   } = useSelector((state) => state.user);
 
   const { st_withdrawCreateDone, st_withdrawCreateError } = useSelector(
     (state) => state.withdraw
   );
-
-  console.log(st_withdrawCreateDone, st_withdrawCreateError);
 
   const router = useRouter();
 
@@ -128,6 +127,7 @@ const Withdraw = () => {
   const inputPrice = useOnlyNumberInput("");
   const inputSecret = useInput("");
 
+  console.log(secretCode, inputSecret.value);
   ////// TOGGLE //////
 
   ////// HANDLER //////
@@ -232,6 +232,22 @@ const Withdraw = () => {
     isConfirmEmail,
   ]);
 
+  const confirmSecretHandler = useCallback(() => {
+    if (!emptyCheck(inputSecret.value)) {
+      return message.error("인증번호를 입력해주세요.");
+    }
+    if (secretCode.UUID !== inputSecret.value) {
+      setIsConfirmEmail(false);
+      return message.error("인증번호가 일치하지 않습니다.");
+    } else {
+      setIsConfirmEmail(true);
+      message.success("이메일 인증이 완료되었습니다.");
+
+      moveLinkHandler("/user");
+      initValueHandler();
+    }
+  }, [inputSecret]);
+
   ////// USE EFFECT //////
   useEffect(() => {
     if (!me) {
@@ -307,8 +323,7 @@ const Withdraw = () => {
         padding={`20px 30px`}
         bgColor={`#fff`}
         border={`1px solid #ededed`}
-        shadow={`2px 2px 10px #e6e6e6`}
-      >
+        shadow={`2px 2px 10px #e6e6e6`}>
         <Wrapper al={`flex-start`}>
           <Wrapper
             al={`flex-start`}
@@ -316,8 +331,7 @@ const Withdraw = () => {
             padding={`0 8px 20px`}
             fontSize={`19px`}
             fontWeight={`700`}
-            borderBottom={`1px solid #ebebeb`}
-          >
+            borderBottom={`1px solid #ebebeb`}>
             출금
           </Wrapper>
 
@@ -330,8 +344,7 @@ const Withdraw = () => {
                     ju={`flex-start`}
                     margin={`0 0 20px`}
                     fontSize={`18px`}
-                    fontWeight={`700`}
-                  >
+                    fontWeight={`700`}>
                     <Wrapper
                       width={`auto`}
                       margin={`0 10px 0 0`}
@@ -339,8 +352,7 @@ const Withdraw = () => {
                       fontSize={`14px`}
                       fontWeight={`700`}
                       bgColor={`#aa28c9`}
-                      color={`#fff`}
-                    >
+                      color={`#fff`}>
                       Step 01
                     </Wrapper>
                     출금정보 입력
@@ -391,17 +403,20 @@ const Withdraw = () => {
                       shadow={`0 2px 8px rgb(0 0 0 / 9%)`}
                       hoverBorder={`1px solid #d7a6ed`}
                       hoverShadow={`0 3px 8px rgb(0 0 0 / 12%)`}
-                      onClick={() => setComboSelectBank(!comboSelectBank)}
-                    >
+                      onClick={() => setComboSelectBank(!comboSelectBank)}>
                       <ComboTitle>
-                        <Wrapper>{inputSelectBank.value || `내 지갑`}</Wrapper>
+                        <Wrapper>{inputSelectBank.value || `지갑선택`}</Wrapper>
                         <CaretDownOutlined />
                       </ComboTitle>
 
                       <ComboList isView={comboSelectBank}>
                         <ComboListItem
-                          onClick={() => inputSelectBank.setValue("")}
-                        >
+                          onClick={() => inputSelectBank.setValue("")}>
+                          지갑선택
+                        </ComboListItem>
+
+                        <ComboListItem
+                          onClick={() => inputSelectBank.setValue("내 지갑")}>
                           내 지갑
                         </ComboListItem>
 
@@ -417,8 +432,7 @@ const Withdraw = () => {
                                 isActive={inputSelectBank.value === data.bankNo}
                                 onClick={() =>
                                   inputSelectBank.setValue(data.bankNo)
-                                }
-                              >
+                                }>
                                 {data.bankNo}
                               </ComboListItem>
                             );
@@ -449,8 +463,7 @@ const Withdraw = () => {
                           kindOf={`black`}
                           height={`38px`}
                           margin={`0 0 0 10px`}
-                          onClick={confirmSecretHandler}
-                        >
+                          onClick={confirmSecretHandler}>
                           인증
                         </CommonButton>
                       </Wrapper>
@@ -465,8 +478,7 @@ const Withdraw = () => {
                     ju={`flex-start`}
                     margin={`0 0 20px`}
                     fontSize={`18px`}
-                    fontWeight={`700`}
-                  >
+                    fontWeight={`700`}>
                     <Wrapper
                       width={`auto`}
                       margin={`0 10px 0 0`}
@@ -474,8 +486,7 @@ const Withdraw = () => {
                       fontSize={`14px`}
                       fontWeight={`700`}
                       bgColor={`#aa28c9`}
-                      color={`#fff`}
-                    >
+                      color={`#fff`}>
                       Step 02
                     </Wrapper>
                     출금신청 완료
@@ -487,8 +498,7 @@ const Withdraw = () => {
                         <Wrapper
                           fontSize={`25px`}
                           width={`auto`}
-                          borderBottom={`1px solid #c9c9c9`}
-                        >
+                          borderBottom={`1px solid #c9c9c9`}>
                           출금신청 완료 !
                         </Wrapper>
                       }
@@ -497,8 +507,7 @@ const Withdraw = () => {
                           margin={`10px 0 0`}
                           padding={`0 15px`}
                           width={`auto`}
-                          lineHeight={`1.8`}
-                        >
+                          lineHeight={`1.8`}>
                           정상적으로 출금신청이 완료되었습니다.
                         </Wrapper>
                       }
@@ -509,8 +518,7 @@ const Withdraw = () => {
                           width={`180px`}
                           height={`40px`}
                           margin={`0 5px`}
-                          onClick={initValueHandler}
-                        >
+                          onClick={initValueHandler}>
                           처음으로
                         </CommonButton>,
 
@@ -520,8 +528,7 @@ const Withdraw = () => {
                           width={`180px`}
                           height={`40px`}
                           margin={`0 5px`}
-                          onClick={() => moveLinkHandler(`/`)}
-                        >
+                          onClick={() => moveLinkHandler(`/`)}>
                           홈으로
                         </CommonButton>,
                       ]}
@@ -539,13 +546,11 @@ const Withdraw = () => {
             ju={`flex-start`}
             margin={`50px 0 0`}
             padding={`20px 0 0`}
-            borderTop={`1px solid #ebebeb`}
-          >
+            borderTop={`1px solid #ebebeb`}>
             <CommonButton
               kindOf={`white`}
               margin={`0 10px 0 0`}
-              onClick={() => moveLinkHandler("/user")}
-            >
+              onClick={() => moveLinkHandler("/user")}>
               이전
             </CommonButton>
 

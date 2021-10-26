@@ -285,11 +285,11 @@ const Signup = () => {
       }
 
       if (!emptyCheck(inputIdDate1.value)) {
-        return message.error("신분증 문제날짜를 입력해주세요.");
+        return message.error("신분증 발행일자를 입력해주세요.");
       }
 
       if (!emptyCheck(inputIdDate2.value)) {
-        return message.error("신분증 만료날짜를 입력해주세요.");
+        return message.error("신분증 만료일자를 입력해주세요.");
       }
 
       if (!emptyCheck(inputIdFilePath.value)) {
@@ -452,8 +452,7 @@ const Signup = () => {
         top={`0`}
         left={`0`}
         zIndex={`0`}
-        minHeight={`100vh`}
-      >
+        minHeight={`100vh`}>
         <Image
           height={`100vh`}
           src={`https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/willmarkets/assets/images/banner/main_banner02.png`}
@@ -465,15 +464,13 @@ const Signup = () => {
           position={`relative`}
           zIndex={`1`}
           al={`flex-end`}
-          minHeight={`100vh`}
-        >
+          minHeight={`100vh`}>
           <Wrapper
             margin={`0 45px 0 0`}
             padding={`25px 20px`}
             width={`550px`}
             bgColor={`#fff`}
-            shadow={`1px 1px 8px #dedede`}
-          >
+            shadow={`1px 1px 8px #dedede`}>
             <Wrapper dr={`row`} ju={`flex-start`} margin={`0 0 30px`}>
               <Image
                 width={`50px`}
@@ -484,8 +481,7 @@ const Signup = () => {
                 margin={`0 0 0 10px`}
                 fontSize={`20px`}
                 fontWeight={`500`}
-                color={`#242424`}
-              >
+                color={`#242424`}>
                 회원가입
               </Wrapper>
             </Wrapper>
@@ -503,8 +499,7 @@ const Signup = () => {
             <Wrapper
               padding={`40px 20px 45px`}
               border={`1px solid #ececec`}
-              shadow={`2px 2px 10px #ebebeb`}
-            >
+              shadow={`2px 2px 10px #ebebeb`}>
               {currentStep === 0 && (
                 <Wrapper>
                   <Wrapper dr={`row`} al={`flex-start`}>
@@ -535,8 +530,7 @@ const Signup = () => {
                           color={`#fff`}
                           fontWeight={`500`}
                           radius={`5px`}
-                          onClick={checkEmailHandler}
-                        >
+                          onClick={checkEmailHandler}>
                           {isConfirmEmail ? `재인증` : `인증받기`}
                         </CommonButton>
                       </Wrapper>
@@ -545,8 +539,7 @@ const Signup = () => {
                         <Wrapper
                           dr={`row`}
                           ju={`flex-start`}
-                          margin={`10px 0 0`}
-                        >
+                          margin={`10px 0 0`}>
                           <CustomInput
                             width={`calc(100% - 90px)`}
                             {...inputSecret}
@@ -561,8 +554,7 @@ const Signup = () => {
                             color={`#030303`}
                             fontWeight={`500`}
                             radius={`5px`}
-                            onClick={confirmSecretHandler}
-                          >
+                            onClick={confirmSecretHandler}>
                             확인
                           </CommonButton>
                         </Wrapper>
@@ -577,8 +569,7 @@ const Signup = () => {
                       <Wrapper
                         dr={`row`}
                         ju={`flex-start`}
-                        width={`calc(100% - 100px)`}
-                      >
+                        width={`calc(100% - 100px)`}>
                         <CustomInput
                           type={`password`}
                           id={`inp-password`}
@@ -597,8 +588,7 @@ const Signup = () => {
                       <Wrapper
                         dr={`row`}
                         ju={`flex-start`}
-                        width={`calc(100% - 100px)`}
-                      >
+                        width={`calc(100% - 100px)`}>
                         <CustomInput
                           id={`inp-userName`}
                           width={`calc(100% - 90px)`}
@@ -616,8 +606,7 @@ const Signup = () => {
                       <Wrapper
                         dr={`row`}
                         ju={`flex-start`}
-                        width={`calc(100% - 100px)`}
-                      >
+                        width={`calc(100% - 100px)`}>
                         <Wrapper dr={`row`} width={`auto`} margin={`0 10px`}>
                           <RadioInput
                             id={`inp-gender-1`}
@@ -631,8 +620,7 @@ const Signup = () => {
                           <Label
                             for={`inp-gender-1`}
                             fontSize={`15px`}
-                            cursor={`pointer`}
-                          >
+                            cursor={`pointer`}>
                             남자
                           </Label>
                         </Wrapper>
@@ -650,8 +638,7 @@ const Signup = () => {
                           <Label
                             for={`inp-gender-2`}
                             fontSize={`15px`}
-                            cursor={`pointer`}
-                          >
+                            cursor={`pointer`}>
                             여자
                           </Label>
                         </Wrapper>
@@ -668,15 +655,12 @@ const Signup = () => {
                         dr={`row`}
                         ju={`flex-start`}
                         width={`calc(100% - 100px)`}
-                        cursor={`pointer`}
-                        onClick={toggleAddressModalHandler}
-                      >
+                        cursor={`pointer`}>
                         <CustomInput
                           id={`inp-address`}
                           width={`100%`}
                           {...inputAddress}
                           placeholder={`주소`}
-                          readOnly
                         />
 
                         <Wrapper
@@ -685,10 +669,7 @@ const Signup = () => {
                           top={`50%`}
                           zIndex={`1`}
                           margin={`-10px 0 0`}
-                          width={`auto`}
-                        >
-                          <SearchOutlined style={{ fontSize: `20px` }} />
-                        </Wrapper>
+                          width={`auto`}></Wrapper>
                       </Wrapper>
                     </Wrapper>
 
@@ -703,8 +684,7 @@ const Signup = () => {
                         dr={`row`}
                         ju={`flex-start`}
                         width={`calc(100% - 100px)`}
-                        cursor={`pointer`}
-                      >
+                        cursor={`pointer`}>
                         <CustomInput
                           id={`inp-detailAddress`}
                           width={`100%`}
@@ -724,8 +704,7 @@ const Signup = () => {
                     margin={`0 0 5px`}
                     fontSize={`22px`}
                     fontWeight={`500`}
-                    color={`#030303`}
-                  >
+                    color={`#030303`}>
                     본인 확인
                   </Wrapper>
 
@@ -737,8 +716,7 @@ const Signup = () => {
                     <Wrapper
                       dr={`row`}
                       ju={`flex-start`}
-                      width={`calc(100% - 100px)`}
-                    >
+                      width={`calc(100% - 100px)`}>
                       <Combo
                         isBorder={true}
                         itemAlign={`flex-start`}
@@ -746,8 +724,7 @@ const Signup = () => {
                         height={`40px`}
                         border={`none`}
                         borderBottom={`1px solid #dfdfdf !important`}
-                        onClick={() => setComboIdType(!comboIdType)}
-                      >
+                        onClick={() => setComboIdType(!comboIdType)}>
                         <ComboTitle>
                           <Wrapper>{inputIdType.value || `유형 선택`}</Wrapper>
                           <CaretDownOutlined />
@@ -756,26 +733,22 @@ const Signup = () => {
                         <ComboList isView={comboIdType}>
                           <ComboListItem
                             isActive={!inputIdType.value}
-                            onClick={() => inputIdType.setValue("")}
-                          >
+                            onClick={() => inputIdType.setValue("")}>
                             유형 선택
                           </ComboListItem>
                           <ComboListItem
                             isActive={inputIdType.value === `신분증`}
-                            onClick={() => inputIdType.setValue(`신분증`)}
-                          >
+                            onClick={() => inputIdType.setValue(`신분증`)}>
                             신분증
                           </ComboListItem>
                           <ComboListItem
                             isActive={inputIdType.value === `여권`}
-                            onClick={() => inputIdType.setValue(`여권`)}
-                          >
+                            onClick={() => inputIdType.setValue(`여권`)}>
                             여권
                           </ComboListItem>
                           <ComboListItem
                             isActive={inputIdType.value === `운전면허증`}
-                            onClick={() => inputIdType.setValue(`운전면허증`)}
-                          >
+                            onClick={() => inputIdType.setValue(`운전면허증`)}>
                             운전면허증
                           </ComboListItem>
                         </ComboList>
@@ -785,14 +758,13 @@ const Signup = () => {
 
                   <Wrapper dr={`row`} margin={`10px 0 0`}>
                     <Wrapper al={`flex-start`} width={`100px`}>
-                      <CustomLabel for={`inp-idDate1`}>문제 날짜</CustomLabel>
+                      <CustomLabel for={`inp-idDate1`}>발행 일자</CustomLabel>
                     </Wrapper>
 
                     <Wrapper
                       dr={`row`}
                       ju={`flex-start`}
-                      width={`calc(100% - 100px)`}
-                    >
+                      width={`calc(100% - 100px)`}>
                       <CustomInput
                         id={`inp-idDate1`}
                         width={`100%`}
@@ -805,14 +777,13 @@ const Signup = () => {
 
                   <Wrapper dr={`row`} margin={`10px 0 0`}>
                     <Wrapper al={`flex-start`} width={`100px`}>
-                      <CustomLabel for={`inp-idDate2`}>만료 날짜</CustomLabel>
+                      <CustomLabel for={`inp-idDate2`}>만료 일자</CustomLabel>
                     </Wrapper>
 
                     <Wrapper
                       dr={`row`}
                       ju={`flex-start`}
-                      width={`calc(100% - 100px)`}
-                    >
+                      width={`calc(100% - 100px)`}>
                       <CustomInput
                         id={`inp-idDate2`}
                         width={`100%`}
@@ -831,8 +802,7 @@ const Signup = () => {
                     <Wrapper
                       dr={`row`}
                       ju={`flex-start`}
-                      width={`calc(100% - 100px)`}
-                    >
+                      width={`calc(100% - 100px)`}>
                       <FileInput
                         type={`file`}
                         ref={fileRef}
@@ -843,8 +813,7 @@ const Signup = () => {
                         height={`38px`}
                         margin={`0 10px 0 0`}
                         radius={`5px`}
-                        onClick={() => fileRef.current.click()}
-                      >
+                        onClick={() => fileRef.current.click()}>
                         파일선택
                       </CommonButton>
 
@@ -852,16 +821,14 @@ const Signup = () => {
                         <Wrapper
                           position={`relative`}
                           dr={`row`}
-                          width={`calc(100% - 90px)`}
-                        >
+                          width={`calc(100% - 90px)`}>
                           <Wrapper
                             position={`absolute`}
                             left={`0`}
                             top={`50%`}
                             margin={`-9px 0 0`}
                             zIndex={`2`}
-                            width={`auto`}
-                          >
+                            width={`auto`}>
                             <FileImageOutlined
                               style={{ fontSize: `18px`, color: `#707070` }}
                             />
@@ -886,8 +853,7 @@ const Signup = () => {
                     margin={`20px 0 5px`}
                     fontSize={`22px`}
                     fontWeight={`500`}
-                    color={`#030303`}
-                  >
+                    color={`#030303`}>
                     주소 확인
                   </Wrapper>
 
@@ -899,8 +865,7 @@ const Signup = () => {
                     <Wrapper
                       dr={`row`}
                       ju={`flex-start`}
-                      width={`calc(100% - 100px)`}
-                    >
+                      width={`calc(100% - 100px)`}>
                       <Combo
                         isBorder={true}
                         itemAlign={`flex-start`}
@@ -908,8 +873,7 @@ const Signup = () => {
                         height={`40px`}
                         border={`none`}
                         borderBottom={`1px solid #dfdfdf !important`}
-                        onClick={() => setComboAddrType(!comboAddrType)}
-                      >
+                        onClick={() => setComboAddrType(!comboAddrType)}>
                         <ComboTitle>
                           <Wrapper>
                             {inputAddrType.value || `유형 선택`}
@@ -920,34 +884,29 @@ const Signup = () => {
                         <ComboList isView={comboAddrType}>
                           <ComboListItem
                             isActive={!inputAddrType.value}
-                            onClick={() => inputAddrType.setValue("")}
-                          >
+                            onClick={() => inputAddrType.setValue("")}>
                             유형 선택
                           </ComboListItem>
                           <ComboListItem
                             isActive={inputAddrType.value === `가스 요금`}
-                            onClick={() => inputAddrType.setValue(`가스 요금`)}
-                          >
+                            onClick={() => inputAddrType.setValue(`가스 요금`)}>
                             가스 요금
                           </ComboListItem>
                           <ComboListItem
                             isActive={inputAddrType.value === `전기 빌`}
-                            onClick={() => inputAddrType.setValue(`전기 빌`)}
-                          >
+                            onClick={() => inputAddrType.setValue(`전기 빌`)}>
                             전기 빌
                           </ComboListItem>
                           <ComboListItem
                             isActive={inputAddrType.value === `워터 빌`}
-                            onClick={() => inputAddrType.setValue(`워터 빌`)}
-                          >
+                            onClick={() => inputAddrType.setValue(`워터 빌`)}>
                             워터 빌
                           </ComboListItem>
                           <ComboListItem
                             isActive={inputAddrType.value === `은행 명세서`}
                             onClick={() =>
                               inputAddrType.setValue(`은행 명세서`)
-                            }
-                          >
+                            }>
                             은행 명세서
                           </ComboListItem>
                         </ComboList>
@@ -963,8 +922,7 @@ const Signup = () => {
                     <Wrapper
                       dr={`row`}
                       ju={`flex-start`}
-                      width={`calc(100% - 100px)`}
-                    >
+                      width={`calc(100% - 100px)`}>
                       <FileInput
                         type={`file`}
                         ref={fileRef2}
@@ -975,8 +933,7 @@ const Signup = () => {
                         height={`38px`}
                         margin={`0 10px 0 0`}
                         radius={`5px`}
-                        onClick={() => fileRef2.current.click()}
-                      >
+                        onClick={() => fileRef2.current.click()}>
                         파일선택
                       </CommonButton>
 
@@ -984,16 +941,14 @@ const Signup = () => {
                         <Wrapper
                           position={`relative`}
                           dr={`row`}
-                          width={`calc(100% - 90px)`}
-                        >
+                          width={`calc(100% - 90px)`}>
                           <Wrapper
                             position={`absolute`}
                             left={`0`}
                             top={`50%`}
                             margin={`-9px 0 0`}
                             zIndex={`2`}
-                            width={`auto`}
-                          >
+                            width={`auto`}>
                             <FileImageOutlined
                               style={{ fontSize: `18px`, color: `#707070` }}
                             />
@@ -1026,8 +981,7 @@ const Signup = () => {
                 radius={`8px`}
                 bgColor={`#f8459b`}
                 color={`#fff`}
-                onClick={signupUserHandler}
-              >
+                onClick={signupUserHandler}>
                 {currentTab === 0
                   ? currentStep === 0
                     ? `다음으로`
@@ -1044,8 +998,7 @@ const Signup = () => {
                 border={`1px solid #ebebeb`}
                 bgColor={`#ebebeb`}
                 color={`#030303`}
-                onClick={moveBackHandler}
-              >
+                onClick={moveBackHandler}>
                 {currentTab === 0
                   ? currentStep === 0
                     ? `취소`

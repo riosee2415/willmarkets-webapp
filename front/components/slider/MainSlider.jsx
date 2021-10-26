@@ -5,6 +5,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import SwiperCore, { Navigation } from "swiper";
 import "swiper/swiper-bundle.min.css";
 import { DoubleRightOutlined } from "@ant-design/icons";
+import { useRouter } from "next/router";
 
 SwiperCore.use([Navigation]);
 
@@ -14,6 +15,12 @@ const Container = styled.div`
 `;
 
 export default ({ width }) => {
+  const router = useRouter();
+
+  const moveLinkHandler = (link) => {
+    router.push(link);
+  };
+
   return (
     <Container>
       <Swiper
@@ -68,7 +75,8 @@ export default ({ width }) => {
                     width={`200px`}
                     radius={`30px`}
                     fontSize={`18px`}
-                    fontWeight={`700`}>
+                    fontWeight={`700`}
+                    onClick={() => moveLinkHandler(`/signup`)}>
                     실거래 계정 개설
                     <Wrapper
                       position={`absolute`}
@@ -87,7 +95,8 @@ export default ({ width }) => {
                     width={`200px`}
                     radius={`30px`}
                     fontSize={`18px`}
-                    fontWeight={`700`}>
+                    fontWeight={`700`}
+                    onClick={() => moveLinkHandler(`/signup`)}>
                     모의 계정 개설
                     <Wrapper
                       position={`absolute`}
@@ -146,7 +155,8 @@ export default ({ width }) => {
                     width={`200px`}
                     radius={`30px`}
                     fontSize={`18px`}
-                    fontWeight={`700`}>
+                    fontWeight={`700`}
+                    onClick={() => moveLinkHandler(`/signup`)}>
                     실거래 계정 개설
                     <Wrapper
                       position={`absolute`}
@@ -165,7 +175,8 @@ export default ({ width }) => {
                     width={`200px`}
                     radius={`30px`}
                     fontSize={`18px`}
-                    fontWeight={`700`}>
+                    fontWeight={`700`}
+                    onClick={() => moveLinkHandler(`/signup`)}>
                     모의 계정 개설
                     <Wrapper
                       position={`absolute`}

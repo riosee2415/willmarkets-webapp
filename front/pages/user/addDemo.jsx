@@ -10,6 +10,7 @@ import wrapper from "../../store/configureStore";
 import { LOAD_MY_INFO_REQUEST } from "../../reducers/user";
 import { END } from "redux-saga";
 import axios from "axios";
+import { useTranslation } from "react-i18next";
 import {} from "@ant-design/icons";
 import {
   Wrapper,
@@ -20,7 +21,6 @@ import {
 } from "../../components/commonComponents";
 import UserLayout from "../../components/user/UserLayout";
 import Theme from "../../components/Theme";
-import { useTranslation } from "react-i18next";
 import { DEMO_ACCOUNT_CREATE_REQUEST } from "../../reducers/demoAccount";
 
 const TabWrapper = styled(Wrapper)`
@@ -116,7 +116,7 @@ const AddDemo = () => {
   ];
 
   ////// HOOKS //////
-  // const { t, i18n } = useTranslation();
+  const { t } = useTranslation(["user_addDemo"]);
 
   const dispatch = useDispatch();
 
@@ -158,15 +158,15 @@ const AddDemo = () => {
 
   const createDemoAccountHandler = useCallback(() => {
     if (!emptyCheck(inputPrice.value)) {
-      return message.error("환율 금액을 입력해주세요.");
+      return message.error(t(`1`));
     }
 
     if (!emptyCheck(inputTradePassword.value)) {
-      return message.error("거래용 비밀번호를 입력해주세요.");
+      return message.error(t(`2`));
     }
 
     if (!emptyCheck(inputViewPassword.value)) {
-      return message.error("보기용 비밀번호를 입력해주세요.");
+      return message.error(t(`3`));
     }
 
     dispatch({
@@ -202,7 +202,7 @@ const AddDemo = () => {
 
   useEffect(() => {
     if (!me) {
-      message.error("로그인 후 이용할 수 있습니다.");
+      message.error(t(`4`));
       router.push("/login");
     }
   }, [me]);
@@ -230,7 +230,7 @@ const AddDemo = () => {
       <UserLayout>
         <TabWrapper position={`absolute`} top={`-21px`} left={`20px`}>
           <Tab isActive={currentTab === 0} onClick={() => setCurrentTab(0)}>
-            데모 계좌 추가
+            {t(`5`)}
           </Tab>
         </TabWrapper>
 
@@ -241,8 +241,7 @@ const AddDemo = () => {
           padding={`20px 30px`}
           bgColor={`#fff`}
           border={`1px solid #ededed`}
-          shadow={`2px 2px 10px #e6e6e6`}
-        >
+          shadow={`2px 2px 10px #e6e6e6`}>
           <Wrapper al={`flex-start`}>
             <Wrapper
               al={`flex-start`}
@@ -250,9 +249,8 @@ const AddDemo = () => {
               padding={`0 8px 20px`}
               fontSize={`19px`}
               fontWeight={`700`}
-              borderBottom={`1px solid #ebebeb`}
-            >
-              데모 계좌
+              borderBottom={`1px solid #ebebeb`}>
+              {t(`6`)}
             </Wrapper>
             {currentTab === 0 && (
               <Wrapper al={`flex-start`}>
@@ -260,7 +258,7 @@ const AddDemo = () => {
                   <>
                     <CustomLabel margin={`0 0 15px`}>
                       <Wrapper className={`required`}>*</Wrapper>
-                      거래 플랫폼
+                      {t(`7`)}
                     </CustomLabel>
 
                     {platformList.map((data, idx) => {
@@ -269,8 +267,7 @@ const AddDemo = () => {
                           isActive={inputPlatform.value === data}
                           onClick={() =>
                             changeSelectBoxHandler(data, inputPlatform.setValue)
-                          }
-                        >
+                          }>
                           {data}
                         </InputBox>
                       );
@@ -278,7 +275,7 @@ const AddDemo = () => {
 
                     <CustomLabel margin={`40px 0 15px`}>
                       <Wrapper className={`required`}>*</Wrapper>
-                      계좌 유형
+                      {t(`8`)}
                     </CustomLabel>
 
                     <Wrapper dr={`row`} ju={`flex-start`}>
@@ -298,8 +295,7 @@ const AddDemo = () => {
                                   (data2) => data.type === data2.type
                                 ).leverage[0]
                               );
-                            }}
-                          >
+                            }}>
                             {data.type}
                           </InputBox>
                         );
@@ -308,7 +304,7 @@ const AddDemo = () => {
 
                     <CustomLabel margin={`40px 0 15px`}>
                       <Wrapper className={`required`}>*</Wrapper>
-                      레버리지
+                      {t(`9`)}
                     </CustomLabel>
 
                     <Wrapper dr={`row`} ju={`flex-start`}>
@@ -328,8 +324,7 @@ const AddDemo = () => {
                                     data,
                                     inputLeverage.setValue
                                   )
-                                }
-                              >
+                                }>
                                 {data}
                               </InputBox>
                             );
@@ -338,10 +333,9 @@ const AddDemo = () => {
 
                     <CustomLabel
                       for={`inp-trade-password`}
-                      margin={`40px 0 15px`}
-                    >
+                      margin={`40px 0 15px`}>
                       <Wrapper className={`required`}>*</Wrapper>
-                      환율금액
+                      {t(`10`)}
                     </CustomLabel>
 
                     <Wrapper dr={`row`} ju={`flex-start`}>
@@ -350,10 +344,9 @@ const AddDemo = () => {
 
                     <CustomLabel
                       for={`inp-trade-password`}
-                      margin={`40px 0 15px`}
-                    >
+                      margin={`40px 0 15px`}>
                       <Wrapper className={`required`}>*</Wrapper>
-                      거래용 비번
+                      {t(`11`)}
                     </CustomLabel>
 
                     <Wrapper dr={`row`} ju={`flex-start`}>
@@ -365,10 +358,9 @@ const AddDemo = () => {
 
                     <CustomLabel
                       for={`inp-view-password`}
-                      margin={`40px 0 15px`}
-                    >
+                      margin={`40px 0 15px`}>
                       <Wrapper className={`required`}>*</Wrapper>
-                      보기용 비번
+                      {t(`12`)}
                     </CustomLabel>
 
                     <Wrapper dr={`row`} ju={`flex-start`}>
@@ -383,21 +375,18 @@ const AddDemo = () => {
                       ju={`flex-start`}
                       margin={`50px 0 0`}
                       padding={`20px 0 0`}
-                      borderTop={`1px solid #ebebeb`}
-                    >
+                      borderTop={`1px solid #ebebeb`}>
                       <CommonButton
                         kindOf={`white`}
                         margin={`0 10px 0 0`}
-                        onClick={() => moveLinkHandler(`/user`)}
-                      >
-                        이전
+                        onClick={() => moveLinkHandler(`/user`)}>
+                        {t(`13`)}
                       </CommonButton>
 
                       <CommonButton
                         kindOf={`red`}
-                        onClick={createDemoAccountHandler}
-                      >
-                        계좌 개설
+                        onClick={createDemoAccountHandler}>
+                        {t(`14`)}
                       </CommonButton>
                     </Wrapper>
                   </>
@@ -411,9 +400,8 @@ const AddDemo = () => {
                         <Wrapper
                           fontSize={`25px`}
                           width={`auto`}
-                          borderBottom={`1px solid #c9c9c9`}
-                        >
-                          데모계좌 생성 완료 !
+                          borderBottom={`1px solid #c9c9c9`}>
+                          {t(`15`)}
                         </Wrapper>
                       }
                       subTitle={
@@ -421,9 +409,8 @@ const AddDemo = () => {
                           margin={`10px 0 0`}
                           padding={`0 15px`}
                           width={`auto`}
-                          lineHeight={`1.8`}
-                        >
-                          정상적으로 데모 계좌가 생성되었습니다.
+                          lineHeight={`1.8`}>
+                          {t(`16`)}
                         </Wrapper>
                       }
                       extra={[
@@ -433,9 +420,8 @@ const AddDemo = () => {
                           width={`180px`}
                           height={`40px`}
                           margin={`0 5px`}
-                          onClick={initValueHandler}
-                        >
-                          처음으로
+                          onClick={initValueHandler}>
+                          {t(`17`)}
                         </CommonButton>,
                       ]}
                     />

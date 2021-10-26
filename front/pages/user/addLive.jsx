@@ -26,6 +26,7 @@ import {
 import UserLayout from "../../components/user/UserLayout";
 import Theme from "../../components/Theme";
 import { LIVE_ACCOUNT_CREATE_REQUEST } from "../../reducers/liveAccount";
+import { useTranslation } from "react-i18next";
 
 const TabWrapper = styled(Wrapper)`
   flex-direction: row;
@@ -121,6 +122,8 @@ const AddLive = () => {
   ];
 
   ////// HOOKS //////
+  const { t } = useTranslation(["user_addLive"]);
+
   const router = useRouter();
 
   const dispatch = useDispatch();
@@ -159,11 +162,11 @@ const AddLive = () => {
 
   const createLiveAccountHandler = useCallback(() => {
     if (!emptyCheck(inputTradePassword.value)) {
-      return message.error("거래용 비밀번호를 입력해주세요.");
+      return message.error(t(`1`));
     }
 
     if (!emptyCheck(inputViewPassword.value)) {
-      return message.error("보기용 비밀번호를 입력해주세요.");
+      return message.error(`2`);
     }
 
     dispatch({
@@ -197,7 +200,7 @@ const AddLive = () => {
 
   useEffect(() => {
     if (!me) {
-      message.error("로그인 후 이용할 수 있습니다.");
+      message.error(`3`);
       router.push("/login");
     } else if (me.userType === `1`) {
       router.push("/user?access=false");
@@ -225,7 +228,7 @@ const AddLive = () => {
     <UserLayout>
       <TabWrapper position={`absolute`} top={`-21px`} left={`20px`}>
         <Tab isActive={currentTab === 0} onClick={() => setCurrentTab(0)}>
-          라이브 계좌 추가
+          {t(`4`)}
         </Tab>
       </TabWrapper>
 
@@ -236,8 +239,7 @@ const AddLive = () => {
         padding={`20px 30px`}
         bgColor={`#fff`}
         border={`1px solid #ededed`}
-        shadow={`2px 2px 10px #e6e6e6`}
-      >
+        shadow={`2px 2px 10px #e6e6e6`}>
         <Wrapper al={`flex-start`}>
           <Wrapper
             al={`flex-start`}
@@ -245,9 +247,8 @@ const AddLive = () => {
             padding={`0 8px 20px`}
             fontSize={`19px`}
             fontWeight={`700`}
-            borderBottom={`1px solid #ebebeb`}
-          >
-            라이브 계좌
+            borderBottom={`1px solid #ebebeb`}>
+            {t(`5`)}
           </Wrapper>
           {currentTab === 0 && (
             <Wrapper al={`flex-start`}>
@@ -255,7 +256,7 @@ const AddLive = () => {
                 <Wrapper al={`flex-start`}>
                   <CustomLabel margin={`0 0 15px`}>
                     <Wrapper className={`required`}>*</Wrapper>
-                    거래 플랫폼
+                    {t(`6`)}
                   </CustomLabel>
 
                   <Wrapper dr={`row`} ju={`flex-start`}>
@@ -265,8 +266,7 @@ const AddLive = () => {
                           isActive={inputPlatform.value === data}
                           onClick={() =>
                             changeSelectBoxHandler(data, inputPlatform.setValue)
-                          }
-                        >
+                          }>
                           {data}
                         </InputBox>
                       );
@@ -275,7 +275,7 @@ const AddLive = () => {
 
                   <CustomLabel margin={`40px 0 15px`}>
                     <Wrapper className={`required`}>*</Wrapper>
-                    계좌 유형
+                    {t(`7`)}
                   </CustomLabel>
 
                   <Wrapper dr={`row`} ju={`flex-start`}>
@@ -294,8 +294,7 @@ const AddLive = () => {
                               typeList.find((data2) => data.type === data2.type)
                                 .leverage[0]
                             );
-                          }}
-                        >
+                          }}>
                           {data.type}
                         </InputBox>
                       );
@@ -304,7 +303,7 @@ const AddLive = () => {
 
                   <CustomLabel margin={`40px 0 15px`}>
                     <Wrapper className={`required`}>*</Wrapper>
-                    레버리지
+                    {t(`8`)}
                   </CustomLabel>
                   <Wrapper dr={`row`} ju={`flex-start`}>
                     {inputType.value &&
@@ -323,8 +322,7 @@ const AddLive = () => {
                                   data,
                                   inputLeverage.setValue
                                 )
-                              }
-                            >
+                              }>
                               {data}
                             </InputBox>
                           );
@@ -333,10 +331,9 @@ const AddLive = () => {
 
                   <CustomLabel
                     for={`inp-trade-password`}
-                    margin={`40px 0 15px`}
-                  >
+                    margin={`40px 0 15px`}>
                     <Wrapper className={`required`}>*</Wrapper>
-                    거래용 비번
+                    {t(`9`)}
                   </CustomLabel>
 
                   <Wrapper dr={`row`} ju={`flex-start`}>
@@ -348,7 +345,7 @@ const AddLive = () => {
 
                   <CustomLabel for={`inp-view-password`} margin={`40px 0 15px`}>
                     <Wrapper className={`required`}>*</Wrapper>
-                    보기용 비번
+                    {t(`10`)}
                   </CustomLabel>
 
                   <Wrapper dr={`row`} ju={`flex-start`}>
@@ -363,21 +360,18 @@ const AddLive = () => {
                     ju={`flex-start`}
                     margin={`50px 0 0`}
                     padding={`20px 0 0`}
-                    borderTop={`1px solid #ebebeb`}
-                  >
+                    borderTop={`1px solid #ebebeb`}>
                     <CommonButton
                       kindOf={`white`}
                       margin={`0 10px 0 0`}
-                      onClick={() => moveLinkHandler(`/user`)}
-                    >
-                      이전
+                      onClick={() => moveLinkHandler(`/user`)}>
+                      {t(`11`)}
                     </CommonButton>
 
                     <CommonButton
                       kindOf={`red`}
-                      onClick={createLiveAccountHandler}
-                    >
-                      계좌 개설
+                      onClick={createLiveAccountHandler}>
+                      {t(`12`)}
                     </CommonButton>
                   </Wrapper>
                 </Wrapper>
@@ -391,9 +385,8 @@ const AddLive = () => {
                       <Wrapper
                         fontSize={`25px`}
                         width={`auto`}
-                        borderBottom={`1px solid #c9c9c9`}
-                      >
-                        라이브계좌 생성 완료 !
+                        borderBottom={`1px solid #c9c9c9`}>
+                        {t(`13`)}
                       </Wrapper>
                     }
                     subTitle={
@@ -401,9 +394,8 @@ const AddLive = () => {
                         margin={`10px 0 0`}
                         padding={`0 15px`}
                         width={`auto`}
-                        lineHeight={`1.8`}
-                      >
-                        정상적으로 라이브 계좌가 생성되었습니다.
+                        lineHeight={`1.8`}>
+                        {t(`14`)}
                       </Wrapper>
                     }
                     extra={[
@@ -413,9 +405,8 @@ const AddLive = () => {
                         width={`180px`}
                         height={`40px`}
                         margin={`0 5px`}
-                        onClick={initValueHandler}
-                      >
-                        처음으로
+                        onClick={initValueHandler}>
+                        {t(`15`)}
                       </CommonButton>,
                     ]}
                   />

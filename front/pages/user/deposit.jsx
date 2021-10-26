@@ -168,15 +168,15 @@ const Deposit = () => {
   const createDepositHanlder = useCallback(() => {
     if (!currentBank) {
       setCurrentStep(0);
-      return message.error("입금은행을 선택 해주세요.");
+      return message.error(t(`1`));
     }
 
     if (!emptyCheck(inputSelectBank.value)) {
-      return message.error("입금계좌를 선택해주세요.");
+      return message.error(t(`2`));
     }
 
     if (!emptyCheck(inputPrice.value)) {
-      return message.error("입금금액을 입력해주세요.");
+      return message.error(t(`3`));
     }
 
     if (!isSendEmail) {
@@ -191,7 +191,7 @@ const Deposit = () => {
 
     if (isSendEmail && !isConfirmEmail) {
       if (!emptyCheck(inputSecret.value)) {
-        return message.error("인증번호를 입력해주세요.");
+        return message.error(t(`4`));
       }
 
       dispatch({
@@ -242,7 +242,7 @@ const Deposit = () => {
         ext === "pdf"
       )
     ) {
-      message.error("지원되지 않는 파일 형식입니다.");
+      message.error(t(`5`));
       return;
     }
 
@@ -259,11 +259,11 @@ const Deposit = () => {
   const createImageFileHandler = useCallback(() => {
     setCurrentStep(1);
     if (!emptyCheck(inputFilePath.value)) {
-      return message.error("첨부파일을 업로드 해주세요.");
+      return message.error(t(`6`));
     }
 
     if (st_depositImageFileLoading) {
-      return message.error("첨부파일을 업로드 중입니다. 잠시만 기다려주세요.");
+      return message.error(t(`7`));
     }
 
     dispatch({
@@ -279,7 +279,7 @@ const Deposit = () => {
   ////// USEEFFECT //////
   useEffect(() => {
     if (!me) {
-      message.error("로그인 후 이용할 수 있습니다.");
+      message.error(t(`8`));
       router.push("/login");
     } else if (me.userType === `1`) {
       router.push("/user?access=false");
@@ -293,7 +293,7 @@ const Deposit = () => {
   useEffect(() => {
     if (st_userFindPasswordDone) {
       setIsSendEmail(true);
-      message.success("이메일로 인증코드가 전송되었습니다.");
+      message.success(t(`9`));
     }
   }, [st_userFindPasswordDone]);
 
@@ -365,10 +365,10 @@ const Deposit = () => {
     <UserLayout>
       <TabWrapper position={`absolute`} top={`-21px`} left={`20px`}>
         <Tab isActive={currentTab === 0} onClick={() => setCurrentTab(0)}>
-          {t(`1`)}
+          {t(`10`)}
         </Tab>
         <Tab isActive={currentTab === 1} onClick={() => setCurrentTab(1)}>
-          입금영수 첨부
+          {t(`11`)}
         </Tab>
       </TabWrapper>
 
@@ -388,7 +388,7 @@ const Deposit = () => {
             fontSize={`19px`}
             fontWeight={`700`}
             borderBottom={`1px solid #ebebeb`}>
-            입금
+            {t(`12`)}
           </Wrapper>
 
           {currentTab === 0 && (
@@ -411,7 +411,7 @@ const Deposit = () => {
                       color={`#fff`}>
                       Step 01
                     </Wrapper>
-                    입금방식 선택
+                    {t(`13`)}
                   </Wrapper>
 
                   <Wrapper dr={`row`} al={`flex-start`} ju={`flex-start`}>
@@ -441,7 +441,7 @@ const Deposit = () => {
                               fontSize={`15px`}
                               fontWeight={`700`}
                               color={`#a8559e`}>
-                              은행명
+                              {t(`14`)}
                             </Wrapper>
 
                             <Wrapper
@@ -468,7 +468,7 @@ const Deposit = () => {
                               fontSize={`15px`}
                               fontWeight={`700`}
                               color={`#a8559e`}>
-                              계좌번호
+                              {t(`15`)}
                             </Wrapper>
 
                             <Wrapper
@@ -522,7 +522,7 @@ const Deposit = () => {
                               fontSize={`15px`}
                               fontWeight={`700`}
                               color={`#a8559e`}>
-                              윌마켓 주소
+                              {t(`16`)}
                             </Wrapper>
 
                             <Wrapper
@@ -543,7 +543,7 @@ const Deposit = () => {
                               fontSize={`15px`}
                               fontWeight={`700`}
                               color={`#a8559e`}>
-                              은행주소
+                              {t(`17`)}
                             </Wrapper>
 
                             <Wrapper
@@ -580,14 +580,12 @@ const Deposit = () => {
                       color={`#fff`}>
                       Step 02
                     </Wrapper>
-                    입금정보 입력
+                    {t(`18`)}
                   </Wrapper>
-
                   <CustomLabel for={`inp-price`} margin={`20px 0 15px`}>
                     <Wrapper className={`required`}>*</Wrapper>
-                    입금 은행
+                    {t(`19`)}
                   </CustomLabel>
-
                   <Wrapper dr={`row`} ju={`flex-start`}>
                     {currentBank && (
                       <SelectBox
@@ -611,7 +609,7 @@ const Deposit = () => {
                             fontSize={`15px`}
                             fontWeight={`700`}
                             color={`#a8559e`}>
-                            은행명
+                            {t(`14`)}
                           </Wrapper>
 
                           <Wrapper
@@ -638,7 +636,7 @@ const Deposit = () => {
                             fontSize={`15px`}
                             fontWeight={`700`}
                             color={`#a8559e`}>
-                            계좌번호
+                            {t(`15`)}
                           </Wrapper>
 
                           <Wrapper
@@ -692,7 +690,7 @@ const Deposit = () => {
                             fontSize={`15px`}
                             fontWeight={`700`}
                             color={`#a8559e`}>
-                            윌마켓 주소
+                            {t(`16`)}
                           </Wrapper>
 
                           <Wrapper
@@ -713,7 +711,7 @@ const Deposit = () => {
                             fontSize={`15px`}
                             fontWeight={`700`}
                             color={`#a8559e`}>
-                            은행주소
+                            {t(`17`)}
                           </Wrapper>
 
                           <Wrapper
@@ -728,10 +726,9 @@ const Deposit = () => {
                       </SelectBox>
                     )}
                   </Wrapper>
-
                   <CustomLabel margin={`40px 0 15px`}>
                     <Wrapper className={`required`}>*</Wrapper>
-                    입금 계좌
+                    {t(`20`)}
                   </CustomLabel>
 
                   <Wrapper dr={`row`} ju={`flex-start`}>
@@ -747,7 +744,7 @@ const Deposit = () => {
                       onClick={() => setComboSelectBank(!comboSelectBank)}>
                       <ComboTitle>
                         <Wrapper>
-                          {inputSelectBank.value || `입금계좌 선택`}
+                          {inputSelectBank.value || `${t("21")}`}
                         </Wrapper>
                         <CaretDownOutlined />
                       </ComboTitle>
@@ -756,12 +753,12 @@ const Deposit = () => {
                         <ComboListItem
                           isActive={!inputSelectBank.value}
                           onClick={() => inputSelectBank.setValue("")}>
-                          입금계좌 선택
+                          {t(`21`)}
                         </ComboListItem>
 
                         <ComboListItem
                           onClick={() => inputSelectBank.setValue("내 지갑")}>
-                          내 지갑
+                          {t(`22`)}
                         </ComboListItem>
 
                         {me &&
@@ -784,21 +781,18 @@ const Deposit = () => {
                       </ComboList>
                     </Combo>
                   </Wrapper>
-
                   <CustomLabel for={`inp-price`} margin={`40px 0 15px`}>
                     <Wrapper className={`required`}>*</Wrapper>
-                    입금 금액
+                    {t(`23`)}
                   </CustomLabel>
-
                   <Wrapper dr={`row`} ju={`flex-start`}>
                     <CustomInput id={`inp-price`} {...inputPrice} />
                   </Wrapper>
-
                   {isSendEmail && (
                     <Wrapper al={`flex-start`}>
                       <CustomLabel for={`inp-secret`} margin={`40px 0 15px`}>
                         <Wrapper className={`required`}>*</Wrapper>
-                        인증코드
+                        {t(`24`)}
                       </CustomLabel>
 
                       <Wrapper dr={`row`} ju={`flex-start`}>
@@ -827,7 +821,7 @@ const Deposit = () => {
                       color={`#fff`}>
                       Step 03
                     </Wrapper>
-                    입금신청 완료
+                    {t(`25`)}
                   </Wrapper>
 
                   <Wrapper margin={`80px 0 0`}>
@@ -838,7 +832,7 @@ const Deposit = () => {
                           fontSize={`25px`}
                           width={`auto`}
                           borderBottom={`1px solid #c9c9c9`}>
-                          입금신청 완료 !
+                          {t(`26`)}
                         </Wrapper>
                       }
                       subTitle={
@@ -847,10 +841,9 @@ const Deposit = () => {
                           padding={`0 15px`}
                           width={`auto`}
                           lineHeight={`1.8`}>
-                          정상적으로 입금신청이 완료되었습니다.
+                          {t(`27`)}
                           <br />
-                          입금 후, 입금 영수증을 첨부해주시면 입금 처리가
-                          완료됩니다.
+                          {t(`28`)}
                         </Wrapper>
                       }
                       extra={[
@@ -862,7 +855,7 @@ const Deposit = () => {
                             height={`40px`}
                             margin={`0 5px`}
                             onClick={initValueHandler}>
-                            처음으로
+                            {t(`29`)}
                           </CommonButton>
 
                           <CommonButton
@@ -872,7 +865,7 @@ const Deposit = () => {
                             height={`40px`}
                             margin={`0 5px`}
                             onClick={() => setCurrentTab(1)}>
-                            입금영수 첨부
+                            {t(`30`)}
                           </CommonButton>
                         </Wrapper>,
                       ]}
@@ -903,12 +896,12 @@ const Deposit = () => {
                       color={`#fff`}>
                       Step 01
                     </Wrapper>
-                    파일첨부 하기
+                    {t(`31`)}
                   </Wrapper>
 
                   <CustomLabel for={`inp-price`} margin={`40px 0 15px`}>
                     <Wrapper className={`required`}>*</Wrapper>
-                    입금 영수증 파일
+                    {t(`32`)}
                   </CustomLabel>
 
                   <Wrapper dr={`row`} ju={`flex-start`}>
@@ -930,7 +923,7 @@ const Deposit = () => {
                       height={`38px`}
                       margin={`0 0 0 10px`}
                       onClick={() => fileRef.current.click()}>
-                      첨부
+                      {t(`33`)}
                     </CommonButton>
                   </Wrapper>
 
@@ -940,8 +933,8 @@ const Deposit = () => {
                     fontSize={`13px`}
                     color={`#e91448`}
                     lineHeight={`1.8`}>
-                    * 지원되는 파일 형식은 JPG, PNG, GIF, PDF 입니다.
-                    <br />* 첨부파일의 크기는 5MB 까지 허용됩니다.
+                    {t(`34`)}
+                    <br /> {t(`35`)}
                   </Wrapper>
                 </Wrapper>
               )}
@@ -964,7 +957,7 @@ const Deposit = () => {
                       color={`#fff`}>
                       Step 02
                     </Wrapper>
-                    파일첨부 완료
+                    {t(`36`)}
                   </Wrapper>
 
                   <Wrapper margin={`80px 0 0`}>
@@ -975,7 +968,7 @@ const Deposit = () => {
                           fontSize={`25px`}
                           width={`auto`}
                           borderBottom={`1px solid #c9c9c9`}>
-                          파일첨부 완료 !
+                          {t(`37`)}
                         </Wrapper>
                       }
                       subTitle={
@@ -984,9 +977,9 @@ const Deposit = () => {
                           padding={`0 15px`}
                           width={`auto`}
                           lineHeight={`1.8`}>
-                          정상적으로 파일첨부가 완료되었습니다.
+                          {t(`38`)}
                           <br />
-                          관리자 확인 후 입금될 예정이오니, 잠시만 기다려주세요.
+                          {t(`39`)}
                         </Wrapper>
                       }
                       extra={[
@@ -997,7 +990,7 @@ const Deposit = () => {
                           height={`40px`}
                           margin={`0 5px`}
                           onClick={initValueHandler}>
-                          처음으로
+                          {t(`29`)}
                         </CommonButton>,
 
                         <CommonButton
@@ -1007,7 +1000,7 @@ const Deposit = () => {
                           height={`40px`}
                           margin={`0 5px`}
                           onClick={() => moveLinkHandler(`/user`)}>
-                          홈으로
+                          {t(`40`)}
                         </CommonButton>,
                       ]}
                     />
@@ -1029,10 +1022,10 @@ const Deposit = () => {
               kindOf={`white`}
               margin={`0 10px 0 0`}
               onClick={moveBackHandler}>
-              이전
+              {t(`41`)}
             </CommonButton>
             <CommonButton kindOf={`red`} onClick={createDepositHanlder}>
-              입금 신청
+              {t(`42`)}
             </CommonButton>
           </Wrapper>
         )}
@@ -1045,7 +1038,7 @@ const Deposit = () => {
             padding={`20px 0 0`}
             borderTop={`1px solid #ebebeb`}>
             <CommonButton kindOf={`red`} onClick={createImageFileHandler}>
-              첨부하기
+              {t(`43`)}
             </CommonButton>
           </Wrapper>
         )}

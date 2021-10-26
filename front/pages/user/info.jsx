@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { withRouter, useRouter } from "next/router";
 import styled from "styled-components";
 import { Result, message, Modal, Input, Button } from "antd";
+import { useTranslation } from "react-i18next";
 import useInput from "../../hooks/useInput";
 import { emptyCheck } from "../../components/commonUtils";
 import { UpOutlined, DownOutlined, CaretDownOutlined } from "@ant-design/icons";
@@ -75,6 +76,8 @@ const Info = () => {
   ////// VARIABLES //////
 
   ////// HOOKS //////
+  const { t } = useTranslation(["user_info"]);
+
   const dispatch = useDispatch();
 
   const {
@@ -160,11 +163,11 @@ const Info = () => {
 
   const checkEmailHandler = useCallback(() => {
     if (!emptyCheck(inputEmail.value)) {
-      return message.error("이메일을 입력해주세요.");
+      return message.error(t(`1`));
     }
 
     if (inputEmail.value === me.email) {
-      return message.error("현재 이메일과 같은 이메일입니다.");
+      return message.error(t(`2`));
     }
 
     dispatch({
@@ -186,12 +189,12 @@ const Info = () => {
 
   const confirmSecretHandler = useCallback(() => {
     if (!emptyCheck(inputSecret.value)) {
-      return message.error("인증번호를 입력해주세요.");
+      return message.error(t(`3`));
     }
 
     if (secretCode !== inputSecret.value) {
       setIsConfirmEmail(false);
-      return message.error("인증번호가 일치하지 않습니다.");
+      return message.error(t(`1`));
     } else {
       setIsConfirmEmail(true);
       message.success("이메일 인증이 완료되었습니다.");
@@ -642,19 +645,7 @@ const Info = () => {
 
                 <Wrapper al={`flex-start`} width={`calc(100% - 120px)`}>
                   <Wrapper dr={`row`} ju={`flex-start`}>
-                    <CustomInput
-                      id={`inp-address`}
-                      {...inputAddress}
-                      readOnly
-                    />
-
-                    <CommonButton
-                      kindOf={`black`}
-                      height={`38px`}
-                      margin={`0 0 0 10px`}
-                      onClick={toggleAddressModalHandler}>
-                      검색
-                    </CommonButton>
+                    <CustomInput id={`inp-address`} {...inputAddress} />
                   </Wrapper>
 
                   <Wrapper dr={`row`} ju={`flex-start`} margin={`5px 0 0`}>

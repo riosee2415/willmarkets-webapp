@@ -194,10 +194,10 @@ const Info = () => {
 
     if (secretCode !== inputSecret.value) {
       setIsConfirmEmail(false);
-      return message.error(t(`1`));
+      return message.error(t(`4`));
     } else {
       setIsConfirmEmail(true);
-      message.success("이메일 인증이 완료되었습니다.");
+      message.success(t(`5`));
     }
   }, [inputSecret]);
 
@@ -218,7 +218,7 @@ const Info = () => {
         ext === "pdf"
       )
     ) {
-      message.error("지원되지 않는 파일 형식입니다.");
+      message.error(t(`6`));
       return;
     }
 
@@ -236,55 +236,55 @@ const Info = () => {
 
   const updateUserMeHandler = useCallback(() => {
     if (!emptyCheck(inputEmail.value)) {
-      return message.error("이메일을 입력해주세요.");
+      return message.error(t(`7`));
     }
 
     if (isSendEmail && !isConfirmEmail) {
-      return message.error("이메일 인증을 완료해주세요.");
+      return message.error(t(`8`));
     }
 
     if (!emptyCheck(inputUserName.value)) {
-      return message.error("이름을 입력해주세요.");
+      return message.error(t(`9`));
     }
 
     if (!emptyCheck(inputGender.value)) {
-      return message.error("성별을 선택해주세요.");
+      return message.error(t(`10`));
     }
 
     if (!emptyCheck(inputAddress.value)) {
-      return message.error("주소를 선택해주세요.");
+      return message.error(t(`11`));
     }
 
     if (!emptyCheck(inputDetailAddress.value)) {
-      return message.error("상세주소를 입력해주세요.");
+      return message.error(t(`12`));
     }
 
     if (!emptyCheck(inputIdType.value)) {
-      return message.error("신분증 확인정보를 입력해주세요.");
+      return message.error(t(`13`));
     }
 
     if (!emptyCheck(inputIdDate1.value)) {
-      return message.error("신분증 확인정보를 입력해주세요.");
+      return message.error(t(`13`));
     }
 
     if (!emptyCheck(inputIdDate2.value)) {
-      return message.error("신분증 확인정보를 입력해주세요.");
+      return message.error(t(`13`));
     }
 
     if (!emptyCheck(inputIdFilePath.value)) {
-      return message.error("신분증 확인정보를 입력해주세요.");
+      return message.error(t(`13`));
     }
 
     if (!emptyCheck(inputAddrType.value)) {
-      return message.error("주소 확인정보를 입력해주세요.");
+      return message.error(t(`14`));
     }
 
     if (!emptyCheck(inputAddrFilePath.value)) {
-      return message.error("주소 확인정보를 입력해주세요.");
+      return message.error(t(`14`));
     }
 
     if (st_userIdImageFileLoading) {
-      return message.error("첨부파일을 업로드 중입니다. 잠시 기다려주세요.");
+      return message.error(t(`15`));
     }
 
     dispatch({
@@ -333,7 +333,7 @@ const Info = () => {
   ////// USEEFFECT //////
   useEffect(() => {
     if (!me) {
-      message.error("로그인 후 이용할 수 있습니다.");
+      message.error(t(`16`));
       router.push("/login");
     } else if (me.userType === `1`) {
       router.push("/user?access=false");
@@ -408,7 +408,7 @@ const Info = () => {
     if (st_userSecretEmailDone) {
       setIsSendEmail(true);
       setIsConfirmEmail(false);
-      message.success("입력하신 이메일로 인증번호가 전송되었습니다.");
+      message.success(t(`17`));
     }
   }, [st_userSecretEmailDone]);
 
@@ -435,7 +435,7 @@ const Info = () => {
       setIsSendEmail(false);
       setIsConfirmEmail(false);
 
-      message.success("정상적으로 정보가 변경되었습니다.");
+      message.success(t(`18`));
     }
   }, [st_userMeUpdateDone]);
 
@@ -463,12 +463,12 @@ const Info = () => {
             fontSize={`19px`}
             fontWeight={`700`}
             borderBottom={`1px solid #ebebeb`}>
-            내 정보수정
+            {t(`19`)}
           </Wrapper>
 
           <AccordionWrapper>
             <AccordionHeader onClick={() => toggleAccordionHandler(0)}>
-              <Wrapper width={`auto`}>기본정보 수정</Wrapper>
+              <Wrapper width={`auto`}>{t(`20`)}</Wrapper>
 
               <Wrapper width={`auto`}>
                 {currentAccordion === 0 ? <UpOutlined /> : <DownOutlined />}
@@ -483,7 +483,7 @@ const Info = () => {
                 borderBottom={`1px solid #f6f6f6`}>
                 <Wrapper al={`flex-start`} width={`120px`}>
                   <CustomLabel for={`inp-email`}>
-                    {isChangeEmail ? `변경할 이메일` : `이메일`}
+                    {isChangeEmail ? t(`21`) : t(`22`)}
                   </CustomLabel>
                 </Wrapper>
 
@@ -507,7 +507,7 @@ const Info = () => {
                     height={`38px`}
                     margin={`0 0 0 10px`}
                     onClick={() => setIsChangeEmail(!isChangeEmail)}>
-                    {isChangeEmail ? `취소` : `변경`}
+                    {isChangeEmail ? t(`23`) : t(`24`)}
                   </CommonButton>
 
                   {isChangeEmail && !isConfirmEmail && (
@@ -516,7 +516,7 @@ const Info = () => {
                       height={`38px`}
                       margin={`0 0 0 10px`}
                       onClick={checkEmailHandler}>
-                      확인
+                      {t(`25`)}
                     </CommonButton>
                   )}
                 </Wrapper>
@@ -529,7 +529,7 @@ const Info = () => {
                   padding={`15px 0`}
                   borderBottom={`1px solid #f6f6f6`}>
                   <Wrapper al={`flex-start`} width={`120px`}>
-                    <CustomLabel for={`inp-email`}>인증코드</CustomLabel>
+                    <CustomLabel for={`inp-email`}>{t(`26`)}</CustomLabel>
                   </Wrapper>
 
                   <Wrapper
@@ -543,7 +543,7 @@ const Info = () => {
                       height={`38px`}
                       margin={`0 0 0 10px`}
                       onClick={confirmSecretHandler}>
-                      인증
+                      {t(`27`)}
                     </CommonButton>
                   </Wrapper>
                 </Wrapper>
@@ -555,7 +555,7 @@ const Info = () => {
                 padding={`15px 0`}
                 borderBottom={`1px solid #f6f6f6`}>
                 <Wrapper al={`flex-start`} width={`120px`}>
-                  <CustomLabel for={`inp-password`}>비밀번호</CustomLabel>
+                  <CustomLabel for={`inp-password`}>{t(`28`)}</CustomLabel>
                 </Wrapper>
 
                 <Wrapper
@@ -576,7 +576,7 @@ const Info = () => {
                 padding={`15px 0`}
                 borderBottom={`1px solid #f6f6f6`}>
                 <Wrapper al={`flex-start`} width={`120px`}>
-                  <CustomLabel for={`inp-userName`}>이름</CustomLabel>
+                  <CustomLabel for={`inp-userName`}>{t(`29`)}</CustomLabel>
                 </Wrapper>
 
                 <Wrapper
@@ -593,7 +593,7 @@ const Info = () => {
                 padding={`15px 0`}
                 borderBottom={`1px solid #f6f6f6`}>
                 <Wrapper al={`flex-start`} width={`120px`}>
-                  <CustomLabel>성별</CustomLabel>
+                  <CustomLabel>{t(`30`)}</CustomLabel>
                 </Wrapper>
 
                 <Wrapper
@@ -604,15 +604,15 @@ const Info = () => {
                     <RadioInput
                       id={`inp-gender-1`}
                       color={`#e87f5d`}
-                      value={`남자`}
-                      checked={inputGender.value === `남자`}
+                      value={t(`31`)}
+                      checked={inputGender.value === t(`31`)}
                       onChange={(e) => inputGender.setValue(e.target.value)}
                     />
                     <Label
                       for={`inp-gender-1`}
                       fontSize={`15px`}
                       cursor={`pointer`}>
-                      남자
+                      {t(`31`)}
                     </Label>
                   </Wrapper>
 
@@ -620,15 +620,15 @@ const Info = () => {
                     <RadioInput
                       id={`inp-gender-2`}
                       color={`#e87f5d`}
-                      value={`여자`}
-                      checked={inputGender.value === `여자`}
+                      value={t(`32`)}
+                      checked={inputGender.value === t(`32`)}
                       onChange={(e) => inputGender.setValue(e.target.value)}
                     />
                     <Label
                       for={`inp-gender-2`}
                       fontSize={`15px`}
                       cursor={`pointer`}>
-                      여자
+                      {t(`32`)}
                     </Label>
                   </Wrapper>
                 </Wrapper>
@@ -640,7 +640,7 @@ const Info = () => {
                 padding={`15px 0`}
                 borderBottom={`1px solid #f6f6f6`}>
                 <Wrapper al={`flex-start`} width={`120px`}>
-                  <CustomLabel for={`inp-address`}>주소</CustomLabel>
+                  <CustomLabel for={`inp-address`}>{t(`33`)}</CustomLabel>
                 </Wrapper>
 
                 <Wrapper al={`flex-start`} width={`calc(100% - 120px)`}>
@@ -658,7 +658,7 @@ const Info = () => {
 
           <AccordionWrapper margin={`20px 0 0`}>
             <AccordionHeader onClick={() => toggleAccordionHandler(1)}>
-              <Wrapper width={`auto`}>신분증 확인정보 수정</Wrapper>
+              <Wrapper width={`auto`}>{t(`34`)}</Wrapper>
 
               <Wrapper width={`auto`}>
                 {currentAccordion === 1 ? <UpOutlined /> : <DownOutlined />}
@@ -672,7 +672,7 @@ const Info = () => {
                 padding={`15px 0`}
                 borderBottom={`1px solid #f6f6f6`}>
                 <Wrapper al={`flex-start`} width={`120px`}>
-                  <CustomLabel>인증유형</CustomLabel>
+                  <CustomLabel>{t(`35`)}</CustomLabel>
                 </Wrapper>
 
                 <Wrapper
@@ -690,7 +690,7 @@ const Info = () => {
                     hoverShadow={`0 3px 8px rgb(0 0 0 / 12%)`}
                     onClick={() => setComboIdType(!comboIdType)}>
                     <ComboTitle>
-                      <Wrapper>{inputIdType.value || `유형 선택`}</Wrapper>
+                      <Wrapper>{inputIdType.value || t(`35`)}</Wrapper>
                       <CaretDownOutlined />
                     </ComboTitle>
 
@@ -698,22 +698,22 @@ const Info = () => {
                       <ComboListItem
                         isActive={!inputIdType.value}
                         onClick={() => inputIdType.setValue("")}>
-                        유형 선택
+                        {t(`36`)}
                       </ComboListItem>
                       <ComboListItem
-                        isActive={inputIdType.value === `신분증`}
-                        onClick={() => inputIdType.setValue(`신분증`)}>
-                        신분증
+                        isActive={inputIdType.value === t(`37`)}
+                        onClick={() => inputIdType.setValue(t(`37`))}>
+                        {t(`37`)}
                       </ComboListItem>
                       <ComboListItem
-                        isActive={inputIdType.value === `여권`}
-                        onClick={() => inputIdType.setValue(`여권`)}>
-                        여권
+                        isActive={inputIdType.value === t(`38`)}
+                        onClick={() => inputIdType.setValue(t(`38`))}>
+                        {t(`38`)}
                       </ComboListItem>
                       <ComboListItem
-                        isActive={inputIdType.value === `운전면허증`}
-                        onClick={() => inputIdType.setValue(`운전면허증`)}>
-                        운전면허증
+                        isActive={inputIdType.value === t(`39`)}
+                        onClick={() => inputIdType.setValue(t(`39`))}>
+                        {t(`39`)}
                       </ComboListItem>
                     </ComboList>
                   </Combo>
@@ -726,7 +726,7 @@ const Info = () => {
                 padding={`15px 0`}
                 borderBottom={`1px solid #f6f6f6`}>
                 <Wrapper al={`flex-start`} width={`120px`}>
-                  <CustomLabel for={`inp-idDate1`}>발행일자</CustomLabel>
+                  <CustomLabel for={`inp-idDate1`}>{t(`40`)}</CustomLabel>
                 </Wrapper>
 
                 <Wrapper
@@ -747,7 +747,7 @@ const Info = () => {
                 padding={`15px 0`}
                 borderBottom={`1px solid #f6f6f6`}>
                 <Wrapper al={`flex-start`} width={`120px`}>
-                  <CustomLabel for={`inp-idDate2`}>만료일자</CustomLabel>
+                  <CustomLabel for={`inp-idDate2`}>{t(`41`)}</CustomLabel>
                 </Wrapper>
 
                 <Wrapper
@@ -768,7 +768,7 @@ const Info = () => {
                 padding={`15px 0`}
                 borderBottom={`1px solid #f6f6f6`}>
                 <Wrapper al={`flex-start`} width={`120px`}>
-                  <CustomLabel for={`inp-idFile`}>파일첨부</CustomLabel>
+                  <CustomLabel for={`inp-idFile`}>{t(`42`)}</CustomLabel>
                 </Wrapper>
 
                 <Wrapper
@@ -790,7 +790,7 @@ const Info = () => {
                     height={`38px`}
                     margin={`0 0 0 10px`}
                     onClick={() => fileRef.current.click()}>
-                    첨부
+                    {t(`43`)}
                   </CommonButton>
                 </Wrapper>
               </Wrapper>
@@ -799,7 +799,7 @@ const Info = () => {
 
           <AccordionWrapper margin={`20px 0 0`}>
             <AccordionHeader onClick={() => toggleAccordionHandler(2)}>
-              <Wrapper width={`auto`}>주소 확인정보 수정</Wrapper>
+              <Wrapper width={`auto`}>{t(`44`)}</Wrapper>
 
               <Wrapper width={`auto`}>
                 {currentAccordion === 2 ? <UpOutlined /> : <DownOutlined />}
@@ -813,7 +813,7 @@ const Info = () => {
                 padding={`15px 0`}
                 borderBottom={`1px solid #f6f6f6`}>
                 <Wrapper al={`flex-start`} width={`120px`}>
-                  <CustomLabel>인증유형</CustomLabel>
+                  <CustomLabel>{t(`45`)}</CustomLabel>
                 </Wrapper>
 
                 <Wrapper
@@ -832,7 +832,7 @@ const Info = () => {
                     hoverShadow={`0 3px 8px rgb(0 0 0 / 12%)`}
                     onClick={() => setComboAddrType(!comboAddrType)}>
                     <ComboTitle>
-                      <Wrapper>{inputAddrType.value || `유형 선택`}</Wrapper>
+                      <Wrapper>{inputAddrType.value || t(`36`)}</Wrapper>
                       <CaretDownOutlined />
                     </ComboTitle>
 
@@ -840,27 +840,27 @@ const Info = () => {
                       <ComboListItem
                         isActive={!inputAddrType.value}
                         onClick={() => inputAddrType.setValue("")}>
-                        유형 선택
+                        {t(`36`)}
                       </ComboListItem>
                       <ComboListItem
-                        isActive={inputAddrType.value === `가스 요금`}
-                        onClick={() => inputAddrType.setValue(`가스 요금`)}>
-                        가스 요금
+                        isActive={inputAddrType.value === t(`46`)}
+                        onClick={() => inputAddrType.setValue(t(`46`))}>
+                        {t(`46`)}
                       </ComboListItem>
                       <ComboListItem
-                        isActive={inputAddrType.value === `전기 빌`}
-                        onClick={() => inputAddrType.setValue(`전기 빌`)}>
-                        전기 빌
+                        isActive={inputAddrType.value === t(`47`)}
+                        onClick={() => inputAddrType.setValue(t(`47`))}>
+                        {t(`47`)}
                       </ComboListItem>
                       <ComboListItem
-                        isActive={inputAddrType.value === `워터 빌`}
-                        onClick={() => inputAddrType.setValue(`워터 빌`)}>
-                        워터 빌
+                        isActive={inputAddrType.value === t(`48`)}
+                        onClick={() => inputAddrType.setValue(t(`48`))}>
+                        {t(`48`)}
                       </ComboListItem>
                       <ComboListItem
-                        isActive={inputAddrType.value === `은행 명세서`}
-                        onClick={() => inputAddrType.setValue(`은행 명세서`)}>
-                        은행 명세서
+                        isActive={inputAddrType.value === t(`49`)}
+                        onClick={() => inputAddrType.setValue(t(`49`))}>
+                        {t(`49`)}
                       </ComboListItem>
                     </ComboList>
                   </Combo>
@@ -873,7 +873,7 @@ const Info = () => {
                 padding={`15px 0`}
                 borderBottom={`1px solid #f6f6f6`}>
                 <Wrapper al={`flex-start`} width={`120px`}>
-                  <CustomLabel for={`inp-addrFile`}>파일첨부</CustomLabel>
+                  <CustomLabel for={`inp-addrFile`}>{t(`42`)}</CustomLabel>
                 </Wrapper>
 
                 <Wrapper
@@ -895,7 +895,7 @@ const Info = () => {
                     height={`38px`}
                     margin={`0 0 0 10px`}
                     onClick={() => fileRef2.current.click()}>
-                    첨부
+                    {t(`43`)}
                   </CommonButton>
                 </Wrapper>
               </Wrapper>
@@ -910,7 +910,7 @@ const Info = () => {
           padding={`20px 0 0`}
           borderTop={`1px solid #ebebeb`}>
           <CommonButton kindOf={`red`} onClick={updateUserMeHandler}>
-            정보 수정
+            {t(`50`)}
           </CommonButton>
         </Wrapper>
       </Wrapper>

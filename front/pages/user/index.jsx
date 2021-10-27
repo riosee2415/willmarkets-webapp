@@ -37,7 +37,12 @@ const User = ({ width }) => {
 
   const router = useRouter();
 
-  const { t } = useTranslation(["user"]);
+  const { t, i18n } = useTranslation(["user"]);
+
+  const PText = styled.p`
+    background: ${i18n.language === `en` ? `blue` : "green"};
+    color: ${i18n.language === `en` ? `white` : "red"};
+  `;
 
   ////// TOGGLE //////
 
@@ -70,21 +75,21 @@ const User = ({ width }) => {
       </Wrapper>
       <Wrapper dr={`row`} ju={`flex-start`}>
         <MenuBox
-          width={`100px`}
+          width={`130px`}
           height={`100px`}
           onClick={() => moveLinkHandler(`/user/deposit`)}>
           {t(`2`)}
         </MenuBox>
 
         <MenuBox
-          width={`100px`}
+          width={`130px`}
           height={`100px`}
           onClick={() => moveLinkHandler(`/user/withdraw`)}>
           {t(`3`)}
         </MenuBox>
 
         <MenuBox
-          width={`100px`}
+          width={`130px`}
           height={`100px`}
           onClick={() => moveLinkHandler(`/user/record`)}>
           {t(`4`)}
@@ -93,6 +98,9 @@ const User = ({ width }) => {
       <Wrapper al={`flex-start`} margin={`50px 0 10px`} fontWeight={`700`}>
         {t(`5`)}
       </Wrapper>
+
+      <PText>{t(`5`)}</PText>
+
       <Wrapper al={`flex-start`}>
         <SelectBox dr={`row`} padding={`15px 70px 15px 25px`}>
           <Wrapper

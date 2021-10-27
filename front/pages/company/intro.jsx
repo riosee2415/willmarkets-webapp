@@ -44,8 +44,7 @@ const Intro = () => {
             dr={`row`}
             color={`#2c2c2c`}
             fontSize={`28px`}
-            lineHeight={`1.4`}
-          >
+            lineHeight={`1.4`}>
             <Text position={`relative`} top={`1px`}>
               {t(`1`).split(`\n`)[0]}
             </Text>
@@ -58,21 +57,19 @@ const Intro = () => {
             color={`#2c2c2c`}
             fontSize={`20px`}
             lineHeight={`1.4`}
-          >
+            textAlign={`center`}>
             {t(`2`)}
             <Wrapper
               display={`inline`}
               width={`auto`}
               fontSize={`inherit`}
-              color={`inherit`}
-            >
+              color={`inherit`}>
               {t(`3`).split(`\n`)[0]}
               <Text
                 display={`inline`}
                 padding={`0 0 0 5px`}
                 color={`inherit`}
-                fontWeight={`700`}
-              >
+                fontWeight={`700`}>
                 {t(`3`).split(`\n`)[1]}
               </Text>
               {t(`3`).split(`\n`)[2]}
@@ -102,8 +99,7 @@ const Intro = () => {
               radius={`30px`}
               fontSize={`18px`}
               fontWeight={`500`}
-              onClick={() => moveLinkHandler(`/signup`)}
-            >
+              onClick={() => moveLinkHandler(`/signup`)}>
               {t(`4`)}
             </CommonButton>
           </Wrapper>
@@ -125,8 +121,7 @@ const Intro = () => {
               width={`auto`}
               margin={`30px 0 0`}
               padding={`0 157px 0 0`}
-              fontWeight={`300`}
-            >
+              fontWeight={`300`}>
               {t(`6`)}
               <br />
               {t(`7`)}
@@ -135,8 +130,7 @@ const Intro = () => {
                 <Text
                   display={`inline`}
                   padding={`0 0 0 5px`}
-                  fontWeight={`500`}
-                >
+                  fontWeight={`500`}>
                   {t(`8`).split(`\n`)[1]}
                 </Text>
                 {t(`8`).split(`\n`)[2]}
@@ -150,8 +144,7 @@ const Intro = () => {
               top={`-50px`}
               left={`-60px`}
               width={`auto`}
-              zIndex={`0`}
-            >
+              zIndex={`0`}>
               <Image
                 width={`auto`}
                 opacity={`0.3`}
@@ -175,8 +168,7 @@ const Intro = () => {
             position={`relative`}
             al={`flex-start`}
             width={`50%`}
-            padding={`70px 0`}
-          >
+            padding={`70px 0`}>
             <Wrapper position={`relative`} zIndex={`1`} width={`auto`}>
               <Image
                 width={`auto`}
@@ -191,8 +183,7 @@ const Intro = () => {
               width={`auto`}
               fontSize={`25px`}
               fontWeight={`500`}
-              lineHeight={`1.3`}
-            >
+              lineHeight={`1.3`}>
               {t(`9`).split(`\n`)[0]}
               <Text margin={`0 0 0 8px`} padding={`0 2px`}>
                 {t(`9`).split(`\n`)[1]}
@@ -205,15 +196,13 @@ const Intro = () => {
               margin={`30px 0 0`}
               padding={`0 0 0 240px`}
               fontWeight={`300`}
-              textAlign={`right`}
-            >
+              textAlign={`right`}>
               <Wrapper display={`block`} width={`auto`}>
                 {t(`10`).split(`\n`)[0]}
                 <Text
                   display={`inline`}
                   padding={`0 0 0 5px`}
-                  fontWeight={`500`}
-                >
+                  fontWeight={`500`}>
                   {t(`10`).split(`\n`)[1]}
                 </Text>
                 {t(`10`).split(`\n`)[2]}

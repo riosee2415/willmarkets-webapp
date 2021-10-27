@@ -139,8 +139,7 @@ const Support = () => {
             color={`#fff`}
             margin={`22px 0 5px`}
             textAlign={`center`}
-            fontSize={`20px`}
-          >
+            fontSize={`20px`}>
             {t(`8`)}
             <br />
             {t(`9`)}
@@ -160,8 +159,7 @@ const Support = () => {
             bgColor={Theme.white_C}
             radius={`8px`}
             padding={`40px 70px`}
-            width={`auto`}
-          >
+            width={`auto`}>
             <Wrapper dr={`row`} ju={`center`} al={`flex-end`}>
               <Wrapper width={`85px`} al={"flex-start"}>
                 <TextLabel margin={`0 25px 0 0 `}>{t(`10`)}</TextLabel>
@@ -183,8 +181,7 @@ const Support = () => {
               dr={`row`}
               ju={`center`}
               al={`flex-end`}
-              margin={`10px 0 0 0`}
-            >
+              margin={`10px 0 0 0`}>
               <Wrapper width={`85px`} al={"flex-start"}>
                 <TextLabel margin={`0 25px 0 0 `}>{t(`11`)}</TextLabel>
               </Wrapper>
@@ -205,8 +202,7 @@ const Support = () => {
               dr={`row`}
               ju={`center`}
               al={`flex-end`}
-              margin={`10px 0 0 0`}
-            >
+              margin={`10px 0 0 0`}>
               <Wrapper width={`85px`} al={"flex-start"}>
                 <TextLabel margin={`0 25px 0 0 `}>{t(`12`)}</TextLabel>
               </Wrapper>
@@ -225,8 +221,7 @@ const Support = () => {
               dr={`row`}
               ju={`center`}
               al={`nomal`}
-              margin={`10px 0 0 0`}
-            >
+              margin={`10px 0 0 0`}>
               <Wrapper width={`85px`} al={`flex-start`}>
                 <TextLabel margin={`0 25px 0 0 `}>{t(`13`)}</TextLabel>
               </Wrapper>
@@ -250,8 +245,7 @@ const Support = () => {
                 width={`auto`}
                 opacity={`0.6`}
                 cursor={`pointer`}
-                onClick={() => inputAgree.setValue(!inputAgree.value)}
-              >
+                onClick={() => inputAgree.setValue(!inputAgree.value)}>
                 {t(`14`)}
               </Wrapper>
               <Wrapper
@@ -261,8 +255,7 @@ const Support = () => {
                 width={`auto`}
                 radius={`5px`}
                 padding={`0 6px`}
-                bgColor={"#8b8686"}
-              >
+                bgColor={"#8b8686"}>
                 {t(`15`)}
               </Wrapper>
             </Wrapper>
@@ -276,8 +269,7 @@ const Support = () => {
               fontSize={`24px`}
               padding={`6px 50px 8px`}
               radius={`6px`}
-              onClick={createQuestionHandler}
-            >
+              onClick={createQuestionHandler}>
               {t(`7`)}
             </CommonButton>
           </Wrapper>

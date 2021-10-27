@@ -98,11 +98,11 @@ const Record = () => {
           <TableWrapper>
             <TableHeader>
               <TableRow>
-                <TableCol width={`50px`}>{t(`3`)}</TableCol>
+                <TableCol width={`70px`}>{t(`3`)}</TableCol>
                 <TableCol width={`130px`}>{t(`4`)}</TableCol>
                 <TableCol width={`200px`}>{t(`5`)}</TableCol>
                 <TableCol
-                  width={`calc(100% - 50px - 130px - 200px - 120px - 120px - 130px)`}
+                  width={`calc(100% - 70px - 130px - 200px - 120px - 120px - 130px)`}
                   minWidth={`250px`}>
                   {t(`6`)}
                 </TableCol>
@@ -118,7 +118,7 @@ const Record = () => {
                 viewData.map((data, idx) => {
                   return (
                     <TableRow key={data._id}>
-                      <TableCol width={`50px`}>{idx + 1}</TableCol>
+                      <TableCol width={`70px`}>{idx + 1}</TableCol>
                       <TableCol width={`130px`}>
                         {moment(data.createdAt).format(`YYYY-MM-DD HH:mm:ss`)}
                       </TableCol>

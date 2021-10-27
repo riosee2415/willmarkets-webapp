@@ -167,6 +167,7 @@ router.patch("/updatePermit", isAdminCheck, async (req, res, next) => {
             <br />
             라이브 계좌 : ${updateData.bankNo}
             <br />
+            <br />
             
             자세한 내용은 홈페이지에서 확인하세요 !
             <br />

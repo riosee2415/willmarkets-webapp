@@ -210,21 +210,6 @@ const Deposit = ({}) => {
     },
     {
       width: 70,
-      title: <Wrapper fontSize={`14px`}>Swift Code</Wrapper>,
-      render: (data) => <Wrapper fontSize={`14px`}>{data.swiftCode}</Wrapper>,
-    },
-    {
-      width: 100,
-      title: <Wrapper fontSize={`14px`}>윌마켓 주소</Wrapper>,
-      render: (data) => <Wrapper fontSize={`14px`}>{data.willAddress}</Wrapper>,
-    },
-    {
-      width: 100,
-      title: <Wrapper fontSize={`14px`}>은행 주소</Wrapper>,
-      render: (data) => <Wrapper fontSize={`14px`}>{data.bankAddress}</Wrapper>,
-    },
-    {
-      width: 70,
       title: <Wrapper fontSize={`14px`}>입금 계좌</Wrapper>,
       render: (data) => <Wrapper fontSize={`14px`}>{data.selectBank}</Wrapper>,
     },
@@ -233,7 +218,7 @@ const Deposit = ({}) => {
       title: <Wrapper fontSize={`14px`}>입금 금액</Wrapper>,
       render: (data) => (
         <Wrapper fontSize={`14px`}>
-          {numberWithCommas(String(data.price || 0))}원
+          {numberWithCommas(String(data.price || 0))}
         </Wrapper>
       ),
     },

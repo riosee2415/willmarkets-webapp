@@ -840,8 +840,8 @@ export const AccordionHeader = styled(Wrapper)`
   padding: 12px 18px;
   font-size: 15px;
   color: #221d22;
-  background: #fed5d5;
-  box-shadow: 1px 1px 5px #deabab;
+  background: #fdf6f6;
+  box-shadow: 1px 1px 5px #f9d2d2;
   cursor: pointer;
 
   & * {

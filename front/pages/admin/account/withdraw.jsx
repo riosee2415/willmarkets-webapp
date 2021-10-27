@@ -219,7 +219,7 @@ const Withdraw = ({}) => {
       title: <Wrapper fontSize={`14px`}>출금 금액</Wrapper>,
       render: (data) => (
         <Wrapper fontSize={`14px`}>
-          {numberWithCommas(String(data.price || 0))}원
+          {numberWithCommas(String(data.price || 0))}
         </Wrapper>
       ),
     },

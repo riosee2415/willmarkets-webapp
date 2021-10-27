@@ -97,7 +97,6 @@ const UserHeader = ({ children, width }) => {
         isTitleHover={true}
         width={`120px`}
         onMouseOver={() => setComboLanguage(true)}
-        onMouseOut={() => setComboLanguage(false)}
       >
         <ComboTitle>
           <Wrapper>Language</Wrapper>

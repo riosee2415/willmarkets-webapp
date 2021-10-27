@@ -1,1 +1,22 @@
-{}
+{
+   "1": "Available after login.",
+   "2": "Examination record",
+   "3": "Number",
+   "4": "Application Date",
+   "5": "Type",
+   "6": "Details",
+   "7": "Amount",
+   "8": "Examination status",
+   "9": "Approval date",
+   "10": "Deposit",
+   "11": "Bank name",
+   "12": "Account number",
+   "13": "Willmarket Address",
+   "14": "Bank address",
+   "15": "Deposit account",
+   "16": "Withdraw",
+   "17": "Withdrawal Account",
+   "18": "Approved",
+   "19": "Waiting for approval",
+   "20": "Please select a product to search."
+}

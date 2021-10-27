@@ -1,1 +1,20 @@
-{}
+{
+   "1": "Please enter an exchange rate.",
+   "2": "Please enter your transaction password.",
+   "3": "Please enter a password for viewing.",
+   "4": "Available after login.",
+   "5": "Add demo account",
+   "6": "Demo Account",
+   "7": "Trading platform",
+   "8": "Account type",
+   "9": "Leverage",
+   "10": "Amount of exchange rate",
+   "11": "Password for transaction",
+   "12": "Password for viewing",
+   "13": "Previous",
+   "14": "Open an account",
+   "15": "Demo account creation complete!",
+   "16": "Your demo account has been successfully created.",
+   "17": "For the first time"
+}
+

@@ -1,1 +1,14 @@
-{}
+{
+   "1": "Menu",
+   "2": "Deposit",
+   "3": "Withdraw",
+   "4": "Review record",
+   "5": "My wallet",
+   "6": "Wallet Amount",
+   "7": "Live Account",
+   "8": "Account Number",
+   "9": "Add Account",
+   "10": "Demo Account",
+   "11": "Available after login.",
+   "12": "Mock account members cannot use it."
+}

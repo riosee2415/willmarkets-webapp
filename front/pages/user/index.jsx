@@ -39,11 +39,6 @@ const User = ({ width }) => {
 
   const { t, i18n } = useTranslation(["user"]);
 
-  const PText = styled.p`
-    background: ${i18n.language === `en` ? `blue` : "green"};
-    color: ${i18n.language === `en` ? `white` : "red"};
-  `;
-
   ////// TOGGLE //////
 
   ////// HANDLER //////
@@ -98,8 +93,6 @@ const User = ({ width }) => {
       <Wrapper al={`flex-start`} margin={`50px 0 10px`} fontWeight={`700`}>
         {t(`5`)}
       </Wrapper>
-
-      <PText>{t(`5`)}</PText>
 
       <Wrapper al={`flex-start`}>
         <SelectBox dr={`row`} padding={`15px 70px 15px 25px`}>

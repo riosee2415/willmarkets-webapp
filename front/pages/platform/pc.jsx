@@ -205,7 +205,12 @@ const Pc = () => {
             </Wrapper>
 
             <Wrapper al={`flex-start`} ju={`flex-start`} width={`50%`}>
-              <Wrapper dr={`row`} margin={`0 0 20px`} width={`auto`}>
+              <Wrapper
+                dr={`row`}
+                al={`flex-start`}
+                margin={`0 0 20px`}
+                width={`auto`}
+                wrap={`nowrap`}>
                 <Image
                   margin={`0 10px 0 0`}
                   width={`auto`}
@@ -214,7 +219,12 @@ const Pc = () => {
                 {t(`16`)}
               </Wrapper>
 
-              <Wrapper dr={`row`} margin={`0 0 20px`} width={`auto`}>
+              <Wrapper
+                dr={`row`}
+                al={`flex-start`}
+                margin={`0 0 20px`}
+                width={`auto`}
+                wrap={`nowrap`}>
                 <Image
                   margin={`0 10px 0 0`}
                   width={`auto`}
@@ -223,7 +233,12 @@ const Pc = () => {
                 {t(`17`)}
               </Wrapper>
 
-              <Wrapper dr={`row`} margin={`0 0 20px`} width={`auto`}>
+              <Wrapper
+                dr={`row`}
+                al={`flex-start`}
+                margin={`0 0 20px`}
+                width={`auto`}
+                wrap={`nowrap`}>
                 <Image
                   margin={`0 10px 0 0`}
                   width={`auto`}
@@ -232,7 +247,12 @@ const Pc = () => {
                 {t(`18`)}
               </Wrapper>
 
-              <Wrapper dr={`row`} margin={`0 0 20px`} width={`auto`}>
+              <Wrapper
+                dr={`row`}
+                al={`flex-start`}
+                margin={`0 0 20px`}
+                width={`auto`}
+                wrap={`nowrap`}>
                 <Image
                   margin={`0 10px 0 0`}
                   width={`auto`}
@@ -241,7 +261,12 @@ const Pc = () => {
                 {t(`19`)}
               </Wrapper>
 
-              <Wrapper dr={`row`} margin={`0 0 20px`} width={`auto`}>
+              <Wrapper
+                dr={`row`}
+                al={`flex-start`}
+                margin={`0 0 20px`}
+                width={`auto`}
+                wrap={`nowrap`}>
                 <Image
                   margin={`0 10px 0 0`}
                   width={`auto`}
@@ -250,7 +275,12 @@ const Pc = () => {
                 {t(`20`)}
               </Wrapper>
 
-              <Wrapper dr={`row`} margin={`0 0 20px`} width={`auto`}>
+              <Wrapper
+                dr={`row`}
+                al={`flex-start`}
+                margin={`0 0 20px`}
+                width={`auto`}
+                wrap={`nowrap`}>
                 <Image
                   margin={`0 10px 0 0`}
                   width={`auto`}
@@ -259,7 +289,12 @@ const Pc = () => {
                 {t(`21`)}
               </Wrapper>
 
-              <Wrapper dr={`row`} margin={`0 0 20px`} width={`auto`}>
+              <Wrapper
+                dr={`row`}
+                al={`flex-start`}
+                margin={`0 0 20px`}
+                width={`auto`}
+                wrap={`nowrap`}>
                 <Image
                   margin={`0 10px 0 0`}
                   width={`auto`}
@@ -268,7 +303,12 @@ const Pc = () => {
                 {t(`22`)}
               </Wrapper>
 
-              <Wrapper dr={`row`} margin={`0 0 20px`} width={`auto`}>
+              <Wrapper
+                dr={`row`}
+                al={`flex-start`}
+                margin={`0 0 20px`}
+                width={`auto`}
+                wrap={`nowrap`}>
                 <Image
                   margin={`0 10px 0 0`}
                   width={`auto`}
@@ -277,7 +317,12 @@ const Pc = () => {
                 {t(`23`)}
               </Wrapper>
 
-              <Wrapper dr={`row`} margin={`0 0 20px`} width={`auto`}>
+              <Wrapper
+                dr={`row`}
+                al={`flex-start`}
+                margin={`0 0 20px`}
+                width={`auto`}
+                wrap={`nowrap`}>
                 <Image
                   margin={`0 10px 0 0`}
                   width={`auto`}
@@ -286,7 +331,12 @@ const Pc = () => {
                 {t(`24`)}
               </Wrapper>
 
-              <Wrapper dr={`row`} margin={`0 0 20px`} width={`auto`}>
+              <Wrapper
+                dr={`row`}
+                al={`flex-start`}
+                margin={`0 0 20px`}
+                width={`auto`}
+                wrap={`nowrap`}>
                 <Image
                   margin={`0 10px 0 0`}
                   width={`auto`}
@@ -295,7 +345,12 @@ const Pc = () => {
                 {t(`25`)}
               </Wrapper>
 
-              <Wrapper dr={`row`} margin={`0 0 20px`} width={`auto`}>
+              <Wrapper
+                dr={`row`}
+                al={`flex-start`}
+                margin={`0 0 20px`}
+                width={`auto`}
+                wrap={`nowrap`}>
                 <Image
                   margin={`0 10px 0 0`}
                   width={`auto`}
@@ -304,7 +359,12 @@ const Pc = () => {
                 {t(`26`)}
               </Wrapper>
 
-              <Wrapper dr={`row`} margin={`0 0 20px`} width={`auto`}>
+              <Wrapper
+                dr={`row`}
+                al={`flex-start`}
+                margin={`0 0 20px`}
+                width={`auto`}
+                wrap={`nowrap`}>
                 <Image
                   margin={`0 10px 0 0`}
                   width={`auto`}

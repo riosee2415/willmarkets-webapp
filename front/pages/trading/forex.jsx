@@ -66,7 +66,12 @@ const Forex = () => {
 
           <Wrapper dr={`row`} al={`normal`} margin={`40px 0 0`}>
             <Wrapper al={`flex-start`} ju={`flex-start`} width={`520px`}>
-              <Wrapper dr={`row`} margin={`0 0 15px`} width={`auto`}>
+              <Wrapper
+                dr={`row`}
+                al={`flex-start`}
+                margin={`0 0 15px`}
+                width={`auto`}
+                wrap={`nowrap`}>
                 <Image
                   margin={`0 10px 0 0`}
                   width={`auto`}
@@ -87,7 +92,12 @@ const Forex = () => {
                 {t(`10`)}
               </Wrapper>
 
-              <Wrapper dr={`row`} margin={`30px 0 15px`} width={`auto`}>
+              <Wrapper
+                dr={`row`}
+                al={`flex-start`}
+                margin={`30px 0 15px`}
+                width={`auto`}
+                wrap={`nowrap`}>
                 <Image
                   margin={`0 10px 0 0`}
                   width={`auto`}
@@ -100,7 +110,12 @@ const Forex = () => {
                 {t(`12`)}
               </Wrapper>
 
-              <Wrapper dr={`row`} margin={`30px 0 15px`} width={`auto`}>
+              <Wrapper
+                dr={`row`}
+                al={`flex-start`}
+                margin={`30px 0 15px`}
+                width={`auto`}
+                wrap={`nowrap`}>
                 <Image
                   margin={`0 10px 0 0`}
                   width={`auto`}

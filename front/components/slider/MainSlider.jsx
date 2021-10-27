@@ -35,8 +35,7 @@ export default ({ width }) => {
         navigation={false}
         grabCursor={true}
         loop
-        autoplay
-      >
+        autoplay>
         <SwiperSlide>
           <Wrapper position={`relative`} height={`100vh`}>
             <Wrapper position={`absolute`} left={`0`} top={`0`} height={`100%`}>
@@ -55,8 +54,7 @@ export default ({ width }) => {
                 right={`0`}
                 width={`auto`}
                 height={`100%`}
-                zIndex={`9999`}
-              >
+                zIndex={`9999`}>
                 <Image
                   src={`https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/willmarkets/assets/images/main/text_willmarkets.png`}
                 />
@@ -67,8 +65,7 @@ export default ({ width }) => {
                   fontSize={`30px`}
                   fontWeight={`500`}
                   textAlign={`right`}
-                  lineHeight={`1.4`}
-                >
+                  lineHeight={`1.4`}>
                   {t(`1`).split(`\n`)[0]}
                   <br />
                   {t(`1`).split(`\n`)[1]}
@@ -82,16 +79,14 @@ export default ({ width }) => {
                     radius={`30px`}
                     fontSize={`18px`}
                     fontWeight={`700`}
-                    onClick={() => moveLinkHandler(`/signup`)}
-                  >
+                    onClick={() => moveLinkHandler(`/signup`)}>
                     {t(`2`)}
                     <Wrapper
                       position={`absolute`}
                       right={`15px`}
                       top={`50%`}
                       margin={`-7px 0 0 0`}
-                      width={`auto`}
-                    >
+                      width={`auto`}>
                       <DoubleRightOutlined />
                     </Wrapper>
                   </CommonButton>
@@ -104,16 +99,14 @@ export default ({ width }) => {
                     radius={`30px`}
                     fontSize={`18px`}
                     fontWeight={`700`}
-                    onClick={() => moveLinkHandler(`/signup`)}
-                  >
+                    onClick={() => moveLinkHandler(`/signup`)}>
                     {t(`3`)}
                     <Wrapper
                       position={`absolute`}
                       right={`23px`}
                       top={`50%`}
                       margin={`-7px 0 0 0`}
-                      width={`auto`}
-                    >
+                      width={`auto`}>
                       <DoubleRightOutlined />
                     </Wrapper>
                   </CommonButton>
@@ -141,8 +134,7 @@ export default ({ width }) => {
                 right={`0`}
                 width={`auto`}
                 height={`100%`}
-                zIndex={`9999`}
-              >
+                zIndex={`9999`}>
                 <Image
                   src={`https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/willmarkets/assets/images/main/text_grobal+stock.png`}
                 />
@@ -153,9 +145,7 @@ export default ({ width }) => {
                   fontSize={`30px`}
                   fontWeight={`500`}
                   textAlign={`right`}
-                  lineHeight={`1.4`}
-                  borderBottom={`1px solid #92165c`}
-                >
+                  lineHeight={`1.4`}>
                   {t(`4`).split(`\n`)[0]}
                   <br />
                   {t(`4`).split(`\n`)[1]}
@@ -169,16 +159,14 @@ export default ({ width }) => {
                     radius={`30px`}
                     fontSize={`18px`}
                     fontWeight={`700`}
-                    onClick={() => moveLinkHandler(`/signup`)}
-                  >
+                    onClick={() => moveLinkHandler(`/signup`)}>
                     {t(`2`)}
                     <Wrapper
                       position={`absolute`}
                       right={`15px`}
                       top={`50%`}
                       margin={`-7px 0 0 0`}
-                      width={`auto`}
-                    >
+                      width={`auto`}>
                       <DoubleRightOutlined />
                     </Wrapper>
                   </CommonButton>
@@ -191,16 +179,14 @@ export default ({ width }) => {
                     radius={`30px`}
                     fontSize={`18px`}
                     fontWeight={`700`}
-                    onClick={() => moveLinkHandler(`/signup`)}
-                  >
+                    onClick={() => moveLinkHandler(`/signup`)}>
                     {t(`3`)}
                     <Wrapper
                       position={`absolute`}
                       right={`23px`}
                       top={`50%`}
                       margin={`-7px 0 0 0`}
-                      width={`auto`}
-                    >
+                      width={`auto`}>
                       <DoubleRightOutlined />
                     </Wrapper>
                   </CommonButton>

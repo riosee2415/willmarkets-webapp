@@ -90,7 +90,7 @@ const Deposit = () => {
 
   const dispatch = useDispatch();
 
-  const { t } = useTranslation(["user_deposit"]);
+  const { t, i18n } = useTranslation(["user_deposit"]);
 
   const {
     me,
@@ -424,7 +424,7 @@ const Deposit = () => {
                           margin={`0 40px 40px 0`}
                           padding={`20px`}
                           width={`300px`}
-                          height={`225px`}
+                          height={`335px`}
                           radius={`8px`}
                           onClick={() => selectBankHandler(data)}>
                           <Wrapper
@@ -437,17 +437,13 @@ const Deposit = () => {
                             <Wrapper
                               al={`flex-start`}
                               ju={`flex-start`}
-                              width={`90px`}
                               fontSize={`15px`}
                               fontWeight={`700`}
                               color={`#a8559e`}>
                               {t(`14`)}
                             </Wrapper>
 
-                            <Wrapper
-                              al={`flex-start`}
-                              width={`calc(100% - 90px)`}
-                              fontSize={`14px`}>
+                            <Wrapper al={`flex-start`} fontSize={`14px`}>
                               <Text isEllipsis={true} width={`100%`}>
                                 {data.bankName}
                               </Text>
@@ -464,17 +460,13 @@ const Deposit = () => {
                             <Wrapper
                               al={`flex-start`}
                               ju={`flex-start`}
-                              width={`90px`}
                               fontSize={`15px`}
                               fontWeight={`700`}
                               color={`#a8559e`}>
                               {t(`15`)}
                             </Wrapper>
 
-                            <Wrapper
-                              al={`flex-start`}
-                              width={`calc(100% - 90px)`}
-                              fontSize={`14px`}>
+                            <Wrapper al={`flex-start`} fontSize={`14px`}>
                               <Text isEllipsis={true} width={`100%`}>
                                 {data.bankNo}
                               </Text>
@@ -491,17 +483,13 @@ const Deposit = () => {
                             <Wrapper
                               al={`flex-start`}
                               ju={`flex-start`}
-                              width={`90px`}
                               fontSize={`15px`}
                               fontWeight={`700`}
                               color={`#a8559e`}>
                               Swift Code
                             </Wrapper>
 
-                            <Wrapper
-                              al={`flex-start`}
-                              width={`calc(100% - 90px)`}
-                              fontSize={`14px`}>
+                            <Wrapper al={`flex-start`} fontSize={`14px`}>
                               <Text isEllipsis={true} width={`100%`}>
                                 {data.swiftCode}
                               </Text>
@@ -518,17 +506,13 @@ const Deposit = () => {
                             <Wrapper
                               al={`flex-start`}
                               ju={`flex-start`}
-                              width={`90px`}
                               fontSize={`15px`}
                               fontWeight={`700`}
                               color={`#a8559e`}>
                               {t(`16`)}
                             </Wrapper>
 
-                            <Wrapper
-                              al={`flex-start`}
-                              width={`calc(100% - 90px)`}
-                              fontSize={`14px`}>
+                            <Wrapper al={`flex-start`} fontSize={`14px`}>
                               <Text isEllipsis={true} width={`100%`}>
                                 {data.willAddress}
                               </Text>
@@ -539,7 +523,6 @@ const Deposit = () => {
                             <Wrapper
                               al={`flex-start`}
                               ju={`flex-start`}
-                              width={`90px`}
                               fontSize={`15px`}
                               fontWeight={`700`}
                               color={`#a8559e`}>
@@ -558,8 +541,6 @@ const Deposit = () => {
                         </SelectBox>
                       );
                     })}
-
-                    {/* ////// step1 */}
                   </Wrapper>
                 </Wrapper>
               )}
@@ -595,7 +576,7 @@ const Deposit = () => {
                         ju={`flex-start`}
                         padding={`20px`}
                         width={`300px`}
-                        height={`225px`}
+                        height={`335px`}
                         radius={`8px`}>
                         <Wrapper
                           dr={`row`}
@@ -607,17 +588,13 @@ const Deposit = () => {
                           <Wrapper
                             al={`flex-start`}
                             ju={`flex-start`}
-                            width={`90px`}
                             fontSize={`15px`}
                             fontWeight={`700`}
                             color={`#a8559e`}>
                             {t(`14`)}
                           </Wrapper>
 
-                          <Wrapper
-                            al={`flex-start`}
-                            width={`calc(100% - 90px)`}
-                            fontSize={`14px`}>
+                          <Wrapper al={`flex-start`} fontSize={`14px`}>
                             <Text isEllipsis={true} width={`100%`}>
                               {currentBank.bankName}
                             </Text>
@@ -634,17 +611,13 @@ const Deposit = () => {
                           <Wrapper
                             al={`flex-start`}
                             ju={`flex-start`}
-                            width={`90px`}
                             fontSize={`15px`}
                             fontWeight={`700`}
                             color={`#a8559e`}>
                             {t(`15`)}
                           </Wrapper>
 
-                          <Wrapper
-                            al={`flex-start`}
-                            width={`calc(100% - 90px)`}
-                            fontSize={`14px`}>
+                          <Wrapper al={`flex-start`} fontSize={`14px`}>
                             <Text isEllipsis={true} width={`100%`}>
                               {currentBank.bankNo}
                             </Text>
@@ -661,17 +634,13 @@ const Deposit = () => {
                           <Wrapper
                             al={`flex-start`}
                             ju={`flex-start`}
-                            width={`90px`}
                             fontSize={`15px`}
                             fontWeight={`700`}
                             color={`#a8559e`}>
                             Swift Code
                           </Wrapper>
 
-                          <Wrapper
-                            al={`flex-start`}
-                            width={`calc(100% - 90px)`}
-                            fontSize={`14px`}>
+                          <Wrapper al={`flex-start`} fontSize={`14px`}>
                             <Text isEllipsis={true} width={`100%`}>
                               {currentBank.swiftCode}
                             </Text>
@@ -688,17 +657,13 @@ const Deposit = () => {
                           <Wrapper
                             al={`flex-start`}
                             ju={`flex-start`}
-                            width={`90px`}
                             fontSize={`15px`}
                             fontWeight={`700`}
                             color={`#a8559e`}>
                             {t(`16`)}
                           </Wrapper>
 
-                          <Wrapper
-                            al={`flex-start`}
-                            width={`calc(100% - 90px)`}
-                            fontSize={`14px`}>
+                          <Wrapper al={`flex-start`} fontSize={`14px`}>
                             <Text isEllipsis={true} width={`100%`}>
                               {currentBank.willAddress}
                             </Text>
@@ -709,17 +674,13 @@ const Deposit = () => {
                           <Wrapper
                             al={`flex-start`}
                             ju={`flex-start`}
-                            width={`90px`}
                             fontSize={`15px`}
                             fontWeight={`700`}
                             color={`#a8559e`}>
                             {t(`17`)}
                           </Wrapper>
 
-                          <Wrapper
-                            al={`flex-start`}
-                            width={`calc(100% - 90px)`}
-                            fontSize={`14px`}>
+                          <Wrapper al={`flex-start`} fontSize={`14px`}>
                             <Text isEllipsis={true} width={`100%`}>
                               {currentBank.bankAddress}
                             </Text>
@@ -759,7 +720,7 @@ const Deposit = () => {
                         </ComboListItem>
 
                         <ComboListItem
-                          onClick={() => inputSelectBank.setValue("내 지갑")}>
+                          onClick={() => inputSelectBank.setValue(t(`22`))}>
                           {t(`22`)}
                         </ComboListItem>
 
@@ -866,6 +827,7 @@ const Deposit = () => {
                             width={`180px`}
                             height={`40px`}
                             margin={`0 5px`}
+                            padding={`10px`}
                             onClick={() => setCurrentTab(1)}>
                             {t(`30`)}
                           </CommonButton>

@@ -24,6 +24,7 @@ import ClientLayout from "../../components/ClientLayout";
 import Theme from "../../components/Theme";
 import SubBanner from "../../components/SubBanner";
 import { useTranslation } from "react-i18next";
+import i18next from "i18next";
 
 const Intro = () => {
   const router = useRouter();
@@ -194,7 +195,9 @@ const Intro = () => {
               dr={`row`}
               width={`auto`}
               margin={`30px 0 0`}
-              padding={`0 0 0 240px`}
+              padding={
+                i18next.language === `ko` ? `0 0 0 240px` : "0 0 0 190px"
+              }
               fontWeight={`300`}
               textAlign={`right`}>
               <Wrapper display={`block`} width={`auto`}>

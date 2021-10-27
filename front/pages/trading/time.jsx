@@ -50,7 +50,7 @@ const Time = () => {
             <br />
             {t(`8`).split(`\n`)[0]}
             <br />
-            {t(`8`).split(`\n`)[0]}
+            {t(`8`).split(`\n`)[1]}
           </Wrapper>
         </RsWrapper>
       </Wrapper>

@@ -22,6 +22,12 @@ module.exports = () => {
             });
           }
 
+          if (!user.isComplete) {
+            return done(null, false, {
+              reason: "관리자 승인 후 로그인 할 수 있습니다.",
+            });
+          }
+
           const result = await bcrypt.compare(password, user.password);
           if (result) {
             return done(null, user);

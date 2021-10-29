@@ -22,7 +22,7 @@
   "21": "Live Account",
   "22": "Demo Account",
   "23": "email",
-  "24": "Reauthenticate",
+  "24": "reauthenticate",
   "25": "Get Authenticated",
   "26": "Certification Number",
   "27": "Verified",
@@ -52,5 +52,8 @@
   "51": "next",
   "52": "Register",
   "53": "Cancel",
-  "54": "back to previous"
+  "54": "back to previous",
+  "55": "국가코드를 선택해주세요.",
+  "56": "핸드폰 번호를 입력해주세요.",
+  "57": "핸드폰"
 }

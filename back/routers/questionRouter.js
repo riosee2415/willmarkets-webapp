@@ -3,6 +3,7 @@ const isAdminCheck = require("../middlewares/isAdminCheck");
 const isLoggedIn = require("../middlewares/isLoggedIn");
 const { Question, User } = require("../models");
 const { Op } = require("sequelize");
+const sendSecretMail = require("../utils/mailSender");
 
 const router = express.Router();
 
@@ -158,6 +159,60 @@ router.post("/create", async (req, res, next) => {
       email,
       content,
     });
+
+    sendSecretMail(
+      `4leaf.njm@gmail.com`,
+      `💌 WILLMARKET 에서 문의사항이 작성되었습니다.`,
+      `
+    <div style="width: 50%; padding: 30px; border: 1px solid #eeeeee">
+        <img src="https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/willmarkets/assets/images/logo/logo.png"
+        style="width: 80px; height: 80px; background-size: cover; padding-bottom: 30px;"
+        />
+        
+        <div style="
+          height: 45px;
+          display: flex;
+          border-bottom: 1px solid #f7b1ff;
+          font-size: 22px;
+          color: #0b0b0b;
+          line-height: 2;
+        ">
+        ${name} 님의 문의사항입니다.
+        </div>
+
+        <div style="color: #0b0b0b; padding: 50px 0; font-size: 14px;">
+          <strong>연락처</strong> : ${mobile}<br/>
+          <strong>이메일</strong> : ${email}<br/>
+          <strong>문의내용</strong><br/>
+          ${content
+            .split(`\n`)
+            .map((data) => {
+              return `<p>
+                ${data}
+              </p>`;
+            })
+            .join(``)}
+          <br />
+          <br />
+          자세한 내용은 홈페이지에서 확인하세요 !
+        </div>
+
+        <div>
+          <a href="https://www.will-markets.com">
+            <button style="padding: 10px 20px; color: #fff; background-color:#0b0b0b; 
+            border: 1px solid #0b0b0b;
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: center;
+            ">
+              윌마켓으로 이동하기
+            </button>
+          </a>
+        </div>
+     </div>
+     `
+    );
 
     return res.status(201).json({ result: true });
   } catch (error) {

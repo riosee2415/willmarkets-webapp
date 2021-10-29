@@ -4,6 +4,7 @@ import styled from "styled-components";
 import { withRouter, useRouter } from "next/router";
 import { message } from "antd";
 import useInput from "../hooks/useInput";
+import useOnlyNumberInput from "../hooks/useOnlyNumberInput";
 import { emptyCheck } from "../components/commonUtils";
 import wrapper from "../store/configureStore";
 import { END } from "redux-saga";
@@ -106,6 +107,88 @@ const CustomInput = styled(TextInput)`
 
 const Signup = () => {
   ////// VARIABLES //////
+  const countryList = [
+    {
+      name: `Brazil`,
+      value: `+55`,
+    },
+    {
+      name: `Chile`,
+      value: `+56`,
+    },
+    {
+      name: `Denmark`,
+      value: `+45`,
+    },
+    {
+      name: `Ecuador`,
+      value: `+593`,
+    },
+    {
+      name: `France`,
+      value: `+33`,
+    },
+    {
+      name: `Guatemala`,
+      value: `+502`,
+    },
+    {
+      name: `Hong Kong`,
+      value: `+852`,
+    },
+    {
+      name: `Italy`,
+      value: `+39`,
+    },
+    {
+      name: `Ireland`,
+      value: `+353`,
+    },
+    {
+      name: `Japan`,
+      value: `+81`,
+    },
+    {
+      name: `Monaco`,
+      value: `+377`,
+    },
+    {
+      name: `Mexico`,
+      value: `+52`,
+    },
+    {
+      name: `Philippine`,
+      value: `+63`,
+    },
+    {
+      name: `Portugal`,
+      value: `+351`,
+    },
+    {
+      name: `Paraguay`,
+      value: `+595`,
+    },
+    {
+      name: `South Korea`,
+      value: `+82`,
+    },
+    {
+      name: `Switzerland`,
+      value: `+41`,
+    },
+    {
+      name: `Taiwan`,
+      value: `+886`,
+    },
+    {
+      name: `United Kingdom`,
+      value: `+44`,
+    },
+    {
+      name: `Vietnam`,
+      value: `+84`,
+    },
+  ];
 
   ////// HOOKS //////
   const fileRef = useRef();
@@ -138,6 +221,7 @@ const Signup = () => {
   const [currentTab, setCurrentTab] = useState(0);
   const [currentStep, setCurrentStep] = useState(0);
 
+  const [comboCountryNo, setComboCountryNo] = useState(false);
   const [comboIdType, setComboIdType] = useState(false);
   const [comboAddrType, setComboAddrType] = useState(false);
 
@@ -151,6 +235,8 @@ const Signup = () => {
   const inputEmail = useInput("");
   const inputPassword = useInput("");
   const inputUserName = useInput("");
+  const inputCountryNo = useInput("");
+  const inputMobile = useOnlyNumberInput("");
   const inputGender = useInput("");
   const inputAddress = useInput("");
   const inputDetailAddress = useInput("");
@@ -269,6 +355,14 @@ const Signup = () => {
         return message.error(t(`7`));
       }
 
+      if (!emptyCheck(inputCountryNo.value)) {
+        return message.error(t(`55`));
+      }
+
+      if (!emptyCheck(inputMobile.value)) {
+        return message.error(t(`56`));
+      }
+
       if (!emptyCheck(inputGender.value)) {
         return message.error(t(`8`));
       }
@@ -320,6 +414,8 @@ const Signup = () => {
         email: inputEmail.value,
         password: inputPassword.value,
         username: inputUserName.value,
+        countryNo: inputCountryNo.value,
+        mobile: inputMobile.value,
         gender: inputGender.value,
         zoneCode: inputZoneCode.value,
         address: inputAddress.value,
@@ -342,6 +438,8 @@ const Signup = () => {
     inputEmail,
     inputPassword,
     inputUserName,
+    inputCountryNo,
+    inputMobile,
     inputGender,
     inputAddress,
     inputDetailAddress,
@@ -366,6 +464,8 @@ const Signup = () => {
     inputEmail.setValue("");
     inputPassword.setValue("");
     inputUserName.setValue("");
+    inputCountryNo.setValue("");
+    inputMobile.setValue("");
     inputGender.setValue("");
     inputAddress.setValue("");
     inputDetailAddress.setValue("");
@@ -620,6 +720,61 @@ const Signup = () => {
                           }
                           {...inputUserName}
                           placeholder={t(`29`)}
+                        />
+                      </Wrapper>
+                    </Wrapper>
+
+                    <Wrapper dr={`row`} margin={`10px 0 0`}>
+                      <Wrapper al={`flex-start`} width={`100px`}>
+                        <CustomLabel for={`inp-mobile`}>{t(`57`)}</CustomLabel>
+                      </Wrapper>
+
+                      <Wrapper
+                        dr={`row`}
+                        ju={`flex-start`}
+                        width={`calc(100% - 100px)`}
+                      >
+                        <Combo
+                          isBorder={true}
+                          itemAlign={`flex-start`}
+                          margin={`0 10px 0 0`}
+                          width={`100px`}
+                          height={`40px`}
+                          listHeight={`270px`}
+                          border={`none`}
+                          borderBottom={`1px solid #dfdfdf !important`}
+                          onClick={() => setComboCountryNo(!comboCountryNo)}
+                        >
+                          <ComboTitle>
+                            <Wrapper>
+                              {inputCountryNo.value || `Select`}
+                            </Wrapper>
+                            <CaretDownOutlined />
+                          </ComboTitle>
+
+                          <ComboList isView={comboCountryNo} width={`180%`}>
+                            {countryList.map((data, idx) => {
+                              return (
+                                <ComboListItem
+                                  key={idx}
+                                  isActive={inputCountryNo.value === data.value}
+                                  onClick={() =>
+                                    inputCountryNo.setValue(data.value)
+                                  }
+                                >
+                                  {data.name} ({data.value})
+                                </ComboListItem>
+                              );
+                            })}
+                          </ComboList>
+                        </Combo>
+
+                        <CustomInput
+                          id={`inp-mobile`}
+                          width={`calc(100% - 90px - 110px)`}
+                          {...inputMobile}
+                          placeholder={t(`57`)}
+                          maxLength={`11`}
                         />
                       </Wrapper>
                     </Wrapper>

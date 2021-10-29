@@ -22,6 +22,14 @@ module.exports = class User extends Model {
           type: DataTypes.STRING(30),
           allowNull: false,
         },
+        countryNo: {
+          type: DataTypes.STRING(10),
+          allowNull: false,
+        },
+        mobile: {
+          type: DataTypes.STRING(30),
+          allowNull: false,
+        },
         gender: {
           type: DataTypes.STRING(30),
           allowNull: false,
@@ -39,7 +47,7 @@ module.exports = class User extends Model {
           allowNull: false,
         },
         priceWallet: {
-          type: DataTypes.INTEGER,
+          type: DataTypes.DOUBLE,
           allowNull: true,
           defaultValue: 0,
         },

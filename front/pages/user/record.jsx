@@ -63,7 +63,7 @@ const Record = () => {
       return b["id"] - a["id"];
     });
     setViewData(dataList);
-  }, []);
+  }, [t]);
 
   useEffect(() => {
     if (!me) {

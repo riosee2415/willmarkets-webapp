@@ -52,7 +52,7 @@ const User = ({ width }) => {
       message.error(t(`11`));
       router.push("/login");
     }
-  }, [me]);
+  }, [me, t]);
 
   useEffect(() => {
     const query = router.query;
@@ -61,7 +61,7 @@ const User = ({ width }) => {
       message.error(t(`12`));
       router.push(`/user`);
     }
-  }, [router.query]);
+  }, [router.query, t]);
 
   return (
     <UserLayout>

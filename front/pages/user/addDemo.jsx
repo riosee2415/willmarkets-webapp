@@ -414,15 +414,18 @@ const AddDemo = () => {
                         </Wrapper>
                       }
                       extra={[
-                        <CommonButton
-                          key="1"
-                          kindOf={`white`}
-                          width={`180px`}
-                          height={`40px`}
-                          margin={`0 5px`}
-                          onClick={initValueHandler}>
-                          {t(`17`)}
-                        </CommonButton>,
+                        <Wrapper>
+                          <CommonButton
+                            key="1"
+                            kindOf={`white`}
+                            width={`180px`}
+                            height={`40px`}
+                            margin={`0 5px`}
+                            onClick={initValueHandler}>
+                            {t(`17`)}
+                          </CommonButton>
+                          ,
+                        </Wrapper>,
                       ]}
                     />
                   </Wrapper>

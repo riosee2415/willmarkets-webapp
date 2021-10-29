@@ -947,25 +947,28 @@ const Deposit = () => {
                         </Wrapper>
                       }
                       extra={[
-                        <CommonButton
-                          key="1"
-                          kindOf={`white`}
-                          width={`180px`}
-                          height={`40px`}
-                          margin={`0 5px`}
-                          onClick={initValueHandler}>
-                          {t(`29`)}
-                        </CommonButton>,
+                        <Wrapper dr={`row`}>
+                          <CommonButton
+                            key="1"
+                            kindOf={`white`}
+                            width={`180px`}
+                            height={`40px`}
+                            margin={`0 5px`}
+                            onClick={initValueHandler}>
+                            {t(`29`)}
+                          </CommonButton>
 
-                        <CommonButton
-                          key="1"
-                          kindOf={`blue`}
-                          width={`180px`}
-                          height={`40px`}
-                          margin={`0 5px`}
-                          onClick={() => moveLinkHandler(`/user`)}>
-                          {t(`40`)}
-                        </CommonButton>,
+                          <CommonButton
+                            key="1"
+                            kindOf={`blue`}
+                            width={`180px`}
+                            height={`40px`}
+                            margin={`0 5px`}
+                            padding={`10px`}
+                            onClick={() => setCurrentTab(1)}>
+                            {t(`40`)}
+                          </CommonButton>
+                        </Wrapper>,
                       ]}
                     />
                   </Wrapper>

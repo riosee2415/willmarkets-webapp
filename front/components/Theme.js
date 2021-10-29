@@ -9,7 +9,7 @@ export default {
   subTheme4_C: "#FFD321",
 
   red_C: "#ec3434",
-  blue_C: "#2755df",
+  blue_C: "#3353F2",
   // white
   white_C: "#ffffff",
   // black

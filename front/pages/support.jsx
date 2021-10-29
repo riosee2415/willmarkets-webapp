@@ -131,7 +131,7 @@ const Support = () => {
 
       <Wrapper bgColor={`#000105`} padding={`80px 0`}>
         <RsWrapper>
-          <Wrapper color={"#FF3C8E"} fontSize={`28px`} fontWeight={`500`}>
+          <Wrapper color={"#3353F2"} fontSize={`28px`} fontWeight={`300`}>
             {t(`7`)}
           </Wrapper>
 
@@ -145,133 +145,127 @@ const Support = () => {
             {t(`9`)}
           </Wrapper>
 
-          <Wrapper margin={`30px 0`}>
-            <Image
-              width={`auto`}
-              src={
-                "https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/willmarkets/assets/images/consulting/image_consulting.png"
-              }
-            />
-          </Wrapper>
-
-          <Wrapper
-            shadow={`2px 2px 8px #ddd7d9`}
-            bgColor={Theme.white_C}
-            radius={`8px`}
-            padding={`40px 70px`}
-            width={`auto`}>
-            <Wrapper dr={`row`} ju={`center`} al={`flex-end`}>
-              <Wrapper width={`85px`} al={"flex-start"}>
-                <TextLabel margin={`0 25px 0 0 `}>{t(`10`)}</TextLabel>
-              </Wrapper>
-
-              <Wrapper width={`450px`}>
-                <InputText
-                  width={width < 700 ? `calc(100% - 85px)` : ``}
-                  borderBottom={"1px solid #e3e3e3"}
-                  fontSize={`16px`}
-                  color={`#8b8686`}
-                  fontWeight={`400`}
-                  {...inputName}
-                />
-              </Wrapper>
-            </Wrapper>
-
-            <Wrapper
-              dr={`row`}
-              ju={`center`}
-              al={`flex-end`}
-              margin={`10px 0 0 0`}>
-              <Wrapper width={`85px`} al={"flex-start"}>
-                <TextLabel margin={`0 25px 0 0 `}>{t(`11`)}</TextLabel>
-              </Wrapper>
-
-              <Wrapper width={`450px`}>
-                <InputText
-                  maxLength={`13`}
-                  borderBottom={"1px solid #e3e3e3"}
-                  fontSize={`16px`}
-                  color={`#8b8686`}
-                  fontWeight={`400`}
-                  {...inputNumber}
-                />
-              </Wrapper>
-            </Wrapper>
-
-            <Wrapper
-              dr={`row`}
-              ju={`center`}
-              al={`flex-end`}
-              margin={`10px 0 0 0`}>
-              <Wrapper width={`85px`} al={"flex-start"}>
-                <TextLabel margin={`0 25px 0 0 `}>{t(`12`)}</TextLabel>
-              </Wrapper>
-              <Wrapper width={`450px`}>
-                <InputText
-                  borderBottom={"1px solid #e3e3e3"}
-                  fontSize={`16px`}
-                  color={`#8b8686`}
-                  fontWeight={`400`}
-                  {...inputEmail}
-                />
-              </Wrapper>
-            </Wrapper>
-
-            <Wrapper
-              dr={`row`}
-              ju={`center`}
-              al={`nomal`}
-              margin={`10px 0 0 0`}>
-              <Wrapper width={`85px`} al={`flex-start`}>
-                <TextLabel margin={`0 25px 0 0 `}>{t(`13`)}</TextLabel>
-              </Wrapper>
-              <Wrapper width={`450px`} borderBottom={"1px solid #e3e3e3"}>
-                <Content width={`100%`} {...inputContent} />
-              </Wrapper>
-            </Wrapper>
-          </Wrapper>
-
-          <Wrapper margin={`10px 0`}>
-            <Wrapper dr={`row`} ju={`flex-start`} width={`675px`}>
-              <RadioInput
-                color={`#FF3C8E`}
-                checked={inputAgree.value}
-                onClick={() => inputAgree.setValue(!inputAgree.value)}
+          <Wrapper dr={`row`} ju={`flex-start`} margin={`110px 0 0 0`}>
+            <Wrapper width={`50%`}>
+              <Image
+                width={`auto`}
+                src={`https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/willmarkets/assets/images/consulting/image_consulting.png`}
               />
+            </Wrapper>
+
+            <Wrapper dr={`row`} width={`50%`}>
               <Wrapper
-                fontSize={`15px`}
-                color={`white`}
-                margin={`0 5px 0 0`}
-                width={`auto`}
-                opacity={`0.6`}
-                cursor={`pointer`}
-                onClick={() => inputAgree.setValue(!inputAgree.value)}>
-                {t(`14`)}
+                bgColor={Theme.white_C}
+                radius={`8px`}
+                padding={`50px 15px 60px`}
+                width={`425px`}>
+                <Wrapper dr={`row`} al={`normal`}>
+                  <Wrapper width={`85px`} al={`flex-start`} ju={`flex-end`}>
+                    <TextLabel margin={`0 25px 0 0 `}>{t(`10`)}</TextLabel>
+                  </Wrapper>
+
+                  <Wrapper width={`250px`}>
+                    <InputText
+                      width={width < 700 ? `calc(100% - 85px)` : ``}
+                      borderBottom={"1px solid #e3e3e3"}
+                      fontSize={`16px`}
+                      color={`#8b8686`}
+                      fontWeight={`400`}
+                      {...inputName}
+                    />
+                  </Wrapper>
+                </Wrapper>
+
+                <Wrapper dr={`row`} al={`normal`} margin={`30px 0 0 0`}>
+                  <Wrapper width={`85px`} al={"flex-start"} ju={`flex-end`}>
+                    <TextLabel margin={`0 25px 0 0 `}>{t(`11`)}</TextLabel>
+                  </Wrapper>
+
+                  <Wrapper width={`250px`}>
+                    <InputText
+                      maxLength={`13`}
+                      borderBottom={"1px solid #e3e3e3"}
+                      fontSize={`16px`}
+                      color={`#8b8686`}
+                      fontWeight={`400`}
+                      {...inputNumber}
+                    />
+                  </Wrapper>
+                </Wrapper>
+
+                <Wrapper dr={`row`} al={`normal`} margin={`30px 0 0 0`}>
+                  <Wrapper width={`85px`} al={"flex-start"} ju={`flex-end`}>
+                    <TextLabel margin={`0 25px 0 0 `}>{t(`12`)}</TextLabel>
+                  </Wrapper>
+                  <Wrapper width={`250px`}>
+                    <InputText
+                      borderBottom={"1px solid #e3e3e3"}
+                      fontSize={`16px`}
+                      color={`#8b8686`}
+                      fontWeight={`400`}
+                      {...inputEmail}
+                    />
+                  </Wrapper>
+                </Wrapper>
+
+                <Wrapper dr={`row`} al={`baseline`} margin={`40px 0 0 0`}>
+                  <Wrapper width={`85px`} al={`flex-start`} ju={`flex-end`}>
+                    <TextLabel margin={`0 25px 0 0 `}>{t(`13`)}</TextLabel>
+                  </Wrapper>
+                  <Wrapper width={`250px`} borderBottom={"1px solid #e3e3e3"}>
+                    <Content width={`100%`} {...inputContent} />
+                  </Wrapper>
+                </Wrapper>
               </Wrapper>
-              <Wrapper
-                cursor={`pointer`}
-                fontSize={`13px`}
-                color={`white`}
-                width={`auto`}
-                radius={`5px`}
-                padding={`0 6px`}
-                bgColor={"#8b8686"}>
-                {t(`15`)}
+
+              <Wrapper margin={`10px 0`}>
+                <Wrapper ju={`flex-start`} width={`475px`} margin={`0 30px`}>
+                  <Wrapper
+                    dr={`row`}
+                    ju={`flex-start`}
+                    margin={`0px 10px 0 0px`}>
+                    <RadioInput
+                      color={`#FF3C8E`}
+                      checked={inputAgree.value}
+                      onClick={() => inputAgree.setValue(!inputAgree.value)}
+                    />
+                    <Wrapper
+                      fontSize={`15px`}
+                      color={`white`}
+                      margin={`0 30px 0 0`}
+                      width={`auto`}
+                      opacity={`0.6`}
+                      cursor={`pointer`}
+                      onClick={() => inputAgree.setValue(!inputAgree.value)}>
+                      {t(`14`)}
+                    </Wrapper>
+                    <Wrapper
+                      cursor={`pointer`}
+                      fontSize={`13px`}
+                      color={`white`}
+                      width={`auto`}
+                      radius={`5px`}
+                      padding={`0 6px`}
+                      bgColor={"#8b8686"}>
+                      {t(`15`)}
+                    </Wrapper>
+                  </Wrapper>
+
+                  <Wrapper margin={`50px 80px 0 0`} fontSize={`32px`}>
+                    <CommonButton
+                      bgColor={`#3353F2`}
+                      color={`#fff`}
+                      fontWeight={`300`}
+                      fontSize={`24px`}
+                      padding={`6px 50px 8px`}
+                      radius={`6px`}
+                      onClick={createQuestionHandler}>
+                      {t(`7`)}
+                    </CommonButton>
+                  </Wrapper>
+                </Wrapper>
               </Wrapper>
             </Wrapper>
-          </Wrapper>
-
-          <Wrapper margin={`24px 0 0 0`} fontSize={`32px`}>
-            <CommonButton
-              bgColor={`#FF3C8E`}
-              color={`#fff`}
-              fontWeight={`500`}
-              fontSize={`24px`}
-              padding={`6px 50px 8px`}
-              radius={`6px`}
-              onClick={createQuestionHandler}>
-              {t(`7`)}
-            </CommonButton>
           </Wrapper>
         </RsWrapper>
       </Wrapper>

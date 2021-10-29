@@ -25,6 +25,7 @@ import {
 import ClientLayout from "../components/ClientLayout";
 import Theme from "../components/Theme";
 import { useTranslation } from "react-i18next";
+import i18next from "i18next";
 
 const CustomLabel = styled(Label)`
   display: flex;
@@ -208,8 +209,7 @@ const Find = () => {
         top={`0`}
         left={`0`}
         zIndex={`0`}
-        minHeight={`100vh`}
-      >
+        minHeight={`100vh`}>
         <Image
           height={`100vh`}
           src={`https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/willmarkets/assets/images/banner/main_banner02.png`}
@@ -221,15 +221,13 @@ const Find = () => {
           position={`relative`}
           zIndex={`1`}
           al={`flex-end`}
-          minHeight={`100vh`}
-        >
+          minHeight={`100vh`}>
           <Wrapper
             margin={`0 45px 0 0`}
             padding={`40px 40px 30px`}
             width={`500px`}
             bgColor={`#fff`}
-            shadow={`1px 1px 8px #dedede`}
-          >
+            shadow={`1px 1px 8px #dedede`}>
             <Wrapper dr={`row`} ju={`flex-start`} margin={`0 0 30px`}>
               <Image
                 width={`50px`}
@@ -240,8 +238,7 @@ const Find = () => {
                 margin={`0 0 0 10px`}
                 fontSize={`20px`}
                 fontWeight={`500`}
-                color={`#242424`}
-              >
+                color={`#242424`}>
                 {t(`10`)}
               </Wrapper>
             </Wrapper>
@@ -257,7 +254,11 @@ const Find = () => {
                     <Wrapper dr={`row`} ju={`flex-start`}>
                       <CustomInput
                         id={`inp-email`}
-                        width={`calc(100% - 90px)`}
+                        width={
+                          i18next.language === `en`
+                            ? `calc(100% - 110px)`
+                            : `calc(100% - 90px)`
+                        }
                         {...inputEmail}
                         placeholder={t(`11`)}
                         readOnly={isConfirmEmail}
@@ -268,7 +269,7 @@ const Find = () => {
                         }}
                       />
                       <CommonButton
-                        width={`80px`}
+                        width={i18next.language === `en` ? `100px` : `80px`}
                         height={`38px`}
                         lineHeight={`34px`}
                         margin={`0 0 0 10px`}
@@ -276,8 +277,7 @@ const Find = () => {
                         color={`#fff`}
                         fontWeight={`500`}
                         radius={`5px`}
-                        onClick={findPasswordHandler}
-                      >
+                        onClick={findPasswordHandler}>
                         {isConfirmEmail ? t(`12`) : t(`13`)}
                       </CommonButton>
                     </Wrapper>
@@ -298,8 +298,7 @@ const Find = () => {
                           color={`#030303`}
                           fontWeight={`500`}
                           radius={`5px`}
-                          onClick={findPasswordConfirmHandler}
-                        >
+                          onClick={findPasswordConfirmHandler}>
                           {t(`15`)}
                         </CommonButton>
                       </Wrapper>
@@ -319,8 +318,7 @@ const Find = () => {
                   <Wrapper
                     dr={`row`}
                     ju={`flex-start`}
-                    width={`calc(100% - 120px)`}
-                  >
+                    width={`calc(100% - 120px)`}>
                     <CustomInput
                       type={`password`}
                       id={`inp-password`}
@@ -340,8 +338,7 @@ const Find = () => {
                   <Wrapper
                     dr={`row`}
                     ju={`flex-start`}
-                    width={`calc(100% - 120px)`}
-                  >
+                    width={`calc(100% - 120px)`}>
                     <CustomInput
                       type={`password`}
                       id={`inp-passwordCheck`}
@@ -355,7 +352,7 @@ const Find = () => {
 
             <Wrapper>
               <CommonButton
-                width={`180px`}
+                width={`200px`}
                 height={`45px`}
                 lineHeight={`40px`}
                 fontSize={`20px`}
@@ -363,8 +360,7 @@ const Find = () => {
                 radius={`8px`}
                 bgColor={`#f8459b`}
                 color={`#fff`}
-                onClick={findPasswordUpdateHandler}
-              >
+                onClick={findPasswordUpdateHandler}>
                 {currentTab === 0 ? t(`10`) : t(`18`)}
               </CommonButton>
             </Wrapper>

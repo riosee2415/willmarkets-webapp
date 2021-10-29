@@ -196,7 +196,7 @@ const Intro = () => {
               width={`auto`}
               margin={`30px 0 0`}
               padding={
-                i18next.language === `ko` ? `0 0 0 240px` : "0 0 0 190px"
+                i18next.language === `en` ? `0 0 0 190px` : `0 0 0 240px`
               }
               fontWeight={`300`}
               textAlign={`right`}>

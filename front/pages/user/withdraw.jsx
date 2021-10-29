@@ -250,7 +250,7 @@ const Withdraw = () => {
       moveLinkHandler("/user");
       initValueHandler();
     }
-  }, [inputSecret]);
+  }, [inputSecret, t]);
 
   ////// USE EFFECT //////
   useEffect(() => {
@@ -260,7 +260,7 @@ const Withdraw = () => {
     } else if (me.userType === `1`) {
       router.push("/user?access=false");
     }
-  }, [me]);
+  }, [me, t]);
 
   useEffect(() => {
     initValueHandler();
@@ -269,7 +269,7 @@ const Withdraw = () => {
   useEffect(() => {
     if (st_userFindPasswordDone) {
       setIsSendEmail(true);
-      message.success("11");
+      message.success(t(`11`));
     }
   }, [st_userFindPasswordDone]);
 
@@ -516,25 +516,27 @@ const Withdraw = () => {
                         </Wrapper>
                       }
                       extra={[
-                        <CommonButton
-                          key="1"
-                          kindOf={`white`}
-                          width={`180px`}
-                          height={`40px`}
-                          margin={`0 5px`}
-                          onClick={initValueHandler}>
-                          {t(`27`)}
-                        </CommonButton>,
-
-                        <CommonButton
-                          key="1"
-                          kindOf={`blue`}
-                          width={`180px`}
-                          height={`40px`}
-                          margin={`0 5px`}
-                          onClick={() => moveLinkHandler(`/`)}>
-                          {t(`28`)}
-                        </CommonButton>,
+                        <Wrapper dr={`row`}>
+                          <CommonButton
+                            key="1"
+                            kindOf={`white`}
+                            width={`180px`}
+                            height={`40px`}
+                            margin={`0 5px`}
+                            onClick={initValueHandler}>
+                            {t(`27`)}
+                          </CommonButton>
+                          ,
+                          <CommonButton
+                            key="1"
+                            kindOf={`blue`}
+                            width={`180px`}
+                            height={`40px`}
+                            margin={`0 5px`}
+                            onClick={() => moveLinkHandler(`/`)}>
+                            {t(`28`)}
+                          </CommonButton>
+                        </Wrapper>,
                       ]}
                     />
                   </Wrapper>

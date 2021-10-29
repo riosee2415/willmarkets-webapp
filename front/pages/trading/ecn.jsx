@@ -23,15 +23,20 @@ const Ecn = () => {
 
       <Wrapper padding={`80px 0`} bgColor={`#eeeeee`}>
         <RsWrapper>
-          <Wrapper display={`block`} width={`auto`} fontSize={`26px`}>
+          <Wrapper
+            display={`block`}
+            width={`auto`}
+            fontSize={`24px`}
+            fontWeight={`400`}>
             <Text display={`inline`}>{t(`1`).split(`\n`)[0]}</Text>
             {t(`1`).split(`\n`)[1]}
           </Wrapper>
 
-          <Wrapper margin={`40px 0 20px`} width={`auto`}>
+          <Wrapper margin={`40px 0 20px`}>
             <Image
-              width={`auto`}
-              src={`https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/willmarkets/assets/images/trade/image_ecn.png`}
+              width={`calc(960px - 440px)`}
+              height={`566px`}
+              border={`1px solid red`}
             />
           </Wrapper>
 

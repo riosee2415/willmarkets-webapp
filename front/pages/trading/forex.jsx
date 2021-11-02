@@ -22,35 +22,34 @@ const Forex = () => {
       <SubBanner />
 
       <Wrapper padding={`80px 0`} bgColor={`#eeeeee`}>
-        <RsWrapper>
-          <Wrapper display={`block`} width={`auto`} fontSize={`30px`}>
-            {t(`1`).split(`\n`)[0]}
-            <Text display={`inline`} margin={`0 0 0 5px`}>
-              {t(`1`).split(`\n`)[1]}
-            </Text>
-          </Wrapper>
+        <Wrapper display={`block`} width={`auto`} fontSize={`30px`}>
+          {t(`1`).split(`\n`)[0]}
+          <Text display={`inline`} margin={`0 0 0 5px`}>
+            {t(`1`).split(`\n`)[1]}
+          </Text>
+        </Wrapper>
 
-          <Wrapper margin={`40px 0 20px`} width={`auto`}>
+        <Wrapper dr={`row`} ju={`flex-start`} margin={`50px 0 0 0`}>
+          <Wrapper margin={`40px 0 20px`} width={`50%`}>
             <Image
-              width={`auto`}
-              src={`https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/willmarkets/assets/images/trade/image_ecn.png`}
+              src={`https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/willmarkets/assets/images/trade/image_1.png`}
             />
           </Wrapper>
 
-          <Wrapper width={`auto`} textAlign={`center`}>
+          <Wrapper width={`40%`} margin={`0 0 0 60px`} textAlign={`center`}>
             {t(`2`)}
             <br />
             {t(`3`).split(`\n`)[0]}
             <br />
             {t(`3`).split(`\n`)[1]}
           </Wrapper>
-        </RsWrapper>
+        </Wrapper>
       </Wrapper>
 
       <Wrapper padding={`60px 0`} color={`#fff`} bgColor={`#000105`}>
         <RsWrapper>
           <Wrapper display={`block`} width={`auto`} fontSize={`26px`}>
-            <Text display={`inline`} padding={`0 0 0 5px`} color={`#ff50b0`}>
+            <Text display={`inline`} padding={`0 0 0 5px`} color={`#3353F2`}>
               {t(`4`).split(`\n`)[0]}
             </Text>
             {t(`4`).split(`\n`)[1]}
@@ -75,7 +74,7 @@ const Forex = () => {
                 <Image
                   margin={`0 10px 0 0`}
                   width={`auto`}
-                  src={`https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/willmarkets/assets/images/download/icon_check2.png`}
+                  src={`https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/willmarkets/assets/images/trade/icon_check.png`}
                 />
                 {t(`7`)}
               </Wrapper>
@@ -101,7 +100,7 @@ const Forex = () => {
                 <Image
                   margin={`0 10px 0 0`}
                   width={`auto`}
-                  src={`https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/willmarkets/assets/images/download/icon_check2.png`}
+                  src={`https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/willmarkets/assets/images/trade/icon_check.png`}
                 />
                 {t(`11`)}
               </Wrapper>
@@ -119,7 +118,7 @@ const Forex = () => {
                 <Image
                   margin={`0 10px 0 0`}
                   width={`auto`}
-                  src={`https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/willmarkets/assets/images/download/icon_check2.png`}
+                  src={`https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/willmarkets/assets/images/trade/icon_check.png`}
                 />
                 {t(`13`)}
               </Wrapper>

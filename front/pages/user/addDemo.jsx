@@ -22,6 +22,7 @@ import {
 import UserLayout from "../../components/user/UserLayout";
 import Theme from "../../components/Theme";
 import { DEMO_ACCOUNT_CREATE_REQUEST } from "../../reducers/demoAccount";
+import i18next from "i18next";
 
 const TabWrapper = styled(Wrapper)`
   flex-direction: row;
@@ -172,6 +173,7 @@ const AddDemo = () => {
     dispatch({
       type: DEMO_ACCOUNT_CREATE_REQUEST,
       data: {
+        language: i18next.language,
         userId: me.id,
         platform: inputPlatform.value,
         type: inputType.value,

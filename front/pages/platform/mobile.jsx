@@ -40,7 +40,7 @@ const Mobile = () => {
               width={`auto`}
               fontSize={`24px`}>
               {t(`1`).split(`\n`)[0]}
-              <Text padding={`0 5px`} fontWeight={`400`} color={`#ec5bac`}>
+              <Text padding={`0 5px`} fontWeight={`400`} color={`#6D7BFF`}>
                 {t(`1`).split(`\n`)[1]}
               </Text>
               {t(`1`).split(`\n`)[2]}
@@ -79,9 +79,9 @@ const Mobile = () => {
               lineHeight={`43px`}
               fontSize={`18px`}
               fontWeight={`500`}
-              color={`#2a2925`}
-              bgColor={`#f9e96f`}
-              hoverBgColor={`#fae648`}
+              color={`#ffffff`}
+              bgColor={`#3353F2`}
+              hoverBgColor={`#3353F2`}
               radius={`10px`}>
               {t(`4`)}
               <RightOutlined
@@ -104,7 +104,7 @@ const Mobile = () => {
               width={`auto`}
               fontSize={`24px`}>
               {t(`5`).split(`\n`)[0]}
-              <Text padding={`0 5px`} fontWeight={`400`} color={`#ec5bac`}>
+              <Text padding={`0 5px`} fontWeight={`400`} color={`#6D7BFF`}>
                 {t(`5`).split(`\n`)[1]}
               </Text>
               {t(`5`).split(`\n`)[2]}
@@ -149,9 +149,9 @@ const Mobile = () => {
               lineHeight={`43px`}
               fontSize={`18px`}
               fontWeight={`500`}
-              color={`#2a2925`}
-              bgColor={`#f9e96f`}
-              hoverBgColor={`#fae648`}
+              color={`#ffffff`}
+              bgColor={`#3353F2`}
+              hoverBgColor={`#3353F2`}
               radius={`10px`}>
               {t(`4`)}
               <RightOutlined
@@ -256,9 +256,12 @@ const Mobile = () => {
             <Wrapper al={`flex-start`} ju={`space-between`} width={`50%`}>
               <Wrapper al={`flex-start`} width={`auto`}>
                 <Wrapper display={`block`} fontSize={`25px`} fontWeight={`500`}>
-                  {t(`9`).split(`\n`)[0]}
-                  <Text display={`inline`} margin={`0 0 0 5px`}>
-                    {t(`9`).split(`\n`)[1]}
+                  {t(`15`).split(`\n`)[0]}
+                  <Text
+                    display={`inline`}
+                    margin={`0 0 0 5px`}
+                    color={`#3353F2`}>
+                    {t(`15`).split(`\n`)[1]}
                   </Text>
                 </Wrapper>
 
@@ -288,7 +291,7 @@ const Mobile = () => {
                 <Image
                   margin={`0 10px 0 0`}
                   width={`auto`}
-                  src={`https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/willmarkets/assets/images/download/icon_check2.png`}
+                  src={`https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/willmarkets/assets/images/trade/icon_check.png`}
                 />
                 {t(`16`)}
               </Wrapper>
@@ -302,7 +305,7 @@ const Mobile = () => {
                 <Image
                   margin={`0 10px 0 0`}
                   width={`auto`}
-                  src={`https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/willmarkets/assets/images/download/icon_check2.png`}
+                  src={`https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/willmarkets/assets/images/trade/icon_check.png`}
                 />
                 {t(`17`)}
               </Wrapper>
@@ -316,7 +319,7 @@ const Mobile = () => {
                 <Image
                   margin={`0 10px 0 0`}
                   width={`auto`}
-                  src={`https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/willmarkets/assets/images/download/icon_check2.png`}
+                  src={`https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/willmarkets/assets/images/trade/icon_check.png`}
                 />
                 {t(`18`)}
               </Wrapper>
@@ -330,7 +333,7 @@ const Mobile = () => {
                 <Image
                   margin={`0 10px 0 0`}
                   width={`auto`}
-                  src={`https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/willmarkets/assets/images/download/icon_check2.png`}
+                  src={`https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/willmarkets/assets/images/trade/icon_check.png`}
                 />
                 {t(`19`)}
               </Wrapper>
@@ -344,7 +347,7 @@ const Mobile = () => {
                 <Image
                   margin={`0 10px 0 0`}
                   width={`auto`}
-                  src={`https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/willmarkets/assets/images/download/icon_check2.png`}
+                  src={`https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/willmarkets/assets/images/trade/icon_check.png`}
                 />
                 {t(`20`)}
               </Wrapper>
@@ -358,7 +361,7 @@ const Mobile = () => {
                 <Image
                   margin={`0 10px 0 0`}
                   width={`auto`}
-                  src={`https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/willmarkets/assets/images/download/icon_check2.png`}
+                  src={`https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/willmarkets/assets/images/trade/icon_check.png`}
                 />
                 {t(`21`)}
               </Wrapper>
@@ -372,7 +375,7 @@ const Mobile = () => {
                 <Image
                   margin={`0 10px 0 0`}
                   width={`auto`}
-                  src={`https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/willmarkets/assets/images/download/icon_check2.png`}
+                  src={`https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/willmarkets/assets/images/trade/icon_check.png`}
                 />
                 {t(`22`)}
               </Wrapper>
@@ -386,7 +389,7 @@ const Mobile = () => {
                 <Image
                   margin={`0 10px 0 0`}
                   width={`auto`}
-                  src={`https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/willmarkets/assets/images/download/icon_check2.png`}
+                  src={`https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/willmarkets/assets/images/trade/icon_check.png`}
                 />
                 {t(`23`)}
               </Wrapper>
@@ -400,7 +403,7 @@ const Mobile = () => {
                 <Image
                   margin={`0 10px 0 0`}
                   width={`auto`}
-                  src={`https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/willmarkets/assets/images/download/icon_check2.png`}
+                  src={`https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/willmarkets/assets/images/trade/icon_check.png`}
                 />
                 {t(`24`)}
               </Wrapper>
@@ -414,7 +417,7 @@ const Mobile = () => {
                 <Image
                   margin={`0 10px 0 0`}
                   width={`auto`}
-                  src={`https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/willmarkets/assets/images/download/icon_check2.png`}
+                  src={`https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/willmarkets/assets/images/trade/icon_check.png`}
                 />
                 {t(`25`)}
               </Wrapper>
@@ -428,7 +431,7 @@ const Mobile = () => {
                 <Image
                   margin={`0 10px 0 0`}
                   width={`auto`}
-                  src={`https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/willmarkets/assets/images/download/icon_check2.png`}
+                  src={`https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/willmarkets/assets/images/trade/icon_check.png`}
                 />
                 {t(`26`)}
               </Wrapper>
@@ -442,7 +445,7 @@ const Mobile = () => {
                 <Image
                   margin={`0 10px 0 0`}
                   width={`auto`}
-                  src={`https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/willmarkets/assets/images/download/icon_check2.png`}
+                  src={`https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/willmarkets/assets/images/trade/icon_check.png`}
                 />
                 {t(`27`)}
               </Wrapper>

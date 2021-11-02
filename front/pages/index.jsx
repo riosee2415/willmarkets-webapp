@@ -24,6 +24,7 @@ import { useRouter } from "next/router";
 import styled from "styled-components";
 import { QUESTION_CREATE_REQUEST } from "../reducers/question";
 import { useTranslation } from "react-i18next";
+import i18next from "i18next";
 
 const CustomInput = styled(TextInput)`
   border-radius: ${(props) => props.radius};
@@ -101,6 +102,7 @@ const Home = ({ width }) => {
     dispatch({
       type: QUESTION_CREATE_REQUEST,
       data: {
+        language: i18next.language,
         name: inputName.value,
         mobile: inputPhone.value,
         email: inputEmail.value,
@@ -148,17 +150,15 @@ const Home = ({ width }) => {
           right={`30px`}
           zIndex={`7`}
           width={`auto`}
-          bgColor={`#EFE4E9`}
+          bgColor={`#E9EDFF`}
           radius={`6px`}
-          shadow={"2px 2px 10px #a9a9b7"}
-        >
+          shadow={"2px 2px 10px #a9a9b7"}>
           <Wrapper
             dr={`row`}
             ju={`space-between`}
             padding={`5px 10px`}
             bgColor={`#fff`}
-            radius={`6px`}
-          >
+            radius={`6px`}>
             <Wrapper width={`auto`} fontSize={`14px`} fontWeight={`600`}>
               {t(`6`)}
             </Wrapper>
@@ -171,17 +171,16 @@ const Home = ({ width }) => {
             width={`280px`}
             bgColor={`#fff`}
             padding={`12px`}
-            zIndex={`5`}
-          >
+            zIndex={`5`}>
             <Image
               top={`40px`}
               position={`absolute`}
               objectFit={`fill`}
               background-size={`cover`}
-              width={`50px`}
-              height={`50px`}
+              width={`51px`}
+              height={`46px`}
               src={
-                "https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/willmarkets/assets/images/logo/big_logo.png"
+                "https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/willmarkets/assets/images/logo/logo_big.png"
               }
             />
 
@@ -189,8 +188,7 @@ const Home = ({ width }) => {
               <Wrapper
                 lineHeight={`18px`}
                 fontSize={`13px`}
-                margin={`24px 0 0 0`}
-              >
+                margin={`24px 0 0 0`}>
                 {t(`7`)}
               </Wrapper>
               <Wrapper>
@@ -198,8 +196,7 @@ const Home = ({ width }) => {
                   fontSize={`12px`}
                   al={`flex-start`}
                   fontWeight={`600`}
-                  margin={`10px 0 4px 0`}
-                >
+                  margin={`10px 0 4px 0`}>
                   {t(`8`)}
                 </Wrapper>
                 <CustomInput {...inputName} />
@@ -210,8 +207,7 @@ const Home = ({ width }) => {
                   fontSize={`12px`}
                   al={`flex-start`}
                   margin={`10px 0 4px 0`}
-                  fontWeight={`600`}
-                >
+                  fontWeight={`600`}>
                   {t(`9`)}
                 </Wrapper>
                 <CustomInput {...inputPhone} />
@@ -221,8 +217,7 @@ const Home = ({ width }) => {
                   fontSize={`12px`}
                   al={`flex-start`}
                   margin={`10px 0 4px 0`}
-                  fontWeight={`600`}
-                >
+                  fontWeight={`600`}>
                   {t(`10`)}
                 </Wrapper>
                 <CustomInput {...inputEmail} />
@@ -232,8 +227,7 @@ const Home = ({ width }) => {
                   fontSize={`12px`}
                   al={`flex-start`}
                   margin={`10px 0 4px 0`}
-                  fontWeight={`600`}
-                >
+                  fontWeight={`600`}>
                   {t(`11`)}
                 </Wrapper>
                 <Content {...inputText} />
@@ -249,9 +243,8 @@ const Home = ({ width }) => {
               margin={`0 0 10px 0`}
               color={`#fff`}
               bgColor={`#000104`}
-              onClick={createQuestionHandler}
-            >
-              {t(`12`)}
+              onClick={createQuestionHandler}>
+              {t(`12`)}asdasd
             </CommonButton>
           </Wrapper>
         </Wrapper>
@@ -263,8 +256,7 @@ const Home = ({ width }) => {
           color={`#fff`}
           width={`auto`}
           cursor={`pointer`}
-          onClick={onClickToggleHanlder}
-        >
+          onClick={onClickToggleHanlder}>
           <Wrapper dr={`row`}>
             <Wrapper width={`auto`}>
               <Image
@@ -287,8 +279,7 @@ const Home = ({ width }) => {
           width={`100%`}
           height={`100%`}
           bgImg={`url('https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/willmarkets/assets/images/main/back_download.png')`}
-          zIndex={`-2`}
-        ></Wrapper>
+          zIndex={`-2`}></Wrapper>
 
         <Wrapper
           position={`absolute`}
@@ -297,10 +288,9 @@ const Home = ({ width }) => {
           width={`100%`}
           height={`100%`}
           bgColor={`rgba(0, 0, 0, 0.5)`}
-          zIndex={`-1`}
-        ></Wrapper>
+          zIndex={`-1`}></Wrapper>
 
-        <Wrapper fontSize={`30px`} fontWeight={`500`} color={`#f776be`}>
+        <Wrapper fontSize={`30px`} fontWeight={`500`} color={`#3353F2`}>
           {t(`13`)}
         </Wrapper>
 
@@ -308,8 +298,7 @@ const Home = ({ width }) => {
           margin={`15px 0 0`}
           fontSize={`19px`}
           fontWeight={`400`}
-          color={`#fff`}
-        >
+          color={`#fff`}>
           {t(`14`)}
         </Wrapper>
 
@@ -327,8 +316,7 @@ const Home = ({ width }) => {
             width={`auto`}
             margin={`0 80px`}
             color={`#fff`}
-            fontSize={`34px`}
-          >
+            fontSize={`34px`}>
             <PlusOutlined />
           </Wrapper>
 
@@ -345,8 +333,7 @@ const Home = ({ width }) => {
             width={`auto`}
             margin={`0 80px`}
             color={`#fff`}
-            fontSize={`34px`}
-          >
+            fontSize={`34px`}>
             <PlusOutlined />
           </Wrapper>
 
@@ -370,16 +357,14 @@ const Home = ({ width }) => {
             radius={`30px`}
             fontSize={`17px`}
             fontWeight={`500`}
-            onClick={() => moveLinkHandler(`/platform/pc`)}
-          >
+            onClick={() => moveLinkHandler(`/platform/pc`)}>
             {t(`15`)}
             <Wrapper
               position={`absolute`}
               right={`40px`}
               top={`50%`}
               margin={`-6px 0 0 0`}
-              width={`auto`}
-            >
+              width={`auto`}>
               <RightOutlined />
             </Wrapper>
           </CommonButton>
@@ -389,8 +374,7 @@ const Home = ({ width }) => {
           position={`absolute`}
           right={`180px`}
           bottom={`40px`}
-          width={`auto`}
-        >
+          width={`auto`}>
           <Image
             src={`https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/willmarkets/assets/images/main/iphone.png`}
           />
@@ -415,8 +399,7 @@ const Home = ({ width }) => {
             width={`auto`}
             color={`#ffea6b`}
             fontSize={`18px`}
-            fontWeight={`500`}
-          >
+            fontWeight={`500`}>
             ※{t(`16`)}※
           </Wrapper>
 
@@ -425,22 +408,19 @@ const Home = ({ width }) => {
             fontWeight={`300`}
             color={`#fff`}
             textAlign={`center`}
-            lineHeight={`1.8`}
-          >
+            lineHeight={`1.8`}>
             <Wrapper
               dr={`row`}
               width={`auto`}
               color={`inherit`}
-              fontSize={`inherit`}
-            >
+              fontSize={`inherit`}>
               {t(`17`).split(`\n`)[0]}
               <Wrapper
                 padding={`0 0 0 5px`}
                 width={`auto`}
                 fontWeight={`500`}
                 color={`inherit`}
-                fontSize={`inherit`}
-              >
+                fontSize={`inherit`}>
                 {t(`17`).split(`\n`)[1]}
               </Wrapper>
               {t(`17`).split(`\n`)[2]}

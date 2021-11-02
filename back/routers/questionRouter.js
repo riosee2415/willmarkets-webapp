@@ -13,6 +13,8 @@ router.get(
   async (req, res, next) => {
     const { page, search } = req.query;
     const { listType } = req.params;
+    const { language } = req.body;
+
     const LIMIT = 10;
 
     const _page = page ? page : 1;
@@ -150,7 +152,7 @@ router.get(
 );
 
 router.post("/create", async (req, res, next) => {
-  const { name, mobile, email, content } = req.body;
+  const { language, name, mobile, email, content } = req.body;
 
   try {
     const createResult = await Question.create({
@@ -217,7 +219,13 @@ router.post("/create", async (req, res, next) => {
     return res.status(201).json({ result: true });
   } catch (error) {
     console.error(error);
-    return res.status(401).send("문의 데이터를 생성할 수 없습니다. [CODE 037]");
+    return res
+      .status(401)
+      .send(
+        language === "ko"
+          ? `문의 데이터를 생성할 수 없습니다. [CODE 037]`
+          : `Could not create inquiry data. [CODE 037]`
+      );
   }
 });
 

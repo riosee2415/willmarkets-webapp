@@ -72,8 +72,8 @@ const Tab = styled(Wrapper)`
   ${(props) =>
     props.isActive &&
     `
-    background: #f9edf8 !important;
-    box-shadow: 0px 0px 10px #f4c6f2;
+    background: #E2E5FF !important;
+    box-shadow: 0px 0px 10px ##E2E5FF;
 
   `}
 `;
@@ -277,6 +277,7 @@ const Signup = () => {
     dispatch({
       type: USER_CHECK_EMAIL_REQUEST,
       data: {
+        language: i18next.language,
         email: inputEmail.value,
       },
     });
@@ -290,6 +291,7 @@ const Signup = () => {
     dispatch({
       type: USER_SECRET_EMAIL_REQUEST,
       data: {
+        language: i18next.language,
         email: inputEmail.value,
       },
     });
@@ -337,7 +339,10 @@ const Signup = () => {
 
     dispatch({
       type: USER_ID_IMAGE_FILE_REQUEST,
-      data: formData,
+      data: {
+        language: i18next.language,
+        formData,
+      },
     });
   }, []);
 
@@ -410,6 +415,7 @@ const Signup = () => {
     dispatch({
       type: USER_SIGNUP_REQUEST,
       data: {
+        language: i18next.language,
         type: currentTab === 0 ? `2` : `1`,
         email: inputEmail.value,
         password: inputPassword.value,
@@ -570,7 +576,7 @@ const Signup = () => {
           al={`flex-end`}
           minHeight={`100vh`}>
           <Wrapper
-            margin={`0 45px 0 0`}
+            margin={`75px 45px 0 0`}
             padding={`25px 20px`}
             width={`550px`}
             bgColor={`#fff`}
@@ -578,7 +584,7 @@ const Signup = () => {
             <Wrapper dr={`row`} ju={`flex-start`} margin={`0 0 30px`}>
               <Image
                 width={`50px`}
-                src={`https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/willmarkets/assets/images/logo/big_logo.png`}
+                src={`https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/willmarkets/assets/images/logo/logo_big.png`}
               />
               <Wrapper
                 width={`auto`}
@@ -732,8 +738,7 @@ const Signup = () => {
                       <Wrapper
                         dr={`row`}
                         ju={`flex-start`}
-                        width={`calc(100% - 100px)`}
-                      >
+                        width={`calc(100% - 100px)`}>
                         <Combo
                           isBorder={true}
                           itemAlign={`flex-start`}
@@ -743,8 +748,7 @@ const Signup = () => {
                           listHeight={`270px`}
                           border={`none`}
                           borderBottom={`1px solid #dfdfdf !important`}
-                          onClick={() => setComboCountryNo(!comboCountryNo)}
-                        >
+                          onClick={() => setComboCountryNo(!comboCountryNo)}>
                           <ComboTitle>
                             <Wrapper>
                               {inputCountryNo.value || `Select`}
@@ -760,8 +764,7 @@ const Signup = () => {
                                   isActive={inputCountryNo.value === data.value}
                                   onClick={() =>
                                     inputCountryNo.setValue(data.value)
-                                  }
-                                >
+                                  }>
                                   {data.name} ({data.value})
                                 </ComboListItem>
                               );
@@ -793,7 +796,7 @@ const Signup = () => {
                         <Wrapper dr={`row`} width={`auto`} margin={`0 10px`}>
                           <RadioInput
                             id={`inp-gender-1`}
-                            color={`#e87f5d`}
+                            color={`#313B91`}
                             value={t(`31`)}
                             checked={inputGender.value === t(`31`)}
                             onChange={(e) =>
@@ -811,7 +814,7 @@ const Signup = () => {
                         <Wrapper dr={`row`} width={`auto`} margin={`0 10px`}>
                           <RadioInput
                             id={`inp-gender-2`}
-                            color={`#e87f5d`}
+                            color={`#313B91`}
                             value={t(`32`)}
                             checked={inputGender.value === t(`32`)}
                             onChange={(e) =>
@@ -1194,7 +1197,7 @@ const Signup = () => {
                 fontSize={`14px`}
                 margin={`0 5px`}
                 radius={`8px`}
-                bgColor={`#f8459b`}
+                bgColor={`#313B91`}
                 color={`#fff`}
                 lineHeight={`1.2`}
                 onClick={signupUserHandler}>

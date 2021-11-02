@@ -7,6 +7,7 @@ const router = express.Router();
 
 router.get(["/list/:listType", "/list"], async (req, res, next) => {
   const { page, search } = req.query;
+  const { language } = req.body;
 
   const LIMIT = 10;
 
@@ -58,6 +59,7 @@ router.get(["/list/:listType", "/list"], async (req, res, next) => {
 
 router.post("/create", async (req, res, next) => {
   const {
+    language,
     userId,
     platform,
     type,
@@ -73,7 +75,13 @@ router.post("/create", async (req, res, next) => {
     });
 
     if (!exUser) {
-      return res.status(401).send("존재하지 않는 사용자입니다.");
+      return res
+        .status(401)
+        .send(
+          language === `ko`
+            ? "존재하지 않는 사용자입니다."
+            : "User does not exist."
+        );
     }
 
     const createResult = await DemoAccount.create({
@@ -88,18 +96,30 @@ router.post("/create", async (req, res, next) => {
     });
 
     if (!createResult) {
-      return res.status(401).send("데모 계좌를 생성할 수 없습니다.");
+      return res
+        .status(401)
+        .send(
+          language === `ko`
+            ? "데모 계좌를 생성할 수 없습니다."
+            : "Could not create demo account."
+        );
     }
 
     return res.status(201).json({ result: true });
   } catch (error) {
     console.error(error);
-    return res.status(401).send("데모 계좌를 생성할 수 없습니다.");
+    return res
+      .status(401)
+      .send(
+        language === `ko`
+          ? "데모 계좌를 생성할 수 없습니다."
+          : "Could not create demo account."
+      );
   }
 });
 
 router.patch("/updatePermit", isAdminCheck, async (req, res, next) => {
-  const { id, bankNo, userId } = req.body;
+  const { language, id, bankNo, userId } = req.body;
   try {
     const exUpdatePermit = await DemoAccount.findOne({
       where: {
@@ -108,7 +128,13 @@ router.patch("/updatePermit", isAdminCheck, async (req, res, next) => {
     });
 
     if (!exUpdatePermit) {
-      return res.status(401).send("존재하지 않는 데모 계좌입니다.");
+      return res
+        .status(401)
+        .send(
+          language === `ko`
+            ? "존재하지 않는 데모 계좌입니다."
+            : "aa존재하지 않는 데모 계좌입니다."
+        );
     }
 
     const exUser = await User.findOne({
@@ -116,7 +142,13 @@ router.patch("/updatePermit", isAdminCheck, async (req, res, next) => {
     });
 
     if (!exUser) {
-      return res.status(401).send("존재하지 않는 사용자입니다.");
+      return res
+        .status(401)
+        .send(
+          language === `ko`
+            ? "존재하지 않는 사용자입니다."
+            : "User does not exist"
+        );
     }
 
     const updateData = await DemoAccount.findOne({

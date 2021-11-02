@@ -192,8 +192,7 @@ const AppHeader = ({ children, width }) => {
         top={`0`}
         left={`0`}
         index={`10000`}
-        className={headerScroll && "background"}
-      >
+        className={headerScroll && "background"}>
         <Wrapper padding={`5px 0`} bgColor={`#231d21`}>
           <RsWrapper al={`flex-end`}>
             <Wrapper dr={`row`} width={`auto`}>
@@ -204,8 +203,7 @@ const AppHeader = ({ children, width }) => {
                   fontSize={`13px`}
                   color={`#fff`}
                   cursor={`pointer`}
-                  onClick={logoutUserHandler}
-                >
+                  onClick={logoutUserHandler}>
                   {t(`1`)}
                 </Wrapper>
               ) : (
@@ -216,8 +214,7 @@ const AppHeader = ({ children, width }) => {
                     fontSize={`13px`}
                     color={`#fff`}
                     cursor={`pointer`}
-                    onClick={() => moveLinkHandler(`/login`)}
-                  >
+                    onClick={() => moveLinkHandler(`/login`)}>
                     {t(`2`)}
                   </Wrapper>
                   <Wrapper
@@ -226,8 +223,7 @@ const AppHeader = ({ children, width }) => {
                     fontSize={`13px`}
                     color={`#fff`}
                     cursor={`pointer`}
-                    onClick={() => moveLinkHandler(`/signup`)}
-                  >
+                    onClick={() => moveLinkHandler(`/signup`)}>
                     {t(`3`)}
                   </Wrapper>
                 </>
@@ -239,13 +235,11 @@ const AppHeader = ({ children, width }) => {
                 margin={`0 0 0 30px`}
                 width={`auto`}
                 fontSize={`13px`}
-                cursor={`pointer`}
-              >
+                cursor={`pointer`}>
                 <Combo
                   width={`110px`}
                   padding={`0`}
-                  onMouseOver={() => setComboLanguage(true)}
-                >
+                  onMouseOver={() => setComboLanguage(true)}>
                   <ComboTitle color={`#fff`}>
                     <Wrapper fontSize={`13px`}>Language</Wrapper>
                     <CaretDownOutlined />
@@ -253,8 +247,7 @@ const AppHeader = ({ children, width }) => {
 
                   <ComboList
                     isView={comboLanguage}
-                    onClick={() => setComboLanguage(false)}
-                  >
+                    onClick={() => setComboLanguage(false)}>
                     <ComboListItem onClick={() => i18n.changeLanguage("en")}>
                       English
                     </ComboListItem>
@@ -286,23 +279,28 @@ const AppHeader = ({ children, width }) => {
             toggleMenu05
               ? `#2c2c2c`
               : `#fff`
-          }
-        >
+          }>
           <RsWrapper>
             <Wrapper
               dr={`row`}
               ju={`space-between`}
               padding={`5px 0`}
-              height={`85px`}
-            >
+              height={`85px`}>
               <Wrapper
                 width={`auto`}
                 cursor={`pointer`}
-                onClick={() => moveLinkHandler(`/`)}
-              >
+                onClick={() => moveLinkHandler(`/`)}>
                 <Image
-                  width={`80px`}
-                  src={`https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/willmarkets/assets/images/logo/logo.png`}
+                  width={`auto`}
+                  src={
+                    toggleMenu01 ||
+                    toggleMenu02 ||
+                    toggleMenu03 ||
+                    toggleMenu04 ||
+                    toggleMenu05
+                      ? `https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/willmarkets/assets/images/logo/logo_hover.png`
+                      : `https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/willmarkets/assets/images/logo/logo.png`
+                  }
                 />
               </Wrapper>
 
@@ -315,31 +313,25 @@ const AppHeader = ({ children, width }) => {
                     setToggleMenu03(false);
                     setToggleMenu04(false);
                     setToggleMenu05(false);
-                  }}
-                >
+                  }}>
                   <MenuTextWrapper
-                    onClick={() => moveLinkHandler(`/company/intro`)}
-                  >
+                    onClick={() => moveLinkHandler(`/company/intro`)}>
                     {t(`4`)}
                   </MenuTextWrapper>
 
                   <MenuListWrapper
                     onMouseOut={() => setToggleMenu01(false)}
-                    onClick={() => setToggleMenu01(false)}
-                  >
+                    onClick={() => setToggleMenu01(false)}>
                     <MenuListItemWrapper
-                      onClick={() => moveLinkHandler(`/company/intro`)}
-                    >
+                      onClick={() => moveLinkHandler(`/company/intro`)}>
                       {t(`5`)}
                     </MenuListItemWrapper>
                     <MenuListItemWrapper
-                      onClick={() => moveLinkHandler(`/company/terms`)}
-                    >
+                      onClick={() => moveLinkHandler(`/company/terms`)}>
                       {t(`6`)}
                     </MenuListItemWrapper>
                     <MenuListItemWrapper
-                      onClick={() => moveLinkHandler(`/company/privacy`)}
-                    >
+                      onClick={() => moveLinkHandler(`/company/privacy`)}>
                       {t(`7`)}
                     </MenuListItemWrapper>
                     {/* <MenuListItemWrapper
@@ -358,51 +350,41 @@ const AppHeader = ({ children, width }) => {
                     setToggleMenu03(false);
                     setToggleMenu04(false);
                     setToggleMenu05(false);
-                  }}
-                >
+                  }}>
                   <MenuTextWrapper
-                    onClick={() => moveLinkHandler(`/trading/forex`)}
-                  >
+                    onClick={() => moveLinkHandler(`/trading/forex`)}>
                     {t(`9`)}
                   </MenuTextWrapper>
 
                   <MenuListWrapper
                     onMouseOut={() => setToggleMenu02(false)}
-                    onClick={() => setToggleMenu02(false)}
-                  >
+                    onClick={() => setToggleMenu02(false)}>
                     <MenuListItemWrapper
-                      onClick={() => moveLinkHandler(`/trading/forex`)}
-                    >
+                      onClick={() => moveLinkHandler(`/trading/forex`)}>
                       Forex
                     </MenuListItemWrapper>
                     <MenuListItemWrapper
-                      onClick={() => moveLinkHandler(`/trading/ecn`)}
-                    >
+                      onClick={() => moveLinkHandler(`/trading/ecn`)}>
                       ECN
                     </MenuListItemWrapper>
                     <MenuListItemWrapper
-                      onClick={() => moveLinkHandler(`/trading/stp`)}
-                    >
+                      onClick={() => moveLinkHandler(`/trading/stp`)}>
                       STP
                     </MenuListItemWrapper>
                     <MenuListItemWrapper
-                      onClick={() => moveLinkHandler(`/trading/spread`)}
-                    >
+                      onClick={() => moveLinkHandler(`/trading/spread`)}>
                       {t(`10`)}
                     </MenuListItemWrapper>
                     <MenuListItemWrapper
-                      onClick={() => moveLinkHandler(`/trading/margin`)}
-                    >
+                      onClick={() => moveLinkHandler(`/trading/margin`)}>
                       {t(`11`)}
                     </MenuListItemWrapper>
                     <MenuListItemWrapper
-                      onClick={() => moveLinkHandler(`/trading/provider`)}
-                    >
+                      onClick={() => moveLinkHandler(`/trading/provider`)}>
                       {t(`12`)}
                     </MenuListItemWrapper>
                     <MenuListItemWrapper
-                      onClick={() => moveLinkHandler(`/trading/time`)}
-                    >
+                      onClick={() => moveLinkHandler(`/trading/time`)}>
                       {t(`13`)}
                     </MenuListItemWrapper>
                   </MenuListWrapper>
@@ -416,26 +398,21 @@ const AppHeader = ({ children, width }) => {
                     setToggleMenu02(false);
                     setToggleMenu04(false);
                     setToggleMenu05(false);
-                  }}
-                >
+                  }}>
                   <MenuTextWrapper
-                    onClick={() => moveLinkHandler(`/platform/pc`)}
-                  >
+                    onClick={() => moveLinkHandler(`/platform/pc`)}>
                     {t(`14`)}
                   </MenuTextWrapper>
 
                   <MenuListWrapper
                     onMouseOut={() => setToggleMenu03(false)}
-                    onClick={() => setToggleMenu03(false)}
-                  >
+                    onClick={() => setToggleMenu03(false)}>
                     <MenuListItemWrapper
-                      onClick={() => moveLinkHandler(`/platform/pc`)}
-                    >
+                      onClick={() => moveLinkHandler(`/platform/pc`)}>
                       {t(`15`)}
                     </MenuListItemWrapper>
                     <MenuListItemWrapper
-                      onClick={() => moveLinkHandler(`/platform/mobile`)}
-                    >
+                      onClick={() => moveLinkHandler(`/platform/mobile`)}>
                       {t(`16`)}
                     </MenuListItemWrapper>
                   </MenuListWrapper>
@@ -450,8 +427,7 @@ const AppHeader = ({ children, width }) => {
                     setToggleMenu03(false);
                     setToggleMenu05(false);
                   }}
-                  onMouseOut={() => setToggleMenu04(false)}
-                >
+                  onMouseOut={() => setToggleMenu04(false)}>
                   <MenuTextWrapper onClick={() => moveLinkHandler(`/user`)}>
                     {t(`17`)}
                   </MenuTextWrapper>
@@ -466,8 +442,7 @@ const AppHeader = ({ children, width }) => {
                     setToggleMenu03(false);
                     setToggleMenu04(false);
                   }}
-                  onMouseOut={() => setToggleMenu05(false)}
-                >
+                  onMouseOut={() => setToggleMenu05(false)}>
                   <MenuTextWrapper onClick={() => moveLinkHandler(`/support`)}>
                     {t(`18`)}
                   </MenuTextWrapper>

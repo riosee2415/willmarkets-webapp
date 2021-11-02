@@ -162,7 +162,6 @@ const SubBanner = ({
           color={`#fff`}
           fontSize={`40px`}
           fontWeight={`500`}
-          borderBottom={`2px solid #b12774`}
           lineHeight={`1.3`}
           zIndex={`2`}>
           {inputMenu1.value &&

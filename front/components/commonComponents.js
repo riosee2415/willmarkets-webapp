@@ -146,7 +146,7 @@ export const Wrapper = styled.div`
 `;
 
 export const RsWrapper = styled.article`
-  width: 1350px;
+  width: ${(props) => props.width || ` 1350px`};
   height: ${(props) => props.height || `100%`};
   min-height: ${(props) => props.minHeight};
   ${(props) => props.minHeight}
@@ -282,27 +282,26 @@ export const CommonButton = styled.button`
     box-shadow: 1px 1px 8px #2d34f0;
    
     &:hover {
-      background: #FBFBFF;
-      color: #1b1919;
-      border: 1px solid #9a9df7;
-      box-shadow: 1px 1px 8px #898df3;
+      background: none;
+      color: #3353F2;
+      border: 1px solid #3353F2;
     }
   `};
 
   ${(props) =>
-    props.kindOf === `pink` &&
+    props.kindOf === `blue1` &&
     `
       position: relative;
       background: none;
-      color: #d8449a;
-      border: 2px solid #811757;
+      color: #3353F2;
+      border: 2px solid #3353F2;
 
       & div {
         display: none;
       }
 
       &:hover {
-        background: #d84697;
+        background: #3353F2;
         color: #fff;
       }
 
@@ -316,19 +315,19 @@ export const CommonButton = styled.button`
   `}
 
   ${(props) =>
-    props.kindOf === `yellow` &&
+    props.kindOf === `Skyblue` &&
     `
       position: relative;
       background: none;
-      color: #ffea73;
-      border: 2px solid #f4e68d;
+      color: #6BD2FF;
+      border: 2px solid #6BD2FF;
 
       & div {
         display: none;
       }
 
       &:hover {
-        background: #f9e96f;
+        background: #6BD2FF;
         color: #2c2535;
       }
 
@@ -340,6 +339,21 @@ export const CommonButton = styled.button`
         color: #2c2535;
       }
   `}
+
+${(props) =>
+    props.kindOf === `Skyblue1` &&
+    `
+    background: #6BD2FF;
+    color: #242424;
+    border: 1px solid #6BD2FF;
+   
+   
+    &:hover {
+      background: none;
+      color: #6BD2FF;
+      border: 1px solid #6BD2FF;
+    }
+  `};
 
   ${(props) =>
     props.kindOf === `white2` &&

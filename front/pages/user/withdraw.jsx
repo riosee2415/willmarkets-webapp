@@ -191,6 +191,7 @@ const Withdraw = () => {
       dispatch({
         type: USER_FIND_PASSWORD_REQUEST,
         data: {
+          language: i18next.language,
           email: me.email,
         },
       });
@@ -205,6 +206,7 @@ const Withdraw = () => {
       dispatch({
         type: USER_FIND_PASSWORD_CONFIRM_REQUEST,
         data: {
+          language: i18next.language,
           email: me.email,
           secret: inputSecret.value,
         },
@@ -215,6 +217,7 @@ const Withdraw = () => {
     dispatch({
       type: WITHDRAW_CREATE_REQUEST,
       data: {
+        language: i18next.language,
         userId: me.id,
         bankName: inputBankName.value,
         bankNo: inputBankNo.value,

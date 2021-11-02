@@ -172,6 +172,7 @@ const AddLive = () => {
     dispatch({
       type: LIVE_ACCOUNT_CREATE_REQUEST,
       data: {
+        language: i18next.language,
         userId: me.id,
         platform: inputPlatform.value,
         type: inputType.value,

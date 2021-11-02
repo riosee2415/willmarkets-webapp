@@ -21,6 +21,7 @@ import ClientLayout from "../components/ClientLayout";
 import Theme from "../components/Theme";
 import { UserOutlined, LockOutlined } from "@ant-design/icons";
 import { useTranslation } from "react-i18next";
+import i18next from "i18next";
 
 const CustomInput = styled(TextInput)`
   padding: 0 0 0 15px;
@@ -63,7 +64,7 @@ const Login = () => {
     dispatch({
       type: USER_SIGNIN_REQUEST,
       data: {
-        email: inputEmail.value,
+        email: `ISCLIENT&&${i18next.language}&&${inputEmail.value}`,
         password: inputPassword.value,
       },
     });
@@ -116,13 +117,13 @@ const Login = () => {
             <Image
               width={`auto`}
               margin={`0 0 50px`}
-              src={`https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/willmarkets/assets/images/logo/big_logo.png`}
+              src={`https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/willmarkets/assets/images/logo/logo_big.png`}
             />
 
             <Wrapper
               dr={`row`}
               padding={`0 10px 5px`}
-              borderBottom={`1.5px solid #f97fba`}>
+              borderBottom={`1.5px solid #635CF3`}>
               <UserOutlined style={{ fontSize: `24px`, color: `#555555` }} />
               <CustomInput
                 width={`calc(100% - 24px)`}
@@ -136,7 +137,7 @@ const Login = () => {
               dr={`row`}
               margin={`30px 0 0`}
               padding={`0 10px 5px`}
-              borderBottom={`1.5px solid #f97fba`}>
+              borderBottom={`1.5px solid #635CF3`}>
               <LockOutlined style={{ fontSize: `24px`, color: `#555555` }} />
               <CustomInput
                 type={`password`}
@@ -167,7 +168,7 @@ const Login = () => {
                 fontSize={`20px`}
                 margin={`0 0 10px`}
                 radius={`8px`}
-                bgColor={`#f8459b`}
+                bgColor={`#313B91`}
                 color={`#fff`}
                 onClick={loginHandler}>
                 {t(`5`)}
@@ -179,9 +180,9 @@ const Login = () => {
                 fontSize={`20px`}
                 margin={`0 0 10px`}
                 radius={`8px`}
-                border={`1px solid #f8459b`}
+                border={`1px solid #313B91`}
                 bgColor={`#fff`}
-                color={`#f8459b`}
+                color={`#313B91`}
                 onClick={() => moveLinkHandler(`/signup`)}>
                 {t(`6`)}
               </CommonButton>

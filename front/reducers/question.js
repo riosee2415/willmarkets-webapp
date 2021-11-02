@@ -88,7 +88,7 @@ const reducer = (state = initailState, action) =>
       case QUESTION_CREATE_FAILURE: {
         draft.st_questionCreateLoading = false;
         draft.st_questionCreateDone = false;
-        draft.st_questionCreateError = false;
+        draft.st_questionCreateError = action.error;
         break;
       }
       //

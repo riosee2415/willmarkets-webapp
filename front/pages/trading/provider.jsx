@@ -32,7 +32,7 @@ const Provider = () => {
           <Wrapper margin={`40px 0 0`} width={`auto`}>
             <Image
               width={`auto`}
-              src={`https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/willmarkets/assets/images/trade/image_ecn.png`}
+              src={`https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/willmarkets/assets/images/trade/image_6.png`}
             />
           </Wrapper>
         </RsWrapper>

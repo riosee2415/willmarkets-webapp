@@ -99,6 +99,7 @@ const Find = () => {
     dispatch({
       type: USER_FIND_PASSWORD_REQUEST,
       data: {
+        language: i18next.language,
         email: inputEmail.value,
       },
     });
@@ -112,6 +113,7 @@ const Find = () => {
     dispatch({
       type: USER_FIND_PASSWORD_CONFIRM_REQUEST,
       data: {
+        language: i18next.language,
         email: inputEmail.value,
         secret: inputSecret.value,
       },
@@ -145,6 +147,7 @@ const Find = () => {
       dispatch({
         type: USER_FIND_PASSWORD_UPDATE_REQUEST,
         data: {
+          language: i18next.language,
           email: inputEmail.value,
           password: inputPassword.value,
         },
@@ -231,7 +234,7 @@ const Find = () => {
             <Wrapper dr={`row`} ju={`flex-start`} margin={`0 0 30px`}>
               <Image
                 width={`50px`}
-                src={`https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/willmarkets/assets/images/logo/big_logo.png`}
+                src={`https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/willmarkets/assets/images/logo/logo_big.png`}
               />
               <Wrapper
                 width={`auto`}
@@ -256,7 +259,7 @@ const Find = () => {
                         id={`inp-email`}
                         width={
                           i18next.language === `en`
-                            ? `calc(100% - 110px)`
+                            ? `calc(100% - 130px)`
                             : `calc(100% - 90px)`
                         }
                         {...inputEmail}
@@ -269,7 +272,7 @@ const Find = () => {
                         }}
                       />
                       <CommonButton
-                        width={i18next.language === `en` ? `100px` : `80px`}
+                        width={i18next.language === `en` ? `120px` : `80px`}
                         height={`38px`}
                         lineHeight={`34px`}
                         margin={`0 0 0 10px`}
@@ -358,7 +361,7 @@ const Find = () => {
                 fontSize={`20px`}
                 margin={`50px 0 10px`}
                 radius={`8px`}
-                bgColor={`#f8459b`}
+                bgColor={`#313B91`}
                 color={`#fff`}
                 onClick={findPasswordUpdateHandler}>
                 {currentTab === 0 ? t(`10`) : t(`18`)}

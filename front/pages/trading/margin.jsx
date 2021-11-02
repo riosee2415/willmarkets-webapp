@@ -36,7 +36,7 @@ const Margin = () => {
           <Wrapper margin={`40px 0 0`} width={`auto`}>
             <Image
               width={`auto`}
-              src={`https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/willmarkets/assets/images/trade/image_ecn.png`}
+              src={`https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/willmarkets/assets/images/trade/image_5.png`}
             />
           </Wrapper>
         </RsWrapper>
@@ -45,7 +45,7 @@ const Margin = () => {
       <Wrapper padding={`60px 0`} color={`#fff`} bgColor={`#000105`}>
         <RsWrapper>
           <Wrapper display={`block`} width={`auto`} fontSize={`26px`}>
-            <Text display={`inline`} padding={`0 0 0 5px`} color={`#ff50b0`}>
+            <Text display={`inline`} padding={`0 0 0 5px`} color={`#3353F2`}>
               {t(`2`).split(`\n`)[0]}
             </Text>
             {t(`2`).split(`\n`)[1]}
@@ -54,8 +54,7 @@ const Margin = () => {
           <Wrapper
             margin={`30px 0 50px`}
             textAlign={`center`}
-            lineHeight={`1.8`}
-          >
+            lineHeight={`1.8`}>
             {t(`3`)}
             <br />
             {t(`4`)}
@@ -66,7 +65,7 @@ const Margin = () => {
           </Wrapper>
 
           <Wrapper display={`block`} width={`auto`} fontSize={`26px`}>
-            <Text display={`inline`} padding={`0 0 0 5px`} color={`#ff50b0`}>
+            <Text display={`inline`} padding={`0 0 0 5px`} color={`#3353F2`}>
               {t(`7`).split(`\n`)[0]}
             </Text>
             {t(`7`).split(`\n`)[1]}

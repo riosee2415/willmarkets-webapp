@@ -48,7 +48,7 @@ const User = ({ width }) => {
 
   ////// USEEFFECT //////
   useEffect(() => {
-    if (!me) {
+    if (!me && t(`11`)) {
       message.error(t(`11`));
       router.push("/login");
     }

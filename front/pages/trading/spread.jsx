@@ -22,7 +22,7 @@ const Spread = () => {
       <SubBanner />
 
       <Wrapper padding={`80px 0`} bgColor={`#eeeeee`}>
-        <RsWrapper>
+        <Wrapper>
           <Wrapper display={`block`} width={`auto`} fontSize={`26px`}>
             <Text display={`inline`}>{t(`1`).split(`\n`)[0]}</Text>
             {t(`1`).split(`\n`)[1]}
@@ -31,23 +31,24 @@ const Spread = () => {
             </Text>
           </Wrapper>
 
-          <Wrapper margin={`40px 0 20px`} width={`auto`}>
-            <Image
-              width={`auto`}
-              src={`https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/willmarkets/assets/images/trade/image_ecn.png`}
-            />
-          </Wrapper>
+          <Wrapper dr={`row`} ju={`flex-start`} margin={`50px 0 0 0`}>
+            <Wrapper margin={`40px 0 20px`} width={`50%`}>
+              <Image
+                src={`https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/willmarkets/assets/images/trade/image_4.png`}
+              />
+            </Wrapper>
 
-          <Wrapper width={`auto`} textAlign={`center`}>
-            {t(`2`).split(`\n`)[0]}
-            <br />
-            {t(`3`).split(`\n`)[0]}
-            <br />
-            {t(`3`).split(`\n`)[1]}
-            <br />
-            {t(`3`).split(`\n`)[2]}
+            <Wrapper width={`40%`} margin={`0 0 0 60px`} textAlign={`center`}>
+              {t(`2`).split(`\n`)[0]}
+              <br />
+              {t(`3`).split(`\n`)[0]}
+              <br />
+              {t(`3`).split(`\n`)[1]}
+              <br />
+              {t(`3`).split(`\n`)[2]}
+            </Wrapper>
           </Wrapper>
-        </RsWrapper>
+        </Wrapper>
       </Wrapper>
     </ClientLayout>
   );

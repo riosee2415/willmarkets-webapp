@@ -26,13 +26,13 @@ const SubmenuTitle = styled(Wrapper)`
   cursor: pointer;
 
   &:hover {
-    color: #f7b1ff;
+    color: #f7e6fc;
   }
 
   ${(props) =>
     props.isActive &&
     `
-     color: #f7b1ff;
+     color: #f7e6fc;
   `}
 
   & > div {
@@ -74,19 +74,19 @@ const SubmenuListItem = styled(Wrapper)`
   padding: 12px 20px 10px 55px;
   color: #272525;
   font-size: 15px;
-  background-color: #fcf0f6;
+  background-color: #f7e6fc;
   border-bottom: 1px solid #dedede;
   box-shadow: 0 1px 4px #c5c5c5;
   cursor: pointer;
 
   &:hover {
-    background-color: #ffe8fe;
+    background-color: #f0d4ef;
   }
 
   ${(props) =>
     props.isActive &&
     `
-     background-color: #FFE8FE;
+     background-color: #f7e6fc;
   `}
 `;
 
@@ -116,13 +116,12 @@ const UserSide = () => {
   return (
     <Wrapper>
       <Wrapper
-        margin={`20px 0 40px`}
+        margin={`20px 0 15px`}
         cursor={`pointer`}
-        onClick={() => moveLinkHandler(`/`)}
-      >
+        onClick={() => moveLinkHandler(`/`)}>
         <Image
           width={`40%`}
-          src={`https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/willmarkets/assets/images/logo/logo_2.png`}
+          src={`https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/willmarkets/assets/images/logo/logo_big.png`}
         />
       </Wrapper>
 
@@ -130,8 +129,7 @@ const UserSide = () => {
         <Submenu>
           <SubmenuTitle
             isActive={router.pathname === `/user`}
-            onClick={() => moveLinkHandler(`/user`)}
-          >
+            onClick={() => moveLinkHandler(`/user`)}>
             <Wrapper>
               <HomeOutlined />
               {t(`1`)}
@@ -146,8 +144,7 @@ const UserSide = () => {
               `/user/withdraw`,
               `/user/record`,
             ].includes(router.pathname)}
-            onClick={() => toggleSubmenuHandler(1)}
-          >
+            onClick={() => toggleSubmenuHandler(1)}>
             <Wrapper>
               <DollarOutlined />
               {t(`2`)}
@@ -159,20 +156,17 @@ const UserSide = () => {
           <SubmenuList isOpen={toggleSubmenu === 1}>
             <SubmenuListItem
               isActive={router.pathname === `/user/deposit`}
-              onClick={() => moveLinkHandler(`/user/deposit`)}
-            >
+              onClick={() => moveLinkHandler(`/user/deposit`)}>
               {t(`3`)}
             </SubmenuListItem>
             <SubmenuListItem
               isActive={router.pathname === `/user/withdraw`}
-              onClick={() => moveLinkHandler(`/user/withdraw`)}
-            >
+              onClick={() => moveLinkHandler(`/user/withdraw`)}>
               {t(`4`)}
             </SubmenuListItem>
             <SubmenuListItem
               isActive={router.pathname === `/user/record`}
-              onClick={() => moveLinkHandler(`/user/record`)}
-            >
+              onClick={() => moveLinkHandler(`/user/record`)}>
               {t(`5`)}
             </SubmenuListItem>
           </SubmenuList>
@@ -181,8 +175,7 @@ const UserSide = () => {
         <Submenu>
           <SubmenuTitle
             isActive={[`/user/info`].includes(router.pathname)}
-            onClick={() => toggleSubmenuHandler(2)}
-          >
+            onClick={() => toggleSubmenuHandler(2)}>
             <Wrapper>
               <UserOutlined /> {t(`6`)}
             </Wrapper>
@@ -193,8 +186,7 @@ const UserSide = () => {
           <SubmenuList isOpen={toggleSubmenu === 2}>
             <SubmenuListItem
               isActive={router.pathname === `/user/info`}
-              onClick={() => moveLinkHandler(`/user/info`)}
-            >
+              onClick={() => moveLinkHandler(`/user/info`)}>
               {t(`7`)}
             </SubmenuListItem>
           </SubmenuList>

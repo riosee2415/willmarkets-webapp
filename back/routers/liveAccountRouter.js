@@ -7,6 +7,7 @@ const router = express.Router();
 
 router.get(["/list/:listType", "/list"], async (req, res, next) => {
   const { page, search } = req.query;
+  const { language } = req.body;
 
   const LIMIT = 10;
 
@@ -52,13 +53,26 @@ router.get(["/list/:listType", "/list"], async (req, res, next) => {
       .json({ liveAccounts, lastPage: parseInt(lastPage), liveLen });
   } catch (error) {
     console.error(error);
-    return res.status(401).send("라이브 계좌 목록을 불러올 수 없습니다.");
+    return res
+      .status(401)
+      .send(
+        language === `ko`
+          ? "라이브 계좌 목록을 불러올 수 없습니다."
+          : "Could not load list of live accounts."
+      );
   }
 });
 
 router.post("/create", async (req, res, next) => {
-  const { userId, platform, type, leverage, tradePassword, viewPassword } =
-    req.body;
+  const {
+    language,
+    userId,
+    platform,
+    type,
+    leverage,
+    tradePassword,
+    viewPassword,
+  } = req.body;
 
   try {
     const exUser = await User.findOne({
@@ -66,7 +80,13 @@ router.post("/create", async (req, res, next) => {
     });
 
     if (!exUser) {
-      return res.status(401).send("존재하지 않는 사용자입니다.");
+      return res
+        .status(401)
+        .send(
+          language === `ko`
+            ? "존재하지 않는 사용자입니다."
+            : "User does not exist"
+        );
     }
 
     const createResult = await LiveAccount.create({
@@ -80,18 +100,30 @@ router.post("/create", async (req, res, next) => {
     });
 
     if (!createResult) {
-      return res.status(401).send("라이브 계좌를 생성할 수 없습니다.");
+      return res
+        .status(401)
+        .send(
+          language === `ko`
+            ? "라이브 계좌를 생성할 수 없습니다."
+            : "Could not create live account."
+        );
     }
 
     return res.status(201).json({ result: true });
   } catch (error) {
     console.error(error);
-    return res.status(401).send("라이브 계좌를 생성할 수 없습니다.");
+    return res
+      .status(401)
+      .send(
+        language === `ko`
+          ? "라이브 계좌를 생성할 수 없습니다."
+          : "Could not create live account."
+      );
   }
 });
 
 router.patch("/updatePermit", isAdminCheck, async (req, res, next) => {
-  const { id, bankNo, userId } = req.body;
+  const { language, id, bankNo, userId } = req.body;
   try {
     const exUpdatePermit = await LiveAccount.findOne({
       where: {
@@ -100,7 +132,13 @@ router.patch("/updatePermit", isAdminCheck, async (req, res, next) => {
     });
 
     if (!exUpdatePermit) {
-      return res.status(401).send("존재하지 않는 라이브 계좌입니다.");
+      return res
+        .status(401)
+        .send(
+          language === `ko`
+            ? "존재하지 않는 라이브 계좌입니다."
+            : "This is a non-existent live account."
+        );
     }
 
     const exUser = await User.findOne({
@@ -108,7 +146,13 @@ router.patch("/updatePermit", isAdminCheck, async (req, res, next) => {
     });
 
     if (!exUser) {
-      return res.status(401).send("존재하지 않는 사용자입니다.");
+      return res
+        .status(401)
+        .send(
+          language === `ko`
+            ? "존재하지 않는 사용자입니다."
+            : "User does not exist"
+        );
     }
 
     const updateData = await LiveAccount.findOne({

@@ -8,6 +8,7 @@ const router = express.Router();
 
 router.get("/list", async (req, res, next) => {
   const { page, search } = req.query;
+  const { language } = req.body;
 
   const LIMIT = 10;
 
@@ -51,12 +52,19 @@ router.get("/list", async (req, res, next) => {
       .json({ withdraws, lastPage: parseInt(lastPage), withdrawLen });
   } catch (error) {
     console.error(error);
-    return res.status(401).send("출금 신청 목록을 불러올 수 없습니다.");
+    return res
+      .status(401)
+      .send(
+        language === `ko`
+          ? "출금 신청 목록을 불러올 수 없습니다."
+          : "Could not load withdrawal request list."
+      );
   }
 });
 
 router.post("/create", async (req, res, next) => {
   const {
+    language,
     userId,
     bankName,
     price,
@@ -71,7 +79,13 @@ router.post("/create", async (req, res, next) => {
     });
 
     if (!exUser) {
-      return res.status(401).send("존재하지 않는 사용자입니다.");
+      return res
+        .status(401)
+        .send(
+          language === `ko`
+            ? "존재하지 않는 사용자입니다."
+            : "User does not exist."
+        );
     }
 
     const createResult = await Withdraw.create({
@@ -86,18 +100,30 @@ router.post("/create", async (req, res, next) => {
     });
 
     if (!createResult) {
-      return res.status(401).send("출금 신청을 할 수 없습니다.");
+      return res
+        .status(401)
+        .send(
+          language === `ko`
+            ? "출금 신청을 할 수 없습니다."
+            : "Cannot apply for withdrawal."
+        );
     }
 
     return res.status(201).json({ result: true });
   } catch (error) {
     console.error(error);
-    return res.status(401).send("출금 신청을 할 수 없습니다.");
+    return res
+      .status(401)
+      .send(
+        language === `ko`
+          ? "출금 신청을 할 수 없습니다."
+          : "Cannot apply for withdrawal."
+      );
   }
 });
 
 router.patch("/updatePermit", isAdminCheck, async (req, res, next) => {
-  const { id, userId } = req.body;
+  const { language, id, userId } = req.body;
   try {
     const exUpdatePermit = await Withdraw.findOne({
       where: {
@@ -106,7 +132,13 @@ router.patch("/updatePermit", isAdminCheck, async (req, res, next) => {
     });
 
     if (!exUpdatePermit) {
-      return res.status(401).send("존재하지 않는 출금 신청입니다.");
+      return res
+        .status(401)
+        .send(
+          language === `ko`
+            ? "존재하지 않는 출금 신청입니다."
+            : "This is a non-existent withdrawal request."
+        );
     }
 
     const exUser = await User.findOne({
@@ -114,7 +146,13 @@ router.patch("/updatePermit", isAdminCheck, async (req, res, next) => {
     });
 
     if (!exUser) {
-      return res.status(401).send("존재하지 않는 사용자입니다.");
+      return res
+        .status(401)
+        .send(
+          language === `ko`
+            ? "존재하지 않는 사용자입니다."
+            : "User does not exist."
+        );
     }
 
     const updateData = await Withdraw.findOne({

@@ -63,7 +63,7 @@ export default ({ width }) => {
                   width={`auto`}
                   color={`#fff`}
                   fontSize={`30px`}
-                  fontWeight={`500`}
+                  fontWeight={`400`}
                   textAlign={`right`}
                   lineHeight={`1.4`}>
                   {t(`1`).split(`\n`)[0]}
@@ -73,7 +73,7 @@ export default ({ width }) => {
 
                 <Wrapper dr={`row`} ju={`flex-end`} margin={`60px 0 0`}>
                   <CommonButton
-                    kindOf={`pink`}
+                    kindOf={`blue1`}
                     padding={`10px 0 12px`}
                     width={`200px`}
                     radius={`30px`}
@@ -92,7 +92,7 @@ export default ({ width }) => {
                   </CommonButton>
 
                   <CommonButton
-                    kindOf={`yellow`}
+                    kindOf={`Skyblue`}
                     margin={`0 0 0 30px`}
                     padding={`10px 0 12px`}
                     width={`200px`}
@@ -153,7 +153,7 @@ export default ({ width }) => {
 
                 <Wrapper dr={`row`} ju={`flex-end`} margin={`60px 0 0`}>
                   <CommonButton
-                    kindOf={`pink`}
+                    kindOf={`blue`}
                     padding={`10px 0 12px`}
                     width={`200px`}
                     radius={`30px`}
@@ -172,7 +172,7 @@ export default ({ width }) => {
                   </CommonButton>
 
                   <CommonButton
-                    kindOf={`yellow`}
+                    kindOf={`Skyblue1`}
                     margin={`0 0 0 30px`}
                     padding={`10px 0 12px`}
                     width={`200px`}

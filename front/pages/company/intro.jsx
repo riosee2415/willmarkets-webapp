@@ -92,11 +92,11 @@ const Intro = () => {
               height={`45px`}
               lineHeight={`43px`}
               color={`#fff`}
-              hoverColor={`#e962ad`}
-              bgColor={`#f977bf`}
+              hoverColor={`#3353F2`}
+              bgColor={`#3353F2`}
               hoverBgColor={`#fff`}
-              border={`1px solid #e962ad`}
-              shadow={`1px 1px 5px #df59a3`}
+              border={`1px solid #3353F2`}
+              shadow={`1px 1px 5px #3353F2`}
               radius={`30px`}
               fontSize={`18px`}
               fontWeight={`500`}
@@ -148,8 +148,7 @@ const Intro = () => {
               zIndex={`0`}>
               <Image
                 width={`auto`}
-                opacity={`0.3`}
-                src={`https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/willmarkets/assets/images/introduce/image_logo_large_opacity30%25.png`}
+                src={`https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/willmarkets/assets/images/logo/logo_company.png`}
               />
             </Wrapper>
 

@@ -22,41 +22,40 @@ const Ecn = () => {
       <SubBanner />
 
       <Wrapper padding={`80px 0`} bgColor={`#eeeeee`}>
-        <RsWrapper>
-          <Wrapper
-            display={`block`}
-            width={`auto`}
-            fontSize={`24px`}
-            fontWeight={`400`}>
-            <Text display={`inline`}>{t(`1`).split(`\n`)[0]}</Text>
-            {t(`1`).split(`\n`)[1]}
-          </Wrapper>
-
-          <Wrapper margin={`40px 0 20px`}>
+        <Wrapper
+          display={`block`}
+          width={`auto`}
+          fontSize={`24px`}
+          fontWeight={`400`}>
+          <Text display={`inline`}>{t(`1`).split(`\n`)[0]}</Text>
+          {t(`1`).split(`\n`)[1]}
+        </Wrapper>
+        <Wrapper dr={`row`} ju={`flex-start`} margin={`50px 0 0 0`}>
+          <Wrapper width={`50%`}>
             <Image
-              width={`calc(960px - 440px)`}
-              height={`566px`}
-              border={`1px solid red`}
+              src={`https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/willmarkets/assets/images/trade/image_2.png`}
             />
           </Wrapper>
 
-          <Wrapper width={`auto`} textAlign={`center`}>
+          <Wrapper width={`40%`} textAlign={`center`} margin={`0 0 0 60px`}>
             {t(`2`).split(`\n`)[0]}
             <br />
             {t(`2`).split(`\n`)[1]}
             <br />
             {t(`2`).split(`\n`)[2]} {t(`3`).split(`\n`)[0]}
             <br />
+            {t(`2`).split(`\n`)[3]} {t(`2`).split(`\n`)[4]}
+            <br />
             {t(`3`).split(`\n`)[1]}
           </Wrapper>
-        </RsWrapper>
+        </Wrapper>
       </Wrapper>
 
       <Wrapper padding={`60px 0 40px`} color={`#fff`} bgColor={`#000105`}>
         <RsWrapper>
           <Wrapper display={`block`} width={`auto`} fontSize={`26px`}>
             {t(`4`).split(`\n`)[0]}
-            <Text display={`inline`} padding={`0 0 0 5px`} color={`#ff50b0`}>
+            <Text display={`inline`} padding={`0 0 0 5px`} color={`#3353F2`}>
               {t(`4`).split(`\n`)[1]}
             </Text>
             {t(`4`).split(`\n`)[2]}
@@ -77,7 +76,7 @@ const Ecn = () => {
                 <Image
                   margin={`0 10px 0 0`}
                   width={`auto`}
-                  src={`https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/willmarkets/assets/images/download/icon_check2.png`}
+                  src={`https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/willmarkets/assets/images/trade/icon_check.png`}
                 />
                 {t(`5`)}
               </Wrapper>
@@ -91,7 +90,7 @@ const Ecn = () => {
                 <Image
                   margin={`0 10px 0 0`}
                   width={`auto`}
-                  src={`https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/willmarkets/assets/images/download/icon_check2.png`}
+                  src={`https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/willmarkets/assets/images/trade/icon_check.png`}
                 />
                 {t(`6`)}
               </Wrapper>
@@ -105,7 +104,7 @@ const Ecn = () => {
                 <Image
                   margin={`0 10px 0 0`}
                   width={`auto`}
-                  src={`https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/willmarkets/assets/images/download/icon_check2.png`}
+                  src={`https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/willmarkets/assets/images/trade/icon_check.png`}
                 />
                 {t(`7`)}
               </Wrapper>
@@ -119,7 +118,7 @@ const Ecn = () => {
                 <Image
                   margin={`0 10px 0 0`}
                   width={`auto`}
-                  src={`https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/willmarkets/assets/images/download/icon_check2.png`}
+                  src={`https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/willmarkets/assets/images/trade/icon_check.png`}
                 />
                 {t(`8`)}
               </Wrapper>
@@ -139,7 +138,7 @@ const Ecn = () => {
                 <Image
                   margin={`0 10px 0 0`}
                   width={`auto`}
-                  src={`https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/willmarkets/assets/images/download/icon_check2.png`}
+                  src={`https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/willmarkets/assets/images/trade/icon_check.png`}
                 />
                 {t(`9`)}
               </Wrapper>
@@ -153,7 +152,7 @@ const Ecn = () => {
                 <Image
                   margin={`0 10px 0 0`}
                   width={`auto`}
-                  src={`https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/willmarkets/assets/images/download/icon_check2.png`}
+                  src={`https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/willmarkets/assets/images/trade/icon_check.png`}
                 />
                 {t(`10`)}
               </Wrapper>
@@ -167,7 +166,7 @@ const Ecn = () => {
                 <Image
                   margin={`0 10px 0 0`}
                   width={`auto`}
-                  src={`https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/willmarkets/assets/images/download/icon_check2.png`}
+                  src={`https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/willmarkets/assets/images/trade/icon_check.png`}
                 />
                 {t(`11`)}
               </Wrapper>
@@ -187,14 +186,14 @@ const Ecn = () => {
               dr={`row`}
               al={`normal`}
               padding={`6px 0`}
-              borderTop={`1px solid #db4698`}
-              borderBottom={`1px solid #db4698`}>
+              borderTop={`1px solid #9D65E0`}
+              borderBottom={`1px solid #C8C8C8`}>
               <Wrapper
                 width={`100px`}
                 padding={`5px 10px`}
                 fontSize={`18px`}
                 fontWeight={`500`}
-                color={`#dd459a`}>
+                color={`#3353F2`}>
                 ECN
               </Wrapper>
               <Wrapper
@@ -203,7 +202,7 @@ const Ecn = () => {
                 fontSize={`18px`}
                 fontWeight={`500`}
                 color={`#565656`}
-                borderLeft={`1px solid #6f6f6f`}>
+                borderLeft={`1px solid #C8C8C8`}>
                 DDE
               </Wrapper>
               <Wrapper
@@ -212,7 +211,7 @@ const Ecn = () => {
                 fontSize={`18px`}
                 fontWeight={`500`}
                 color={`#565656`}
-                borderLeft={`1px solid #6f6f6f`}>
+                borderLeft={`1px solid #C8C8C8`}>
                 {t(`13`)}
               </Wrapper>
               <Wrapper
@@ -222,7 +221,7 @@ const Ecn = () => {
                 fontSize={`18px`}
                 fontWeight={`500`}
                 color={`#565656`}
-                borderLeft={`1px solid #6f6f6f`}>
+                borderLeft={`1px solid #C8C8C8`}>
                 {t(`14`)}
               </Wrapper>
             </Wrapper>
@@ -231,7 +230,7 @@ const Ecn = () => {
               dr={`row`}
               al={`normal`}
               padding={`6px 0`}
-              borderBottom={`1px solid #db4698`}>
+              borderBottom={`1px solid #C8C8C8`}>
               <Wrapper width={`100px`} padding={`5px 10px`}>
                 <Image
                   width={`44px`}
@@ -241,7 +240,7 @@ const Ecn = () => {
               <Wrapper
                 width={`100px`}
                 padding={`5px 10px`}
-                borderLeft={`1px solid #6f6f6f`}>
+                borderLeft={`1px solid #C8C8C8`}>
                 <Image
                   width={`44px`}
                   src={`https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/willmarkets/assets/images/trade/icon_disagree.png`}
@@ -252,7 +251,7 @@ const Ecn = () => {
                 padding={`5px 10px`}
                 fontSize={`18px`}
                 color={`#292929`}
-                borderLeft={`1px solid #6f6f6f`}
+                borderLeft={`1px solid #C8C8C8`}
                 textAlign={`center`}>
                 {t(`15`).split(`\n`)[0]}
                 <br />
@@ -264,7 +263,7 @@ const Ecn = () => {
                 padding={`5px 10px`}
                 fontSize={`15px`}
                 color={`#292929`}
-                borderLeft={`1px solid #6f6f6f`}>
+                borderLeft={`1px solid #C8C8C8`}>
                 {t(`16`)}
               </Wrapper>
             </Wrapper>
@@ -273,7 +272,7 @@ const Ecn = () => {
               dr={`row`}
               al={`normal`}
               padding={`6px 0`}
-              borderBottom={`1px solid #db4698`}>
+              borderBottom={`1px solid #C8C8C8`}>
               <Wrapper width={`100px`} padding={`5px 10px`}>
                 <Image
                   width={`44px`}
@@ -283,7 +282,7 @@ const Ecn = () => {
               <Wrapper
                 width={`100px`}
                 padding={`5px 10px`}
-                borderLeft={`1px solid #6f6f6f`}>
+                borderLeft={`1px solid #DFDFDF`}>
                 <Image
                   width={`44px`}
                   src={`https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/willmarkets/assets/images/trade/icon_disagree.png`}
@@ -294,7 +293,7 @@ const Ecn = () => {
                 padding={`5px 10px`}
                 fontSize={`18px`}
                 color={`#292929`}
-                borderLeft={`1px solid #6f6f6f`}
+                borderLeft={`1px solid #DFDFDF`}
                 textAlign={`center`}>
                 {t(`17`).split(`\n`)[0]}
                 <br />
@@ -306,7 +305,7 @@ const Ecn = () => {
                 padding={`5px 10px`}
                 fontSize={`15px`}
                 color={`#292929`}
-                borderLeft={`1px solid #6f6f6f`}>
+                borderLeft={`1px solid #DFDFDF`}>
                 {t(`18`)}
               </Wrapper>
             </Wrapper>
@@ -315,7 +314,7 @@ const Ecn = () => {
               dr={`row`}
               al={`normal`}
               padding={`6px 0`}
-              borderBottom={`1px solid #db4698`}>
+              borderBottom={`1px solid #C8C8C8`}>
               <Wrapper width={`100px`} padding={`5px 10px`}>
                 <Image
                   width={`44px`}
@@ -325,7 +324,7 @@ const Ecn = () => {
               <Wrapper
                 width={`100px`}
                 padding={`5px 10px`}
-                borderLeft={`1px solid #6f6f6f`}>
+                borderLeft={`1px solid #DFDFDF`}>
                 <Image
                   width={`44px`}
                   src={`https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/willmarkets/assets/images/trade/icon_agree.png`}
@@ -336,7 +335,7 @@ const Ecn = () => {
                 padding={`5px 10px`}
                 fontSize={`18px`}
                 color={`#292929`}
-                borderLeft={`1px solid #6f6f6f`}
+                borderLeft={`1px solid #DFDFDF`}
                 textAlign={`center`}>
                 {t(`19`)}
               </Wrapper>
@@ -346,7 +345,7 @@ const Ecn = () => {
                 padding={`5px 10px`}
                 fontSize={`15px`}
                 color={`#292929`}
-                borderLeft={`1px solid #6f6f6f`}>
+                borderLeft={`1px solid #DFDFDF`}>
                 {t(`20`)}
               </Wrapper>
             </Wrapper>
@@ -355,7 +354,7 @@ const Ecn = () => {
               dr={`row`}
               al={`normal`}
               padding={`6px 0`}
-              borderBottom={`1px solid #db4698`}>
+              borderBottom={`1px solid #C8C8C8`}>
               <Wrapper width={`100px`} padding={`5px 10px`}>
                 <Image
                   width={`44px`}
@@ -365,7 +364,7 @@ const Ecn = () => {
               <Wrapper
                 width={`100px`}
                 padding={`5px 10px`}
-                borderLeft={`1px solid #6f6f6f`}>
+                borderLeft={`1px solid #DFDFDF`}>
                 <Image
                   width={`44px`}
                   src={`https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/willmarkets/assets/images/trade/icon_disagree.png`}
@@ -376,7 +375,7 @@ const Ecn = () => {
                 padding={`5px 10px`}
                 fontSize={`18px`}
                 color={`#292929`}
-                borderLeft={`1px solid #6f6f6f`}
+                borderLeft={`1px solid #DFDFDF`}
                 textAlign={`center`}>
                 {t(`21`)}
               </Wrapper>
@@ -386,7 +385,7 @@ const Ecn = () => {
                 padding={`5px 10px`}
                 fontSize={`15px`}
                 color={`#292929`}
-                borderLeft={`1px solid #6f6f6f`}>
+                borderLeft={`1px solid #DFDFDF`}>
                 {t(`22`)}
               </Wrapper>
             </Wrapper>

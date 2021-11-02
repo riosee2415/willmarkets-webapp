@@ -36,6 +36,7 @@ const router = express.Router();
 router.get(["/list/:listType", "/list"], async (req, res, next) => {
   const { page, search } = req.query;
   const { listType } = req.params;
+  const { language } = req.body;
 
   let nanFlag = isNaN(listType);
 
@@ -144,7 +145,13 @@ router.get(["/list/:listType", "/list"], async (req, res, next) => {
       .json({ deposits, lastPage: parseInt(lastPage), depositLen });
   } catch (error) {
     console.error(error);
-    return res.status(401).send("입금 신청 목록을 불러올 수 없습니다.");
+    return res
+      .status(401)
+      .send(
+        language === `ko`
+          ? "입금 신청 목록을 불러올 수 없습니다."
+          : "Could not load deposit request list."
+      );
   }
 });
 
@@ -153,9 +160,21 @@ router.post("/image", async (req, res, next) => {
 
   await uploadImage(req, res, (err) => {
     if (err instanceof multer.MulterError) {
-      return res.status(401).send("첨부 가능한 용량을 초과했습니다.");
+      return res
+        .status(401)
+        .send(
+          language === `ko`
+            ? "첨부 가능한 용량을 초과했습니다."
+            : "The attachable capacity has been exceeded"
+        );
     } else if (err) {
-      return res.status(401).send("업로드 중 문제가 발생했습니다.");
+      return res
+        .status(401)
+        .send(
+          language === `ko`
+            ? "업로드 중 문제가 발생했습니다."
+            : "There was a problem uploading"
+        );
     }
 
     return res.json({
@@ -166,14 +185,20 @@ router.post("/image", async (req, res, next) => {
 });
 
 router.post("/createImage", async (req, res, next) => {
-  const { userId, filePath, fileOriginName } = req.body;
+  const { language, userId, filePath, fileOriginName } = req.body;
   try {
     const exUser = await User.findOne({
       where: { id: parseInt(userId) },
     });
 
     if (!exUser) {
-      return res.status(401).send("존재하지 않는 사용자입니다.");
+      return res
+        .status(401)
+        .send(
+          language === `ko`
+            ? "존재하지 않는 사용자입니다."
+            : "User does not exist"
+        );
     }
     const createResult = await DepositImage.create({
       UserId: parseInt(userId),
@@ -182,18 +207,31 @@ router.post("/createImage", async (req, res, next) => {
     });
 
     if (!createResult) {
-      return res.status(401).send("이미지를 생성할 수 없습니다.");
+      return res
+        .status(401)
+        .send(
+          language === `ko`
+            ? "이미지를 생성할 수 없습니다."
+            : "Unable to create image."
+        );
     }
 
     return res.status(201).json({ result: true });
   } catch (error) {
     console.error(error);
-    return res.status(401).send("이미지를 생성할 수 없습니다.");
+    return res
+      .status(401)
+      .send(
+        language === `ko`
+          ? "이미지를 생성할 수 없습니다."
+          : "Unable to create image."
+      );
   }
 });
 
 router.post("/create", async (req, res, next) => {
   const {
+    language,
     userId,
     bankName,
     bankNo,
@@ -209,7 +247,13 @@ router.post("/create", async (req, res, next) => {
     });
 
     if (!exUser) {
-      return res.status(401).send("존재하지 않는 사용자입니다.");
+      return res
+        .status(401)
+        .send(
+          language === `ko`
+            ? "존재하지 않는 사용자입니다."
+            : "User does not exist"
+        );
     }
 
     const createResult = await Deposit.create({
@@ -225,18 +269,30 @@ router.post("/create", async (req, res, next) => {
     });
 
     if (!createResult) {
-      return res.status(401).send("입금 신청을 할 수 없습니다.");
+      return res
+        .status(401)
+        .send(
+          language === `ko`
+            ? "입금 신청을 할 수 없습니다."
+            : "Cannot apply for deposit."
+        );
     }
 
     return res.status(201).json({ result: true });
   } catch (error) {
     console.error(error);
-    return res.status(401).send("입금 신청을 할 수 없습니다.");
+    return res
+      .status(401)
+      .send(
+        language === `ko`
+          ? "입금 신청을 할 수 없습니다."
+          : "Cannot apply for deposit."
+      );
   }
 });
 
 router.patch("/updatePermit", isAdminCheck, async (req, res, next) => {
-  const { id, userId } = req.body;
+  const { language, id, userId } = req.body;
   try {
     const exUpdatePermit = await Deposit.findOne({
       where: {
@@ -245,7 +301,13 @@ router.patch("/updatePermit", isAdminCheck, async (req, res, next) => {
     });
 
     if (!exUpdatePermit) {
-      return res.status(401).send("존재하지 않는 입금 신청입니다.");
+      return res
+        .status(401)
+        .send(
+          language === `ko`
+            ? "존재하지 않는 입금 신청입니다."
+            : "This is a non-existent deposit application."
+        );
     }
 
     const exUser = await User.findOne({
@@ -253,7 +315,13 @@ router.patch("/updatePermit", isAdminCheck, async (req, res, next) => {
     });
 
     if (!exUser) {
-      return res.status(401).send("존재하지 않는 사용자입니다.");
+      return res
+        .status(401)
+        .send(
+          language === `ko`
+            ? "존재하지 않는 사용자입니다."
+            : "User does not exist"
+        );
     }
 
     const updateData = await Deposit.findOne({

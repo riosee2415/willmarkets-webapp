@@ -215,13 +215,27 @@ router.post("/signin/admin", (req, res, next) => {
 });
 
 router.post("/image", async (req, res, next) => {
+  const { language } = req.body;
+
   const uploadImage = upload.single("image");
 
   await uploadImage(req, res, (err) => {
     if (err instanceof multer.MulterError) {
-      return res.status(401).send("첨부 가능한 용량을 초과했습니다.");
+      return res
+        .status(401)
+        .send(
+          language === `ko`
+            ? "첨부 가능한 용량을 초과했습니다."
+            : "The attachable capacity has been exceeded"
+        );
     } else if (err) {
-      return res.status(401).send("업로드 중 문제가 발생했습니다.");
+      return res
+        .status(401)
+        .send(
+          language === `ko`
+            ? "업로드 중 문제가 발생했습니다."
+            : "There was a problem uploading"
+        );
     }
 
     return res.json({
@@ -233,6 +247,7 @@ router.post("/image", async (req, res, next) => {
 
 router.post("/signup", async (req, res, next) => {
   const {
+    language,
     type,
     email,
     password,
@@ -259,7 +274,13 @@ router.post("/signup", async (req, res, next) => {
     });
 
     if (exUser) {
-      return res.status(401).send("이미 가입된 이메일 입니다.");
+      return res
+        .status(401)
+        .send(
+          language === `ko`
+            ? `이미 가입된 이메일 입니다.`
+            : `This email is already registered`
+        );
     }
 
     const hashedPassword = await bcrypt.hash(password, 12);
@@ -303,6 +324,7 @@ router.get("/me", isLoggedIn, async (req, res, next) => {
 
 router.patch("/me/update", async (req, res, next) => {
   const {
+    language,
     id,
     email,
     password,
@@ -327,7 +349,13 @@ router.patch("/me/update", async (req, res, next) => {
     const exUser = await User.findOne({ where: { id: parseInt(id) } });
 
     if (!exUser) {
-      return res.status(401).send("존재하지 않는 사용자 입니다.");
+      return res
+        .status(401)
+        .send(
+          language === `ko`
+            ? "존재하지 않는 사용자 입니다."
+            : "User does not exist."
+        );
     }
 
     if (exUser.email !== email) {
@@ -336,7 +364,13 @@ router.patch("/me/update", async (req, res, next) => {
       });
 
       if (exEmail) {
-        return res.status(401).send("이미 사용중인 이메일 입니다.");
+        return res
+          .status(401)
+          .send(
+            language === `ko`
+              ? "이미 사용중인 이메일 입니다."
+              : "This email is already in use."
+          );
       }
     }
 
@@ -370,7 +404,13 @@ router.patch("/me/update", async (req, res, next) => {
     return res.status(200).json({ result: true });
   } catch (error) {
     console.error(error);
-    return res.status(401).send("정보를 수정할 수 없습니다.");
+    return res
+      .status(401)
+      .send(
+        language === `ko`
+          ? "정보를 수정할 수 없습니다."
+          : "Information cannot be edited."
+      );
   }
 });
 
@@ -383,7 +423,13 @@ router.patch("/updatePrice", async (req, res, next) => {
     });
 
     if (!exUser) {
-      return res.status(401).send("존재하지 않는 사용자입니다.");
+      return res
+        .status(401)
+        .send(
+          language === `ko`
+            ? "존재하지 않는 사용자입니다."
+            : "User does not exist"
+        );
     }
 
     const updateResult = await User.update(
@@ -409,25 +455,37 @@ router.patch("/updatePrice", async (req, res, next) => {
 });
 
 router.post("/checkEmail", async (req, res, next) => {
-  const { email } = req.body;
+  const { language, email } = req.body;
   try {
     const exEmail = await User.findOne({
       where: { email: email },
     });
 
     if (exEmail) {
-      return res.status(401).send("이미 사용중인 이메일 입니다.");
+      return res
+        .status(401)
+        .send(
+          language === `ko`
+            ? "이미 사용중인 이메일 입니다."
+            : "This email is already in use."
+        );
     } else {
       return res.status(200).json({ result: true });
     }
   } catch (error) {
     console.error(error);
-    return res.status(401).send("이미 사용중인 이메일 입니다.");
+    return res
+      .status(401)
+      .send(
+        language === `ko`
+          ? "이미 사용중인 이메일 입니다."
+          : "This email is already in use."
+      );
   }
 });
 
 router.post("/secretEmail", async (req, res, next) => {
-  const { email } = req.body;
+  const { language, email } = req.body;
   try {
     const UUID = generateUUID();
 
@@ -452,12 +510,18 @@ router.post("/secretEmail", async (req, res, next) => {
     return res.status(200).json(UUID);
   } catch (error) {
     console.error(error);
-    return res.status(401).send("처리중 문제가 발생하였습니다.");
+    return res
+      .status(401)
+      .send(
+        language === `ko`
+          ? "처리중 문제가 발생하였습니다."
+          : "A problem occurred during processing"
+      );
   }
 });
 
 router.post("/findPass", async (req, res, next) => {
-  const { email } = req.body;
+  const { language, email } = req.body;
 
   try {
     const UUID = generateUUID();
@@ -519,16 +583,28 @@ router.post("/findPass", async (req, res, next) => {
 
       return res.status(200).json({ result: true, UUID });
     } else {
-      return res.status(401).send("가입되지 않은 이메일입니다.");
+      return res
+        .status(401)
+        .send(
+          language === `ko`
+            ? "가입되지 않은 이메일입니다."
+            : "This is an unsigned email"
+        );
     }
   } catch (error) {
-    console.error(error);
-    return res.status(401).send("가입되지 않은 이메일입니다.");
+    console.errofindPassr(error);
+    return res
+      .status(401)
+      .send(
+        language === `ko`
+          ? "가입되지 않은 이메일입니다."
+          : "This is an unsigned email"
+      );
   }
 });
 
 router.post("/findPass/confirm", async (req, res, next) => {
-  const { secret, email } = req.body;
+  const { language, secret, email } = req.body;
   try {
     const exUser = await User.findOne({
       where: { email },
@@ -537,16 +613,28 @@ router.post("/findPass/confirm", async (req, res, next) => {
     if (secret === exUser.secret) {
       return res.status(200).json({ result: true });
     } else {
-      return res.status(401).send("올바르지 않은 인증코드입니다.");
+      return res
+        .status(401)
+        .send(
+          language === `ko`
+            ? "올바르지 않은 인증코드입니다."
+            : "Invalid verification code."
+        );
     }
   } catch (error) {
     console.error(error);
-    return res.status(401).send("올바르지 않은 인증코드입니다.");
+    return res
+      .status(401)
+      .send(
+        language === `ko`
+          ? "올바르지 않은 인증코드입니다."
+          : "Invalid verification code."
+      );
   }
 });
 
 router.patch("/findPass/update", async (req, res, next) => {
-  const { email, password } = req.body;
+  const { language, email, password } = req.body;
 
   try {
     const exUser = await User.findOne({
@@ -556,7 +644,11 @@ router.patch("/findPass/update", async (req, res, next) => {
     if (!exUser) {
       return res
         .status(401)
-        .send("잘못된 요청 입니다. 다시 로그인 후 이용해주세요.");
+        .send(
+          language === `ko`
+            ? "잘못된 요청 입니다. 다시 로그인 후 이용해주세요."
+            : "Invalid request. Please log in again and try again."
+        );
     }
 
     const hashPassord = await bcrypt.hash(password, 12);
@@ -575,7 +667,9 @@ router.patch("/findPass/update", async (req, res, next) => {
     }
   } catch (error) {
     console.error(error);
-    return res.status(401).send("잘못된 요청 입니다.");
+    return res
+      .status(401)
+      .send(language === `ko` ? "잘못된 요청 입니다." : "Invalid request.");
   }
 });
 

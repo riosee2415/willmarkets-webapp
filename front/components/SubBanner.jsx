@@ -36,10 +36,6 @@ const SubBanner = ({
           subMenuName: t(`7`),
           subMenuLink: "/company/privacy",
         },
-        {
-          subMenuName: t(`8`),
-          subMenuLink: "/company/moneyPolicy",
-        },
       ],
     },
     {
@@ -242,6 +238,7 @@ const SubBanner = ({
                 menuList
                   .find((data) => data.menuLink === inputMenu1.value)
                   .subMenu.map((data, idx) => {
+                    console.log(data, "data");
                     return (
                       <ComboListItem
                         key={idx}

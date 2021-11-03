@@ -244,7 +244,7 @@ const Home = ({ width }) => {
               color={`#fff`}
               bgColor={`#000104`}
               onClick={createQuestionHandler}>
-              {t(`12`)}asdasd
+              {t(`12`)}
             </CommonButton>
           </Wrapper>
         </Wrapper>

@@ -176,18 +176,20 @@ router.patch("/updatePermit", isAdminCheck, async (req, res, next) => {
         "데모 계정이 성공적으로 열렸습니다.",
         `
       <div style="width: 50%; padding: 30px; border: 1px solid #eeeeee">
-            <img src="https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/willmarkets/assets/images/logo/logo.png"
-            style="width: 80px; height: 80px; background-size: cover; padding-bottom: 30px;"
-            />
+          <img src="https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/willmarkets/assets/images/logo/logo_hover.png"
+          style="width: auto; height: auto; background-size: cover; padding-bottom: 30px;"
+          />
             
-            <div style="
-             height: 45px;
-             display: flex;
-             border-bottom: 1px solid #f7b1ff;
-             font-size: 22px;
-             color: #0b0b0b;
-             line-height: 2;
-            ">
+          <div style="
+            height: 45px;
+            display: flex;
+            background: #3792eb;
+            font-size: 22px;
+            color: #fff;
+            padding: 0 15;
+            line-height: 2;
+            border-radius: 3px;
+          ">
             데모 계정이 성공적으로 열렸습니다.
             </div>
 

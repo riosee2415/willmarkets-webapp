@@ -493,18 +493,48 @@ router.post("/secretEmail", async (req, res, next) => {
       email,
       `🔐 [보안 인증코드 입니다.] WILLMARKET 에서 보안인증 코드를 발송했습니다.`,
       `
-        <div>
-          <h3>WILLMARKET</h3>
-          <hr />
-          <p>보안 인증코드를 발송해드립니다. WILLMARKET 홈페이지의 인증코드 입력란에 정확히 입력해주시기 바랍니다.</p>
-          <p>인증코드는 [<strong>${UUID}</strong>] 입니다. </p>
-
-          <br /><hr />
-          <article>
-            발송해드린 인증코드는 외부로 유출하시거나, 유출 될 경우 개인정보 침해의 위험이 있으니, 필히 본인만 사용하며 타인에게 양도하거나 알려주지 마십시오.
-          </article>
+    <div style="width: 50%; padding: 30px; border: 1px solid #eeeeee">
+        <img src="https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/willmarkets/assets/images/logo/logo_hover.png"
+        style="width: auto; height: auto; background-size: cover; padding-bottom: 30px;"
+        />
+        
+        <div style="
+          height: 45px;
+          display: flex;
+          background: #3792eb;
+          font-size: 22px;
+          color: #fff;
+          padding: 0 15;
+          line-height: 2;
+          border-radius: 3px;
+        ">
+        아래 인증코드를 입력해주세요.
         </div>
-        `
+
+        <div style="color: #0b0b0b; padding: 50px 0; font-size: 14px;">
+          사용자 여러분 안녕하세요<br/>
+          Willmarket 플랫폼을 선택해주셔서 감사합니다.<br/>
+          인증코드 : <strong style="color: #d62929">[${UUID}]</strong>
+          <br />
+          <br />
+          자세한 내용은 홈페이지에서 확인하세요 !
+        </div>
+
+        <div>
+          <a href="https://www.will-markets.com">
+            <button style="padding: 10px 20px; color: #fff; background-color:#0b0b0b; 
+            border: 1px solid #0b0b0b;
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: center;
+            ">
+              윌마켓으로 이동하기
+            </button>
+          </a>
+        </div>
+     </div>
+     `
     );
 
     return res.status(200).json(UUID);
@@ -540,18 +570,20 @@ router.post("/findPass", async (req, res, next) => {
         `🔐 [보안 인증코드 입니다.] WILLMARKET 에서 보안인증 코드를 발송했습니다.`,
         `
       <div style="width: 50%; padding: 30px; border: 1px solid #eeeeee">
-          <img src="https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/willmarkets/assets/images/logo/logo.png"
-          style="width: 80px; height: 80px; background-size: cover; padding-bottom: 30px;"
-          />
+        <img src="https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/willmarkets/assets/images/logo/logo_hover.png"
+        style="width: auto; height: auto; background-size: cover; padding-bottom: 30px;"
+        />
           
-          <div style="
-            height: 45px;
-            display: flex;
-            border-bottom: 1px solid #f7b1ff;
-            font-size: 22px;
-            color: #0b0b0b;
-            line-height: 2;
-          ">
+      <div style="
+        height: 45px;
+        display: flex;
+        background: #3792eb;
+        font-size: 22px;
+        color: #fff;
+        padding: 0 15;
+        line-height: 2;
+        border-radius: 3px;
+      ">
           아래 인증코드를 입력해주세요.
           </div>
 
@@ -726,19 +758,21 @@ router.patch("/updatePermit", isAdminCheck, async (req, res, next) => {
           exUpdatePermit.email,
           "데모 계정이 성공적으로 열렸습니다.",
           `
-      <div style="width: 50%; padding: 30px; border: 1px solid #eeeeee">
-            <img src="https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/willmarkets/assets/images/logo/logo.png"
-            style="width: 80px; height: 80px; background-size: cover; padding-bottom: 30px;"
-            />
+        <div style="width: 50%; padding: 30px; border: 1px solid #eeeeee">
+          <img src="https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/willmarkets/assets/images/logo/logo_hover.png"
+          style="width: auto; height: auto; background-size: cover; padding-bottom: 30px;"
+          />
             
-            <div style="
-             height: 45px;
-             display: flex;
-             border-bottom: 1px solid #f7b1ff;
-             font-size: 22px;
-             color: #0b0b0b;
-             line-height: 2;
-            ">
+        <div style="
+          height: 45px;
+          display: flex;
+          background: #3792eb;
+          font-size: 22px;
+          color: #fff;
+          padding: 0 15;
+          line-height: 2;
+          border-radius: 3px;
+        ">
             데모 계정이 성공적으로 열렸습니다.
             </div>
 
@@ -797,18 +831,20 @@ router.patch("/updatePermit", isAdminCheck, async (req, res, next) => {
           "라이브 계정이 성공적으로 열렸습니다.",
           `
       <div style="width: 50%; padding: 30px; border: 1px solid #eeeeee">
-            <img src="https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/willmarkets/assets/images/logo/logo.png"
-            style="width: 80px; height: 80px; background-size: cover; padding-bottom: 30px;"
+            <img src="https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/willmarkets/assets/images/logo/logo_hover.png"
+            style="width: auto; height: auto; background-size: cover; padding-bottom: 30px;"
             />
             
-            <div style="
-             height: 45px;
-             display: flex;
-             border-bottom: 1px solid #f7b1ff;
-             font-size: 22px;
-             color: #0b0b0b;
-             line-height: 2;
-            ">
+          <div style="
+            height: 45px;
+            display: flex;
+            background: #3792eb;
+            font-size: 22px;
+            color: #fff;
+            padding: 0 15;
+            line-height: 2;
+            border-radius: 3px;
+        ">
             라이브 계정이 성공적으로 열렸습니다.
             </div>
 

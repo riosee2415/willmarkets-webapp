@@ -79,7 +79,7 @@ const Privacy = () => {
             <Wrapper
               fontSize={width < 600 ? `30px` : `36px`}
               fontWeight={`700`}>
-              WILLMARKETS SA의 개인 정보 보호 정책
+              WILLMARKETS 의 개인 정보 보호 정책
             </Wrapper>
             <Title>
               <Wrapper className={`number`} width={`auto`}>
@@ -93,7 +93,7 @@ const Privacy = () => {
               </Wrapper>
               <Content width={`calc(100% - 60px)`}>
                 당사는 귀하의 개인 데이터를 보호하고 보호하기 위해 최선을 다하고
-                있습니다. WILLMARKETS SA(이하 " 회사 ") 의 현재 개인 정보 보호
+                있습니다. WILLMARKETS (이하 " 회사 ") 의 현재 개인 정보 보호
                 정책은 유럽 ​​연합 거주자에게 혜택을 주는 EU의 GDPR(일반 데이터
                 보호 규정)에 따라 구현되었습니다.
               </Content>
@@ -209,15 +209,7 @@ const Privacy = () => {
                   fontWeight={`500`}
                   display={`contents`}
                   cursor={`pointer`}>
-                  www.dukascopy.bank
-                </Wrapper>
-                &nbsp;및&nbsp;
-                <Wrapper
-                  color={`#3353f2`}
-                  fontWeight={`500`}
-                  display={`contents`}
-                  cursor={`pointer`}>
-                  www.dukascopy.com
+                  https://will-markets.com
                 </Wrapper>
               </Content>
             </SubTitle>
@@ -436,7 +428,7 @@ const Privacy = () => {
                 <Wrapper fontWeight={`500`} display={`contents`}>
                   4.2.3.&nbsp;
                 </Wrapper>
-                Dukascopy Group 제안 및 기타 리소스와 관련하여 고객에게 유용할
+                WILLMARKETS Group 제안 및 기타 리소스와 관련하여 고객에게 유용할
                 수 있는 서비스, 제품, 교육 자료, 예정된 이벤트 및 기타 관련
                 정보에 대한 정보를 고객에게 제공하기 위해
               </Content>
@@ -490,7 +482,7 @@ const Privacy = () => {
                   5.1.1.
                 </Wrapper>
                 지리적 위치에 관계없이 회사의 모든 사무소 및 계열사를 포함하여
-                Dukascopy Group 내
+                WILLMARKETS Group 내
               </Content>
             </SubTitle>
             <SubTitle padding={`14px 0 0 63px`}>
@@ -499,7 +491,7 @@ const Privacy = () => {
                   5.1.2.
                 </Wrapper>
                 개인 데이터 처리와 관련하여 적절한 보호 및 제한을 보장하는 서면
-                계약에 따라 Dukascopy Group에 서비스를 제공하는 제공자를
+                계약에 따라 WILLMARKETS Group에 서비스를 제공하는 제공자를
                 포함하여 선택된 제3자에게. 여기에는 IT, 지불 서비스, 감사
                 서비스, 신원 확인, 실사 서비스, 데이터 분석, 마케팅 지원,
                 클라우드 서비스 및 기타를 제공하는 회사가 포함될 수 있습니다.
@@ -597,13 +589,13 @@ const Privacy = () => {
               고객의 의무
             </Title>
             <Content padding={`40px`} padding={`10px 0 0 26px`}>
-              고객은 회사, Dukascopy Group 또는 그 임원, 이사, 직원 및 계열사가
-              고객의 기밀 정보를 제3자가 사용하는 경우 고객이 입은 재정적 손실을
-              포함하여 모든 종류의 손실에 대해 책임을 지지 않는다는 데
-              동의합니다. 예를 들어 클라이언트가 이 제3자에게 전달하거나
-              남용/사기 방식으로 제3자가 클라이언트로부터 얻은 로그인 및
-              비밀번호. 고객은 승인되지 않은 제3자에게 이러한 개인 데이터 공개에
-              대해 전적인 책임을 집니다.
+              고객은 회사, WILLMARKETS Group 또는 그 임원, 이사, 직원 및
+              계열사가 고객의 기밀 정보를 제3자가 사용하는 경우 고객이 입은
+              재정적 손실을 포함하여 모든 종류의 손실에 대해 책임을 지지
+              않는다는 데 동의합니다. 예를 들어 클라이언트가 이 제3자에게
+              전달하거나 남용/사기 방식으로 제3자가 클라이언트로부터 얻은 로그인
+              및 비밀번호. 고객은 승인되지 않은 제3자에게 이러한 개인 데이터
+              공개에 대해 전적인 책임을 집니다.
             </Content>
             <Title>
               <Wrapper className={`number`} width={`auto`}>
@@ -770,14 +762,14 @@ const Privacy = () => {
             </Title>
             <Content padding={`40px`} padding={`10px 0 0 26px`}>
               고객이 회사의 개인 데이터 처리와 관련하여 질문이나 문의 사항이
-              있는 경우 support@dukascopy.com 으로 이메일을 보내 거나 회사
+              있는 경우 info@will-markets.com 으로 이메일을 보내 거나 회사
               웹사이트에 표시된 우편 주소로 편지를 보내야 합니다:
               <Wrapper
                 color={`#3353f2`}
                 fontWeight={`500`}
                 display={`contents`}
                 cursor={`pointer`}>
-                https://www.dukascopy.com .
+                https://will-markets.com.
               </Wrapper>
             </Content>
             <Title>
@@ -825,7 +817,7 @@ const Privacy = () => {
             <Wrapper
               fontSize={width < 600 ? `30px` : `36px`}
               fontWeight={`700`}>
-              PRIVACY POLICY OF DUKASCOPY BANK SA
+              PRIVACY POLICY OF WILLMARKET
             </Wrapper>
             <Title>
               <Wrapper className={`number`} width={`auto`}>
@@ -839,7 +831,7 @@ const Privacy = () => {
               </Wrapper>
               <Content width={`calc(100% - 60px)`}>
                 We are strongly committed to protecting and safeguarding your
-                personal data. The present Privacy Policy of Dukascopy Bank SA
+                personal data. The present Privacy Policy of WILLMARKETS
                 (here-after "the Company") has been implemented in light of the
                 EU's General Data Protection Regulation (GDPR) which benefits to
                 the residents of the European Union.
@@ -895,7 +887,7 @@ const Privacy = () => {
                   cursor={`pointer`}>
                   Privacy Policy
                 </Wrapper>
-                – the present Privacy Policy of Dukascopy Bank;
+                – the present Privacy Policy of WILLMARKETS 
               </Content>
             </SubTitle>
             <SubTitle padding={`0 0 0 43px`}>
@@ -960,15 +952,7 @@ const Privacy = () => {
                   fontWeight={`500`}
                   display={`contents`}
                   cursor={`pointer`}>
-                  www.dukascopy.bank
-                </Wrapper>
-                &nbsp;and&nbsp;
-                <Wrapper
-                  color={`#3353f2`}
-                  fontWeight={`500`}
-                  display={`contents`}
-                  cursor={`pointer`}>
-                  www.dukascopy.com
+                  https://will-markets.com/
                 </Wrapper>
               </Content>
             </SubTitle>
@@ -1205,7 +1189,7 @@ const Privacy = () => {
                 to provide the Client with information about Services, products,
                 educational materials, upcoming events and other related
                 information that may be useful to the Client in relation to
-                Dukascopy Group offers and other resources;
+                WILLMARKETS Group offers and other resources;
               </Content>
             </SubTitle>
             <SubTitle padding={`0 0 0 63px`}>
@@ -1257,8 +1241,8 @@ const Privacy = () => {
                 <Wrapper fontWeight={`500`} display={`contents`}>
                   5.1.1.
                 </Wrapper>
-                within Dukascopy Group, including all offices and affiliates of
-                the Company, irrespective of their geographical location;
+                within WILLMARKETS Group, including all offices and affiliates
+                of the Company, irrespective of their geographical location;
               </Content>
             </SubTitle>
             <SubTitle padding={`14px 0 0 63px`}>
@@ -1267,7 +1251,7 @@ const Privacy = () => {
                   5.1.2.
                 </Wrapper>
                 to selected third parties, including providers that deliver
-                services to Dukascopy Group under written agreements ensuring
+                services to WILLMARKETS Group under written agreements ensuring
                 proper safeguards and limitations with regards to Personal Data
                 processing. This may include companies providing IT, payment
                 services, audit services, identity verification, due diligence
@@ -1372,7 +1356,7 @@ const Privacy = () => {
               Client’s Obligation
             </Title>
             <Content padding={`40px`} padding={`10px 0 0 26px`}>
-              The Client agrees not to hold the Company nor Dukascopy Group or
+              The Client agrees not to hold the Company nor WILLMARKETS Group or
               any of their officers, directors, employees and affiliates liable
               for losses of any kind, including financial, suffered by the
               Client in case of use by a third party of Client’s confidential
@@ -1551,14 +1535,14 @@ const Privacy = () => {
             <Content padding={`40px`} padding={`10px 0 0 26px`}>
               Should the Client have any questions or inquiries regarding the
               processing of his Personal Data by the Company, he shall send an
-              e-mail to: support@dukascopy.com or send a letter to the postal
+              e-mail to: support@will-markets.com or send a letter to the postal
               address indicated on the Company’s Website:
               <Wrapper
                 color={`#3353f2`}
                 fontWeight={`500`}
                 display={`contents`}
                 cursor={`pointer`}>
-                https://www.dukascopy.com .
+                https://will-markets.com/ .
               </Wrapper>
             </Content>
             <Title>

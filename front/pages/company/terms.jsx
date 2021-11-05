@@ -71,24 +71,24 @@ const Terms = () => {
             <Wrapper
               fontSize={width < 600 ? `30px` : `36px`}
               fontWeight={`700`}>
-              WILLMARKETS BANK SA 웹사이트 접속 및 사용에 적용되는 이용 약관
+              WILLMARKETS 웹사이트 접속 및 사용에 적용되는 이용 약관
             </Wrapper>
 
             <Content padding={`20px 0 0 0`}>
               이 사이트를 사용하기 전에 이 웹사이트("TCU")에 대한 다음 사용
               조건을 모두 읽으십시오. 이 웹사이트 또는 이 웹사이트를 통해
               액세스할 수 있는 모든 서비스에 계속 액세스, 연결 또는 사용함으로써
-              귀하는 TCU에 동의하는 것입니다. WILLMARKETS BANK
-              SA("WILLMARKETS")는 언제든지 TCU를 수정, 제거 또는 추가할 수 있는
-              권한을 보유합니다. 그러한 수정은 즉시 효력을 발생합 니다. 따라서
-              WILLMARKETS의 웹사이트(이하 "웹사이트")에 액세스, 링크 또는 사용할
-              때마다 TCU를 계속 검토하십시오. 웹 사 이트 또는 웹 사이트에서
-              액세스할 수 있는 서비스에 대한 귀하의 액세스, 링크 또는 사용,
-              TCU에 수정 사항을 게시한 후 수정된 대로 TCU에 동의하는 것으로
-              간주됩니다. 언제든지 TCU를 수락하지 않으려면 웹 사이트에
-              액세스하거나 링크하거나 웹 사이트 를 사용할 수 없습니다. TCU에
-              추가되거나 TCU와 충돌하는 귀하가 제안한 모든 이용 약관은
-              WILLMARKETS에 의해 명시적으로 거부되며 효력이 없습니다.
+              귀하는 TCU에 동의하는 것입니다. WILLMARKETS ("WILLMARKETS")는
+              언제든지 TCU를 수정, 제거 또는 추가할 수 있는 권한을 보유합니다.
+              그러한 수정은 즉시 효력을 발생합 니다. 따라서 WILLMARKETS의
+              웹사이트(이하 "웹사이트")에 액세스, 링크 또는 사용할 때마다 TCU를
+              계속 검토하십시오. 웹 사 이트 또는 웹 사이트에서 액세스할 수 있는
+              서비스에 대한 귀하의 액세스, 링크 또는 사용, TCU에 수정 사항을
+              게시한 후 수정된 대로 TCU에 동의하는 것으로 간주됩니다. 언제든지
+              TCU를 수락하지 않으려면 웹 사이트에 액세스하거나 링크하거나 웹
+              사이트 를 사용할 수 없습니다. TCU에 추가되거나 TCU와 충돌하는
+              귀하가 제안한 모든 이용 약관은 WILLMARKETS에 의해 명시적으로
+              거부되며 효력이 없습니다.
             </Content>
 
             <Wrapper al={`flex-start`} fontSize={`22px`} padding={`39px 0 0 0`}>
@@ -217,7 +217,7 @@ const Terms = () => {
               <Wrapper className={`number`} width={`auto`}>
                 4
               </Wrapper>
-              특허
+              면허
             </Title>
             <Content padding={`14px 0 0 43px`}>
               (i) 귀하는 TCU에 따라 웹사이트를 사용할 수 있는 제한된 권리를
@@ -240,8 +240,10 @@ const Terms = () => {
               제공하는 자료의 사용은 이 TCU를 위반하지 않으며 개인이나 단체에
               상해를 입히지 않습니다. 그리고 귀하는 귀하가 제공한 자료로 인해
               발생하는 모든 청구에 대해 WILLMARKETS 및 그 공급자, 대리인, 이사,
-              임원, 직원, 대리인, 승계인 및 양수인을 면책할 것입니다.
-              WILLMARKETS 및 그 공급업체, 대리인, 이사, 임원, 직원,
+              임원, 직원, 대리인, 승계인 및 양수인을 면책합니다. WILLMARKETS 및
+              그 공급업체, 대리인, 이사, 임원, 직원, 대표자, 후계자 및 할당은
+              책임을 부인하며 귀하 또는 제3자가 제출한 자료에 대해 어떠한 책임도
+              지지 않습니다.
             </Content>
 
             <Title dr={`row`} ju={`flex-start`} color={`#000`}>
@@ -338,9 +340,9 @@ const Terms = () => {
               인해 발생하거나 불이행으로 인한 손실 또는 손해.
             </Content>
             <Content padding={`14px 0 0 43px`}>
-              수익 손실 또는 예상 이익 손실 또는 사업 손실. 관련 법률은 책임
-              또는 부수적 또는 결과적 손해의 제한 또는 배제를 허용하지 않을 수
-              있습니다. 어떠한 경우에도 귀하에 대한 WILLMARKETS의 총 책임은
+              (iv) 수익 손실 또는 예상 이익 손실 또는 사업 손실. 관련 법률은
+              책임 또는 부수적 또는 결과적 손해의 제한 또는 배제를 허용하지 않을
+              수 있습니다. 어떠한 경우에도 귀하에 대한 WILLMARKETS의 총 책임은
               귀하가 WILLMARKETS, BSIF에 대해 지불한 금액을 초과하지 않습니다.
               관련 법률은 책임 또는 부수적 또는 결과적 손해의 제한 또는 배제를
               허용하지 않을 수 있습니다. 어떠한 경우에도 귀하에 대한
@@ -358,7 +360,7 @@ const Terms = () => {
               이 TCU에 동의할 수 있는 권한
             </Title>
             <Content padding={`14px 0 0 43px`}>
-              귀하는 12조 ff에 따라 본 계약을 체결할 권한과 권한이 있음을 진술,
+              귀하는 12조에 따라 본 계약을 체결할 권한과 권한이 있음을 진술,
               보증 및 서약합니다. 스위스 민법.
             </Content>
 
@@ -369,21 +371,26 @@ const Terms = () => {
               보증
             </Title>
             <Content padding={`14px 0 0 43px`}>
-              (ii) 귀하 또는 귀하의 컴퓨터(또는 해당되는 경우 계정)를 사용하는
-              사람의 TCU 위반 (iii) 귀하 또는 귀하의 컴퓨터를 사용하는 누군가가
-              웹사이트를 사용하는 것이 제3자의 지적 재산권 또는 사생활 보호 또는
-              퍼블리시티권을 침해하거나 명예를 훼손하거나 명예를 훼손하거나 다른
-              사람에게 상해 또는 손해를 입힌다는 주장 제3자; (iv) 귀하 또는
-              귀하의 컴퓨터를 사용하는 누군가에 의한 웹사이트의 삭제, 추가, 삽입
-              또는 변경 또는 무단 사용; (v) 여기에 포함된 귀하의 허위 진술 또는
-              진술 또는 보증 위반; 또는 (vi) 귀하가 본 계약에 따라 수행할 모든
-              계약 또는 계약의 위반. 귀하는 그러한 청구, 소송, 소송 또는 소송과
-              관련하여 또는 이와 관련하여 또는 이와 관련하여 발생한 합리적인
-              변호사 수임료 및 비용을 포함하되 이에 국한되지 않는 모든 비용,
-              손해 및 경비를 지불하는 데 동의합니다. 그러한 주장에 기인합니다.
-              WILLMARKETS는 권리를 보유합니다. 자체 비용으로 귀하가 면책해야
-              하는 모든 문제에 대한 배타적 방어 및 통제를 가정합니다. 이 경우
-              귀하는 WILLMARKETS와 함께 사용 가능한 방어를 주장하는 데 전적으로
+              귀하는 자신의 비용으로 WILLMARKETS를 면책, 방어 및 무해한 상태로
+              유지하는 데 동의합니다. 공급업체, 대리인, 이사, 임원, 직원,
+              대리인, 승계인 및 양수인은 다음을 포함하되 이에 국한되지 않는
+              웹사이트 또는 웹사이트의 모든 링크: (i) 귀하 또는 귀하의 컴퓨터를
+              사용하는 누군가가 웹사이트를 사용하는 경우; (ii) 귀하 또는 귀하의
+              컴퓨터(또는 해당되는 경우 계정)를 사용하는 사람의 TCU 위반 (iii)
+              귀하 또는 귀하의 컴퓨터를 사용하는 누군가가 웹사이트를 사용하는
+              것이 제3자의 지적 재산권 또는 사생활 보호 또는 퍼블리시티권을
+              침해하거나 명예를 훼손하거나 명예를 훼손하거나 다른 사람에게 상해
+              또는 손해를 입힌다는 주장 제3자; (iv) 귀하 또는 귀하의 컴퓨터를
+              사용하는 누군가에 의한 웹사이트의 삭제, 추가, 삽입 또는 변경 또는
+              무단 사용; (v) 여기에 포함된 귀하의 허위 진술 또는 진술 또는 보증
+              위반; 또는 (vi) 귀하가 본 계약에 따라 수행할 모든 계약 또는 계약의
+              위반. 귀하는 그러한 청구, 소송, 소송 또는 소송과 관련하여 또는
+              이와 관련하여 또는 이와 관련하여 발생한 합리적인 변호사 수임료 및
+              비용을 포함하되 이에 국한되지 않는 모든 비용, 손해 및 경비를
+              지불하는 데 동의합니다. 그러한 주장에 기인합니다. WILLMARKETS는
+              권리를 보유합니다. 자체 비용으로 귀하가 면책해야 하는 모든 문제에
+              대한 배타적 방어 및 통제를 가정합니다. 이 경우 귀하는
+              WILLMARKETS와 함께 사용 가능한 방어를 주장하는 데 전적으로
               협력합니다. 귀하는 TCU 및 웹사이트 액세스 및 사용에 적용되는 기타
               조건에 따라 WILLMARKETS가 귀하에게 제기한 모든 소송과 관련하여
               발생한 WILLMARKETS의 합리적인 변호사 비용을 인정하고 이에
@@ -518,9 +525,9 @@ const Terms = () => {
             </Title>
             <Content padding={`14px 0 0 43px`}>
               TCU에 따라 웹사이트에 연결하면 웹사이트에서 밑줄이 그어진 텍스트
-              링크를 제공하기 위한 용도로만 WILLMARKETS Bank SA가 소유한
-              WILLMARKETS 마크를 사용할 수 있는 비독점적이고 양도할 수 없으며
-              로열티 없는 하위 라이선스가 부여됩니다. 에&nbsp;
+              링크를 제공하기 위한 용도로만 WILLMARKETS 가 소유한 WILLMARKETS
+              마크를 사용할 수 있는 비독점적이고 양도할 수 없으며 로열티 없는
+              하위 라이선스가 부여됩니다. 에&nbsp;
               <Wrapper
                 color={`#3353f2`}
                 display={`contents`}
@@ -566,8 +573,8 @@ const Terms = () => {
             <Wrapper
               fontSize={width < 600 ? `30px` : `36px`}
               fontWeight={`700`}>
-              TERMS OF USE GOVERNING THE ACCESS TO AND USE OF WILLMARKETS BANK
-              SA'S WEBSITE
+              TERMS OF USE GOVERNING THE ACCESS TO AND USE OF WILLMARKETS
+              WEBSITE
             </Wrapper>
 
             <Content padding={`20px 0 0 0`}>
@@ -575,8 +582,8 @@ const Terms = () => {
               THIS WEBSITE ("TCU") BEFORE USING THIS SITE. By continuing to
               access, link to, or use this website, or any service accessible
               via this website, you signify YOUR ACCEPTANCE OF THE TCU.
-              WILLMARKETS BANK SA ("WILLMARKETS") reserves the right to amend,
-              remove, or add to the TCU at any time. Such modifications shall be
+              WILLMARKETS ("WILLMARKETS") reserves the right to amend, remove,
+              or add to the TCU at any time. Such modifications shall be
               effective immediately. Accordingly, please continue to review the
               TCU whenever accessing, linking to, or using WILLMARKETS's website
               (the "WEBSITE"). Your access, link to, or use of the WEBSITE, or
@@ -1125,9 +1132,9 @@ const Terms = () => {
             <Content padding={`14px 0 0 43px`}>
               Upon linking to the WEBSITE pursuant to the TCU, you will be
               granted a non-exclusive, non-transferable, royalty-free
-              sub-license to use the WILLMARKETS mark owned by WILLMARKETS Bank
-              SA solely for providing an underlined, textual link from your
-              website to&nbsp;
+              sub-license to use the WILLMARKETS mark owned by WILLMARKETS
+              solely for providing an underlined, textual link from your website
+              to&nbsp;
               <Wrapper
                 color={`#3353f2`}
                 display={`contents`}
@@ -1160,7 +1167,7 @@ const Terms = () => {
                 display={`contents`}
                 cursor={`pointer`}
                 onClick={() => moveLinkHandler(`/`)}>
-                www.will-markets.com
+                www.will-markets.com&nbsp;
               </Wrapper>
               any site containing an inappropriate, profane, defamatory,
               infringing, obscene, indecent or unlawful topic, name, material

@@ -9,7 +9,7 @@ import wrapper from "../store/configureStore";
 import { END } from "redux-saga";
 import axios from "axios";
 import { LOAD_MY_INFO_REQUEST } from "../reducers/user";
-import {} from "@ant-design/icons";
+import { CaretDownOutlined } from "@ant-design/icons";
 import useWidth from "../hooks/useWidth";
 import {
   Image,
@@ -19,6 +19,10 @@ import {
   Label,
   TextInput,
   RadioInput,
+  Combo,
+  ComboList,
+  ComboListItem,
+  ComboTitle,
 } from "../components/commonComponents";
 import ClientLayout from "../components/ClientLayout";
 import Theme from "../components/Theme";
@@ -26,6 +30,18 @@ import SubBanner from "../components/SubBanner";
 import { QUESTION_CREATE_REQUEST } from "../reducers/question";
 import { useTranslation } from "react-i18next";
 import i18next from "i18next";
+
+const CustomInput = styled(TextInput)`
+  width: ${(props) => props.width || `350px`};
+  height: 40px;
+  border: none;
+  border-bottom: ${(props) => props.borderBottom || `1px solid #dfdfdf`};
+
+  &:hover,
+  &:focus {
+    border-bottom: ${(props) => props.hoverBorderBottom || `1px solid #e6c0d4`};
+  }
+`;
 
 const TextLabel = styled(Label)``;
 
@@ -119,6 +135,89 @@ const FormButton = styled(CommonButton)`
 const Support = () => {
   ////// VARIABLES //////
 
+  const countryList = [
+    {
+      name: `Brazil`,
+      value: `+55`,
+    },
+    {
+      name: `Chile`,
+      value: `+56`,
+    },
+    {
+      name: `Denmark`,
+      value: `+45`,
+    },
+    {
+      name: `Ecuador`,
+      value: `+593`,
+    },
+    {
+      name: `France`,
+      value: `+33`,
+    },
+    {
+      name: `Guatemala`,
+      value: `+502`,
+    },
+    {
+      name: `Hong Kong`,
+      value: `+852`,
+    },
+    {
+      name: `Italy`,
+      value: `+39`,
+    },
+    {
+      name: `Ireland`,
+      value: `+353`,
+    },
+    {
+      name: `Japan`,
+      value: `+81`,
+    },
+    {
+      name: `Monaco`,
+      value: `+377`,
+    },
+    {
+      name: `Mexico`,
+      value: `+52`,
+    },
+    {
+      name: `Philippine`,
+      value: `+63`,
+    },
+    {
+      name: `Portugal`,
+      value: `+351`,
+    },
+    {
+      name: `Paraguay`,
+      value: `+595`,
+    },
+    {
+      name: `South Korea`,
+      value: `+82`,
+    },
+    {
+      name: `Switzerland`,
+      value: `+41`,
+    },
+    {
+      name: `Taiwan`,
+      value: `+886`,
+    },
+    {
+      name: `United Kingdom`,
+      value: `+44`,
+    },
+    {
+      name: `Vietnam`,
+      value: `+84`,
+    },
+  ];
+
   ////// HOOKS //////
   const dispatch = useDispatch();
 
@@ -135,8 +234,11 @@ const Support = () => {
   const inputEmail = useInput("");
   const inputContent = useInput("");
   const inputAgree = useInput(false);
+  const inputCountryNo = useInput("");
+  const inputMobile = useInput("");
 
   const [toggleModal, setToggleModal] = useState(false);
+  const [comboCountryNo, setComboCountryNo] = useState(false);
 
   ////// TOGGLE //////
 
@@ -168,7 +270,7 @@ const Support = () => {
       data: {
         language: i18next.language,
         name: inputName.value,
-        mobile: inputNumber.value,
+        mobile: `${inputCountryNo.value} ${inputNumber.value}`,
         email: inputEmail.value,
         content: inputContent.value,
       },
@@ -189,6 +291,7 @@ const Support = () => {
       inputEmail.setValue("");
       inputContent.setValue("");
       inputAgree.setValue(false);
+      inputCountryNo.setValue("");
     }
   }, [st_questionCreateDone]);
 
@@ -253,8 +356,40 @@ const Support = () => {
                     <TextLabel margin={`0 25px 0 0 `}>{t(`11`)}</TextLabel>
                   </Wrapper>
 
-                  <Wrapper width={`250px`}>
+                  <Wrapper dr={`row`} width={`250px`}>
+                    <Combo
+                      isBorder={true}
+                      itemAlign={`flex-start`}
+                      margin={`0 10px 0 0`}
+                      width={`100px`}
+                      height={`35px`}
+                      listHeight={`270px`}
+                      border={`none`}
+                      borderBottom={`1px solid #dfdfdf !important`}
+                      onClick={() => setComboCountryNo(!comboCountryNo)}>
+                      <ComboTitle>
+                        <Wrapper>{inputCountryNo.value || `Select`}</Wrapper>
+                        <CaretDownOutlined />
+                      </ComboTitle>
+
+                      <ComboList isView={comboCountryNo} width={`180%`}>
+                        {countryList.map((data, idx) => {
+                          return (
+                            <ComboListItem
+                              key={idx}
+                              isActive={inputCountryNo.value === data.value}
+                              onClick={() =>
+                                inputCountryNo.setValue(data.value)
+                              }>
+                              {data.name} ({data.value})
+                            </ComboListItem>
+                          );
+                        })}
+                      </ComboList>
+                    </Combo>
+
                     <InputText
+                      width={`calc(100% - 110px)`}
                       maxLength={`13`}
                       borderBottom={"1px solid #e3e3e3"}
                       fontSize={`16px`}

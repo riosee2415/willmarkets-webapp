@@ -478,8 +478,8 @@ router.post("/checkEmail", async (req, res, next) => {
       .status(401)
       .send(
         language === `ko`
-          ? "이미 사용중인 이메일 입니다."
-          : "This email is already in use."
+          ? "처리중 문제가 발생하였습니다."
+          : "A problem occurred during processing"
       );
   }
 });

@@ -5,9 +5,9 @@ dotenv.config();
 
 const smtpTransport = nodemailer.createTransport(
   smtpPool({
-    service: "Gmail",
-    host: "localhost",
+    host: "smtpout.secureserver.net",
     port: "465",
+    secureConnection: false,
     tls: {
       rejectUnauthorize: false,
     },
@@ -35,7 +35,7 @@ const sendMail = async (email) => {
 
 const sendSecretMail = (adress, title, content) => {
   const email = {
-    from: "Willmarkets.com",
+    from: "info@willmarkets.com",
     to: adress,
     subject: title,
     html: content,

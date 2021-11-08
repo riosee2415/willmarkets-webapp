@@ -23,7 +23,7 @@ module.exports = () => {
                 reason:
                   languaue === "ko"
                     ? "존재하지 않는 이메일 입니다."
-                    : "aaa존재하지 않는 이메일 입니다.",
+                    : "This email does not exist.",
               });
             }
 

@@ -5,8 +5,8 @@ dotenv.config();
 
 const smtpTransport = nodemailer.createTransport(
   smtpPool({
-    service: "Gmail",
-    host: "localhost",
+    service: "Godaddy",
+    host: "smtpout.secureserver.net",
     port: "465",
     tls: {
       rejectUnauthorize: false,

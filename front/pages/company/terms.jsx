@@ -340,17 +340,19 @@ const Terms = () => {
               인해 발생하거나 불이행으로 인한 손실 또는 손해.
             </Content>
             <Content padding={`14px 0 0 43px`}>
-              (iv) 수익 손실 또는 예상 이익 손실 또는 사업 손실. 관련 법률은
+              (iv) 과실을 포함하되 이에 국한되지 않는 어떠한 경우에도
+              WILLMARKETS의, 공급업체, 대리인, 이사, 임원, 직원, 대표자, 후임자
+              또는 대리인, 대리인, 후계자 또는 대리인이 직접, 간접, 부수적,
+              결과적, 특별, 징벌적 또는 예견된 손해에 대해 귀하에게 책임을 져야
+              하며, WILLMARKETS의는 웹사이트 또는 웹사이트의 웹사이트 또는
+              링크의 사용 또는 무능력으로 인해 발생하는 손해의 가능성에 대해
+              구체적으로 통보된 경우에도 예를 들어, 매출 손실 또는 예상 이익
+              또는 손실 사업 손실과 같이 이에 국한되지 않습니다. 관련 법률은
               책임 또는 부수적 또는 결과적 손해의 제한 또는 배제를 허용하지 않을
-              수 있습니다. 어떠한 경우에도 귀하에 대한 WILLMARKETS의 총 책임은
-              귀하가 WILLMARKETS, BSIF에 대해 지불한 금액을 초과하지 않습니다.
-              관련 법률은 책임 또는 부수적 또는 결과적 손해의 제한 또는 배제를
-              허용하지 않을 수 있습니다. 어떠한 경우에도 귀하에 대한
-              WILLMARKETS의 총 책임은 귀하가 WILLMARKETS, BSIF에 대해 지불한
-              금액을 초과하지 않습니다. 관련 법률은 책임 또는 부수적 또는 결과적
-              손해의 제한 또는 배제를 허용하지 않을 수 있습니다. 어떠한 경우에도
-              귀하에 대한 WILLMARKETS의 총 책임은 귀하가 WILLMARKETS, BSIF에
-              대해 지불한 금액을 초과하지 않습니다.
+              수 있습니다. 어떠한 경우에도 WILLMARKETS의는 모든 손해, 손실 및
+              행동 원인에 대해 귀하에게 전적인 책임을 지지 않습니다(계약 또는
+              불법 행위의 경우, 과실을 포함하되 이에 국한되지 않음)은 귀하가 웹
+              사이트에 액세스하기 위해 WILLMARKETS의에 지불한 금액을 초과합니다.
             </Content>
 
             <Title dr={`row`} ju={`flex-start`} color={`#000`}>
@@ -919,20 +921,20 @@ const Terms = () => {
             </Content>
             <Content padding={`14px 0 0 43px`}>
               (iv) UNDER NO CIRCUMSTANCES, INCLUDING BUT NOT LIMITED TO
-              NEGLIGENCE, SHALL WILLMARKETS, ITS SUPPLIERS, AGENTS, DIRECTORS,
+              NEGLIGENCE, SHALL DUKASCOPY, ITS SUPPLIERS, AGENTS, DIRECTORS,
               OFFICERS, EMPLOYEES, REPRESENTATIVES, SUCCESSORS, OR ASSIGNS BE
               LIABLE TO YOU FOR DIRECT, INDIRECT, INCIDENTAL, CONSEQUENTIAL,
-              SPECIAL, PUNITIVE, OR EXEMPLARY DAMAGES EVEN IF WILLMARKETS HAS
-              BEEN ADVISED SPECIFICALLY OF THE POSSIBILITY OF SUCH DAMAGES,
-              ARISING FROM THE USE OF OR INABILITY TO USE THE WEBSITE OR ANY
-              LINKS OR ITEMS ON THE WEBSITE OR ANY PROVISION OF THE TCU, SUCH
-              AS, BUT NOT LIMITED TO, LOSS OF REVENUE OR ANTICIPATED PROFITS OR
-              LOST BUSINESS. APPLICABLE LAW MAY NOT ALLOW THE LIMITATION OR
-              EXCLUSION OF LIABILITY OR INCIDENTAL OR CONSEQUENTIAL DAMAGES. IN
-              NO EVENT SHALL WILLMARKETS'S TOTAL LIABILITY TO YOU FOR ALL
-              DAMAGES, LOSSES AND CAUSES OF ACTION (WHETHER IN CONTRACT OR TORT,
-              INCLUDING BUT NOT LIMITED TO, NEGLIGENCE) EXCEED THE AMOUNT PAID
-              BY YOU TO WILLMARKETS, IF ANY, FOR ACCESSING THE WEBSITE.
+              SPECIAL, PUNITIVE, OR EXEMPLARY DAMAGES EVEN IF DUKASCOPY HAS BEEN
+              ADVISED SPECIFICALLY OF THE POSSIBILITY OF SUCH DAMAGES, ARISING
+              FROM THE USE OF OR INABILITY TO USE THE WEBSITE OR ANY LINKS OR
+              ITEMS ON THE WEBSITE OR ANY PROVISION OF THE TCU, SUCH AS, BUT NOT
+              LIMITED TO, LOSS OF REVENUE OR ANTICIPATED PROFITS OR LOST
+              BUSINESS. APPLICABLE LAW MAY NOT ALLOW THE LIMITATION OR EXCLUSION
+              OF LIABILITY OR INCIDENTAL OR CONSEQUENTIAL DAMAGES. IN NO EVENT
+              SHALL DUKASCOPY'S TOTAL LIABILITY TO YOU FOR ALL DAMAGES, LOSSES
+              AND CAUSES OF ACTION (WHETHER IN CONTRACT OR TORT, INCLUDING BUT
+              NOT LIMITED TO, NEGLIGENCE) EXCEED THE AMOUNT PAID BY YOU TO
+              DUKASCOPY, IF ANY, FOR ACCESSING THE WEBSITE.
             </Content>
 
             <Title dr={`row`} ju={`flex-start`} color={`#000`}>

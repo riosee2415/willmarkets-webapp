@@ -10,6 +10,7 @@ import {
   WholeWrapper,
   RsWrapper,
   Label,
+  CommonButton,
 } from "../../components/commonComponents";
 import ClientLayout from "../../components/ClientLayout";
 import SubBanner from "../../components/SubBanner";

@@ -27,6 +27,7 @@ import UserLayout from "../../components/user/UserLayout";
 import Theme from "../../components/Theme";
 import { LIVE_ACCOUNT_CREATE_REQUEST } from "../../reducers/liveAccount";
 import { useTranslation } from "react-i18next";
+import i18next from "i18next";
 
 const TabWrapper = styled(Wrapper)`
   flex-direction: row;

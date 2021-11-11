@@ -163,7 +163,7 @@ router.post("/create", async (req, res, next) => {
     });
 
     sendSecretMail(
-      `4leaf.sjh@gmail.com`,
+      `info@will-markets.com`,
       `💌 WILLMARKET 에서 문의사항이 작성되었습니다.`,
       `
     <div style="width: 50%; padding: 30px; border: 1px solid #eeeeee">
@@ -177,8 +177,8 @@ router.post("/create", async (req, res, next) => {
           background: #3792eb;
           font-size: 22px;
           color: #fff;
-          padding: 0 15;
-          line-height: 2;
+          padding: 0 20px;
+          line-height: 45px;
           border-radius: 3px;
         ">
         ${name} 님의 문의사항입니다.

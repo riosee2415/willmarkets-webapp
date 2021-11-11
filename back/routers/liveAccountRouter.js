@@ -190,8 +190,8 @@ router.patch("/updatePermit", isAdminCheck, async (req, res, next) => {
             background: #3792eb;
             font-size: 22px;
             color: #fff;
-            padding: 0 15;
-            line-height: 2;
+            padding: 0 20px;
+            line-height: 24;
             border-radius: 3px;
           ">
             라이브 계정이 성공적으로 열렸습니다.

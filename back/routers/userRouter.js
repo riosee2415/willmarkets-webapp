@@ -504,8 +504,8 @@ router.post("/secretEmail", async (req, res, next) => {
           background: #3792eb;
           font-size: 22px;
           color: #fff;
-          padding: 0 15;
-          line-height: 2;
+          padding: 0 20px;
+          line-height: 45px;
           border-radius: 3px;
         ">
         아래 인증코드를 입력해주세요.
@@ -580,8 +580,8 @@ router.post("/findPass", async (req, res, next) => {
         background: #3792eb;
         font-size: 22px;
         color: #fff;
-        padding: 0 15;
-        line-height: 2;
+        padding: 0 20px;
+        line-height: 45px;
         border-radius: 3px;
       ">
           아래 인증코드를 입력해주세요.
@@ -769,8 +769,8 @@ router.patch("/updatePermit", isAdminCheck, async (req, res, next) => {
           background: #3792eb;
           font-size: 22px;
           color: #fff;
-          padding: 0 15;
-          line-height: 2;
+          padding: 0 20px;
+          line-height: 45px;
           border-radius: 3px;
         ">
             데모 계정이 성공적으로 열렸습니다.
@@ -841,8 +841,8 @@ router.patch("/updatePermit", isAdminCheck, async (req, res, next) => {
             background: #3792eb;
             font-size: 22px;
             color: #fff;
-            padding: 0 15;
-            line-height: 2;
+            padding: 0 20px;
+            line-height: 45px;
             border-radius: 3px;
         ">
             라이브 계정이 성공적으로 열렸습니다.

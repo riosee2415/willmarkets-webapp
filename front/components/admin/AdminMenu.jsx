@@ -63,8 +63,7 @@ const AdminMenu = () => {
         selectedKeys={[current]}
         mode="inline"
         selectedKeys={router.pathname}
-        disabled={false}
-      >
+        disabled={false}>
         <Wrapper margin={`20px 0 10px`}>
           <Image
             alt="logo"
@@ -78,13 +77,14 @@ const AdminMenu = () => {
           {me && me.nickname}
         </Wrapper>
         <Wrapper height={`30px`} fontSize={`0.8rem`} margin={`0 0 20px`}>
-          {me && parseInt(me.level) === 5
-            ? `개발사`
-            : parseInt(me.level) === 4
-            ? `최고관리자`
-            : parseInt(me.level) === 3
-            ? `운영자`
-            : ``}
+          {me &&
+            (parseInt(me.level) === 5
+              ? `개발사`
+              : parseInt(me.level) === 4
+              ? `최고관리자`
+              : parseInt(me.level) === 3
+              ? `운영자`
+              : ``)}
         </Wrapper>
         <Menu.Item key="/admin">
           <MenuName>관리자 메인</MenuName>
@@ -143,8 +143,7 @@ const AdminMenu = () => {
           key="sub5"
           icon={<UserOutlined />}
           title="회원 관리"
-          onTitleClick={titleClickHandler("sub5")}
-        >
+          onTitleClick={titleClickHandler("sub5")}>
           <Menu.Item key="/admin/user/userList">
             <MenuName>회원 리스트</MenuName>
           </Menu.Item>
@@ -153,8 +152,7 @@ const AdminMenu = () => {
           key="sub7"
           icon={<DollarOutlined />}
           title="입출금 관리"
-          onTitleClick={titleClickHandler("sub7")}
-        >
+          onTitleClick={titleClickHandler("sub7")}>
           <Menu.Item key="/admin/account/deposit">
             <MenuName>입금 관리</MenuName>
           </Menu.Item>
@@ -172,8 +170,7 @@ const AdminMenu = () => {
           key="sub6"
           icon={<PhoneOutlined />}
           title="문의 관리"
-          onTitleClick={titleClickHandler("sub6")}
-        >
+          onTitleClick={titleClickHandler("sub6")}>
           {/* <Menu.Item key="/admin/question/type">
             <MenuName>문의 유형 리스트</MenuName>
           </Menu.Item> */}

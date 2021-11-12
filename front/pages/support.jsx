@@ -315,7 +315,7 @@ const Support = () => {
             color={`#fff`}
             margin={`22px 0 5px`}
             textAlign={`center`}
-            fontSize={`20px`}
+            fontSize={width < 570 ? `17px` : `20px`}
           >
             {t(`8`)}
             <br />
@@ -325,9 +325,9 @@ const Support = () => {
           <Wrapper
             dr={width < 950 ? `column` : `row`}
             ju={`flex-start`}
-            margin={`100px 0 0 0`}
+            margin={width < 950 ? `30px 0 0 0` : `100px 0 0 0`}
           >
-            <Wrapper width={width < 1100 ? `45%` : `60%`}>
+            <Wrapper width={`55%`}>
               <Image
                 src={`https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/willmarkets/assets/images/consulting/image_consulting.png`}
               />
@@ -347,7 +347,6 @@ const Support = () => {
 
                   <Wrapper width={`calc(100% - 90px)`}>
                     <InputText
-                      width={width < 700 ? `calc(100% - 85px)` : ``}
                       borderBottom={"1px solid #e3e3e3"}
                       fontSize={`16px`}
                       color={`#8b8686`}
@@ -436,45 +435,44 @@ const Support = () => {
                 </Wrapper>
               </Wrapper>
 
-              <Wrapper ju={`flex-start`} width={`auto`} margin={`0 0 0 -50px`}>
-                <Wrapper dr={`row`} ju={`flex-start`} margin={`10px 10px 0 0`}>
-                  <RadioInput
-                    color={`#313B91`}
-                    checked={inputAgree.value}
-                    onClick={() => inputAgree.setValue(!inputAgree.value)}
-                  />
-                  <Wrapper
-                    fontSize={`15px`}
-                    color={`white`}
-                    margin={width < 450 ? `0` : `0 30px 0 0`}
-                    width={`auto`}
-                    opacity={`0.6`}
-                    cursor={`pointer`}
-                    onClick={() => inputAgree.setValue(!inputAgree.value)}
-                  >
-                    {t(`14`)}
-                  </Wrapper>
-                  <Wrapper
-                    cursor={`pointer`}
-                    fontSize={`13px`}
-                    color={`white`}
-                    width={`auto`}
-                    radius={`5px`}
-                    padding={`0 6px`}
-                    bgColor={"#8b8686"}
-                    onClick={toggleModalHandler}
-                  >
-                    {t(`15`)}
-                  </Wrapper>
+              <Wrapper dr={`row`} ju={`center`} margin={`10px 0 0 0`}>
+                <RadioInput
+                  color={`#313B91`}
+                  checked={inputAgree.value}
+                  onClick={() => inputAgree.setValue(!inputAgree.value)}
+                />
+                <Wrapper
+                  fontSize={`15px`}
+                  color={`white`}
+                  margin={width < 450 ? `0 15px 0 0` : `0 30px 0 0`}
+                  width={`auto`}
+                  opacity={`0.6`}
+                  cursor={`pointer`}
+                  onClick={() => inputAgree.setValue(!inputAgree.value)}
+                >
+                  {t(`14`)}
+                </Wrapper>
+                <Wrapper
+                  cursor={`pointer`}
+                  fontSize={`13px`}
+                  color={`white`}
+                  width={`auto`}
+                  radius={`5px`}
+                  padding={`0 6px`}
+                  bgColor={"#8b8686"}
+                  onClick={toggleModalHandler}
+                >
+                  {t(`15`)}
                 </Wrapper>
               </Wrapper>
-              <Wrapper margin={`50px 80px 0 0`} fontSize={`32px`}>
+
+              <Wrapper margin={`50px 0 0 0`} fontSize={`32px`}>
                 <CommonButton
                   bgColor={`#3353F2`}
                   color={`#fff`}
                   fontWeight={`300`}
-                  fontSize={`24px`}
-                  padding={`6px 50px 8px`}
+                  fontSize={width < 450 ? `22px` : `24px`}
+                  padding={width < 450 ? `5px 45px 7px` : `6px 50px 8px`}
                   radius={`6px`}
                   onClick={createQuestionHandler}
                 >

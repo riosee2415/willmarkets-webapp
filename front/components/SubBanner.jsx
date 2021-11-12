@@ -12,12 +12,12 @@ import { useRouter } from "next/router";
 import useInput from "../hooks/useInput";
 import { CaretDownOutlined } from "@ant-design/icons";
 import { useTranslation } from "react-i18next";
+import useWidth from "../hooks/useWidth";
 
-const SubBanner = ({
-  width,
-  //
-}) => {
+const SubBanner = () => {
   const { t } = useTranslation(["appHeader"]);
+
+  const width = useWidth();
 
   const menuList = [
     {
@@ -141,14 +141,16 @@ const SubBanner = ({
           : router.pathname.includes(`/support`)
           ? `url('https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/willmarkets/assets/images/banner/subbanner_consulting.png')`
           : null
-      }>
+      }
+    >
       <Wrapper
         position={`absolute`}
         left={`0`}
         top={`0`}
         height={`100%`}
         bgColor={`rgba(0, 0, 0, 0.7)`}
-        zIndex={`1`}></Wrapper>
+        zIndex={`1`}
+      ></Wrapper>
 
       <RsWrapper position={`relative`}>
         <Wrapper
@@ -159,7 +161,8 @@ const SubBanner = ({
           fontSize={`40px`}
           fontWeight={`500`}
           lineHeight={`1.3`}
-          zIndex={`2`}>
+          zIndex={`2`}
+        >
           {inputMenu1.value &&
             inputMenu2.value &&
             menuList
@@ -173,11 +176,12 @@ const SubBanner = ({
           left={`0`}
           bottom={`20px`}
           dr={`row`}
-          width={`auto`}>
+          width={`auto`}
+        >
           <Combo
             isBorder={true}
             itemAlign={`flex-start`}
-            margin={`0 10px 0 0`}
+            margin={width < 750 ? `0 10px` : `0 10px 0 0`}
             width={`150px`}
             height={`40px`}
             fontWeight={`500`}
@@ -185,7 +189,8 @@ const SubBanner = ({
             shadow={`0 2px 8px rgb(0 0 0 / 9%)`}
             hoverBorder={`1px solid #ac5a8a`}
             hoverShadow={`0 3px 8px rgb(0 0 0 / 12%)`}
-            onClick={() => setComboMenu1(!comboMenu1)}>
+            onClick={() => setComboMenu1(!comboMenu1)}
+          >
             <ComboTitle color={`#fff`}>
               <Wrapper>
                 {inputMenu1.value &&
@@ -201,7 +206,8 @@ const SubBanner = ({
                   <ComboListItem
                     key={idx}
                     isActive={inputMenu1.value === data.menuLink}
-                    onClick={() => moveLinkHandler(data.menuLink)}>
+                    onClick={() => moveLinkHandler(data.menuLink)}
+                  >
                     {data.menuName}
                   </ComboListItem>
                 );
@@ -219,7 +225,8 @@ const SubBanner = ({
             shadow={`0 2px 8px rgb(0 0 0 / 9%)`}
             hoverBorder={`1px solid #ac5a8a`}
             hoverShadow={`0 3px 8px rgb(0 0 0 / 12%)`}
-            onClick={() => setComboMenu2(!comboMenu2)}>
+            onClick={() => setComboMenu2(!comboMenu2)}
+          >
             <ComboTitle color={`#fff`}>
               <Wrapper>
                 {inputMenu1.value &&
@@ -243,7 +250,8 @@ const SubBanner = ({
                       <ComboListItem
                         key={idx}
                         isActive={inputMenu2.value === data.subMenuLink}
-                        onClick={() => moveLinkHandler(data.subMenuLink)}>
+                        onClick={() => moveLinkHandler(data.subMenuLink)}
+                      >
                         {data.subMenuName}
                       </ComboListItem>
                     );

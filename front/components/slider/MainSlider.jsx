@@ -8,7 +8,7 @@ import { DoubleRightOutlined } from "@ant-design/icons";
 import { useRouter } from "next/router";
 import { useTranslation } from "react-i18next";
 import useWidth from "../../hooks/useWidth";
-
+import i18next from "i18next";
 SwiperCore.use([Navigation]);
 
 const Container = styled.div`
@@ -38,8 +38,7 @@ export default () => {
         navigation={false}
         grabCursor={true}
         loop
-        autoplay
-      >
+        autoplay>
         <SwiperSlide>
           <Wrapper position={`relative`} height={`100vh`}>
             <Wrapper position={`absolute`} left={`0`} top={`0`} height={`100%`}>
@@ -60,8 +59,7 @@ export default () => {
                 width={width < 800 ? `340px` : `auto`}
                 height={`100%`}
                 zIndex={`9999`}
-                padding={width < 800 ? `0 20px 0 0` : `0`}
-              >
+                padding={width < 800 ? `0 20px 0 0` : `0`}>
                 <Image
                   src={`https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/willmarkets/assets/images/main/text_willmarkets.png`}
                 />
@@ -74,8 +72,7 @@ export default () => {
                   fontWeight={`500`}
                   textAlign={`right`}
                   lineHeight={`1.4`}
-                  margin={width < 800 ? `30px 0 0` : `0`}
-                >
+                  margin={width < 800 ? `30px 0 0` : `0`}>
                   {t(`1`).split(`\n`)[0]}
                   <br />
                   {t(`1`).split(`\n`)[1]}
@@ -84,8 +81,7 @@ export default () => {
                 <Wrapper
                   dr={width < 800 ? `column` : `row`}
                   ju={`flex-end`}
-                  margin={width < 800 ? `60px -60px 0 0` : `60px 0`}
-                >
+                  margin={width < 800 ? `60px -60px 0 0` : `60px 0`}>
                   <CommonButton
                     kindOf={`blue1`}
                     padding={`10px 0 12px`}
@@ -94,16 +90,14 @@ export default () => {
                     fontSize={`18px`}
                     fontWeight={`700`}
                     onClick={() => moveLinkHandler(`/signup`)}
-                    margin={width < 800 ? `0 0 10px` : `0`}
-                  >
+                    margin={width < 800 ? `0 0 10px` : `0`}>
                     {t(`2`)}
                     <Wrapper
                       position={`absolute`}
                       right={`15px`}
                       top={`50%`}
                       margin={`-7px 0 0 0`}
-                      width={`auto`}
-                    >
+                      width={`auto`}>
                       <DoubleRightOutlined />
                     </Wrapper>
                   </CommonButton>
@@ -116,16 +110,14 @@ export default () => {
                     radius={`30px`}
                     fontSize={`18px`}
                     fontWeight={`700`}
-                    onClick={() => moveLinkHandler(`/signup`)}
-                  >
+                    onClick={() => moveLinkHandler(`/signup`)}>
                     {t(`3`)}
                     <Wrapper
                       position={`absolute`}
-                      right={`23px`}
+                      right={i18next.language === "en" ? `13px` : `23px`}
                       top={`50%`}
                       margin={`-7px 0 0 0`}
-                      width={`auto`}
-                    >
+                      width={`auto`}>
                       <DoubleRightOutlined />
                     </Wrapper>
                   </CommonButton>
@@ -155,8 +147,7 @@ export default () => {
                 width={width < 800 ? `340px` : `auto`}
                 height={`100%`}
                 zIndex={`9999`}
-                padding={width < 800 ? `0 20px 0 0` : `0`}
-              >
+                padding={width < 800 ? `0 20px 0 0` : `0`}>
                 <Image
                   src={`https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/willmarkets/assets/images/main/text_grobal+stock.png`}
                 />
@@ -169,19 +160,19 @@ export default () => {
                   fontWeight={`500`}
                   textAlign={`right`}
                   lineHeight={`1.4`}
-                  margin={width < 800 ? `30px 0 0` : `0`}
-                >
+                  margin={width < 800 ? `30px 0 0` : `0`}>
                   {t(`4`).split(`\n`)[0]}
                   <br />
                   {t(`4`).split(`\n`)[1]}
                 </Wrapper>
 
                 <Wrapper
+                  position={`relative`}
                   dr={width < 800 ? `column` : `row`}
                   ju={`flex-end`}
-                  margin={width < 800 ? `60px -60px 0 0` : `60px 0 0`}
-                >
+                  margin={width < 800 ? `60px -60px 0 0` : `60px 0 0`}>
                   <CommonButton
+                    position={`relative`}
                     kindOf={`blue`}
                     padding={`10px 0 12px`}
                     width={`200px`}
@@ -189,21 +180,20 @@ export default () => {
                     fontSize={`18px`}
                     fontWeight={`700`}
                     onClick={() => moveLinkHandler(`/signup`)}
-                    margin={width < 800 ? `0 0 10px` : `0`}
-                  >
+                    margin={width < 800 ? `0 0 10px` : `0`}>
                     {t(`2`)}
                     <Wrapper
                       position={`absolute`}
                       right={`15px`}
                       top={`50%`}
                       margin={`-7px 0 0 0`}
-                      width={`auto`}
-                    >
+                      width={`auto`}>
                       <DoubleRightOutlined />
                     </Wrapper>
                   </CommonButton>
 
                   <CommonButton
+                    position={`relative`}
                     kindOf={`Skyblue1`}
                     margin={width < 800 ? `10px 0 0 0` : `0 0 0 30px`}
                     padding={`10px 0 12px`}
@@ -211,16 +201,14 @@ export default () => {
                     radius={`30px`}
                     fontSize={`18px`}
                     fontWeight={`700`}
-                    onClick={() => moveLinkHandler(`/signup`)}
-                  >
+                    onClick={() => moveLinkHandler(`/signup`)}>
                     {t(`3`)}
                     <Wrapper
                       position={`absolute`}
-                      right={`23px`}
+                      right={i18next.language === `en` ? `13px` : `23px`}
                       top={`50%`}
                       margin={`-7px 0 0 0`}
-                      width={`auto`}
-                    >
+                      width={`auto`}>
                       <DoubleRightOutlined />
                     </Wrapper>
                   </CommonButton>

@@ -205,6 +205,7 @@ export const CommonButton = styled.button`
   font-size: ${(props) => props.fontSize || `15px`};
   font-weight: ${(props) => props.fontWeight};
   border-radius: ${(props) => props.radius};
+  position: ${(props) => props.position};
   border: none;
   outline: none;
   cursor: pointer;

@@ -331,18 +331,18 @@ const Signup = () => {
       return;
     }
 
+    console.log(file);
+
     const formData = new FormData();
 
+    formData.append("language", i18next.language);
     formData.append("image", file);
 
     setFileType(type);
 
     dispatch({
       type: USER_ID_IMAGE_FILE_REQUEST,
-      data: {
-        language: i18next.language,
-        formData,
-      },
+      data: formData,
     });
   }, []);
 

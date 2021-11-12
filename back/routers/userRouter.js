@@ -214,36 +214,42 @@ router.post("/signin/admin", (req, res, next) => {
   })(req, res, next);
 });
 
-router.post("/image", async (req, res, next) => {
-  const { language } = req.body;
+router.post(
+  "/image",
+  async (req, res, next) => {
+    const uploadImage = upload.single("image");
 
-  const uploadImage = upload.single("image");
+    await uploadImage(req, res, (err) => {
+      const { language } = req.body;
 
-  await uploadImage(req, res, (err) => {
-    if (err instanceof multer.MulterError) {
-      return res
-        .status(401)
-        .send(
-          language === `ko`
-            ? "첨부 가능한 용량을 초과했습니다."
-            : "The attachable capacity has been exceeded"
-        );
-    } else if (err) {
-      return res
-        .status(401)
-        .send(
-          language === `ko`
-            ? "업로드 중 문제가 발생했습니다."
-            : "There was a problem uploading"
-        );
-    }
+      if (err instanceof multer.MulterError) {
+        return res
+          .status(401)
+          .send(
+            language === `ko`
+              ? "첨부 가능한 용량을 초과했습니다."
+              : "The attachable capacity has been exceeded"
+          );
+      } else if (err) {
+        return res
+          .status(401)
+          .send(
+            language === `ko`
+              ? "업로드 중 문제가 발생했습니다."
+              : "There was a problem uploading"
+          );
+      }
 
+      next();
+    });
+  },
+  async (req, res) => {
     return res.json({
       path: req.file.location,
       originName: req.file.originalname,
     });
-  });
-});
+  }
+);
 
 router.post("/signup", async (req, res, next) => {
   const {

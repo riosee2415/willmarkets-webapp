@@ -11,6 +11,7 @@ const db = require("./models");
 const passportConfig = require("./passport");
 const passport = require("passport");
 const cron = require("node-cron");
+const fileUpload = require("express-fileupload");
 
 const userRouter = require("./routers/userRouter");
 const questionRouter = require("./routers/questionRouter");
@@ -58,6 +59,7 @@ if (process.env.NODE_ENV === "production") {
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser(process.env.COOKIE_SECRET));
+// app.use(fileUpload());
 
 app.use(
   session({

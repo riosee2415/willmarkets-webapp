@@ -40,6 +40,7 @@ import {
 } from "../../reducers/deposit";
 import { INIT_STATE_REQUEST } from "../../reducers/user";
 import { useTranslation } from "react-i18next";
+import i18next from "i18next";
 
 const CustomLabel = styled(Label)`
   display: flex;

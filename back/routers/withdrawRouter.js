@@ -187,8 +187,8 @@ router.patch("/updatePermit", isAdminCheck, async (req, res, next) => {
             background: #3792eb;
             font-size: 22px;
             color: #fff;
-            padding: 0 15;
-            line-height: 2;
+            padding: 0 20px;
+            line-height: 45px;
             border-radius: 3px;
           ">
             출금 신청이 성공적으로 승인되었습니다.

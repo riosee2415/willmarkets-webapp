@@ -13,9 +13,12 @@ import {
 import ClientLayout from "../../components/ClientLayout";
 import SubBanner from "../../components/SubBanner";
 import { useTranslation } from "react-i18next";
+import useWidth from "../../hooks/useWidth";
 
 const Provider = () => {
   const { t } = useTranslation(["trading_provider"]);
+
+  const width = useWidth();
 
   return (
     <ClientLayout>
@@ -29,9 +32,9 @@ const Provider = () => {
             </Text>
           </Wrapper>
 
-          <Wrapper margin={`40px 0 0`} width={`auto`}>
+          <Wrapper margin={`40px 0 0`} width={width < 700 ? `330px` : `auto`}>
             <Image
-              width={`auto`}
+              width={`100%`}
               src={`https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/willmarkets/assets/images/trade/image_6.png`}
             />
           </Wrapper>

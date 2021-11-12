@@ -13,9 +13,12 @@ import {
 import ClientLayout from "../../components/ClientLayout";
 import SubBanner from "../../components/SubBanner";
 import { useTranslation } from "react-i18next";
+import useWidth from "../../hooks/useWidth";
 
 const Time = () => {
   const { t } = useTranslation(["trading_time"]);
+
+  const width = useWidth();
 
   return (
     <ClientLayout>
@@ -27,14 +30,25 @@ const Time = () => {
             <Text display={`inline`}>{t(`1`)}</Text>
           </Wrapper>
 
-          <Wrapper dr={`row`} ju={`flex-start`} margin={`50px 0 0 0`}>
-            <Wrapper margin={`40px 0 20px`} width={`50%`}>
+          <Wrapper
+            dr={width < 700 ? `column` : `row`}
+            ju={`flex-start`}
+            margin={width < 700 ? `0` : `50px 0 0 0`}
+          >
+            <Wrapper
+              margin={`40px 0 20px`}
+              width={width < 700 ? `330px` : `50%`}
+            >
               <Image
                 src={`https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/willmarkets/assets/images/trade/image_7.png`}
               />
             </Wrapper>
 
-            <Wrapper width={`40%`} margin={`0 0 0 60px`} textAlign={`center`}>
+            <Wrapper
+              width={`40%`}
+              margin={width < 700 ? `0` : `0 0 0 60px`}
+              textAlign={`center`}
+            >
               {t(`2`)}
               <br />
               {t(`3`)}

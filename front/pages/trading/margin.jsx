@@ -13,9 +13,12 @@ import {
 import ClientLayout from "../../components/ClientLayout";
 import SubBanner from "../../components/SubBanner";
 import { useTranslation } from "react-i18next";
+import useWidth from "../../hooks/useWidth";
 
 const Margin = () => {
   const { t } = useTranslation(["trading_margin"]);
+
+  const width = useWidth();
 
   return (
     <ClientLayout>
@@ -33,9 +36,9 @@ const Margin = () => {
             </Text>
           </Wrapper>
 
-          <Wrapper margin={`40px 0 0`} width={`auto`}>
+          <Wrapper margin={`40px 0 0`} width={width < 700 ? `330px` : `auto`}>
             <Image
-              width={`auto`}
+              width={`100%`}
               src={`https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/willmarkets/assets/images/trade/image_5.png`}
             />
           </Wrapper>
@@ -54,7 +57,8 @@ const Margin = () => {
           <Wrapper
             margin={`30px 0 50px`}
             textAlign={`center`}
-            lineHeight={`1.8`}>
+            lineHeight={`1.8`}
+          >
             {t(`3`)}
             <br />
             {t(`4`)}

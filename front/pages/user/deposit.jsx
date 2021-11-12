@@ -252,11 +252,11 @@ const Deposit = () => {
     const formData = new FormData();
 
     formData.append("image", file);
-
-    dispatch({
-      type: DEPOSIT_IMAGE_FILE_REQUEST,
-      data: formData,
-    });
+    formData.append("language", i18next.language),
+      dispatch({
+        type: DEPOSIT_IMAGE_FILE_REQUEST,
+        data: formData,
+      });
   }, []);
 
   const createImageFileHandler = useCallback(() => {

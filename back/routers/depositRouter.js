@@ -159,6 +159,7 @@ router.post("/image", async (req, res, next) => {
   const uploadImage = upload.single("image");
 
   await uploadImage(req, res, (err) => {
+    const { language } = req.body;
     if (err instanceof multer.MulterError) {
       return res
         .status(401)

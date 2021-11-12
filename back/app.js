@@ -11,7 +11,6 @@ const db = require("./models");
 const passportConfig = require("./passport");
 const passport = require("passport");
 const cron = require("node-cron");
-const fileUpload = require("express-fileupload");
 
 const userRouter = require("./routers/userRouter");
 const questionRouter = require("./routers/questionRouter");

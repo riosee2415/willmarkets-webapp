@@ -13,9 +13,12 @@ import {
 import ClientLayout from "../../components/ClientLayout";
 import SubBanner from "../../components/SubBanner";
 import { useTranslation } from "react-i18next";
+import useWidth from "../../hooks/useWidth";
 
 const Forex = () => {
   const { t } = useTranslation(["trading_forex"]);
+
+  const width = useWidth();
 
   return (
     <ClientLayout>
@@ -29,14 +32,22 @@ const Forex = () => {
           </Text>
         </Wrapper>
 
-        <Wrapper dr={`row`} ju={`flex-start`} margin={`50px 0 0 0`}>
-          <Wrapper margin={`40px 0 20px`} width={`50%`}>
+        <Wrapper
+          dr={width < 700 ? `column` : `row`}
+          ju={`flex-start`}
+          margin={`50px 0 0 0`}
+        >
+          <Wrapper margin={`40px 0 20px`} width={width < 700 ? `330px` : `50%`}>
             <Image
               src={`https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/willmarkets/assets/images/trade/image_1.png`}
             />
           </Wrapper>
 
-          <Wrapper width={`40%`} margin={`0 0 0 60px`} textAlign={`center`}>
+          <Wrapper
+            width={width < 700 ? `250px` : `40%`}
+            margin={width < 700 ? `0` : `0 0 0 60px`}
+            textAlign={`center`}
+          >
             {t(`2`)}
             <br />
             {t(`3`).split(`\n`)[0]}
@@ -70,10 +81,11 @@ const Forex = () => {
                 al={`flex-start`}
                 margin={`0 0 15px`}
                 width={`auto`}
-                wrap={`nowrap`}>
+                wrap={`nowrap`}
+              >
                 <Image
                   margin={`0 10px 0 0`}
-                  width={`auto`}
+                  width={width < 700 ? `30px` : `auto`}
                   src={`https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/willmarkets/assets/images/trade/icon_check.png`}
                 />
                 {t(`7`)}
@@ -96,10 +108,11 @@ const Forex = () => {
                 al={`flex-start`}
                 margin={`30px 0 15px`}
                 width={`auto`}
-                wrap={`nowrap`}>
+                wrap={`nowrap`}
+              >
                 <Image
                   margin={`0 10px 0 0`}
-                  width={`auto`}
+                  width={width < 700 ? `30px` : `auto`}
                   src={`https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/willmarkets/assets/images/trade/icon_check.png`}
                 />
                 {t(`11`)}
@@ -114,10 +127,11 @@ const Forex = () => {
                 al={`flex-start`}
                 margin={`30px 0 15px`}
                 width={`auto`}
-                wrap={`nowrap`}>
+                wrap={`nowrap`}
+              >
                 <Image
                   margin={`0 10px 0 0`}
-                  width={`auto`}
+                  width={width < 700 ? `30px` : `auto`}
                   src={`https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/willmarkets/assets/images/trade/icon_check.png`}
                 />
                 {t(`13`)}

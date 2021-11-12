@@ -493,6 +493,7 @@ export const Image = styled.img`
   cursor: ${(props) => props.cursor};
   transform: ${(props) => props.transform};
   object-fit: ${(props) => props.objectFit || `cover`};
+  object-position: ${(props) => props.objectPosition};
   position: ${(props) => props.position};
   box-shadow: ${(props) => props.shadow};
   border: ${(props) => props.border};

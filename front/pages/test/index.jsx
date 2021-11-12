@@ -1,19 +1,22 @@
-import React from "react";
+import React, { useCallback, useEffect, useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
+
 import styled from "styled-components";
-import { CaretDownOutlined } from "@ant-design/icons";
+import useInput from "../../hooks/useInput";
+import { emptyCheck } from "../../components/commonUtils";
+import { message } from "antd";
 
 import {
   Wrapper,
   Image,
   TextInput,
   RadioInput,
-  WholeWrapper,
   RsWrapper,
   Label,
+  CommonButton,
 } from "../../components/commonComponents";
 import ClientLayout from "../../components/ClientLayout";
-import SubBanner from "../../components/SubBanner";
-import Theme from "../../components/Theme";
+import { QUESTION_CREATE_REQUEST } from "../../reducers/question";
 
 const SuportImage = styled(Image)`
   width: 100%;
@@ -33,12 +36,24 @@ const QnA = styled(Wrapper)`
   margin: 0 0 15px 0;
 `;
 
+const Content = styled.textarea`
+  font-size: 16px;
+  outline: none;
+  resize: none;
+  border: none;
+  border-bottom: 1px solid rgba(227, 227, 227);
+  width: 70%;
+  padding: 5px 0;
+
+  &:focus {
+    border-bottom: 1px solid blue;
+  }
+`;
+
 const QnAInput = styled(TextInput)`
   width: 70%;
+  border: none;
   border-bottom: 1px solid rgba(227, 227, 227);
-  border-top: none;
-  border-right: none;
-  border-left: none;
 
   &:focus {
     border-bottom: 1px solid blue;
@@ -46,6 +61,66 @@ const QnAInput = styled(TextInput)`
 `;
 
 const Support = () => {
+  const dispatch = useDispatch();
+
+  const { st_questionCreateDone, st_questionCreateError } = useSelector(
+    (state) => state.question
+  );
+
+  const inputName = useInput("");
+  const inputNumber = useInput("");
+  const inputEmail = useInput("");
+  const inputConotent = useInput("");
+  const inputAgree = useInput(false);
+
+  const createQuestionHandler = useCallback(() => {
+    if (!emptyCheck(inputName.value)) {
+      return message.error("성명을 입력하세요");
+    }
+    if (!emptyCheck(inputNumber.value)) {
+      return message.error("연락처를 입력하세요");
+    }
+    if (!emptyCheck(inputEmail.value)) {
+      return message.error("이메일을 입력하세요");
+    }
+    if (!emptyCheck(inputConotent.value)) {
+      return message.error("문의사항을 입력하세요");
+    }
+    if (!inputAgree.value) {
+      return message.error("개인정보처리방침에 동의하세요");
+    }
+
+    dispatch({
+      type: QUESTION_CREATE_REQUEST,
+      data: {
+        name: inputName.value,
+        mobile: inputNumber.value,
+        email: inputEmail.value,
+        content: inputConotent.value,
+      },
+    });
+  }, [inputName, inputNumber, inputEmail, inputConotent, inputAgree]);
+
+  useEffect(() => {
+    if (st_questionCreateDone) {
+      message.success("문의사항이 정상 접수되었습니다.");
+
+      inputName.setValue("");
+      inputNumber.setValue("");
+      inputEmail.setValue("");
+      inputConotent.setValue("");
+      inputAgree.setValue(false);
+
+      console.log(st_questionCreateDone);
+    }
+  }, [st_questionCreateDone]);
+
+  useEffect(() => {
+    if (st_questionCreateError) {
+      return message.error(st_questionCreateError);
+    }
+  }, [st_questionCreateError]);
+
   return (
     <ClientLayout>
       <Wrapper>
@@ -96,28 +171,56 @@ const Support = () => {
             <Wrapper width={`40%`}>
               <Wrapper>
                 <QnA>
-                  <RsWrapper dr={`row`} margin={`15px 0`}>
+                  <RsWrapper
+                    ju={`flex-start`}
+                    dr={`row`}
+                    margin={`5px 0 0 25px`}
+                  >
                     <Label width={`20%`}>성명</Label>
-                    <QnAInput></QnAInput>
+                    <QnAInput {...inputName} />
                   </RsWrapper>
-                  <RsWrapper dr={`row`} margin={`15px 0`}>
+                  <RsWrapper
+                    ju={`flex-start`}
+                    dr={`row`}
+                    margin={`30px 0 0 25px`}
+                  >
                     <Label width={`20%`}>연락처</Label>
-                    <QnAInput></QnAInput>
+                    <QnAInput {...inputNumber} />
                   </RsWrapper>
-                  <RsWrapper dr={`row`} margin={`15px 0`}>
+                  <RsWrapper
+                    ju={`flex-start`}
+                    dr={`row`}
+                    margin={`30px 0 0 25px`}
+                  >
                     <Label width={`20%`}>이메일</Label>
-                    <QnAInput></QnAInput>
+                    <QnAInput {...inputEmail} />
                   </RsWrapper>
-                  <RsWrapper dr={`row`} margin={`15px 0`}>
+                  <RsWrapper
+                    ju={`flex-start`}
+                    dr={`row`}
+                    margin={`20px 0 5px 25px`}
+                  >
                     <Label width={`20%`}>문의내용</Label>
-                    <QnAInput></QnAInput>
+                    <Content {...inputConotent} />
                   </RsWrapper>
                 </QnA>
                 <Wrapper dr={`row`}>
-                  <RadioInput />
-                  <Label fontWeight={`400`} width={`auto`} color={`gray`}>
+                  <RadioInput
+                    id={`agree`}
+                    checked={inputAgree.value}
+                    onClick={() => inputAgree.setValue(!inputAgree.value)}
+                  />
+                  <Wrapper ///inputAgree ! 부정 제거후 작동잘됨 왜?  Wrapper로 변경후 정상작동
+                    ///Label과 Wrapper의 차이?
+                    htmlFor={`agree`}
+                    fontWeight={`400`}
+                    width={`auto`}
+                    color={`gray`}
+                    cursor={`pointer`}
+                    onClick={() => inputAgree.setValue(!inputAgree.value)}
+                  >
                     개인정보 처리방침에 동의합니다.
-                  </Label>
+                  </Wrapper>
                   <CommonButton
                     margin={`0 50px 0 30px`}
                     radius={`5px`}
@@ -139,6 +242,7 @@ const Support = () => {
                   padding={`6px 50px 8px`}
                   radius={`6px`}
                   margin={`50px 0 0 0`}
+                  onClick={createQuestionHandler}
                 >
                   문의하기
                 </CommonButton>

@@ -14,10 +14,10 @@ const { Op } = require("sequelize");
 const generateUUID = require("../utils/generateUUID");
 const sendSecretMail = require("../utils/mailSender");
 const fs = require("fs");
-const multer = require("multer");
-const path = require("path");
 const AWS = require("aws-sdk");
 const multerS3 = require("multer-s3");
+const multer = require("multer");
+const path = require("path");
 
 AWS.config.update({
   accessKeyId: process.env.S3_ACCESS_KEY_Id,

@@ -4,9 +4,12 @@ import Theme from "./Theme";
 import styled from "styled-components";
 import { useRouter } from "next/router";
 import { useTranslation } from "react-i18next";
+import useWidth from "../hooks/useWidth";
 
 const AppFooter = () => {
   const router = useRouter();
+
+  const width = useWidth();
 
   const { t } = useTranslation(["appFooter"]);
 
@@ -16,17 +19,18 @@ const AppFooter = () => {
 
   return (
     <Wrapper>
-      <Wrapper height={`60px`} bgColor={`#222222`}>
-        <RsWrapper dr={`row`} ju={`space-between`}>
+      <Wrapper height={width < 900 ? `auto` : `60px`} bgColor={`#222222`}>
+        <RsWrapper dr={width < 900 ? `column` : `row`} ju={`space-between`}>
           <Wrapper
-            dr={`row`}
+            dr={width < 900 ? `column` : `row`}
             width={`auto`}
             color={`#fff`}
-            fontSize={`17px`}
+            fontSize={width < 900 ? `15px` : `17px`}
             fontWeight={`500`}
           >
             <Wrapper
-              margin={`0 50px 0 0`}
+              margin={width < 900 ? `20px 0 5px 0` : `0 50px 0 0`}
+              borderBottom={width < 900 ? `1px solid #e2e2e2` : ``}
               width={`auto`}
               color={`inherit`}
               fontSize={`inherit`}
@@ -36,7 +40,8 @@ const AppFooter = () => {
               {t(`1`)}
             </Wrapper>
             <Wrapper
-              margin={`0 50px 0 0`}
+              margin={width < 900 ? `0 0 5px 0` : `0 50px 0 0`}
+              borderBottom={width < 900 ? `1px solid #e2e2e2` : ``}
               width={`auto`}
               color={`inherit`}
               fontSize={`inherit`}
@@ -46,7 +51,8 @@ const AppFooter = () => {
               {t(`2`)}
             </Wrapper>
             <Wrapper
-              margin={`0 50px 0 0`}
+              margin={width < 900 ? `0 0 5px 0` : `0 50px 0 0`}
+              borderBottom={width < 900 ? `1px solid #e2e2e2` : ``}
               width={`auto`}
               color={`inherit`}
               fontSize={`inherit`}
@@ -62,6 +68,7 @@ const AppFooter = () => {
             fontSize={`13px`}
             fontWeight={`500`}
             color={`#fff`}
+            margin={width < 900 ? `20px 0` : `0`}
           >
             Copyright 2021. Willmarkets inc. all rights reserved.
           </Wrapper>

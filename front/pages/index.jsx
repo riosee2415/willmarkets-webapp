@@ -25,6 +25,7 @@ import styled from "styled-components";
 import { QUESTION_CREATE_REQUEST } from "../reducers/question";
 import { useTranslation } from "react-i18next";
 import i18next from "i18next";
+import useWidth from "../hooks/useWidth";
 
 const CustomInput = styled(TextInput)`
   border-radius: ${(props) => props.radius};
@@ -64,8 +65,10 @@ const QuestionWrapper = styled(Wrapper)`
   }
 `;
 
-const Home = ({ width }) => {
+const Home = () => {
   const router = useRouter();
+
+  const width = useWidth();
 
   const dispatch = useDispatch();
 
@@ -152,13 +155,15 @@ const Home = ({ width }) => {
           width={`auto`}
           bgColor={`#E9EDFF`}
           radius={`6px`}
-          shadow={"2px 2px 10px #a9a9b7"}>
+          shadow={"2px 2px 10px #a9a9b7"}
+        >
           <Wrapper
             dr={`row`}
             ju={`space-between`}
             padding={`5px 10px`}
             bgColor={`#fff`}
-            radius={`6px`}>
+            radius={`6px`}
+          >
             <Wrapper width={`auto`} fontSize={`14px`} fontWeight={`600`}>
               {t(`6`)}
             </Wrapper>
@@ -171,7 +176,8 @@ const Home = ({ width }) => {
             width={`280px`}
             bgColor={`#fff`}
             padding={`12px`}
-            zIndex={`5`}>
+            zIndex={`5`}
+          >
             <Image
               top={`40px`}
               position={`absolute`}
@@ -188,7 +194,8 @@ const Home = ({ width }) => {
               <Wrapper
                 lineHeight={`18px`}
                 fontSize={`13px`}
-                margin={`24px 0 0 0`}>
+                margin={`24px 0 0 0`}
+              >
                 {t(`7`)}
               </Wrapper>
               <Wrapper>
@@ -196,7 +203,8 @@ const Home = ({ width }) => {
                   fontSize={`12px`}
                   al={`flex-start`}
                   fontWeight={`600`}
-                  margin={`10px 0 4px 0`}>
+                  margin={`10px 0 4px 0`}
+                >
                   {t(`8`)}
                 </Wrapper>
                 <CustomInput {...inputName} />
@@ -207,7 +215,8 @@ const Home = ({ width }) => {
                   fontSize={`12px`}
                   al={`flex-start`}
                   margin={`10px 0 4px 0`}
-                  fontWeight={`600`}>
+                  fontWeight={`600`}
+                >
                   {t(`9`)}
                 </Wrapper>
                 <CustomInput {...inputPhone} />
@@ -217,7 +226,8 @@ const Home = ({ width }) => {
                   fontSize={`12px`}
                   al={`flex-start`}
                   margin={`10px 0 4px 0`}
-                  fontWeight={`600`}>
+                  fontWeight={`600`}
+                >
                   {t(`10`)}
                 </Wrapper>
                 <CustomInput {...inputEmail} />
@@ -227,7 +237,8 @@ const Home = ({ width }) => {
                   fontSize={`12px`}
                   al={`flex-start`}
                   margin={`10px 0 4px 0`}
-                  fontWeight={`600`}>
+                  fontWeight={`600`}
+                >
                   {t(`11`)}
                 </Wrapper>
                 <Content {...inputText} />
@@ -243,7 +254,8 @@ const Home = ({ width }) => {
               margin={`0 0 10px 0`}
               color={`#fff`}
               bgColor={`#000104`}
-              onClick={createQuestionHandler}>
+              onClick={createQuestionHandler}
+            >
               {t(`12`)}
             </CommonButton>
           </Wrapper>
@@ -256,7 +268,8 @@ const Home = ({ width }) => {
           color={`#fff`}
           width={`auto`}
           cursor={`pointer`}
-          onClick={onClickToggleHanlder}>
+          onClick={onClickToggleHanlder}
+        >
           <Wrapper dr={`row`}>
             <Wrapper width={`auto`}>
               <Image
@@ -279,7 +292,8 @@ const Home = ({ width }) => {
           width={`100%`}
           height={`100%`}
           bgImg={`url('https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/willmarkets/assets/images/main/back_download.png')`}
-          zIndex={`-2`}></Wrapper>
+          zIndex={`-2`}
+        ></Wrapper>
 
         <Wrapper
           position={`absolute`}
@@ -288,7 +302,8 @@ const Home = ({ width }) => {
           width={`100%`}
           height={`100%`}
           bgColor={`rgba(0, 0, 0, 0.5)`}
-          zIndex={`-1`}></Wrapper>
+          zIndex={`-1`}
+        ></Wrapper>
 
         <Wrapper fontSize={`30px`} fontWeight={`500`} color={`#3353F2`}>
           {t(`13`)}
@@ -296,13 +311,16 @@ const Home = ({ width }) => {
 
         <Wrapper
           margin={`15px 0 0`}
-          fontSize={`19px`}
+          fontSize={width < 700 ? `15px` : `19px`}
           fontWeight={`400`}
-          color={`#fff`}>
+          color={`#fff`}
+          padding={`0 20px`}
+          textAlign={`center`}
+        >
           {t(`14`)}
         </Wrapper>
 
-        <Wrapper dr={`row`} margin={`70px 0 0`}>
+        <Wrapper dr={width < 750 ? `column` : `row`} margin={`70px 0 0`}>
           <Wrapper width={`auto`}>
             <Image
               src={`https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/willmarkets/assets/images/main/icon_windows.png`}
@@ -316,7 +334,9 @@ const Home = ({ width }) => {
             width={`auto`}
             margin={`0 80px`}
             color={`#fff`}
-            fontSize={`34px`}>
+            fontSize={`34px`}
+            zIndex={width < 750 ? `-3` : `0`}
+          >
             <PlusOutlined />
           </Wrapper>
 
@@ -333,7 +353,9 @@ const Home = ({ width }) => {
             width={`auto`}
             margin={`0 80px`}
             color={`#fff`}
-            fontSize={`34px`}>
+            fontSize={`34px`}
+            zIndex={width < 750 ? `-3` : `0`}
+          >
             <PlusOutlined />
           </Wrapper>
 
@@ -357,14 +379,16 @@ const Home = ({ width }) => {
             radius={`30px`}
             fontSize={`17px`}
             fontWeight={`500`}
-            onClick={() => moveLinkHandler(`/platform/pc`)}>
+            onClick={() => moveLinkHandler(`/platform/pc`)}
+          >
             {t(`15`)}
             <Wrapper
               position={`absolute`}
               right={`40px`}
               top={`50%`}
               margin={`-6px 0 0 0`}
-              width={`auto`}>
+              width={`auto`}
+            >
               <RightOutlined />
             </Wrapper>
           </CommonButton>
@@ -374,7 +398,9 @@ const Home = ({ width }) => {
           position={`absolute`}
           right={`180px`}
           bottom={`40px`}
-          width={`auto`}>
+          width={`auto`}
+          zIndex={width < 1200 ? `-3` : `0`}
+        >
           <Image
             src={`https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/willmarkets/assets/images/main/iphone.png`}
           />
@@ -399,7 +425,8 @@ const Home = ({ width }) => {
             width={`auto`}
             color={`#ffea6b`}
             fontSize={`18px`}
-            fontWeight={`500`}>
+            fontWeight={`500`}
+          >
             ※{t(`16`)}※
           </Wrapper>
 
@@ -408,19 +435,25 @@ const Home = ({ width }) => {
             fontWeight={`300`}
             color={`#fff`}
             textAlign={`center`}
-            lineHeight={`1.8`}>
+            lineHeight={`1.8`}
+            display={`block`}
+          >
             <Wrapper
+              display={`inline`}
               dr={`row`}
               width={`auto`}
               color={`inherit`}
-              fontSize={`inherit`}>
+              fontSize={`inherit`}
+            >
               {t(`17`).split(`\n`)[0]}
               <Wrapper
+                display={`inline`}
                 padding={`0 0 0 5px`}
                 width={`auto`}
                 fontWeight={`500`}
                 color={`inherit`}
-                fontSize={`inherit`}>
+                fontSize={`inherit`}
+              >
                 {t(`17`).split(`\n`)[1]}
               </Wrapper>
               {t(`17`).split(`\n`)[2]}
@@ -434,7 +467,12 @@ const Home = ({ width }) => {
             {t(`21`)}
 
             <br />
-            <Wrapper width={`auto`} color={`#c1c1c1`} fontSize={`inherit`}>
+            <Wrapper
+              display={`inline`}
+              width={`auto`}
+              color={`#c1c1c1`}
+              fontSize={`inherit`}
+            >
               ※ {t(`22`)}
             </Wrapper>
           </Wrapper>

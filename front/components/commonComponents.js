@@ -102,6 +102,7 @@ export const WholeWrapper = styled.section`
 export const Wrapper = styled.div`
   width: ${(props) => props.width || `100%`};
   min-width: ${(props) => props.minWidth};
+  max-width: ${(props) => props.maxWidth};
   height: ${(props) => props.height};
   min-height: ${(props) => props.minHeight};
   display: ${(props) => props.display || `flex`};
@@ -142,7 +143,18 @@ export const Wrapper = styled.div`
   line-height: ${(props) => props.lineHeight};
   text-align: ${(props) => props.textAlign};
   letter-spacing: ${(props) => props.letterSpacing};
+  word-break: ${(props) => props.wordBreak};
   opacity: ${(props) => props.opacity};
+
+  ${(props) =>
+    props.isEllipsis
+      ? `
+    // display: block;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  `
+      : ``}
 `;
 
 export const RsWrapper = styled.article`

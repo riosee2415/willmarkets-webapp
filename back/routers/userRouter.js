@@ -272,6 +272,9 @@ router.post("/signup", async (req, res, next) => {
     addrType,
     addrFilePath,
     addrFileOriginName,
+    platform,
+    accountType,
+    leverage,
   } = req.body;
 
   try {
@@ -310,6 +313,9 @@ router.post("/signup", async (req, res, next) => {
       addrType,
       addrFilePath,
       addrFileOriginName,
+      platform,
+      accountType,
+      leverage,
     });
 
     res.status(201).send("SUCCESS");
@@ -722,6 +728,7 @@ router.patch("/updatePermit", isAdminCheck, async (req, res, next) => {
     viewPassword,
     bankNo,
   } = req.body;
+
   try {
     const exUpdatePermit = await User.findOne({
       where: {
@@ -786,19 +793,19 @@ router.patch("/updatePermit", isAdminCheck, async (req, res, next) => {
             데모 계정이 성공적으로 열렸습니다. 다음은 데모 계정 정보입니다.
             <br />
             <br />
-            거래 플랫폼 : ${req.body.platfrom}
+            거래 플랫폼 : ${platform}
             <br />
-            유형 : ${req.body.type}
+            유형 : ${type}
             <br />
-            레버리지 : ${req.body.leverage}
+            레버리지 : ${leverage}
             <br />
-            환율금액 : ${req.body.price}
+            환율금액 : ${price}
             <br />
-            거래용 비밀번호 : ${req.body.tradePassword}
+            거래용 비밀번호 : ${tradePassword}
             <br />
-            보기용 비밀번호 : ${req.body.viewPassword}
+            보기용 비밀번호 : ${viewPassword}
             <br />
-            데모 계좌 : ${req.body.bankNo}
+            데모 계좌 : ${bankNo}
             <br />
             <br />
             
@@ -858,17 +865,17 @@ router.patch("/updatePermit", isAdminCheck, async (req, res, next) => {
             라이브 계정이 성공적으로 열렸습니다. 다음은 라이브 계정 정보입니다.
             <br />
             <br />
-            거래 플랫폼 : ${req.body.platfrom}
+            거래 플랫폼 : ${platform}
             <br />
-            유형 : ${req.body.type}
+            유형 : ${type}
             <br />
-            레버리지 : ${req.body.leverage}
+            레버리지 : ${leverage}
             <br />
-            거래용 비밀번호 : ${req.body.tradePassword}
+            거래용 비밀번호 : ${tradePassword}
             <br />
-            보기용 비밀번호 : ${req.body.viewPassword}
+            보기용 비밀번호 : ${viewPassword}
             <br />
-            라이브 계좌 : ${req.body.bankNo}
+            라이브 계좌 : ${bankNo}
             <br />
             <br />
             

@@ -15,7 +15,7 @@ import { message } from "antd";
 import { useTranslation } from "react-i18next";
 
 const MenuBox = styled(SelectBox)`
-  margin: ${(props) => props.margin || `0 20px 0 0`};
+  margin: ${(props) => props.margin || `0 20px 20px 0`};
   border: 5px solid #f7e6fc;
 
   &:hover {
@@ -72,25 +72,28 @@ const User = ({ width }) => {
         <MenuBox
           width={`130px`}
           height={`100px`}
-          onClick={() => moveLinkHandler(`/user/deposit`)}>
+          onClick={() => moveLinkHandler(`/user/deposit`)}
+        >
           {t(`2`)}
         </MenuBox>
 
         <MenuBox
           width={`130px`}
           height={`100px`}
-          onClick={() => moveLinkHandler(`/user/withdraw`)}>
+          onClick={() => moveLinkHandler(`/user/withdraw`)}
+        >
           {t(`3`)}
         </MenuBox>
 
         <MenuBox
           width={`130px`}
           height={`100px`}
-          onClick={() => moveLinkHandler(`/user/record`)}>
+          onClick={() => moveLinkHandler(`/user/record`)}
+        >
           {t(`4`)}
         </MenuBox>
       </Wrapper>
-      <Wrapper al={`flex-start`} margin={`50px 0 10px`} fontWeight={`700`}>
+      <Wrapper al={`flex-start`} margin={`30px 0 10px`} fontWeight={`700`}>
         {t(`5`)}
       </Wrapper>
 
@@ -102,7 +105,8 @@ const User = ({ width }) => {
             bgColor={`#a06ec6`}
             color={`#fff`}
             fontSize={`38px`}
-            radius={`50%`}>
+            radius={`50%`}
+          >
             <MdAttachMoney />
           </Wrapper>
 
@@ -111,14 +115,19 @@ const User = ({ width }) => {
               width={`auto`}
               color={`#7c1a81`}
               fontSize={`13px`}
-              lineHeight={`1.3`}>
+              lineHeight={`1.3`}
+            >
               {t(`6`)}
             </Wrapper>
             <Wrapper
+              isEllipsis={width < 900 ? true : false}
               width={`auto`}
-              fontSize={`26px`}
+              maxWidth={width < 900 ? `145px` : `auto`}
+              display={`block`}
+              fontSize={width < 900 ? `24px` : `26px`}
               fontWeight={`400`}
-              lineHeight={`1.3`}>
+              lineHeight={`1.3`}
+            >
               {me && me.priceWallet}
             </Wrapper>
           </Wrapper>
@@ -139,14 +148,16 @@ const User = ({ width }) => {
               <SelectBox
                 dr={`row`}
                 margin={`0 20px 20px 0`}
-                padding={`15px 70px 15px 25px`}>
+                padding={`15px 70px 15px 25px`}
+              >
                 <Wrapper
                   width={`auto`}
                   padding={`9px`}
                   bgColor={`#a06ec6`}
                   color={`#fff`}
                   fontSize={`30px`}
-                  radius={`50%`}>
+                  radius={`50%`}
+                >
                   <AiOutlineCreditCard />
                 </Wrapper>
 
@@ -155,14 +166,19 @@ const User = ({ width }) => {
                     width={`auto`}
                     color={`#7c1a81`}
                     fontSize={`13px`}
-                    lineHeight={`1.3`}>
+                    lineHeight={`1.3`}
+                  >
                     {t(`8`)}
                   </Wrapper>
                   <Wrapper
+                    isEllipsis={width < 900 ? true : false}
                     width={`auto`}
-                    fontSize={`26px`}
+                    maxWidth={width < 900 ? `145px` : `auto`}
+                    display={`block`}
+                    fontSize={width < 900 ? `20px` : `26px`}
                     fontWeight={`400`}
-                    lineHeight={`1.3`}>
+                    lineHeight={`1.3`}
+                  >
                     {data.bankNo}
                   </Wrapper>
                 </Wrapper>
@@ -174,14 +190,16 @@ const User = ({ width }) => {
           dr={`row`}
           margin={`0 20px 20px 0`}
           padding={`15px 70px 15px 25px`}
-          onClick={() => moveLinkHandler(`/user/addLive`)}>
+          onClick={() => moveLinkHandler(`/user/addLive`)}
+        >
           <Wrapper
             width={`auto`}
             padding={`9px`}
             bgColor={`#a06ec6`}
             color={`#fff`}
             fontSize={`30px`}
-            radius={`50%`}>
+            radius={`50%`}
+          >
             <AiOutlinePlus />
           </Wrapper>
 
@@ -189,7 +207,8 @@ const User = ({ width }) => {
             al={`center`}
             margin={`0 0 0 15px`}
             width={`auto`}
-            color={`#7c1a81`}>
+            color={`#7c1a81`}
+          >
             {t(`9`)}
           </Wrapper>
         </SelectBox>
@@ -208,14 +227,16 @@ const User = ({ width }) => {
               <SelectBox
                 dr={`row`}
                 margin={`0 20px 20px 0`}
-                padding={`15px 70px 15px 25px`}>
+                padding={`15px 70px 15px 25px`}
+              >
                 <Wrapper
                   width={`auto`}
                   padding={`9px`}
                   bgColor={`#a06ec6`}
                   color={`#fff`}
                   fontSize={`30px`}
-                  radius={`50%`}>
+                  radius={`50%`}
+                >
                   <AiOutlineCreditCard />
                 </Wrapper>
 
@@ -224,14 +245,19 @@ const User = ({ width }) => {
                     width={`auto`}
                     color={`#7c1a81`}
                     fontSize={`13px`}
-                    lineHeight={`1.3`}>
+                    lineHeight={`1.3`}
+                  >
                     {t(`8`)}
                   </Wrapper>
                   <Wrapper
+                    isEllipsis={width < 900 ? true : false}
                     width={`auto`}
-                    fontSize={`26px`}
+                    maxWidth={width < 900 ? `145px` : `auto`}
+                    display={`block`}
+                    fontSize={width < 900 ? `20px` : `26px`}
                     fontWeight={`400`}
-                    lineHeight={`1.3`}>
+                    lineHeight={`1.3`}
+                  >
                     {data.bankNo}
                   </Wrapper>
                 </Wrapper>
@@ -243,14 +269,16 @@ const User = ({ width }) => {
           dr={`row`}
           margin={`0 20px 20px 0`}
           padding={`15px 70px 15px 25px`}
-          onClick={() => moveLinkHandler(`/user/addDemo`)}>
+          onClick={() => moveLinkHandler(`/user/addDemo`)}
+        >
           <Wrapper
             width={`auto`}
             padding={`9px`}
             bgColor={`#a06ec6`}
             color={`#fff`}
             fontSize={`30px`}
-            radius={`50%`}>
+            radius={`50%`}
+          >
             <AiOutlinePlus />
           </Wrapper>
 
@@ -258,7 +286,8 @@ const User = ({ width }) => {
             al={`center`}
             margin={`0 0 0 15px`}
             width={`auto`}
-            color={`#7c1a81`}>
+            color={`#7c1a81`}
+          >
             {t(`9`)}
           </Wrapper>
         </SelectBox>

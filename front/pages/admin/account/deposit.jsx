@@ -21,6 +21,7 @@ import { Wrapper, TabWrapper, Tab } from "../../../components/commonComponents";
 import { numberWithCommas, emptyCheck } from "../../../components/commonUtils";
 import { saveAs } from "file-saver";
 import moment from "moment";
+import { CopyToClipboard } from "react-copy-to-clipboard";
 
 const AdminContent = styled.div`
   padding: 20px;
@@ -167,6 +168,12 @@ const Deposit = ({}) => {
     saveAs(file, originName);
   }, []);
 
+  const copyHashWalletHandler = (text, result, msg) => {
+    if (result) {
+      message.success(msg);
+    }
+  };
+
   ////// DATAVIEW //////
 
   const columns1 = [
@@ -181,7 +188,7 @@ const Deposit = ({}) => {
       ),
     },
     {
-      width: 70,
+      width: 100,
       title: <Wrapper fontSize={`14px`}>신청일</Wrapper>,
       fixed: "left",
       render: (data) => (
@@ -198,27 +205,80 @@ const Deposit = ({}) => {
         <Wrapper fontSize={`14px`}>{data.User.username}</Wrapper>
       ),
     },
-    {
-      width: 70,
-      title: <Wrapper fontSize={`14px`}>은행명</Wrapper>,
-      render: (data) => <Wrapper fontSize={`14px`}>{data.bankName}</Wrapper>,
-    },
-    {
-      width: 70,
-      title: <Wrapper fontSize={`14px`}>계좌번호</Wrapper>,
-      render: (data) => <Wrapper fontSize={`14px`}>{data.bankNo}</Wrapper>,
-    },
+    // {
+    //   width: 70,
+    //   title: <Wrapper fontSize={`14px`}>은행명</Wrapper>,
+    //   render: (data) => <Wrapper fontSize={`14px`}>{data.bankName}</Wrapper>,
+    // },
+    // {
+    //   width: 70,
+    //   title: <Wrapper fontSize={`14px`}>계좌번호</Wrapper>,
+    //   render: (data) => <Wrapper fontSize={`14px`}>{data.bankNo}</Wrapper>,
+    // },
     {
       width: 70,
       title: <Wrapper fontSize={`14px`}>입금 계좌</Wrapper>,
       render: (data) => <Wrapper fontSize={`14px`}>{data.selectBank}</Wrapper>,
     },
+    // {
+    //   width: 70,
+    //   title: <Wrapper fontSize={`14px`}>입금 금액</Wrapper>,
+    //   render: (data) => (
+    //     <Wrapper fontSize={`14px`}>
+    //       {numberWithCommas(String(data.price || 0))}
+    //     </Wrapper>
+    //   ),
+    // },
     {
       width: 70,
-      title: <Wrapper fontSize={`14px`}>입금 금액</Wrapper>,
+      title: <Wrapper fontSize={`14px`}>지불 화폐</Wrapper>,
+      render: (data) => <Wrapper fontSize={`14px`}>{data.priceType}</Wrapper>,
+    },
+    {
+      width: 70,
+      title: <Wrapper fontSize={`14px`}>지갑 주소</Wrapper>,
       render: (data) => (
         <Wrapper fontSize={`14px`}>
-          {numberWithCommas(String(data.price || 0))}
+          <CopyToClipboard
+            text={`${data.walletAddress}`}
+            onCopy={(text, result) =>
+              copyHashWalletHandler(text, result, `지갑주소가 복사되었습니다.`)
+            }
+          >
+            <Button type="primary">복사</Button>
+          </CopyToClipboard>
+        </Wrapper>
+      ),
+    },
+    {
+      width: 70,
+      title: <Wrapper fontSize={`14px`}>hash 주소</Wrapper>,
+      render: (data) => (
+        <Wrapper fontSize={`14px`}>
+          <CopyToClipboard
+            text={`${data.hashAddress}`}
+            onCopy={(text, result) =>
+              copyHashWalletHandler(text, result, `hash주소가 복사되었습니다.`)
+            }
+          >
+            <Button type="primary">복사</Button>
+          </CopyToClipboard>
+        </Wrapper>
+      ),
+    },
+    {
+      width: 70,
+      title: <Wrapper fontSize={`14px`}>첨부파일</Wrapper>,
+      render: (data) => (
+        <Wrapper dr={`row`} fontSize={`14px`}>
+          <Button
+            type="primary"
+            onClick={() =>
+              downloadFileHandler(data.filePath, data.fileOriginName)
+            }
+          >
+            다운로드
+          </Button>
         </Wrapper>
       ),
     },
@@ -316,9 +376,9 @@ const Deposit = ({}) => {
             입금정보
           </Tab>
 
-          <Tab isActive={currentTab === 1} onClick={() => setCurrentTab(1)}>
+          {/* <Tab isActive={currentTab === 1} onClick={() => setCurrentTab(1)}>
             입금 영수내역
-          </Tab>
+          </Tab> */}
         </TabWrapper>
 
         <Wrapper dr={`row`} ju={`space-between`} margin={`15px 0 10px`}>
@@ -342,7 +402,7 @@ const Deposit = ({}) => {
           columns={currentTab === 0 ? columns1 : columns2}
           dataSource={depositList ? depositList : []}
           size="small"
-          scroll={currentTab === 0 ? { x: 2000 } : null}
+          scroll={currentTab === 0 ? { x: 1600 } : null}
           pagination={{
             pageSize: 10,
             total: depositLen,

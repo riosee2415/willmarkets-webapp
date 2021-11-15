@@ -671,7 +671,10 @@ const Signup = () => {
                         <CustomLabel for={`inp-email`}>{t(`23`)}</CustomLabel>
                       </Wrapper>
 
-                      <Wrapper dr={`row`} width={`calc(100% - 100px)`}>
+                      <Wrapper
+                        dr={`row`}
+                        width={width < 600 ? `100%` : `calc(100% - 100px)`}
+                      >
                         <Wrapper
                           dr={width < 600 ? `column` : `row`}
                           ju={`flex-start`}
@@ -771,7 +774,7 @@ const Signup = () => {
                       <Wrapper
                         dr={`row`}
                         ju={`flex-start`}
-                        width={`calc(100% - 100px)`}
+                        width={width < 600 ? `100%` : `calc(100% - 100px)`}
                       >
                         <CustomInput
                           type={`password`}
@@ -804,7 +807,7 @@ const Signup = () => {
                       <Wrapper
                         dr={`row`}
                         ju={`flex-start`}
-                        width={`calc(100% - 100px)`}
+                        width={width < 600 ? `100%` : `calc(100% - 100px)`}
                       >
                         <CustomInput
                           id={`inp-userName`}
@@ -834,7 +837,7 @@ const Signup = () => {
                       <Wrapper
                         dr={`row`}
                         ju={`flex-start`}
-                        width={`calc(100% - 100px)`}
+                        width={width < 600 ? `100%` : `calc(100% - 100px)`}
                       >
                         <Combo
                           isBorder={true}
@@ -898,7 +901,7 @@ const Signup = () => {
                       <Wrapper
                         dr={`row`}
                         ju={`flex-start`}
-                        width={`calc(100% - 100px)`}
+                        width={width < 600 ? `100%` : `calc(100% - 100px)`}
                       >
                         <Wrapper dr={`row`} width={`auto`} margin={`0 10px`}>
                           <RadioInput
@@ -954,7 +957,7 @@ const Signup = () => {
                         position={`relative`}
                         dr={`row`}
                         ju={`flex-start`}
-                        width={`calc(100% - 100px)`}
+                        width={width < 600 ? `100%` : `calc(100% - 100px)`}
                         cursor={`pointer`}
                       >
                         <CustomInput
@@ -990,7 +993,7 @@ const Signup = () => {
                       <Wrapper
                         dr={`row`}
                         ju={`flex-start`}
-                        width={`calc(100% - 100px)`}
+                        width={width < 600 ? `100%` : `calc(100% - 100px)`}
                         cursor={`pointer`}
                       >
                         <CustomInput

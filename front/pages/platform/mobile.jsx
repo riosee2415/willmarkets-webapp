@@ -15,9 +15,12 @@ import {
 import ClientLayout from "../../components/ClientLayout";
 import SubBanner from "../../components/SubBanner";
 import { useTranslation } from "react-i18next";
+import useWidth from "../../hooks/useWidth";
 
 const Mobile = () => {
   const { t } = useTranslation(["platform"]);
+
+  const width = useWidth();
 
   return (
     <ClientLayout>
@@ -27,8 +30,8 @@ const Mobile = () => {
         padding={`150px 0`}
         color={`#fff`}
         bgImg={`url('https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/willmarkets/assets/images/download/back_mobile1_download.png')`}>
-        <RsWrapper al={`flex-start`}>
-          <Wrapper dr={`row`} width={`auto`}>
+        <RsWrapper al={width < 800 ? `center` : `flex-start`}>
+          <Wrapper dr={width < 700 ? `column` : `row`} width={`auto`}>
             <Image
               width={`auto`}
               src={`https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/willmarkets/assets/images/download/icon_android.png`}
@@ -96,8 +99,8 @@ const Mobile = () => {
         padding={`150px 0`}
         color={`#fff`}
         bgImg={`url('https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/willmarkets/assets/images/download/back_mobile2_download.png')`}>
-        <RsWrapper al={`flex-end`}>
-          <Wrapper dr={`row`} width={`auto`}>
+        <RsWrapper al={width < 800 ? `center` : `flex-end`}>
+          <Wrapper dr={width < 700 ? `column-reverse` : `row`} width={`auto`}>
             <Wrapper
               dr={`row`}
               padding={`0 10px`}
@@ -122,7 +125,7 @@ const Mobile = () => {
             margin={`15px 0 0`}
             fontWeight={`300`}
             lineHeight={`1.6`}
-            textAlign={`right`}>
+            textAlign={width < 800 ? `left` : `right`}>
             {t(`2`).split(`\n`)[0]}
             <br />
             {t(`2`).split(`\n`)[1]} {t(`3`).split(`\n`)[0]}
@@ -196,12 +199,12 @@ const Mobile = () => {
           </Wrapper>
 
           <Wrapper
-            dr={`row`}
+            dr={width < 800 ? `column` : `row`}
             margin={`40px 0 70px`}
-            padding={`40px 110px`}
+            padding={width < 800 ? `40px 0px` : `40px 110px`}
             border={`1px solid #707072`}
             radius={`30px`}
-            width={`auto`}
+            width={width < 800 ? `100%` : `auto`}
             bgColor={`#fff`}>
             <Wrapper width={`auto`}>
               <Image
@@ -243,14 +246,14 @@ const Mobile = () => {
         <RsWrapper>
           <Wrapper position={`relative`} bottom={`120px`} width={`auto`}>
             <Image
-              width={`auto`}
+              width={width < 800 ? `100%` : `auto`}
               src={`https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/willmarkets/assets/images/download/image_2phone.png`}
             />
           </Wrapper>
 
           <Wrapper
-            dr={`row`}
-            al={`normal`}
+            dr={width < 800 ? `column` : `row`}
+            al={width < 800 ? `center` : `normal`}
             position={`relative`}
             bottom={`50px`}>
             <Wrapper al={`flex-start`} ju={`space-between`} width={`50%`}>

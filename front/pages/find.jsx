@@ -26,6 +26,7 @@ import ClientLayout from "../components/ClientLayout";
 import Theme from "../components/Theme";
 import { useTranslation } from "react-i18next";
 import i18next from "i18next";
+import useWidth from "../hooks/useWidth";
 
 const CustomLabel = styled(Label)`
   display: flex;
@@ -63,6 +64,8 @@ const Find = () => {
   const { t } = useTranslation(["find"]);
 
   const router = useRouter();
+
+  const width = useWidth();
 
   const {
     me,
@@ -228,7 +231,7 @@ const Find = () => {
           <Wrapper
             margin={`0 45px 0 0`}
             padding={`40px 40px 30px`}
-            width={`500px`}
+            width={width < 600 ? `100%` : `500px`}
             bgColor={`#fff`}
             shadow={`1px 1px 8px #dedede`}>
             <Wrapper dr={`row`} ju={`flex-start`} margin={`0 0 30px`}>

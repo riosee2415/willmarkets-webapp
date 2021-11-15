@@ -15,9 +15,12 @@ import {
 import ClientLayout from "../../components/ClientLayout";
 import SubBanner from "../../components/SubBanner";
 import { useTranslation } from "react-i18next";
+import useWidth from "../../hooks/useWidth";
 
 const Pc = () => {
   const { t } = useTranslation(["platform"]);
+
+  const width = useWidth();
 
   return (
     <ClientLayout>
@@ -27,7 +30,7 @@ const Pc = () => {
         padding={`150px 0`}
         color={`#fff`}
         bgImg={`url('https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/willmarkets/assets/images/download/back_download.png')`}>
-        <RsWrapper al={`flex-start`}>
+        <RsWrapper al={width < 500 ? `center` : `flex-start`}>
           <Wrapper dr={`row`} width={`auto`}>
             <Image
               width={`auto`}
@@ -92,7 +95,10 @@ const Pc = () => {
         </RsWrapper>
       </Wrapper>
 
-      <Wrapper padding={`100px 0 120px`} bgColor={`#eeeeee`}>
+      <Wrapper
+        padding={`100px 0 120px`}
+        bgColor={`#eeeeee`}
+        textAlign={`center`}>
         <RsWrapper>
           <Wrapper
             display={`block`}
@@ -127,12 +133,12 @@ const Pc = () => {
           </Wrapper>
 
           <Wrapper
-            dr={`row`}
+            dr={width < 800 ? `column` : `row`}
             margin={`40px 0 70px`}
-            padding={`40px 110px`}
+            padding={width < 800 ? `40px 0` : `40px 110px`}
             border={`1px solid #707072`}
             radius={`30px`}
-            width={`auto`}
+            width={width < 800 ? `100%` : `auto`}
             bgColor={`#fff`}>
             <Wrapper width={`auto`}>
               <Image
@@ -174,14 +180,14 @@ const Pc = () => {
         <RsWrapper>
           <Wrapper position={`relative`} bottom={`120px`} width={`auto`}>
             <Image
-              width={`auto`}
+              width={width < 800 ? `100%` : `auto`}
               src={`https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/willmarkets/assets/images/download/image_2phone.png`}
             />
           </Wrapper>
 
           <Wrapper
-            dr={`row`}
-            al={`normal`}
+            dr={width < 800 ? `column` : `row`}
+            al={width < 800 ? `center` : `normal`}
             position={`relative`}
             bottom={`50px`}>
             <Wrapper al={`flex-start`} ju={`flex-start`} width={`50%`}>

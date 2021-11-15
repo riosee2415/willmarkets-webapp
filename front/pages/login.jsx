@@ -22,6 +22,7 @@ import Theme from "../components/Theme";
 import { UserOutlined, LockOutlined } from "@ant-design/icons";
 import { useTranslation } from "react-i18next";
 import i18next from "i18next";
+import useWidth from "../hooks/useWidth";
 
 const CustomInput = styled(TextInput)`
   padding: 0 0 0 15px;
@@ -38,6 +39,8 @@ const Login = () => {
   const { t } = useTranslation(["login"]);
 
   const router = useRouter();
+
+  const width = useWidth();
 
   const { me, st_userSigninDone, st_userSigninError } = useSelector(
     (state) => state.user
@@ -111,7 +114,7 @@ const Login = () => {
           <Wrapper
             margin={`0 45px 0 0`}
             padding={`60px 50px`}
-            width={`500px`}
+            width={width < 600 ? `100%` : `500px`}
             bgColor={`#fff`}
             shadow={`1px 1px 8px #dedede`}>
             <Image

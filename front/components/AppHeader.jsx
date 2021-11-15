@@ -11,6 +11,7 @@ import {
   ComboTitle,
   ComboList,
   ComboListItem,
+  WholeWrapper,
 } from "./commonComponents";
 import { withResizeDetector } from "react-resize-detector";
 import styled from "styled-components";
@@ -18,7 +19,12 @@ import Theme from "./Theme";
 import { AlignRightOutlined } from "@ant-design/icons";
 import { Drawer, message } from "antd";
 import Link from "next/link";
-import { CaretDownOutlined } from "@ant-design/icons";
+import {
+  CaretDownOutlined,
+  BarsOutlined,
+  CloseOutlined,
+  MailOutlined,
+} from "@ant-design/icons";
 import { useRouter } from "next/router";
 import { USER_LOGOUT_REQUEST } from "../reducers/user";
 import { useDispatch, useSelector } from "react-redux";
@@ -116,6 +122,16 @@ const MenuWrapper = styled(Wrapper)`
   `}
 `;
 
+const MobileDrawer = styled(Drawer)`
+  & .ant-drawer-header {
+    padding: 0px;
+  }
+
+  & .ant-drawer-body {
+    padding: 0px;
+  }
+`;
+
 const AppHeader = ({ children, width }) => {
   const router = useRouter();
 
@@ -135,6 +151,8 @@ const AppHeader = ({ children, width }) => {
   const [drawar, setDrawar] = useState(false);
   const [subMenu, setSubMenu] = useState(``);
 
+  const [visible, setVisible] = useState(false);
+
   const [comboLanguage, setComboLanguage] = useState(false);
 
   const [toggleMenu01, setToggleMenu01] = useState(false);
@@ -143,10 +161,19 @@ const AppHeader = ({ children, width }) => {
   const [toggleMenu04, setToggleMenu04] = useState(false);
   const [toggleMenu05, setToggleMenu05] = useState(false);
 
+  const [MobileSubMenu1, setMobileSubMenu1] = useState(false);
+  const [MobileSubMenu2, setMobileSubMenu2] = useState(false);
+  const [MobileSubMenu3, setMobileSubMenu3] = useState(false);
+
   ///////////// - EVENT HANDLER- ////////////
-  const drawarToggle = useCallback(() => {
-    setDrawar(!drawar);
-  });
+
+  const DrawToggle = () => {
+    setVisible(!visible);
+
+    setMobileSubMenu1(false);
+    setMobileSubMenu2(false);
+    setMobileSubMenu3(false);
+  };
 
   const handleScroll = useCallback(() => {
     const { pageYOffset } = window;
@@ -165,6 +192,16 @@ const AppHeader = ({ children, width }) => {
       type: USER_LOGOUT_REQUEST,
     });
   }, []);
+
+  const MobileSubMenuToggle = (num) => {
+    if (num === `1`) {
+      setMobileSubMenu1(!MobileSubMenu1);
+    } else if (num === `2`) {
+      setMobileSubMenu2(!MobileSubMenu2);
+    } else if (num === `3`) {
+      setMobileSubMenu3(!MobileSubMenu3);
+    }
+  };
 
   ////////////// - USE EFFECT- //////////////
   useEffect(() => {
@@ -192,8 +229,7 @@ const AppHeader = ({ children, width }) => {
         top={`0`}
         left={`0`}
         index={`10000`}
-        className={headerScroll && "background"}
-      >
+        className={headerScroll && "background"}>
         <Wrapper padding={`5px 0`} bgColor={`#231d21`}>
           <RsWrapper al={`flex-end`}>
             <Wrapper dr={`row`} width={`auto`}>
@@ -204,8 +240,7 @@ const AppHeader = ({ children, width }) => {
                   fontSize={`13px`}
                   color={`#fff`}
                   cursor={`pointer`}
-                  onClick={logoutUserHandler}
-                >
+                  onClick={logoutUserHandler}>
                   {t(`1`)}
                 </Wrapper>
               ) : (
@@ -216,8 +251,7 @@ const AppHeader = ({ children, width }) => {
                     fontSize={`13px`}
                     color={`#fff`}
                     cursor={`pointer`}
-                    onClick={() => moveLinkHandler(`/login`)}
-                  >
+                    onClick={() => moveLinkHandler(`/login`)}>
                     {t(`2`)}
                   </Wrapper>
                   <Wrapper
@@ -226,8 +260,7 @@ const AppHeader = ({ children, width }) => {
                     fontSize={`13px`}
                     color={`#fff`}
                     cursor={`pointer`}
-                    onClick={() => moveLinkHandler(`/signup`)}
-                  >
+                    onClick={() => moveLinkHandler(`/signup`)}>
                     {t(`3`)}
                   </Wrapper>
                 </>
@@ -239,13 +272,11 @@ const AppHeader = ({ children, width }) => {
                 margin={`0 0 0 30px`}
                 width={`auto`}
                 fontSize={`13px`}
-                cursor={`pointer`}
-              >
+                cursor={`pointer`}>
                 <Combo
                   width={`110px`}
                   padding={`0`}
-                  onMouseOver={() => setComboLanguage(true)}
-                >
+                  onMouseOver={() => setComboLanguage(true)}>
                   <ComboTitle color={`#fff`}>
                     <Wrapper fontSize={`13px`}>Language</Wrapper>
                     <CaretDownOutlined />
@@ -253,8 +284,7 @@ const AppHeader = ({ children, width }) => {
 
                   <ComboList
                     isView={comboLanguage}
-                    onClick={() => setComboLanguage(false)}
-                  >
+                    onClick={() => setComboLanguage(false)}>
                     <ComboListItem onClick={() => i18n.changeLanguage("en")}>
                       English
                     </ComboListItem>
@@ -286,20 +316,17 @@ const AppHeader = ({ children, width }) => {
             toggleMenu05
               ? `#2c2c2c`
               : `#fff`
-          }
-        >
+          }>
           <RsWrapper>
             <Wrapper
               dr={`row`}
               ju={`space-between`}
               padding={`5px 0`}
-              height={`85px`}
-            >
+              height={`85px`}>
               <Wrapper
                 width={`auto`}
                 cursor={`pointer`}
-                onClick={() => moveLinkHandler(`/`)}
-              >
+                onClick={() => moveLinkHandler(`/`)}>
                 <Image
                   width={`auto`}
                   src={
@@ -323,31 +350,25 @@ const AppHeader = ({ children, width }) => {
                     setToggleMenu03(false);
                     setToggleMenu04(false);
                     setToggleMenu05(false);
-                  }}
-                >
+                  }}>
                   <MenuTextWrapper
-                    onClick={() => moveLinkHandler(`/company/intro`)}
-                  >
+                    onClick={() => moveLinkHandler(`/company/intro`)}>
                     {t(`4`)}
                   </MenuTextWrapper>
 
                   <MenuListWrapper
                     onMouseOut={() => setToggleMenu01(false)}
-                    onClick={() => setToggleMenu01(false)}
-                  >
+                    onClick={() => setToggleMenu01(false)}>
                     <MenuListItemWrapper
-                      onClick={() => moveLinkHandler(`/company/intro`)}
-                    >
+                      onClick={() => moveLinkHandler(`/company/intro`)}>
                       {t(`5`)}
                     </MenuListItemWrapper>
                     <MenuListItemWrapper
-                      onClick={() => moveLinkHandler(`/company/terms`)}
-                    >
+                      onClick={() => moveLinkHandler(`/company/terms`)}>
                       {t(`6`)}
                     </MenuListItemWrapper>
                     <MenuListItemWrapper
-                      onClick={() => moveLinkHandler(`/company/privacy`)}
-                    >
+                      onClick={() => moveLinkHandler(`/company/privacy`)}>
                       {t(`7`)}
                     </MenuListItemWrapper>
                     {/* <MenuListItemWrapper
@@ -366,41 +387,33 @@ const AppHeader = ({ children, width }) => {
                     setToggleMenu03(false);
                     setToggleMenu04(false);
                     setToggleMenu05(false);
-                  }}
-                >
+                  }}>
                   <MenuTextWrapper
-                    onClick={() => moveLinkHandler(`/trading/forex`)}
-                  >
+                    onClick={() => moveLinkHandler(`/trading/forex`)}>
                     {t(`9`)}
                   </MenuTextWrapper>
 
                   <MenuListWrapper
                     onMouseOut={() => setToggleMenu02(false)}
-                    onClick={() => setToggleMenu02(false)}
-                  >
+                    onClick={() => setToggleMenu02(false)}>
                     <MenuListItemWrapper
-                      onClick={() => moveLinkHandler(`/trading/forex`)}
-                    >
+                      onClick={() => moveLinkHandler(`/trading/forex`)}>
                       Forex
                     </MenuListItemWrapper>
                     <MenuListItemWrapper
-                      onClick={() => moveLinkHandler(`/trading/ecn`)}
-                    >
+                      onClick={() => moveLinkHandler(`/trading/ecn`)}>
                       ECN
                     </MenuListItemWrapper>
                     <MenuListItemWrapper
-                      onClick={() => moveLinkHandler(`/trading/stp`)}
-                    >
+                      onClick={() => moveLinkHandler(`/trading/stp`)}>
                       STP
                     </MenuListItemWrapper>
                     <MenuListItemWrapper
-                      onClick={() => moveLinkHandler(`/trading/spread`)}
-                    >
+                      onClick={() => moveLinkHandler(`/trading/spread`)}>
                       {t(`10`)}
                     </MenuListItemWrapper>
                     <MenuListItemWrapper
-                      onClick={() => moveLinkHandler(`/trading/margin`)}
-                    >
+                      onClick={() => moveLinkHandler(`/trading/margin`)}>
                       {t(`11`)}
                     </MenuListItemWrapper>
                     {/* <MenuListItemWrapper
@@ -408,8 +421,7 @@ const AppHeader = ({ children, width }) => {
                       {t(`12`)}
                     </MenuListItemWrapper> */}
                     <MenuListItemWrapper
-                      onClick={() => moveLinkHandler(`/trading/time`)}
-                    >
+                      onClick={() => moveLinkHandler(`/trading/time`)}>
                       {t(`13`)}
                     </MenuListItemWrapper>
                   </MenuListWrapper>
@@ -423,26 +435,21 @@ const AppHeader = ({ children, width }) => {
                     setToggleMenu02(false);
                     setToggleMenu04(false);
                     setToggleMenu05(false);
-                  }}
-                >
+                  }}>
                   <MenuTextWrapper
-                    onClick={() => moveLinkHandler(`/platform/pc`)}
-                  >
+                    onClick={() => moveLinkHandler(`/platform/pc`)}>
                     {t(`14`)}
                   </MenuTextWrapper>
 
                   <MenuListWrapper
                     onMouseOut={() => setToggleMenu03(false)}
-                    onClick={() => setToggleMenu03(false)}
-                  >
+                    onClick={() => setToggleMenu03(false)}>
                     <MenuListItemWrapper
-                      onClick={() => moveLinkHandler(`/platform/pc`)}
-                    >
+                      onClick={() => moveLinkHandler(`/platform/pc`)}>
                       {t(`15`)}
                     </MenuListItemWrapper>
                     <MenuListItemWrapper
-                      onClick={() => moveLinkHandler(`/platform/mobile`)}
-                    >
+                      onClick={() => moveLinkHandler(`/platform/mobile`)}>
                       {t(`16`)}
                     </MenuListItemWrapper>
                   </MenuListWrapper>
@@ -457,8 +464,7 @@ const AppHeader = ({ children, width }) => {
                     setToggleMenu03(false);
                     setToggleMenu05(false);
                   }}
-                  onMouseOut={() => setToggleMenu04(false)}
-                >
+                  onMouseOut={() => setToggleMenu04(false)}>
                   <MenuTextWrapper onClick={() => moveLinkHandler(`/user`)}>
                     {t(`17`)}
                   </MenuTextWrapper>
@@ -473,8 +479,7 @@ const AppHeader = ({ children, width }) => {
                     setToggleMenu03(false);
                     setToggleMenu04(false);
                   }}
-                  onMouseOut={() => setToggleMenu05(false)}
-                >
+                  onMouseOut={() => setToggleMenu05(false)}>
                   <MenuTextWrapper onClick={() => moveLinkHandler(`/support`)}>
                     {t(`18`)}
                   </MenuTextWrapper>
@@ -485,6 +490,259 @@ const AppHeader = ({ children, width }) => {
         </Wrapper>
       </WebRow>
 
+      <Wrapper bgColor={`#fff`} al={`flex-start`}>
+        <Wrapper onClick={DrawToggle} al={`flex-start`}>
+          <BarsOutlined style={{ fontSize: "27px" }} />
+        </Wrapper>
+        <MobileDrawer
+          title={
+            <WholeWrapper>
+              <Wrapper dr={`row`} ju={`space-between`} padding={`10px 15px`}>
+                <Wrapper
+                  width={`auto`}
+                  onClick={() => moveLinkHandler(`/`)}
+                  cursor={`pointer`}>
+                  <Image
+                    width={`auto`}
+                    src={`https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/willmarkets/assets/images/logo/logo_hover.png`}
+                  />
+                </Wrapper>
+                <Wrapper width={`auto`} onClick={DrawToggle} cursor={`pointer`}>
+                  <CloseOutlined style={{ fontSize: "22px" }} />
+                </Wrapper>
+              </Wrapper>
+
+              <Wrapper
+                dr={`row`}
+                margin={`5px 0 0 0`}
+                bgColor={`#008eff`}
+                padding={`10px 20px`}>
+                {me ? (
+                  <Wrapper
+                    width={`25%`}
+                    cursor={`pointer`}
+                    color={`#fff`}
+                    onClick={() => logoutUserHandler()}>
+                    로그아웃
+                  </Wrapper>
+                ) : (
+                  <Wrapper
+                    width={`25%`}
+                    cursor={`pointer`}
+                    color={`#fff`}
+                    onClick={() => moveLinkHandler(`/user/login`)}>
+                    로그인
+                  </Wrapper>
+                )}
+                {me && (
+                  <Wrapper
+                    width={`25%`}
+                    color={`#575252`}
+                    cursor={`pointer`}
+                    color={`#fff`}
+                    onClick={() => moveLinkHandler(`/user/mypage`)}>
+                    마이페이지
+                  </Wrapper>
+                )}
+                {!me && (
+                  <Wrapper
+                    width={`25%`}
+                    cursor={`pointer`}
+                    color={`#fff`}
+                    onClick={() => moveLinkHandler(`/user/signup`)}>
+                    회원가입
+                  </Wrapper>
+                )}
+
+                <Wrapper
+                  width={`25%`}
+                  cursor={`pointer`}
+                  color={`#fff`}
+                  onClick={() => toggleModalHandler()}>
+                  고객센터
+                </Wrapper>
+              </Wrapper>
+            </WholeWrapper>
+          }
+          closable={false}
+          placement={`left`}
+          onClose={DrawToggle}
+          visible={visible}
+          width={`100%`}>
+          <Wrapper al={`flex-start`}>
+            <Wrapper
+              dr={`row`}
+              ju={`space-between`}
+              borderBottom={`1px solid #efeaea`}
+              padding={`10px 15px`}
+              onClick={() => MobileSubMenuToggle(`1`)}
+              cursor={`pointer`}>
+              <Wrapper
+                width={`auto`}
+                cursor={`pointer`}
+                onClick={() => MobileSubMenuToggle(`1`)}>
+                회사 소개
+              </Wrapper>
+
+              <Wrapper width={`auto`} cursor={`pointer`}>
+                <CaretDownOutlined onClick={() => MobileSubMenuToggle(`1`)} />
+              </Wrapper>
+              {MobileSubMenu1 && (
+                <Wrapper
+                  al={`flex-start`}
+                  padding={`4px 10px`}
+                  cursor={`pointer`}>
+                  <Wrapper
+                    width={`auto`}
+                    fontSize={`13px`}
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      moveLinkHandler(`/company?menu=1`);
+                    }}>
+                    • 이용약관
+                  </Wrapper>
+                  <Wrapper
+                    width={`auto`}
+                    padding={`4px 0`}
+                    fontSize={`13px`}
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      moveLinkHandler(`/company?menu=2`);
+                    }}>
+                    • 개인정보 보호정책
+                  </Wrapper>
+                </Wrapper>
+              )}
+            </Wrapper>
+
+            <Wrapper
+              dr={`row`}
+              ju={`space-between`}
+              borderBottom={`1px solid #efeaea`}
+              padding={`10px 15px`}
+              onClick={() => MobileSubMenuToggle(`2`)}
+              cursor={`pointer`}>
+              <Wrapper
+                al={`flex-start`}
+                width={`100%`}
+                cursor={`pointer`}
+                padding={`10px 15px`}
+                borderBottom={`1px solid #efeaea`}
+                onClick={() => moveLinkHandler(`2`)}>
+                트레이딩
+              </Wrapper>
+
+              <Wrapper width={`auto`} cursor={`pointer`}>
+                <CaretDownOutlined onClick={() => MobileSubMenuToggle(`2`)} />
+              </Wrapper>
+
+              {MobileSubMenu2 && (
+                <Wrapper
+                  al={`flex-start`}
+                  padding={`4px 10px`}
+                  cursor={`pointer`}>
+                  <Wrapper
+                    width={`auto`}
+                    fontSize={`13px`}
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      moveLinkHandler(`/company?menu=1`);
+                    }}>
+                    • Forex
+                  </Wrapper>
+                  <Wrapper
+                    width={`auto`}
+                    padding={`4px 0`}
+                    fontSize={`13px`}
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      moveLinkHandler(`/company?menu=2`);
+                    }}>
+                    • ECN
+                  </Wrapper>
+                </Wrapper>
+              )}
+            </Wrapper>
+
+            <Wrapper
+              al={`flex-start`}
+              width={`100%`}
+              cursor={`pointer`}
+              padding={`10px 15px`}
+              borderBottom={`1px solid #efeaea`}
+              onClick={() => moveLinkHandler(`/event`)}>
+              공지/이벤트
+            </Wrapper>
+
+            <Wrapper
+              al={`flex-start`}
+              width={`100%`}
+              padding={`10px 15px`}
+              cursor={`pointer`}
+              borderBottom={`1px solid #efeaea`}
+              onClick={() => moveLinkHandler(`/review`)}>
+              이용 후기
+            </Wrapper>
+
+            <Wrapper
+              dr={`row`}
+              ju={`space-between`}
+              padding={`10px 15px`}
+              borderBottom={`1px solid #efeaea`}
+              onClick={() => MobileSubMenuToggle(`2`)}
+              cursor={`pointer`}>
+              <Wrapper
+                width={`auto`}
+                cursor={`pointer`}
+                onClick={() => MobileSubMenuToggle(`2`)}>
+                이용 안내
+              </Wrapper>
+
+              <Wrapper width={`auto`} cursor={`pointer`}>
+                <CaretDownOutlined onClick={() => MobileSubMenuToggle(`2`)} />
+              </Wrapper>
+              {MobileSubMenu2 && (
+                <Wrapper
+                  al={`flex-start`}
+                  padding={`4px 10px`}
+                  cursor={`pointer`}>
+                  <Wrapper
+                    width={`auto`}
+                    padding={`4px 0`}
+                    fontSize={`13px`}
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      moveLinkHandler(`/info?menu=1`);
+                    }}>
+                    • 이용 방법
+                  </Wrapper>
+                  <Wrapper
+                    width={`auto`}
+                    padding={`4px 0`}
+                    fontSize={`13px`}
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      moveLinkHandler(`/info?menu=2`);
+                    }}>
+                    • 주의사항
+                  </Wrapper>
+
+                  <Wrapper
+                    width={`auto`}
+                    padding={`4px 0`}
+                    fontSize={`13px`}
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      moveLinkHandler(`/info?menu=3`);
+                    }}>
+                    • 금액 충전
+                  </Wrapper>
+                </Wrapper>
+              )}
+            </Wrapper>
+          </Wrapper>
+        </MobileDrawer>
+      </Wrapper>
       {/* mobile */}
       {/* <MobileRow justify={`center`} className={headerScroll && "background"}>
         <ColWrapper span={11} al={`flex-start`}>

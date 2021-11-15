@@ -98,7 +98,8 @@ const Login = () => {
         top={`0`}
         left={`0`}
         zIndex={`0`}
-        minHeight={`100vh`}>
+        minHeight={`100vh`}
+      >
         <Image
           height={`100vh`}
           src={`https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/willmarkets/assets/images/banner/main_banner02.png`}
@@ -110,15 +111,17 @@ const Login = () => {
           position={`relative`}
           zIndex={`1`}
           al={`flex-end`}
-          minHeight={`100vh`}>
+          minHeight={`100vh`}
+        >
           <Wrapper
-            margin={`0 45px 0 0`}
+            margin={width < 600 ? `0` : `0 45px 0 0`}
             padding={`60px 50px`}
             width={width < 600 ? `100%` : `500px`}
             bgColor={`#fff`}
-            shadow={`1px 1px 8px #dedede`}>
+            shadow={`1px 1px 8px #dedede`}
+          >
             <Image
-              width={`auto`}
+              width={width < 500 ? `130px` : `auto`}
               margin={`0 0 50px`}
               src={`https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/willmarkets/assets/images/logo/logo_big.png`}
             />
@@ -126,7 +129,8 @@ const Login = () => {
             <Wrapper
               dr={`row`}
               padding={`0 10px 5px`}
-              borderBottom={`1.5px solid #635CF3`}>
+              borderBottom={`1.5px solid #635CF3`}
+            >
               <UserOutlined style={{ fontSize: `24px`, color: `#555555` }} />
               <CustomInput
                 width={`calc(100% - 24px)`}
@@ -140,7 +144,8 @@ const Login = () => {
               dr={`row`}
               margin={`30px 0 0`}
               padding={`0 10px 5px`}
-              borderBottom={`1.5px solid #635CF3`}>
+              borderBottom={`1.5px solid #635CF3`}
+            >
               <LockOutlined style={{ fontSize: `24px`, color: `#555555` }} />
               <CustomInput
                 type={`password`}
@@ -154,39 +159,42 @@ const Login = () => {
             <Wrapper al={`flex-end`} margin={`5px 0 20px`}>
               <Wrapper
                 width={`auto`}
-                fontSize={`15px`}
+                fontSize={width < 500 ? `13px` : `15px`}
                 fontWeight={`300`}
                 color={`#707070`}
                 cursor={`pointer`}
-                onClick={() => moveLinkHandler(`/find`)}>
+                onClick={() => moveLinkHandler(`/find`)}
+              >
                 {t(`4`)}
               </Wrapper>
             </Wrapper>
 
             <Wrapper>
               <CommonButton
-                width={`180px`}
+                width={width < 500 ? `150px` : `180px`}
                 height={`45px`}
                 lineHeight={`40px`}
-                fontSize={`20px`}
+                fontSize={width < 500 ? `17px` : `20px`}
                 margin={`0 0 10px`}
                 radius={`8px`}
                 bgColor={`#313B91`}
                 color={`#fff`}
-                onClick={loginHandler}>
+                onClick={loginHandler}
+              >
                 {t(`5`)}
               </CommonButton>
               <CommonButton
-                width={`180px`}
+                width={width < 500 ? `150px` : `180px`}
                 height={`45px`}
                 lineHeight={`40px`}
-                fontSize={`20px`}
+                fontSize={width < 500 ? `17px` : `20px`}
                 margin={`0 0 10px`}
                 radius={`8px`}
                 border={`1px solid #313B91`}
                 bgColor={`#fff`}
                 color={`#313B91`}
-                onClick={() => moveLinkHandler(`/signup`)}>
+                onClick={() => moveLinkHandler(`/signup`)}
+              >
                 {t(`6`)}
               </CommonButton>
             </Wrapper>

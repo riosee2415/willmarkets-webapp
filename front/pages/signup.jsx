@@ -624,7 +624,7 @@ const Signup = () => {
           <Wrapper
             margin={`75px 45px 0 0`}
             padding={`25px 20px`}
-            width={`550px`}
+            width={width < 600 ? `100%` : `550px`}
             bgColor={`#fff`}
             shadow={`1px 1px 8px #dedede`}
           >
@@ -662,78 +662,106 @@ const Signup = () => {
               {currentStep === 0 && (
                 <Wrapper>
                   <Wrapper dr={`row`} al={`flex-start`}>
-                    <Wrapper al={`flex-start`} width={`100px`}>
-                      <CustomLabel for={`inp-email`}>{t(`23`)}</CustomLabel>
-                    </Wrapper>
-
-                    <Wrapper width={`calc(100% - 100px)`}>
-                      <Wrapper dr={`row`} ju={`flex-start`}>
-                        <CustomInput
-                          id={`inp-email`}
-                          width={
-                            i18next.language === `en`
-                              ? `calc(100% - 130px)`
-                              : `calc(100% - 90px)`
-                          }
-                          {...inputEmail}
-                          placeholder={t(`23`)}
-                          readOnly={isConfirmEmail}
-                          onChange={(e) => {
-                            setIsSendEmail(false);
-                            setIsConfirmEmail(false);
-                            inputEmail.setValue(e.target.value);
-                          }}
-                        />
-                        <CommonButton
-                          width={i18next.language === `en` ? `120px` : `80px`}
-                          height={`38px`}
-                          lineHeight={
-                            i18next.language === `en` ? `1.2` : `34px`
-                          }
-                          margin={`0 0 0 10px`}
-                          bgColor={`#030303`}
-                          color={`#fff`}
-                          fontWeight={`500`}
-                          radius={`5px`}
-                          onClick={checkEmailHandler}
-                        >
-                          {isConfirmEmail ? t(`24`) : t(`25`)}
-                        </CommonButton>
+                    <Wrapper
+                      dr={width < 600 ? `column` : `row`}
+                      margin={`10px 0 0`}
+                      al={`flex-start`}
+                    >
+                      <Wrapper al={`flex-start`} width={`100px`}>
+                        <CustomLabel for={`inp-email`}>{t(`23`)}</CustomLabel>
                       </Wrapper>
 
-                      {isSendEmail && !isConfirmEmail && (
+                      <Wrapper dr={`row`} width={`calc(100% - 100px)`}>
                         <Wrapper
-                          dr={`row`}
+                          dr={width < 600 ? `column` : `row`}
                           ju={`flex-start`}
-                          margin={`10px 0 0`}
                         >
                           <CustomInput
+                            id={`inp-email`}
                             width={
-                              i18next.language === `en`
+                              width < 600
+                                ? `100%`
+                                : i18next.language === `en`
                                 ? `calc(100% - 130px)`
                                 : `calc(100% - 90px)`
                             }
-                            {...inputSecret}
-                            placeholder={t(`26`)}
+                            {...inputEmail}
+                            placeholder={t(`23`)}
+                            readOnly={isConfirmEmail}
+                            onChange={(e) => {
+                              setIsSendEmail(false);
+                              setIsConfirmEmail(false);
+                              inputEmail.setValue(e.target.value);
+                            }}
                           />
                           <CommonButton
-                            width={i18next.language === `en` ? `120px` : `80px`}
+                            width={
+                              width < 600
+                                ? `100%`
+                                : i18next.language === `en`
+                                ? `120px`
+                                : `80px`
+                            }
                             height={`38px`}
-                            lineHeight={`34px`}
-                            margin={`0 0 0 10px`}
-                            bgColor={`#ebebeb`}
-                            color={`#030303`}
+                            lineHeight={
+                              i18next.language === `en` ? `1.2` : `34px`
+                            }
+                            margin={width < 600 ? `5px 0 0` : `0 0 0 10px`}
+                            bgColor={`#030303`}
+                            color={`#fff`}
                             fontWeight={`500`}
                             radius={`5px`}
-                            onClick={confirmSecretHandler}
+                            onClick={checkEmailHandler}
                           >
-                            {t(`27`)}
+                            {isConfirmEmail ? t(`24`) : t(`25`)}
                           </CommonButton>
                         </Wrapper>
-                      )}
+
+                        {isSendEmail && !isConfirmEmail && (
+                          <Wrapper
+                            dr={width < 600 ? `column` : `row`}
+                            ju={`flex-start`}
+                            margin={`10px 0 0`}
+                          >
+                            <CustomInput
+                              width={
+                                width < 600
+                                  ? `100%`
+                                  : i18next.language === `en`
+                                  ? `calc(100% - 130px)`
+                                  : `calc(100% - 90px)`
+                              }
+                              {...inputSecret}
+                              placeholder={t(`26`)}
+                            />
+                            <CommonButton
+                              width={
+                                i18next.language === `en` ? `120px` : `80px`
+                              }
+                              height={`38px`}
+                              lineHeight={`34px`}
+                              margin={
+                                width < 600 ? `5px -150px 0 0` : `0 0 0 10px`
+                              }
+                              bgColor={`#ebebeb`}
+                              color={`#030303`}
+                              fontWeight={`500`}
+                              radius={`5px`}
+                              onClick={confirmSecretHandler}
+                            >
+                              {t(`27`)}
+                            </CommonButton>
+                          </Wrapper>
+                        )}
+                      </Wrapper>
                     </Wrapper>
 
-                    <Wrapper dr={`row`} margin={`10px 0 0`}>
+                    {/* password */}
+                    <Wrapper
+                      dr={width < 600 ? `column` : `row`}
+                      margin={`10px 0 0`}
+                      al={`flex-start`}
+                    >
                       <Wrapper al={`flex-start`} width={`100px`}>
                         <CustomLabel for={`inp-password`}>
                           {t(`28`)}
@@ -749,7 +777,9 @@ const Signup = () => {
                           type={`password`}
                           id={`inp-password`}
                           width={
-                            i18next.language === `en`
+                            width < 600
+                              ? `100%`
+                              : i18next.language === `en`
                               ? `calc(100% - 130px)`
                               : `calc(100% - 90px)`
                           }
@@ -759,7 +789,12 @@ const Signup = () => {
                       </Wrapper>
                     </Wrapper>
 
-                    <Wrapper dr={`row`} margin={`10px 0 0`}>
+                    {/* name */}
+                    <Wrapper
+                      dr={width < 600 ? `column` : `row`}
+                      margin={`10px 0 0`}
+                      al={`flex-start`}
+                    >
                       <Wrapper al={`flex-start`} width={`100px`}>
                         <CustomLabel for={`inp-userName`}>
                           {t(`29`)}
@@ -774,7 +809,9 @@ const Signup = () => {
                         <CustomInput
                           id={`inp-userName`}
                           width={
-                            i18next.language === `en`
+                            width < 600
+                              ? `100%`
+                              : i18next.language === `en`
                               ? `calc(100% - 130px)`
                               : `calc(100% - 90px)`
                           }
@@ -784,7 +821,12 @@ const Signup = () => {
                       </Wrapper>
                     </Wrapper>
 
-                    <Wrapper dr={`row`} margin={`10px 0 0`}>
+                    {/* mobile */}
+                    <Wrapper
+                      dr={width < 600 ? `column` : `row`}
+                      margin={`10px 0 0`}
+                      al={`flex-start`}
+                    >
                       <Wrapper al={`flex-start`} width={`100px`}>
                         <CustomLabel for={`inp-mobile`}>{t(`57`)}</CustomLabel>
                       </Wrapper>
@@ -831,7 +873,9 @@ const Signup = () => {
 
                         <CustomInput
                           id={`inp-mobile`}
-                          width={`calc(100% - 90px - 110px)`}
+                          width={
+                            width < 600 ? `100%` : `calc(100% - 90px - 110px)`
+                          }
                           {...inputMobile}
                           placeholder={t(`57`)}
                           maxLength={`11`}
@@ -839,7 +883,12 @@ const Signup = () => {
                       </Wrapper>
                     </Wrapper>
 
-                    <Wrapper dr={`row`} margin={`10px 0 0`}>
+                    {/* gender */}
+                    <Wrapper
+                      dr={width < 600 ? `column` : `row`}
+                      margin={`10px 0 0`}
+                      al={`flex-start`}
+                    >
                       <Wrapper al={`flex-start`} width={`100px`}>
                         <CustomLabel for={`inp-userName`}>
                           {t(`30`)}
@@ -891,7 +940,12 @@ const Signup = () => {
                       </Wrapper>
                     </Wrapper>
 
-                    <Wrapper dr={`row`} margin={`10px 0 0`}>
+                    {/* address */}
+                    <Wrapper
+                      dr={width < 600 ? `column` : `row`}
+                      margin={`10px 0 0`}
+                      al={`flex-start`}
+                    >
                       <Wrapper al={`flex-start`} width={`100px`}>
                         <CustomLabel for={`inp-address`}>{t(`33`)}</CustomLabel>
                       </Wrapper>
@@ -921,7 +975,12 @@ const Signup = () => {
                       </Wrapper>
                     </Wrapper>
 
-                    <Wrapper dr={`row`} margin={`10px 0 0`}>
+                    {/* detailed adress */}
+                    <Wrapper
+                      dr={width < 600 ? `column` : `row`}
+                      margin={`20px 0 0`}
+                      al={`flex-start`}
+                    >
                       <Wrapper al={`flex-start`} width={`100px`}>
                         <CustomLabel for={`inp-detailAddress`}>
                           {t(`34`)}

@@ -387,10 +387,10 @@ const Find = () => {
 
             <Wrapper>
               <CommonButton
-                width={`200px`}
+                width={width < 500 ? `140px` : `200px`}
                 height={`45px`}
                 lineHeight={`40px`}
-                fontSize={`20px`}
+                fontSize={width < 500 ? `14px` : `20px`}
                 margin={`50px 0 10px`}
                 radius={`8px`}
                 bgColor={`#313B91`}

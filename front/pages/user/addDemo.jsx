@@ -23,6 +23,7 @@ import UserLayout from "../../components/user/UserLayout";
 import Theme from "../../components/Theme";
 import { DEMO_ACCOUNT_CREATE_REQUEST } from "../../reducers/demoAccount";
 import i18next from "i18next";
+import useWidth from "../../hooks/useWidth";
 
 const TabWrapper = styled(Wrapper)`
   flex-direction: row;
@@ -71,7 +72,7 @@ const CustomLabel = styled(Label)`
 const InputBox = styled(SelectBox)`
   width: ${(props) => props.width || `250px`};
   height: ${(props) => props.height || `70px`};
-  margin: 0 20px 0 0;
+  margin: 0 20px 10px 0;
   font-size: ${(props) => props.fontSize || `18px`};
   color: #8b2373;
   border: 1px solid #f3e4fa;
@@ -103,16 +104,17 @@ const CustomInput = styled(TextInput)`
 
 const AddDemo = () => {
   ////// VARIABLES //////
-  const platformList = ["MetaTrader 4"];
+
+  const platformList = ["MetaTrader 4", "MetaTrader 5"];
 
   const typeList = [
     {
       type: "STP Account",
-      leverage: ["1:500", "1:400"],
+      leverage: ["100:1", "200:1", "500:1"],
     },
     {
       type: "ECN Account",
-      leverage: ["1:500", "1:400", "1:300"],
+      leverage: ["100:1", "200:1", "500:1"],
     },
   ];
 
@@ -122,6 +124,8 @@ const AddDemo = () => {
   const dispatch = useDispatch();
 
   const router = useRouter();
+
+  const width = useWidth();
 
   const { me } = useSelector((state) => state.user);
 
@@ -230,7 +234,11 @@ const AddDemo = () => {
   return (
     <>
       <UserLayout>
-        <TabWrapper position={`absolute`} top={`-21px`} left={`20px`}>
+        <TabWrapper
+          position={`absolute`}
+          top={width < 900 ? `0` : `-21px`}
+          left={`20px`}
+        >
           <Tab isActive={currentTab === 0} onClick={() => setCurrentTab(0)}>
             {t(`5`)}
           </Tab>
@@ -240,10 +248,12 @@ const AddDemo = () => {
           al={`flex-start`}
           ju={`space-between`}
           minHeight={`calc(100vh - 110px)`}
-          padding={`20px 30px`}
+          margin={width < 900 ? `20px 0 0` : `0`}
+          padding={width < 900 ? `20px` : `20px 30px`}
           bgColor={`#fff`}
           border={`1px solid #ededed`}
-          shadow={`2px 2px 10px #e6e6e6`}>
+          shadow={`2px 2px 10px #e6e6e6`}
+        >
           <Wrapper al={`flex-start`}>
             <Wrapper
               al={`flex-start`}
@@ -251,7 +261,8 @@ const AddDemo = () => {
               padding={`0 8px 20px`}
               fontSize={`19px`}
               fontWeight={`700`}
-              borderBottom={`1px solid #ebebeb`}>
+              borderBottom={`1px solid #ebebeb`}
+            >
               {t(`6`)}
             </Wrapper>
             {currentTab === 0 && (
@@ -269,7 +280,8 @@ const AddDemo = () => {
                           isActive={inputPlatform.value === data}
                           onClick={() =>
                             changeSelectBoxHandler(data, inputPlatform.setValue)
-                          }>
+                          }
+                        >
                           {data}
                         </InputBox>
                       );
@@ -297,7 +309,8 @@ const AddDemo = () => {
                                   (data2) => data.type === data2.type
                                 ).leverage[0]
                               );
-                            }}>
+                            }}
+                          >
                             {data.type}
                           </InputBox>
                         );
@@ -326,7 +339,8 @@ const AddDemo = () => {
                                     data,
                                     inputLeverage.setValue
                                   )
-                                }>
+                                }
+                              >
                                 {data}
                               </InputBox>
                             );
@@ -335,7 +349,8 @@ const AddDemo = () => {
 
                     <CustomLabel
                       for={`inp-trade-password`}
-                      margin={`40px 0 15px`}>
+                      margin={`40px 0 15px`}
+                    >
                       <Wrapper className={`required`}>*</Wrapper>
                       {t(`10`)}
                     </CustomLabel>
@@ -346,7 +361,8 @@ const AddDemo = () => {
 
                     <CustomLabel
                       for={`inp-trade-password`}
-                      margin={`40px 0 15px`}>
+                      margin={`40px 0 15px`}
+                    >
                       <Wrapper className={`required`}>*</Wrapper>
                       {t(`11`)}
                     </CustomLabel>
@@ -360,7 +376,8 @@ const AddDemo = () => {
 
                     <CustomLabel
                       for={`inp-view-password`}
-                      margin={`40px 0 15px`}>
+                      margin={`40px 0 15px`}
+                    >
                       <Wrapper className={`required`}>*</Wrapper>
                       {t(`12`)}
                     </CustomLabel>
@@ -377,17 +394,20 @@ const AddDemo = () => {
                       ju={`flex-start`}
                       margin={`50px 0 0`}
                       padding={`20px 0 0`}
-                      borderTop={`1px solid #ebebeb`}>
+                      borderTop={`1px solid #ebebeb`}
+                    >
                       <CommonButton
                         kindOf={`white`}
                         margin={`0 10px 0 0`}
-                        onClick={() => moveLinkHandler(`/user`)}>
+                        onClick={() => moveLinkHandler(`/user`)}
+                      >
                         {t(`13`)}
                       </CommonButton>
 
                       <CommonButton
                         kindOf={`red`}
-                        onClick={createDemoAccountHandler}>
+                        onClick={createDemoAccountHandler}
+                      >
                         {t(`14`)}
                       </CommonButton>
                     </Wrapper>
@@ -402,7 +422,8 @@ const AddDemo = () => {
                         <Wrapper
                           fontSize={`25px`}
                           width={`auto`}
-                          borderBottom={`1px solid #c9c9c9`}>
+                          borderBottom={`1px solid #c9c9c9`}
+                        >
                           {t(`15`)}
                         </Wrapper>
                       }
@@ -411,7 +432,8 @@ const AddDemo = () => {
                           margin={`10px 0 0`}
                           padding={`0 15px`}
                           width={`auto`}
-                          lineHeight={`1.8`}>
+                          lineHeight={`1.8`}
+                        >
                           {t(`16`)}
                         </Wrapper>
                       }
@@ -423,10 +445,10 @@ const AddDemo = () => {
                             width={`180px`}
                             height={`40px`}
                             margin={`0 5px`}
-                            onClick={initValueHandler}>
+                            onClick={initValueHandler}
+                          >
                             {t(`17`)}
                           </CommonButton>
-                          ,
                         </Wrapper>,
                       ]}
                     />

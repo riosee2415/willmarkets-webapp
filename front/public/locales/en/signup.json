@@ -21,7 +21,7 @@
   "20": "Register",
   "21": "Live Account",
   "22": "Demo Account",
-  "23": "email",
+  "23": "Email",
   "24": "reauthenticate",
   "25": "Get Authenticated",
   "26": "Certification Number",
@@ -29,8 +29,8 @@
   "28": "Password",
   "29": "Name",
   "30": "Gender",
-  "31": "man",
-  "32": "woman",
+  "31": "Man",
+  "32": "Woman",
   "33": "Address",
   "34": "Detailed address",
   "35": "Identify me",
@@ -55,5 +55,13 @@
   "54": "back to previous",
   "55": "Please select country code",
   "56": "Please enter your mobile number",
-  "57": "Mobile"
+  "57": "Mobile",
+  "58": "Trading platform",
+  "59": "Account type",
+  "60": "Leverage",
+  "61": "Select an trading platform.",
+  "62": "Select an account type.",
+  "63": "Select an leverage.",
+  "64": "Select"
 }
+

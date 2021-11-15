@@ -234,13 +234,18 @@ router.post("/create", async (req, res, next) => {
   const {
     language,
     userId,
-    bankName,
-    bankNo,
-    swiftCode,
-    willAddress,
-    bankAddress,
+    // bankName,
+    // bankNo,
+    // swiftCode,
+    // willAddress,
+    // bankAddress,
     selectBank,
-    price,
+    // price,
+    priceType,
+    filePath,
+    fileOriginName,
+    walletAddress,
+    hashAddress,
   } = req.body;
   try {
     const exUser = await User.findOne({
@@ -259,13 +264,18 @@ router.post("/create", async (req, res, next) => {
 
     const createResult = await Deposit.create({
       UserId: parseInt(userId),
-      bankName,
-      bankNo,
-      swiftCode,
-      willAddress,
-      bankAddress,
+      // bankName,
+      // bankNo,
+      // swiftCode,
+      // willAddress,
+      // bankAddress,
       selectBank,
-      price,
+      // price,
+      priceType,
+      filePath,
+      fileOriginName,
+      walletAddress,
+      hashAddress,
       isComplete: false,
     });
 
@@ -370,7 +380,11 @@ router.patch("/updatePermit", isAdminCheck, async (req, res, next) => {
             <br />
             입금계좌 : ${updateData.selectBank}
             <br />
-            입금금액 : ${updateData.price}
+            지불화폐 : ${updateData.priceType}
+            <br />
+            지갑주소 : ${updateData.walletAddress}
+            <br />
+            hash주소 : ${updateData.hashAddress}
             <br />
             자세한 내용은 홈페이지에서 확인하세요 !
             <br />

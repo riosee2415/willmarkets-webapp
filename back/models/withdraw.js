@@ -7,28 +7,44 @@ module.exports = class Withdraw extends Model {
       {
         bankName: {
           type: DataTypes.STRING(200),
-          allowNull: false,
+          allowNull: true,
+          defaultValue: null,
         },
         price: {
-          type: DataTypes.INTEGER,
-          allowNull: false,
+          type: DataTypes.DOUBLE,
+          allowNull: true,
+          defaultValue: 0,
         },
         swiftCode: {
           type: DataTypes.STRING(200),
-          allowNull: false,
+          allowNull: true,
+          defaultValue: null,
         },
         bankAddress: {
           type: DataTypes.STRING(500),
-          allowNull: false,
+          allowNull: true,
+          defaultValue: null,
         },
         selectBank: {
           // 출금 계좌 -> 출금 계좌는 내 지갑과 내 라이브 계좌중 선택합니다.
           type: DataTypes.STRING(200),
-          allowNull: false,
+          allowNull: true,
+          defaultValue: null,
         },
         bankNo: {
           type: DataTypes.STRING(200),
-          allowNull: false,
+          allowNull: true,
+          defaultValue: null,
+        },
+        priceType: {
+          type: DataTypes.STRING(100),
+          allowNull: true,
+          defaultValue: null,
+        },
+        walletAddress: {
+          type: DataTypes.STRING(500),
+          allowNull: true,
+          defaultValue: null,
         },
         isComplete: {
           type: DataTypes.BOOLEAN,

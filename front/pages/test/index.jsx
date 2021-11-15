@@ -110,8 +110,6 @@ const Support = () => {
       inputEmail.setValue("");
       inputConotent.setValue("");
       inputAgree.setValue(false);
-
-      console.log(st_questionCreateDone);
     }
   }, [st_questionCreateDone]);
 

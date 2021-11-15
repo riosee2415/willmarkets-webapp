@@ -83,6 +83,21 @@ module.exports = class User extends Model {
           type: DataTypes.STRING(300),
           allowNull: true,
         },
+        platform: {
+          type: DataTypes.STRING(100),
+          allowNull: true,
+          defaultValue: null,
+        },
+        accountType: {
+          type: DataTypes.STRING(100),
+          allowNull: true,
+          defaultValue: null,
+        },
+        leverage: {
+          type: DataTypes.STRING(100),
+          allowNull: true,
+          defaultValue: null,
+        },
         secret: {
           type: DataTypes.STRING(10),
           allowNull: true,

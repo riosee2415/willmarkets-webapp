@@ -72,6 +72,10 @@ const CustomInput = styled(TextInput)`
     border: 1px solid #d7a6ed;
     box-shadow: 0 3px 8px rgb(0 0 0 / 12%);
   }
+
+  @media (max-width: 900px) {
+    width: ${(props) => props.width || `270px`};
+  }
 `;
 
 const Info = () => {
@@ -554,10 +558,11 @@ const Info = () => {
         al={`flex-start`}
         ju={`space-between`}
         minHeight={`calc(100vh - 110px)`}
-        padding={`20px 30px`}
+        padding={width < 900 ? `20px 15px` : `20px 30px`}
         bgColor={`#fff`}
         border={`1px solid #ededed`}
-        shadow={`2px 2px 10px #e6e6e6`}>
+        shadow={`2px 2px 10px #e6e6e6`}
+      >
         <Wrapper al={`flex-start`}>
           <Wrapper
             al={`flex-start`}
@@ -565,35 +570,49 @@ const Info = () => {
             padding={`0 8px 20px`}
             fontSize={`19px`}
             fontWeight={`700`}
-            borderBottom={`1px solid #ebebeb`}>
+            borderBottom={`1px solid #ebebeb`}
+          >
             {t(`19`)}
           </Wrapper>
 
           <AccordionWrapper>
             <AccordionHeader onClick={() => toggleAccordionHandler(0)}>
-              <Wrapper width={`auto`}>{t(`20`)}</Wrapper>
+              <Wrapper width={`calc(100% - 30px)`} al={`flex-start`}>
+                {t(`20`)}
+              </Wrapper>
 
-              <Wrapper width={`auto`}>
+              <Wrapper width={`30px`} al={`flex-end`}>
                 {currentAccordion === 0 ? <UpOutlined /> : <DownOutlined />}
               </Wrapper>
             </AccordionHeader>
 
-            <AccordionBody isOpen={currentAccordion === 0} padding={`0 20px`}>
+            <AccordionBody
+              isOpen={currentAccordion === 0}
+              padding={width < 900 ? `0 10px` : `0 20px`}
+            >
               <Wrapper
-                dr={`row`}
+                dr={width < 900 ? `column` : `row`}
                 al={`normal`}
                 padding={`15px 0`}
-                borderBottom={`1px solid #f6f6f6`}>
-                <Wrapper al={`flex-start`} width={`120px`}>
+                borderBottom={`1px solid #f6f6f6`}
+              >
+                <Wrapper
+                  al={`flex-start`}
+                  width={width < 900 ? `100%` : `120px`}
+                  padding={`0 10px 0 0`}
+                >
                   <CustomLabel for={`inp-email`}>
                     {isChangeEmail ? t(`21`) : t(`22`)}
                   </CustomLabel>
                 </Wrapper>
 
                 <Wrapper
-                  dr={`row`}
+                  dr={width < 900 ? `column` : `row`}
                   ju={`flex-start`}
-                  width={`calc(100% - 120px)`}>
+                  al={width < 900 ? `flex-start` : `center`}
+                  margin={width < 900 ? `10px 0 0` : `0`}
+                  width={width < 900 ? `100%` : `calc(100% - 120px)`}
+                >
                   <CustomInput
                     id={`inp-email`}
                     {...inputEmail}
@@ -605,47 +624,59 @@ const Info = () => {
                     readOnly={!isChangeEmail}
                   />
 
-                  <CommonButton
-                    kindOf={isChangeEmail ? `white` : `black`}
-                    height={`38px`}
-                    margin={`0 0 0 10px`}
-                    onClick={() => setIsChangeEmail(!isChangeEmail)}>
-                    {isChangeEmail ? t(`23`) : t(`24`)}
-                  </CommonButton>
-
-                  {isChangeEmail && !isConfirmEmail && (
+                  <Wrapper dr={`row`} width={`auto`}>
                     <CommonButton
-                      kindOf={`black`}
+                      kindOf={isChangeEmail ? `white` : `black`}
                       height={`38px`}
-                      margin={`0 0 0 10px`}
-                      onClick={checkEmailHandler}>
-                      {t(`25`)}
+                      margin={width < 900 ? `10px 0 0` : `0 0 0 10px`}
+                      onClick={() => setIsChangeEmail(!isChangeEmail)}
+                    >
+                      {isChangeEmail ? t(`23`) : t(`24`)}
                     </CommonButton>
-                  )}
+
+                    {isChangeEmail && !isConfirmEmail && (
+                      <CommonButton
+                        kindOf={`black`}
+                        height={`38px`}
+                        margin={width < 900 ? `10px 0 0 10px` : `0 0 0 10px`}
+                        onClick={checkEmailHandler}
+                      >
+                        {t(`25`)}
+                      </CommonButton>
+                    )}
+                  </Wrapper>
                 </Wrapper>
               </Wrapper>
 
               {isSendEmail && !isConfirmEmail && (
                 <Wrapper
-                  dr={`row`}
+                  dr={width < 900 ? `column` : `row`}
                   al={`normal`}
                   padding={`15px 0`}
-                  borderBottom={`1px solid #f6f6f6`}>
-                  <Wrapper al={`flex-start`} width={`120px`}>
+                  borderBottom={`1px solid #f6f6f6`}
+                >
+                  <Wrapper
+                    al={`flex-start`}
+                    width={width < 900 ? `100%` : `120px`}
+                    padding={`0 10px 0 0`}
+                  >
                     <CustomLabel for={`inp-email`}>{t(`26`)}</CustomLabel>
                   </Wrapper>
 
                   <Wrapper
                     dr={`row`}
                     ju={`flex-start`}
-                    width={`calc(100% - 120px)`}>
+                    margin={width < 900 ? `10px 0 0` : `0`}
+                    width={width < 900 ? `100%` : `calc(100% - 120px)`}
+                  >
                     <CustomInput id={`inp-email`} {...inputSecret} />
 
                     <CommonButton
                       kindOf={`black`}
                       height={`38px`}
                       margin={`0 0 0 10px`}
-                      onClick={confirmSecretHandler}>
+                      onClick={confirmSecretHandler}
+                    >
                       {t(`27`)}
                     </CommonButton>
                   </Wrapper>
@@ -653,18 +684,26 @@ const Info = () => {
               )}
 
               <Wrapper
-                dr={`row`}
+                dr={width < 900 ? `column` : `row`}
                 al={`normal`}
                 padding={`15px 0`}
-                borderBottom={`1px solid #f6f6f6`}>
-                <Wrapper al={`flex-start`} width={`120px`}>
+                borderBottom={`1px solid #f6f6f6`}
+              >
+                <Wrapper
+                  al={`flex-start`}
+                  width={width < 900 ? `100%` : `120px`}
+                  padding={`0 10px 0 0`}
+                >
                   <CustomLabel for={`inp-password`}>{t(`28`)}</CustomLabel>
                 </Wrapper>
 
                 <Wrapper
-                  dr={`row`}
+                  dr={width < 900 ? `column` : `row`}
                   ju={`flex-start`}
-                  width={`calc(100% - 120px)`}>
+                  al={width < 900 ? `flex-start` : `center`}
+                  margin={width < 900 ? `10px 0 0` : `0`}
+                  width={width < 900 ? `100%` : `calc(100% - 120px)`}
+                >
                   <CustomInput
                     type={`password`}
                     id={`inp-password`}
@@ -674,47 +713,61 @@ const Info = () => {
               </Wrapper>
 
               <Wrapper
-                dr={`row`}
+                dr={width < 900 ? `column` : `row`}
                 al={`normal`}
                 padding={`15px 0`}
-                borderBottom={`1px solid #f6f6f6`}>
-                <Wrapper al={`flex-start`} width={`120px`}>
+                borderBottom={`1px solid #f6f6f6`}
+              >
+                <Wrapper
+                  al={`flex-start`}
+                  width={width < 900 ? `100%` : `120px`}
+                >
                   <CustomLabel for={`inp-userName`}>{t(`29`)}</CustomLabel>
                 </Wrapper>
 
                 <Wrapper
                   dr={`row`}
                   ju={`flex-start`}
-                  width={`calc(100% - 120px)`}>
+                  margin={width < 900 ? `10px 0 0` : `0`}
+                  width={width < 900 ? `100%` : `calc(100% - 120px)`}
+                >
                   <CustomInput id={`inp-userName`} {...inputUserName} />
                 </Wrapper>
               </Wrapper>
 
               <Wrapper
-                dr={`row`}
+                dr={width < 900 ? `column` : `row`}
                 al={`normal`}
                 padding={`15px 0`}
-                borderBottom={`1px solid #f6f6f6`}>
-                <Wrapper al={`flex-start`} width={`120px`}>
+                borderBottom={`1px solid #f6f6f6`}
+              >
+                <Wrapper
+                  al={`flex-start`}
+                  width={width < 900 ? `100%` : `120px`}
+                  padding={`0 10px 0 0`}
+                >
                   <CustomLabel for={`inp-mobile`}>{t(`53`)}</CustomLabel>
                 </Wrapper>
 
                 <Wrapper
                   dr={`row`}
                   ju={`flex-start`}
-                  width={`calc(100% - 120px)`}>
+                  margin={width < 900 ? `10px 0 0` : `0`}
+                  width={width < 900 ? `100%` : `calc(100% - 120px)`}
+                >
                   <Combo
                     isBorder={true}
                     itemAlign={`flex-start`}
                     margin={`0 5px 0 0`}
-                    width={`100px`}
+                    width={width < 900 ? `80px` : `100px`}
                     height={`40px`}
                     listHeight={`250px`}
                     border={`1px solid #f3e4fa`}
                     shadow={`0 2px 8px rgb(0 0 0 / 9%)`}
                     hoverBorder={`1px solid #d7a6ed`}
                     hoverShadow={`0 3px 8px rgb(0 0 0 / 12%)`}
-                    onClick={() => setComboCountryNo(!comboCountryNo)}>
+                    onClick={() => setComboCountryNo(!comboCountryNo)}
+                  >
                     <ComboTitle>
                       <Wrapper>{inputCountryNo.value || `Select`}</Wrapper>
                       <CaretDownOutlined />
@@ -726,7 +779,8 @@ const Info = () => {
                           <ComboListItem
                             key={idx}
                             isActive={inputCountryNo.value === data.value}
-                            onClick={() => inputCountryNo.setValue(data.value)}>
+                            onClick={() => inputCountryNo.setValue(data.value)}
+                          >
                             {data.name} ({data.value})
                           </ComboListItem>
                         );
@@ -736,7 +790,7 @@ const Info = () => {
 
                   <CustomInput
                     id={`inp-mobile`}
-                    width={`245px`}
+                    width={width < 900 ? `185px` : `245px`}
                     maxLength={`11`}
                     {...inputMobile}
                   />
@@ -744,18 +798,25 @@ const Info = () => {
               </Wrapper>
 
               <Wrapper
-                dr={`row`}
+                dr={width < 900 ? `column` : `row`}
                 al={`normal`}
                 padding={`15px 0`}
-                borderBottom={`1px solid #f6f6f6`}>
-                <Wrapper al={`flex-start`} width={`120px`}>
+                borderBottom={`1px solid #f6f6f6`}
+              >
+                <Wrapper
+                  al={`flex-start`}
+                  width={width < 900 ? `100%` : `120px`}
+                  padding={`0 10px 0 0`}
+                >
                   <CustomLabel>{t(`30`)}</CustomLabel>
                 </Wrapper>
 
                 <Wrapper
                   dr={`row`}
                   ju={`flex-start`}
-                  width={`calc(100% - 120px)`}>
+                  margin={width < 900 ? `10px 0 0` : `0`}
+                  width={width < 900 ? `100%` : `calc(100% - 120px)`}
+                >
                   <Wrapper dr={`row`} width={`auto`} margin={`0 10px`}>
                     <RadioInput
                       id={`inp-gender-1`}
@@ -767,7 +828,8 @@ const Info = () => {
                     <Label
                       for={`inp-gender-1`}
                       fontSize={`15px`}
-                      cursor={`pointer`}>
+                      cursor={`pointer`}
+                    >
                       {t(`31`)}
                     </Label>
                   </Wrapper>
@@ -783,7 +845,8 @@ const Info = () => {
                     <Label
                       for={`inp-gender-2`}
                       fontSize={`15px`}
-                      cursor={`pointer`}>
+                      cursor={`pointer`}
+                    >
                       {t(`32`)}
                     </Label>
                   </Wrapper>
@@ -791,15 +854,24 @@ const Info = () => {
               </Wrapper>
 
               <Wrapper
-                dr={`row`}
+                dr={width < 900 ? `column` : `row`}
                 al={`normal`}
                 padding={`15px 0`}
-                borderBottom={`1px solid #f6f6f6`}>
-                <Wrapper al={`flex-start`} width={`120px`}>
+                borderBottom={`1px solid #f6f6f6`}
+              >
+                <Wrapper
+                  al={`flex-start`}
+                  width={width < 900 ? `100%` : `120px`}
+                  padding={`0 10px 0 0`}
+                >
                   <CustomLabel for={`inp-address`}>{t(`33`)}</CustomLabel>
                 </Wrapper>
 
-                <Wrapper al={`flex-start`} width={`calc(100% - 120px)`}>
+                <Wrapper
+                  al={`flex-start`}
+                  margin={width < 900 ? `10px 0 0` : `0`}
+                  width={width < 900 ? `100%` : `calc(100% - 120px)`}
+                >
                   <Wrapper dr={`row`} ju={`flex-start`}>
                     <CustomInput id={`inp-address`} {...inputAddress} />
                   </Wrapper>
@@ -814,43 +886,62 @@ const Info = () => {
 
           <AccordionWrapper margin={`20px 0 0`}>
             <AccordionHeader onClick={() => toggleAccordionHandler(1)}>
-              <Wrapper width={`auto`}>{t(`34`)}</Wrapper>
+              <Wrapper width={`calc(100% - 30px)`} al={`flex-start`}>
+                {t(`34`)}
+              </Wrapper>
 
-              <Wrapper width={`auto`}>
+              <Wrapper width={`30px`} al={`flex-end`}>
                 {currentAccordion === 1 ? <UpOutlined /> : <DownOutlined />}
               </Wrapper>
             </AccordionHeader>
 
-            <AccordionBody isOpen={currentAccordion === 1} padding={`0 20px`}>
+            <AccordionBody
+              isOpen={currentAccordion === 1}
+              padding={width < 900 ? `0 10px` : `0 20px`}
+            >
               <Wrapper
-                dr={`row`}
+                dr={width < 900 ? `column` : `row`}
                 al={`normal`}
                 padding={`15px 0`}
-                borderBottom={`1px solid #f6f6f6`}>
+                borderBottom={`1px solid #f6f6f6`}
+              >
                 <Wrapper
                   al={`flex-start`}
-                  width={i18next.language === "en" ? `200px` : `120px`}>
+                  width={
+                    width < 900
+                      ? `100%`
+                      : i18next.language === "en"
+                      ? `200px`
+                      : `120px`
+                  }
+                  padding={`0 10px 0 0`}
+                >
                   <CustomLabel>{t(`35`)}</CustomLabel>
                 </Wrapper>
 
                 <Wrapper
                   dr={`row`}
                   ju={`flex-start`}
+                  margin={width < 900 ? `10px 0 0` : `0`}
                   width={
-                    i18next.language === "en"
+                    width < 900
+                      ? `100%`
+                      : i18next.language === "en"
                       ? `calc(100% - 200px)`
                       : `calc(100% - 120px)`
-                  }>
+                  }
+                >
                   <Combo
                     isBorder={true}
                     itemAlign={`flex-start`}
-                    width={`250px`}
+                    width={width < 900 ? `270px` : `250px`}
                     height={`40px`}
                     border={`1px solid #f3e4fa`}
                     shadow={`0 2px 8px rgb(0 0 0 / 9%)`}
                     hoverBorder={`1px solid #d7a6ed`}
                     hoverShadow={`0 3px 8px rgb(0 0 0 / 12%)`}
-                    onClick={() => setComboIdType(!comboIdType)}>
+                    onClick={() => setComboIdType(!comboIdType)}
+                  >
                     <ComboTitle>
                       <Wrapper>{inputIdType.value || t(`35`)}</Wrapper>
                       <CaretDownOutlined />
@@ -859,22 +950,26 @@ const Info = () => {
                     <ComboList isView={comboIdType}>
                       <ComboListItem
                         isActive={!inputIdType.value === t(`36`)}
-                        onClick={() => inputIdType.setValue(t(`36`))}>
+                        onClick={() => inputIdType.setValue(t(`36`))}
+                      >
                         {t(`36`)}
                       </ComboListItem>
                       <ComboListItem
                         isActive={inputIdType.value === t(`37`)}
-                        onClick={() => inputIdType.setValue(t(`37`))}>
+                        onClick={() => inputIdType.setValue(t(`37`))}
+                      >
                         {t(`37`)}
                       </ComboListItem>
                       <ComboListItem
                         isActive={inputIdType.value === t(`38`)}
-                        onClick={() => inputIdType.setValue(t(`38`))}>
+                        onClick={() => inputIdType.setValue(t(`38`))}
+                      >
                         {t(`38`)}
                       </ComboListItem>
                       <ComboListItem
                         isActive={inputIdType.value === t(`39`)}
-                        onClick={() => inputIdType.setValue(t(`39`))}>
+                        onClick={() => inputIdType.setValue(t(`39`))}
+                      >
                         {t(`39`)}
                       </ComboListItem>
                     </ComboList>
@@ -883,24 +978,37 @@ const Info = () => {
               </Wrapper>
 
               <Wrapper
-                dr={`row`}
+                dr={width < 900 ? `column` : `row`}
                 al={`normal`}
                 padding={`15px 0`}
-                borderBottom={`1px solid #f6f6f6`}>
+                borderBottom={`1px solid #f6f6f6`}
+              >
                 <Wrapper
                   al={`flex-start`}
-                  width={i18next.language === "en" ? `200px` : `120px`}>
+                  width={
+                    width < 900
+                      ? `100%`
+                      : i18next.language === "en"
+                      ? `200px`
+                      : `120px`
+                  }
+                  padding={`0 10px 0 0`}
+                >
                   <CustomLabel for={`inp-idDate1`}>{t(`40`)}</CustomLabel>
                 </Wrapper>
 
                 <Wrapper
                   dr={`row`}
                   ju={`flex-start`}
+                  margin={width < 900 ? `10px 0 0` : `0`}
                   width={
-                    i18next.language === "en"
+                    width < 900
+                      ? `100%`
+                      : i18next.language === "en"
                       ? `calc(100% - 200px)`
                       : `calc(100% - 120px)`
-                  }>
+                  }
+                >
                   <CustomInput
                     id={`inp-idDate1`}
                     placeholder={`YYYY-MM-DD`}
@@ -910,24 +1018,37 @@ const Info = () => {
               </Wrapper>
 
               <Wrapper
-                dr={`row`}
+                dr={width < 900 ? `column` : `row`}
                 al={`normal`}
                 padding={`15px 0`}
-                borderBottom={`1px solid #f6f6f6`}>
+                borderBottom={`1px solid #f6f6f6`}
+              >
                 <Wrapper
                   al={`flex-start`}
-                  width={i18next.language === "en" ? `200px` : `120px`}>
+                  width={
+                    width < 900
+                      ? `100%`
+                      : i18next.language === "en"
+                      ? `200px`
+                      : `120px`
+                  }
+                  padding={`0 10px 0 0`}
+                >
                   <CustomLabel for={`inp-idDate2`}>{t(`41`)}</CustomLabel>
                 </Wrapper>
 
                 <Wrapper
                   dr={`row`}
                   ju={`flex-start`}
+                  margin={width < 900 ? `10px 0 0` : `0`}
                   width={
-                    i18next.language === "en"
+                    width < 900
+                      ? `100%`
+                      : i18next.language === "en"
                       ? `calc(100% - 200px)`
                       : `calc(100% - 120px)`
-                  }>
+                  }
+                >
                   <CustomInput
                     id={`inp-idDate2`}
                     placeholder={`YYYY-MM-DD`}
@@ -937,24 +1058,38 @@ const Info = () => {
               </Wrapper>
 
               <Wrapper
-                dr={`row`}
+                dr={width < 900 ? `column` : `row`}
                 al={`normal`}
                 padding={`15px 0`}
-                borderBottom={`1px solid #f6f6f6`}>
+                borderBottom={`1px solid #f6f6f6`}
+              >
                 <Wrapper
                   al={`flex-start`}
-                  width={i18next.language === "en" ? `200px` : `120px`}>
+                  width={
+                    width < 900
+                      ? `100%`
+                      : i18next.language === "en"
+                      ? `200px`
+                      : `120px`
+                  }
+                  padding={`0 10px 0 0`}
+                >
                   <CustomLabel for={`inp-idFile`}>{t(`42`)}</CustomLabel>
                 </Wrapper>
 
                 <Wrapper
-                  dr={`row`}
+                  dr={width < 900 ? `column` : `row`}
                   ju={`flex-start`}
+                  al={width < 900 ? `flex-start` : `center`}
+                  margin={width < 900 ? `10px 0 0` : `0`}
                   width={
-                    i18next.language === "en"
+                    width < 900
+                      ? `100%`
+                      : i18next.language === "en"
                       ? `calc(100% - 200px)`
                       : `calc(100% - 120px)`
-                  }>
+                  }
+                >
                   <FileInput
                     type={`file`}
                     ref={fileRef}
@@ -968,8 +1103,9 @@ const Info = () => {
                   <CommonButton
                     kindOf={`black`}
                     height={`38px`}
-                    margin={`0 0 0 10px`}
-                    onClick={() => fileRef.current.click()}>
+                    margin={width < 900 ? `10px 0 0 0` : `0 0 0 10px`}
+                    onClick={() => fileRef.current.click()}
+                  >
                     {t(`43`)}
                   </CommonButton>
                 </Wrapper>
@@ -979,44 +1115,63 @@ const Info = () => {
 
           <AccordionWrapper margin={`20px 0 0`}>
             <AccordionHeader onClick={() => toggleAccordionHandler(2)}>
-              <Wrapper width={`auto`}>{t(`44`)}</Wrapper>
+              <Wrapper width={`calc(100% - 30px)`} al={`flex-start`}>
+                {t(`44`)}
+              </Wrapper>
 
-              <Wrapper width={`auto`}>
+              <Wrapper width={`30px`} al={`flex-end`}>
                 {currentAccordion === 2 ? <UpOutlined /> : <DownOutlined />}
               </Wrapper>
             </AccordionHeader>
 
-            <AccordionBody isOpen={currentAccordion === 2} padding={`0 20px`}>
+            <AccordionBody
+              isOpen={currentAccordion === 2}
+              padding={width < 900 ? `0 10px` : `0 20px`}
+            >
               <Wrapper
-                dr={`row`}
+                dr={width < 900 ? `column` : `row`}
                 al={`normal`}
                 padding={`15px 0`}
-                borderBottom={`1px solid #f6f6f6`}>
+                borderBottom={`1px solid #f6f6f6`}
+              >
                 <Wrapper
                   al={`flex-start`}
-                  width={i18next.language === `en` ? `200px` : `120px`}>
+                  width={
+                    width < 900
+                      ? `100%`
+                      : i18next.language === "en"
+                      ? `200px`
+                      : `120px`
+                  }
+                  padding={`0 10px 0 0`}
+                >
                   <CustomLabel>{t(`45`)}</CustomLabel>
                 </Wrapper>
 
                 <Wrapper
                   dr={`row`}
                   ju={`flex-start`}
+                  margin={width < 900 ? `10px 0 0` : `0`}
                   width={
-                    i18next.language === `en`
+                    width < 900
+                      ? `100%`
+                      : i18next.language === "en"
                       ? `calc(100% - 200px)`
                       : `calc(100% - 120px)`
-                  }>
+                  }
+                >
                   <Combo
                     isBorder={true}
                     itemAlign={`flex-start`}
-                    width={`250px`}
+                    width={width < 900 ? `270px` : `250px`}
                     height={`40px`}
                     listHeight={`80px`}
                     border={`1px solid #f3e4fa`}
                     shadow={`0 2px 8px rgb(0 0 0 / 9%)`}
                     hoverBorder={`1px solid #d7a6ed`}
                     hoverShadow={`0 3px 8px rgb(0 0 0 / 12%)`}
-                    onClick={() => setComboAddrType(!comboAddrType)}>
+                    onClick={() => setComboAddrType(!comboAddrType)}
+                  >
                     <ComboTitle>
                       <Wrapper>{inputAddrType.value || t(`36`)}</Wrapper>
                       <CaretDownOutlined />
@@ -1025,27 +1180,32 @@ const Info = () => {
                     <ComboList isView={comboAddrType}>
                       <ComboListItem
                         isActive={!inputAddrType.value}
-                        onClick={() => inputAddrType.setValue("")}>
+                        onClick={() => inputAddrType.setValue("")}
+                      >
                         {t(`36`)}
                       </ComboListItem>
                       <ComboListItem
                         isActive={inputAddrType.value === t(`46`)}
-                        onClick={() => inputAddrType.setValue(t(`46`))}>
+                        onClick={() => inputAddrType.setValue(t(`46`))}
+                      >
                         {t(`46`)}
                       </ComboListItem>
                       <ComboListItem
                         isActive={inputAddrType.value === t(`47`)}
-                        onClick={() => inputAddrType.setValue(t(`47`))}>
+                        onClick={() => inputAddrType.setValue(t(`47`))}
+                      >
                         {t(`47`)}
                       </ComboListItem>
                       <ComboListItem
                         isActive={inputAddrType.value === t(`48`)}
-                        onClick={() => inputAddrType.setValue(t(`48`))}>
+                        onClick={() => inputAddrType.setValue(t(`48`))}
+                      >
                         {t(`48`)}
                       </ComboListItem>
                       <ComboListItem
                         isActive={inputAddrType.value === t(`49`)}
-                        onClick={() => inputAddrType.setValue(t(`49`))}>
+                        onClick={() => inputAddrType.setValue(t(`49`))}
+                      >
                         {t(`49`)}
                       </ComboListItem>
                     </ComboList>
@@ -1054,24 +1214,38 @@ const Info = () => {
               </Wrapper>
 
               <Wrapper
-                dr={`row`}
+                dr={width < 900 ? `column` : `row`}
                 al={`normal`}
                 padding={`15px 0`}
-                borderBottom={`1px solid #f6f6f6`}>
+                borderBottom={`1px solid #f6f6f6`}
+              >
                 <Wrapper
                   al={`flex-start`}
-                  width={i18next.language === `en` ? `200px` : `120px`}>
+                  width={
+                    width < 900
+                      ? `100%`
+                      : i18next.language === "en"
+                      ? `200px`
+                      : `120px`
+                  }
+                  padding={`0 10px 0 0`}
+                >
                   <CustomLabel for={`inp-addrFile`}>{t(`42`)}</CustomLabel>
                 </Wrapper>
 
                 <Wrapper
-                  dr={`row`}
+                  dr={width < 900 ? `column` : `row`}
                   ju={`flex-start`}
+                  al={width < 900 ? `flex-start` : `center`}
+                  margin={width < 900 ? `10px 0 0` : `0`}
                   width={
-                    i18next.language === `en`
+                    width < 900
+                      ? `100%`
+                      : i18next.language === "en"
                       ? `calc(100% - 200px)`
                       : `calc(100% - 120px)`
-                  }>
+                  }
+                >
                   <FileInput
                     type={`file`}
                     ref={fileRef2}
@@ -1085,8 +1259,9 @@ const Info = () => {
                   <CommonButton
                     kindOf={`black`}
                     height={`38px`}
-                    margin={`0 0 0 10px`}
-                    onClick={() => fileRef2.current.click()}>
+                    margin={width < 900 ? `10px 0 0 0` : `0 0 0 10px`}
+                    onClick={() => fileRef2.current.click()}
+                  >
                     {t(`43`)}
                   </CommonButton>
                 </Wrapper>
@@ -1100,7 +1275,8 @@ const Info = () => {
           ju={`flex-start`}
           margin={`50px 0 0`}
           padding={`20px 0 0`}
-          borderTop={`1px solid #ebebeb`}>
+          borderTop={`1px solid #ebebeb`}
+        >
           <CommonButton kindOf={`red`} onClick={updateUserMeHandler}>
             {t(`50`)}
           </CommonButton>

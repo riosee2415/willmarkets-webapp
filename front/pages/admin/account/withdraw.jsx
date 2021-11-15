@@ -19,6 +19,7 @@ import axios from "axios";
 import { Wrapper } from "../../../components/commonComponents";
 import { numberWithCommas, emptyCheck } from "../../../components/commonUtils";
 import moment from "moment";
+import { CopyToClipboard } from "react-copy-to-clipboard";
 
 const AdminContent = styled.div`
   padding: 20px;
@@ -149,6 +150,12 @@ const Withdraw = ({}) => {
     });
   };
 
+  const copyHashWalletHandler = (text, result, msg) => {
+    if (result) {
+      message.success(msg);
+    }
+  };
+
   ////// DATAVIEW //////
 
   const columns = [
@@ -181,34 +188,34 @@ const Withdraw = ({}) => {
       ),
     },
     {
-      width: 180,
+      width: 130,
       title: <Wrapper fontSize={`14px`}>주소</Wrapper>,
       render: (data) => (
         <Wrapper
           fontSize={`14px`}
-        >{`(${data.User.zoneCode}) ${data.User.address} ${data.User.detailAddress}`}</Wrapper>
+        >{`${data.User.address} ${data.User.detailAddress}`}</Wrapper>
       ),
     },
-    {
-      width: 80,
-      title: <Wrapper fontSize={`14px`}>출금은행</Wrapper>,
-      render: (data) => <Wrapper fontSize={`14px`}>{data.bankName}</Wrapper>,
-    },
-    {
-      width: 80,
-      title: <Wrapper fontSize={`14px`}>계좌번호</Wrapper>,
-      render: (data) => <Wrapper fontSize={`14px`}>{data.bankNo}</Wrapper>,
-    },
-    {
-      width: 80,
-      title: <Wrapper fontSize={`14px`}>Swift Code</Wrapper>,
-      render: (data) => <Wrapper fontSize={`14px`}>{data.swiftCode}</Wrapper>,
-    },
-    {
-      width: 130,
-      title: <Wrapper fontSize={`14px`}>은행 주소</Wrapper>,
-      render: (data) => <Wrapper fontSize={`14px`}>{data.bankAddress}</Wrapper>,
-    },
+    // {
+    //   width: 80,
+    //   title: <Wrapper fontSize={`14px`}>출금은행</Wrapper>,
+    //   render: (data) => <Wrapper fontSize={`14px`}>{data.bankName}</Wrapper>,
+    // },
+    // {
+    //   width: 80,
+    //   title: <Wrapper fontSize={`14px`}>계좌번호</Wrapper>,
+    //   render: (data) => <Wrapper fontSize={`14px`}>{data.bankNo}</Wrapper>,
+    // },
+    // {
+    //   width: 80,
+    //   title: <Wrapper fontSize={`14px`}>Swift Code</Wrapper>,
+    //   render: (data) => <Wrapper fontSize={`14px`}>{data.swiftCode}</Wrapper>,
+    // },
+    // {
+    //   width: 130,
+    //   title: <Wrapper fontSize={`14px`}>은행 주소</Wrapper>,
+    //   render: (data) => <Wrapper fontSize={`14px`}>{data.bankAddress}</Wrapper>,
+    // },
     {
       width: 80,
       title: <Wrapper fontSize={`14px`}>출금 계좌</Wrapper>,
@@ -216,12 +223,29 @@ const Withdraw = ({}) => {
     },
     {
       width: 80,
-      title: <Wrapper fontSize={`14px`}>출금 금액</Wrapper>,
+      title: <Wrapper fontSize={`14px`}>암호 화폐</Wrapper>,
+      render: (data) => <Wrapper fontSize={`14px`}>{data.priceType}</Wrapper>,
+    },
+    {
+      width: 80,
+      title: <Wrapper fontSize={`14px`}>월릿 주소</Wrapper>,
       render: (data) => (
         <Wrapper fontSize={`14px`}>
-          {numberWithCommas(String(data.price || 0))}
+          <CopyToClipboard
+            text={`${data.walletAddress}`}
+            onCopy={(text, result) =>
+              copyHashWalletHandler(text, result, `월릿주소가 복사되었습니다.`)
+            }
+          >
+            <Button type="primary">복사</Button>
+          </CopyToClipboard>
         </Wrapper>
       ),
+    },
+    {
+      width: 80,
+      title: <Wrapper fontSize={`14px`}>출금 금액</Wrapper>,
+      render: (data) => <Wrapper fontSize={`14px`}>{data.price}</Wrapper>,
     },
     {
       width: 100,

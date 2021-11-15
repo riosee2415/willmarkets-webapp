@@ -28,6 +28,7 @@ import Theme from "../../components/Theme";
 import { LIVE_ACCOUNT_CREATE_REQUEST } from "../../reducers/liveAccount";
 import { useTranslation } from "react-i18next";
 import i18next from "i18next";
+import useWidth from "../../hooks/useWidth";
 
 const TabWrapper = styled(Wrapper)`
   flex-direction: row;
@@ -76,7 +77,7 @@ const CustomLabel = styled(Label)`
 const InputBox = styled(SelectBox)`
   width: ${(props) => props.width || `250px`};
   height: ${(props) => props.height || `70px`};
-  margin: ${(props) => props.margin || `0 20px 0 0`};
+  margin: ${(props) => props.margin || `0 20px 10px 0`};
 
   font-size: ${(props) => props.fontSize || `18px`};
   color: #8b2373;
@@ -109,16 +110,16 @@ const CustomInput = styled(TextInput)`
 
 const AddLive = () => {
   ////// VARIABLES //////
-  const platformList = ["MetaTrader 4"];
+  const platformList = ["MetaTrader 4", "MetaTrader 5"];
 
   const typeList = [
     {
       type: "STP Account",
-      leverage: ["1:500", "1:400"],
+      leverage: ["100:1", "200:1", "500:1"],
     },
     {
       type: "ECN Account",
-      leverage: ["1:500", "1:400", "1:100", "1:200"],
+      leverage: ["100:1", "200:1", "500:1"],
     },
   ];
 
@@ -126,6 +127,8 @@ const AddLive = () => {
   const { t } = useTranslation(["user_addLive"]);
 
   const router = useRouter();
+
+  const width = useWidth();
 
   const dispatch = useDispatch();
 
@@ -228,7 +231,11 @@ const AddLive = () => {
 
   return (
     <UserLayout>
-      <TabWrapper position={`absolute`} top={`-21px`} left={`20px`}>
+      <TabWrapper
+        position={`absolute`}
+        top={width < 900 ? `0` : `-21px`}
+        left={`20px`}
+      >
         <Tab isActive={currentTab === 0} onClick={() => setCurrentTab(0)}>
           {t(`4`)}
         </Tab>
@@ -238,10 +245,12 @@ const AddLive = () => {
         al={`flex-start`}
         ju={`space-between`}
         minHeight={`calc(100vh - 110px)`}
-        padding={`20px 30px`}
+        margin={width < 900 ? `20px 0 0` : `0`}
+        padding={width < 900 ? `20px` : `20px 30px`}
         bgColor={`#fff`}
         border={`1px solid #ededed`}
-        shadow={`2px 2px 10px #e6e6e6`}>
+        shadow={`2px 2px 10px #e6e6e6`}
+      >
         <Wrapper al={`flex-start`}>
           <Wrapper
             al={`flex-start`}
@@ -249,7 +258,8 @@ const AddLive = () => {
             padding={`0 8px 20px`}
             fontSize={`19px`}
             fontWeight={`700`}
-            borderBottom={`1px solid #ebebeb`}>
+            borderBottom={`1px solid #ebebeb`}
+          >
             {t(`5`)}
           </Wrapper>
           {currentTab === 0 && (
@@ -268,7 +278,8 @@ const AddLive = () => {
                           isActive={inputPlatform.value === data}
                           onClick={() =>
                             changeSelectBoxHandler(data, inputPlatform.setValue)
-                          }>
+                          }
+                        >
                           {data}
                         </InputBox>
                       );
@@ -296,7 +307,8 @@ const AddLive = () => {
                               typeList.find((data2) => data.type === data2.type)
                                 .leverage[0]
                             );
-                          }}>
+                          }}
+                        >
                           {data.type}
                         </InputBox>
                       );
@@ -324,7 +336,8 @@ const AddLive = () => {
                                   data,
                                   inputLeverage.setValue
                                 )
-                              }>
+                              }
+                            >
                               {data}
                             </InputBox>
                           );
@@ -333,7 +346,8 @@ const AddLive = () => {
 
                   <CustomLabel
                     for={`inp-trade-password`}
-                    margin={`40px 0 15px`}>
+                    margin={`40px 0 15px`}
+                  >
                     <Wrapper className={`required`}>*</Wrapper>
                     {t(`9`)}
                   </CustomLabel>
@@ -362,17 +376,20 @@ const AddLive = () => {
                     ju={`flex-start`}
                     margin={`50px 0 0`}
                     padding={`20px 0 0`}
-                    borderTop={`1px solid #ebebeb`}>
+                    borderTop={`1px solid #ebebeb`}
+                  >
                     <CommonButton
                       kindOf={`white`}
                       margin={`0 10px 0 0`}
-                      onClick={() => moveLinkHandler(`/user`)}>
+                      onClick={() => moveLinkHandler(`/user`)}
+                    >
                       {t(`11`)}
                     </CommonButton>
 
                     <CommonButton
                       kindOf={`red`}
-                      onClick={createLiveAccountHandler}>
+                      onClick={createLiveAccountHandler}
+                    >
                       {t(`12`)}
                     </CommonButton>
                   </Wrapper>
@@ -387,7 +404,8 @@ const AddLive = () => {
                       <Wrapper
                         fontSize={`25px`}
                         width={`auto`}
-                        borderBottom={`1px solid #c9c9c9`}>
+                        borderBottom={`1px solid #c9c9c9`}
+                      >
                         {t(`13`)}
                       </Wrapper>
                     }
@@ -396,7 +414,8 @@ const AddLive = () => {
                         margin={`10px 0 0`}
                         padding={`0 15px`}
                         width={`auto`}
-                        lineHeight={`1.8`}>
+                        lineHeight={`1.8`}
+                      >
                         {t(`14`)}
                       </Wrapper>
                     }
@@ -408,7 +427,8 @@ const AddLive = () => {
                           width={`180px`}
                           height={`40px`}
                           margin={`0 5px`}
-                          onClick={initValueHandler}>
+                          onClick={initValueHandler}
+                        >
                           {t(`15`)}
                         </CommonButton>
                       </Wrapper>,

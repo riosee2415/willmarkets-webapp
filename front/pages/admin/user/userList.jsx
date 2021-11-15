@@ -64,16 +64,16 @@ const UserList = ({}) => {
 
   /////////////////////////////////////////////////////////////////////////
 
-  const platformList = ["MetaTrader 4"];
+  const platformList = ["MetaTrader 4", "MetaTrader 5"];
 
   const typeList = [
     {
       type: "STP Account",
-      leverage: ["1:500", "1:400"],
+      leverage: ["100:1", "200:1", "500:1"],
     },
     {
       type: "ECN Account",
-      leverage: ["1:500", "1:400", "1:300"],
+      leverage: ["100:1", "200:1", "500:1"],
     },
   ];
 
@@ -111,8 +111,6 @@ const UserList = ({}) => {
   const inputTradePassword = useInput("");
   const inputViewPassword = useInput("");
   const inputBankNo = useInput("");
-
-  console.log(inputPrice2, inputPrice);
 
   ////// USEEFFECT //////
   useEffect(() => {
@@ -187,6 +185,10 @@ const UserList = ({}) => {
       inputViewPassword.setValue("");
       inputBankNo.setValue("");
     } else {
+      inputPlatform.setValue(data.platform);
+      inputType.setValue(data.accountType);
+      inputLeverage.setValue(data.leverage);
+
       setCurrentData(data);
     }
     setToggleModal2(!toggleModal2);
@@ -379,7 +381,8 @@ const UserList = ({}) => {
       title: <Wrapper fontSize={`14px`}>주소</Wrapper>,
       render: (data) => (
         <Wrapper
-          fontSize={`14px`}>{`(${data.zoneCode}) ${data.address} ${data.detailAddress}`}</Wrapper>
+          fontSize={`14px`}
+        >{`${data.address} ${data.detailAddress}`}</Wrapper>
       ),
     },
     {
@@ -406,7 +409,8 @@ const UserList = ({}) => {
           <Button
             type="primary"
             disabled={data.userType === `1`}
-            onClick={() => toggleModalHandler3(data)}>
+            onClick={() => toggleModalHandler3(data)}
+          >
             확인
           </Button>
         </Wrapper>
@@ -421,14 +425,16 @@ const UserList = ({}) => {
           <Wrapper
             width={`90px`}
             fontSize={`inherit`}
-            color={data.isComplete ? `#0d24c4` : `#d62929`}>
+            color={data.isComplete ? `#0d24c4` : `#d62929`}
+          >
             {data.isComplete ? `승인` : `승인대기`}
           </Wrapper>
 
           <Button
             type="primary"
             disabled={data.isComplete}
-            onClick={() => toggleModalHandler2(data)}>
+            onClick={() => toggleModalHandler2(data)}
+          >
             승인
           </Button>
         </Wrapper>
@@ -508,7 +514,8 @@ const UserList = ({}) => {
         width={`400px`}
         title={`지갑금액 부여`}
         onCancel={toggleModalHandler}
-        onOk={updatePriceHandler}>
+        onOk={updatePriceHandler}
+      >
         <Wrapper padding={`20px`} al={`flex-start`}>
           <Wrapper width={`auto`} fontSize={`15px`} margin={`0 0 4px`}>
             지갑금액
@@ -522,7 +529,8 @@ const UserList = ({}) => {
         width={`400px`}
         title={`승인`}
         onCancel={toggleModalHandler2}
-        onOk={updatePermitHandler}>
+        onOk={updatePermitHandler}
+      >
         <Wrapper padding={`20px`} al={`flex-start`}>
           <Wrapper
             al={`flex-start`}
@@ -530,7 +538,8 @@ const UserList = ({}) => {
             margin={`0 0 10px`}
             fontSize={`15px`}
             fontWeight={`500`}
-            borderBottom={`1px solid #eee`}>
+            borderBottom={`1px solid #eee`}
+          >
             해당 입금신청을 승인하시겠습니까 ?
           </Wrapper>
 
@@ -542,7 +551,8 @@ const UserList = ({}) => {
             defaultValue={``}
             style={{ width: `100%` }}
             {...inputPlatform}
-            onChange={(value) => inputPlatform.setValue(value)}>
+            onChange={(value) => inputPlatform.setValue(value)}
+          >
             <Option value="">선택</Option>
 
             {platformList.map((data, idx) => {
@@ -564,7 +574,8 @@ const UserList = ({}) => {
             onChange={(value) => {
               inputType.setValue(value);
               inputLeverage.setValue("");
-            }}>
+            }}
+          >
             <Option value="">선택</Option>
 
             {typeList.map((data, idx) => {
@@ -583,7 +594,8 @@ const UserList = ({}) => {
             defaultValue={``}
             style={{ width: `100%` }}
             {...inputLeverage}
-            onChange={(value) => inputLeverage.setValue(value)}>
+            onChange={(value) => inputLeverage.setValue(value)}
+          >
             <Option value="">선택</Option>
 
             {inputType.value &&
@@ -633,13 +645,15 @@ const UserList = ({}) => {
           <Button type={`primary`} onClick={toggleModalHandler3}>
             OK
           </Button>,
-        ]}>
+        ]}
+      >
         <Wrapper padding={`20px`} al={`flex-start`}>
           <Wrapper
             al={`flex-start`}
             margin={`0 0 10px`}
             fontSize={`17px`}
-            fontWeight={`500`}>
+            fontWeight={`500`}
+          >
             본인 확인
           </Wrapper>
 
@@ -649,7 +663,8 @@ const UserList = ({}) => {
             fontSize={`15px`}
             padding={`5px 10px`}
             borderTop={`1px solid #eee`}
-            borderBottom={`1px solid #eee`}>
+            borderBottom={`1px solid #eee`}
+          >
             <Wrapper al={`flex-start`} width={`100px`} fontWeight={`500`}>
               인증 유형
             </Wrapper>
@@ -664,13 +679,14 @@ const UserList = ({}) => {
             ju={`flex-start`}
             fontSize={`15px`}
             padding={`5px 10px`}
-            borderBottom={`1px solid #eee`}>
+            borderBottom={`1px solid #eee`}
+          >
             <Wrapper al={`flex-start`} width={`100px`} fontWeight={`500`}>
               발행 일자
             </Wrapper>
 
             <Wrapper dr={`row`} ju={`flex-start`} width={`calc(100% - 100px)`}>
-              {currentData && currentData.idType}
+              {currentData && currentData.idDate1}
             </Wrapper>
           </Wrapper>
 
@@ -679,13 +695,14 @@ const UserList = ({}) => {
             ju={`flex-start`}
             fontSize={`15px`}
             padding={`5px 10px`}
-            borderBottom={`1px solid #eee`}>
+            borderBottom={`1px solid #eee`}
+          >
             <Wrapper al={`flex-start`} width={`100px`} fontWeight={`500`}>
               만료 일자
             </Wrapper>
 
             <Wrapper dr={`row`} ju={`flex-start`} width={`calc(100% - 100px)`}>
-              {currentData && currentData.idType}
+              {currentData && currentData.idDate2}
             </Wrapper>
           </Wrapper>
 
@@ -694,7 +711,8 @@ const UserList = ({}) => {
             ju={`flex-start`}
             fontSize={`15px`}
             padding={`5px 10px`}
-            borderBottom={`1px solid #eee`}>
+            borderBottom={`1px solid #eee`}
+          >
             <Wrapper al={`flex-start`} width={`100px`} fontWeight={`500`}>
               문서 파일
             </Wrapper>
@@ -706,7 +724,8 @@ const UserList = ({}) => {
                     currentData.idFilePath,
                     currentData.idFileOriginName
                   )
-                }>
+                }
+              >
                 다운로드
               </Button>
             </Wrapper>
@@ -716,7 +735,8 @@ const UserList = ({}) => {
             al={`flex-start`}
             margin={`15px 0 10px`}
             fontSize={`17px`}
-            fontWeight={`500`}>
+            fontWeight={`500`}
+          >
             본인 확인
           </Wrapper>
 
@@ -725,7 +745,8 @@ const UserList = ({}) => {
             ju={`flex-start`}
             fontSize={`15px`}
             padding={`5px 10px`}
-            borderBottom={`1px solid #eee`}>
+            borderBottom={`1px solid #eee`}
+          >
             <Wrapper al={`flex-start`} width={`100px`} fontWeight={`500`}>
               인증 유형
             </Wrapper>
@@ -740,7 +761,8 @@ const UserList = ({}) => {
             ju={`flex-start`}
             fontSize={`15px`}
             padding={`5px 10px`}
-            borderBottom={`1px solid #eee`}>
+            borderBottom={`1px solid #eee`}
+          >
             <Wrapper al={`flex-start`} width={`100px`} fontWeight={`500`}>
               문서 파일
             </Wrapper>
@@ -752,7 +774,8 @@ const UserList = ({}) => {
                     currentData.addrFilePath,
                     currentData.addrFileOriginName
                   )
-                }>
+                }
+              >
                 다운로드
               </Button>
             </Wrapper>
@@ -764,7 +787,8 @@ const UserList = ({}) => {
         visible={false}
         onOk={() => {}}
         onCancel={() => {}}
-        title="Ask"></Modal>
+        title="Ask"
+      ></Modal>
     </AdminLayout>
   );
 };

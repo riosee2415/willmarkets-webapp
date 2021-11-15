@@ -15,9 +15,12 @@ import {
 import ClientLayout from "../../components/ClientLayout";
 import SubBanner from "../../components/SubBanner";
 import { useTranslation } from "react-i18next";
+import useWidth from "../../hooks/useWidth";
 
 const Mobile = () => {
   const { t } = useTranslation(["platform"]);
+
+  const width = useWidth();
 
   return (
     <ClientLayout>
@@ -26,9 +29,10 @@ const Mobile = () => {
       <Wrapper
         padding={`150px 0`}
         color={`#fff`}
-        bgImg={`url('https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/willmarkets/assets/images/download/back_mobile1_download.png')`}>
-        <RsWrapper al={`flex-start`}>
-          <Wrapper dr={`row`} width={`auto`}>
+        bgImg={`url('https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/willmarkets/assets/images/download/back_mobile1_download.png')`}
+      >
+        <RsWrapper al={width < 800 ? `center` : `flex-start`}>
+          <Wrapper dr={width < 700 ? `column` : `row`} width={`auto`}>
             <Image
               width={`auto`}
               src={`https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/willmarkets/assets/images/download/icon_android.png`}
@@ -38,7 +42,8 @@ const Mobile = () => {
               dr={`row`}
               padding={`0 10px`}
               width={`auto`}
-              fontSize={`24px`}>
+              fontSize={`24px`}
+            >
               {t(`1`).split(`\n`)[0]}
               <Text padding={`0 5px`} fontWeight={`400`} color={`#6D7BFF`}>
                 {t(`1`).split(`\n`)[1]}
@@ -52,7 +57,9 @@ const Mobile = () => {
             width={`auto`}
             margin={`15px 0 0`}
             fontWeight={`300`}
-            lineHeight={`1.6`}>
+            lineHeight={`1.6`}
+            textAlign={width < 800 ? `center` : `inherit`}
+          >
             {t(`2`).split(`\n`)[0]}
             <br />
             {t(`2`).split(`\n`)[1]} {t(`3`).split(`\n`)[0]}
@@ -70,7 +77,11 @@ const Mobile = () => {
             {t(`3`).split(`\n`)[6]}
           </Wrapper>
 
-          <Wrapper margin={`40px 0 0`} width={`auto`}>
+          <Wrapper
+            dr={width < 500 ? `column` : `row`}
+            margin={`40px 0 0`}
+            width={`auto`}
+          >
             <CommonButton
               display={`flex`}
               padding={`0`}
@@ -82,8 +93,29 @@ const Mobile = () => {
               color={`#ffffff`}
               bgColor={`#3353F2`}
               hoverBgColor={`#3353F2`}
-              radius={`10px`}>
-              {t(`4`)}
+              radius={`10px`}
+            >
+              MT4 Download
+              <RightOutlined
+                style={{ margin: `0 0 0 5px`, fontSize: `12px` }}
+              />
+            </CommonButton>
+
+            <CommonButton
+              display={`flex`}
+              padding={`0`}
+              width={`160px`}
+              height={`45px`}
+              lineHeight={`43px`}
+              fontSize={`18px`}
+              fontWeight={`500`}
+              color={`#ffffff`}
+              bgColor={`#3353F2`}
+              hoverBgColor={`#3353F2`}
+              radius={`10px`}
+              margin={width < 500 ? `20px 0 0` : `0 0 0 20px`}
+            >
+              MT5 Download
               <RightOutlined
                 style={{ margin: `0 0 0 5px`, fontSize: `12px` }}
               />
@@ -95,14 +127,16 @@ const Mobile = () => {
       <Wrapper
         padding={`150px 0`}
         color={`#fff`}
-        bgImg={`url('https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/willmarkets/assets/images/download/back_mobile2_download.png')`}>
-        <RsWrapper al={`flex-end`}>
-          <Wrapper dr={`row`} width={`auto`}>
+        bgImg={`url('https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/willmarkets/assets/images/download/back_mobile2_download.png')`}
+      >
+        <RsWrapper al={width < 800 ? `center` : `flex-end`}>
+          <Wrapper dr={width < 700 ? `column-reverse` : `row`} width={`auto`}>
             <Wrapper
               dr={`row`}
               padding={`0 10px`}
               width={`auto`}
-              fontSize={`24px`}>
+              fontSize={`24px`}
+            >
               {t(`5`).split(`\n`)[0]}
               <Text padding={`0 5px`} fontWeight={`400`} color={`#6D7BFF`}>
                 {t(`5`).split(`\n`)[1]}
@@ -122,7 +156,8 @@ const Mobile = () => {
             margin={`15px 0 0`}
             fontWeight={`300`}
             lineHeight={`1.6`}
-            textAlign={`right`}>
+            textAlign={width < 800 ? `center` : `right`}
+          >
             {t(`2`).split(`\n`)[0]}
             <br />
             {t(`2`).split(`\n`)[1]} {t(`3`).split(`\n`)[0]}
@@ -140,7 +175,11 @@ const Mobile = () => {
             {t(`3`).split(`\n`)[6]}
           </Wrapper>
 
-          <Wrapper margin={`40px 0 0`} width={`auto`}>
+          <Wrapper
+            dr={width < 500 ? `column` : `row`}
+            margin={`40px 0 0`}
+            width={`auto`}
+          >
             <CommonButton
               display={`flex`}
               padding={`0`}
@@ -152,8 +191,29 @@ const Mobile = () => {
               color={`#ffffff`}
               bgColor={`#3353F2`}
               hoverBgColor={`#3353F2`}
-              radius={`10px`}>
-              {t(`4`)}
+              radius={`10px`}
+            >
+              MT4 Download
+              <RightOutlined
+                style={{ margin: `0 0 0 5px`, fontSize: `12px` }}
+              />
+            </CommonButton>
+
+            <CommonButton
+              display={`flex`}
+              padding={`0`}
+              width={`160px`}
+              height={`45px`}
+              lineHeight={`43px`}
+              fontSize={`18px`}
+              fontWeight={`500`}
+              color={`#ffffff`}
+              bgColor={`#3353F2`}
+              hoverBgColor={`#3353F2`}
+              radius={`10px`}
+              margin={width < 500 ? `20px 0 0` : `0 0 0 20px`}
+            >
+              MT5 Download
               <RightOutlined
                 style={{ margin: `0 0 0 5px`, fontSize: `12px` }}
               />
@@ -167,8 +227,10 @@ const Mobile = () => {
           <Wrapper
             display={`block`}
             width={`auto`}
-            fontSize={`28px`}
-            fontWeight={`500`}>
+            fontSize={width < 500 ? `24px` : `28px`}
+            fontWeight={`500`}
+            textAlign={`center`}
+          >
             <Text display={`inline-block`} lineHeight={`1.3`}>
               {t(`7`).split(`\n`)[0]}
             </Text>
@@ -180,7 +242,8 @@ const Mobile = () => {
             margin={`25px 0`}
             width={`auto`}
             textAlign={`center`}
-            fontSize={`17px`}>
+            fontSize={`17px`}
+          >
             {t(`8`).split(`\n`)[0]}
             <br />
             {t(`8`).split(`\n`)[1]}
@@ -196,13 +259,14 @@ const Mobile = () => {
           </Wrapper>
 
           <Wrapper
-            dr={`row`}
+            dr={width < 800 ? `column` : `row`}
             margin={`40px 0 70px`}
-            padding={`40px 110px`}
+            padding={width < 800 ? `40px 0px` : `40px 110px`}
             border={`1px solid #707072`}
             radius={`30px`}
-            width={`auto`}
-            bgColor={`#fff`}>
+            width={width < 800 ? `100%` : `auto`}
+            bgColor={`#fff`}
+          >
             <Wrapper width={`auto`}>
               <Image
                 width={`auto`}
@@ -214,7 +278,7 @@ const Mobile = () => {
               </Wrapper>
             </Wrapper>
 
-            <Wrapper width={`auto`} margin={`0 100px`}>
+            <Wrapper width={`auto`} margin={`10px 100px`}>
               <Image
                 width={`auto`}
                 src={`https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/willmarkets/assets/images/download/icon_android2.png`}
@@ -243,33 +307,36 @@ const Mobile = () => {
         <RsWrapper>
           <Wrapper position={`relative`} bottom={`120px`} width={`auto`}>
             <Image
-              width={`auto`}
+              width={width < 800 ? `100%` : `auto`}
               src={`https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/willmarkets/assets/images/download/image_2phone.png`}
             />
           </Wrapper>
 
           <Wrapper
-            dr={`row`}
-            al={`normal`}
+            dr={width < 800 ? `column` : `row`}
+            al={width < 800 ? `center` : `normal`}
             position={`relative`}
-            bottom={`50px`}>
-            <Wrapper al={`flex-start`} ju={`space-between`} width={`50%`}>
-              <Wrapper al={`flex-start`} width={`auto`}>
-                <Wrapper display={`block`} fontSize={`25px`} fontWeight={`500`}>
-                  {t(`15`).split(`\n`)[0]}
-                  <Text
-                    display={`inline`}
-                    margin={`0 0 0 5px`}
-                    color={`#3353F2`}>
-                    {t(`15`).split(`\n`)[1]}
-                  </Text>
-                </Wrapper>
+            bottom={`50px`}
+          >
+            <Wrapper
+              al={`flex-start`}
+              ju={`flex-start`}
+              width={width < 800 ? `100%` : `50%`}
+            >
+              <Wrapper
+                textAlign={width < 800 ? `center` : ``}
+                display={`block`}
+                fontSize={width < 500 ? `22px` : `25px`}
+                fontWeight={`500`}
+              >
+                {t(`15`).split(`\n`)[0]}
+                <Text display={`inline`} margin={`0 0 0 5px`} color={`#3353F2`}>
+                  {t(`15`).split(`\n`)[1]}
+                </Text>
+              </Wrapper>
 
-                <Wrapper
-                  margin={`20px 0 50px`}
-                  width={`auto`}
-                  lineHeight={`1.8`}>
-                  {/* IronFX는 MT4 거래의 선구자입니다.
+              <Wrapper margin={`30px 0 0`} width={`auto`} lineHeight={`1.8`}>
+                {/* IronFX는 MT4 거래의 선구자입니다.
                   <br />
                   쉬운 사용성 및 설치 Windows 외에도 복잡한 전략을
                   <br />
@@ -277,20 +344,25 @@ const Mobile = () => {
                   <br />
                   차트에서 추측하면서 트렌드를 따라 자신의 위치를 찾을 수
                   있습니다. */}
-                </Wrapper>
               </Wrapper>
             </Wrapper>
 
-            <Wrapper al={`flex-start`} ju={`flex-start`} width={`50%`}>
+            <Wrapper
+              al={`flex-start`}
+              ju={`flex-start`}
+              width={width < 800 ? `80%` : `50%`}
+            >
               <Wrapper
                 dr={`row`}
                 al={`flex-start`}
                 margin={`0 0 20px`}
                 width={`auto`}
-                wrap={`nowrap`}>
+                wrap={`nowrap`}
+                fontSize={width < 500 ? `14px` : `1rem`}
+              >
                 <Image
                   margin={`0 10px 0 0`}
-                  width={`auto`}
+                  width={width < 500 ? `30px` : `auto`}
                   src={`https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/willmarkets/assets/images/trade/icon_check.png`}
                 />
                 {t(`16`)}
@@ -301,10 +373,11 @@ const Mobile = () => {
                 al={`flex-start`}
                 margin={`0 0 20px`}
                 width={`auto`}
-                wrap={`nowrap`}>
+                wrap={`nowrap`}
+              >
                 <Image
                   margin={`0 10px 0 0`}
-                  width={`auto`}
+                  width={width < 500 ? `30px` : `auto`}
                   src={`https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/willmarkets/assets/images/trade/icon_check.png`}
                 />
                 {t(`17`)}
@@ -315,10 +388,11 @@ const Mobile = () => {
                 al={`flex-start`}
                 margin={`0 0 20px`}
                 width={`auto`}
-                wrap={`nowrap`}>
+                wrap={`nowrap`}
+              >
                 <Image
                   margin={`0 10px 0 0`}
-                  width={`auto`}
+                  width={width < 500 ? `30px` : `auto`}
                   src={`https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/willmarkets/assets/images/trade/icon_check.png`}
                 />
                 {t(`18`)}
@@ -329,10 +403,11 @@ const Mobile = () => {
                 al={`flex-start`}
                 margin={`0 0 20px`}
                 width={`auto`}
-                wrap={`nowrap`}>
+                wrap={`nowrap`}
+              >
                 <Image
                   margin={`0 10px 0 0`}
-                  width={`auto`}
+                  width={width < 500 ? `30px` : `auto`}
                   src={`https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/willmarkets/assets/images/trade/icon_check.png`}
                 />
                 {t(`19`)}
@@ -343,10 +418,11 @@ const Mobile = () => {
                 al={`flex-start`}
                 margin={`0 0 20px`}
                 width={`auto`}
-                wrap={`nowrap`}>
+                wrap={`nowrap`}
+              >
                 <Image
                   margin={`0 10px 0 0`}
-                  width={`auto`}
+                  width={width < 500 ? `30px` : `auto`}
                   src={`https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/willmarkets/assets/images/trade/icon_check.png`}
                 />
                 {t(`20`)}
@@ -357,10 +433,11 @@ const Mobile = () => {
                 al={`flex-start`}
                 margin={`0 0 20px`}
                 width={`auto`}
-                wrap={`nowrap`}>
+                wrap={`nowrap`}
+              >
                 <Image
                   margin={`0 10px 0 0`}
-                  width={`auto`}
+                  width={width < 500 ? `30px` : `auto`}
                   src={`https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/willmarkets/assets/images/trade/icon_check.png`}
                 />
                 {t(`21`)}
@@ -371,10 +448,11 @@ const Mobile = () => {
                 al={`flex-start`}
                 margin={`0 0 20px`}
                 width={`auto`}
-                wrap={`nowrap`}>
+                wrap={`nowrap`}
+              >
                 <Image
                   margin={`0 10px 0 0`}
-                  width={`auto`}
+                  width={width < 500 ? `30px` : `auto`}
                   src={`https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/willmarkets/assets/images/trade/icon_check.png`}
                 />
                 {t(`22`)}
@@ -385,10 +463,11 @@ const Mobile = () => {
                 al={`flex-start`}
                 margin={`0 0 20px`}
                 width={`auto`}
-                wrap={`nowrap`}>
+                wrap={`nowrap`}
+              >
                 <Image
                   margin={`0 10px 0 0`}
-                  width={`auto`}
+                  width={width < 500 ? `30px` : `auto`}
                   src={`https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/willmarkets/assets/images/trade/icon_check.png`}
                 />
                 {t(`23`)}
@@ -399,10 +478,11 @@ const Mobile = () => {
                 al={`flex-start`}
                 margin={`0 0 20px`}
                 width={`auto`}
-                wrap={`nowrap`}>
+                wrap={`nowrap`}
+              >
                 <Image
                   margin={`0 10px 0 0`}
-                  width={`auto`}
+                  width={width < 500 ? `30px` : `auto`}
                   src={`https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/willmarkets/assets/images/trade/icon_check.png`}
                 />
                 {t(`24`)}
@@ -413,10 +493,11 @@ const Mobile = () => {
                 al={`flex-start`}
                 margin={`0 0 20px`}
                 width={`auto`}
-                wrap={`nowrap`}>
+                wrap={`nowrap`}
+              >
                 <Image
                   margin={`0 10px 0 0`}
-                  width={`auto`}
+                  width={width < 500 ? `30px` : `auto`}
                   src={`https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/willmarkets/assets/images/trade/icon_check.png`}
                 />
                 {t(`25`)}
@@ -427,10 +508,11 @@ const Mobile = () => {
                 al={`flex-start`}
                 margin={`0 0 20px`}
                 width={`auto`}
-                wrap={`nowrap`}>
+                wrap={`nowrap`}
+              >
                 <Image
                   margin={`0 10px 0 0`}
-                  width={`auto`}
+                  width={width < 500 ? `30px` : `auto`}
                   src={`https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/willmarkets/assets/images/trade/icon_check.png`}
                 />
                 {t(`26`)}
@@ -441,10 +523,11 @@ const Mobile = () => {
                 al={`flex-start`}
                 margin={`0 0 20px`}
                 width={`auto`}
-                wrap={`nowrap`}>
+                wrap={`nowrap`}
+              >
                 <Image
                   margin={`0 10px 0 0`}
-                  width={`auto`}
+                  width={width < 500 ? `30px` : `auto`}
                   src={`https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/willmarkets/assets/images/trade/icon_check.png`}
                 />
                 {t(`27`)}

@@ -33,6 +33,8 @@ import Theme from "../../components/Theme";
 import { WITHDRAW_CREATE_REQUEST } from "../../reducers/withdraw";
 import { USER_FIND_PASSWORD_CONFIRM_REQUEST } from "../../reducers/user";
 import { useTranslation } from "react-i18next";
+import i18next from "i18next";
+import useWidth from "../../hooks/useWidth";
 
 const TabWrapper = styled(Wrapper)`
   flex-direction: row;
@@ -93,6 +95,7 @@ const CustomInput = styled(TextInput)`
 
 const Withdraw = () => {
   ////// VARIABLES //////
+  const priceTypeList = ["BTC-BTC", "ETH-ETH"];
 
   ////// HOOKS //////
 
@@ -115,10 +118,13 @@ const Withdraw = () => {
 
   const router = useRouter();
 
+  const width = useWidth();
+
   const [currentTab, setCurrentTab] = useState(0);
   const [currentStep, setCurrentStep] = useState(0);
 
   const [comboSelectBank, setComboSelectBank] = useState(false);
+  const [comboPriceType, setComboPriceType] = useState(false);
 
   const [isSendEmail, setIsSendEmail] = useState(false);
   const [isConfirmEmail, setIsConfirmEmail] = useState(false);
@@ -128,10 +134,12 @@ const Withdraw = () => {
   const inputSwiftCode = useInput("");
   const inputBankAddress = useInput("");
   const inputSelectBank = useInput("");
-  const inputPrice = useOnlyNumberInput("");
+  const inputPrice = useInput("");
   const inputSecret = useInput("");
 
-  console.log(secretCode, inputSecret.value);
+  const inputPriceType = useInput("");
+  const inputWalletAddress = useInput("");
+
   ////// TOGGLE //////
 
   ////// HANDLER //////
@@ -160,27 +168,38 @@ const Withdraw = () => {
     inputSelectBank.setValue("");
     inputPrice.setValue("");
     inputSecret.setValue("");
+
+    inputPriceType.setValue("");
+    inputWalletAddress.setValue("");
   }, []);
 
   const createWithdrawHanlder = useCallback(() => {
-    if (!emptyCheck(inputBankName.value)) {
-      return message.error(t(`1`));
-    }
+    // if (!emptyCheck(inputBankName.value)) {
+    //   return message.error(t(`1`));
+    // }
 
-    if (!emptyCheck(inputBankNo.value)) {
-      return message.error(t(`2`));
-    }
+    // if (!emptyCheck(inputBankNo.value)) {
+    //   return message.error(t(`2`));
+    // }
 
-    if (!emptyCheck(inputSwiftCode.value)) {
-      return message.error(t(`3`));
-    }
+    // if (!emptyCheck(inputSwiftCode.value)) {
+    //   return message.error(t(`3`));
+    // }
 
-    if (!emptyCheck(inputBankAddress.value)) {
-      return message.error(t(`4`));
-    }
+    // if (!emptyCheck(inputBankAddress.value)) {
+    //   return message.error(t(`4`));
+    // }
 
     if (!emptyCheck(inputSelectBank.value)) {
       return message.error(t(`5`));
+    }
+
+    if (!emptyCheck(inputPriceType.value)) {
+      return message.error(t(`33`));
+    }
+
+    if (!emptyCheck(inputWalletAddress.value)) {
+      return message.error(t(`34`));
     }
 
     if (!emptyCheck(inputPrice.value)) {
@@ -219,22 +238,26 @@ const Withdraw = () => {
       data: {
         language: i18next.language,
         userId: me.id,
-        bankName: inputBankName.value,
-        bankNo: inputBankNo.value,
-        swiftCode: inputSwiftCode.value,
-        bankAddress: inputBankAddress.value,
+        // bankName: inputBankName.value,
+        // bankNo: inputBankNo.value,
+        // swiftCode: inputSwiftCode.value,
+        // bankAddress: inputBankAddress.value,
         selectBank: inputSelectBank.value,
         price: inputPrice.value,
+        priceType: inputPriceType.value,
+        walletAddress: inputWalletAddress.value,
       },
     });
   }, [
-    inputBankName,
-    inputBankNo,
-    inputSwiftCode,
-    inputBankAddress,
-    inputSelectBank,
-    inputPrice,
-    inputSecret,
+    inputBankName.value,
+    inputBankNo.value,
+    inputSwiftCode.value,
+    inputBankAddress.value,
+    inputSelectBank.value,
+    inputPrice.value,
+    inputSecret.value,
+    inputPriceType.value,
+    inputWalletAddress.value,
     isSendEmail,
     isConfirmEmail,
   ]);
@@ -317,7 +340,11 @@ const Withdraw = () => {
 
   return (
     <UserLayout>
-      <TabWrapper position={`absolute`} top={`-21px`} left={`20px`}>
+      <TabWrapper
+        position={`absolute`}
+        top={width < 900 ? `0` : `-21px`}
+        left={`20px`}
+      >
         <Tab isActive={currentTab === 0} onClick={() => setCurrentTab(0)}>
           {t(`12`)}
         </Tab>
@@ -327,10 +354,12 @@ const Withdraw = () => {
         al={`flex-start`}
         ju={`space-between`}
         minHeight={`calc(100vh - 110px)`}
-        padding={`20px 30px`}
+        margin={width < 900 ? `20px 0 0` : ``}
+        padding={width < 900 ? `20px` : `20px 30px`}
         bgColor={`#fff`}
         border={`1px solid #ededed`}
-        shadow={`2px 2px 10px #e6e6e6`}>
+        shadow={`2px 2px 10px #e6e6e6`}
+      >
         <Wrapper al={`flex-start`}>
           <Wrapper
             al={`flex-start`}
@@ -338,7 +367,8 @@ const Withdraw = () => {
             padding={`0 8px 20px`}
             fontSize={`19px`}
             fontWeight={`700`}
-            borderBottom={`1px solid #ebebeb`}>
+            borderBottom={`1px solid #ebebeb`}
+          >
             {t(`13`)}
           </Wrapper>
 
@@ -351,7 +381,8 @@ const Withdraw = () => {
                     ju={`flex-start`}
                     margin={`0 0 20px`}
                     fontSize={`18px`}
-                    fontWeight={`700`}>
+                    fontWeight={`700`}
+                  >
                     <Wrapper
                       width={`auto`}
                       margin={`0 10px 0 0`}
@@ -359,12 +390,14 @@ const Withdraw = () => {
                       fontSize={`14px`}
                       fontWeight={`700`}
                       bgColor={`#aa28c9`}
-                      color={`#fff`}>
+                      color={`#fff`}
+                    >
                       Step 01
                     </Wrapper>
                     {t(`14`)}
                   </Wrapper>
-                  <CustomLabel for={`inp-price`} margin={`40px 0 15px`}>
+
+                  {/* <CustomLabel for={`inp-price`} margin={`40px 0 15px`}>
                     <Wrapper className={`required`}>*</Wrapper>
                     {t(`15`)}
                   </CustomLabel>
@@ -394,9 +427,9 @@ const Withdraw = () => {
                   </CustomLabel>
                   <Wrapper dr={`row`} ju={`flex-start`}>
                     <CustomInput id={`inp-price`} {...inputBankAddress} />
-                  </Wrapper>
+                  </Wrapper> */}
 
-                  <CustomLabel for={`inp-price`} margin={`40px 0 15px`}>
+                  <CustomLabel for={`inp-price`} margin={`20px 0 15px`}>
                     <Wrapper className={`required`}>*</Wrapper>
                     {t(`18`)}
                   </CustomLabel>
@@ -410,7 +443,8 @@ const Withdraw = () => {
                       shadow={`0 2px 8px rgb(0 0 0 / 9%)`}
                       hoverBorder={`1px solid #d7a6ed`}
                       hoverShadow={`0 3px 8px rgb(0 0 0 / 12%)`}
-                      onClick={() => setComboSelectBank(!comboSelectBank)}>
+                      onClick={() => setComboSelectBank(!comboSelectBank)}
+                    >
                       <ComboTitle>
                         <Wrapper>{inputSelectBank.value || t(`19`)}</Wrapper>
                         <CaretDownOutlined />
@@ -418,16 +452,18 @@ const Withdraw = () => {
 
                       <ComboList isView={comboSelectBank}>
                         <ComboListItem
-                          onClick={() => inputSelectBank.setValue("")}>
+                          onClick={() => inputSelectBank.setValue("")}
+                        >
                           {t(`19`)}
                         </ComboListItem>
 
                         <ComboListItem
-                          onClick={() => inputSelectBank.setValue(t(`20`))}>
+                          onClick={() => inputSelectBank.setValue(t(`20`))}
+                        >
                           {t(`20`)}
                         </ComboListItem>
 
-                        {me &&
+                        {/* {me &&
                           me.LiveAccounts &&
                           me.LiveAccounts.map((data) => {
                             if (!data.isComplete) {
@@ -439,13 +475,82 @@ const Withdraw = () => {
                                 isActive={inputSelectBank.value === data.bankNo}
                                 onClick={() =>
                                   inputSelectBank.setValue(data.bankNo)
-                                }>
+                                }
+                              >
                                 {data.bankNo}
                               </ComboListItem>
                             );
-                          })}
+                          })} */}
                       </ComboList>
                     </Combo>
+                  </Wrapper>
+
+                  <CustomLabel for={`inp-priceType`} margin={`40px 0 15px`}>
+                    <Wrapper className={`required`}>*</Wrapper>
+                    {t(`31`)}
+                  </CustomLabel>
+                  <Wrapper dr={`row`} ju={`flex-start`}>
+                    <Combo
+                      isBorder={true}
+                      itemAlign={`flex-start`}
+                      width={`250px`}
+                      height={`40px`}
+                      border={`1px solid #f3e4fa`}
+                      shadow={`0 2px 8px rgb(0 0 0 / 9%)`}
+                      hoverBorder={`1px solid #d7a6ed`}
+                      hoverShadow={`0 3px 8px rgb(0 0 0 / 12%)`}
+                      onClick={() => setComboPriceType(!comboPriceType)}
+                    >
+                      <ComboTitle>
+                        <Wrapper>
+                          {inputPriceType.value || `${t("35")}`}
+                        </Wrapper>
+                        <CaretDownOutlined />
+                      </ComboTitle>
+
+                      <ComboList isView={comboPriceType}>
+                        <ComboListItem
+                          isActive={!inputPriceType.value}
+                          onClick={() => inputPriceType.setValue("")}
+                        >
+                          {t(`35`)}
+                        </ComboListItem>
+
+                        {priceTypeList.map((data, idx) => {
+                          return (
+                            <ComboListItem
+                              key={idx}
+                              isActive={inputPriceType.value === data}
+                              onClick={() => inputPriceType.setValue(data)}
+                            >
+                              {data}
+                            </ComboListItem>
+                          );
+                        })}
+                      </ComboList>
+                    </Combo>
+                  </Wrapper>
+
+                  <CustomLabel for={`inp-walletAddress`} margin={`40px 0 15px`}>
+                    <Wrapper className={`required`}>*</Wrapper>
+                    {t(`32`)}
+                  </CustomLabel>
+                  <Wrapper dr={`row`} ju={`flex-start`}>
+                    <CustomInput
+                      id={`inp-walletAddress`}
+                      {...inputWalletAddress}
+                    />
+                  </Wrapper>
+
+                  <CustomLabel
+                    for={`inp-walletAddress`}
+                    margin={`40px 0 5px`}
+                    fontSize={`0.9em`}
+                  >
+                    {t(`36`)}
+                  </CustomLabel>
+                  <Wrapper dr={`row`} ju={`flex-start`} fontSize={`0.9em`}>
+                    {me && me.priceWallet} USD (USD)
                   </Wrapper>
 
                   <CustomLabel for={`inp-price`} margin={`40px 0 15px`}>
@@ -453,7 +558,15 @@ const Withdraw = () => {
                     {t(`21`)}
                   </CustomLabel>
                   <Wrapper dr={`row`} ju={`flex-start`}>
-                    <CustomInput id={`inp-price`} {...inputPrice} />
+                    <CustomInput
+                      id={`inp-price`}
+                      margin={`10px 10px 10px 0`}
+                      {...inputPrice}
+                    />
+
+                    <Wrapper width={`auto`} fontSize={`0.8em`}>
+                      {t(`37`)} 0.00
+                    </Wrapper>
                   </Wrapper>
 
                   {isSendEmail && (
@@ -470,7 +583,8 @@ const Withdraw = () => {
                           kindOf={`black`}
                           height={`38px`}
                           margin={`0 0 0 10px`}
-                          onClick={confirmSecretHandler}>
+                          onClick={confirmSecretHandler}
+                        >
                           {t(`23`)}
                         </CommonButton>
                       </Wrapper>
@@ -485,7 +599,8 @@ const Withdraw = () => {
                     ju={`flex-start`}
                     margin={`0 0 20px`}
                     fontSize={`18px`}
-                    fontWeight={`700`}>
+                    fontWeight={`700`}
+                  >
                     <Wrapper
                       width={`auto`}
                       margin={`0 10px 0 0`}
@@ -493,7 +608,8 @@ const Withdraw = () => {
                       fontSize={`14px`}
                       fontWeight={`700`}
                       bgColor={`#aa28c9`}
-                      color={`#fff`}>
+                      color={`#fff`}
+                    >
                       Step 02
                     </Wrapper>
                     {t(`24`)}
@@ -505,7 +621,8 @@ const Withdraw = () => {
                         <Wrapper
                           fontSize={`25px`}
                           width={`auto`}
-                          borderBottom={`1px solid #c9c9c9`}>
+                          borderBottom={`1px solid #c9c9c9`}
+                        >
                           {t(`25`)}
                         </Wrapper>
                       }
@@ -514,7 +631,8 @@ const Withdraw = () => {
                           margin={`10px 0 0`}
                           padding={`0 15px`}
                           width={`auto`}
-                          lineHeight={`1.8`}>
+                          lineHeight={`1.8`}
+                        >
                           {t(`26`)}
                         </Wrapper>
                       }
@@ -526,17 +644,19 @@ const Withdraw = () => {
                             width={`180px`}
                             height={`40px`}
                             margin={`0 5px`}
-                            onClick={initValueHandler}>
+                            onClick={initValueHandler}
+                          >
                             {t(`27`)}
                           </CommonButton>
-                          ,
+
                           <CommonButton
                             key="1"
                             kindOf={`blue`}
                             width={`180px`}
                             height={`40px`}
                             margin={`0 5px`}
-                            onClick={() => moveLinkHandler(`/`)}>
+                            onClick={() => moveLinkHandler(`/`)}
+                          >
                             {t(`28`)}
                           </CommonButton>
                         </Wrapper>,
@@ -555,11 +675,13 @@ const Withdraw = () => {
             ju={`flex-start`}
             margin={`50px 0 0`}
             padding={`20px 0 0`}
-            borderTop={`1px solid #ebebeb`}>
+            borderTop={`1px solid #ebebeb`}
+          >
             <CommonButton
               kindOf={`white`}
               margin={`0 10px 0 0`}
-              onClick={() => moveLinkHandler("/user")}>
+              onClick={() => moveLinkHandler("/user")}
+            >
               {t(`29`)}
             </CommonButton>
 

@@ -46,6 +46,7 @@ router.get("/list", async (req, res, next) => {
           },
         },
       },
+      order: [["createdAt", "DESC"]],
     });
     return res
       .status(200)
@@ -66,12 +67,14 @@ router.post("/create", async (req, res, next) => {
   const {
     language,
     userId,
-    bankName,
+    // bankName,
     price,
-    swiftCode,
-    bankAddress,
+    // swiftCode,
+    // bankAddress,
     selectBank,
-    bankNo,
+    // bankNo,
+    priceType,
+    walletAddress,
   } = req.body;
   try {
     const exUser = await User.findOne({
@@ -90,12 +93,14 @@ router.post("/create", async (req, res, next) => {
 
     const createResult = await Withdraw.create({
       UserId: parseInt(userId),
-      bankName,
+      // bankName,
       price,
-      swiftCode,
-      bankAddress,
+      // swiftCode,
+      // bankAddress,
       selectBank,
-      bankNo,
+      // bankNo,
+      priceType,
+      walletAddress,
       isComplete: false,
     });
 
@@ -200,6 +205,10 @@ router.patch("/updatePermit", isAdminCheck, async (req, res, next) => {
             <br />
 
             출금계좌 : ${updateData.selectBank}
+            <br />
+            암호화폐 : ${updateData.priceType}
+            <br />
+            월릿주소 : ${updateData.walletAddress}
             <br />
             출금금액 : ${updateData.price}
             <br />

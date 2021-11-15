@@ -141,125 +141,111 @@ const SubBanner = () => {
           : router.pathname.includes(`/support`)
           ? `url('https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/willmarkets/assets/images/banner/subbanner_consulting.png')`
           : null
-      }
-    >
-      <Wrapper
-        position={`absolute`}
-        left={`0`}
-        top={`0`}
-        height={`100%`}
-        bgColor={`rgba(0, 0, 0, 0.7)`}
-        zIndex={`1`}
-      ></Wrapper>
-
-      <RsWrapper position={`relative`}>
-        <Wrapper
-          position={`relative`}
-          top={`20px`}
-          width={`auto`}
-          color={`#fff`}
-          fontSize={`40px`}
-          fontWeight={`500`}
-          lineHeight={`1.3`}
-          zIndex={`2`}
-        >
-          {inputMenu1.value &&
-            inputMenu2.value &&
-            menuList
-              .find((data) => data.menuLink === inputMenu1.value)
-              .subMenu.find((data2) => data2.subMenuLink === inputMenu2.value)
-              .subMenuName}
-        </Wrapper>
-
-        <Wrapper
-          position={`absolute`}
-          left={`0`}
-          bottom={`20px`}
-          dr={`row`}
-          width={`auto`}
-        >
-          <Combo
-            isBorder={true}
-            itemAlign={`flex-start`}
-            margin={width < 750 ? `0 10px` : `0 10px 0 0`}
-            width={`150px`}
-            height={`40px`}
+      }>
+      <Wrapper height={`100%`} bgColor={`rgba(0, 0, 0, 0.7)`} zIndex={`1`}>
+        <RsWrapper position={`relative`}>
+          <Wrapper
+            position={`relative`}
+            top={`20px`}
+            width={`auto`}
+            color={`#fff`}
+            fontSize={`40px`}
             fontWeight={`500`}
-            border={`1px solid #c45194`}
-            shadow={`0 2px 8px rgb(0 0 0 / 9%)`}
-            hoverBorder={`1px solid #ac5a8a`}
-            hoverShadow={`0 3px 8px rgb(0 0 0 / 12%)`}
-            onClick={() => setComboMenu1(!comboMenu1)}
-          >
-            <ComboTitle color={`#fff`}>
-              <Wrapper>
-                {inputMenu1.value &&
-                  menuList.find((data) => data.menuLink === inputMenu1.value)
-                    .menuName}
-              </Wrapper>
-              <CaretDownOutlined />
-            </ComboTitle>
+            lineHeight={`1.3`}
+            zIndex={`2`}>
+            {inputMenu1.value &&
+              inputMenu2.value &&
+              menuList
+                .find((data) => data.menuLink === inputMenu1.value)
+                .subMenu.find((data2) => data2.subMenuLink === inputMenu2.value)
+                .subMenuName}
+          </Wrapper>
 
-            <ComboList isView={comboMenu1}>
-              {menuList.map((data, idx) => {
-                return (
-                  <ComboListItem
-                    key={idx}
-                    isActive={inputMenu1.value === data.menuLink}
-                    onClick={() => moveLinkHandler(data.menuLink)}
-                  >
-                    {data.menuName}
-                  </ComboListItem>
-                );
-              })}
-            </ComboList>
-          </Combo>
+          <Wrapper
+            position={`absolute`}
+            left={`0`}
+            bottom={`20px`}
+            dr={`row`}
+            width={`auto`}>
+            <Combo
+              isBorder={true}
+              itemAlign={`flex-start`}
+              margin={width < 750 ? `0 10px` : `0 10px 0 0`}
+              width={`150px`}
+              height={`40px`}
+              fontWeight={`500`}
+              border={`1px solid #c45194`}
+              shadow={`0 2px 8px rgb(0 0 0 / 9%)`}
+              hoverBorder={`1px solid #ac5a8a`}
+              hoverShadow={`0 3px 8px rgb(0 0 0 / 12%)`}
+              onClick={() => setComboMenu1(!comboMenu1)}>
+              <ComboTitle color={`#fff`}>
+                <Wrapper>
+                  {inputMenu1.value &&
+                    menuList.find((data) => data.menuLink === inputMenu1.value)
+                      .menuName}
+                </Wrapper>
+                <CaretDownOutlined />
+              </ComboTitle>
 
-          <Combo
-            isBorder={true}
-            itemAlign={`flex-start`}
-            width={`180px`}
-            height={`40px`}
-            fontWeight={`500`}
-            border={`1px solid #c45194`}
-            shadow={`0 2px 8px rgb(0 0 0 / 9%)`}
-            hoverBorder={`1px solid #ac5a8a`}
-            hoverShadow={`0 3px 8px rgb(0 0 0 / 12%)`}
-            onClick={() => setComboMenu2(!comboMenu2)}
-          >
-            <ComboTitle color={`#fff`}>
-              <Wrapper>
+              <ComboList isView={comboMenu1}>
+                {menuList.map((data, idx) => {
+                  return (
+                    <ComboListItem
+                      key={idx}
+                      isActive={inputMenu1.value === data.menuLink}
+                      onClick={() => moveLinkHandler(data.menuLink)}>
+                      {data.menuName}
+                    </ComboListItem>
+                  );
+                })}
+              </ComboList>
+            </Combo>
+
+            <Combo
+              isBorder={true}
+              itemAlign={`flex-start`}
+              width={`180px`}
+              height={`40px`}
+              fontWeight={`500`}
+              border={`1px solid #c45194`}
+              shadow={`0 2px 8px rgb(0 0 0 / 9%)`}
+              hoverBorder={`1px solid #ac5a8a`}
+              hoverShadow={`0 3px 8px rgb(0 0 0 / 12%)`}
+              onClick={() => setComboMenu2(!comboMenu2)}>
+              <ComboTitle color={`#fff`}>
+                <Wrapper>
+                  {inputMenu1.value &&
+                    inputMenu2.value &&
+                    menuList
+                      .find((data) => data.menuLink === inputMenu1.value)
+                      .subMenu.find(
+                        (data2) => data2.subMenuLink === inputMenu2.value
+                      ).subMenuName}
+                </Wrapper>
+                <CaretDownOutlined />
+              </ComboTitle>
+
+              <ComboList isView={comboMenu2}>
                 {inputMenu1.value &&
-                  inputMenu2.value &&
                   menuList
                     .find((data) => data.menuLink === inputMenu1.value)
-                    .subMenu.find(
-                      (data2) => data2.subMenuLink === inputMenu2.value
-                    ).subMenuName}
-              </Wrapper>
-              <CaretDownOutlined />
-            </ComboTitle>
-
-            <ComboList isView={comboMenu2}>
-              {inputMenu1.value &&
-                menuList
-                  .find((data) => data.menuLink === inputMenu1.value)
-                  .subMenu.map((data, idx) => {
-                    console.log(data, "data");
-                    return (
-                      <ComboListItem
-                        key={idx}
-                        isActive={inputMenu2.value === data.subMenuLink}
-                        onClick={() => moveLinkHandler(data.subMenuLink)}
-                      >
-                        {data.subMenuName}
-                      </ComboListItem>
-                    );
-                  })}
-            </ComboList>
-          </Combo>
-        </Wrapper>
-      </RsWrapper>
+                    .subMenu.map((data, idx) => {
+                      console.log(data, "data");
+                      return (
+                        <ComboListItem
+                          key={idx}
+                          isActive={inputMenu2.value === data.subMenuLink}
+                          onClick={() => moveLinkHandler(data.subMenuLink)}>
+                          {data.subMenuName}
+                        </ComboListItem>
+                      );
+                    })}
+              </ComboList>
+            </Combo>
+          </Wrapper>
+        </RsWrapper>
+      </Wrapper>
     </Wrapper>
   );
 };

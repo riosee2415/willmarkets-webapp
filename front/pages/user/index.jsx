@@ -128,7 +128,7 @@ const User = ({ width }) => {
               fontWeight={`400`}
               lineHeight={`1.3`}
             >
-              {me && me.priceWallet}
+              {me && parseFloat(me.priceWallet).toFixed(2)}
             </Wrapper>
           </Wrapper>
         </SelectBox>

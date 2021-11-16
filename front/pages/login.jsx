@@ -171,11 +171,11 @@ const Login = () => {
 
             <Wrapper>
               <CommonButton
-                width={width < 500 ? `150px` : `180px`}
+                width={width < 500 ? `120px` : `180px`}
                 height={`45px`}
                 lineHeight={`40px`}
-                fontSize={width < 500 ? `17px` : `20px`}
-                margin={`0 0 10px`}
+                fontSize={width < 500 ? `16px` : `20px`}
+                margin={width < 500 ? `30px 0 10px` : `0 0 10px`}
                 radius={`8px`}
                 bgColor={`#313B91`}
                 color={`#fff`}
@@ -184,10 +184,10 @@ const Login = () => {
                 {t(`5`)}
               </CommonButton>
               <CommonButton
-                width={width < 500 ? `150px` : `180px`}
+                width={width < 500 ? `120px` : `180px`}
                 height={`45px`}
                 lineHeight={`40px`}
-                fontSize={width < 500 ? `17px` : `20px`}
+                fontSize={width < 500 ? `16px` : `20px`}
                 margin={`0 0 10px`}
                 radius={`8px`}
                 border={`1px solid #313B91`}

@@ -43,6 +43,7 @@ const Pc = () => {
               padding={`0 10px`}
               width={`auto`}
               fontSize={`24px`}
+              textAlign={width < 600 ? `center` : ``}
             >
               {t(`9`).split(`\n`)[0]}
               <Text padding={`0 5px`} fontWeight={`400`} color={`#6D7BFF`}>
@@ -77,21 +78,45 @@ const Pc = () => {
             {t(`10`).split(`\n`)[6]}
           </Wrapper>
 
-          <Wrapper margin={`40px 0 0`} width={`auto`}>
+          <Wrapper
+            dr={width < 500 ? `column` : `row`}
+            margin={`40px 0 0`}
+            width={`auto`}
+          >
             <CommonButton
               display={`flex`}
               padding={`0`}
               width={`160px`}
               height={`45px`}
               lineHeight={`43px`}
-              fontSize={`18px`}
+              fontSize={`17px`}
               fontWeight={`500`}
               color={`#FFFFFF`}
               bgColor={`#3353F2`}
               hoverBgColor={`#3353F2`}
               radius={`10px`}
             >
-              {t(`11`)}
+              MT4 Download
+              <RightOutlined
+                style={{ margin: `0 0 0 5px`, fontSize: `12px` }}
+              />
+            </CommonButton>
+
+            <CommonButton
+              display={`flex`}
+              padding={`0`}
+              width={`160px`}
+              height={`45px`}
+              lineHeight={`43px`}
+              fontSize={`17px`}
+              fontWeight={`500`}
+              color={`#FFFFFF`}
+              bgColor={`#3353F2`}
+              hoverBgColor={`#3353F2`}
+              radius={`10px`}
+              margin={width < 500 ? `20px 0 0` : `0 0 0 20px`}
+            >
+              MT5 Download
               <RightOutlined
                 style={{ margin: `0 0 0 5px`, fontSize: `12px` }}
               />

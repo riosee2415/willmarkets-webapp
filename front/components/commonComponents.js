@@ -608,7 +608,7 @@ export const Combo = styled(Wrapper)`
   padding: ${(props) => props.padding || ` 0 10px 5px`};
   width: ${(props) => props.width || `auto`};
   cursor: pointer;
-  z-index: 9999;
+  z-index: 10;
 
   ${(props) =>
     props.isBorder &&

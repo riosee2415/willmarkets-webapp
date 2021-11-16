@@ -131,6 +131,7 @@ const SubBanner = () => {
       position={`relative`}
       height={`500px`}
       wrap={`nowrap`}
+      textAlign={`center`}
       bgImg={
         router.pathname.includes(`/company`)
           ? `url('https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/willmarkets/assets/images/banner/subbanner_introduce.png')`

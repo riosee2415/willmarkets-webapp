@@ -243,7 +243,6 @@ function* userUpdatePermit(action) {
 // SAGA AREA ********************************************************************************************************
 // ******************************************************************************************************************
 function userIdImageFileAPI(data) {
-  console.log(data, "datadatadatadatadatadata");
   return axios.post(`/api/user/image`, data);
 }
 

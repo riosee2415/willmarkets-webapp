@@ -29,6 +29,7 @@ import { USER_LOGOUT_REQUEST } from "../reducers/user";
 import { useDispatch, useSelector } from "react-redux";
 import { useTranslation } from "react-i18next";
 import i18next from "i18next";
+import useWidth from "../hooks/useWidth";
 
 const WebRow = styled(RowWrapper)`
   background: transparent;
@@ -43,30 +44,21 @@ const WebRow = styled(RowWrapper)`
     backdrop-filter: blur(3px);
   }
 
-  @media (max-width: 800px) {
-    display: none;
-  }
-`;
+  ${(props) =>
+    props.language === `en` &&
+    `
+    @media (max-width: 1300px) {
+      display: none;
+    }
+  `}
 
-const MobileRow = styled(RowWrapper)`
-  display: none;
-
-  background: transparent;
-  position: fixed;
-  top: 0;
-  left: 0;
-  z-index: 10000;
-  transition: 0.5s;
-  padding: 10px 0;
-
-  &.background {
-    background: rgba(0, 0, 0, 0.5);
-    backdrop-filter: blur(3px);
-  }
-
-  @media (max-width: 700px) {
-    display: flex;
-  }
+  ${(props) =>
+    props.language === `ko` &&
+    `
+    @media (max-width: 1100px) {
+      display: none;
+    }
+  `}
 `;
 
 const MenuTextWrapper = styled(Wrapper)`
@@ -130,9 +122,16 @@ const MobileDrawer = styled(Drawer)`
   & .ant-drawer-body {
     padding: 0px;
   }
+
+  & {
+    z-index: 10000;
+  }
 `;
 
-const AppHeader = ({ children, width }) => {
+const AppHeader = ({ children }) => {
+  const width = useWidth();
+
+  console.log(width);
   const router = useRouter();
 
   const dispatch = useDispatch();
@@ -225,7 +224,7 @@ const AppHeader = ({ children, width }) => {
   return (
     <>
       <WebRow
-        display={i18next.language === `en` ? `none` : `flex`}
+        language={i18next.language}
         justify={`center`}
         position={`fixed`}
         top={`0`}
@@ -492,323 +491,336 @@ const AppHeader = ({ children, width }) => {
         </Wrapper>
       </WebRow>
 
-      <Wrapper al={`flex-start`}>
-        <Wrapper onClick={DrawToggle} al={`flex-start`} cursor={`pointer`}>
-          <BarsOutlined style={{ fontSize: "30px" }} />
-        </Wrapper>
-        <MobileDrawer
-          title={
-            <WholeWrapper>
-              <Wrapper dr={`row`} ju={`space-between`} padding={`10px 15px`}>
+      {((width < 1300 && i18next.language === "en") ||
+        (width < 1100 && i18next.language === "ko")) && (
+        <Wrapper al={`flex-start`} bgColor={`#231d21`}>
+          <Wrapper
+            dr={`row`}
+            ju={`space-between`}
+            al={`normal`}
+            padding={`5px 15px`}
+            cursor={`pointer`}>
+            <BarsOutlined
+              style={{ fontSize: "35px", color: "#fff" }}
+              onClick={DrawToggle}
+            />
+
+            <Wrapper width={`auto`} cursor={`pointer`} color={`#fff`}>
+              <Combo
+                width={`110px`}
+                padding={`0`}
+                onClick={() => setComboLanguage(!comboLanguage)}>
+                <ComboTitle color={`#fff`}>
+                  <Wrapper fontSize={`15px`}>Language</Wrapper>
+                  <CaretDownOutlined />
+                </ComboTitle>
+
+                <ComboList
+                  isView={comboLanguage}
+                  onClick={() => setComboLanguage(false)}>
+                  <ComboListItem
+                    bgColor={`#000`}
+                    onClick={() => i18n.changeLanguage("en")}>
+                    English
+                  </ComboListItem>
+                  <ComboListItem
+                    bgColor={`#000`}
+                    onClick={() => i18n.changeLanguage("ko")}>
+                    한국어
+                  </ComboListItem>
+                </ComboList>
+              </Combo>
+            </Wrapper>
+          </Wrapper>
+
+          <MobileDrawer
+            title={
+              <WholeWrapper>
+                <Wrapper dr={`row`} ju={`space-between`} padding={`10px 15px`}>
+                  <Wrapper
+                    width={`auto`}
+                    onClick={() => moveLinkHandler(`/`)}
+                    cursor={`pointer`}>
+                    <Image
+                      width={`auto`}
+                      src={`https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/willmarkets/assets/images/logo/logo_hover.png`}
+                    />
+                  </Wrapper>
+                  <Wrapper
+                    width={`auto`}
+                    onClick={DrawToggle}
+                    cursor={`pointer`}>
+                    <CloseOutlined style={{ fontSize: "22px" }} />
+                  </Wrapper>
+                </Wrapper>
+
+                <Wrapper
+                  dr={`row`}
+                  margin={`5px 0 0 0`}
+                  bgColor={`#231d21`}
+                  padding={`10px 20px`}>
+                  {me ? (
+                    <Wrapper
+                      width={`50%`}
+                      cursor={`pointer`}
+                      color={`#fff`}
+                      onClick={() => logoutUserHandler()}>
+                      {t(`1`)}
+                    </Wrapper>
+                  ) : (
+                    <Wrapper
+                      width={`50%`}
+                      cursor={`pointer`}
+                      color={`#fff`}
+                      onClick={() => moveLinkHandler(`/login`)}>
+                      {t(`2`)}
+                    </Wrapper>
+                  )}
+                  {/* {me && (
+                    <Wrapper
+                      width={`25%`}
+                      color={`#575252`}
+                      cursor={`pointer`}
+                      color={`#fff`}
+                      onClick={() => moveLinkHandler(`/user/mypage`)}>
+                      마이페이지
+                    </Wrapper>
+                  )} */}
+                  {!me && (
+                    <Wrapper
+                      width={`50%`}
+                      cursor={`pointer`}
+                      color={`#fff`}
+                      onClick={() => moveLinkHandler(`/signup`)}>
+                      {t(`3`)}
+                    </Wrapper>
+                  )}
+
+                  {/* <Wrapper
+                    width={`50%`}
+                    cursor={`pointer`}
+                    color={`#fff`}
+                    onClick={() => moveLinkHandler(`/support`)}>
+                    {t(`18`)}
+                  </Wrapper> */}
+                </Wrapper>
+              </WholeWrapper>
+            }
+            closable={false}
+            placement={`left`}
+            onClose={DrawToggle}
+            visible={visible}
+            width={`100%`}>
+            <Wrapper al={`flex-start`}>
+              <Wrapper
+                dr={`row`}
+                ju={`space-between`}
+                borderBottom={`1px solid #efeaea`}
+                padding={`10px 15px`}
+                onClick={() => MobileSubMenuToggle(`1`)}
+                cursor={`pointer`}>
                 <Wrapper
                   width={`auto`}
-                  onClick={() => moveLinkHandler(`/`)}
-                  cursor={`pointer`}>
-                  <Image
-                    width={`auto`}
-                    src={`https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/willmarkets/assets/images/logo/logo_hover.png`}
-                  />
+                  cursor={`pointer`}
+                  onClick={() => MobileSubMenuToggle(`1`)}>
+                  {t(`5`)}
                 </Wrapper>
-                <Wrapper width={`auto`} onClick={DrawToggle} cursor={`pointer`}>
-                  <CloseOutlined style={{ fontSize: "22px" }} />
+
+                <Wrapper width={`auto`} cursor={`pointer`}>
+                  <CaretDownOutlined onClick={() => MobileSubMenuToggle(`1`)} />
                 </Wrapper>
+                {MobileSubMenu1 && (
+                  <Wrapper
+                    al={`flex-start`}
+                    padding={`4px 10px`}
+                    cursor={`pointer`}>
+                    <Wrapper
+                      width={`auto`}
+                      padding={`5px 0 2px`}
+                      fontSize={`13px`}
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        moveLinkHandler(`/company/intro`);
+                      }}>
+                      • {t(`4`)}
+                    </Wrapper>
+                    <Wrapper
+                      width={`auto`}
+                      padding={`5px 0 2px`}
+                      fontSize={`13px`}
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        moveLinkHandler(`/company/terms`);
+                      }}>
+                      • {t(`6`)}
+                    </Wrapper>
+                    <Wrapper
+                      width={`auto`}
+                      padding={`5px 0 2px`}
+                      fontSize={`13px`}
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        moveLinkHandler(`/company/privacy`);
+                      }}>
+                      • {t(`7`)}
+                    </Wrapper>
+                  </Wrapper>
+                )}
               </Wrapper>
 
               <Wrapper
                 dr={`row`}
-                margin={`5px 0 0 0`}
-                bgColor={`#231d21`}
-                padding={`10px 20px`}>
-                {me ? (
-                  <Wrapper
-                    width={`25%`}
-                    cursor={`pointer`}
-                    color={`#fff`}
-                    onClick={() => logoutUserHandler()}>
-                    {t(`1`)}
-                  </Wrapper>
-                ) : (
-                  <Wrapper
-                    width={`25%`}
-                    cursor={`pointer`}
-                    color={`#fff`}
-                    onClick={() => moveLinkHandler(`/login`)}>
-                    {t(`2`)}
-                  </Wrapper>
-                )}
-                {me && (
-                  <Wrapper
-                    width={`25%`}
-                    color={`#575252`}
-                    cursor={`pointer`}
-                    color={`#fff`}
-                    onClick={() => moveLinkHandler(`/user/mypage`)}>
-                    마이페이지
-                  </Wrapper>
-                )}
-                {!me && (
-                  <Wrapper
-                    width={`25%`}
-                    cursor={`pointer`}
-                    color={`#fff`}
-                    onClick={() => moveLinkHandler(`/signup`)}>
-                    {t(`3`)}
-                  </Wrapper>
-                )}
-
+                ju={`space-between`}
+                borderBottom={`1px solid #efeaea`}
+                padding={`10px 15px`}
+                onClick={() => MobileSubMenuToggle(`2`)}
+                cursor={`pointer`}>
                 <Wrapper
-                  width={`25%`}
+                  width={`auto`}
                   cursor={`pointer`}
-                  color={`#fff`}
-                  onClick={() => moveLinkHandler(`/support`)}>
-                  {t(`18`)}
+                  onClick={() => MobileSubMenuToggle(`2`)}>
+                  {t(`9`)}
                 </Wrapper>
 
-                <Wrapper width={`25%`} cursor={`pointer`} color={`#fff`}>
-                  <Combo
-                    width={`110px`}
-                    padding={`0`}
-                    onMouseOver={() => setComboLanguage(true)}>
-                    <ComboTitle color={`#fff`}>
-                      <Wrapper fontSize={`13px`}>Language</Wrapper>
-                      <CaretDownOutlined />
-                    </ComboTitle>
-
-                    <ComboList
-                      isView={comboLanguage}
-                      onClick={() => setComboLanguage(false)}>
-                      <ComboListItem
-                        bgColor={`#000`}
-                        onClick={() => i18n.changeLanguage("en")}>
-                        English
-                      </ComboListItem>
-                      <ComboListItem
-                        bgColor={`#000`}
-                        onClick={() => i18n.changeLanguage("ko")}>
-                        한국어
-                      </ComboListItem>
-                    </ComboList>
-                  </Combo>
+                <Wrapper width={`auto`} cursor={`pointer`}>
+                  <CaretDownOutlined onClick={() => MobileSubMenuToggle(`2`)} />
                 </Wrapper>
+                {MobileSubMenu2 && (
+                  <Wrapper al={`flex-start`} cursor={`pointer`}>
+                    <Wrapper
+                      padding={`5px 0 2px`}
+                      width={`auto`}
+                      fontSize={`13px`}
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        moveLinkHandler(`/trading/forex`);
+                      }}>
+                      • Forex
+                    </Wrapper>
+                    <Wrapper
+                      width={`auto`}
+                      padding={`2px`}
+                      fontSize={`13px`}
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        moveLinkHandler(`/trading/ecn`);
+                      }}>
+                      • ECN
+                    </Wrapper>
+
+                    <Wrapper
+                      width={`auto`}
+                      padding={`2px`}
+                      fontSize={`13px`}
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        moveLinkHandler(`/trading/stp`);
+                      }}>
+                      • STP
+                    </Wrapper>
+
+                    <Wrapper
+                      width={`auto`}
+                      padding={`2px`}
+                      fontSize={`13px`}
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        moveLinkHandler(`/trading/spread`);
+                      }}>
+                      • {t(`10`)}
+                    </Wrapper>
+
+                    <Wrapper
+                      width={`auto`}
+                      padding={`2px`}
+                      fontSize={`13px`}
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        moveLinkHandler(`/trading/margin`);
+                      }}>
+                      • {t(`11`)}
+                    </Wrapper>
+
+                    <Wrapper
+                      width={`auto`}
+                      padding={`2px`}
+                      fontSize={`13px`}
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        moveLinkHandler(`/trading/time`);
+                      }}>
+                      • {t(`13`)}
+                    </Wrapper>
+                  </Wrapper>
+                )}
               </Wrapper>
-            </WholeWrapper>
-          }
-          closable={false}
-          placement={`left`}
-          onClose={DrawToggle}
-          visible={visible}
-          width={`100%`}>
-          <Wrapper al={`flex-start`}>
-            <Wrapper
-              dr={`row`}
-              ju={`space-between`}
-              borderBottom={`1px solid #efeaea`}
-              padding={`10px 15px`}
-              onClick={() => MobileSubMenuToggle(`1`)}
-              cursor={`pointer`}>
+
               <Wrapper
-                width={`auto`}
-                cursor={`pointer`}
-                onClick={() => MobileSubMenuToggle(`1`)}>
-                {t(`5`)}
-              </Wrapper>
-
-              <Wrapper width={`auto`} cursor={`pointer`}>
-                <CaretDownOutlined onClick={() => MobileSubMenuToggle(`1`)} />
-              </Wrapper>
-              {MobileSubMenu1 && (
+                dr={`row`}
+                ju={`space-between`}
+                padding={`10px 15px`}
+                borderBottom={`1px solid #efeaea`}
+                onClick={() => MobileSubMenuToggle(`3`)}
+                cursor={`pointer`}>
                 <Wrapper
-                  al={`flex-start`}
-                  padding={`4px 10px`}
-                  cursor={`pointer`}>
-                  <Wrapper
-                    width={`auto`}
-                    fontSize={`13px`}
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      moveLinkHandler(`/company/intro`);
-                    }}>
-                    • {t(`4`)}
-                  </Wrapper>
-                  <Wrapper
-                    width={`auto`}
-                    fontSize={`13px`}
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      moveLinkHandler(`/company/terms`);
-                    }}>
-                    • {t(`6`)}
-                  </Wrapper>
-                  <Wrapper
-                    width={`auto`}
-                    fontSize={`13px`}
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      moveLinkHandler(`/company/privacy`);
-                    }}>
-                    • {t(`7`)}
-                  </Wrapper>
+                  width={`auto`}
+                  cursor={`pointer`}
+                  onClick={() => MobileSubMenuToggle(`3`)}>
+                  {t(`14`)}
                 </Wrapper>
-              )}
-            </Wrapper>
 
-            <Wrapper
-              dr={`row`}
-              ju={`space-between`}
-              borderBottom={`1px solid #efeaea`}
-              padding={`10px 15px`}
-              onClick={() => MobileSubMenuToggle(`2`)}
-              cursor={`pointer`}>
+                <Wrapper width={`auto`} cursor={`pointer`}>
+                  <CaretDownOutlined onClick={() => MobileSubMenuToggle(`3`)} />
+                </Wrapper>
+                {MobileSubMenu3 && (
+                  <Wrapper al={`flex-start`} cursor={`pointer`}>
+                    <Wrapper
+                      width={`auto`}
+                      padding={`5px 0 2px`}
+                      fontSize={`13px`}
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        moveLinkHandler(`/platform/pc`);
+                      }}>
+                      • {t(`15`)}
+                    </Wrapper>
+                    <Wrapper
+                      width={`auto`}
+                      padding={`5px 0 2px`}
+                      fontSize={`13px`}
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        moveLinkHandler(`/platform/mobile`);
+                      }}>
+                      • {t(`16`)}
+                    </Wrapper>
+                  </Wrapper>
+                )}
+              </Wrapper>
+
               <Wrapper
-                width={`auto`}
+                al={`flex-start`}
+                width={`100%`}
                 cursor={`pointer`}
-                onClick={() => MobileSubMenuToggle(`2`)}>
-                {t(`9`)}
+                padding={`10px 15px`}
+                borderBottom={`1px solid #efeaea`}
+                onClick={() => moveLinkHandler(`/user`)}>
+                {t(`17`)}
               </Wrapper>
 
-              <Wrapper width={`auto`} cursor={`pointer`}>
-                <CaretDownOutlined onClick={() => MobileSubMenuToggle(`2`)} />
-              </Wrapper>
-              {MobileSubMenu2 && (
-                <Wrapper
-                  al={`flex-start`}
-                  padding={`4px 10px`}
-                  cursor={`pointer`}>
-                  <Wrapper
-                    width={`auto`}
-                    fontSize={`13px`}
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      moveLinkHandler(`/trading/forex`);
-                    }}>
-                    • Forex
-                  </Wrapper>
-                  <Wrapper
-                    width={`auto`}
-                    padding={`4px 0`}
-                    fontSize={`13px`}
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      moveLinkHandler(`/trading/ecn`);
-                    }}>
-                    • ECN
-                  </Wrapper>
-
-                  <Wrapper
-                    width={`auto`}
-                    padding={`4px 0`}
-                    fontSize={`13px`}
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      moveLinkHandler(`/trading/stp`);
-                    }}>
-                    • STP
-                  </Wrapper>
-
-                  <Wrapper
-                    width={`auto`}
-                    padding={`4px 0`}
-                    fontSize={`13px`}
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      moveLinkHandler(`/trading/spread`);
-                    }}>
-                    • {t(`10`)}
-                  </Wrapper>
-
-                  <Wrapper
-                    width={`auto`}
-                    padding={`4px 0`}
-                    fontSize={`13px`}
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      moveLinkHandler(`/trading/margin`);
-                    }}>
-                    • {t(`11`)}
-                  </Wrapper>
-
-                  <Wrapper
-                    width={`auto`}
-                    padding={`4px 0`}
-                    fontSize={`13px`}
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      moveLinkHandler(`/trading/time`);
-                    }}>
-                    • {t(`13`)}
-                  </Wrapper>
-                </Wrapper>
-              )}
-            </Wrapper>
-
-            <Wrapper
-              dr={`row`}
-              ju={`space-between`}
-              padding={`10px 15px`}
-              borderBottom={`1px solid #efeaea`}
-              onClick={() => MobileSubMenuToggle(`3`)}
-              cursor={`pointer`}>
               <Wrapper
-                width={`auto`}
+                al={`flex-start`}
+                width={`100%`}
+                padding={`10px 15px`}
                 cursor={`pointer`}
-                onClick={() => MobileSubMenuToggle(`3`)}>
-                {t(`14`)}
+                borderBottom={`1px solid #efeaea`}
+                onClick={() => moveLinkHandler(`/support`)}>
+                {t(`18`)}
               </Wrapper>
-
-              <Wrapper width={`auto`} cursor={`pointer`}>
-                <CaretDownOutlined onClick={() => MobileSubMenuToggle(`3`)} />
-              </Wrapper>
-              {MobileSubMenu3 && (
-                <Wrapper
-                  al={`flex-start`}
-                  padding={`4px 10px`}
-                  cursor={`pointer`}>
-                  <Wrapper
-                    width={`auto`}
-                    padding={`4px 0`}
-                    fontSize={`13px`}
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      moveLinkHandler(`/platform/pc`);
-                    }}>
-                    • {t(`15`)}
-                  </Wrapper>
-                  <Wrapper
-                    width={`auto`}
-                    padding={`4px 0`}
-                    fontSize={`13px`}
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      moveLinkHandler(`/platform/mobile`);
-                    }}>
-                    • {t(`16`)}
-                  </Wrapper>
-                </Wrapper>
-              )}
             </Wrapper>
-
-            <Wrapper
-              al={`flex-start`}
-              width={`100%`}
-              cursor={`pointer`}
-              padding={`10px 15px`}
-              borderBottom={`1px solid #efeaea`}
-              onClick={() => moveLinkHandler(`/support`)}>
-              {t(`17`)}
-            </Wrapper>
-
-            <Wrapper
-              al={`flex-start`}
-              width={`100%`}
-              padding={`10px 15px`}
-              cursor={`pointer`}
-              borderBottom={`1px solid #efeaea`}
-              onClick={() => moveLinkHandler(`/support`)}>
-              {t(`18`)}
-            </Wrapper>
-          </Wrapper>
-        </MobileDrawer>
-      </Wrapper>
+          </MobileDrawer>
+        </Wrapper>
+      )}
       {/* mobile */}
       {/* <MobileRow justify={`center`} className={headerScroll && "background"}>
         <ColWrapper span={11} al={`flex-start`}>
@@ -907,4 +919,4 @@ const AppHeader = ({ children, width }) => {
   );
 };
 
-export default withResizeDetector(AppHeader);
+export default AppHeader;

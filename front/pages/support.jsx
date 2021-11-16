@@ -132,6 +132,12 @@ const FormButton = styled(CommonButton)`
   }
 `;
 
+const ModalView = styled(Modal)`
+  & .ant-modal-wrap {
+    z-index: 10000;
+  }
+`;
+
 const Support = () => {
   ////// VARIABLES //////
 
@@ -315,8 +321,7 @@ const Support = () => {
             color={`#fff`}
             margin={`22px 0 5px`}
             textAlign={`center`}
-            fontSize={width < 570 ? `17px` : `20px`}
-          >
+            fontSize={width < 570 ? `17px` : `20px`}>
             {t(`8`)}
             <br />
             {t(`9`)}
@@ -325,8 +330,7 @@ const Support = () => {
           <Wrapper
             dr={width < 950 ? `column` : `row`}
             ju={`flex-start`}
-            margin={width < 950 ? `30px 0 0 0` : `100px 0 0 0`}
-          >
+            margin={width < 950 ? `30px 0 0 0` : `100px 0 0 0`}>
             <Wrapper width={`55%`}>
               <Image
                 src={`https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/willmarkets/assets/images/consulting/image_consulting.png`}
@@ -338,8 +342,7 @@ const Support = () => {
                 bgColor={Theme.white_C}
                 radius={`8px`}
                 padding={`50px 15px 60px`}
-                width={`400px`}
-              >
+                width={`400px`}>
                 <Wrapper dr={`row`} al={`normal`}>
                   <Wrapper width={`85px`} al={`flex-start`} ju={`flex-end`}>
                     <TextLabel margin={`0 25px 0 0 `}>{t(`10`)}</TextLabel>
@@ -371,8 +374,7 @@ const Support = () => {
                       listHeight={`270px`}
                       border={`none`}
                       borderBottom={`1px solid #dfdfdf !important`}
-                      onClick={() => setComboCountryNo(!comboCountryNo)}
-                    >
+                      onClick={() => setComboCountryNo(!comboCountryNo)}>
                       <ComboTitle>
                         <Wrapper>{inputCountryNo.value || `Select`}</Wrapper>
                         <CaretDownOutlined />
@@ -386,8 +388,7 @@ const Support = () => {
                               isActive={inputCountryNo.value === data.value}
                               onClick={() =>
                                 inputCountryNo.setValue(data.value)
-                              }
-                            >
+                              }>
                               {data.name} ({data.value})
                             </ComboListItem>
                           );
@@ -428,8 +429,7 @@ const Support = () => {
                   </Wrapper>
                   <Wrapper
                     width={`calc(100% - 90px)`}
-                    borderBottom={"1px solid #e3e3e3"}
-                  >
+                    borderBottom={"1px solid #e3e3e3"}>
                     <Content width={`100%`} {...inputContent} />
                   </Wrapper>
                 </Wrapper>
@@ -448,8 +448,7 @@ const Support = () => {
                   width={`auto`}
                   opacity={`0.6`}
                   cursor={`pointer`}
-                  onClick={() => inputAgree.setValue(!inputAgree.value)}
-                >
+                  onClick={() => inputAgree.setValue(!inputAgree.value)}>
                   {t(`14`)}
                 </Wrapper>
                 <Wrapper
@@ -460,8 +459,7 @@ const Support = () => {
                   radius={`5px`}
                   padding={`0 6px`}
                   bgColor={"#8b8686"}
-                  onClick={toggleModalHandler}
-                >
+                  onClick={toggleModalHandler}>
                   {t(`15`)}
                 </Wrapper>
               </Wrapper>
@@ -474,8 +472,7 @@ const Support = () => {
                   fontSize={width < 450 ? `22px` : `24px`}
                   padding={width < 450 ? `5px 45px 7px` : `6px 50px 8px`}
                   radius={`6px`}
-                  onClick={createQuestionHandler}
-                >
+                  onClick={createQuestionHandler}>
                   {t(`7`)}
                 </CommonButton>
               </Wrapper>
@@ -483,7 +480,7 @@ const Support = () => {
           </Wrapper>
         </RsWrapper>
 
-        <Modal
+        <ModalView
           visible={toggleModal}
           width={width < 700 ? `350px` : `500px`}
           title={`개인정보 수집 및 이용`}
@@ -494,18 +491,15 @@ const Support = () => {
               width={`70px`}
               height={`35px`}
               fontSize={`15px`}
-              onClick={toggleModalHandler}
-            >
+              onClick={toggleModalHandler}>
               확인
             </FormButton>,
-          ]}
-        >
+          ]}>
           <Wrapper
             width={`auto`}
             height={`300px`}
             overflow={`auto`}
-            padding={`10px`}
-          >
+            padding={`10px`}>
             <PreText>
               {i18next.language === `en`
                 ? `
@@ -842,7 +836,7 @@ const Support = () => {
                 업데이트되었습니다. 그것은 모든 이전 버전을 대체합니다.`}
             </PreText>
           </Wrapper>
-        </Modal>
+        </ModalView>
       </Wrapper>
     </ClientLayout>
   );

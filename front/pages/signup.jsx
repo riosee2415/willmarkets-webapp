@@ -841,7 +841,9 @@ const Signup = () => {
                             <CaretDownOutlined />
                           </ComboTitle>
 
-                          <ComboList isView={comboCountryNo} width={`180%`}>
+                          <ComboList
+                            isView={comboCountryNo}
+                            width={width < 600 ? `100%` : `180%`}>
                             {countryList.map((data, idx) => {
                               return (
                                 <ComboListItem

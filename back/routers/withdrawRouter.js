@@ -162,6 +162,9 @@ router.patch("/updatePermit", isAdminCheck, async (req, res, next) => {
 
     const updateData = await Withdraw.findOne({
       where: { id: parseInt(id) },
+      include: {
+        model: User,
+      },
     });
 
     const updateResult = await Withdraw.update(
@@ -200,19 +203,16 @@ router.patch("/updatePermit", isAdminCheck, async (req, res, next) => {
             </div>
 
             <div style="color: #0b0b0b; padding: 50px 0; font-size: 14px;">
-            아래 계좌로 출금이 완료되었습니다.
+            ${updateData.User.username}님
             <br />
+            willmarkets 플랫폼을 이용해주셔서 감사합니다.
             <br />
-
-            출금계좌 : ${updateData.selectBank}
+            입금신청이 성공되었습니다.
             <br />
-            암호화폐 : ${updateData.priceType}
+            담당부서 심사가 필요합니다.
             <br />
-            월릿주소 : ${updateData.walletAddress}
+            자세한 내용은 홈페이지에서 확인바랍니다.
             <br />
-            출금금액 : ${updateData.price}
-            <br />
-            자세한 내용은 홈페이지에서 확인하세요 !
             <br />
             </div>
             <div>

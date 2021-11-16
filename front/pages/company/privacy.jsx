@@ -31,6 +31,7 @@ const Title = styled(Wrapper)`
   justify-content: flex-start;
   padding: 20px 0 0 0;
   color: #000;
+  flex-wrap: ${(props) => props.wrap || `wrap`};
 
   & > div.number {
     width: 30px;
@@ -75,10 +76,11 @@ const Privacy = () => {
       <SubBanner />
       <WholeWrapper>
         {i18next.language === "ko" ? (
-          <RsWrapper padding={width < 1100 ? `50px 100px` : `50px 245px`}>
+          <RsWrapper padding={width < 1100 ? `50px 60px` : `50px 245px`}>
             <Wrapper
               fontSize={width < 600 ? `30px` : `36px`}
-              fontWeight={`700`}>
+              fontWeight={`700`}
+              textAlign={`center`}>
               WILLMARKETS 의 개인 정보 보호 정책
             </Wrapper>
             <Title>
@@ -87,7 +89,7 @@ const Privacy = () => {
               </Wrapper>
               소개
             </Title>
-            <SubTitle padding={`14px 0 0 43px`}>
+            <SubTitle padding={width < 800 ? `14px 0 0 10px` : `14px 0 0 43px`}>
               <Wrapper width={`60px`} fontWeight={`500`}>
                 1.1.
               </Wrapper>
@@ -98,7 +100,7 @@ const Privacy = () => {
                 보호 규정)에 따라 구현되었습니다.
               </Content>
             </SubTitle>
-            <SubTitle>
+            <SubTitle padding={width < 800 ? `14px 0 0 10px` : `14px 0 0 43px`}>
               <Wrapper width={`60px`} fontWeight={`500`}>
                 1.2.
               </Wrapper>
@@ -119,7 +121,7 @@ const Privacy = () => {
               </Wrapper>
               정의
             </Title>
-            <SubTitle>
+            <SubTitle padding={width < 800 ? `14px 0 0 10px` : `14px 0 0 43px`}>
               <Wrapper width={`60px`} fontWeight={`500`}>
                 2.1.
               </Wrapper>
@@ -134,7 +136,7 @@ const Privacy = () => {
                 온라인 커뮤니티 등)를 사용했거나 사용할 의향이 있는 모든 자연인
               </Content>
             </SubTitle>
-            <SubTitle padding={`10px 0 0 43px`}>
+            <SubTitle padding={width < 800 ? `14px 0 0 10px` : `14px 0 0 43px`}>
               <Wrapper width={`60px`} fontWeight={`500`}>
                 2.2.
               </Wrapper>
@@ -148,7 +150,7 @@ const Privacy = () => {
                 – WILLMARKETS의 현재 개인 정보 보호 정책;
               </Content>
             </SubTitle>
-            <SubTitle padding={`0 0 0 43px`}>
+            <SubTitle padding={width < 800 ? `14px 0 0 10px` : `14px 0 0 43px`}>
               <Wrapper width={`60px`} fontWeight={`500`}>
                 2.3.
               </Wrapper>
@@ -163,7 +165,7 @@ const Privacy = () => {
                 섹션 3을 참조하십시오.
               </Content>
             </SubTitle>
-            <SubTitle padding={`0 0 0 43px`}>
+            <SubTitle padding={width < 800 ? `14px 0 0 10px` : `14px 0 0 43px`}>
               <Wrapper width={`60px`} fontWeight={`500`}>
                 2.4.
               </Wrapper>
@@ -178,7 +180,7 @@ const Privacy = () => {
                 전송, 삭제 등)
               </Content>
             </SubTitle>
-            <SubTitle padding={`0 0 0 43px`}>
+            <SubTitle padding={width < 800 ? `14px 0 0 10px` : `14px 0 0 43px`}>
               <Wrapper width={`60px`} fontWeight={`500`}>
                 2.5.
               </Wrapper>
@@ -192,7 +194,7 @@ const Privacy = () => {
                 - 회사에서 제공하는 모든 서비스
               </Content>
             </SubTitle>
-            <SubTitle padding={`0 0 0 43px`}>
+            <SubTitle padding={width < 800 ? `14px 0 0 10px` : `14px 0 0 43px`}>
               <Wrapper width={`60px`} fontWeight={`500`}>
                 2.6.
               </Wrapper>
@@ -219,7 +221,7 @@ const Privacy = () => {
               </Wrapper>
               회사가 처리하는 개인 데이터의 범주
             </Title>
-            <SubTitle>
+            <SubTitle padding={width < 800 ? `14px 0 0 10px` : `14px 0 0 43px`}>
               <Wrapper width={`60px`} fontWeight={`500`}>
                 3.1.
               </Wrapper>
@@ -230,7 +232,9 @@ const Privacy = () => {
                 처리할 수 있습니다.
               </Content>
             </SubTitle>
-            <SubTitle padding={`14px 0 0 63px`} ju={`space-around`}>
+            <SubTitle
+              padding={width < 800 ? `14px 0 0 35px` : `14px 0 0 63px`}
+              ju={`space-around`}>
               <Wrapper width={`70px`} fontWeight={`500`} display={`contents`}>
                 3.2.1.
               </Wrapper>
@@ -238,7 +242,7 @@ const Privacy = () => {
                 클라이언트로부터 받은 개인 데이터:
               </Content>
             </SubTitle>
-            <SubTitle padding={`14px 0 0 155px`}>
+            <SubTitle padding={width < 800 ? `14px 0 0 50px` : `14px 0 0 90px`}>
               <Wrapper width={`70px`} fontWeight={`500`} al={`flex-start`}>
                 3.2.1.1.
               </Wrapper>
@@ -250,7 +254,7 @@ const Privacy = () => {
                 여권 번호 또는 사본)를 포함하되 이에 국한되지 않습니다.
               </Content>
             </SubTitle>
-            <SubTitle padding={`0px 0 0 155px`}>
+            <SubTitle padding={width < 800 ? `14px 0 0 50px` : `14px 0 0 90px`}>
               <Wrapper width={`70px`} fontWeight={`500`} al={`flex-start`}>
                 3.2.1.2.
               </Wrapper>
@@ -261,7 +265,7 @@ const Privacy = () => {
                 - 주소, 전화번호, 이메일 주소 및 기타 해당되는 경우
               </Content>
             </SubTitle>
-            <SubTitle padding={`0px 0 0 155px`}>
+            <SubTitle padding={width < 800 ? `14px 0 0 50px` : `14px 0 0 90px`}>
               <Wrapper width={`70px`} fontWeight={`500`} al={`flex-start`}>
                 3.2.1.3.
               </Wrapper>
@@ -272,7 +276,7 @@ const Privacy = () => {
                 – 계좌 번호, 계좌 잔고, 소득, 자산, 거래 및 기타 유사한 정보
               </Content>
             </SubTitle>
-            <SubTitle padding={`0px 0 0 155px`}>
+            <SubTitle padding={width < 800 ? `14px 0 0 50px` : `14px 0 0 90px`}>
               <Wrapper width={`70px`} fontWeight={`500`} al={`flex-start`}>
                 3.2.1.4.
               </Wrapper>
@@ -284,7 +288,7 @@ const Privacy = () => {
                 관한 정보
               </Content>
             </SubTitle>
-            <SubTitle padding={`0px 0 0 155px`}>
+            <SubTitle padding={width < 800 ? `14px 0 0 50px` : `14px 0 0 90px`}>
               <Wrapper width={`70px`} fontWeight={`500`} al={`flex-start`}>
                 3.2.1.5.
               </Wrapper>
@@ -298,7 +302,7 @@ const Privacy = () => {
                 고객이 참여한 캠페인에 대한 정보
               </Content>
             </SubTitle>
-            <SubTitle padding={`0px 0 0 155px`}>
+            <SubTitle padding={width < 800 ? `14px 0 0 50px` : `14px 0 0 90px`}>
               <Wrapper width={`70px`} fontWeight={`500`} al={`flex-start`}>
                 3.2.1.6.
               </Wrapper>
@@ -310,7 +314,9 @@ const Privacy = () => {
                 등), 고객 거래의 개시자 또는 수혜자 등
               </Content>
             </SubTitle>
-            <SubTitle padding={`14px 0 0 63px`} ju={`space-around`}>
+            <SubTitle
+              padding={width < 800 ? `14px 0 0 35px` : `14px 0 0 63px`}
+              ju={`space-around`}>
               <Wrapper width={`70px`} fontWeight={`500`} display={`contents`}>
                 3.2.2.
               </Wrapper>
@@ -319,7 +325,7 @@ const Privacy = () => {
                 애플리케이션을 사용하는 동안 자동으로 수집되는 정보:
               </Content>
             </SubTitle>
-            <SubTitle padding={`0px 0 0 155px`}>
+            <SubTitle padding={width < 800 ? `14px 0 0 50px` : `14px 0 0 90px`}>
               <Wrapper width={`70px`} fontWeight={`500`} al={`flex-start`}>
                 3.2.2.1.
               </Wrapper>
@@ -331,7 +337,7 @@ const Privacy = () => {
                 등
               </Content>
             </SubTitle>
-            <SubTitle padding={`0px 0 0 155px`}>
+            <SubTitle padding={width < 800 ? `14px 0 0 50px` : `14px 0 0 90px`}>
               <Wrapper width={`70px`} fontWeight={`500`} al={`flex-start`}>
                 3.2.1.2.
               </Wrapper>
@@ -344,7 +350,7 @@ const Privacy = () => {
                 자세한 내용은 섹션 10을 참조하십시오.
               </Content>
             </SubTitle>
-            <SubTitle>
+            <SubTitle padding={width < 800 ? `14px 0 0 10px` : `14px 0 0 43px`}>
               <Wrapper width={`60px`} fontWeight={`500`}>
                 3.3.
               </Wrapper>
@@ -359,7 +365,7 @@ const Privacy = () => {
               </Wrapper>
               개인정보 처리의 근거 및 목적
             </Title>
-            <SubTitle>
+            <SubTitle padding={width < 800 ? `14px 0 0 10px` : `14px 0 0 43px`}>
               <Wrapper width={`60px`} fontWeight={`500`}>
                 4.1.
               </Wrapper>
@@ -367,39 +373,43 @@ const Privacy = () => {
                 회사는 다음 중 하나에 해당하는 경우 개인 데이터를 처리합니다.
               </Content>
             </SubTitle>
-            <SubTitle padding={`14px 0 0 63px`}>
+            <SubTitle padding={width < 800 ? `14px 0 0 35px` : `14px 0 0 63px`}>
               <Content width={`calc(100% - 70px)`}>
                 <Wrapper fontWeight={`500`} display={`contents`}>
                   4.1.1.
+                  <br />
                 </Wrapper>
                 계약을 체결하고 이행하기 위해 개인 데이터 처리가 필요합니다.
               </Content>
             </SubTitle>
-            <SubTitle padding={`0 0 0 63px`}>
+            <SubTitle padding={width < 800 ? `0 0 0 35px` : `0 0 0 63px`}>
               <Content width={`calc(100% - 70px)`}>
                 <Wrapper fontWeight={`500`} display={`contents`}>
                   4.1.2.
+                  <br />
                 </Wrapper>
                 회사의 법적 의무를 준수하기 위해
               </Content>
             </SubTitle>
-            <SubTitle padding={`0 0 0 63px`}>
+            <SubTitle padding={width < 800 ? `0 0 0 35px` : `0 0 0 63px`}>
               <Content width={`calc(100% - 70px)`}>
                 <Wrapper fontWeight={`500`} display={`contents`}>
                   4.1.3.
+                  <br />
                 </Wrapper>
                 회사 또는 제3자의 정당한 이익을 보호하기 위해
               </Content>
             </SubTitle>
-            <SubTitle padding={`0 0 0 63px`}>
+            <SubTitle padding={width < 800 ? `0 0 0 35px` : `0 0 0 63px`}>
               <Content width={`calc(100% - 70px)`}>
                 <Wrapper fontWeight={`500`} display={`contents`}>
                   4.1.4.
+                  <br />
                 </Wrapper>
                 회사가 고객의 동의를 받은 경우
               </Content>
             </SubTitle>
-            <SubTitle padding={`0 0 0 43px`}>
+            <SubTitle padding={width < 800 ? `0px 0 0 10px` : `0px 0 0 43px`}>
               <Wrapper width={`60px`} fontWeight={`500`}>
                 4.2.
               </Wrapper>
@@ -407,56 +417,62 @@ const Privacy = () => {
                 회사는 주로 다음의 목적을 위해 개인정보를 처리합니다.
               </Content>
             </SubTitle>
-            <SubTitle padding={`0 0 0 63px`}>
+            <SubTitle padding={width < 800 ? `0 0 0 35px` : `0 0 0 63px`}>
               <Content width={`calc(100% - 70px)`}>
                 <Wrapper fontWeight={`500`} display={`contents`}>
                   4.2.1.&nbsp;
+                  <br />
                 </Wrapper>
                 서비스를 제공하고 온라인 및 모바일 리소스를 무료로 제공합니다.
               </Content>
             </SubTitle>
-            <SubTitle padding={`0 0 0 63px`}>
+            <SubTitle padding={width < 800 ? `0 0 0 35px` : `0 0 0 63px`}>
               <Content width={`calc(100% - 70px)`}>
                 <Wrapper fontWeight={`500`} display={`contents`}>
                   4.2.2.&nbsp;
+                  <br />
                 </Wrapper>
                 정책 업데이트 및 계약 조건 변경을 포함한 관리 정보 전송
               </Content>
             </SubTitle>
-            <SubTitle padding={`0 0 0 63px`}>
+            <SubTitle padding={width < 800 ? `0 0 0 35px` : `0 0 0 63px`}>
               <Content width={`calc(100% - 70px)`}>
                 <Wrapper fontWeight={`500`} display={`contents`}>
                   4.2.3.&nbsp;
+                  <br />
                 </Wrapper>
                 WILLMARKETS Group 제안 및 기타 리소스와 관련하여 고객에게 유용할
                 수 있는 서비스, 제품, 교육 자료, 예정된 이벤트 및 기타 관련
                 정보에 대한 정보를 고객에게 제공하기 위해
               </Content>
             </SubTitle>{" "}
-            <SubTitle padding={`0 0 0 63px`}>
+            <SubTitle padding={width < 800 ? `0 0 0 35px` : `0 0 0 63px`}>
               <Content width={`calc(100% - 70px)`}>
                 <Wrapper fontWeight={`500`} display={`contents`}>
                   4.2.4.&nbsp;
+                  <br />
                 </Wrapper>
                 자금 세탁 방지 및 테러 자금 조달과 관련된 위험과 거래 관련
                 위험을 평가하고 완화합니다.
               </Content>
             </SubTitle>
-            <SubTitle padding={`0 0 0 63px`}>
+            <SubTitle padding={width < 800 ? `0 0 0 35px` : `0 0 0 63px`}>
               <Content width={`calc(100% - 70px)`}>
                 <Wrapper fontWeight={`500`} display={`contents`}>
                   4.2.5.&nbsp;
+                  <br />
                 </Wrapper>
                 법적 의무 및/또는 정부 기관의 요청을 준수하기 위해
               </Content>
             </SubTitle>
-            <SubTitle padding={`0 0 0 63px`}>
+            <SubTitle padding={width < 800 ? `0 0 0 35px` : `0 0 0 63px`}>
               <Content width={`calc(100% - 70px)`}>
                 <Wrapper
                   fontWeight={`500`}
                   display={`contents`}
                   margin={`0 10px 0 0 `}>
                   4.2.6.&nbsp;
+                  <br />
                 </Wrapper>
                 회사의 정당한 이익과 관련하여.
               </Content>
@@ -467,7 +483,7 @@ const Privacy = () => {
               </Wrapper>
               고객 개인 데이터 공개
             </Title>
-            <SubTitle>
+            <SubTitle padding={width < 800 ? `14px 0 0 10px` : `14px 0 0 43px`}>
               <Wrapper width={`60px`} fontWeight={`500`}>
                 5.1.
               </Wrapper>
@@ -476,19 +492,21 @@ const Privacy = () => {
                 공개할 수 있는 권한이 있습니다.
               </Content>
             </SubTitle>
-            <SubTitle padding={`14px 0 0 63px`}>
+            <SubTitle padding={width < 800 ? `0 0 0 35px` : `0 0 0 63px`}>
               <Content width={`calc(100% - 70px)`}>
                 <Wrapper fontWeight={`500`} display={`contents`}>
                   5.1.1.
+                  <br />
                 </Wrapper>
                 지리적 위치에 관계없이 회사의 모든 사무소 및 계열사를 포함하여
                 WILLMARKETS Group 내
               </Content>
             </SubTitle>
-            <SubTitle padding={`14px 0 0 63px`}>
+            <SubTitle padding={width < 800 ? `0 0 0 35px` : `0 0 0 63px`}>
               <Content width={`calc(100% - 70px)`}>
                 <Wrapper fontWeight={`500`} display={`contents`}>
                   5.1.2.
+                  <br />
                 </Wrapper>
                 개인 데이터 처리와 관련하여 적절한 보호 및 제한을 보장하는 서면
                 계약에 따라 WILLMARKETS Group에 서비스를 제공하는 제공자를
@@ -497,10 +515,11 @@ const Privacy = () => {
                 클라우드 서비스 및 기타를 제공하는 회사가 포함될 수 있습니다.
               </Content>
             </SubTitle>
-            <SubTitle padding={`14px 0 0 63px`}>
+            <SubTitle padding={width < 800 ? `0 0 0 35px` : `0 0 0 63px`}>
               <Content width={`calc(100% - 70px)`}>
                 <Wrapper fontWeight={`500`} display={`contents`}>
                   5.1.3.
+                  <br />
                 </Wrapper>
                 권한 있는 정부, 규제 기관 또는 기타 법 집행 기관/당국에
                 전달합니다.
@@ -512,7 +531,7 @@ const Privacy = () => {
               </Wrapper>
               개인 데이터 전송
             </Title>
-            <SubTitle>
+            <SubTitle padding={width < 800 ? `14px 0 0 10px` : `14px 0 0 43px`}>
               <Wrapper width={`60px`} fontWeight={`500`}>
                 6.1.
               </Wrapper>
@@ -522,7 +541,7 @@ const Privacy = () => {
                 대로 개인 데이터를 제3국으로 전송할 수 있습니다.
               </Content>
             </SubTitle>
-            <SubTitle>
+            <SubTitle padding={width < 800 ? `14px 0 0 10px` : `14px 0 0 43px`}>
               <Wrapper width={`60px`} fontWeight={`500`}>
                 6.2.
               </Wrapper>
@@ -532,26 +551,29 @@ const Privacy = () => {
                 데이터를 전송하거나 액세스할 수 있도록 합니다.
               </Content>
             </SubTitle>
-            <SubTitle padding={`14px 0 0 63px`}>
+            <SubTitle padding={width < 800 ? `0 0 0 35px` : `0 0 0 63px`}>
               <Content width={`calc(100% - 70px)`}>
                 <Wrapper fontWeight={`500`} display={`contents`}>
                   6.2.1.
+                  <br />
                 </Wrapper>
                 이는 법률 및 규정에 따라 요구됩니다.
               </Content>
             </SubTitle>
-            <SubTitle padding={`14px 0 0 63px`}>
+            <SubTitle padding={width < 800 ? `0 0 0 35px` : `0 0 0 63px`}>
               <Content width={`calc(100% - 70px)`}>
                 <Wrapper fontWeight={`500`} display={`contents`}>
                   6.2.2.
+                  <br />
                 </Wrapper>
                 이는 서비스에 대한 계약을 체결하거나 이행하는 데 필요합니다.
               </Content>
             </SubTitle>
-            <SubTitle padding={`14px 0 0 63px`}>
+            <SubTitle padding={width < 800 ? `0 0 0 35px` : `0 0 0 63px`}>
               <Content width={`calc(100% - 70px)`}>
                 <Wrapper fontWeight={`500`} display={`contents`}>
                   6.2.3.
+                  <br />
                 </Wrapper>
                 고객은 EEA 외부에서 데이터를 처리하는 데 동의했습니다.
               </Content>
@@ -562,7 +584,7 @@ const Privacy = () => {
               </Wrapper>
               보유 기간
             </Title>
-            <SubTitle>
+            <SubTitle padding={width < 800 ? `14px 0 0 10px` : `14px 0 0 43px`}>
               <Wrapper width={`60px`} fontWeight={`500`}>
                 7.1.
               </Wrapper>
@@ -572,7 +594,7 @@ const Privacy = () => {
                 대로 개인 데이터를 제3국으로 전송할 수 있습니다.
               </Content>
             </SubTitle>
-            <SubTitle>
+            <SubTitle padding={width < 800 ? `14px 0 0 10px` : `14px 0 0 43px`}>
               <Wrapper width={`60px`} fontWeight={`500`}>
                 7.2.
               </Wrapper>
@@ -603,7 +625,7 @@ const Privacy = () => {
               </Wrapper>
               고객의 권리
             </Title>
-            <SubTitle>
+            <SubTitle padding={width < 800 ? `14px 0 0 10px` : `14px 0 0 43px`}>
               <Wrapper width={`60px`} fontWeight={`500`}>
                 9.1.
               </Wrapper>
@@ -615,7 +637,7 @@ const Privacy = () => {
                 수 있습니다.
               </Content>
             </SubTitle>
-            <SubTitle>
+            <SubTitle padding={width < 800 ? `14px 0 0 10px` : `14px 0 0 43px`}>
               <Wrapper width={`60px`} fontWeight={`500`}>
                 9.2.
               </Wrapper>
@@ -624,7 +646,7 @@ const Privacy = () => {
                 있습니다.
               </Content>
             </SubTitle>
-            <SubTitle>
+            <SubTitle padding={width < 800 ? `14px 0 0 10px` : `14px 0 0 43px`}>
               <Wrapper width={`60px`} fontWeight={`500`}>
                 9.3.
               </Wrapper>
@@ -633,7 +655,7 @@ const Privacy = () => {
                 자신의 개인 데이터를 삭제하도록 회사에 요청할 수 있습니다.
               </Content>
             </SubTitle>
-            <SubTitle>
+            <SubTitle padding={width < 800 ? `14px 0 0 10px` : `14px 0 0 43px`}>
               <Wrapper width={`60px`} fontWeight={`500`}>
                 9.4.
               </Wrapper>
@@ -642,7 +664,7 @@ const Privacy = () => {
                 내에서 회사의 개인 데이터 처리를 제한할 수 있습니다.
               </Content>
             </SubTitle>
-            <SubTitle>
+            <SubTitle padding={width < 800 ? `14px 0 0 10px` : `14px 0 0 43px`}>
               <Wrapper width={`60px`} fontWeight={`500`}>
                 9.5.
               </Wrapper>
@@ -651,7 +673,7 @@ const Privacy = () => {
                 데이터를 수신하고 이를 다른 컨트롤러에게 전송할 권리가 있습니다.
               </Content>
             </SubTitle>
-            <SubTitle>
+            <SubTitle padding={width < 800 ? `14px 0 0 10px` : `14px 0 0 43px`}>
               <Wrapper width={`60px`} fontWeight={`500`}>
                 9.6.
               </Wrapper>
@@ -660,7 +682,7 @@ const Privacy = () => {
                 합니다.
               </Content>
             </SubTitle>
-            <SubTitle>
+            <SubTitle padding={width < 800 ? `14px 0 0 10px` : `14px 0 0 43px`}>
               <Wrapper width={`60px`} fontWeight={`500`}>
                 9.7.
               </Wrapper>
@@ -676,7 +698,7 @@ const Privacy = () => {
               </Wrapper>
               고객의 권리
             </Title>
-            <SubTitle>
+            <SubTitle padding={width < 800 ? `14px 0 0 10px` : `14px 0 0 43px`}>
               <Wrapper width={`60px`} fontWeight={`500`}>
                 10.1.
               </Wrapper>
@@ -685,7 +707,7 @@ const Privacy = () => {
                 쿠키와 같은 모니터링 기술을 사용합니다.
               </Content>
             </SubTitle>
-            <SubTitle>
+            <SubTitle padding={width < 800 ? `14px 0 0 10px` : `14px 0 0 43px`}>
               <Wrapper width={`60px`} fontWeight={`500`}>
                 10.2.
               </Wrapper>
@@ -694,7 +716,7 @@ const Privacy = () => {
                 파일을 기반으로 하는 기술입니다.
               </Content>
             </SubTitle>
-            <SubTitle>
+            <SubTitle padding={width < 800 ? `14px 0 0 10px` : `14px 0 0 43px`}>
               <Wrapper width={`60px`} fontWeight={`500`}>
                 10.3.
               </Wrapper>
@@ -703,7 +725,7 @@ const Privacy = () => {
                 다음을 수행합니다.
               </Content>
             </SubTitle>
-            <SubTitle padding={`14px 0 0 63px`}>
+            <SubTitle padding={width < 800 ? `0 0 0 35px` : `0 0 0 63px`}>
               <Content width={`calc(100% - 70px)`}>
                 <Wrapper fontWeight={`500`} display={`contents`}>
                   10.3.1.
@@ -711,7 +733,7 @@ const Privacy = () => {
                 회사의 웹사이트 기능을 사용자 정의합니다.
               </Content>
             </SubTitle>
-            <SubTitle padding={`14px 0 0 63px`}>
+            <SubTitle padding={width < 800 ? `0 0 0 35px` : `0 0 0 63px`}>
               <Content width={`calc(100% - 70px)`}>
                 <Wrapper fontWeight={`500`} display={`contents`}>
                   10.3.2.
@@ -719,7 +741,7 @@ const Privacy = () => {
                 방문자 데이터의 재입력을 방지합니다.
               </Content>
             </SubTitle>
-            <SubTitle padding={`14px 0 0 63px`}>
+            <SubTitle padding={width < 800 ? `0 0 0 35px` : `0 0 0 63px`}>
               <Content width={`calc(100% - 70px)`}>
                 <Wrapper fontWeight={`500`} display={`contents`}>
                   10.3.3.
@@ -727,7 +749,7 @@ const Privacy = () => {
                 방문자의 선호도를 저장합니다.
               </Content>
             </SubTitle>
-            <SubTitle padding={`14px 0 0 63px`}>
+            <SubTitle padding={width < 800 ? `0 0 0 35px` : `0 0 0 63px`}>
               <Content width={`calc(100% - 70px)`}>
                 <Wrapper fontWeight={`500`} display={`contents`}>
                   10.3.4.
@@ -735,7 +757,7 @@ const Privacy = () => {
                 웹사이트 사용에 대한 정보를 수집합니다.
               </Content>
             </SubTitle>
-            <SubTitle>
+            <SubTitle padding={width < 800 ? `14px 0 0 10px` : `14px 0 0 43px`}>
               <Wrapper width={`60px`} fontWeight={`500`}>
                 10.4.
               </Wrapper>
@@ -744,7 +766,7 @@ const Privacy = () => {
                 제3자 쿠키를 사용합니다.
               </Content>
             </SubTitle>
-            <SubTitle>
+            <SubTitle padding={width < 800 ? `14px 0 0 10px` : `14px 0 0 43px`}>
               <Wrapper width={`60px`} fontWeight={`500`}>
                 10.5.
               </Wrapper>
@@ -778,7 +800,7 @@ const Privacy = () => {
               </Wrapper>
               최종 규정
             </Title>
-            <SubTitle>
+            <SubTitle padding={width < 800 ? `14px 0 0 10px` : `14px 0 0 43px`}>
               <Wrapper width={`60px`} fontWeight={`500`}>
                 12.1.
               </Wrapper>
@@ -792,7 +814,7 @@ const Privacy = () => {
                 것을 약속합니다.
               </Content>
             </SubTitle>
-            <SubTitle>
+            <SubTitle padding={width < 800 ? `14px 0 0 10px` : `14px 0 0 43px`}>
               <Wrapper width={`60px`} fontWeight={`500`}>
                 12.2.
               </Wrapper>
@@ -801,7 +823,7 @@ const Privacy = () => {
                 날짜에 발효됩니다.
               </Content>
             </SubTitle>
-            <SubTitle>
+            <SubTitle padding={width < 800 ? `14px 0 0 10px` : `14px 0 0 43px`}>
               <Wrapper width={`60px`} fontWeight={`500`}>
                 12.3.
               </Wrapper>
@@ -825,7 +847,7 @@ const Privacy = () => {
               </Wrapper>
               Introduction
             </Title>
-            <SubTitle padding={`14px 0 0 43px`}>
+            <SubTitle padding={width < 800 ? `14px 0 0 10px` : `14px 0 0 43px`}>
               <Wrapper width={`60px`} fontWeight={`500`}>
                 1.1.
               </Wrapper>
@@ -837,7 +859,7 @@ const Privacy = () => {
                 the residents of the European Union.
               </Content>
             </SubTitle>
-            <SubTitle>
+            <SubTitle padding={width < 800 ? `14px 0 0 10px` : `14px 0 0 43px`}>
               <Wrapper width={`60px`} fontWeight={`500`}>
                 1.2.
               </Wrapper>
@@ -860,7 +882,7 @@ const Privacy = () => {
               </Wrapper>
               Definitions
             </Title>
-            <SubTitle>
+            <SubTitle padding={width < 800 ? `14px 0 0 10px` : `14px 0 0 43px`}>
               <Wrapper width={`60px`} fontWeight={`500`}>
                 2.1.
               </Wrapper>
@@ -876,7 +898,7 @@ const Privacy = () => {
                 contests, online community, etc.) provided by the Company;
               </Content>
             </SubTitle>
-            <SubTitle padding={`10px 0 0 43px`}>
+            <SubTitle padding={width < 800 ? `14px 0 0 10px` : `14px 0 0 43px`}>
               <Wrapper width={`60px`} fontWeight={`500`}>
                 2.2.
               </Wrapper>
@@ -887,10 +909,10 @@ const Privacy = () => {
                   cursor={`pointer`}>
                   Privacy Policy
                 </Wrapper>
-                – the present Privacy Policy of WILLMARKETS 
+                – the present Privacy Policy of WILLMARKETS
               </Content>
             </SubTitle>
-            <SubTitle padding={`0 0 0 43px`}>
+            <SubTitle padding={width < 800 ? `14px 0 0 10px` : `14px 0 0 43px`}>
               <Wrapper width={`60px`} fontWeight={`500`}>
                 2.3.
               </Wrapper>
@@ -905,7 +927,7 @@ const Privacy = () => {
                 individual. For further information please see Section 3;
               </Content>
             </SubTitle>
-            <SubTitle padding={`0 0 0 43px`}>
+            <SubTitle padding={width < 800 ? `14px 0 0 10px` : `14px 0 0 43px`}>
               <Wrapper width={`60px`} fontWeight={`500`}>
                 2.4.
               </Wrapper>
@@ -921,7 +943,7 @@ const Privacy = () => {
                 etc.;
               </Content>
             </SubTitle>
-            <SubTitle padding={`0 0 0 43px`}>
+            <SubTitle padding={width < 800 ? `14px 0 0 10px` : `14px 0 0 43px`}>
               <Wrapper width={`60px`} fontWeight={`500`}>
                 2.5.
               </Wrapper>
@@ -935,7 +957,7 @@ const Privacy = () => {
                 - any services offered by the Company;
               </Content>
             </SubTitle>
-            <SubTitle padding={`0 0 0 43px`}>
+            <SubTitle padding={width < 800 ? `14px 0 0 10px` : `14px 0 0 43px`}>
               <Wrapper width={`60px`} fontWeight={`500`}>
                 2.6.
               </Wrapper>
@@ -956,13 +978,13 @@ const Privacy = () => {
                 </Wrapper>
               </Content>
             </SubTitle>
-            <Title>
+            <Title wrap={`nowrap`}>
               <Wrapper className={`number`} width={`auto`}>
                 3
               </Wrapper>
               Categories of Personal Data That the Company Process
             </Title>
-            <SubTitle>
+            <SubTitle padding={width < 800 ? `14px 0 0 10px` : `14px 0 0 43px`}>
               <Wrapper width={`60px`} fontWeight={`500`}>
                 3.1.
               </Wrapper>
@@ -974,7 +996,9 @@ const Privacy = () => {
                 relevant legal enactments.
               </Content>
             </SubTitle>
-            <SubTitle padding={`14px 0 0 63px`} ju={`space-around`}>
+            <SubTitle
+              padding={width < 800 ? `14px 0 0 35px` : `14px 0 0 63px`}
+              ju={`space-around`}>
               <Wrapper width={`70px`} fontWeight={`500`} display={`contents`}>
                 3.2.1.
               </Wrapper>
@@ -982,7 +1006,7 @@ const Privacy = () => {
                 Personal Data received from the Client:
               </Content>
             </SubTitle>
-            <SubTitle padding={`14px 0 0 155px`}>
+            <SubTitle padding={width < 800 ? `14px 0 0 50px` : `14px 0 0 90px`}>
               <Wrapper width={`70px`} fontWeight={`500`} al={`flex-start`}>
                 3.2.1.1.
               </Wrapper>
@@ -995,7 +1019,7 @@ const Privacy = () => {
                 document (e.g. passport number or copies);
               </Content>
             </SubTitle>
-            <SubTitle padding={`0px 0 0 155px`}>
+            <SubTitle padding={width < 800 ? `14px 0 0 50px` : `0px 0 0 90px`}>
               <Wrapper width={`70px`} fontWeight={`500`} al={`flex-start`}>
                 3.2.1.2.
               </Wrapper>
@@ -1007,7 +1031,7 @@ const Privacy = () => {
                 relevant;
               </Content>
             </SubTitle>
-            <SubTitle padding={`0px 0 0 155px`}>
+            <SubTitle padding={width < 800 ? `14px 0 0 50px` : `0px 0 0 90px`}>
               <Wrapper width={`70px`} fontWeight={`500`} al={`flex-start`}>
                 3.2.1.3.
               </Wrapper>
@@ -1019,7 +1043,7 @@ const Privacy = () => {
                 and other similar information;
               </Content>
             </SubTitle>
-            <SubTitle padding={`0px 0 0 155px`}>
+            <SubTitle padding={width < 800 ? `14px 0 0 50px` : `0px 0 0 90px`}>
               <Wrapper width={`70px`} fontWeight={`500`} al={`flex-start`}>
                 3.2.1.4.
               </Wrapper>
@@ -1031,7 +1055,7 @@ const Privacy = () => {
                 occupation, business activities if any, employer if any;
               </Content>
             </SubTitle>
-            <SubTitle padding={`0px 0 0 155px`}>
+            <SubTitle padding={width < 800 ? `14px 0 0 50px` : `0px 0 0 90px`}>
               <Wrapper width={`70px`} fontWeight={`500`} al={`flex-start`}>
                 3.2.1.5.
               </Wrapper>
@@ -1047,7 +1071,7 @@ const Privacy = () => {
                 participated;
               </Content>
             </SubTitle>
-            <SubTitle padding={`0px 0 0 155px`}>
+            <SubTitle padding={width < 800 ? `14px 0 0 50px` : `0px 0 0 90px`}>
               <Wrapper width={`70px`} fontWeight={`500`} al={`flex-start`}>
                 3.2.1.6.
               </Wrapper>
@@ -1060,7 +1084,9 @@ const Privacy = () => {
                 beneficiaries of the Client's transactions, etc.
               </Content>
             </SubTitle>
-            <SubTitle padding={`14px 0 0 63px`} ju={`space-around`}>
+            <SubTitle
+              padding={width < 800 ? `14px 0 0 35px` : `14px 0 0 63px`}
+              ju={`space-around`}>
               <Wrapper width={`70px`} fontWeight={`500`} display={`contents`}>
                 3.2.2.
               </Wrapper>
@@ -1069,7 +1095,7 @@ const Privacy = () => {
                 mobile or online applications operated or owned by the Company:
               </Content>
             </SubTitle>
-            <SubTitle padding={`0px 0 0 155px`}>
+            <SubTitle padding={width < 800 ? `14px 0 0 50px` : `0px 0 0 90px`}>
               <Wrapper width={`70px`} fontWeight={`500`} al={`flex-start`}>
                 3.2.2.1.
               </Wrapper>
@@ -1081,7 +1107,7 @@ const Privacy = () => {
                 about browser, time zone, etc.;
               </Content>
             </SubTitle>
-            <SubTitle padding={`0px 0 0 155px`}>
+            <SubTitle padding={width < 800 ? `14px 0 0 50px` : `0px 0 0 90px`}>
               <Wrapper width={`70px`} fontWeight={`500`} al={`flex-start`}>
                 3.2.1.2.
               </Wrapper>
@@ -1095,7 +1121,7 @@ const Privacy = () => {
                 to Section 10.
               </Content>
             </SubTitle>
-            <SubTitle>
+            <SubTitle padding={width < 800 ? `14px 0 0 10px` : `14px 0 0 43px`}>
               <Wrapper width={`60px`} fontWeight={`500`}>
                 3.3.
               </Wrapper>
@@ -1105,13 +1131,13 @@ const Privacy = () => {
                 related to such third parties.
               </Content>
             </SubTitle>
-            <Title>
+            <Title wrap={`nowrap`}>
               <Wrapper className={`number`} width={`auto`}>
                 4
               </Wrapper>
               Grounds and Purposes for the Processing of Personal Data
             </Title>
-            <SubTitle>
+            <SubTitle padding={width < 800 ? `14px 0 0 10px` : `14px 0 0 43px`}>
               <Wrapper width={`60px`} fontWeight={`500`}>
                 4.1.
               </Wrapper>
@@ -1120,7 +1146,7 @@ const Privacy = () => {
                 applies:
               </Content>
             </SubTitle>
-            <SubTitle padding={`14px 0 0 63px`}>
+            <SubTitle padding={width < 800 ? `14px 0 0 35px` : `14px 0 0 63px`}>
               <Content width={`calc(100% - 70px)`}>
                 <Wrapper fontWeight={`500`} display={`contents`}>
                   4.1.1.
@@ -1129,7 +1155,7 @@ const Privacy = () => {
                 perform a contract;
               </Content>
             </SubTitle>
-            <SubTitle padding={`0 0 0 63px`}>
+            <SubTitle padding={width < 800 ? `0 0 0 35px` : `0 0 0 63px`}>
               <Content width={`calc(100% - 70px)`}>
                 <Wrapper fontWeight={`500`} display={`contents`}>
                   4.1.2.
@@ -1137,7 +1163,7 @@ const Privacy = () => {
                 to comply with the Company’s legal obligations;
               </Content>
             </SubTitle>
-            <SubTitle padding={`0 0 0 63px`}>
+            <SubTitle padding={width < 800 ? `0 0 0 35px` : `0 0 0 63px`}>
               <Content width={`calc(100% - 70px)`}>
                 <Wrapper fontWeight={`500`} display={`contents`}>
                   4.1.3.
@@ -1146,7 +1172,7 @@ const Privacy = () => {
                 party;
               </Content>
             </SubTitle>
-            <SubTitle padding={`0 0 0 63px`}>
+            <SubTitle padding={width < 800 ? `0 0 0 35px` : `0 0 0 63px`}>
               <Content width={`calc(100% - 70px)`}>
                 <Wrapper fontWeight={`500`} display={`contents`}>
                   4.1.4.
@@ -1154,7 +1180,7 @@ const Privacy = () => {
                 if the Company receives the Client's consent.
               </Content>
             </SubTitle>
-            <SubTitle padding={`0 0 0 43px`}>
+            <SubTitle padding={width < 800 ? `14px 0 0 10px` : `14px 0 0 43px`}>
               <Wrapper width={`60px`} fontWeight={`500`}>
                 4.2.
               </Wrapper>
@@ -1163,28 +1189,31 @@ const Privacy = () => {
                 purposes:
               </Content>
             </SubTitle>
-            <SubTitle padding={`0 0 0 63px`}>
+            <SubTitle padding={width < 800 ? `0 0 0 35px` : `0 0 0 63px`}>
               <Content width={`calc(100% - 70px)`}>
                 <Wrapper fontWeight={`500`} display={`contents`}>
                   4.2.1.&nbsp;
+                  <br />
                 </Wrapper>
                 to provide Services and free of charge online and mobile
                 resources;
               </Content>
             </SubTitle>
-            <SubTitle padding={`0 0 0 63px`}>
+            <SubTitle padding={width < 800 ? `0 0 0 35px` : `0 0 0 63px`}>
               <Content width={`calc(100% - 70px)`}>
                 <Wrapper fontWeight={`500`} display={`contents`}>
                   4.2.2.&nbsp;
+                  <br />
                 </Wrapper>
                 to send administrative information, including updates of
                 policies and changes to contractual terms;
               </Content>
             </SubTitle>
-            <SubTitle padding={`0 0 0 63px`}>
+            <SubTitle padding={width < 800 ? `0 0 0 35px` : `0 0 0 63px`}>
               <Content width={`calc(100% - 70px)`}>
                 <Wrapper fontWeight={`500`} display={`contents`}>
                   4.2.3.&nbsp;
+                  <br />
                 </Wrapper>
                 to provide the Client with information about Services, products,
                 educational materials, upcoming events and other related
@@ -1192,31 +1221,34 @@ const Privacy = () => {
                 WILLMARKETS Group offers and other resources;
               </Content>
             </SubTitle>
-            <SubTitle padding={`0 0 0 63px`}>
+            <SubTitle padding={width < 800 ? `0 0 0 35px` : `0 0 0 63px`}>
               <Content width={`calc(100% - 70px)`}>
                 <Wrapper fontWeight={`500`} display={`contents`}>
                   4.2.4.&nbsp;
+                  <br />
                 </Wrapper>
                 to assess and mitigate risks related to anti-money laundering
                 and terrorism financing as well as transaction related risks;
               </Content>
             </SubTitle>
-            <SubTitle padding={`0 0 0 63px`}>
+            <SubTitle padding={width < 800 ? `0 0 0 35px` : `0 0 0 63px`}>
               <Content width={`calc(100% - 70px)`}>
                 <Wrapper fontWeight={`500`} display={`contents`}>
                   4.2.5.&nbsp;
+                  <br />
                 </Wrapper>
                 to comply with legal obligations and/ or government authorities’
                 requests;
               </Content>
             </SubTitle>
-            <SubTitle padding={`0 0 0 63px`}>
+            <SubTitle padding={width < 800 ? `0 0 0 35px` : `0 0 0 63px`}>
               <Content width={`calc(100% - 70px)`}>
                 <Wrapper
                   fontWeight={`500`}
                   display={`contents`}
                   margin={`0 10px 0 0 `}>
                   4.2.6.&nbsp;
+                  <br />
                 </Wrapper>
                 in relation to the Company’s legitimate interests.
               </Content>
@@ -1227,7 +1259,7 @@ const Privacy = () => {
               </Wrapper>
               Disclosure of Clients Personal Data
             </Title>
-            <SubTitle>
+            <SubTitle padding={width < 800 ? `14px 0 0 10px` : `14px 0 0 43px`}>
               <Wrapper width={`60px`} fontWeight={`500`}>
                 5.1.
               </Wrapper>
@@ -1236,19 +1268,21 @@ const Privacy = () => {
                 selected third parties, including:
               </Content>
             </SubTitle>
-            <SubTitle padding={`14px 0 0 63px`}>
+            <SubTitle padding={width < 800 ? `0 0 0 35px` : `0 0 0 63px`}>
               <Content width={`calc(100% - 70px)`}>
                 <Wrapper fontWeight={`500`} display={`contents`}>
                   5.1.1.
+                  <br />
                 </Wrapper>
                 within WILLMARKETS Group, including all offices and affiliates
                 of the Company, irrespective of their geographical location;
               </Content>
             </SubTitle>
-            <SubTitle padding={`14px 0 0 63px`}>
+            <SubTitle padding={width < 800 ? `0 0 0 35px` : `0 0 0 63px`}>
               <Content width={`calc(100% - 70px)`}>
                 <Wrapper fontWeight={`500`} display={`contents`}>
                   5.1.2.
+                  <br />
                 </Wrapper>
                 to selected third parties, including providers that deliver
                 services to WILLMARKETS Group under written agreements ensuring
@@ -1259,10 +1293,11 @@ const Privacy = () => {
                 others;
               </Content>
             </SubTitle>
-            <SubTitle padding={`14px 0 0 63px`}>
+            <SubTitle padding={width < 800 ? `0 0 0 35px` : `0 0 0 63px`}>
               <Content width={`calc(100% - 70px)`}>
                 <Wrapper fontWeight={`500`} display={`contents`}>
                   5.1.3.
+                  <br />
                 </Wrapper>
                 to competent governmental, regulatory or other law enforcement
                 agencies/ authorities.
@@ -1274,7 +1309,7 @@ const Privacy = () => {
               </Wrapper>
               Personal Data Transfers
             </Title>
-            <SubTitle>
+            <SubTitle padding={width < 800 ? `14px 0 0 10px` : `14px 0 0 43px`}>
               <Wrapper width={`60px`} fontWeight={`500`}>
                 6.1.
               </Wrapper>
@@ -1285,7 +1320,7 @@ const Privacy = () => {
                 to third countries, as specified in this Privacy Policy.
               </Content>
             </SubTitle>
-            <SubTitle>
+            <SubTitle padding={width < 800 ? `14px 0 0 10px` : `14px 0 0 43px`}>
               <Wrapper width={`60px`} fontWeight={`500`}>
                 6.2.
               </Wrapper>
@@ -1296,27 +1331,30 @@ const Privacy = () => {
                 following applies:
               </Content>
             </SubTitle>
-            <SubTitle padding={`14px 0 0 63px`}>
+            <SubTitle padding={width < 800 ? `0 0 0 35px` : `0 0 0 63px`}>
               <Content width={`calc(100% - 70px)`}>
                 <Wrapper fontWeight={`500`} display={`contents`}>
                   6.2.1.
+                  <br />
                 </Wrapper>
                 This is required under the laws and regulations;
               </Content>
             </SubTitle>
-            <SubTitle padding={`14px 0 0 63px`}>
+            <SubTitle padding={width < 800 ? `0 0 0 35px` : `0 0 0 63px`}>
               <Content width={`calc(100% - 70px)`}>
                 <Wrapper fontWeight={`500`} display={`contents`}>
                   6.2.2.
+                  <br />
                 </Wrapper>
                 This is necessary to enter into or to perform the agreements for
                 the Services;
               </Content>
             </SubTitle>
-            <SubTitle padding={`14px 0 0 63px`}>
+            <SubTitle padding={width < 800 ? `0 0 0 35px` : `0 0 0 63px`}>
               <Content width={`calc(100% - 70px)`}>
                 <Wrapper fontWeight={`500`} display={`contents`}>
                   6.2.3.
+                  <br />
                 </Wrapper>
                 The Client has given consent to the processing of his data
                 outside the EEA.
@@ -1328,7 +1366,7 @@ const Privacy = () => {
               </Wrapper>
               Retention Period
             </Title>
-            <SubTitle>
+            <SubTitle padding={width < 800 ? `14px 0 0 10px` : `14px 0 0 43px`}>
               <Wrapper width={`60px`} fontWeight={`500`}>
                 7.1.
               </Wrapper>
@@ -1337,7 +1375,7 @@ const Privacy = () => {
                 specified by the Company.
               </Content>
             </SubTitle>
-            <SubTitle>
+            <SubTitle padding={width < 800 ? `14px 0 0 10px` : `14px 0 0 43px`}>
               <Wrapper width={`60px`} fontWeight={`500`}>
                 7.2.
               </Wrapper>
@@ -1355,7 +1393,7 @@ const Privacy = () => {
               </Wrapper>
               Client’s Obligation
             </Title>
-            <Content padding={`40px`} padding={`10px 0 0 26px`}>
+            <Content padding={`40px`} padding={`10px 0 0 43px`}>
               The Client agrees not to hold the Company nor WILLMARKETS Group or
               any of their officers, directors, employees and affiliates liable
               for losses of any kind, including financial, suffered by the
@@ -1372,7 +1410,7 @@ const Privacy = () => {
               </Wrapper>
               Client’s Rights
             </Title>
-            <SubTitle>
+            <SubTitle padding={width < 800 ? `14px 0 0 10px` : `14px 0 0 43px`}>
               <Wrapper width={`60px`} fontWeight={`500`}>
                 9.1.
               </Wrapper>
@@ -1385,7 +1423,7 @@ const Privacy = () => {
                 resources for preparing such copy;
               </Content>
             </SubTitle>
-            <SubTitle>
+            <SubTitle padding={width < 800 ? `14px 0 0 10px` : `14px 0 0 43px`}>
               <Wrapper width={`60px`} fontWeight={`500`}>
                 9.2.
               </Wrapper>
@@ -1393,7 +1431,7 @@ const Privacy = () => {
                 The Client may request the Company to correct his Personal Data;
               </Content>
             </SubTitle>
-            <SubTitle>
+            <SubTitle padding={width < 800 ? `14px 0 0 10px` : `14px 0 0 43px`}>
               <Wrapper width={`60px`} fontWeight={`500`}>
                 9.3.
               </Wrapper>
@@ -1403,7 +1441,7 @@ const Privacy = () => {
                 the Company;
               </Content>
             </SubTitle>
-            <SubTitle>
+            <SubTitle padding={width < 800 ? `14px 0 0 10px` : `14px 0 0 43px`}>
               <Wrapper width={`60px`} fontWeight={`500`}>
                 9.4.
               </Wrapper>
@@ -1413,7 +1451,7 @@ const Privacy = () => {
                 applicable to the Company;
               </Content>
             </SubTitle>
-            <SubTitle>
+            <SubTitle padding={width < 800 ? `14px 0 0 10px` : `14px 0 0 43px`}>
               <Wrapper width={`60px`} fontWeight={`500`}>
                 9.5.
               </Wrapper>
@@ -1423,7 +1461,7 @@ const Privacy = () => {
                 transmit it to another controller;
               </Content>
             </SubTitle>
-            <SubTitle>
+            <SubTitle padding={width < 800 ? `14px 0 0 10px` : `14px 0 0 43px`}>
               <Wrapper width={`60px`} fontWeight={`500`}>
                 9.6.
               </Wrapper>
@@ -1432,7 +1470,7 @@ const Privacy = () => {
                 on written request basis;
               </Content>
             </SubTitle>
-            <SubTitle>
+            <SubTitle padding={width < 800 ? `14px 0 0 10px` : `14px 0 0 43px`}>
               <Wrapper width={`60px`} fontWeight={`500`}>
                 9.7.
               </Wrapper>
@@ -1448,16 +1486,17 @@ const Privacy = () => {
               </Wrapper>
               Cookies
             </Title>
-            <SubTitle>
+            <SubTitle padding={width < 800 ? `14px 0 0 10px` : `14px 0 0 43px`}>
               <Wrapper width={`60px`} fontWeight={`500`}>
                 10.1.
               </Wrapper>
+
               <Content width={`calc(100% - 60px)`}>
                 The Company uses monitoring technologies such as cookies to
                 provide efficient operation of the Website to its visitors;
               </Content>
             </SubTitle>
-            <SubTitle>
+            <SubTitle padding={width < 800 ? `14px 0 0 10px` : `14px 0 0 43px`}>
               <Wrapper width={`60px`} fontWeight={`500`}>
                 10.2.
               </Wrapper>
@@ -1466,7 +1505,7 @@ const Privacy = () => {
                 browser during visit of the Website;
               </Content>
             </SubTitle>
-            <SubTitle>
+            <SubTitle padding={width < 800 ? `14px 0 0 10px` : `14px 0 0 43px`}>
               <Wrapper width={`60px`} fontWeight={`500`}>
                 10.3.
               </Wrapper>
@@ -1475,39 +1514,43 @@ const Privacy = () => {
                 cookies to:
               </Content>
             </SubTitle>
-            <SubTitle padding={`14px 0 0 63px`}>
+            <SubTitle padding={width < 800 ? `14px 0 0 35px` : `14px 0 0 63px`}>
               <Content width={`calc(100% - 70px)`}>
                 <Wrapper fontWeight={`500`} display={`contents`}>
                   10.3.1.
+                  <br />
                 </Wrapper>
                 customize Company’s Website features;
               </Content>
             </SubTitle>
-            <SubTitle padding={`14px 0 0 63px`}>
+            <SubTitle padding={width < 800 ? `14px 0 0 35px` : `14px 0 0 63px`}>
               <Content width={`calc(100% - 70px)`}>
                 <Wrapper fontWeight={`500`} display={`contents`}>
                   10.3.2.
+                  <br />
                 </Wrapper>
                 avoid re-entry of visitor’s data;
               </Content>
             </SubTitle>
-            <SubTitle padding={`14px 0 0 63px`}>
+            <SubTitle padding={width < 800 ? `14px 0 0 35px` : `14px 0 0 63px`}>
               <Content width={`calc(100% - 70px)`}>
                 <Wrapper fontWeight={`500`} display={`contents`}>
                   10.3.3.
+                  <br />
                 </Wrapper>
                 store visitor’s preferences;
               </Content>
             </SubTitle>
-            <SubTitle padding={`14px 0 0 63px`}>
+            <SubTitle padding={width < 800 ? `14px 0 0 35px` : `14px 0 0 63px`}>
               <Content width={`calc(100% - 70px)`}>
                 <Wrapper fontWeight={`500`} display={`contents`}>
                   10.3.4.
+                  <br />
                 </Wrapper>
                 gather information about usage of the Website.
               </Content>
             </SubTitle>
-            <SubTitle>
+            <SubTitle padding={width < 800 ? `14px 0 0 10px` : `14px 0 0 43px`}>
               <Wrapper width={`60px`} fontWeight={`500`}>
                 10.4.
               </Wrapper>
@@ -1516,7 +1559,7 @@ const Privacy = () => {
                 web analytic services such as Google Analytics;
               </Content>
             </SubTitle>
-            <SubTitle>
+            <SubTitle padding={width < 800 ? `14px 0 0 10px` : `14px 0 0 43px`}>
               <Wrapper width={`60px`} fontWeight={`500`}>
                 10.5.
               </Wrapper>
@@ -1551,7 +1594,7 @@ const Privacy = () => {
               </Wrapper>
               Final Provisions
             </Title>
-            <SubTitle>
+            <SubTitle padding={width < 800 ? `14px 0 0 10px` : `14px 0 0 43px`}>
               <Wrapper width={`60px`} fontWeight={`500`}>
                 12.1.
               </Wrapper>
@@ -1566,7 +1609,7 @@ const Privacy = () => {
                 Company’s Website(s) and updates to the Privacy Policy.
               </Content>
             </SubTitle>
-            <SubTitle>
+            <SubTitle padding={width < 800 ? `14px 0 0 10px` : `14px 0 0 43px`}>
               <Wrapper width={`60px`} fontWeight={`500`}>
                 12.2.
               </Wrapper>
@@ -1575,7 +1618,7 @@ const Privacy = () => {
                 the date specified in the Privacy Policy;
               </Content>
             </SubTitle>
-            <SubTitle>
+            <SubTitle padding={width < 800 ? `14px 0 0 10px` : `14px 0 0 43px`}>
               <Wrapper width={`60px`} fontWeight={`500`}>
                 12.3.
               </Wrapper>

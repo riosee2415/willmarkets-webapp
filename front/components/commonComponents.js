@@ -576,7 +576,7 @@ export const ComboList = styled(Wrapper)`
   flex-wrap: nowrap;
   justify-content: flex-start;
   overflow: auto;
-  background: #fff;
+  background: ${(props) => props.bgColor || `#fff`};
   box-shadow: 0 2px 8px rgb(0 0 0 / 15%);
 
   ${(props) =>
@@ -587,12 +587,13 @@ export const ComboList = styled(Wrapper)`
 `;
 
 export const ComboListItem = styled(Wrapper)`
-  padding: 8px 10px;
+  padding: ${(props) => props.padding || `8px 10px`};
   font-size: 14px;
   cursor: pointer;
 
   &:hover {
     background: #f7f7f7;
+    color: #000;
   }
 
   ${(props) =>
@@ -604,10 +605,10 @@ export const ComboListItem = styled(Wrapper)`
 
 export const Combo = styled(Wrapper)`
   position: relative;
-  padding: 0 10px 5px;
+  padding: ${(props) => props.padding || ` 0 10px 5px`};
   width: ${(props) => props.width || `auto`};
   cursor: pointer;
-  z-index: 9999;
+  z-index: 10;
 
   ${(props) =>
     props.isBorder &&

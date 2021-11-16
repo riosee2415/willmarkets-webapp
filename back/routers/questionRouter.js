@@ -164,7 +164,7 @@ router.post("/create", async (req, res, next) => {
 
     sendSecretMail(
       `info@will-markets.com`,
-      `💌 WILLMARKET 에서 문의사항이 작성되었습니다.`,
+      `💌 WILLMARKETS 에서 문의사항이 작성되었습니다.`,
       `
     <div style="width: 50%; padding: 30px; border: 1px solid #eeeeee">
         <img src="https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/willmarkets/assets/images/logo/logo_hover.png"

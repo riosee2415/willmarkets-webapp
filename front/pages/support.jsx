@@ -57,12 +57,18 @@ const ViewContent = styled(Wrapper)`
   letter-spacing: 2px;
   word-spacing: 1px;
   line-height: 30px;
+  font-size: 13px;
+
+  & div {
+    font-size: inherit;
+  }
 `;
 
 const SubTitle = styled(Wrapper)`
   flex-direction: row;
   align-items: baseline;
   padding: ${(props) => props.padding || `14px 0 0 43px`};
+  font-size: 40px;
 `;
 
 const CustomInput = styled(TextInput)`
@@ -509,7 +515,7 @@ const Support = () => {
 
         <ModalView
           visible={toggleModal}
-          width={width < 700 ? `350px` : `500px`}
+          width={width < 700 ? `100%` : `500px`}
           title={`개인정보 수집 및 이용`}
           onCancel={toggleModalHandler}
           footer={[
@@ -525,16 +531,13 @@ const Support = () => {
           <Wrapper
             ju={`flex-start`}
             width={`auto`}
-            height={`350px`}
+            height={`450px`}
             overflow={`auto`}
             padding={`10px`}
             wrap={`nowrap`}>
             {i18next.language === "ko" ? (
               <Wrapper>
-                <Wrapper
-                  fontSize={`30px`}
-                  fontWeight={`700`}
-                  textAlign={`center`}>
+                <Wrapper al={`flex-start`} fontSize={`22px`} fontWeight={`700`}>
                   WILLMARKETS 의 개인 정보 보호 정책
                 </Wrapper>
                 <Title>
@@ -1346,8 +1349,8 @@ const Support = () => {
               </Wrapper>
             ) : (
               /////
-              <Wrapper padding={`20px 10px`}>
-                <Wrapper fontSize={`30px`} fontWeight={`700`}>
+              <Wrapper padding={`10px`}>
+                <Wrapper al={`flex-start`} fontSize={`24px`} fontWeight={`700`}>
                   PRIVACY POLICY OF WILLMARKET
                 </Wrapper>
                 <Title>

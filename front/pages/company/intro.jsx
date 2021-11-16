@@ -46,7 +46,9 @@ const Intro = () => {
             dr={`row`}
             color={`#2c2c2c`}
             fontSize={`28px`}
-            lineHeight={`1.4`}>
+            lineHeight={`1.4`}
+            textAlign={`center`}
+          >
             <Text position={`relative`} top={`1px`}>
               {t(`1`).split(`\n`)[0]}
             </Text>
@@ -59,19 +61,22 @@ const Intro = () => {
             color={`#2c2c2c`}
             fontSize={`20px`}
             lineHeight={`1.4`}
-            textAlign={`center`}>
+            textAlign={`center`}
+          >
             {t(`2`)}
             <Wrapper
               display={`inline`}
               width={`auto`}
               fontSize={`inherit`}
-              color={`inherit`}>
+              color={`inherit`}
+            >
               {t(`3`).split(`\n`)[0]}
               <Text
                 display={`inline`}
                 padding={`0 0 0 5px`}
                 color={`inherit`}
-                fontWeight={`700`}>
+                fontWeight={`700`}
+              >
                 {t(`3`).split(`\n`)[1]}
               </Text>
               {t(`3`).split(`\n`)[2]}
@@ -101,7 +106,8 @@ const Intro = () => {
               radius={`30px`}
               fontSize={`18px`}
               fontWeight={`500`}
-              onClick={() => moveLinkHandler(`/signup`)}>
+              onClick={() => moveLinkHandler(`/signup`)}
+            >
               {t(`4`)}
             </CommonButton>
           </Wrapper>
@@ -109,8 +115,13 @@ const Intro = () => {
       </Wrapper>
 
       <Wrapper color={`#fff`} bgColor={`#000105`}>
-        <RsWrapper dr={`row`} al={`normal`}>
-          <Wrapper al={`flex-start`} width={`50%`} padding={`70px 0 60px`}>
+        <RsWrapper dr={width < 900 ? `column` : `row`} al={`normal`}>
+          <Wrapper
+            textAlign={width < 900 ? `center` : ``}
+            al={width < 900 ? `center` : `flex-start`}
+            width={width < 900 ? `100%` : `50%`}
+            padding={`70px 0 60px`}
+          >
             <Wrapper dr={`row`} width={`auto`} fontSize={`25px`}>
               {t(`5`).split(`\n`)[0]}
               <Text margin={`0 0 0 8px`} padding={`0 2px`} lineHeight={`1.3`}>
@@ -122,8 +133,9 @@ const Intro = () => {
               dr={`row`}
               width={`auto`}
               margin={`30px 0 0`}
-              padding={width < 800 ? `0 20px 0 0 ` : `0 157px 0 0`}
-              fontWeight={`300`}>
+              padding={width < 900 ? `0 20px 0` : `0 157px 0 0`}
+              fontWeight={`300`}
+            >
               {t(`6`)}
               <br />
               {t(`7`)}
@@ -132,7 +144,8 @@ const Intro = () => {
                 <Text
                   display={`inline`}
                   padding={`0 0 0 5px`}
-                  fontWeight={`500`}>
+                  fontWeight={`500`}
+                >
                   {t(`8`).split(`\n`)[1]}
                 </Text>
                 {t(`8`).split(`\n`)[2]}
@@ -140,22 +153,32 @@ const Intro = () => {
             </Wrapper>
           </Wrapper>
 
-          <Wrapper position={`relative`} width={`50%`} padding={`30px 0 0`}>
+          <Wrapper
+            position={`relative`}
+            width={width < 900 ? `100%` : `50%`}
+            padding={`30px 0 0`}
+          >
             <Wrapper
               position={`absolute`}
-              top={`-50px`}
-              left={`-60px`}
-              width={`auto`}
-              zIndex={`0`}>
+              top={width < 900 ? `-120px` : `-50px`}
+              left={width < 900 ? `10px` : `-60px`}
+              width={width < 500 ? `280px` : `auto`}
+              zIndex={`0`}
+            >
               <Image
-                width={`auto`}
+                width={width < 500 ? `280px` : `auto`}
                 src={`https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/willmarkets/assets/images/logo/logo_company.png`}
               />
             </Wrapper>
 
-            <Wrapper position={`relative`} zIndex={`1`} width={`auto`}>
+            <Wrapper
+              position={`relative`}
+              zIndex={`1`}
+              width={width < 500 ? `280px` : `auto`}
+              left={width < 900 ? `30px` : ``}
+            >
               <Image
-                width={`auto`}
+                width={width < 500 ? `280px` : `auto`}
                 src={`https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/willmarkets/assets/images/introduce/image_worldwide.png`}
               />
             </Wrapper>
@@ -164,15 +187,20 @@ const Intro = () => {
       </Wrapper>
 
       <Wrapper color={`#282828`} bgColor={`#eeeeee`}>
-        <RsWrapper dr={width < 600 ? `column-reverse` : `row`} al={`normal`}>
+        <RsWrapper dr={width < 700 ? `column-reverse` : `row`} al={`normal`}>
           <Wrapper
             position={`relative`}
             al={`flex-start`}
-            width={`50%`}
-            padding={`70px 0`}>
-            <Wrapper position={`relative`} zIndex={`1`} width={`auto`}>
+            width={width < 700 ? `320px` : `50%`}
+            padding={width < 700 ? `20px 0` : `70px 0`}
+          >
+            <Wrapper
+              position={`relative`}
+              zIndex={`1`}
+              width={width < 700 ? `320px` : `auto`}
+            >
               <Image
-                width={`auto`}
+                width={width < 700 ? `320px` : `auto`}
                 src={`https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/willmarkets/assets/images/introduce/image_phone.png`}
               />
             </Wrapper>
@@ -180,14 +208,16 @@ const Intro = () => {
 
           <Wrapper
             al={`flex-end`}
-            width={width < 600 ? `100%` : `50%`}
-            padding={`70px 0 60px`}>
+            width={width < 700 ? `100%` : `50%`}
+            padding={`70px 0 60px`}
+          >
             <Wrapper
               dr={`row`}
               width={`auto`}
               fontSize={`25px`}
               fontWeight={`500`}
-              lineHeight={`1.3`}>
+              lineHeight={`1.3`}
+            >
               {t(`9`).split(`\n`)[0]}
               <Text margin={`0 0 0 8px`} padding={`0 2px`}>
                 {t(`9`).split(`\n`)[1]}
@@ -206,13 +236,15 @@ const Intro = () => {
                   : `0 0 0 170px`
               }
               fontWeight={`300`}
-              textAlign={`right`}>
+              textAlign={`right`}
+            >
               <Wrapper display={`block`} width={`auto`}>
                 {t(`10`).split(`\n`)[0]}
                 <Text
                   display={`inline`}
                   padding={`0 0 0 5px`}
-                  fontWeight={`500`}>
+                  fontWeight={`500`}
+                >
                   {t(`10`).split(`\n`)[1]}
                 </Text>
                 {t(`10`).split(`\n`)[2]}

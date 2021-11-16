@@ -245,7 +245,9 @@ const Withdraw = ({}) => {
     {
       width: 80,
       title: <Wrapper fontSize={`14px`}>출금 금액</Wrapper>,
-      render: (data) => <Wrapper fontSize={`14px`}>{data.price}</Wrapper>,
+      render: (data) => (
+        <Wrapper fontSize={`14px`}>{parseFloat(data.price).toFixed(2)}</Wrapper>
+      ),
     },
     {
       width: 100,

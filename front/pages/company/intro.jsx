@@ -25,9 +25,10 @@ import Theme from "../../components/Theme";
 import SubBanner from "../../components/SubBanner";
 import { useTranslation } from "react-i18next";
 import i18next from "i18next";
-
+import useWidth from "../../hooks/useWidth";
 const Intro = () => {
   const router = useRouter();
+  const width = useWidth();
 
   const { t } = useTranslation(["company_intro"]);
 
@@ -121,7 +122,7 @@ const Intro = () => {
               dr={`row`}
               width={`auto`}
               margin={`30px 0 0`}
-              padding={`0 157px 0 0`}
+              padding={width < 800 ? `0 20px 0 0 ` : `0 157px 0 0`}
               fontWeight={`300`}>
               {t(`6`)}
               <br />
@@ -163,7 +164,7 @@ const Intro = () => {
       </Wrapper>
 
       <Wrapper color={`#282828`} bgColor={`#eeeeee`}>
-        <RsWrapper dr={`row`} al={`normal`}>
+        <RsWrapper dr={width < 600 ? `column-reverse` : `row`} al={`normal`}>
           <Wrapper
             position={`relative`}
             al={`flex-start`}
@@ -177,7 +178,10 @@ const Intro = () => {
             </Wrapper>
           </Wrapper>
 
-          <Wrapper al={`flex-end`} width={`50%`} padding={`70px 0 60px`}>
+          <Wrapper
+            al={`flex-end`}
+            width={width < 600 ? `100%` : `50%`}
+            padding={`70px 0 60px`}>
             <Wrapper
               dr={`row`}
               width={`auto`}
@@ -195,7 +199,11 @@ const Intro = () => {
               width={`auto`}
               margin={`30px 0 0`}
               padding={
-                i18next.language === `en` ? `0 0 0 190px` : `0 0 0 240px`
+                width < 800
+                  ? "0 0 0 80px"
+                  : i18next.language === `en`
+                  ? `0 0 0 120px`
+                  : `0 0 0 170px`
               }
               fontWeight={`300`}
               textAlign={`right`}>

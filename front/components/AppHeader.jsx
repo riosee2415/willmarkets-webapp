@@ -28,6 +28,7 @@ import { useRouter } from "next/router";
 import { USER_LOGOUT_REQUEST } from "../reducers/user";
 import { useDispatch, useSelector } from "react-redux";
 import { useTranslation } from "react-i18next";
+import i18next from "i18next";
 
 const WebRow = styled(RowWrapper)`
   background: transparent;
@@ -224,6 +225,7 @@ const AppHeader = ({ children, width }) => {
   return (
     <>
       <WebRow
+        display={i18next.language === `en` ? `none` : `flex`}
         justify={`center`}
         position={`fixed`}
         top={`0`}

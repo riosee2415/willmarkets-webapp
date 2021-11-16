@@ -665,7 +665,9 @@ const Signup = () => {
                         <CustomLabel for={`inp-email`}>{t(`23`)}</CustomLabel>
                       </Wrapper>
 
-                      <Wrapper dr={`row`} width={`calc(100% - 100px)`}>
+                      <Wrapper
+                        dr={`row`}
+                        width={width < 600 ? `100%` : `calc(100% - 100px)`}>
                         <Wrapper
                           dr={width < 600 ? `column` : `row`}
                           ju={`flex-start`}>
@@ -727,13 +729,15 @@ const Signup = () => {
                             />
                             <CommonButton
                               width={
-                                i18next.language === `en` ? `120px` : `80px`
+                                width < 600
+                                  ? `100%`
+                                  : i18next.language === `en`
+                                  ? `120px`
+                                  : `80px`
                               }
                               height={`38px`}
                               lineHeight={`34px`}
-                              margin={
-                                width < 600 ? `5px -150px 0 0` : `0 0 0 10px`
-                              }
+                              margin={width < 600 ? `0` : `0 0 0 10px`}
                               bgColor={`#ebebeb`}
                               color={`#030303`}
                               fontWeight={`500`}
@@ -760,7 +764,7 @@ const Signup = () => {
                       <Wrapper
                         dr={`row`}
                         ju={`flex-start`}
-                        width={`calc(100% - 100px)`}>
+                        width={width < 600 ? `100%` : `calc(100% - 100px)`}>
                         <CustomInput
                           type={`password`}
                           id={`inp-password`}
@@ -791,7 +795,7 @@ const Signup = () => {
                       <Wrapper
                         dr={`row`}
                         ju={`flex-start`}
-                        width={`calc(100% - 100px)`}>
+                        width={width < 600 ? `100%` : `calc(100% - 100px)`}>
                         <CustomInput
                           id={`inp-userName`}
                           width={
@@ -819,12 +823,12 @@ const Signup = () => {
                       <Wrapper
                         dr={`row`}
                         ju={`flex-start`}
-                        width={`calc(100% - 100px)`}>
+                        width={width < 600 ? `100%` : `calc(100% - 100px)`}>
                         <Combo
                           isBorder={true}
                           itemAlign={`flex-start`}
                           margin={`0 10px 0 0`}
-                          width={`100px`}
+                          width={width < 600 ? `100%` : `100px`}
                           height={`40px`}
                           listHeight={`270px`}
                           border={`none`}
@@ -879,7 +883,7 @@ const Signup = () => {
                       <Wrapper
                         dr={`row`}
                         ju={`flex-start`}
-                        width={`calc(100% - 100px)`}>
+                        width={width < 600 ? `100%` : `calc(100% - 100px)`}>
                         <Wrapper dr={`row`} width={`auto`} margin={`0 10px`}>
                           <RadioInput
                             id={`inp-gender-1`}
@@ -931,7 +935,7 @@ const Signup = () => {
                         position={`relative`}
                         dr={`row`}
                         ju={`flex-start`}
-                        width={`calc(100% - 100px)`}
+                        width={width < 600 ? `100%` : `calc(100% - 100px)`}
                         cursor={`pointer`}>
                         <CustomInput
                           id={`inp-address`}
@@ -964,7 +968,7 @@ const Signup = () => {
                       <Wrapper
                         dr={`row`}
                         ju={`flex-start`}
-                        width={`calc(100% - 100px)`}
+                        width={width < 600 ? `100%` : `calc(100% - 100px)`}
                         cursor={`pointer`}>
                         <CustomInput
                           id={`inp-detailAddress`}

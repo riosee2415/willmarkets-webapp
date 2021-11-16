@@ -231,7 +231,8 @@ const AppHeader = ({ children, width }) => {
         top={`0`}
         left={`0`}
         index={`10000`}
-        className={headerScroll && "background"}>
+        className={headerScroll && "background"}
+      >
         <Wrapper padding={`5px 0`} bgColor={`#231d21`}>
           <RsWrapper al={`flex-end`}>
             <Wrapper dr={`row`} width={`auto`}>
@@ -242,7 +243,8 @@ const AppHeader = ({ children, width }) => {
                   fontSize={`13px`}
                   color={`#fff`}
                   cursor={`pointer`}
-                  onClick={logoutUserHandler}>
+                  onClick={logoutUserHandler}
+                >
                   {t(`1`)}
                 </Wrapper>
               ) : (
@@ -253,7 +255,8 @@ const AppHeader = ({ children, width }) => {
                     fontSize={`13px`}
                     color={`#fff`}
                     cursor={`pointer`}
-                    onClick={() => moveLinkHandler(`/login`)}>
+                    onClick={() => moveLinkHandler(`/login`)}
+                  >
                     {t(`2`)}
                   </Wrapper>
                   <Wrapper
@@ -262,7 +265,8 @@ const AppHeader = ({ children, width }) => {
                     fontSize={`13px`}
                     color={`#fff`}
                     cursor={`pointer`}
-                    onClick={() => moveLinkHandler(`/signup`)}>
+                    onClick={() => moveLinkHandler(`/signup`)}
+                  >
                     {t(`3`)}
                   </Wrapper>
                 </>
@@ -274,11 +278,13 @@ const AppHeader = ({ children, width }) => {
                 margin={`0 0 0 30px`}
                 width={`auto`}
                 fontSize={`13px`}
-                cursor={`pointer`}>
+                cursor={`pointer`}
+              >
                 <Combo
                   width={`110px`}
                   padding={`0`}
-                  onMouseOver={() => setComboLanguage(true)}>
+                  onMouseOver={() => setComboLanguage(true)}
+                >
                   <ComboTitle color={`#fff`}>
                     <Wrapper fontSize={`13px`}>Language</Wrapper>
                     <CaretDownOutlined />
@@ -286,7 +292,8 @@ const AppHeader = ({ children, width }) => {
 
                   <ComboList
                     isView={comboLanguage}
-                    onClick={() => setComboLanguage(false)}>
+                    onClick={() => setComboLanguage(false)}
+                  >
                     <ComboListItem onClick={() => i18n.changeLanguage("en")}>
                       English
                     </ComboListItem>
@@ -318,17 +325,20 @@ const AppHeader = ({ children, width }) => {
             toggleMenu05
               ? `#2c2c2c`
               : `#fff`
-          }>
+          }
+        >
           <RsWrapper>
             <Wrapper
               dr={`row`}
               ju={`space-between`}
               padding={`5px 0`}
-              height={`85px`}>
+              height={`85px`}
+            >
               <Wrapper
                 width={`auto`}
                 cursor={`pointer`}
-                onClick={() => moveLinkHandler(`/`)}>
+                onClick={() => moveLinkHandler(`/`)}
+              >
                 <Image
                   width={`auto`}
                   src={
@@ -352,25 +362,31 @@ const AppHeader = ({ children, width }) => {
                     setToggleMenu03(false);
                     setToggleMenu04(false);
                     setToggleMenu05(false);
-                  }}>
+                  }}
+                >
                   <MenuTextWrapper
-                    onClick={() => moveLinkHandler(`/company/intro`)}>
+                    onClick={() => moveLinkHandler(`/company/intro`)}
+                  >
                     {t(`4`)}
                   </MenuTextWrapper>
 
                   <MenuListWrapper
                     onMouseOut={() => setToggleMenu01(false)}
-                    onClick={() => setToggleMenu01(false)}>
+                    onClick={() => setToggleMenu01(false)}
+                  >
                     <MenuListItemWrapper
-                      onClick={() => moveLinkHandler(`/company/intro`)}>
+                      onClick={() => moveLinkHandler(`/company/intro`)}
+                    >
                       {t(`5`)}
                     </MenuListItemWrapper>
                     <MenuListItemWrapper
-                      onClick={() => moveLinkHandler(`/company/terms`)}>
+                      onClick={() => moveLinkHandler(`/company/terms`)}
+                    >
                       {t(`6`)}
                     </MenuListItemWrapper>
                     <MenuListItemWrapper
-                      onClick={() => moveLinkHandler(`/company/privacy`)}>
+                      onClick={() => moveLinkHandler(`/company/privacy`)}
+                    >
                       {t(`7`)}
                     </MenuListItemWrapper>
                     {/* <MenuListItemWrapper
@@ -389,33 +405,41 @@ const AppHeader = ({ children, width }) => {
                     setToggleMenu03(false);
                     setToggleMenu04(false);
                     setToggleMenu05(false);
-                  }}>
+                  }}
+                >
                   <MenuTextWrapper
-                    onClick={() => moveLinkHandler(`/trading/forex`)}>
+                    onClick={() => moveLinkHandler(`/trading/forex`)}
+                  >
                     {t(`9`)}
                   </MenuTextWrapper>
 
                   <MenuListWrapper
                     onMouseOut={() => setToggleMenu02(false)}
-                    onClick={() => setToggleMenu02(false)}>
+                    onClick={() => setToggleMenu02(false)}
+                  >
                     <MenuListItemWrapper
-                      onClick={() => moveLinkHandler(`/trading/forex`)}>
+                      onClick={() => moveLinkHandler(`/trading/forex`)}
+                    >
                       Forex
                     </MenuListItemWrapper>
                     <MenuListItemWrapper
-                      onClick={() => moveLinkHandler(`/trading/ecn`)}>
+                      onClick={() => moveLinkHandler(`/trading/ecn`)}
+                    >
                       ECN
                     </MenuListItemWrapper>
                     <MenuListItemWrapper
-                      onClick={() => moveLinkHandler(`/trading/stp`)}>
+                      onClick={() => moveLinkHandler(`/trading/stp`)}
+                    >
                       STP
                     </MenuListItemWrapper>
                     <MenuListItemWrapper
-                      onClick={() => moveLinkHandler(`/trading/spread`)}>
+                      onClick={() => moveLinkHandler(`/trading/spread`)}
+                    >
                       {t(`10`)}
                     </MenuListItemWrapper>
                     <MenuListItemWrapper
-                      onClick={() => moveLinkHandler(`/trading/margin`)}>
+                      onClick={() => moveLinkHandler(`/trading/margin`)}
+                    >
                       {t(`11`)}
                     </MenuListItemWrapper>
                     {/* <MenuListItemWrapper
@@ -423,7 +447,8 @@ const AppHeader = ({ children, width }) => {
                       {t(`12`)}
                     </MenuListItemWrapper> */}
                     <MenuListItemWrapper
-                      onClick={() => moveLinkHandler(`/trading/time`)}>
+                      onClick={() => moveLinkHandler(`/trading/time`)}
+                    >
                       {t(`13`)}
                     </MenuListItemWrapper>
                   </MenuListWrapper>
@@ -437,21 +462,26 @@ const AppHeader = ({ children, width }) => {
                     setToggleMenu02(false);
                     setToggleMenu04(false);
                     setToggleMenu05(false);
-                  }}>
+                  }}
+                >
                   <MenuTextWrapper
-                    onClick={() => moveLinkHandler(`/platform/pc`)}>
+                    onClick={() => moveLinkHandler(`/platform/pc`)}
+                  >
                     {t(`14`)}
                   </MenuTextWrapper>
 
                   <MenuListWrapper
                     onMouseOut={() => setToggleMenu03(false)}
-                    onClick={() => setToggleMenu03(false)}>
+                    onClick={() => setToggleMenu03(false)}
+                  >
                     <MenuListItemWrapper
-                      onClick={() => moveLinkHandler(`/platform/pc`)}>
+                      onClick={() => moveLinkHandler(`/platform/pc`)}
+                    >
                       {t(`15`)}
                     </MenuListItemWrapper>
                     <MenuListItemWrapper
-                      onClick={() => moveLinkHandler(`/platform/mobile`)}>
+                      onClick={() => moveLinkHandler(`/platform/mobile`)}
+                    >
                       {t(`16`)}
                     </MenuListItemWrapper>
                   </MenuListWrapper>
@@ -466,7 +496,8 @@ const AppHeader = ({ children, width }) => {
                     setToggleMenu03(false);
                     setToggleMenu05(false);
                   }}
-                  onMouseOut={() => setToggleMenu04(false)}>
+                  onMouseOut={() => setToggleMenu04(false)}
+                >
                   <MenuTextWrapper onClick={() => moveLinkHandler(`/user`)}>
                     {t(`17`)}
                   </MenuTextWrapper>
@@ -481,7 +512,8 @@ const AppHeader = ({ children, width }) => {
                     setToggleMenu03(false);
                     setToggleMenu04(false);
                   }}
-                  onMouseOut={() => setToggleMenu05(false)}>
+                  onMouseOut={() => setToggleMenu05(false)}
+                >
                   <MenuTextWrapper onClick={() => moveLinkHandler(`/support`)}>
                     {t(`18`)}
                   </MenuTextWrapper>
@@ -503,7 +535,8 @@ const AppHeader = ({ children, width }) => {
                 <Wrapper
                   width={`auto`}
                   onClick={() => moveLinkHandler(`/`)}
-                  cursor={`pointer`}>
+                  cursor={`pointer`}
+                >
                   <Image
                     width={`auto`}
                     src={`https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/willmarkets/assets/images/logo/logo_hover.png`}
@@ -518,13 +551,15 @@ const AppHeader = ({ children, width }) => {
                 dr={`row`}
                 margin={`5px 0 0 0`}
                 bgColor={`#231d21`}
-                padding={`10px 20px`}>
+                padding={`10px 20px`}
+              >
                 {me ? (
                   <Wrapper
                     width={`25%`}
                     cursor={`pointer`}
                     color={`#fff`}
-                    onClick={() => logoutUserHandler()}>
+                    onClick={() => logoutUserHandler()}
+                  >
                     {t(`1`)}
                   </Wrapper>
                 ) : (
@@ -532,7 +567,8 @@ const AppHeader = ({ children, width }) => {
                     width={`25%`}
                     cursor={`pointer`}
                     color={`#fff`}
-                    onClick={() => moveLinkHandler(`/login`)}>
+                    onClick={() => moveLinkHandler(`/login`)}
+                  >
                     {t(`2`)}
                   </Wrapper>
                 )}
@@ -542,7 +578,8 @@ const AppHeader = ({ children, width }) => {
                     color={`#575252`}
                     cursor={`pointer`}
                     color={`#fff`}
-                    onClick={() => moveLinkHandler(`/user/mypage`)}>
+                    onClick={() => moveLinkHandler(`/user/mypage`)}
+                  >
                     마이페이지
                   </Wrapper>
                 )}
@@ -551,7 +588,8 @@ const AppHeader = ({ children, width }) => {
                     width={`25%`}
                     cursor={`pointer`}
                     color={`#fff`}
-                    onClick={() => moveLinkHandler(`/signup`)}>
+                    onClick={() => moveLinkHandler(`/signup`)}
+                  >
                     {t(`3`)}
                   </Wrapper>
                 )}
@@ -560,7 +598,8 @@ const AppHeader = ({ children, width }) => {
                   width={`25%`}
                   cursor={`pointer`}
                   color={`#fff`}
-                  onClick={() => moveLinkHandler(`/support`)}>
+                  onClick={() => moveLinkHandler(`/support`)}
+                >
                   {t(`18`)}
                 </Wrapper>
 
@@ -568,7 +607,8 @@ const AppHeader = ({ children, width }) => {
                   <Combo
                     width={`110px`}
                     padding={`0`}
-                    onMouseOver={() => setComboLanguage(true)}>
+                    onMouseOver={() => setComboLanguage(true)}
+                  >
                     <ComboTitle color={`#fff`}>
                       <Wrapper fontSize={`13px`}>Language</Wrapper>
                       <CaretDownOutlined />
@@ -576,15 +616,18 @@ const AppHeader = ({ children, width }) => {
 
                     <ComboList
                       isView={comboLanguage}
-                      onClick={() => setComboLanguage(false)}>
+                      onClick={() => setComboLanguage(false)}
+                    >
                       <ComboListItem
                         bgColor={`#000`}
-                        onClick={() => i18n.changeLanguage("en")}>
+                        onClick={() => i18n.changeLanguage("en")}
+                      >
                         English
                       </ComboListItem>
                       <ComboListItem
                         bgColor={`#000`}
-                        onClick={() => i18n.changeLanguage("ko")}>
+                        onClick={() => i18n.changeLanguage("ko")}
+                      >
                         한국어
                       </ComboListItem>
                     </ComboList>
@@ -597,7 +640,8 @@ const AppHeader = ({ children, width }) => {
           placement={`left`}
           onClose={DrawToggle}
           visible={visible}
-          width={`100%`}>
+          width={`100%`}
+        >
           <Wrapper al={`flex-start`}>
             <Wrapper
               dr={`row`}
@@ -605,11 +649,13 @@ const AppHeader = ({ children, width }) => {
               borderBottom={`1px solid #efeaea`}
               padding={`10px 15px`}
               onClick={() => MobileSubMenuToggle(`1`)}
-              cursor={`pointer`}>
+              cursor={`pointer`}
+            >
               <Wrapper
                 width={`auto`}
                 cursor={`pointer`}
-                onClick={() => MobileSubMenuToggle(`1`)}>
+                onClick={() => MobileSubMenuToggle(`1`)}
+              >
                 {t(`5`)}
               </Wrapper>
 
@@ -620,14 +666,16 @@ const AppHeader = ({ children, width }) => {
                 <Wrapper
                   al={`flex-start`}
                   padding={`4px 10px`}
-                  cursor={`pointer`}>
+                  cursor={`pointer`}
+                >
                   <Wrapper
                     width={`auto`}
                     fontSize={`13px`}
                     onClick={(e) => {
                       e.stopPropagation();
                       moveLinkHandler(`/company/intro`);
-                    }}>
+                    }}
+                  >
                     • {t(`4`)}
                   </Wrapper>
                   <Wrapper
@@ -636,7 +684,8 @@ const AppHeader = ({ children, width }) => {
                     onClick={(e) => {
                       e.stopPropagation();
                       moveLinkHandler(`/company/terms`);
-                    }}>
+                    }}
+                  >
                     • {t(`6`)}
                   </Wrapper>
                   <Wrapper
@@ -645,7 +694,8 @@ const AppHeader = ({ children, width }) => {
                     onClick={(e) => {
                       e.stopPropagation();
                       moveLinkHandler(`/company/privacy`);
-                    }}>
+                    }}
+                  >
                     • {t(`7`)}
                   </Wrapper>
                 </Wrapper>
@@ -658,11 +708,13 @@ const AppHeader = ({ children, width }) => {
               borderBottom={`1px solid #efeaea`}
               padding={`10px 15px`}
               onClick={() => MobileSubMenuToggle(`2`)}
-              cursor={`pointer`}>
+              cursor={`pointer`}
+            >
               <Wrapper
                 width={`auto`}
                 cursor={`pointer`}
-                onClick={() => MobileSubMenuToggle(`2`)}>
+                onClick={() => MobileSubMenuToggle(`2`)}
+              >
                 {t(`9`)}
               </Wrapper>
 
@@ -673,14 +725,16 @@ const AppHeader = ({ children, width }) => {
                 <Wrapper
                   al={`flex-start`}
                   padding={`4px 10px`}
-                  cursor={`pointer`}>
+                  cursor={`pointer`}
+                >
                   <Wrapper
                     width={`auto`}
                     fontSize={`13px`}
                     onClick={(e) => {
                       e.stopPropagation();
                       moveLinkHandler(`/trading/forex`);
-                    }}>
+                    }}
+                  >
                     • Forex
                   </Wrapper>
                   <Wrapper
@@ -690,7 +744,8 @@ const AppHeader = ({ children, width }) => {
                     onClick={(e) => {
                       e.stopPropagation();
                       moveLinkHandler(`/trading/ecn`);
-                    }}>
+                    }}
+                  >
                     • ECN
                   </Wrapper>
 
@@ -701,7 +756,8 @@ const AppHeader = ({ children, width }) => {
                     onClick={(e) => {
                       e.stopPropagation();
                       moveLinkHandler(`/trading/stp`);
-                    }}>
+                    }}
+                  >
                     • STP
                   </Wrapper>
 
@@ -712,7 +768,8 @@ const AppHeader = ({ children, width }) => {
                     onClick={(e) => {
                       e.stopPropagation();
                       moveLinkHandler(`/trading/spread`);
-                    }}>
+                    }}
+                  >
                     • {t(`10`)}
                   </Wrapper>
 
@@ -723,7 +780,8 @@ const AppHeader = ({ children, width }) => {
                     onClick={(e) => {
                       e.stopPropagation();
                       moveLinkHandler(`/trading/margin`);
-                    }}>
+                    }}
+                  >
                     • {t(`11`)}
                   </Wrapper>
 
@@ -734,7 +792,8 @@ const AppHeader = ({ children, width }) => {
                     onClick={(e) => {
                       e.stopPropagation();
                       moveLinkHandler(`/trading/time`);
-                    }}>
+                    }}
+                  >
                     • {t(`13`)}
                   </Wrapper>
                 </Wrapper>
@@ -747,11 +806,13 @@ const AppHeader = ({ children, width }) => {
               padding={`10px 15px`}
               borderBottom={`1px solid #efeaea`}
               onClick={() => MobileSubMenuToggle(`3`)}
-              cursor={`pointer`}>
+              cursor={`pointer`}
+            >
               <Wrapper
                 width={`auto`}
                 cursor={`pointer`}
-                onClick={() => MobileSubMenuToggle(`3`)}>
+                onClick={() => MobileSubMenuToggle(`3`)}
+              >
                 {t(`14`)}
               </Wrapper>
 
@@ -762,7 +823,8 @@ const AppHeader = ({ children, width }) => {
                 <Wrapper
                   al={`flex-start`}
                   padding={`4px 10px`}
-                  cursor={`pointer`}>
+                  cursor={`pointer`}
+                >
                   <Wrapper
                     width={`auto`}
                     padding={`4px 0`}
@@ -770,7 +832,8 @@ const AppHeader = ({ children, width }) => {
                     onClick={(e) => {
                       e.stopPropagation();
                       moveLinkHandler(`/platform/pc`);
-                    }}>
+                    }}
+                  >
                     • {t(`15`)}
                   </Wrapper>
                   <Wrapper
@@ -780,7 +843,8 @@ const AppHeader = ({ children, width }) => {
                     onClick={(e) => {
                       e.stopPropagation();
                       moveLinkHandler(`/platform/mobile`);
-                    }}>
+                    }}
+                  >
                     • {t(`16`)}
                   </Wrapper>
                 </Wrapper>
@@ -793,7 +857,8 @@ const AppHeader = ({ children, width }) => {
               cursor={`pointer`}
               padding={`10px 15px`}
               borderBottom={`1px solid #efeaea`}
-              onClick={() => moveLinkHandler(`/support`)}>
+              onClick={() => moveLinkHandler(`/support`)}
+            >
               {t(`17`)}
             </Wrapper>
 
@@ -803,7 +868,8 @@ const AppHeader = ({ children, width }) => {
               padding={`10px 15px`}
               cursor={`pointer`}
               borderBottom={`1px solid #efeaea`}
-              onClick={() => moveLinkHandler(`/support`)}>
+              onClick={() => moveLinkHandler(`/support`)}
+            >
               {t(`18`)}
             </Wrapper>
           </Wrapper>

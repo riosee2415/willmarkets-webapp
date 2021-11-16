@@ -391,7 +391,7 @@ const UserList = ({}) => {
       render: (data) => (
         <Wrapper dr={`row`} fontSize={`14px`}>
           <Wrapper width={`auto`} fontSize={`inherit`} margin={`0 20px 0 0`}>
-            {numberWithCommas(data.priceWallet)}
+            {parseFloat(data.priceWallet).toFixed(2)}
           </Wrapper>
 
           <Button type="primary" onClick={() => toggleModalHandler(data)}>

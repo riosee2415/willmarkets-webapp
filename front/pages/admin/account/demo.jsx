@@ -205,7 +205,7 @@ const Live = ({}) => {
       width: 60,
       title: <Wrapper fontSize={`14px`}>환율금액</Wrapper>,
       render: (data) => (
-        <Wrapper fontSize={`14px`}>{numberWithCommas(data.price)}</Wrapper>
+        <Wrapper fontSize={`14px`}>{parseFloat(data.price).toFixed(2)}</Wrapper>
       ),
     },
     {

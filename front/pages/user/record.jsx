@@ -368,7 +368,9 @@ const Record = () => {
                           )}
                         </TableCol>
                         <TableCol width={`120px`}>
-                          {data.type === t(`10`) ? `-` : data.price}
+                          {data.type === t(`10`)
+                            ? `-`
+                            : parseFloat(data.price).toFixed(2)}
                         </TableCol>
                         <TableCol width={`120px`}>
                           {data.isComplete ? (

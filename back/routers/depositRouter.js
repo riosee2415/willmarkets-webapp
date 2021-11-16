@@ -337,6 +337,9 @@ router.patch("/updatePermit", isAdminCheck, async (req, res, next) => {
 
     const updateData = await Deposit.findOne({
       where: { id: parseInt(id) },
+      include: {
+        model: User,
+      },
     });
 
     const updateResult = await Deposit.update(
@@ -375,18 +378,15 @@ router.patch("/updatePermit", isAdminCheck, async (req, res, next) => {
             </div>
 
             <div style="color: #0b0b0b; padding: 50px 0; font-size: 14px;">
-            아래 계좌로 입금하신 정보가 확인되었습니다.
+            ${updateData.User.username}님
             <br />
+            willmarkets 플랫폼을 이용해주셔서 감사합니다.
             <br />
-            입금계좌 : ${updateData.selectBank}
+            입금신청이 성공되었습니다.
             <br />
-            지불화폐 : ${updateData.priceType}
+            담당부서 심사가 필요합니다.
             <br />
-            지갑주소 : ${updateData.walletAddress}
-            <br />
-            hash주소 : ${updateData.hashAddress}
-            <br />
-            자세한 내용은 홈페이지에서 확인하세요 !
+            자세한 내용은 홈페이지에서 확인바랍니다.
             <br />
             </div>
             <div>

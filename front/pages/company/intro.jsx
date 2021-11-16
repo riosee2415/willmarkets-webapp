@@ -121,6 +121,7 @@ const Intro = () => {
             al={width < 900 ? `center` : `flex-start`}
             width={width < 900 ? `100%` : `50%`}
             padding={`70px 0 60px`}
+            zIndex={`1`}
           >
             <Wrapper dr={`row`} width={`auto`} fontSize={`25px`}>
               {t(`5`).split(`\n`)[0]}

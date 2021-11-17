@@ -206,6 +206,10 @@ const Withdraw = () => {
       return message.error(t(`6`));
     }
 
+    if (parseFloat(me.priceWallet) < parseFloat(inputPrice.value)) {
+      return message.error(t(`38`));
+    }
+
     if (!isSendEmail) {
       dispatch({
         type: USER_FIND_PASSWORD_REQUEST,
@@ -260,7 +264,10 @@ const Withdraw = () => {
     inputWalletAddress.value,
     isSendEmail,
     isConfirmEmail,
+    t,
   ]);
+
+  console.log(isConfirmEmail);
 
   const confirmSecretHandler = useCallback(() => {
     if (!emptyCheck(inputSecret.value)) {
@@ -272,11 +279,8 @@ const Withdraw = () => {
     } else {
       setIsConfirmEmail(true);
       message.success(t(`9`));
-
-      moveLinkHandler("/user");
-      initValueHandler();
     }
-  }, [inputSecret, t]);
+  }, [inputSecret.value, t, secretCode]);
 
   ////// USE EFFECT //////
   useEffect(() => {
@@ -553,11 +557,11 @@ const Withdraw = () => {
                     />
 
                     <Wrapper width={`auto`} fontSize={`0.8em`}>
-                      {t(`37`)} 20.00.00
+                      {t(`37`)} 20.00
                     </Wrapper>
                   </Wrapper>
 
-                  {isSendEmail && (
+                  {isSendEmail && !isConfirmEmail && (
                     <Wrapper al={`flex-start`}>
                       <CustomLabel for={`inp-secret`} margin={`40px 0 15px`}>
                         <Wrapper className={`required`}>*</Wrapper>
@@ -637,7 +641,7 @@ const Withdraw = () => {
                             width={`180px`}
                             height={`40px`}
                             margin={`0 5px`}
-                            onClick={() => moveLinkHandler(`/`)}>
+                            onClick={() => moveLinkHandler(`/user`)}>
                             {t(`28`)}
                           </CommonButton>
                         </Wrapper>,

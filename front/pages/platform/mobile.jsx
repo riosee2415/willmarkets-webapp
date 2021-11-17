@@ -89,14 +89,19 @@ const Mobile = () => {
               color={`#ffffff`}
               bgColor={`#3353F2`}
               hoverBgColor={`#3353F2`}
-              radius={`10px`}>
+              radius={`10px`}
+              onClick={() =>
+                window.open(
+                  `https://download.mql5.com/cdn/mobile/mt4/android?server=Willmarkets-Demo,Willmarkets-Live`
+                )
+              }>
               {t(`4`).split(`\n`)[0]}
               <RightOutlined
                 style={{ margin: `0 0 0 5px`, fontSize: `12px` }}
               />
             </CommonButton>
 
-            <CommonButton
+            {/* <CommonButton
               display={`flex`}
               padding={`0`}
               width={`160px`}
@@ -113,7 +118,7 @@ const Mobile = () => {
               <RightOutlined
                 style={{ margin: `0 0 0 5px`, fontSize: `12px` }}
               />
-            </CommonButton>
+            </CommonButton> */}
           </Wrapper>
         </RsWrapper>
       </Wrapper>
@@ -181,14 +186,19 @@ const Mobile = () => {
               color={`#ffffff`}
               bgColor={`#3353F2`}
               hoverBgColor={`#3353F2`}
-              radius={`10px`}>
+              radius={`10px`}
+              onClick={() =>
+                window.open(
+                  `https://apps.apple.com/us/app/metatrader-4/id496212596`
+                )
+              }>
               {t(`4`).split(`\n`)[0]}
               <RightOutlined
                 style={{ margin: `0 0 0 5px`, fontSize: `12px` }}
               />
             </CommonButton>
 
-            <CommonButton
+            {/* <CommonButton
               display={`flex`}
               padding={`0`}
               width={`160px`}
@@ -205,7 +215,7 @@ const Mobile = () => {
               <RightOutlined
                 style={{ margin: `0 0 0 5px`, fontSize: `12px` }}
               />
-            </CommonButton>
+            </CommonButton> */}
           </Wrapper>
         </RsWrapper>
       </Wrapper>

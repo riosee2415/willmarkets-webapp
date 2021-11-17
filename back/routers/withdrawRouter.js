@@ -207,7 +207,7 @@ router.patch("/updatePermit", isAdminCheck, async (req, res, next) => {
             <br />
             willmarkets 플랫폼을 이용해주셔서 감사합니다.
             <br />
-            입금신청이 성공되었습니다.
+            출금 신청이 성공되었습니다.
             <br />
             담당부서 심사가 필요합니다.
             <br />

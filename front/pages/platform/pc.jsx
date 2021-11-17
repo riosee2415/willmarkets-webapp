@@ -125,6 +125,103 @@ const Pc = () => {
       </Wrapper>
 
       <Wrapper
+        padding={`150px 0`}
+        color={`#fff`}
+        bgImg={`url('https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/willmarkets/assets/images/download/back_download2.png')`}>
+        <RsWrapper al={width < 800 ? `center` : `flex-end`}>
+          <Wrapper dr={width < 700 ? `column-reverse` : `row`} width={`auto`}>
+            <Wrapper
+              dr={`row`}
+              padding={`0 10px`}
+              width={`auto`}
+              fontSize={`24px`}>
+              {t(`5`).split(`\n`)[0]}
+              <Text padding={`0 5px`} fontWeight={`400`} color={`#6D7BFF`}>
+                {t(`5`).split(`\n`)[1]}
+              </Text>
+              {t(`5`).split(`\n`)[2]}
+            </Wrapper>
+
+            <Image
+              width={`auto`}
+              src={`https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/willmarkets/assets/images/download/icon_ios.png`}
+            />
+          </Wrapper>
+
+          <Wrapper
+            display={`block`}
+            width={`auto`}
+            margin={`15px 0 0`}
+            fontWeight={`300`}
+            lineHeight={`1.6`}
+            textAlign={width < 800 ? `center` : `right`}>
+            {t(`2`).split(`\n`)[0]}
+            <br />
+            {t(`2`).split(`\n`)[1]} {t(`3`).split(`\n`)[0]}
+            <Text display={`inline`} padding={`0 0 0 5px`} fontWeight={`500`}>
+              {t(`3`).split(`\n`)[1]}
+            </Text>
+            {t(`3`).split(`\n`)[2]}
+            <br />
+            {t(`3`).split(`\n`)[3]}
+            <Text display={`inline`} padding={`0 0 0 5px`} fontWeight={`500`}>
+              {t(`3`).split(`\n`)[4]}
+            </Text>
+            {t(`3`).split(`\n`)[5]}
+            <br />
+            {t(`3`).split(`\n`)[6]}
+          </Wrapper>
+
+          <Wrapper
+            dr={width < 500 ? `column` : `row`}
+            margin={`40px 0 0`}
+            width={`auto`}>
+            <CommonButton
+              display={`flex`}
+              padding={`0`}
+              width={`160px`}
+              height={`45px`}
+              lineHeight={`43px`}
+              fontSize={`18px`}
+              fontWeight={`500`}
+              color={`#ffffff`}
+              bgColor={`#3353F2`}
+              hoverBgColor={`#3353F2`}
+              radius={`10px`}
+              onClick={() =>
+                window.open(
+                  `https://apps.apple.com/us/app/metatrader-4/id496212596`
+                )
+              }>
+              {t(`4`).split(`\n`)[0]}
+              <RightOutlined
+                style={{ margin: `0 0 0 5px`, fontSize: `12px` }}
+              />
+            </CommonButton>
+
+            {/* <CommonButton
+              display={`flex`}
+              padding={`0`}
+              width={`160px`}
+              height={`45px`}
+              lineHeight={`43px`}
+              fontSize={`18px`}
+              fontWeight={`500`}
+              color={`#ffffff`}
+              bgColor={`#3353F2`}
+              hoverBgColor={`#3353F2`}
+              radius={`10px`}
+              margin={width < 500 ? `20px 0 0` : `0 0 0 20px`}>
+              {t(`4`).split(`\n`)[1]}
+              <RightOutlined
+                style={{ margin: `0 0 0 5px`, fontSize: `12px` }}
+              />
+            </CommonButton> */}
+          </Wrapper>
+        </RsWrapper>
+      </Wrapper>
+
+      <Wrapper
         padding={`100px 0 120px`}
         bgColor={`#eeeeee`}
         textAlign={`center`}>

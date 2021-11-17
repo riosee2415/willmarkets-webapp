@@ -503,7 +503,7 @@ router.post("/secretEmail", async (req, res, next) => {
 
     await sendSecretMail(
       email,
-      `🔐 [보안 인증코드 입니다.] WILLMARKET 에서 보안인증 코드를 발송했습니다.`,
+      `🔐 [보안 인증코드 입니다.] WILLMARKETS 에서 보안인증 코드를 발송했습니다.`,
       `
     <div style="width: 50%; padding: 30px; border: 1px solid #eeeeee">
         <img src="https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/willmarkets/assets/images/logo/logo_hover.png"
@@ -525,7 +525,7 @@ router.post("/secretEmail", async (req, res, next) => {
 
         <div style="color: #0b0b0b; padding: 50px 0; font-size: 14px;">
           사용자 여러분 안녕하세요<br/>
-          Willmarket 플랫폼을 선택해주셔서 감사합니다.<br/>
+          Willmarkets 플랫폼을 선택해주셔서 감사합니다.<br/>
           인증코드 : <strong style="color: #d62929">[${UUID}]</strong>
           <br />
           <br />
@@ -579,7 +579,7 @@ router.post("/findPass", async (req, res, next) => {
       // 이메일 전송
       sendSecretMail(
         email,
-        `🔐 [보안 인증코드 입니다.] WILLMARKET 에서 보안인증 코드를 발송했습니다.`,
+        `🔐 [보안 인증코드 입니다.] WILLMARKETS 에서 보안인증 코드를 발송했습니다.`,
         `
       <div style="width: 50%; padding: 30px; border: 1px solid #eeeeee">
         <img src="https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/willmarkets/assets/images/logo/logo_hover.png"
@@ -601,7 +601,7 @@ router.post("/findPass", async (req, res, next) => {
 
           <div style="color: #0b0b0b; padding: 50px 0; font-size: 14px;">
             사용자 여러분 안녕하세요<br/>
-            Willmarket 플랫폼을 선택해주셔서 감사합니다.<br/>
+            Willmarkets 플랫폼을 선택해주셔서 감사합니다.<br/>
             인증코드 : <strong style="color: #d62929">[${UUID}]</strong>
             <br />
             <br />

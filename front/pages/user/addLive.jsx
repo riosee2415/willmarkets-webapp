@@ -220,6 +220,11 @@ const AddLive = () => {
       inputLeverage.setValue("");
       inputTradePassword.setValue("");
       inputViewPassword.setValue("");
+
+
+      dispatch({
+        
+      })
     }
   }, [st_liveAccountCreateDone]);
 

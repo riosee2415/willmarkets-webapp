@@ -1157,7 +1157,7 @@ const Deposit = () => {
                             width={`180px`}
                             height={`40px`}
                             margin={`0 5px`}
-                            onClick={() => moveLinkHandler(`/`)}
+                            onClick={() => moveLinkHandler(`/user`)}
                           >
                             {t(`40`)}
                           </CommonButton>

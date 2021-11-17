@@ -131,7 +131,6 @@ const MobileDrawer = styled(Drawer)`
 const AppHeader = ({ children }) => {
   const width = useWidth();
 
-  console.log(width);
   const router = useRouter();
 
   const dispatch = useDispatch();

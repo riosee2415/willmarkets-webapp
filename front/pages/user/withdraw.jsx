@@ -267,8 +267,6 @@ const Withdraw = () => {
     t,
   ]);
 
-  console.log(isConfirmEmail);
-
   const confirmSecretHandler = useCallback(() => {
     if (!emptyCheck(inputSecret.value)) {
       return message.error(t(`7`));

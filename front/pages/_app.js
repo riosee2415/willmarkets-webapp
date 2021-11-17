@@ -6,7 +6,6 @@ import { ThemeProvider } from "styled-components";
 import Theme from "../components/Theme";
 import GlobalStyles from "../components/GlobalStyles";
 import wrapper from "../store/configureStore";
-import i18n from "../i18n";
 
 const Fourleaf = ({ Component }) => {
   return (
@@ -14,27 +13,27 @@ const Fourleaf = ({ Component }) => {
       <ThemeProvider theme={Theme}>
         <GlobalStyles />
         <Head>
-          <title>Willmarket</title>
+          <title>Willmarkets</title>
 
           <meta name="subject" content="금융 거래 신뢰" />
-          <meta name="title" content="Willmarket" />
-          <meta name="author" content="[[**4LEAF GEAR SAMPLE**]]" />
+          <meta name="title" content="Willmarkets" />
+          <meta name="author" content="Willmarkets" />
           <meta
             name="keywords"
             content="세계적인 금융 시장 최고의 금융서비스 안전한 거래 환경"
           />
           <meta
             name="description"
-            content="Willmarkets은 리테일과 기업 고객 모두에게 최고의 트레이딩 환경을 제공해드리는 것을 목표로 하고 있습니다."
+            content="Willmarkets aims to provide the best trading experience for both retail and corporate clients."
           />
           {/* <!-- OG tag  --> */}
           <meta property="og:type" content="website" />
-          <meta property="og:title" content="Willmarket" />
-          <meta property="og:site_name" content="Willmarket" />
+          <meta property="og:title" content="Willmarkets" />
+          <meta property="og:site_name" content="Willmarkets" />
           <meta property="og:url" content="https://will-markets.com/" />
           <meta
             property="og:description"
-            content="Willmarkets은 리테일과 기업 고객 모두에게 최고의 트레이딩 환경을 제공해드리는 것을 목표로 하고 있습니다."
+            content="Willmarkets aims to provide the best trading experience for both retail and corporate clients."
           />
           <meta
             property="og:keywords"
@@ -45,7 +44,7 @@ const Fourleaf = ({ Component }) => {
           <meta property="og:image:width" content="800" />
           <meta property="og:image:height" content="400" />
           <link rel="shortcut icon" href="/favicon.ico" />
-          <link rel="canonical" href="https://www.sample.com" />
+          <link rel="canonical" href="https://will-markets.com/" />
 
           <link rel="preconnect" href="https://fonts.googleapis.com" />
           <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />

@@ -35,5 +35,6 @@
   "34": "Wallet Address.",
   "35": "Cryptocurrency selection",
   "36": "Withdrawable Amount",
-  "37": "Commission"
+  "37": "Commission",
+  "38": "Withdrawal amount is more than my wallet amount"
 }

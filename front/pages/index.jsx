@@ -364,7 +364,7 @@ const Home = () => {
               src={`https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/willmarkets/assets/images/main/icon_ios.png`}
             />
             <Wrapper width={`auto`} fontWeight={`500`} color={`#fff`}>
-              Ios
+              Ios/Mac
             </Wrapper>
           </Wrapper>
         </Wrapper>

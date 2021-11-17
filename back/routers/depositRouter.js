@@ -365,15 +365,15 @@ router.patch("/updatePermit", isAdminCheck, async (req, res, next) => {
             />
             
             <div style="
-              height: 45px;
-              display: flex;
-              background: #3792eb;
-              font-size: 22px;
-              color: #fff;
-              padding: 0 20px;
-              line-height: 24;
-              border-radius: 3px;
-           ">
+            height: 45px;
+            display: flex;
+            background: #3792eb;
+            font-size: 22px;
+            color: #fff;
+            padding: 0 20px;
+            line-height: 45px;
+            border-radius: 3px;
+          ">
             입금 신청이 성공적으로 승인되었습니다.
             </div>
 
@@ -382,11 +382,12 @@ router.patch("/updatePermit", isAdminCheck, async (req, res, next) => {
             <br />
             willmarkets 플랫폼을 이용해주셔서 감사합니다.
             <br />
-            입금신청이 성공되었습니다.
+            입금 신청이 성공되었습니다.
             <br />
             담당부서 심사가 필요합니다.
             <br />
             자세한 내용은 홈페이지에서 확인바랍니다.
+            <br />
             <br />
             </div>
             <div>

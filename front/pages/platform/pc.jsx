@@ -29,7 +29,8 @@ const Pc = () => {
       <Wrapper
         padding={`150px 0`}
         color={`#fff`}
-        bgImg={`url('https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/willmarkets/assets/images/download/back_download.png')`}>
+        bgImg={`url('https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/willmarkets/assets/images/download/back_download.png')`}
+      >
         <RsWrapper al={width < 600 ? `center` : `flex-start`}>
           <Wrapper dr={width < 600 ? `column` : `row`} width={`auto`}>
             <Image
@@ -42,7 +43,8 @@ const Pc = () => {
               padding={`0 10px`}
               width={`auto`}
               fontSize={`24px`}
-              textAlign={width < 600 ? `center` : ``}>
+              textAlign={width < 600 ? `center` : ``}
+            >
               {t(`9`).split(`\n`)[0]}
               <Text padding={`0 5px`} fontWeight={`400`} color={`#6D7BFF`}>
                 {t(`9`).split(`\n`)[1]}
@@ -57,7 +59,8 @@ const Pc = () => {
             margin={`15px 0 0`}
             fontWeight={`300`}
             lineHeight={`1.6`}
-            textAlign={width < 600 ? `center` : `inherit`}>
+            textAlign={width < 600 ? `center` : `inherit`}
+          >
             {t(`2`).split(`\n`)[0]}
             <br />
             {t(`10`).split(`\n`)[0]}
@@ -78,7 +81,8 @@ const Pc = () => {
           <Wrapper
             dr={width < 500 ? `column` : `row`}
             margin={`40px 0 0`}
-            width={`auto`}>
+            width={`auto`}
+          >
             <CommonButton
               display={`flex`}
               padding={`0`}
@@ -95,7 +99,8 @@ const Pc = () => {
                 window.open(
                   `https://download.mql5.com/cdn/web/20135/mt4/willmarkets4setup.exe`
                 )
-              }>
+              }
+            >
               {t(`4`).split(`\n`)[0]}
               <RightOutlined
                 style={{ margin: `0 0 0 5px`, fontSize: `12px` }}
@@ -125,15 +130,119 @@ const Pc = () => {
       </Wrapper>
 
       <Wrapper
+        padding={`150px 0`}
+        color={`#fff`}
+        bgImg={`url('https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/willmarkets/assets/images/download/back_download2.png')`}
+      >
+        <RsWrapper al={width < 800 ? `center` : `flex-end`}>
+          <Wrapper dr={width < 700 ? `column-reverse` : `row`} width={`auto`}>
+            <Wrapper
+              dr={`row`}
+              padding={`0 10px`}
+              width={`auto`}
+              fontSize={`24px`}
+            >
+              {t(`6`).split(`\n`)[0]}
+              <Text padding={`0 5px`} fontWeight={`400`} color={`#6D7BFF`}>
+                {t(`6`).split(`\n`)[1]}
+              </Text>
+              {t(`6`).split(`\n`)[2]}
+            </Wrapper>
+
+            <Image
+              width={`auto`}
+              src={`https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/willmarkets/assets/images/download/icon_ios.png`}
+            />
+          </Wrapper>
+
+          <Wrapper
+            display={`block`}
+            width={`auto`}
+            margin={`15px 0 0`}
+            fontWeight={`300`}
+            lineHeight={`1.6`}
+            textAlign={width < 800 ? `center` : `right`}
+          >
+            {t(`2`).split(`\n`)[0]}
+            <br />
+            {t(`2`).split(`\n`)[1]} {t(`3`).split(`\n`)[0]}
+            <Text display={`inline`} padding={`0 0 0 5px`} fontWeight={`500`}>
+              {t(`3`).split(`\n`)[1]}
+            </Text>
+            {t(`3`).split(`\n`)[2]}
+            <br />
+            {t(`3`).split(`\n`)[3]}
+            <Text display={`inline`} padding={`0 0 0 5px`} fontWeight={`500`}>
+              {t(`3`).split(`\n`)[4]}
+            </Text>
+            {t(`3`).split(`\n`)[5]}
+            <br />
+            {t(`3`).split(`\n`)[6]}
+          </Wrapper>
+
+          <Wrapper
+            dr={width < 500 ? `column` : `row`}
+            margin={`40px 0 0`}
+            width={`auto`}
+          >
+            <CommonButton
+              display={`flex`}
+              padding={`0`}
+              width={`160px`}
+              height={`45px`}
+              lineHeight={`43px`}
+              fontSize={`18px`}
+              fontWeight={`500`}
+              color={`#ffffff`}
+              bgColor={`#3353F2`}
+              hoverBgColor={`#3353F2`}
+              radius={`10px`}
+              onClick={() =>
+                window.open(
+                  `https://apps.apple.com/us/app/metatrader-4/id496212596`
+                )
+              }
+            >
+              {t(`4`).split(`\n`)[0]}
+              <RightOutlined
+                style={{ margin: `0 0 0 5px`, fontSize: `12px` }}
+              />
+            </CommonButton>
+
+            {/* <CommonButton
+              display={`flex`}
+              padding={`0`}
+              width={`160px`}
+              height={`45px`}
+              lineHeight={`43px`}
+              fontSize={`18px`}
+              fontWeight={`500`}
+              color={`#ffffff`}
+              bgColor={`#3353F2`}
+              hoverBgColor={`#3353F2`}
+              radius={`10px`}
+              margin={width < 500 ? `20px 0 0` : `0 0 0 20px`}>
+              {t(`4`).split(`\n`)[1]}
+              <RightOutlined
+                style={{ margin: `0 0 0 5px`, fontSize: `12px` }}
+              />
+            </CommonButton> */}
+          </Wrapper>
+        </RsWrapper>
+      </Wrapper>
+
+      <Wrapper
         padding={`100px 0 120px`}
         bgColor={`#eeeeee`}
-        textAlign={`center`}>
+        textAlign={`center`}
+      >
         <RsWrapper>
           <Wrapper
             display={`block`}
             width={`auto`}
             fontSize={`28px`}
-            fontWeight={`500`}>
+            fontWeight={`500`}
+          >
             <Text display={`inline-block`} lineHeight={`1.3`}>
               {t(`7`).split(`\n`)[0]}
             </Text>
@@ -145,7 +254,8 @@ const Pc = () => {
             margin={`25px 0`}
             width={`auto`}
             textAlign={`center`}
-            fontSize={`17px`}>
+            fontSize={`17px`}
+          >
             {t(`8`).split(`\n`)[0]}
             <br />
             {t(`8`).split(`\n`)[1]}
@@ -168,7 +278,8 @@ const Pc = () => {
             border={`1px solid #707072`}
             radius={`30px`}
             width={width < 800 ? `100%` : `auto`}
-            bgColor={`#fff`}>
+            bgColor={`#fff`}
+          >
             <Wrapper width={`auto`}>
               <Image
                 width={`auto`}
@@ -198,7 +309,7 @@ const Pc = () => {
               />
 
               <Wrapper margin={`10px 0 0`} width={`auto`} fontWeight={`700`}>
-                Ios
+                Ios/Mac
               </Wrapper>
             </Wrapper>
           </Wrapper>
@@ -218,16 +329,19 @@ const Pc = () => {
             dr={width < 800 ? `column` : `row`}
             al={width < 800 ? `center` : `normal`}
             position={`relative`}
-            bottom={`50px`}>
+            bottom={`50px`}
+          >
             <Wrapper
               al={`flex-start`}
               ju={`flex-start`}
-              width={width < 800 ? `100%` : `50%`}>
+              width={width < 800 ? `100%` : `50%`}
+            >
               <Wrapper
                 textAlign={width < 800 ? `center` : ``}
                 display={`block`}
                 fontSize={width < 500 ? `22px` : `25px`}
-                fontWeight={`500`}>
+                fontWeight={`500`}
+              >
                 {t(`15`).split(`\n`)[0]}
                 <Text display={`inline`} margin={`0 0 0 5px`} color={`#3353F2`}>
                   {t(`15`).split(`\n`)[1]}
@@ -249,14 +363,16 @@ const Pc = () => {
             <Wrapper
               al={`flex-start`}
               ju={`flex-start`}
-              width={width < 800 ? `80%` : `50%`}>
+              width={width < 800 ? `80%` : `50%`}
+            >
               <Wrapper
                 dr={`row`}
                 al={`flex-start`}
                 margin={`0 0 20px`}
                 width={`auto`}
                 wrap={`nowrap`}
-                fontSize={width < 500 ? `14px` : `1rem`}>
+                fontSize={width < 500 ? `14px` : `1rem`}
+              >
                 <Image
                   margin={`0 10px 0 0`}
                   width={width < 500 ? `30px` : `auto`}
@@ -271,7 +387,8 @@ const Pc = () => {
                 margin={`0 0 20px`}
                 width={`auto`}
                 wrap={`nowrap`}
-                fontSize={width < 500 ? `14px` : `1rem`}>
+                fontSize={width < 500 ? `14px` : `1rem`}
+              >
                 <Image
                   margin={`0 10px 0 0`}
                   width={width < 500 ? `30px` : `auto`}
@@ -286,7 +403,8 @@ const Pc = () => {
                 margin={`0 0 20px`}
                 width={`auto`}
                 wrap={`nowrap`}
-                fontSize={width < 500 ? `14px` : `1rem`}>
+                fontSize={width < 500 ? `14px` : `1rem`}
+              >
                 <Image
                   margin={`0 10px 0 0`}
                   width={width < 500 ? `30px` : `auto`}
@@ -301,7 +419,8 @@ const Pc = () => {
                 margin={`0 0 20px`}
                 width={`auto`}
                 wrap={`nowrap`}
-                fontSize={width < 500 ? `14px` : `1rem`}>
+                fontSize={width < 500 ? `14px` : `1rem`}
+              >
                 <Image
                   margin={`0 10px 0 0`}
                   width={width < 500 ? `30px` : `auto`}
@@ -316,7 +435,8 @@ const Pc = () => {
                 margin={`0 0 20px`}
                 width={`auto`}
                 wrap={`nowrap`}
-                fontSize={width < 500 ? `14px` : `1rem`}>
+                fontSize={width < 500 ? `14px` : `1rem`}
+              >
                 <Image
                   margin={`0 10px 0 0`}
                   width={width < 500 ? `30px` : `auto`}
@@ -331,7 +451,8 @@ const Pc = () => {
                 margin={`0 0 20px`}
                 width={`auto`}
                 wrap={`nowrap`}
-                fontSize={width < 500 ? `14px` : `1rem`}>
+                fontSize={width < 500 ? `14px` : `1rem`}
+              >
                 <Image
                   margin={`0 10px 0 0`}
                   width={width < 500 ? `30px` : `auto`}
@@ -346,7 +467,8 @@ const Pc = () => {
                 margin={`0 0 20px`}
                 width={`auto`}
                 wrap={`nowrap`}
-                fontSize={width < 500 ? `14px` : `1rem`}>
+                fontSize={width < 500 ? `14px` : `1rem`}
+              >
                 <Image
                   margin={`0 10px 0 0`}
                   width={width < 500 ? `30px` : `auto`}
@@ -361,7 +483,8 @@ const Pc = () => {
                 margin={`0 0 20px`}
                 width={`auto`}
                 wrap={`nowrap`}
-                fontSize={width < 500 ? `14px` : `1rem`}>
+                fontSize={width < 500 ? `14px` : `1rem`}
+              >
                 <Image
                   margin={`0 10px 0 0`}
                   width={width < 500 ? `30px` : `auto`}
@@ -376,7 +499,8 @@ const Pc = () => {
                 margin={`0 0 20px`}
                 width={`auto`}
                 wrap={`nowrap`}
-                fontSize={width < 500 ? `14px` : `1rem`}>
+                fontSize={width < 500 ? `14px` : `1rem`}
+              >
                 <Image
                   margin={`0 10px 0 0`}
                   width={width < 500 ? `30px` : `auto`}
@@ -391,7 +515,8 @@ const Pc = () => {
                 margin={`0 0 20px`}
                 width={`auto`}
                 wrap={`nowrap`}
-                fontSize={width < 500 ? `14px` : `1rem`}>
+                fontSize={width < 500 ? `14px` : `1rem`}
+              >
                 <Image
                   margin={`0 10px 0 0`}
                   width={width < 500 ? `30px` : `auto`}
@@ -406,7 +531,8 @@ const Pc = () => {
                 margin={`0 0 20px`}
                 width={`auto`}
                 wrap={`nowrap`}
-                fontSize={width < 500 ? `14px` : `1rem`}>
+                fontSize={width < 500 ? `14px` : `1rem`}
+              >
                 <Image
                   margin={`0 10px 0 0`}
                   width={width < 500 ? `30px` : `auto`}
@@ -421,7 +547,8 @@ const Pc = () => {
                 margin={`0 0 20px`}
                 width={`auto`}
                 wrap={`nowrap`}
-                fontSize={width < 500 ? `14px` : `1rem`}>
+                fontSize={width < 500 ? `14px` : `1rem`}
+              >
                 <Image
                   margin={`0 10px 0 0`}
                   width={width < 500 ? `30px` : `auto`}

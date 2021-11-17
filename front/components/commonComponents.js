@@ -555,6 +555,7 @@ export const ComboTitle = styled(Wrapper)`
   justify-content: space-between;
   height: 100%;
   font-size: ${(props) => props.fontSize || `14px`};
+  text-align: left;
 
   & > div {
     display: inline-block;

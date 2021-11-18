@@ -140,8 +140,6 @@ const AddDemo = () => {
   const inputType = useInput("");
   const inputLeverage = useInput("");
   const inputPrice = useInput("");
-  const inputTradePassword = useInput("");
-  const inputViewPassword = useInput("");
 
   ////// TOGGLE //////
 
@@ -156,22 +154,12 @@ const AddDemo = () => {
 
     inputType.setValue("");
     inputLeverage.setValue("");
-    inputTradePassword.setValue("");
-    inputViewPassword.setValue("");
     inputPrice.setValue("");
   }, []);
 
   const createDemoAccountHandler = useCallback(() => {
     if (!emptyCheck(inputPrice.value)) {
       return message.error(t(`1`));
-    }
-
-    if (!emptyCheck(inputTradePassword.value)) {
-      return message.error(t(`2`));
-    }
-
-    if (!emptyCheck(inputViewPassword.value)) {
-      return message.error(t(`3`));
     }
 
     dispatch({
@@ -183,18 +171,9 @@ const AddDemo = () => {
         type: inputType.value,
         leverage: inputLeverage.value,
         price: inputPrice.value,
-        tradePassword: inputTradePassword.value,
-        viewPassword: inputViewPassword.value,
       },
     });
-  }, [
-    inputPlatform,
-    inputType,
-    inputLeverage,
-    inputPrice,
-    inputTradePassword,
-    inputViewPassword,
-  ]);
+  }, [inputPlatform, inputType, inputLeverage, inputPrice]);
 
   const changeSelectBoxHandler = useCallback((value, setValue) => {
     setValue(value);
@@ -220,8 +199,6 @@ const AddDemo = () => {
       inputType.setValue("");
       inputLeverage.setValue("");
       inputPrice.setValue("");
-      inputTradePassword.setValue("");
-      inputViewPassword.setValue("");
     }
   }, [st_demoAccountCreateDone]);
 
@@ -237,8 +214,7 @@ const AddDemo = () => {
         <TabWrapper
           position={`absolute`}
           top={width < 900 ? `0` : `-21px`}
-          left={`20px`}
-        >
+          left={`20px`}>
           <Tab isActive={currentTab === 0} onClick={() => setCurrentTab(0)}>
             {t(`5`)}
           </Tab>
@@ -252,8 +228,7 @@ const AddDemo = () => {
           padding={width < 900 ? `20px` : `20px 30px`}
           bgColor={`#fff`}
           border={`1px solid #ededed`}
-          shadow={`2px 2px 10px #e6e6e6`}
-        >
+          shadow={`2px 2px 10px #e6e6e6`}>
           <Wrapper al={`flex-start`}>
             <Wrapper
               al={`flex-start`}
@@ -261,8 +236,7 @@ const AddDemo = () => {
               padding={`0 8px 20px`}
               fontSize={`19px`}
               fontWeight={`700`}
-              borderBottom={`1px solid #ebebeb`}
-            >
+              borderBottom={`1px solid #ebebeb`}>
               {t(`6`)}
             </Wrapper>
             {currentTab === 0 && (
@@ -273,19 +247,22 @@ const AddDemo = () => {
                       <Wrapper className={`required`}>*</Wrapper>
                       {t(`7`)}
                     </CustomLabel>
-
-                    {platformList.map((data, idx) => {
-                      return (
-                        <InputBox
-                          isActive={inputPlatform.value === data}
-                          onClick={() =>
-                            changeSelectBoxHandler(data, inputPlatform.setValue)
-                          }
-                        >
-                          {data}
-                        </InputBox>
-                      );
-                    })}
+                    <Wrapper dr={`row`} ju={`flex-start`}>
+                      {platformList.map((data, idx) => {
+                        return (
+                          <InputBox
+                            isActive={inputPlatform.value === data}
+                            onClick={() =>
+                              changeSelectBoxHandler(
+                                data,
+                                inputPlatform.setValue
+                              )
+                            }>
+                            {data}
+                          </InputBox>
+                        );
+                      })}
+                    </Wrapper>
 
                     <CustomLabel margin={`40px 0 15px`}>
                       <Wrapper className={`required`}>*</Wrapper>
@@ -309,8 +286,7 @@ const AddDemo = () => {
                                   (data2) => data.type === data2.type
                                 ).leverage[0]
                               );
-                            }}
-                          >
+                            }}>
                             {data.type}
                           </InputBox>
                         );
@@ -339,8 +315,7 @@ const AddDemo = () => {
                                     data,
                                     inputLeverage.setValue
                                   )
-                                }
-                              >
+                                }>
                                 {data}
                               </InputBox>
                             );
@@ -349,8 +324,7 @@ const AddDemo = () => {
 
                     <CustomLabel
                       for={`inp-trade-password`}
-                      margin={`40px 0 15px`}
-                    >
+                      margin={`40px 0 15px`}>
                       <Wrapper className={`required`}>*</Wrapper>
                       {t(`10`)}
                     </CustomLabel>
@@ -359,55 +333,22 @@ const AddDemo = () => {
                       <CustomInput id={`inp-trade-password`} {...inputPrice} />
                     </Wrapper>
 
-                    <CustomLabel
-                      for={`inp-trade-password`}
-                      margin={`40px 0 15px`}
-                    >
-                      <Wrapper className={`required`}>*</Wrapper>
-                      {t(`11`)}
-                    </CustomLabel>
-
-                    <Wrapper dr={`row`} ju={`flex-start`}>
-                      <CustomInput
-                        id={`inp-trade-password`}
-                        {...inputTradePassword}
-                      />
-                    </Wrapper>
-
-                    <CustomLabel
-                      for={`inp-view-password`}
-                      margin={`40px 0 15px`}
-                    >
-                      <Wrapper className={`required`}>*</Wrapper>
-                      {t(`12`)}
-                    </CustomLabel>
-
-                    <Wrapper dr={`row`} ju={`flex-start`}>
-                      <CustomInput
-                        id={`inp-view-password`}
-                        {...inputViewPassword}
-                      />
-                    </Wrapper>
-
                     <Wrapper
                       dr={`row`}
                       ju={`flex-start`}
                       margin={`50px 0 0`}
                       padding={`20px 0 0`}
-                      borderTop={`1px solid #ebebeb`}
-                    >
+                      borderTop={`1px solid #ebebeb`}>
                       <CommonButton
                         kindOf={`white`}
                         margin={`0 10px 0 0`}
-                        onClick={() => moveLinkHandler(`/user`)}
-                      >
+                        onClick={() => moveLinkHandler(`/user`)}>
                         {t(`13`)}
                       </CommonButton>
 
                       <CommonButton
                         kindOf={`red`}
-                        onClick={createDemoAccountHandler}
-                      >
+                        onClick={createDemoAccountHandler}>
                         {t(`14`)}
                       </CommonButton>
                     </Wrapper>
@@ -422,8 +363,7 @@ const AddDemo = () => {
                         <Wrapper
                           fontSize={`25px`}
                           width={`auto`}
-                          borderBottom={`1px solid #c9c9c9`}
-                        >
+                          borderBottom={`1px solid #c9c9c9`}>
                           {t(`15`)}
                         </Wrapper>
                       }
@@ -432,8 +372,7 @@ const AddDemo = () => {
                           margin={`10px 0 0`}
                           padding={`0 15px`}
                           width={`auto`}
-                          lineHeight={`1.8`}
-                        >
+                          lineHeight={`1.8`}>
                           {t(`16`)}
                         </Wrapper>
                       }
@@ -445,8 +384,7 @@ const AddDemo = () => {
                             width={`180px`}
                             height={`40px`}
                             margin={`0 5px`}
-                            onClick={initValueHandler}
-                          >
+                            onClick={initValueHandler}>
                             {t(`17`)}
                           </CommonButton>
                         </Wrapper>,

@@ -144,8 +144,6 @@ const AddLive = () => {
   const inputPlatform = useInput("MetaTrader 4");
   const inputType = useInput("");
   const inputLeverage = useInput("");
-  const inputTradePassword = useInput("");
-  const inputViewPassword = useInput("");
 
   ////// TOGGLE //////
 
@@ -160,19 +158,9 @@ const AddLive = () => {
 
     inputType.setValue("");
     inputLeverage.setValue("");
-    inputTradePassword.setValue("");
-    inputViewPassword.setValue("");
-  }, []);
+  }, [inputType.value, inputLeverage.value]);
 
   const createLiveAccountHandler = useCallback(() => {
-    if (!emptyCheck(inputTradePassword.value)) {
-      return message.error(t(`1`));
-    }
-
-    if (!emptyCheck(inputViewPassword.value)) {
-      return message.error(`2`);
-    }
-
     dispatch({
       type: LIVE_ACCOUNT_CREATE_REQUEST,
       data: {
@@ -181,17 +169,9 @@ const AddLive = () => {
         platform: inputPlatform.value,
         type: inputType.value,
         leverage: inputLeverage.value,
-        tradePassword: inputTradePassword.value,
-        viewPassword: inputViewPassword.value,
       },
     });
-  }, [
-    inputPlatform,
-    inputType,
-    inputLeverage,
-    inputTradePassword,
-    inputViewPassword,
-  ]);
+  }, [inputPlatform, inputType, inputLeverage]);
 
   const changeSelectBoxHandler = useCallback((value, setValue) => {
     setValue(value);
@@ -218,13 +198,6 @@ const AddLive = () => {
 
       inputType.setValue("");
       inputLeverage.setValue("");
-      inputTradePassword.setValue("");
-      inputViewPassword.setValue("");
-
-
-      dispatch({
-        
-      })
     }
   }, [st_liveAccountCreateDone]);
 
@@ -239,8 +212,7 @@ const AddLive = () => {
       <TabWrapper
         position={`absolute`}
         top={width < 900 ? `0` : `-21px`}
-        left={`20px`}
-      >
+        left={`20px`}>
         <Tab isActive={currentTab === 0} onClick={() => setCurrentTab(0)}>
           {t(`4`)}
         </Tab>
@@ -254,8 +226,7 @@ const AddLive = () => {
         padding={width < 900 ? `20px` : `20px 30px`}
         bgColor={`#fff`}
         border={`1px solid #ededed`}
-        shadow={`2px 2px 10px #e6e6e6`}
-      >
+        shadow={`2px 2px 10px #e6e6e6`}>
         <Wrapper al={`flex-start`}>
           <Wrapper
             al={`flex-start`}
@@ -263,8 +234,7 @@ const AddLive = () => {
             padding={`0 8px 20px`}
             fontSize={`19px`}
             fontWeight={`700`}
-            borderBottom={`1px solid #ebebeb`}
-          >
+            borderBottom={`1px solid #ebebeb`}>
             {t(`5`)}
           </Wrapper>
           {currentTab === 0 && (
@@ -283,8 +253,7 @@ const AddLive = () => {
                           isActive={inputPlatform.value === data}
                           onClick={() =>
                             changeSelectBoxHandler(data, inputPlatform.setValue)
-                          }
-                        >
+                          }>
                           {data}
                         </InputBox>
                       );
@@ -312,8 +281,7 @@ const AddLive = () => {
                               typeList.find((data2) => data.type === data2.type)
                                 .leverage[0]
                             );
-                          }}
-                        >
+                          }}>
                           {data.type}
                         </InputBox>
                       );
@@ -341,60 +309,29 @@ const AddLive = () => {
                                   data,
                                   inputLeverage.setValue
                                 )
-                              }
-                            >
+                              }>
                               {data}
                             </InputBox>
                           );
                         })}
                   </Wrapper>
 
-                  <CustomLabel
-                    for={`inp-trade-password`}
-                    margin={`40px 0 15px`}
-                  >
-                    <Wrapper className={`required`}>*</Wrapper>
-                    {t(`9`)}
-                  </CustomLabel>
-
-                  <Wrapper dr={`row`} ju={`flex-start`}>
-                    <CustomInput
-                      id={`inp-trade-password`}
-                      {...inputTradePassword}
-                    />
-                  </Wrapper>
-
-                  <CustomLabel for={`inp-view-password`} margin={`40px 0 15px`}>
-                    <Wrapper className={`required`}>*</Wrapper>
-                    {t(`10`)}
-                  </CustomLabel>
-
-                  <Wrapper dr={`row`} ju={`flex-start`}>
-                    <CustomInput
-                      id={`inp-view-password`}
-                      {...inputViewPassword}
-                    />
-                  </Wrapper>
-
                   <Wrapper
                     dr={`row`}
                     ju={`flex-start`}
-                    margin={`50px 0 0`}
+                    margin={`120px 0 0`}
                     padding={`20px 0 0`}
-                    borderTop={`1px solid #ebebeb`}
-                  >
+                    borderTop={`1px solid #ebebeb`}>
                     <CommonButton
                       kindOf={`white`}
                       margin={`0 10px 0 0`}
-                      onClick={() => moveLinkHandler(`/user`)}
-                    >
+                      onClick={() => moveLinkHandler(`/user`)}>
                       {t(`11`)}
                     </CommonButton>
 
                     <CommonButton
                       kindOf={`red`}
-                      onClick={createLiveAccountHandler}
-                    >
+                      onClick={createLiveAccountHandler}>
                       {t(`12`)}
                     </CommonButton>
                   </Wrapper>
@@ -409,8 +346,7 @@ const AddLive = () => {
                       <Wrapper
                         fontSize={`25px`}
                         width={`auto`}
-                        borderBottom={`1px solid #c9c9c9`}
-                      >
+                        borderBottom={`1px solid #c9c9c9`}>
                         {t(`13`)}
                       </Wrapper>
                     }
@@ -419,8 +355,7 @@ const AddLive = () => {
                         margin={`10px 0 0`}
                         padding={`0 15px`}
                         width={`auto`}
-                        lineHeight={`1.8`}
-                      >
+                        lineHeight={`1.8`}>
                         {t(`14`)}
                       </Wrapper>
                     }
@@ -432,8 +367,7 @@ const AddLive = () => {
                           width={`180px`}
                           height={`40px`}
                           margin={`0 5px`}
-                          onClick={initValueHandler}
-                        >
+                          onClick={initValueHandler}>
                           {t(`15`)}
                         </CommonButton>
                       </Wrapper>,

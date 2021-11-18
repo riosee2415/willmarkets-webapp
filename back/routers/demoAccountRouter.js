@@ -165,7 +165,10 @@ router.post("/create", async (req, res, next) => {
 });
 
 router.patch("/updatePermit", isAdminCheck, async (req, res, next) => {
-  const { language, id, bankNo, userId } = req.body;
+  const { language, id, bankNo, userId, viewPassword, tradePassword } =
+    req.body;
+
+  console.log(viewPassword, tradePassword);
   try {
     const exUpdatePermit = await DemoAccount.findOne({
       where: {
@@ -208,6 +211,8 @@ router.patch("/updatePermit", isAdminCheck, async (req, res, next) => {
         isComplete: true,
         completedAt: new Date(),
         bankNo,
+        viewPassword,
+        tradePassword,
       },
       {
         where: {

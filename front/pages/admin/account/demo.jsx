@@ -172,6 +172,8 @@ const Live = ({}) => {
         id: currentData.id,
         userId: currentData.User.id,
         bankNo: inputBankNo.value,
+        viewPassword: inputViewPassword.value,
+        tradePassword: inputTradePassword.value,
       },
     });
   };

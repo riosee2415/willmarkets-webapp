@@ -105,11 +105,10 @@ router.post("/create", async (req, res, next) => {
         );
     }
 
-    if (updateResult[0] > 0) {
-      sendSecretMail(
-        exUser.email,
-        "추가 데모 계정 요청이 접수되었습니다.",
-        `
+    sendSecretMail(
+      exUser.email,
+      "추가 데모 계정 요청이 접수되었습니다.",
+      `
       <div style="width: 50%; padding: 30px; border: 1px solid #eeeeee">
             <img src="https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/willmarkets/assets/images/logo/logo_hover.png"
             style="width: auto; height: auto; background-size: cover; padding-bottom: 30px;"
@@ -151,11 +150,8 @@ router.post("/create", async (req, res, next) => {
             </div>
        </div>
        `
-      );
-      return res.status(200).json({ result: true });
-    } else {
-      return res.status(200).json({ result: false });
-    }
+    );
+    return res.status(200).json({ result: true });
   } catch (error) {
     console.error(error);
     return res

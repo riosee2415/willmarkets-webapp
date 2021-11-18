@@ -71,6 +71,10 @@ const Live = ({}) => {
 
   const inputSearch = useInput("");
   const inputBankNo = useInput("");
+  const inputTradePassword = useInput("");
+  const inputViewPassword = useInput("");
+
+  console.log(inputTradePassword, inputViewPassword);
 
   ////// USEEFFECT //////
   useEffect(() => {
@@ -94,6 +98,9 @@ const Live = ({}) => {
       });
       toggleModalHandler();
       inputBankNo.setValue("");
+      inputBankNo.setValue("");
+      inputTradePassword.setValue("");
+      inputViewPassword.setValue("");
 
       message.success("정상적으로 처리되었습니다.");
     }
@@ -145,6 +152,19 @@ const Live = ({}) => {
     if (!emptyCheck(inputBankNo.value)) {
       return LoadNotification("ADMIN SYSTEM ERRLR", "계좌번호를 입력해주세요.");
     }
+    if (!emptyCheck(inputViewPassword.value)) {
+      return LoadNotification(
+        "ADMIN SYSTEM ERRLR",
+        "보기용 비밀번호를 입력해주세요"
+      );
+    }
+
+    if (!emptyCheck(inputTradePassword.value)) {
+      return LoadNotification(
+        "ADMIN SYSTEM ERRLR",
+        "거래용 비밀번호를 입력해주세요."
+      );
+    }
 
     dispatch({
       type: DEMO_ACCOUNT_UPDATE_PERMIT_REQUEST,
@@ -152,6 +172,8 @@ const Live = ({}) => {
         id: currentData.id,
         userId: currentData.User.id,
         bankNo: inputBankNo.value,
+        viewPassword: inputViewPassword.value,
+        tradePassword: inputTradePassword.value,
       },
     });
   };
@@ -236,16 +258,14 @@ const Live = ({}) => {
           <Wrapper
             width={`90px`}
             fontSize={`inherit`}
-            color={data.isComplete ? `#0d24c4` : `#d62929`}
-          >
+            color={data.isComplete ? `#0d24c4` : `#d62929`}>
             {data.isComplete ? `승인` : `승인대기`}
           </Wrapper>
 
           <Button
             type="primary"
             disabled={data.isComplete}
-            onClick={() => toggleModalHandler(data)}
-          >
+            onClick={() => toggleModalHandler(data)}>
             승인
           </Button>
         </Wrapper>
@@ -308,8 +328,7 @@ const Live = ({}) => {
         width={`400px`}
         title={`승인`}
         onCancel={toggleModalHandler}
-        onOk={updatePermitHandler}
-      >
+        onOk={updatePermitHandler}>
         <Wrapper padding={`20px`} al={`flex-start`}>
           <Wrapper
             al={`flex-start`}
@@ -317,8 +336,7 @@ const Live = ({}) => {
             margin={`0 0 10px`}
             fontSize={`15px`}
             fontWeight={`500`}
-            borderBottom={`1px solid #eee`}
-          >
+            borderBottom={`1px solid #eee`}>
             해당 데모계좌 신청을 승인하시겠습니까 ?
           </Wrapper>
 
@@ -326,6 +344,23 @@ const Live = ({}) => {
             계좌번호
           </Wrapper>
           <Input style={{ width: "100%" }} {...inputBankNo} />
+
+          <Wrapper width={`auto`} fontSize={`14px`} margin={`8px 0 4px`}>
+            보기용 비밀번호
+          </Wrapper>
+          <Input
+            style={{ width: "100%" }}
+            type={`password`}
+            {...inputViewPassword}
+          />
+          <Wrapper width={`auto`} fontSize={`14px`} margin={`8px 0 4px`}>
+            거래용 비밀번호
+          </Wrapper>
+          <Input
+            style={{ width: "100%" }}
+            type={`password`}
+            {...inputTradePassword}
+          />
         </Wrapper>
       </Modal>
 
@@ -333,8 +368,7 @@ const Live = ({}) => {
         visible={false}
         onOk={() => {}}
         onCancel={() => {}}
-        title="Ask"
-      ></Modal>
+        title="Ask"></Modal>
     </AdminLayout>
   );
 };

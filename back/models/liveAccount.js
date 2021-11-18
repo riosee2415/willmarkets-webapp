@@ -23,11 +23,11 @@ module.exports = class LiveAccount extends Model {
         },
         tradePassword: {
           type: DataTypes.STRING(200),
-          allowNull: false,
+          allowNull: true,
         },
         viewPassword: {
           type: DataTypes.STRING(200),
-          allowNull: false,
+          allowNull: true,
         },
         isComplete: {
           type: DataTypes.BOOLEAN,

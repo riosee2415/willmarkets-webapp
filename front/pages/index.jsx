@@ -229,6 +229,7 @@ const Home = () => {
       inputPhone.setValue("");
       inputEmail.setValue("");
       inputText.setValue("");
+      inputCountryNo.setValue("");
     }
   }, [st_questionCreateDone]);
 

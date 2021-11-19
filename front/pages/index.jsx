@@ -6,7 +6,7 @@ import ClientLayout from "../components/ClientLayout";
 import axios from "axios";
 import wrapper from "../store/configureStore";
 import { END } from "redux-saga";
-import { CloseOutlined } from "@ant-design/icons";
+import { CloseOutlined, CaretDownOutlined } from "@ant-design/icons";
 import { emptyCheck } from "../components/commonUtils";
 import { message } from "antd";
 import {
@@ -15,6 +15,10 @@ import {
   Image,
   CommonButton,
   TextInput,
+  Combo,
+  ComboList,
+  ComboListItem,
+  ComboTitle,
 } from "../components/commonComponents";
 import { withResizeDetector } from "react-resize-detector";
 import Theme from "../components/Theme";
@@ -28,6 +32,7 @@ import i18next from "i18next";
 import useWidth from "../hooks/useWidth";
 
 const CustomInput = styled(TextInput)`
+  width: ${(props) => props.width};
   border-radius: ${(props) => props.radius};
   border: 1px solid #e9dae1;
   border-radius: 6px;
@@ -66,6 +71,89 @@ const QuestionWrapper = styled(Wrapper)`
 `;
 
 const Home = () => {
+  const countryList = [
+    {
+      name: `Brazil`,
+      value: `+55`,
+    },
+    {
+      name: `Chile`,
+      value: `+56`,
+    },
+    {
+      name: `Denmark`,
+      value: `+45`,
+    },
+    {
+      name: `Ecuador`,
+      value: `+593`,
+    },
+    {
+      name: `France`,
+      value: `+33`,
+    },
+    {
+      name: `Guatemala`,
+      value: `+502`,
+    },
+    {
+      name: `Hong Kong`,
+      value: `+852`,
+    },
+    {
+      name: `Italy`,
+      value: `+39`,
+    },
+    {
+      name: `Ireland`,
+      value: `+353`,
+    },
+    {
+      name: `Japan`,
+      value: `+81`,
+    },
+    {
+      name: `Monaco`,
+      value: `+377`,
+    },
+    {
+      name: `Mexico`,
+      value: `+52`,
+    },
+    {
+      name: `Philippine`,
+      value: `+63`,
+    },
+    {
+      name: `Portugal`,
+      value: `+351`,
+    },
+    {
+      name: `Paraguay`,
+      value: `+595`,
+    },
+    {
+      name: `South Korea`,
+      value: `+82`,
+    },
+    {
+      name: `Switzerland`,
+      value: `+41`,
+    },
+    {
+      name: `Taiwan`,
+      value: `+886`,
+    },
+    {
+      name: `United Kingdom`,
+      value: `+44`,
+    },
+    {
+      name: `Vietnam`,
+      value: `+84`,
+    },
+  ];
+
   const router = useRouter();
 
   const width = useWidth();
@@ -75,11 +163,16 @@ const Home = () => {
   const { t } = useTranslation(["main"]);
 
   const [toggle, setToggle] = useState(false);
+  const [comboCountryNo, setComboCountryNo] = useState(false);
 
   const inputName = useInput("");
   const inputPhone = useInput("");
   const inputEmail = useInput("");
   const inputText = useInput("");
+
+  const inputCountryNo = useInput("");
+
+  console.log(inputCountryNo, inputPhone);
 
   const { st_questionCreateDone, st_questionCreateError } = useSelector(
     (state) => state.question
@@ -155,15 +248,13 @@ const Home = () => {
           width={`auto`}
           bgColor={`#E9EDFF`}
           radius={`6px`}
-          shadow={"2px 2px 10px #a9a9b7"}
-        >
+          shadow={"2px 2px 10px #a9a9b7"}>
           <Wrapper
             dr={`row`}
             ju={`space-between`}
             padding={`5px 10px`}
             bgColor={`#fff`}
-            radius={`6px`}
-          >
+            radius={`6px`}>
             <Wrapper width={`auto`} fontSize={`14px`} fontWeight={`600`}>
               {t(`6`)}
             </Wrapper>
@@ -176,8 +267,7 @@ const Home = () => {
             width={`280px`}
             bgColor={`#fff`}
             padding={`12px`}
-            zIndex={`5`}
-          >
+            zIndex={`5`}>
             <Image
               top={`40px`}
               position={`absolute`}
@@ -194,8 +284,7 @@ const Home = () => {
               <Wrapper
                 lineHeight={`18px`}
                 fontSize={`13px`}
-                margin={`24px 0 0 0`}
-              >
+                margin={`24px 0 0 0`}>
                 {t(`7`)}
               </Wrapper>
               <Wrapper>
@@ -203,8 +292,7 @@ const Home = () => {
                   fontSize={`12px`}
                   al={`flex-start`}
                   fontWeight={`600`}
-                  margin={`10px 0 4px 0`}
-                >
+                  margin={`10px 0 4px 0`}>
                   {t(`8`)}
                 </Wrapper>
                 <CustomInput {...inputName} />
@@ -215,19 +303,49 @@ const Home = () => {
                   fontSize={`12px`}
                   al={`flex-start`}
                   margin={`10px 0 4px 0`}
-                  fontWeight={`600`}
-                >
+                  fontWeight={`600`}>
                   {t(`9`)}
                 </Wrapper>
-                <CustomInput {...inputPhone} />
+
+                <Wrapper dr={`row`} ju={`flex-start`}>
+                  <Combo
+                    isBorder={true}
+                    itemAlign={`flex-start`}
+                    margin={`0 10px 0 0`}
+                    width={`90px`}
+                    height={`35px`}
+                    listHeight={`270px`}
+                    border={`none`}
+                    borderBottom={`1px solid #dfdfdf !important`}
+                    onClick={() => setComboCountryNo(!comboCountryNo)}>
+                    <ComboTitle>
+                      <Wrapper>{inputCountryNo.value || `Select`}</Wrapper>
+                      <CaretDownOutlined />
+                    </ComboTitle>
+
+                    <ComboList isView={comboCountryNo} width={`180%`}>
+                      {countryList.map((data, idx) => {
+                        return (
+                          <ComboListItem
+                            key={idx}
+                            isActive={inputCountryNo.value === data.value}
+                            onClick={() => inputCountryNo.setValue(data.value)}>
+                            {data.name} ({data.value})
+                          </ComboListItem>
+                        );
+                      })}
+                    </ComboList>
+                  </Combo>
+
+                  <CustomInput {...inputPhone} width={`145px`} />
+                </Wrapper>
               </Wrapper>
               <Wrapper>
                 <Wrapper
                   fontSize={`12px`}
                   al={`flex-start`}
                   margin={`10px 0 4px 0`}
-                  fontWeight={`600`}
-                >
+                  fontWeight={`600`}>
                   {t(`10`)}
                 </Wrapper>
                 <CustomInput {...inputEmail} />
@@ -237,8 +355,7 @@ const Home = () => {
                   fontSize={`12px`}
                   al={`flex-start`}
                   margin={`10px 0 4px 0`}
-                  fontWeight={`600`}
-                >
+                  fontWeight={`600`}>
                   {t(`11`)}
                 </Wrapper>
                 <Content {...inputText} />
@@ -254,8 +371,7 @@ const Home = () => {
               margin={`0 0 10px 0`}
               color={`#fff`}
               bgColor={`#000104`}
-              onClick={createQuestionHandler}
-            >
+              onClick={createQuestionHandler}>
               {t(`12`)}
             </CommonButton>
           </Wrapper>
@@ -268,8 +384,7 @@ const Home = () => {
           color={`#fff`}
           width={`auto`}
           cursor={`pointer`}
-          onClick={onClickToggleHanlder}
-        >
+          onClick={onClickToggleHanlder}>
           <Wrapper dr={`row`}>
             <Wrapper width={`auto`}>
               <Image
@@ -292,8 +407,7 @@ const Home = () => {
           width={`100%`}
           height={`100%`}
           bgImg={`url('https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/willmarkets/assets/images/main/back_download.png')`}
-          zIndex={`-2`}
-        ></Wrapper>
+          zIndex={`-2`}></Wrapper>
 
         <Wrapper
           position={`absolute`}
@@ -302,8 +416,7 @@ const Home = () => {
           width={`100%`}
           height={`100%`}
           bgColor={`rgba(0, 0, 0, 0.5)`}
-          zIndex={`-1`}
-        ></Wrapper>
+          zIndex={`-1`}></Wrapper>
 
         <Wrapper fontSize={`30px`} fontWeight={`500`} color={`#3353F2`}>
           {t(`13`)}
@@ -315,8 +428,7 @@ const Home = () => {
           fontWeight={`400`}
           color={`#fff`}
           padding={`0 20px`}
-          textAlign={`center`}
-        >
+          textAlign={`center`}>
           {t(`14`)}
         </Wrapper>
 
@@ -335,8 +447,7 @@ const Home = () => {
             margin={`0 80px`}
             color={`#fff`}
             fontSize={`34px`}
-            zIndex={width < 750 ? `-3` : `0`}
-          >
+            zIndex={width < 750 ? `-3` : `0`}>
             <PlusOutlined />
           </Wrapper>
 
@@ -354,8 +465,7 @@ const Home = () => {
             margin={`0 80px`}
             color={`#fff`}
             fontSize={`34px`}
-            zIndex={width < 750 ? `-3` : `0`}
-          >
+            zIndex={width < 750 ? `-3` : `0`}>
             <PlusOutlined />
           </Wrapper>
 
@@ -379,16 +489,14 @@ const Home = () => {
             radius={`30px`}
             fontSize={`17px`}
             fontWeight={`500`}
-            onClick={() => moveLinkHandler(`/platform/pc`)}
-          >
+            onClick={() => moveLinkHandler(`/platform/pc`)}>
             {t(`15`)}
             <Wrapper
               position={`absolute`}
               right={`40px`}
               top={`50%`}
               margin={`-6px 0 0 0`}
-              width={`auto`}
-            >
+              width={`auto`}>
               <RightOutlined />
             </Wrapper>
           </CommonButton>
@@ -399,8 +507,7 @@ const Home = () => {
           right={`180px`}
           bottom={`40px`}
           width={`auto`}
-          zIndex={width < 1200 ? `-3` : `0`}
-        >
+          zIndex={width < 1200 ? `-3` : `0`}>
           <Image
             src={`https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/willmarkets/assets/images/main/iphone.png`}
           />
@@ -425,8 +532,7 @@ const Home = () => {
             width={`auto`}
             color={`#ffea6b`}
             fontSize={`18px`}
-            fontWeight={`500`}
-          >
+            fontWeight={`500`}>
             ※{t(`16`)}※
           </Wrapper>
 
@@ -436,15 +542,13 @@ const Home = () => {
             color={`#fff`}
             textAlign={`center`}
             lineHeight={`1.8`}
-            display={`block`}
-          >
+            display={`block`}>
             <Wrapper
               display={`inline`}
               dr={`row`}
               width={`auto`}
               color={`inherit`}
-              fontSize={`inherit`}
-            >
+              fontSize={`inherit`}>
               {t(`17`).split(`\n`)[0]}
               <Wrapper
                 display={`inline`}
@@ -452,8 +556,7 @@ const Home = () => {
                 width={`auto`}
                 fontWeight={`500`}
                 color={`inherit`}
-                fontSize={`inherit`}
-              >
+                fontSize={`inherit`}>
                 {t(`17`).split(`\n`)[1]}
               </Wrapper>
               {t(`17`).split(`\n`)[2]}
@@ -471,8 +574,7 @@ const Home = () => {
               display={`inline`}
               width={`auto`}
               color={`#c1c1c1`}
-              fontSize={`inherit`}
-            >
+              fontSize={`inherit`}>
               ※ {t(`22`)}
             </Wrapper>
           </Wrapper>

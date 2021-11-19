@@ -153,7 +153,6 @@ router.get(
 
 router.post("/create", async (req, res, next) => {
   const { language, name, mobile, email, content } = req.body;
-
   try {
     const createResult = await Question.create({
       name,

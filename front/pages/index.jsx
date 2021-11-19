@@ -172,8 +172,6 @@ const Home = () => {
 
   const inputCountryNo = useInput("");
 
-  console.log(inputCountryNo, inputPhone);
-
   const { st_questionCreateDone, st_questionCreateError } = useSelector(
     (state) => state.question
   );
@@ -200,12 +198,18 @@ const Home = () => {
       data: {
         language: i18next.language,
         name: inputName.value,
-        mobile: inputPhone.value,
+        mobile: `${inputCountryNo.value} ${inputPhone.value}`,
         email: inputEmail.value,
         content: inputText.value,
       },
     });
-  }, [inputName, inputEmail, inputPhone, inputText]);
+  }, [
+    inputName.value,
+    inputEmail.value,
+    inputPhone.value,
+    inputText.value,
+    inputCountryNo.value,
+  ]);
 
   const moveLinkHandler = useCallback((link) => {
     router.push(link);

@@ -314,7 +314,13 @@ const Support = () => {
         content: inputContent.value,
       },
     });
-  }, [inputName, inputNumber, inputEmail, inputContent, inputAgree]);
+  }, [
+    inputName.value,
+    inputNumber.value,
+    inputEmail.value,
+    inputContent.value,
+    inputAgree,
+  ]);
 
   const toggleModalHandler = useCallback(() => {
     setToggleModal(!toggleModal);

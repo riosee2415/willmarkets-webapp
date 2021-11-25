@@ -106,7 +106,7 @@ const Mobile = () => {
               />
             </CommonButton>
 
-            {/* <CommonButton
+            <CommonButton
               display={`flex`}
               padding={`0`}
               width={`160px`}
@@ -118,12 +118,18 @@ const Mobile = () => {
               bgColor={`#3353F2`}
               hoverBgColor={`#3353F2`}
               radius={`10px`}
-              margin={width < 500 ? `20px 0 0` : `0 0 0 20px`}>
+              margin={width < 500 ? `20px 0 0` : `0 0 0 20px`}
+              onClick={() =>
+                window.open(
+                  `https://download.metatrader.com/cdn/mobile/mt5/android?server=WILLMarketsLtd-Server`
+                )
+              }
+            >
               {t(`4`).split(`\n`)[1]}
               <RightOutlined
                 style={{ margin: `0 0 0 5px`, fontSize: `12px` }}
               />
-            </CommonButton> */}
+            </CommonButton>
           </Wrapper>
         </RsWrapper>
       </Wrapper>
@@ -208,7 +214,7 @@ const Mobile = () => {
               />
             </CommonButton>
 
-            {/* <CommonButton
+            <CommonButton
               display={`flex`}
               padding={`0`}
               width={`160px`}
@@ -220,12 +226,18 @@ const Mobile = () => {
               bgColor={`#3353F2`}
               hoverBgColor={`#3353F2`}
               radius={`10px`}
-              margin={width < 500 ? `20px 0 0` : `0 0 0 20px`}>
+              margin={width < 500 ? `20px 0 0` : `0 0 0 20px`}
+              onClick={() =>
+                window.open(
+                  `https://download.metatrader.com/cdn/mobile/mt5/ios?server=WILLMarketsLtd-Server`
+                )
+              }
+            >
               {t(`4`).split(`\n`)[1]}
               <RightOutlined
                 style={{ margin: `0 0 0 5px`, fontSize: `12px` }}
               />
-            </CommonButton> */}
+            </CommonButton>
           </Wrapper>
         </RsWrapper>
       </Wrapper>

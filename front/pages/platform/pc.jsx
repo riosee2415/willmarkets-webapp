@@ -107,7 +107,7 @@ const Pc = () => {
               />
             </CommonButton>
 
-            {/* <CommonButton
+            <CommonButton
               display={`flex`}
               padding={`0`}
               width={`160px`}
@@ -119,12 +119,18 @@ const Pc = () => {
               bgColor={`#3353F2`}
               hoverBgColor={`#3353F2`}
               radius={`10px`}
-              margin={width < 500 ? `20px 0 0` : `0 0 0 20px`}>
+              margin={width < 500 ? `20px 0 0` : `0 0 0 20px`}
+              onClick={() =>
+                window.open(
+                  `https://download.mql5.com/cdn/web/will.markets.ltd/mt5/willmarketsltd5setup.exe`
+                )
+              }
+            >
               {t(`4`).split(`\n`)[1]}
               <RightOutlined
                 style={{ margin: `0 0 0 5px`, fontSize: `12px` }}
               />
-            </CommonButton> */}
+            </CommonButton>
           </Wrapper>
         </RsWrapper>
       </Wrapper>

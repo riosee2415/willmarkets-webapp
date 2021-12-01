@@ -7,7 +7,7 @@ const smtpTransport = nodemailer.createTransport(
   smtpPool({
     host: "smtpout.secureserver.net",
     port: "465",
-    secureConnection: false,
+    secure: true,
     // tls: {
     //   rejectUnauthorize: false,
     // },

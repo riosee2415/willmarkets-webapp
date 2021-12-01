@@ -477,6 +477,8 @@ const Signup = () => {
 
     window.scrollTo(0, 0);
   }, [
+    currentTab,
+    currentStep,
     isSendEmail,
     isConfirmEmail,
     inputEmail.value,
@@ -606,7 +608,8 @@ const Signup = () => {
         top={`0`}
         left={`0`}
         zIndex={`0`}
-        minHeight={`100vh`}>
+        minHeight={`100vh`}
+      >
         <Image
           height={`100vh`}
           src={`https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/willmarkets/assets/images/banner/main_banner02.png`}
@@ -618,13 +621,15 @@ const Signup = () => {
           position={`relative`}
           zIndex={`1`}
           al={`flex-end`}
-          minHeight={`100vh`}>
+          minHeight={`100vh`}
+        >
           <Wrapper
             margin={`75px 45px 0 0`}
             padding={`25px 20px`}
             width={width < 600 ? `100%` : `550px`}
             bgColor={`#fff`}
-            shadow={`1px 1px 8px #dedede`}>
+            shadow={`1px 1px 8px #dedede`}
+          >
             <Wrapper dr={`row`} ju={`flex-start`} margin={`0 0 30px`}>
               <Image
                 width={`50px`}
@@ -635,7 +640,8 @@ const Signup = () => {
                 margin={`0 0 0 10px`}
                 fontSize={`20px`}
                 fontWeight={`500`}
-                color={`#242424`}>
+                color={`#242424`}
+              >
                 {t(`20`)}
               </Wrapper>
             </Wrapper>
@@ -653,24 +659,28 @@ const Signup = () => {
             <Wrapper
               padding={`40px 20px 45px`}
               border={`1px solid #ececec`}
-              shadow={`2px 2px 10px #ebebeb`}>
+              shadow={`2px 2px 10px #ebebeb`}
+            >
               {currentStep === 0 && (
                 <Wrapper>
                   <Wrapper dr={`row`} al={`flex-start`}>
                     <Wrapper
                       dr={width < 600 ? `column` : `row`}
                       margin={`10px 0 0`}
-                      al={`flex-start`}>
+                      al={`flex-start`}
+                    >
                       <Wrapper al={`flex-start`} width={`100px`}>
                         <CustomLabel for={`inp-email`}>{t(`23`)}</CustomLabel>
                       </Wrapper>
 
                       <Wrapper
                         dr={`row`}
-                        width={width < 600 ? `100%` : `calc(100% - 100px)`}>
+                        width={width < 600 ? `100%` : `calc(100% - 100px)`}
+                      >
                         <Wrapper
                           dr={width < 600 ? `column` : `row`}
-                          ju={`flex-start`}>
+                          ju={`flex-start`}
+                        >
                           <CustomInput
                             id={`inp-email`}
                             width={
@@ -706,7 +716,8 @@ const Signup = () => {
                             color={`#fff`}
                             fontWeight={`500`}
                             radius={`5px`}
-                            onClick={checkEmailHandler}>
+                            onClick={checkEmailHandler}
+                          >
                             {isConfirmEmail ? t(`24`) : t(`25`)}
                           </CommonButton>
                         </Wrapper>
@@ -715,7 +726,8 @@ const Signup = () => {
                           <Wrapper
                             dr={width < 600 ? `column` : `row`}
                             ju={`flex-start`}
-                            margin={`10px 0 0`}>
+                            margin={`10px 0 0`}
+                          >
                             <CustomInput
                               width={
                                 width < 600
@@ -742,7 +754,8 @@ const Signup = () => {
                               color={`#030303`}
                               fontWeight={`500`}
                               radius={`5px`}
-                              onClick={confirmSecretHandler}>
+                              onClick={confirmSecretHandler}
+                            >
                               {t(`27`)}
                             </CommonButton>
                           </Wrapper>
@@ -754,7 +767,8 @@ const Signup = () => {
                     <Wrapper
                       dr={width < 600 ? `column` : `row`}
                       margin={`10px 0 0`}
-                      al={`flex-start`}>
+                      al={`flex-start`}
+                    >
                       <Wrapper al={`flex-start`} width={`100px`}>
                         <CustomLabel for={`inp-password`}>
                           {t(`28`)}
@@ -764,7 +778,8 @@ const Signup = () => {
                       <Wrapper
                         dr={`row`}
                         ju={`flex-start`}
-                        width={width < 600 ? `100%` : `calc(100% - 100px)`}>
+                        width={width < 600 ? `100%` : `calc(100% - 100px)`}
+                      >
                         <CustomInput
                           type={`password`}
                           id={`inp-password`}
@@ -785,7 +800,8 @@ const Signup = () => {
                     <Wrapper
                       dr={width < 600 ? `column` : `row`}
                       margin={`10px 0 0`}
-                      al={`flex-start`}>
+                      al={`flex-start`}
+                    >
                       <Wrapper al={`flex-start`} width={`100px`}>
                         <CustomLabel for={`inp-userName`}>
                           {t(`29`)}
@@ -795,7 +811,8 @@ const Signup = () => {
                       <Wrapper
                         dr={`row`}
                         ju={`flex-start`}
-                        width={width < 600 ? `100%` : `calc(100% - 100px)`}>
+                        width={width < 600 ? `100%` : `calc(100% - 100px)`}
+                      >
                         <CustomInput
                           id={`inp-userName`}
                           width={
@@ -815,7 +832,8 @@ const Signup = () => {
                     <Wrapper
                       dr={width < 600 ? `column` : `row`}
                       margin={`10px 0 0`}
-                      al={`flex-start`}>
+                      al={`flex-start`}
+                    >
                       <Wrapper al={`flex-start`} width={`100px`}>
                         <CustomLabel for={`inp-mobile`}>{t(`57`)}</CustomLabel>
                       </Wrapper>
@@ -823,7 +841,8 @@ const Signup = () => {
                       <Wrapper
                         dr={`row`}
                         ju={`flex-start`}
-                        width={width < 600 ? `100%` : `calc(100% - 100px)`}>
+                        width={width < 600 ? `100%` : `calc(100% - 100px)`}
+                      >
                         <Combo
                           isBorder={true}
                           itemAlign={`flex-start`}
@@ -833,7 +852,8 @@ const Signup = () => {
                           listHeight={`270px`}
                           border={`none`}
                           borderBottom={`1px solid #dfdfdf !important`}
-                          onClick={() => setComboCountryNo(!comboCountryNo)}>
+                          onClick={() => setComboCountryNo(!comboCountryNo)}
+                        >
                           <ComboTitle>
                             <Wrapper>
                               {inputCountryNo.value || `Select`}
@@ -843,7 +863,8 @@ const Signup = () => {
 
                           <ComboList
                             isView={comboCountryNo}
-                            width={width < 600 ? `100%` : `180%`}>
+                            width={width < 600 ? `100%` : `180%`}
+                          >
                             {countryList.map((data, idx) => {
                               return (
                                 <ComboListItem
@@ -851,7 +872,8 @@ const Signup = () => {
                                   isActive={inputCountryNo.value === data.value}
                                   onClick={() =>
                                     inputCountryNo.setValue(data.value)
-                                  }>
+                                  }
+                                >
                                   {data.name} ({data.value})
                                 </ComboListItem>
                               );
@@ -875,7 +897,8 @@ const Signup = () => {
                     <Wrapper
                       dr={width < 600 ? `column` : `row`}
                       margin={`10px 0 0`}
-                      al={`flex-start`}>
+                      al={`flex-start`}
+                    >
                       <Wrapper al={`flex-start`} width={`100px`}>
                         <CustomLabel for={`inp-userName`}>
                           {t(`30`)}
@@ -885,7 +908,8 @@ const Signup = () => {
                       <Wrapper
                         dr={`row`}
                         ju={`flex-start`}
-                        width={width < 600 ? `100%` : `calc(100% - 100px)`}>
+                        width={width < 600 ? `100%` : `calc(100% - 100px)`}
+                      >
                         <Wrapper dr={`row`} width={`auto`} margin={`0 10px`}>
                           <RadioInput
                             id={`inp-gender-1`}
@@ -899,7 +923,8 @@ const Signup = () => {
                           <Label
                             for={`inp-gender-1`}
                             fontSize={`15px`}
-                            cursor={`pointer`}>
+                            cursor={`pointer`}
+                          >
                             {t(`31`)}
                           </Label>
                         </Wrapper>
@@ -917,7 +942,8 @@ const Signup = () => {
                           <Label
                             for={`inp-gender-2`}
                             fontSize={`15px`}
-                            cursor={`pointer`}>
+                            cursor={`pointer`}
+                          >
                             {t(`32`)}
                           </Label>
                         </Wrapper>
@@ -928,7 +954,8 @@ const Signup = () => {
                     <Wrapper
                       dr={width < 600 ? `column` : `row`}
                       margin={`10px 0 0`}
-                      al={`flex-start`}>
+                      al={`flex-start`}
+                    >
                       <Wrapper al={`flex-start`} width={`100px`}>
                         <CustomLabel for={`inp-address`}>{t(`33`)}</CustomLabel>
                       </Wrapper>
@@ -938,7 +965,8 @@ const Signup = () => {
                         dr={`row`}
                         ju={`flex-start`}
                         width={width < 600 ? `100%` : `calc(100% - 100px)`}
-                        cursor={`pointer`}>
+                        cursor={`pointer`}
+                      >
                         <CustomInput
                           id={`inp-address`}
                           width={`100%`}
@@ -952,7 +980,8 @@ const Signup = () => {
                           top={`50%`}
                           zIndex={`1`}
                           margin={`-10px 0 0`}
-                          width={`auto`}></Wrapper>
+                          width={`auto`}
+                        ></Wrapper>
                       </Wrapper>
                     </Wrapper>
 
@@ -960,7 +989,8 @@ const Signup = () => {
                     <Wrapper
                       dr={width < 600 ? `column` : `row`}
                       margin={`20px 0 0`}
-                      al={`flex-start`}>
+                      al={`flex-start`}
+                    >
                       <Wrapper al={`flex-start`} width={`100px`}>
                         <CustomLabel for={`inp-detailAddress`}>
                           {t(`34`)}
@@ -971,7 +1001,8 @@ const Signup = () => {
                         dr={`row`}
                         ju={`flex-start`}
                         width={width < 600 ? `100%` : `calc(100% - 100px)`}
-                        cursor={`pointer`}>
+                        cursor={`pointer`}
+                      >
                         <CustomInput
                           id={`inp-detailAddress`}
                           width={`100%`}
@@ -989,7 +1020,8 @@ const Signup = () => {
                   <Wrapper zIndex={`3`} dr={`row`} margin={`0 0 10px`}>
                     <Wrapper
                       al={`flex-start`}
-                      width={i18next.language === `en` ? `160px` : `100px`}>
+                      width={i18next.language === `en` ? `160px` : `100px`}
+                    >
                       <CustomLabel>{t(`58`)}</CustomLabel>
                     </Wrapper>
 
@@ -1000,7 +1032,8 @@ const Signup = () => {
                         i18next.language === `en`
                           ? `calc(100% - 160px)`
                           : `calc(100% - 100px)`
-                      }>
+                      }
+                    >
                       <Combo
                         isBorder={true}
                         itemAlign={`flex-start`}
@@ -1008,7 +1041,8 @@ const Signup = () => {
                         height={`40px`}
                         border={`none`}
                         borderBottom={`1px solid #dfdfdf !important`}
-                        onClick={() => setComboPlatform(!comboPlatform)}>
+                        onClick={() => setComboPlatform(!comboPlatform)}
+                      >
                         <ComboTitle>
                           <Wrapper>{inputPlatform.value || t(`64`)}</Wrapper>
                           <CaretDownOutlined />
@@ -1017,7 +1051,8 @@ const Signup = () => {
                         <ComboList isView={comboPlatform}>
                           <ComboListItem
                             isActive={!inputPlatform.value}
-                            onClick={() => inputPlatform.setValue("")}>
+                            onClick={() => inputPlatform.setValue("")}
+                          >
                             {t(`64`)}
                           </ComboListItem>
 
@@ -1025,7 +1060,8 @@ const Signup = () => {
                             return (
                               <ComboListItem
                                 isActive={inputPlatform.value === data}
-                                onClick={() => inputPlatform.setValue(data)}>
+                                onClick={() => inputPlatform.setValue(data)}
+                              >
                                 {data}
                               </ComboListItem>
                             );
@@ -1038,7 +1074,8 @@ const Signup = () => {
                   <Wrapper zIndex={`2`} dr={`row`} margin={`0 0 10px`}>
                     <Wrapper
                       al={`flex-start`}
-                      width={i18next.language === `en` ? `160px` : `100px`}>
+                      width={i18next.language === `en` ? `160px` : `100px`}
+                    >
                       <CustomLabel>{t(`59`)}</CustomLabel>
                     </Wrapper>
 
@@ -1049,7 +1086,8 @@ const Signup = () => {
                         i18next.language === `en`
                           ? `calc(100% - 160px)`
                           : `calc(100% - 100px)`
-                      }>
+                      }
+                    >
                       <Combo
                         isBorder={true}
                         itemAlign={`flex-start`}
@@ -1057,7 +1095,8 @@ const Signup = () => {
                         height={`40px`}
                         border={`none`}
                         borderBottom={`1px solid #dfdfdf !important`}
-                        onClick={() => setComboType(!comboType)}>
+                        onClick={() => setComboType(!comboType)}
+                      >
                         <ComboTitle>
                           <Wrapper>{inputAccountType.value || t(`64`)}</Wrapper>
                           <CaretDownOutlined />
@@ -1069,7 +1108,8 @@ const Signup = () => {
                             onClick={() => {
                               inputAccountType.setValue("");
                               inputLeverage.setValue("");
-                            }}>
+                            }}
+                          >
                             {t(`64`)}
                           </ComboListItem>
 
@@ -1080,7 +1120,8 @@ const Signup = () => {
                                 onClick={() => {
                                   inputAccountType.setValue(data.type);
                                   inputLeverage.setValue("");
-                                }}>
+                                }}
+                              >
                                 {data.type}
                               </ComboListItem>
                             );
@@ -1093,7 +1134,8 @@ const Signup = () => {
                   <Wrapper zIndex={`1`} dr={`row`} margin={`0 0 10px`}>
                     <Wrapper
                       al={`flex-start`}
-                      width={i18next.language === `en` ? `160px` : `100px`}>
+                      width={i18next.language === `en` ? `160px` : `100px`}
+                    >
                       <CustomLabel>{t(`60`)}</CustomLabel>
                     </Wrapper>
 
@@ -1104,7 +1146,8 @@ const Signup = () => {
                         i18next.language === `en`
                           ? `calc(100% - 160px)`
                           : `calc(100% - 100px)`
-                      }>
+                      }
+                    >
                       <Combo
                         isBorder={true}
                         itemAlign={`flex-start`}
@@ -1112,7 +1155,8 @@ const Signup = () => {
                         height={`40px`}
                         border={`none`}
                         borderBottom={`1px solid #dfdfdf !important`}
-                        onClick={() => setComboLeverage(!comboLeverage)}>
+                        onClick={() => setComboLeverage(!comboLeverage)}
+                      >
                         <ComboTitle>
                           <Wrapper>{inputLeverage.value || t(`64`)}</Wrapper>
                           <CaretDownOutlined />
@@ -1121,7 +1165,8 @@ const Signup = () => {
                         <ComboList isView={comboLeverage}>
                           <ComboListItem
                             isActive={!inputLeverage.value}
-                            onClick={() => inputLeverage.setValue("")}>
+                            onClick={() => inputLeverage.setValue("")}
+                          >
                             {t(`64`)}
                           </ComboListItem>
 
@@ -1134,9 +1179,8 @@ const Signup = () => {
                                 return (
                                   <ComboListItem
                                     isActive={inputLeverage.value === data}
-                                    onClick={() =>
-                                      inputLeverage.setValue(data)
-                                    }>
+                                    onClick={() => inputLeverage.setValue(data)}
+                                  >
                                     {data}
                                   </ComboListItem>
                                 );
@@ -1155,14 +1199,16 @@ const Signup = () => {
                     margin={`0 0 5px`}
                     fontSize={`22px`}
                     fontWeight={`500`}
-                    color={`#030303`}>
+                    color={`#030303`}
+                  >
                     {t(`35`)}
                   </Wrapper>
 
                   <Wrapper dr={`row`}>
                     <Wrapper
                       al={`flex-start`}
-                      width={i18next.language === `en` ? `185px` : `100px`}>
+                      width={i18next.language === `en` ? `185px` : `100px`}
+                    >
                       <CustomLabel>{t(`36`)}</CustomLabel>
                     </Wrapper>
 
@@ -1173,7 +1219,8 @@ const Signup = () => {
                         i18next.language === `en`
                           ? `calc(100% - 185px)`
                           : `calc(100% - 100px)`
-                      }>
+                      }
+                    >
                       <Combo
                         isBorder={true}
                         itemAlign={`flex-start`}
@@ -1181,7 +1228,8 @@ const Signup = () => {
                         height={`40px`}
                         border={`none`}
                         borderBottom={`1px solid #dfdfdf !important`}
-                        onClick={() => setComboIdType(!comboIdType)}>
+                        onClick={() => setComboIdType(!comboIdType)}
+                      >
                         <ComboTitle>
                           <Wrapper>{inputIdType.value || t(`37`)}</Wrapper>
                           <CaretDownOutlined />
@@ -1190,22 +1238,26 @@ const Signup = () => {
                         <ComboList isView={comboIdType}>
                           <ComboListItem
                             isActive={!inputIdType.value}
-                            onClick={() => inputIdType.setValue("")}>
+                            onClick={() => inputIdType.setValue("")}
+                          >
                             {t(`37`)}
                           </ComboListItem>
                           <ComboListItem
                             isActive={inputIdType.value === t(`38`)}
-                            onClick={() => inputIdType.setValue(t(`38`))}>
+                            onClick={() => inputIdType.setValue(t(`38`))}
+                          >
                             {t(`38`)}
                           </ComboListItem>
                           <ComboListItem
                             isActive={inputIdType.value === t(`39`)}
-                            onClick={() => inputIdType.setValue(t(`39`))}>
+                            onClick={() => inputIdType.setValue(t(`39`))}
+                          >
                             {t(`39`)}
                           </ComboListItem>
                           <ComboListItem
                             isActive={inputIdType.value === t(`40`)}
-                            onClick={() => inputIdType.setValue(t(`40`))}>
+                            onClick={() => inputIdType.setValue(t(`40`))}
+                          >
                             {t(`40`)}
                           </ComboListItem>
                         </ComboList>
@@ -1216,7 +1268,8 @@ const Signup = () => {
                   <Wrapper dr={`row`} margin={`10px 0 0`}>
                     <Wrapper
                       al={`flex-start`}
-                      width={i18next.language === `en` ? `185px` : `100px`}>
+                      width={i18next.language === `en` ? `185px` : `100px`}
+                    >
                       <CustomLabel for={`inp-idDate1`}>{t(`41`)}</CustomLabel>
                     </Wrapper>
 
@@ -1227,7 +1280,8 @@ const Signup = () => {
                         i18next.language === `en`
                           ? `calc(100% - 185px)`
                           : `calc(100% - 100px)`
-                      }>
+                      }
+                    >
                       <CustomInput
                         id={`inp-idDate1`}
                         width={`100%`}
@@ -1241,7 +1295,8 @@ const Signup = () => {
                   <Wrapper dr={`row`} margin={`10px 0 0`}>
                     <Wrapper
                       al={`flex-start`}
-                      width={i18next.language === `en` ? `185px` : `100px`}>
+                      width={i18next.language === `en` ? `185px` : `100px`}
+                    >
                       <CustomLabel for={`inp-idDate2`}>{t(`42`)}</CustomLabel>
                     </Wrapper>
 
@@ -1252,7 +1307,8 @@ const Signup = () => {
                         i18next.language === `en`
                           ? `calc(100% - 185px)`
                           : `calc(100% - 100px)`
-                      }>
+                      }
+                    >
                       <CustomInput
                         id={`inp-idDate2`}
                         width={`100%`}
@@ -1266,7 +1322,8 @@ const Signup = () => {
                   <Wrapper dr={`row`} margin={`10px 0 0`}>
                     <Wrapper
                       al={`flex-start`}
-                      width={i18next.language === `en` ? `185px` : `100px`}>
+                      width={i18next.language === `en` ? `185px` : `100px`}
+                    >
                       <CustomLabel>{t(`43`)}</CustomLabel>
                     </Wrapper>
 
@@ -1277,7 +1334,8 @@ const Signup = () => {
                         i18next.language === `en`
                           ? `calc(100% - 185px)`
                           : `calc(100% - 100px)`
-                      }>
+                      }
+                    >
                       <FileInput
                         type={`file`}
                         ref={fileRef}
@@ -1288,7 +1346,8 @@ const Signup = () => {
                         height={`38px`}
                         margin={`0 10px 0 0`}
                         radius={`5px`}
-                        onClick={() => fileRef.current.click()}>
+                        onClick={() => fileRef.current.click()}
+                      >
                         {t(`44`)}
                       </CommonButton>
 
@@ -1296,14 +1355,16 @@ const Signup = () => {
                         <Wrapper
                           position={`relative`}
                           dr={`row`}
-                          width={`calc(100% - 100px)`}>
+                          width={`calc(100% - 100px)`}
+                        >
                           <Wrapper
                             position={`absolute`}
                             left={`0`}
                             top={`50%`}
                             margin={`-9px 0 0`}
                             zIndex={`2`}
-                            width={`auto`}>
+                            width={`auto`}
+                          >
                             <FileImageOutlined
                               style={{ fontSize: `18px`, color: `#707070` }}
                             />
@@ -1328,14 +1389,16 @@ const Signup = () => {
                     margin={`20px 0 5px`}
                     fontSize={`22px`}
                     fontWeight={`500`}
-                    color={`#030303`}>
+                    color={`#030303`}
+                  >
                     {t(`46`)}
                   </Wrapper>
 
                   <Wrapper dr={`row`}>
                     <Wrapper
                       al={`flex-start`}
-                      width={i18next.language === `en` ? `185px` : `100px`}>
+                      width={i18next.language === `en` ? `185px` : `100px`}
+                    >
                       <CustomLabel>{t(`36`)}</CustomLabel>
                     </Wrapper>
 
@@ -1346,7 +1409,8 @@ const Signup = () => {
                         i18next.language === `en`
                           ? `calc(100% - 185px)`
                           : `calc(100% - 100px)`
-                      }>
+                      }
+                    >
                       <Combo
                         isBorder={true}
                         itemAlign={`flex-start`}
@@ -1354,7 +1418,8 @@ const Signup = () => {
                         height={`40px`}
                         border={`none`}
                         borderBottom={`1px solid #dfdfdf !important`}
-                        onClick={() => setComboAddrType(!comboAddrType)}>
+                        onClick={() => setComboAddrType(!comboAddrType)}
+                      >
                         <ComboTitle>
                           <Wrapper>{inputAddrType.value || t(`37`)}</Wrapper>
                           <CaretDownOutlined />
@@ -1363,27 +1428,32 @@ const Signup = () => {
                         <ComboList isView={comboAddrType}>
                           <ComboListItem
                             isActive={!inputAddrType.value}
-                            onClick={() => inputAddrType.setValue("")}>
+                            onClick={() => inputAddrType.setValue("")}
+                          >
                             {t(`37`)}
                           </ComboListItem>
                           <ComboListItem
                             isActive={inputAddrType.value === t(`47`)}
-                            onClick={() => inputAddrType.setValue(t(`47`))}>
+                            onClick={() => inputAddrType.setValue(t(`47`))}
+                          >
                             {t(`47`)}
                           </ComboListItem>
                           <ComboListItem
                             isActive={inputAddrType.value === t(`48`)}
-                            onClick={() => inputAddrType.setValue(t(`48`))}>
+                            onClick={() => inputAddrType.setValue(t(`48`))}
+                          >
                             {t(`48`)}
                           </ComboListItem>
                           <ComboListItem
                             isActive={inputAddrType.value === t(`49`)}
-                            onClick={() => inputAddrType.setValue(t(`49`))}>
+                            onClick={() => inputAddrType.setValue(t(`49`))}
+                          >
                             {t(`49`)}
                           </ComboListItem>
                           <ComboListItem
                             isActive={inputAddrType.value === t(`50`)}
-                            onClick={() => inputAddrType.setValue(t(`50`))}>
+                            onClick={() => inputAddrType.setValue(t(`50`))}
+                          >
                             {t(`50`)}
                           </ComboListItem>
                         </ComboList>
@@ -1394,7 +1464,8 @@ const Signup = () => {
                   <Wrapper dr={`row`} margin={`10px 0 0`}>
                     <Wrapper
                       al={`flex-start`}
-                      width={i18next.language === `en` ? `185px` : `100px`}>
+                      width={i18next.language === `en` ? `185px` : `100px`}
+                    >
                       <CustomLabel>{t(`43`)}</CustomLabel>
                     </Wrapper>
 
@@ -1405,7 +1476,8 @@ const Signup = () => {
                         i18next.language === `en`
                           ? `calc(100% - 185px)`
                           : `calc(100% - 100px)`
-                      }>
+                      }
+                    >
                       <FileInput
                         type={`file`}
                         ref={fileRef2}
@@ -1416,7 +1488,8 @@ const Signup = () => {
                         height={`38px`}
                         margin={`0 10px 0 0`}
                         radius={`5px`}
-                        onClick={() => fileRef2.current.click()}>
+                        onClick={() => fileRef2.current.click()}
+                      >
                         {t(`44`)}
                       </CommonButton>
 
@@ -1424,14 +1497,16 @@ const Signup = () => {
                         <Wrapper
                           position={`relative`}
                           dr={`row`}
-                          width={`calc(100% - 100px)`}>
+                          width={`calc(100% - 100px)`}
+                        >
                           <Wrapper
                             position={`absolute`}
                             left={`0`}
                             top={`50%`}
                             margin={`-9px 0 0`}
                             zIndex={`2`}
-                            width={`auto`}>
+                            width={`auto`}
+                          >
                             <FileImageOutlined
                               style={{ fontSize: `18px`, color: `#707070` }}
                             />
@@ -1465,7 +1540,8 @@ const Signup = () => {
                 bgColor={`#313B91`}
                 color={`#fff`}
                 lineHeight={`1.2`}
-                onClick={signupUserHandler}>
+                onClick={signupUserHandler}
+              >
                 {currentTab === 0
                   ? currentStep < 2
                     ? t(`51`)
@@ -1485,7 +1561,8 @@ const Signup = () => {
                 bgColor={`#ebebeb`}
                 color={`#030303`}
                 lineHeight={`1.2`}
-                onClick={moveBackHandler}>
+                onClick={moveBackHandler}
+              >
                 {currentTab === 0
                   ? currentStep === 0
                     ? t(`53`)

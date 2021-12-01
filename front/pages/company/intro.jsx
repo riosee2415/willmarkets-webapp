@@ -106,7 +106,10 @@ const Intro = () => {
               radius={`30px`}
               fontSize={`18px`}
               fontWeight={`500`}
-              onClick={() => moveLinkHandler(`/signup`)}
+              onClick={() =>
+                // moveLinkHandler(`/signup`)
+                window.open(`https://clients.will-markets.com`)
+              }
             >
               {t(`4`)}
             </CommonButton>

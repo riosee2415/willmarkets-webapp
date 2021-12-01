@@ -253,9 +253,9 @@ const AppHeader = ({ children }) => {
                     fontSize={`13px`}
                     color={`#fff`}
                     cursor={`pointer`}
-                    onClick={() =>
-                      // moveLinkHandler(`/login`)
-                      window.open(`https://clients.will-markets.com`)
+                    onClick={
+                      () => moveLinkHandler(`/login`)
+                      // window.open(`https://clients.will-markets.com`)
                     }
                   >
                     {t(`2`)}
@@ -266,9 +266,9 @@ const AppHeader = ({ children }) => {
                     fontSize={`13px`}
                     color={`#fff`}
                     cursor={`pointer`}
-                    onClick={() =>
-                      // moveLinkHandler(`/signup`)
-                      window.open(`https://clients.will-markets.com`)
+                    onClick={
+                      () => moveLinkHandler(`/signup`)
+                      // window.open(`https://clients.will-markets.com`)
                     }
                   >
                     {t(`3`)}
@@ -622,9 +622,9 @@ const AppHeader = ({ children }) => {
                     width={`50%`}
                     cursor={`pointer`}
                     color={`#fff`}
-                    onClick={() =>
-                      // moveLinkHandler(`/login`)
-                      window.open(`https://clients.will-markets.com`)
+                    onClick={
+                      () => moveLinkHandler(`/login`)
+                      // window.open(`https://clients.will-markets.com`)
                     }
                   >
                     {t(`2`)}
@@ -645,9 +645,9 @@ const AppHeader = ({ children }) => {
                     width={`50%`}
                     cursor={`pointer`}
                     color={`#fff`}
-                    onClick={() =>
-                      //  moveLinkHandler(`/signup`)
-                      window.open(`https://clients.will-markets.com`)
+                    onClick={
+                      () => moveLinkHandler(`/signup`)
+                      // window.open(`https://clients.will-markets.com`)
                     }
                   >
                     {t(`3`)}

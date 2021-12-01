@@ -36,6 +36,10 @@ const Intro = () => {
     router.push(`${link}`);
   }, []);
 
+  const moveURLHandler = useCallback((url) => {
+    if (typeof window !== `undefined`) window.open(url);
+  }, []);
+
   return (
     <ClientLayout>
       <SubBanner />
@@ -106,9 +110,9 @@ const Intro = () => {
               radius={`30px`}
               fontSize={`18px`}
               fontWeight={`500`}
-              onClick={() =>
-                //  moveLinkHandler(`/signup`)
-                window.open(`https://clients.will-markets.com`)
+              onClick={
+                () => moveURLHandler(`https://clients.will-markets.com`)
+                // moveLinkHandler(`/signup`)
               }
             >
               {t(`4`)}

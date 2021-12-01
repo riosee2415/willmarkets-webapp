@@ -27,6 +27,10 @@ export default () => {
     router.push(link);
   };
 
+  const moveURLHandler = useCallback((url) => {
+    if (typeof window !== `undefined`) window.open(url);
+  }, []);
+
   return (
     <Container>
       <Swiper
@@ -93,11 +97,11 @@ export default () => {
                     radius={`30px`}
                     fontSize={`18px`}
                     fontWeight={`700`}
-                    onClick={() =>
-                      //  moveLinkHandler(`/signup`)
-                      window.open(`https://clients.will-markets.com`)
-                    }
                     margin={width < 800 ? `0 0 10px` : `0`}
+                    onClick={
+                      () => moveURLHandler(`https://clients.will-markets.com`)
+                      // moveLinkHandler(`/signup`)
+                    }
                   >
                     {t(`2`)}
                     <Wrapper
@@ -119,9 +123,9 @@ export default () => {
                     radius={`30px`}
                     fontSize={`18px`}
                     fontWeight={`700`}
-                    onClick={() =>
+                    onClick={
+                      () => moveURLHandler(`https://clients.will-markets.com`)
                       // moveLinkHandler(`/signup`)
-                      window.open(`https://clients.will-markets.com`)
                     }
                   >
                     {t(`3`)}
@@ -196,9 +200,9 @@ export default () => {
                     radius={`30px`}
                     fontSize={`18px`}
                     fontWeight={`700`}
-                    onClick={() =>
+                    onClick={
+                      () => moveURLHandler(`https://clients.will-markets.com`)
                       // moveLinkHandler(`/signup`)
-                      window.open(`https://clients.will-markets.com`)
                     }
                     margin={width < 800 ? `0 0 10px` : `0`}
                   >
@@ -223,9 +227,9 @@ export default () => {
                     radius={`30px`}
                     fontSize={`18px`}
                     fontWeight={`700`}
-                    onClick={() =>
+                    onClick={
+                      () => moveURLHandler(`https://clients.will-markets.com`)
                       // moveLinkHandler(`/signup`)
-                      window.open(`https://clients.will-markets.com`)
                     }
                   >
                     {t(`3`)}

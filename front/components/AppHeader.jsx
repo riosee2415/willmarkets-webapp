@@ -186,6 +186,10 @@ const AppHeader = ({ children }) => {
     router.push(link);
   }, []);
 
+  const moveURLHandler = useCallback((url) => {
+    if (typeof window !== `undefined`) window.open(url);
+  }, []);
+
   const logoutUserHandler = useCallback(() => {
     dispatch({
       type: USER_LOGOUT_REQUEST,
@@ -254,8 +258,8 @@ const AppHeader = ({ children }) => {
                     color={`#fff`}
                     cursor={`pointer`}
                     onClick={
-                      // () => moveLinkHandler(`/login`)
-                      window.open(`https://clients.will-markets.com`)
+                      () => moveURLHandler(`https://clients.will-markets.com`)
+                      // moveLinkHandler(`/login`)
                     }
                   >
                     {t(`2`)}
@@ -266,9 +270,9 @@ const AppHeader = ({ children }) => {
                     fontSize={`13px`}
                     color={`#fff`}
                     cursor={`pointer`}
-                    onClick={() =>
-                      // moveLinkHandler(`/signup`)
-                      window.open(`https://clients.will-markets.com`)
+                    onClick={
+                      () => moveURLHandler(`https://clients.will-markets.com`)
+                      // moveLinkHandler(`/login`)
                     }
                   >
                     {t(`3`)}
@@ -504,9 +508,9 @@ const AppHeader = ({ children }) => {
                   onMouseOut={() => setToggleMenu04(false)}
                 >
                   <MenuTextWrapper
-                    onClick={() =>
+                    onClick={
+                      () => moveURLHandler(`https://clients.will-markets.com`)
                       // moveLinkHandler(`/user`)
-                      window.open(`https://clients.will-markets.com`)
                     }
                   >
                     {t(`17`)}
@@ -627,9 +631,9 @@ const AppHeader = ({ children }) => {
                     width={`50%`}
                     cursor={`pointer`}
                     color={`#fff`}
-                    onClick={() =>
-                      //  moveLinkHandler(`/login`)
-                      window.open(`https://clients.will-markets.com`)
+                    onClick={
+                      () => moveURLHandler(`https://clients.will-markets.com`)
+                      // moveLinkHandler(`/login`)
                     }
                   >
                     {t(`2`)}
@@ -650,9 +654,9 @@ const AppHeader = ({ children }) => {
                     width={`50%`}
                     cursor={`pointer`}
                     color={`#fff`}
-                    onClick={() =>
+                    onClick={
+                      () => moveURLHandler(`https://clients.will-markets.com`)
                       // moveLinkHandler(`/signup`)
-                      window.open(`https://clients.will-markets.com`)
                     }
                   >
                     {t(`3`)}
@@ -886,9 +890,9 @@ const AppHeader = ({ children }) => {
               cursor={`pointer`}
               padding={`10px 15px`}
               borderBottom={`1px solid #efeaea`}
-              onClick={() =>
+              onClick={
+                () => moveURLHandler(`https://clients.will-markets.com`)
                 // moveLinkHandler(`/user`)
-                window.open(`https://clients.will-markets.com`)
               }
             >
               {t(`17`)}

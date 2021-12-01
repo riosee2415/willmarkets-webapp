@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useCallback } from "react";
 import styled from "styled-components";
 import { Image, RsWrapper, Wrapper, CommonButton } from "../commonComponents";
 import { Swiper, SwiperSlide } from "swiper/react";

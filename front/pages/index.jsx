@@ -30,6 +30,7 @@ import { QUESTION_CREATE_REQUEST } from "../reducers/question";
 import { useTranslation } from "react-i18next";
 import i18next from "i18next";
 import useWidth from "../hooks/useWidth";
+import Popup from "../components/Popup";
 
 const CustomInput = styled(TextInput)`
   width: ${(props) => props.width};
@@ -610,6 +611,7 @@ const Home = () => {
           </Wrapper>
         </RsWrapper>
       </Wrapper>
+      <Popup />
     </ClientLayout>
   );
 };

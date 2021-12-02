@@ -18,6 +18,7 @@ const depositRouter = require("./routers/depositRouter");
 const withdrawRouter = require("./routers/withdrawRouter");
 const liveAccountRouter = require("./routers/liveAccountRouter");
 const demoAccountRouter = require("./routers/demoAccountRouter");
+const popupRouter = require("./routers/popupRouter");
 
 // Config Settings
 db.sequelize
@@ -91,6 +92,7 @@ app.use("/api/deposit", depositRouter);
 app.use("/api/withdraw", withdrawRouter);
 app.use("/api/liveAccount", liveAccountRouter);
 app.use("/api/demoAccount", demoAccountRouter);
+app.use("/api/popup", popupRouter);
 
 // second minute hour day-of-month month day-of-week
 const task = cron.schedule(

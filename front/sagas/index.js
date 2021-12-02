@@ -5,6 +5,7 @@ import depositSage from "./deposit";
 import withdrawSage from "./withdraw";
 import liveAccount from "./liveAccount";
 import demoAccount from "./demoAccount";
+import popupSaga from "./popup";
 //
 import axios from "axios";
 import backURL from "../config/config";
@@ -20,5 +21,6 @@ export default function* rootSaga() {
     fork(withdrawSage),
     fork(liveAccount),
     fork(demoAccount),
+    fork(popupSaga),
   ]);
 }

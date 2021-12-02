@@ -7,6 +7,7 @@ import deposit from "./deposit";
 import withdraw from "./withdraw";
 import liveAccount from "./liveAccount";
 import demoAccount from "./demoAccount";
+import popup from "./popup";
 
 const rootReducer = (state, action) => {
   switch (action.type) {
@@ -21,6 +22,7 @@ const rootReducer = (state, action) => {
         withdraw,
         liveAccount,
         demoAccount,
+        popup,
       });
       return combinedReducer(state, action);
     }

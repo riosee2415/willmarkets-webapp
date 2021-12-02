@@ -318,7 +318,7 @@ router.post("/signup", async (req, res, next) => {
       leverage,
     });
 
-    if (updateResult[0] > 0 && type === 0) {
+    if (type === 0) {
       sendSecretMail(
         "신규 라이브 계정 요청이 접수되었습니다.",
         `
@@ -365,7 +365,7 @@ router.post("/signup", async (req, res, next) => {
        `
       );
       return res.status(200).json({ result: true });
-    } else if (updateResult[0] > 0 && type === 1) {
+    } else if (type === 1) {
       sendSecretMail(
         "신규 데모 계정 요청이 접수되었습니다.",
         `

@@ -63,7 +63,8 @@ const AdminMenu = () => {
         selectedKeys={[current]}
         mode="inline"
         selectedKeys={router.pathname}
-        disabled={false}>
+        disabled={false}
+      >
         <Wrapper margin={`20px 0 10px`}>
           <Image
             alt="logo"
@@ -98,24 +99,16 @@ const AdminMenu = () => {
             <MenuName>접속자 통계</MenuName>
           </Menu.Item>
         </SubMenu> */}
-        {/* <SubMenu
+        <SubMenu
           key="sub2"
           icon={<InfoCircleOutlined />}
           title="기초 관리"
           onTitleClick={titleClickHandler("sub2")}
         >
-          <Menu.Item key="/admin/info/businessInformation">
-            <MenuName>사업자정보 관리</MenuName>
-          </Menu.Item>
           <Menu.Item key="/admin/info/popup">
             <MenuName>팝업 관리</MenuName>
           </Menu.Item>
-
-         <SubMenu key="sub3" title="Submenu">
-            <Menu.Item key="7">Option 7</Menu.Item>
-            <Menu.Item key="8">Option 8</Menu.Item>
-          </SubMenu>
-        </SubMenu> */}
+        </SubMenu>
         {/* <SubMenu
           key="sub3"
           icon={<BookOutlined />}
@@ -143,7 +136,8 @@ const AdminMenu = () => {
           key="sub5"
           icon={<UserOutlined />}
           title="회원 관리"
-          onTitleClick={titleClickHandler("sub5")}>
+          onTitleClick={titleClickHandler("sub5")}
+        >
           <Menu.Item key="/admin/user/userList">
             <MenuName>회원 리스트</MenuName>
           </Menu.Item>
@@ -152,7 +146,8 @@ const AdminMenu = () => {
           key="sub7"
           icon={<DollarOutlined />}
           title="입출금 관리"
-          onTitleClick={titleClickHandler("sub7")}>
+          onTitleClick={titleClickHandler("sub7")}
+        >
           <Menu.Item key="/admin/account/deposit">
             <MenuName>입금 관리</MenuName>
           </Menu.Item>
@@ -170,7 +165,8 @@ const AdminMenu = () => {
           key="sub6"
           icon={<PhoneOutlined />}
           title="문의 관리"
-          onTitleClick={titleClickHandler("sub6")}>
+          onTitleClick={titleClickHandler("sub6")}
+        >
           {/* <Menu.Item key="/admin/question/type">
             <MenuName>문의 유형 리스트</MenuName>
           </Menu.Item> */}

@@ -111,8 +111,8 @@ const Intro = () => {
               fontSize={`18px`}
               fontWeight={`500`}
               onClick={
-                () => moveURLHandler(`https://clients.will-markets.com`)
-                // moveLinkHandler(`/signup`)
+                () => moveLinkHandler(`/signup`)
+                // moveURLHandler(`https://clients.will-markets.com`)
               }
             >
               {t(`4`)}

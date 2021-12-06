@@ -99,8 +99,8 @@ export default () => {
                     fontWeight={`700`}
                     margin={width < 800 ? `0 0 10px` : `0`}
                     onClick={
-                      () => moveURLHandler(`https://clients.will-markets.com`)
-                      // moveLinkHandler(`/signup`)
+                      () => moveLinkHandler(`/signup`)
+                      // moveURLHandler(`https://clients.will-markets.com`)
                     }
                   >
                     {t(`2`)}
@@ -124,8 +124,8 @@ export default () => {
                     fontSize={`18px`}
                     fontWeight={`700`}
                     onClick={
-                      () => moveURLHandler(`https://clients.will-markets.com`)
-                      // moveLinkHandler(`/signup`)
+                      () => moveLinkHandler(`/signup`)
+                      //  moveURLHandler(`https://clients.will-markets.com`)
                     }
                   >
                     {t(`3`)}
@@ -201,8 +201,8 @@ export default () => {
                     fontSize={`18px`}
                     fontWeight={`700`}
                     onClick={
-                      () => moveURLHandler(`https://clients.will-markets.com`)
-                      // moveLinkHandler(`/signup`)
+                      () => moveLinkHandler(`/signup`)
+                      // moveURLHandler(`https://clients.will-markets.com`)
                     }
                     margin={width < 800 ? `0 0 10px` : `0`}
                   >
@@ -228,8 +228,8 @@ export default () => {
                     fontSize={`18px`}
                     fontWeight={`700`}
                     onClick={
-                      () => moveURLHandler(`https://clients.will-markets.com`)
-                      // moveLinkHandler(`/signup`)
+                      () => moveLinkHandler(`/signup`)
+                      //  moveURLHandler(`https://clients.will-markets.com`)
                     }
                   >
                     {t(`3`)}

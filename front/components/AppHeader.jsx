@@ -258,8 +258,8 @@ const AppHeader = ({ children }) => {
                     color={`#fff`}
                     cursor={`pointer`}
                     onClick={
-                      () => moveURLHandler(`https://clients.will-markets.com`)
-                      // moveLinkHandler(`/login`)
+                      () => moveLinkHandler(`/login`)
+                      // moveURLHandler(`https://clients.will-markets.com`)
                     }
                   >
                     {t(`2`)}
@@ -271,8 +271,8 @@ const AppHeader = ({ children }) => {
                     color={`#fff`}
                     cursor={`pointer`}
                     onClick={
-                      () => moveURLHandler(`https://clients.will-markets.com`)
-                      // moveLinkHandler(`/login`)
+                      () => moveLinkHandler(`/login`)
+                      // moveURLHandler(`https://clients.will-markets.com`)
                     }
                   >
                     {t(`3`)}
@@ -509,8 +509,8 @@ const AppHeader = ({ children }) => {
                 >
                   <MenuTextWrapper
                     onClick={
-                      () => moveURLHandler(`https://clients.will-markets.com`)
-                      // moveLinkHandler(`/user`)
+                      () => moveLinkHandler(`/user`)
+                      // moveURLHandler(`https://clients.will-markets.com`)
                     }
                   >
                     {t(`17`)}
@@ -632,8 +632,8 @@ const AppHeader = ({ children }) => {
                     cursor={`pointer`}
                     color={`#fff`}
                     onClick={
-                      () => moveURLHandler(`https://clients.will-markets.com`)
-                      // moveLinkHandler(`/login`)
+                      () => moveLinkHandler(`/login`)
+                      //  moveURLHandler(`https://clients.will-markets.com`)
                     }
                   >
                     {t(`2`)}
@@ -655,8 +655,8 @@ const AppHeader = ({ children }) => {
                     cursor={`pointer`}
                     color={`#fff`}
                     onClick={
-                      () => moveURLHandler(`https://clients.will-markets.com`)
-                      // moveLinkHandler(`/signup`)
+                      () => moveLinkHandler(`/signup`)
+                      //  moveURLHandler(`https://clients.will-markets.com`)
                     }
                   >
                     {t(`3`)}
@@ -891,8 +891,8 @@ const AppHeader = ({ children }) => {
               padding={`10px 15px`}
               borderBottom={`1px solid #efeaea`}
               onClick={
-                () => moveURLHandler(`https://clients.will-markets.com`)
-                // moveLinkHandler(`/user`)
+                () => moveLinkHandler(`/user`)
+                //  moveURLHandler(`https://clients.will-markets.com`)
               }
             >
               {t(`17`)}

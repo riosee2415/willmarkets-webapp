@@ -5,6 +5,10 @@ module.exports = class LiveAccount extends Model {
   static init(sequelize) {
     return super.init(
       {
+        accountType: {
+          type: DataTypes.STRING(200),
+          allowNull: true,
+        },
         bankNo: {
           type: DataTypes.STRING(200),
           allowNull: true,

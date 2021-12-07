@@ -37,8 +37,6 @@ const AdminMenu = () => {
   const [current, setCurrent] = useState(`1`);
 
   const clickAction = useCallback((e) => {
-    // console.log("click", e);
-
     router.replace(e.key);
     setCurrent(e.key);
   }, []);

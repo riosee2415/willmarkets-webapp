@@ -14,7 +14,7 @@ module.exports = () => {
         try {
           if (email.includes(`ISCLIENT&&`)) {
             const languaue = email.split(`&&`)[1];
-            console.log(email);
+
             const user = await User.findOne({
               where: { email: email.split(`&&`)[2] },
             });

@@ -271,7 +271,7 @@ const AppHeader = ({ children }) => {
                     color={`#fff`}
                     cursor={`pointer`}
                     onClick={
-                      () => moveLinkHandler(`/login`)
+                      () => moveLinkHandler(`/signup`)
                       // moveURLHandler(`https://clients.will-markets.com`)
                     }
                   >

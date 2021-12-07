@@ -64,6 +64,7 @@ router.post("/create", async (req, res, next) => {
     platform,
     type,
     leverage,
+    accountType,
     price,
     tradePassword,
     viewPassword,
@@ -90,6 +91,7 @@ router.post("/create", async (req, res, next) => {
       type,
       price,
       leverage,
+      accountType,
       tradePassword,
       viewPassword,
       isComplete: false,
@@ -168,7 +170,6 @@ router.patch("/updatePermit", isAdminCheck, async (req, res, next) => {
   const { language, id, bankNo, userId, viewPassword, tradePassword } =
     req.body;
 
-  console.log(viewPassword, tradePassword);
   try {
     const exUpdatePermit = await DemoAccount.findOne({
       where: {

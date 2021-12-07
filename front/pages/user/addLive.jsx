@@ -123,6 +123,8 @@ const AddLive = () => {
     },
   ];
 
+  const accountTypeList = ["New", "Old"];
+
   ////// HOOKS //////
   const { t } = useTranslation(["user_addLive"]);
 
@@ -141,9 +143,10 @@ const AddLive = () => {
   const [currentTab, setCurrentTab] = useState(0);
   const [currentStep, setCurrentStep] = useState(0);
 
-  const inputPlatform = useInput("MetaTrader 4");
+  const inputPlatform = useInput("");
   const inputType = useInput("");
   const inputLeverage = useInput("");
+  const inputAccountType = useInput("");
 
   ////// TOGGLE //////
 
@@ -156,9 +159,11 @@ const AddLive = () => {
   const initValueHandler = useCallback(() => {
     setCurrentStep(0);
 
-    inputType.setValue("");
-    inputLeverage.setValue("");
-  }, [inputType.value, inputLeverage.value]);
+    inputPlatform.setValue(platformList[0]);
+    inputType.setValue(typeList[0].type);
+    inputLeverage.setValue(typeList[0].leverage[0]);
+    inputAccountType.setValue(accountTypeList[0]);
+  }, []);
 
   const createLiveAccountHandler = useCallback(() => {
     dispatch({
@@ -169,9 +174,15 @@ const AddLive = () => {
         platform: inputPlatform.value,
         type: inputType.value,
         leverage: inputLeverage.value,
+        accountType: inputAccountType.value,
       },
     });
-  }, [inputPlatform, inputType, inputLeverage]);
+  }, [
+    inputPlatform.value,
+    inputType.value,
+    inputLeverage.value,
+    inputAccountType.value,
+  ]);
 
   const changeSelectBoxHandler = useCallback((value, setValue) => {
     setValue(value);
@@ -179,8 +190,10 @@ const AddLive = () => {
 
   ////// USEEFFECT //////
   useEffect(() => {
+    inputPlatform.setValue(platformList[0]);
     inputType.setValue(typeList[0].type);
     inputLeverage.setValue(typeList[0].leverage[0]);
+    inputAccountType.setValue(accountTypeList[0]);
   }, []);
 
   useEffect(() => {
@@ -196,8 +209,10 @@ const AddLive = () => {
     if (st_liveAccountCreateDone) {
       setCurrentStep(1);
 
-      inputType.setValue("");
-      inputLeverage.setValue("");
+      inputPlatform.setValue(platformList[0]);
+      inputType.setValue(typeList[0].type);
+      inputLeverage.setValue(typeList[0].leverage[0]);
+      inputAccountType.setValue(accountTypeList[0]);
     }
   }, [st_liveAccountCreateDone]);
 
@@ -212,7 +227,8 @@ const AddLive = () => {
       <TabWrapper
         position={`absolute`}
         top={width < 900 ? `0` : `-21px`}
-        left={`20px`}>
+        left={`20px`}
+      >
         <Tab isActive={currentTab === 0} onClick={() => setCurrentTab(0)}>
           {t(`4`)}
         </Tab>
@@ -226,7 +242,8 @@ const AddLive = () => {
         padding={width < 900 ? `20px` : `20px 30px`}
         bgColor={`#fff`}
         border={`1px solid #ededed`}
-        shadow={`2px 2px 10px #e6e6e6`}>
+        shadow={`2px 2px 10px #e6e6e6`}
+      >
         <Wrapper al={`flex-start`}>
           <Wrapper
             al={`flex-start`}
@@ -234,7 +251,8 @@ const AddLive = () => {
             padding={`0 8px 20px`}
             fontSize={`19px`}
             fontWeight={`700`}
-            borderBottom={`1px solid #ebebeb`}>
+            borderBottom={`1px solid #ebebeb`}
+          >
             {t(`5`)}
           </Wrapper>
           {currentTab === 0 && (
@@ -242,6 +260,28 @@ const AddLive = () => {
               {currentStep === 0 && (
                 <Wrapper al={`flex-start`}>
                   <CustomLabel margin={`0 0 15px`}>
+                    <Wrapper className={`required`}>*</Wrapper>
+                    {t(`16`)}
+                  </CustomLabel>
+                  <Wrapper dr={`row`} ju={`flex-start`}>
+                    {accountTypeList.map((data, idx) => {
+                      return (
+                        <InputBox
+                          isActive={inputAccountType.value === data}
+                          onClick={() =>
+                            changeSelectBoxHandler(
+                              data,
+                              inputAccountType.setValue
+                            )
+                          }
+                        >
+                          {data}
+                        </InputBox>
+                      );
+                    })}
+                  </Wrapper>
+
+                  <CustomLabel margin={`40px 0 15px`}>
                     <Wrapper className={`required`}>*</Wrapper>
                     {t(`6`)}
                   </CustomLabel>
@@ -253,7 +293,8 @@ const AddLive = () => {
                           isActive={inputPlatform.value === data}
                           onClick={() =>
                             changeSelectBoxHandler(data, inputPlatform.setValue)
-                          }>
+                          }
+                        >
                           {data}
                         </InputBox>
                       );
@@ -281,7 +322,8 @@ const AddLive = () => {
                               typeList.find((data2) => data.type === data2.type)
                                 .leverage[0]
                             );
-                          }}>
+                          }}
+                        >
                           {data.type}
                         </InputBox>
                       );
@@ -309,7 +351,8 @@ const AddLive = () => {
                                   data,
                                   inputLeverage.setValue
                                 )
-                              }>
+                              }
+                            >
                               {data}
                             </InputBox>
                           );
@@ -321,17 +364,20 @@ const AddLive = () => {
                     ju={`flex-start`}
                     margin={`120px 0 0`}
                     padding={`20px 0 0`}
-                    borderTop={`1px solid #ebebeb`}>
+                    borderTop={`1px solid #ebebeb`}
+                  >
                     <CommonButton
                       kindOf={`white`}
                       margin={`0 10px 0 0`}
-                      onClick={() => moveLinkHandler(`/user`)}>
+                      onClick={() => moveLinkHandler(`/user`)}
+                    >
                       {t(`11`)}
                     </CommonButton>
 
                     <CommonButton
                       kindOf={`red`}
-                      onClick={createLiveAccountHandler}>
+                      onClick={createLiveAccountHandler}
+                    >
                       {t(`12`)}
                     </CommonButton>
                   </Wrapper>
@@ -346,7 +392,8 @@ const AddLive = () => {
                       <Wrapper
                         fontSize={`25px`}
                         width={`auto`}
-                        borderBottom={`1px solid #c9c9c9`}>
+                        borderBottom={`1px solid #c9c9c9`}
+                      >
                         {t(`13`)}
                       </Wrapper>
                     }
@@ -355,7 +402,8 @@ const AddLive = () => {
                         margin={`10px 0 0`}
                         padding={`0 15px`}
                         width={`auto`}
-                        lineHeight={`1.8`}>
+                        lineHeight={`1.8`}
+                      >
                         {t(`14`)}
                       </Wrapper>
                     }
@@ -367,7 +415,8 @@ const AddLive = () => {
                           width={`180px`}
                           height={`40px`}
                           margin={`0 5px`}
-                          onClick={initValueHandler}>
+                          onClick={initValueHandler}
+                        >
                           {t(`15`)}
                         </CommonButton>
                       </Wrapper>,

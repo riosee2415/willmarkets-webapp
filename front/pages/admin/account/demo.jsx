@@ -210,6 +210,11 @@ const Live = ({}) => {
     },
     {
       width: 60,
+      title: <Wrapper fontSize={`14px`}>계좌개설 유형</Wrapper>,
+      render: (data) => <Wrapper fontSize={`14px`}>{data.accountType}</Wrapper>,
+    },
+    {
+      width: 60,
       title: <Wrapper fontSize={`14px`}>거래플랫폼</Wrapper>,
       render: (data) => <Wrapper fontSize={`14px`}>{data.platform}</Wrapper>,
     },
@@ -258,14 +263,16 @@ const Live = ({}) => {
           <Wrapper
             width={`90px`}
             fontSize={`inherit`}
-            color={data.isComplete ? `#0d24c4` : `#d62929`}>
+            color={data.isComplete ? `#0d24c4` : `#d62929`}
+          >
             {data.isComplete ? `승인` : `승인대기`}
           </Wrapper>
 
           <Button
             type="primary"
             disabled={data.isComplete}
-            onClick={() => toggleModalHandler(data)}>
+            onClick={() => toggleModalHandler(data)}
+          >
             승인
           </Button>
         </Wrapper>
@@ -328,7 +335,8 @@ const Live = ({}) => {
         width={`400px`}
         title={`승인`}
         onCancel={toggleModalHandler}
-        onOk={updatePermitHandler}>
+        onOk={updatePermitHandler}
+      >
         <Wrapper padding={`20px`} al={`flex-start`}>
           <Wrapper
             al={`flex-start`}
@@ -336,7 +344,8 @@ const Live = ({}) => {
             margin={`0 0 10px`}
             fontSize={`15px`}
             fontWeight={`500`}
-            borderBottom={`1px solid #eee`}>
+            borderBottom={`1px solid #eee`}
+          >
             해당 데모계좌 신청을 승인하시겠습니까 ?
           </Wrapper>
 
@@ -368,7 +377,8 @@ const Live = ({}) => {
         visible={false}
         onOk={() => {}}
         onCancel={() => {}}
-        title="Ask"></Modal>
+        title="Ask"
+      ></Modal>
     </AdminLayout>
   );
 };

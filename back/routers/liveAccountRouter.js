@@ -64,9 +64,7 @@ router.get(["/list/:listType", "/list"], async (req, res, next) => {
 });
 
 router.post("/create", async (req, res, next) => {
-  const { language, userId, platform, type, leverage } = req.body;
-
-  console.log(userId, platform, type, leverage, "kigkm");
+  const { language, userId, platform, type, leverage, accountType } = req.body;
 
   try {
     const exUser = await User.findOne({
@@ -88,6 +86,7 @@ router.post("/create", async (req, res, next) => {
       platform,
       type,
       leverage,
+      accountType,
       isComplete: false,
     });
 

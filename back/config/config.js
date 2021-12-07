@@ -3,10 +3,10 @@ dotenv.config();
 
 module.exports = {
   development: {
-    username: "root",
+    username: "dev",
     password: process.env.DB_PASSWORD,
     database: "willmarkets",
-    host: "127.0.0.1",
+    host: process.env.DB_DEV_PORT,
     dialect: "mysql",
   },
   test: {

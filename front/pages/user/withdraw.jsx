@@ -345,7 +345,8 @@ const Withdraw = () => {
       <TabWrapper
         position={`absolute`}
         top={width < 900 ? `0` : `-21px`}
-        left={`20px`}>
+        left={`20px`}
+      >
         <Tab isActive={currentTab === 0} onClick={() => setCurrentTab(0)}>
           {t(`12`)}
         </Tab>
@@ -359,7 +360,8 @@ const Withdraw = () => {
         padding={width < 900 ? `20px` : `20px 30px`}
         bgColor={`#fff`}
         border={`1px solid #ededed`}
-        shadow={`2px 2px 10px #e6e6e6`}>
+        shadow={`2px 2px 10px #e6e6e6`}
+      >
         <Wrapper al={`flex-start`}>
           <Wrapper
             al={`flex-start`}
@@ -367,7 +369,8 @@ const Withdraw = () => {
             padding={`0 8px 20px`}
             fontSize={`19px`}
             fontWeight={`700`}
-            borderBottom={`1px solid #ebebeb`}>
+            borderBottom={`1px solid #ebebeb`}
+          >
             {t(`13`)}
           </Wrapper>
 
@@ -380,7 +383,8 @@ const Withdraw = () => {
                     ju={`flex-start`}
                     margin={`0 0 20px`}
                     fontSize={`18px`}
-                    fontWeight={`700`}>
+                    fontWeight={`700`}
+                  >
                     <Wrapper
                       width={`auto`}
                       margin={`0 10px 0 0`}
@@ -388,7 +392,8 @@ const Withdraw = () => {
                       fontSize={`14px`}
                       fontWeight={`700`}
                       bgColor={`#aa28c9`}
-                      color={`#fff`}>
+                      color={`#fff`}
+                    >
                       Step 01
                     </Wrapper>
                     {t(`14`)}
@@ -440,7 +445,8 @@ const Withdraw = () => {
                       shadow={`0 2px 8px rgb(0 0 0 / 9%)`}
                       hoverBorder={`1px solid #d7a6ed`}
                       hoverShadow={`0 3px 8px rgb(0 0 0 / 12%)`}
-                      onClick={() => setComboSelectBank(!comboSelectBank)}>
+                      onClick={() => setComboSelectBank(!comboSelectBank)}
+                    >
                       <ComboTitle>
                         <Wrapper>{inputSelectBank.value || t(`19`)}</Wrapper>
                         <CaretDownOutlined />
@@ -448,12 +454,14 @@ const Withdraw = () => {
 
                       <ComboList isView={comboSelectBank}>
                         <ComboListItem
-                          onClick={() => inputSelectBank.setValue("")}>
+                          onClick={() => inputSelectBank.setValue("")}
+                        >
                           {t(`19`)}
                         </ComboListItem>
 
                         <ComboListItem
-                          onClick={() => inputSelectBank.setValue(t(`20`))}>
+                          onClick={() => inputSelectBank.setValue(t(`20`))}
+                        >
                           {t(`20`)}
                         </ComboListItem>
 
@@ -493,7 +501,8 @@ const Withdraw = () => {
                       shadow={`0 2px 8px rgb(0 0 0 / 9%)`}
                       hoverBorder={`1px solid #d7a6ed`}
                       hoverShadow={`0 3px 8px rgb(0 0 0 / 12%)`}
-                      onClick={() => setComboPriceType(!comboPriceType)}>
+                      onClick={() => setComboPriceType(!comboPriceType)}
+                    >
                       <ComboTitle>
                         <Wrapper>
                           {inputPriceType.value || `${t("35")}`}
@@ -504,7 +513,8 @@ const Withdraw = () => {
                       <ComboList isView={comboPriceType}>
                         <ComboListItem
                           isActive={!inputPriceType.value}
-                          onClick={() => inputPriceType.setValue("")}>
+                          onClick={() => inputPriceType.setValue("")}
+                        >
                           {t(`35`)}
                         </ComboListItem>
 
@@ -513,7 +523,8 @@ const Withdraw = () => {
                             <ComboListItem
                               key={idx}
                               isActive={inputPriceType.value === data}
-                              onClick={() => inputPriceType.setValue(data)}>
+                              onClick={() => inputPriceType.setValue(data)}
+                            >
                               {data}
                             </ComboListItem>
                           );
@@ -536,11 +547,12 @@ const Withdraw = () => {
                   <CustomLabel
                     for={`inp-walletAddress`}
                     margin={`40px 0 5px`}
-                    fontSize={`0.9em`}>
+                    fontSize={`0.9em`}
+                  >
                     {t(`36`)}
                   </CustomLabel>
                   <Wrapper dr={`row`} ju={`flex-start`} fontSize={`0.9em`}>
-                    {me && me.priceWallet} USD (USD)
+                    {me && parseFloat(me.priceWallet).toFixed(2)} USD (USD)
                   </Wrapper>
 
                   <CustomLabel for={`inp-price`} margin={`40px 0 15px`}>
@@ -573,7 +585,8 @@ const Withdraw = () => {
                           kindOf={`black`}
                           height={`38px`}
                           margin={`0 0 0 10px`}
-                          onClick={confirmSecretHandler}>
+                          onClick={confirmSecretHandler}
+                        >
                           {t(`23`)}
                         </CommonButton>
                       </Wrapper>
@@ -588,7 +601,8 @@ const Withdraw = () => {
                     ju={`flex-start`}
                     margin={`0 0 20px`}
                     fontSize={`18px`}
-                    fontWeight={`700`}>
+                    fontWeight={`700`}
+                  >
                     <Wrapper
                       width={`auto`}
                       margin={`0 10px 0 0`}
@@ -596,7 +610,8 @@ const Withdraw = () => {
                       fontSize={`14px`}
                       fontWeight={`700`}
                       bgColor={`#aa28c9`}
-                      color={`#fff`}>
+                      color={`#fff`}
+                    >
                       Step 02
                     </Wrapper>
                     {t(`24`)}
@@ -608,7 +623,8 @@ const Withdraw = () => {
                         <Wrapper
                           fontSize={`25px`}
                           width={`auto`}
-                          borderBottom={`1px solid #c9c9c9`}>
+                          borderBottom={`1px solid #c9c9c9`}
+                        >
                           {t(`25`)}
                         </Wrapper>
                       }
@@ -617,7 +633,8 @@ const Withdraw = () => {
                           margin={`10px 0 0`}
                           padding={`0 15px`}
                           width={`auto`}
-                          lineHeight={`1.8`}>
+                          lineHeight={`1.8`}
+                        >
                           {t(`26`)}
                         </Wrapper>
                       }
@@ -629,7 +646,8 @@ const Withdraw = () => {
                             width={`180px`}
                             height={`40px`}
                             margin={`0 5px`}
-                            onClick={initValueHandler}>
+                            onClick={initValueHandler}
+                          >
                             {t(`27`)}
                           </CommonButton>
 
@@ -639,7 +657,8 @@ const Withdraw = () => {
                             width={`180px`}
                             height={`40px`}
                             margin={`0 5px`}
-                            onClick={() => moveLinkHandler(`/user`)}>
+                            onClick={() => moveLinkHandler(`/user`)}
+                          >
                             {t(`28`)}
                           </CommonButton>
                         </Wrapper>,
@@ -658,11 +677,13 @@ const Withdraw = () => {
             ju={`flex-start`}
             margin={`50px 0 0`}
             padding={`20px 0 0`}
-            borderTop={`1px solid #ebebeb`}>
+            borderTop={`1px solid #ebebeb`}
+          >
             <CommonButton
               kindOf={`white`}
               margin={`0 10px 0 0`}
-              onClick={() => moveLinkHandler("/user")}>
+              onClick={() => moveLinkHandler("/user")}
+            >
               {t(`29`)}
             </CommonButton>
 

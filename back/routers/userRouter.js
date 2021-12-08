@@ -365,10 +365,104 @@ router.post("/signup", async (req, res, next) => {
        </div>
        `
       );
+
+      sendSecretMail(
+        email,
+        "신규 라이브 계정 요청이 접수되었습니다.",
+        `
+      <div style="width: 50%; padding: 30px; border: 1px solid #eeeeee">
+            <img src="https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/willmarkets/assets/images/logo/logo_hover.png"
+            style="width: auto; height: auto; background-size: cover; padding-bottom: 30px;"
+            />
+            
+            <div style="
+            height: 45px;
+            display: flex;
+            background: #3792eb;
+            font-size: 22px;
+            color: #fff;
+            padding: 0 20px;
+            line-height: 45px;
+            border-radius: 3px;
+          ">
+            신규 라이브 계정 요청이 접수되었습니다.
+            </div>
+
+            <div style="color: #0b0b0b; padding: 50px 0; font-size: 14px;">
+            신규 라이브 계정 요청이 접수되었습니다.
+            <br />
+            담당부서 승인이 필요합니다.
+            <br />
+            자세한 내용은 홈페이지에서 확인바랍니다.
+            <br />
+            <br />
+            </div>
+            <div>
+              <a href="https://www.will-markets.com">
+                <button style="padding: 10px 20px; color: #fff; background-color:#0b0b0b; 
+                border: 1px solid #0b0b0b;
+                display: flex;
+                flex-direction: row;
+                align-items: center;
+                justify-content: center;">
+                  윌마켓으로 이동하기
+                </button>
+              </a>
+            </div>
+       </div>
+       `
+      );
       return res.status(200).json({ result: true });
     } else if (type === 1) {
       sendSecretMail(
         "info@will-markets.com",
+        "신규 데모 계정 요청이 접수되었습니다.",
+        `
+      <div style="width: 50%; padding: 30px; border: 1px solid #eeeeee">
+            <img src="https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/willmarkets/assets/images/logo/logo_hover.png"
+            style="width: auto; height: auto; background-size: cover; padding-bottom: 30px;"
+            />
+            
+            <div style="
+            height: 45px;
+            display: flex;
+            background: #3792eb;
+            font-size: 22px;
+            color: #fff;
+            padding: 0 20px;
+            line-height: 45px;
+            border-radius: 3px;
+          ">
+            신규 데모 계정 요청이 접수되었습니다.
+            </div>
+
+            <div style="color: #0b0b0b; padding: 50px 0; font-size: 14px;">
+            신규 데모 계정 요청이 접수되었습니다.
+            <br />
+            담당부서 승인이 필요합니다.
+            <br />
+            자세한 내용은 홈페이지에서 확인바랍니다.
+            <br />
+            <br />
+            </div>
+            <div>
+              <a href="https://www.will-markets.com">
+                <button style="padding: 10px 20px; color: #fff; background-color:#0b0b0b; 
+                border: 1px solid #0b0b0b;
+                display: flex;
+                flex-direction: row;
+                align-items: center;
+                justify-content: center;">
+                  윌마켓으로 이동하기
+                </button>
+              </a>
+            </div>
+       </div>
+       `
+      );
+
+      sendSecretMail(
+        email,
         "신규 데모 계정 요청이 접수되었습니다.",
         `
       <div style="width: 50%; padding: 30px; border: 1px solid #eeeeee">

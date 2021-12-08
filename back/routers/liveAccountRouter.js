@@ -249,11 +249,11 @@ router.patch("/updatePermit", isAdminCheck, async (req, res, next) => {
             <br />
             레버리지 : ${updateData.leverage}
             <br />
-            거래용 비밀번호 : ${updateData.tradePassword}
+            거래용 비밀번호 : ${tradePassword}
             <br />
-            보기용 비밀번호 : ${updateData.viewPassword}
+            보기용 비밀번호 : ${viewPassword}
             <br />
-            라이브 계좌 : ${updateData.bankNo}
+            라이브 계좌 : ${bankNo}
             <br />
             <br />
             

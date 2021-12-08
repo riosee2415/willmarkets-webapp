@@ -170,7 +170,7 @@ const Live = ({}) => {
         userId: currentData.User.id,
         bankNo: inputBankNo.value,
         viewPassword: inputViewPassword.value,
-        radePassword: inputTradePassword.value,
+        tradePassword: inputTradePassword.value,
       },
     });
   };

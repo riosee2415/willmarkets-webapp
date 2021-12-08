@@ -320,6 +320,7 @@ router.post("/signup", async (req, res, next) => {
 
     if (type === 0) {
       sendSecretMail(
+        "info@will-markets.com",
         "신규 라이브 계정 요청이 접수되었습니다.",
         `
       <div style="width: 50%; padding: 30px; border: 1px solid #eeeeee">
@@ -367,6 +368,7 @@ router.post("/signup", async (req, res, next) => {
       return res.status(200).json({ result: true });
     } else if (type === 1) {
       sendSecretMail(
+        "info@will-markets.com",
         "신규 데모 계정 요청이 접수되었습니다.",
         `
       <div style="width: 50%; padding: 30px; border: 1px solid #eeeeee">

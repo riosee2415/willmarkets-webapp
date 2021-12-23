@@ -89,14 +89,14 @@ const Deposit = () => {
   const priceTypeList = {
     BTC: [
       "BTC",
-      "3HyjhCFdGVWCXTi36jQCNta8g1k3teexua",
+      "13242R3baBtwpMbo3PnW14q3pQphMLFqsY",
       "https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/willmarkets/assets/images/user/qr_btc.png",
       "Omni-Chain",
     ],
 
     ETH: [
       "ETH",
-      "0x31185369542895921c18120c0d39e74c4fd97c1e",
+      "0xb4b96fa365c7440d14e0a26126ff20f6eade4805",
       "https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/willmarkets/assets/images/user/qr_eth.png",
       "ERC-20",
     ],

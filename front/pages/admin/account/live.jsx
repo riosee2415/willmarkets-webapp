@@ -246,7 +246,7 @@ const Live = ({}) => {
 
           <Button
             type="primary"
-            disabled={data.isComplete}
+            disabled={data.isComplete && data.accountType !== "Old"}
             onClick={() => toggleModalHandler(data)}
           >
             승인

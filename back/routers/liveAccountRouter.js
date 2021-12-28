@@ -248,26 +248,47 @@ router.patch("/updatePermit", isAdminCheck, async (req, res, next) => {
       },
     });
 
-    const updateResult = await LiveAccount.update(
-      {
-        isComplete: true,
-        completedAt: new Date(),
-        bankNo,
-        viewPassword,
-        tradePassword,
-      },
-      {
-        where: {
-          id: parseInt(id),
+    if (updateData.isComplete) {
+      const updateResult = await LiveAccount.create(
+        {
+          accountType: updateData.accountType,
+          platform: updateData.platform,
+          type: updateData.type,
+          leverage: updateData.leverage,
+          UserId: updateData.UserId,
+          isComplete: true,
+          completedAt: new Date(),
+          bankNo,
+          viewPassword,
+          tradePassword,
         },
-      }
-    );
+        {
+          where: {
+            id: parseInt(id),
+          },
+        }
+      );
+    } else {
+      const updateResult = await LiveAccount.update(
+        {
+          isComplete: true,
+          completedAt: new Date(),
+          bankNo,
+          viewPassword,
+          tradePassword,
+        },
+        {
+          where: {
+            id: parseInt(id),
+          },
+        }
+      );
+    }
 
-    if (updateResult[0] > 0) {
-      sendSecretMail(
-        exUser.email,
-        "라이브 계정이 성공적으로 열렸습니다.",
-        `
+    sendSecretMail(
+      exUser.email,
+      "라이브 계정이 성공적으로 열렸습니다.",
+      `
       <div style="width: 50%; padding: 30px; border: 1px solid #eeeeee">
           <img src="https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/willmarkets/assets/images/logo/logo_hover.png"
           style="width: auto; height: auto; background-size: cover; padding-bottom: 30px;"
@@ -323,12 +344,9 @@ router.patch("/updatePermit", isAdminCheck, async (req, res, next) => {
             </div>
        </div>
        `
-      );
+    );
 
-      return res.status(200).json({ result: true });
-    } else {
-      return res.status(200).json({ result: false });
-    }
+    return res.status(200).json({ result: true });
   } catch (error) {
     console.error(error);
   }

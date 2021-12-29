@@ -266,11 +266,7 @@ const Live = ({}) => {
             {data.isComplete ? `승인` : `승인대기`}
           </Wrapper>
 
-          <Button
-            type="primary"
-            disabled={data.isComplete}
-            onClick={() => toggleModalHandler(data)}
-          >
+          <Button type="primary" onClick={() => toggleModalHandler(data)}>
             승인
           </Button>
         </Wrapper>

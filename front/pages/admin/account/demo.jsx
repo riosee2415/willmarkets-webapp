@@ -207,6 +207,11 @@ const Live = ({}) => {
       ),
     },
     {
+      width: 110,
+      title: <Wrapper fontSize={`14px`}>이메일</Wrapper>,
+      render: (data) => <Wrapper fontSize={`14px`}>{data.User.email}</Wrapper>,
+    },
+    {
       width: 60,
       title: <Wrapper fontSize={`14px`}>계좌개설 유형</Wrapper>,
       render: (data) => <Wrapper fontSize={`14px`}>{data.accountType}</Wrapper>,
@@ -298,7 +303,7 @@ const Live = ({}) => {
           <Input.Group compact style={{ width: `auto` }}>
             <Input
               style={{ width: "280px" }}
-              placeholder="이름"
+              placeholder="이름, 이메일, 계좌번호"
               {...inputSearch}
               onKeyDown={(e) => e.keyCode === 13 && searchDataHandler()}
             />
@@ -351,19 +356,11 @@ const Live = ({}) => {
           <Wrapper width={`auto`} fontSize={`14px`} margin={`8px 0 4px`}>
             보기용 비밀번호
           </Wrapper>
-          <Input
-            style={{ width: "100%" }}
-            type={`password`}
-            {...inputViewPassword}
-          />
+          <Input style={{ width: "100%" }} {...inputViewPassword} />
           <Wrapper width={`auto`} fontSize={`14px`} margin={`8px 0 4px`}>
             거래용 비밀번호
           </Wrapper>
-          <Input
-            style={{ width: "100%" }}
-            type={`password`}
-            {...inputTradePassword}
-          />
+          <Input style={{ width: "100%" }} {...inputTradePassword} />
         </Wrapper>
       </Modal>
 

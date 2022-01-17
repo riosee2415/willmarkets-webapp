@@ -483,7 +483,7 @@ const UserList = ({}) => {
           <Input.Group compact style={{ width: `auto` }}>
             <Input
               style={{ width: "280px" }}
-              placeholder="이름"
+              placeholder="이름, 이메일"
               {...inputSearch}
               onKeyDown={(e) => e.keyCode === 13 && searchDataHandler()}
             />

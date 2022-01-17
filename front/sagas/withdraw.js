@@ -19,7 +19,7 @@ import {
 // ******************************************************************************************************************
 function withdrawListAPI(data) {
   return axios.get(
-    `/api/withdraw/list?page=${data.page}&search${data.search}`,
+    `/api/withdraw/list?page=${data.page}&search=${data.search}`,
     data
   );
 }

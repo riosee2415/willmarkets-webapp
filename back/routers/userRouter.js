@@ -59,9 +59,18 @@ router.get("/list", isAdminCheck, async (req, res, next) => {
   try {
     const totalUser = await User.findAll({
       where: {
-        username: {
-          [Op.like]: `%${searchName}%`,
-        },
+        [Op.or]: [
+          {
+            username: {
+              [Op.like]: `%${searchName}%`,
+            },
+          },
+          {
+            email: {
+              [Op.like]: `%${searchName}%`,
+            },
+          },
+        ],
         userType: {
           [Op.like]: `%${searchTypes}%`,
         },
@@ -80,9 +89,18 @@ router.get("/list", isAdminCheck, async (req, res, next) => {
       offset: OFFSET,
       limit: LIMIT,
       where: {
-        username: {
-          [Op.like]: `%${searchName}%`,
-        },
+        [Op.or]: [
+          {
+            username: {
+              [Op.like]: `%${searchName}%`,
+            },
+          },
+          {
+            email: {
+              [Op.like]: `%${searchName}%`,
+            },
+          },
+        ],
         userType: {
           [Op.like]: `%${searchTypes}%`,
         },

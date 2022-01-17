@@ -205,6 +205,11 @@ const Deposit = ({}) => {
         <Wrapper fontSize={`14px`}>{data.User.username}</Wrapper>
       ),
     },
+    {
+      width: 110,
+      title: <Wrapper fontSize={`14px`}>이메일</Wrapper>,
+      render: (data) => <Wrapper fontSize={`14px`}>{data.User.email}</Wrapper>,
+    },
     // {
     //   width: 70,
     //   title: <Wrapper fontSize={`14px`}>은행명</Wrapper>,
@@ -385,7 +390,7 @@ const Deposit = ({}) => {
           <Input.Group compact style={{ width: `auto` }}>
             <Input
               style={{ width: "280px" }}
-              placeholder="이름"
+              placeholder="이름, 이메일, 입금계좌"
               {...inputSearch}
               onKeyDown={(e) => e.keyCode === 13 && searchDataHandler()}
             />

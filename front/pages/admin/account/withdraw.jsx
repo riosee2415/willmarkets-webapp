@@ -188,11 +188,17 @@ const Withdraw = ({}) => {
       ),
     },
     {
+      width: 110,
+      title: <Wrapper fontSize={`14px`}>이메일</Wrapper>,
+      render: (data) => <Wrapper fontSize={`14px`}>{data.User.email}</Wrapper>,
+    },
+    {
       width: 130,
       title: <Wrapper fontSize={`14px`}>주소</Wrapper>,
       render: (data) => (
         <Wrapper
-          fontSize={`14px`}>{`${data.User.address} ${data.User.detailAddress}`}</Wrapper>
+          fontSize={`14px`}
+        >{`${data.User.address} ${data.User.detailAddress}`}</Wrapper>
       ),
     },
     // {
@@ -234,7 +240,8 @@ const Withdraw = ({}) => {
             text={`${data.walletAddress}`}
             onCopy={(text, result) =>
               copyHashWalletHandler(text, result, `월릿주소가 복사되었습니다.`)
-            }>
+            }
+          >
             <Button type="primary">복사</Button>
           </CopyToClipboard>
         </Wrapper>
@@ -256,14 +263,16 @@ const Withdraw = ({}) => {
           <Wrapper
             width={`90px`}
             fontSize={`inherit`}
-            color={data.isComplete ? `#0d24c4` : `#d62929`}>
+            color={data.isComplete ? `#0d24c4` : `#d62929`}
+          >
             {data.isComplete ? `승인` : `승인대기`}
           </Wrapper>
 
           <Button
             type="primary"
             disabled={data.isComplete}
-            onClick={() => toggleModalHandler(data)}>
+            onClick={() => toggleModalHandler(data)}
+          >
             승인
           </Button>
         </Wrapper>
@@ -295,7 +304,7 @@ const Withdraw = ({}) => {
           <Input.Group compact style={{ width: `auto` }}>
             <Input
               style={{ width: "280px" }}
-              placeholder="이름"
+              placeholder="이름, 이메일, 출금계좌"
               {...inputSearch}
               onKeyDown={(e) => e.keyCode === 13 && searchDataHandler()}
             />
@@ -326,7 +335,8 @@ const Withdraw = ({}) => {
         width={`400px`}
         title={`승인`}
         onCancel={toggleModalHandler}
-        onOk={updatePermitHandler}>
+        onOk={updatePermitHandler}
+      >
         <Wrapper padding={`20px`} al={`flex-start`}>
           <Wrapper al={`flex-start`} fontSize={`15px`} fontWeight={`500`}>
             해당 출금신청을 승인하시겠습니까 ?
@@ -338,7 +348,8 @@ const Withdraw = ({}) => {
         visible={false}
         onOk={() => {}}
         onCancel={() => {}}
-        title="Ask"></Modal>
+        title="Ask"
+      ></Modal>
     </AdminLayout>
   );
 };

@@ -74,12 +74,19 @@ router.get(["/list/:listType", "/list"], async (req, res, next) => {
         totalDeposit = await Deposit.findAll({
           include: {
             model: User,
-            where: {
-              username: {
-                [Op.like]: `%${_search}%`,
-              },
-            },
           },
+        });
+
+        totalDeposit = await totalDeposit.filter((data) => {
+          if (data.selectBank.toLowerCase().includes(_search.toLowerCase())) {
+            return true;
+          } else if (data.User.username.includes(_search)) {
+            return true;
+          } else if (data.User.email.includes(_search)) {
+            return true;
+          } else {
+            return false;
+          }
         });
 
         depositLen = totalDeposit.length;
@@ -92,14 +99,20 @@ router.get(["/list/:listType", "/list"], async (req, res, next) => {
           limit: LIMIT,
           include: {
             model: User,
-            where: {
-              username: {
-                [Op.like]: `%${_search}%`,
-              },
-            },
-            attributes: ["id", "username"],
           },
           order: [["createdAt", "DESC"]],
+        });
+
+        deposits = await deposits.filter((data) => {
+          if (data.selectBank.toLowerCase().includes(_search.toLowerCase())) {
+            return true;
+          } else if (data.User.username.includes(_search)) {
+            return true;
+          } else if (data.User.email.includes(_search)) {
+            return true;
+          } else {
+            return false;
+          }
         });
 
         break;

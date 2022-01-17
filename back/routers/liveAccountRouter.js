@@ -21,15 +21,22 @@ router.get(["/list/:listType", "/list"], async (req, res, next) => {
     const totalLive = await LiveAccount.findAll({
       include: {
         model: User,
-        where: {
-          username: {
-            [Op.like]: `%${_search}%`,
-          },
-        },
       },
     });
 
-    const liveLen = totalLive.length;
+    const _totalLive = await totalLive.filter((data) => {
+      if (data.bankNo.includes(_search)) {
+        return true;
+      } else if (data.User.username.includes(_search)) {
+        return true;
+      } else if (data.User.email.includes(_search)) {
+        return true;
+      } else {
+        return false;
+      }
+    });
+
+    const liveLen = _totalLive.length;
 
     const lastPage =
       liveLen % LIMIT > 0 ? liveLen / LIMIT + 1 : liveLen / LIMIT;
@@ -39,18 +46,27 @@ router.get(["/list/:listType", "/list"], async (req, res, next) => {
       limit: LIMIT,
       include: {
         model: User,
-        where: {
-          username: {
-            [Op.like]: `%${_search}%`,
-          },
-        },
       },
       order: [["createdAt", "DESC"]],
     });
 
-    return res
-      .status(200)
-      .json({ liveAccounts, lastPage: parseInt(lastPage), liveLen });
+    const _liveAccounts = await liveAccounts.filter((data) => {
+      if (data.bankNo.includes(_search)) {
+        return true;
+      } else if (data.User.username.includes(_search)) {
+        return true;
+      } else if (data.User.email.includes(_search)) {
+        return true;
+      } else {
+        return false;
+      }
+    });
+
+    return res.status(200).json({
+      liveAccounts: _liveAccounts,
+      lastPage: parseInt(lastPage),
+      liveLen,
+    });
   } catch (error) {
     console.error(error);
     return res

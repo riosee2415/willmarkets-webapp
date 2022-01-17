@@ -29,7 +29,19 @@ router.get(["/list/:listType", "/list"], async (req, res, next) => {
       },
     });
 
-    const demoLen = totalDemo.length;
+    const _totalDemo = await totalDemo.filter((data) => {
+      if (data.bankNo.includes(_search)) {
+        return true;
+      } else if (data.User.username.includes(_search)) {
+        return true;
+      } else if (data.User.email.includes(_search)) {
+        return true;
+      } else {
+        return false;
+      }
+    });
+
+    const demoLen = _totalDemo.length;
 
     const lastPage =
       demoLen % LIMIT > 0 ? demoLen / LIMIT + 1 : demoLen / LIMIT;
@@ -39,18 +51,29 @@ router.get(["/list/:listType", "/list"], async (req, res, next) => {
       limit: LIMIT,
       include: {
         model: User,
-        where: {
-          username: {
-            [Op.like]: `%${_search}%`,
-          },
-        },
       },
       order: [["createdAt", "DESC"]],
     });
 
+    const _demoAccounts = await demoAccounts.filter((data) => {
+      if (data.bankNo.includes(_search)) {
+        return true;
+      } else if (data.User.username.includes(_search)) {
+        return true;
+      } else if (data.User.email.includes(_search)) {
+        return true;
+      } else {
+        return false;
+      }
+    });
+
     return res
       .status(200)
-      .json({ demoAccounts, lastPage: parseInt(lastPage), demoLen });
+      .json({
+        demoAccounts: _demoAccounts,
+        lastPage: parseInt(lastPage),
+        demoLen,
+      });
   } catch (error) {
     console.error(error);
     return res.status(401).send("데모 계좌 목록을 불러올 수 없습니다.");

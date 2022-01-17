@@ -22,15 +22,22 @@ router.get("/list", async (req, res, next) => {
     const totalWithdraw = await Withdraw.findAll({
       include: {
         model: User,
-        where: {
-          username: {
-            [Op.like]: `%${_search}%`,
-          },
-        },
       },
     });
 
-    const withdrawLen = totalWithdraw.length;
+    const _totalWithdraw = await totalWithdraw.filter((data) => {
+      if (data.selectBank.toLowerCase().includes(_search.toLowerCase())) {
+        return true;
+      } else if (data.User.username.includes(_search)) {
+        return true;
+      } else if (data.User.email.includes(_search)) {
+        return true;
+      } else {
+        return false;
+      }
+    });
+
+    const withdrawLen = _totalWithdraw.length;
 
     const lastPage =
       withdrawLen % LIMIT > 0 ? withdrawLen / LIMIT + 1 : withdrawLen / LIMIT;
@@ -40,17 +47,27 @@ router.get("/list", async (req, res, next) => {
       limit: LIMIT,
       include: {
         model: User,
-        where: {
-          username: {
-            [Op.like]: `%${_search}%`,
-          },
-        },
       },
       order: [["createdAt", "DESC"]],
     });
-    return res
-      .status(200)
-      .json({ withdraws, lastPage: parseInt(lastPage), withdrawLen });
+
+    const _withdraws = await withdraws.filter((data) => {
+      if (data.selectBank.toLowerCase().includes(_search.toLowerCase())) {
+        return true;
+      } else if (data.User.username.includes(_search)) {
+        return true;
+      } else if (data.User.email.includes(_search)) {
+        return true;
+      } else {
+        return false;
+      }
+    });
+
+    return res.status(200).json({
+      withdraws: _withdraws,
+      lastPage: parseInt(lastPage),
+      withdrawLen,
+    });
   } catch (error) {
     console.error(error);
     return res

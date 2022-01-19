@@ -6,6 +6,7 @@ import withdrawSage from "./withdraw";
 import liveAccount from "./liveAccount";
 import demoAccount from "./demoAccount";
 import popupSaga from "./popup";
+import priceHistorySaga from "./priceHistory";
 //
 import axios from "axios";
 import backURL from "../config/config";
@@ -22,5 +23,6 @@ export default function* rootSaga() {
     fork(liveAccount),
     fork(demoAccount),
     fork(popupSaga),
+    fork(priceHistorySaga),
   ]);
 }

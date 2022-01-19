@@ -134,5 +134,6 @@ module.exports = class User extends Model {
     db.User.hasMany(db.Withdraw);
     db.User.hasMany(db.LiveAccount);
     db.User.hasMany(db.DemoAccount);
+    db.User.hasMany(db.PriceHistory);
   }
 };

@@ -7,6 +7,7 @@ const demoAccount = require("./demoAccount");
 const liveAccount = require("./liveAccount");
 const withdraw = require("./withdraw");
 const popup = require("./popup");
+const priceHistory = require("./priceHistory");
 
 const env = process.env.NODE_ENV || "development";
 const config = require("../config/config")[env];
@@ -27,6 +28,7 @@ db.DemoAccount = demoAccount;
 db.LiveAccount = liveAccount;
 db.Withdraw = withdraw;
 db.Popup = popup;
+db.PriceHistory = priceHistory;
 
 Object.keys(db).forEach((modelName) => {
   db[modelName].init(sequelize);

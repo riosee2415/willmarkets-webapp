@@ -10,6 +10,7 @@ import {
   USER_UPDATE_PRICE_REQUEST,
   USER_UPDATE_PERMIT_REQUEST,
 } from "../../../reducers/user";
+import { PRICE_HISTORY_CREATE_REQUEST } from "../../../reducers/priceHistory";
 import {
   Table,
   Button,
@@ -29,6 +30,7 @@ import axios from "axios";
 import { Wrapper, TabWrapper, Tab } from "../../../components/commonComponents";
 import { numberWithCommas, emptyCheck } from "../../../components/commonUtils";
 import { saveAs } from "file-saver";
+import moment from "moment";
 
 const { Option } = Select;
 
@@ -90,7 +92,12 @@ const UserList = ({}) => {
     st_userUpdatePermitError,
   } = useSelector((state) => state.user);
 
+  const { st_priceHistoryCreateDone, st_priceHistoryCreateError } = useSelector(
+    (state) => state.priceHistory
+  );
+
   const [currentPage, setCurrentPage] = useState(1);
+  const [currentPage2, setCurrentPage2] = useState(1);
 
   const [currentTab1, setCurrentTab1] = useState(0);
   const [currentTab2, setCurrentTab2] = useState(0);
@@ -98,11 +105,13 @@ const UserList = ({}) => {
   const [toggleModal, setToggleModal] = useState(false);
   const [toggleModal2, setToggleModal2] = useState(false);
   const [toggleModal3, setToggleModal3] = useState(false);
+  const [toggleModal4, setToggleModal4] = useState(false);
 
   const [currentData, setCurrentData] = useState(null);
 
   const inputSearch = useInput("");
   const inputPrice = useInput("");
+  const inputBankNo2 = useInput("");
 
   const inputPlatform = useInput();
   const inputType = useInput("");
@@ -163,9 +172,32 @@ const UserList = ({}) => {
     }
   }, [st_userUpdatePermitError]);
 
+  useEffect(() => {
+    if (st_priceHistoryCreateDone) {
+      dispatch({
+        type: USER_LIST_REQUEST,
+        data: {
+          page: currentPage,
+          search: inputSearch.value || ``,
+          searchType: currentTab1 === 1 ? `2` : currentTab1 === 2 ? `1` : ``,
+          searchComplete:
+            currentTab2 === 1 ? `0` : currentTab2 === 2 ? `1` : ``,
+        },
+      });
+    }
+  }, [st_priceHistoryCreateDone]);
+
+  useEffect(() => {
+    if (st_priceHistoryCreateError) {
+      message.error(st_priceHistoryCreateError);
+    }
+  }, [st_priceHistoryCreateError]);
+
   ////// TOGGLE //////
   const toggleModalHandler = (data) => {
     if (toggleModal) {
+      inputPrice.setValue("");
+      inputBankNo2.setValue("");
       setCurrentData(null);
     } else {
       setCurrentData(data);
@@ -203,6 +235,16 @@ const UserList = ({}) => {
     setToggleModal3(!toggleModal3);
   };
 
+  const toggleModalHandler4 = (data) => {
+    if (toggleModal4) {
+      setCurrentData(null);
+      setCurrentPage2(1);
+    } else {
+      setCurrentData(data);
+    }
+    setToggleModal4(!toggleModal4);
+  };
+
   ////// HANDLER //////
   const otherPageCall = useCallback(
     (changePage) => {
@@ -222,6 +264,13 @@ const UserList = ({}) => {
     [currentPage]
   );
 
+  const otherPageCall2 = useCallback(
+    (changePage) => {
+      setCurrentPage2(changePage);
+    },
+    [currentPage2]
+  );
+
   const searchDataHandler = () => {
     dispatch({
       type: USER_LIST_REQUEST,
@@ -235,6 +284,10 @@ const UserList = ({}) => {
   };
 
   const updatePriceHandler = () => {
+    if (!emptyCheck(inputBankNo2.value)) {
+      return LoadNotification("ADMIN SYSTEM ERRLR", "계좌번호를 선택해주세요.");
+    }
+
     if (!emptyCheck(inputPrice.value)) {
       return LoadNotification("ADMIN SYSTEM ERRLR", "지갑금액을 입력해주세요.");
     }
@@ -251,6 +304,15 @@ const UserList = ({}) => {
       data: {
         id: currentData.id,
         price: parseFloat(inputPrice.value),
+      },
+    });
+
+    dispatch({
+      type: PRICE_HISTORY_CREATE_REQUEST,
+      data: {
+        userId: currentData.id,
+        price: parseFloat(inputPrice.value),
+        bankNo: inputBankNo2.value,
       },
     });
   };
@@ -397,6 +459,13 @@ const UserList = ({}) => {
           <Button type="primary" onClick={() => toggleModalHandler(data)}>
             부여
           </Button>
+
+          <Button
+            style={{ margin: `0 0 0 5px` }}
+            onClick={() => toggleModalHandler4(data)}
+          >
+            내역
+          </Button>
         </Wrapper>
       ),
     },
@@ -438,6 +507,48 @@ const UserList = ({}) => {
             승인
           </Button>
         </Wrapper>
+      ),
+    },
+  ];
+
+  const columns2 = [
+    {
+      width: 40,
+      title: <Wrapper fontSize={`14px`}>번호</Wrapper>,
+      render: (data, _, idx) => (
+        <Wrapper fontSize={`14px`}>
+          {currentData &&
+            `${
+              currentData.PriceHistories.length -
+              ((currentPage2 - 1) * 10 + idx)
+            }`}
+        </Wrapper>
+      ),
+    },
+    {
+      width: 80,
+      title: <Wrapper fontSize={`14px`}>날짜</Wrapper>,
+      render: (data) => (
+        <Wrapper fontSize={`14px`}>
+          {moment(data.createdAt).format("YYYY.MM.DD HH:mm:ss")}
+        </Wrapper>
+      ),
+    },
+    {
+      width: 50,
+      title: <Wrapper fontSize={`14px`}>유형</Wrapper>,
+      render: (data) => <Wrapper fontSize={`14px`}>{data.type}</Wrapper>,
+    },
+    {
+      width: 80,
+      title: <Wrapper fontSize={`14px`}>계좌번호</Wrapper>,
+      render: (data) => <Wrapper fontSize={`14px`}>{data.bankNo}</Wrapper>,
+    },
+    {
+      width: 80,
+      title: <Wrapper fontSize={`14px`}>금액</Wrapper>,
+      render: (data) => (
+        <Wrapper fontSize={`14px`}>{parseFloat(data.price).toFixed(2)}</Wrapper>
       ),
     },
   ];
@@ -516,7 +627,33 @@ const UserList = ({}) => {
         onCancel={toggleModalHandler}
         onOk={updatePriceHandler}
       >
-        <Wrapper padding={`20px`} al={`flex-start`}>
+        <Wrapper padding={`20px 20px 0`} al={`flex-start`}>
+          <Wrapper width={`auto`} fontSize={`15px`} margin={`0 0 4px`}>
+            계좌번호
+          </Wrapper>
+          <Select
+            defaultValue={``}
+            style={{ width: `100%` }}
+            {...inputBankNo2}
+            onChange={(value) => inputBankNo2.setValue(value)}
+          >
+            <Option value="">선택</Option>
+            <Option value="내 지갑">내 지갑</Option>
+
+            {currentData &&
+              currentData.LiveAccounts.map((data, idx) => {
+                if (!data.isComplete) return null;
+
+                return (
+                  <Option key={data.id} value={data.bankNo}>
+                    {data.bankNo}
+                  </Option>
+                );
+              })}
+          </Select>
+        </Wrapper>
+
+        <Wrapper padding={`15px 20px 20px`} al={`flex-start`}>
           <Wrapper width={`auto`} fontSize={`15px`} margin={`0 0 4px`}>
             지갑금액
           </Wrapper>
@@ -780,6 +917,30 @@ const UserList = ({}) => {
               </Button>
             </Wrapper>
           </Wrapper>
+        </Wrapper>
+      </Modal>
+
+      <Modal
+        visible={toggleModal4}
+        width={`750px`}
+        title={`지갑부여 내역`}
+        onCancel={toggleModalHandler4}
+        footer={[<Button onClick={toggleModalHandler4}>확인</Button>]}
+      >
+        <Wrapper padding={`20px 10px`}>
+          <Table
+            rowKey="id"
+            columns={columns2}
+            dataSource={currentData ? currentData.PriceHistories : []}
+            size="small"
+            scroll={{ x: 700 }}
+            pagination={{
+              pageSize: 10,
+              current: currentPage2,
+              total: currentData ? currentData.PriceHistories.length : 0,
+              onChange: (page) => otherPageCall2(page),
+            }}
+          />
         </Wrapper>
       </Modal>
 

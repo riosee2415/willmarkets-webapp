@@ -7,6 +7,7 @@ const {
   Withdraw,
   LiveAccount,
   DemoAccount,
+  PriceHistory,
 } = require("../models");
 const isAdminCheck = require("../middlewares/isAdminCheck");
 const isLoggedIn = require("../middlewares/isLoggedIn");
@@ -113,11 +114,15 @@ router.get("/list", isAdminCheck, async (req, res, next) => {
         { model: Withdraw },
         { model: LiveAccount },
         { model: DemoAccount },
+        { model: PriceHistory },
       ],
       attributes: {
         exclude: ["password"],
       },
-      order: [["createdAt", "DESC"]],
+      order: [
+        ["createdAt", "DESC"],
+        [{ model: PriceHistory }, "createdAt", "DESC"],
+      ],
     });
 
     return res

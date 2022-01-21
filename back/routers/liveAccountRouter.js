@@ -59,7 +59,7 @@ router.get(["/list/:listType", "/list"], async (req, res, next) => {
     });
 
     const _liveAccounts = await liveAccounts.filter((data) => {
-      if (data.bankNo.includes(_search)) {
+      if (data.bankNo && data.bankNo.includes(_search)) {
         return true;
       } else if (
         data.User &&

@@ -25,11 +25,19 @@ router.get(["/list/:listType", "/list"], async (req, res, next) => {
     });
 
     const _totalLive = await totalLive.filter((data) => {
-      if (data.bankNo.includes(_search)) {
+      if (data.bankNo && data.bankNo.includes(_search)) {
         return true;
-      } else if (data.User.username.includes(_search)) {
+      } else if (
+        data.User &&
+        data.User.username &&
+        data.User.username.includes(_search)
+      ) {
         return true;
-      } else if (data.User.email.includes(_search)) {
+      } else if (
+        data.User &&
+        data.User.email &&
+        data.User.email.includes(_search)
+      ) {
         return true;
       } else {
         return false;
@@ -53,9 +61,17 @@ router.get(["/list/:listType", "/list"], async (req, res, next) => {
     const _liveAccounts = await liveAccounts.filter((data) => {
       if (data.bankNo.includes(_search)) {
         return true;
-      } else if (data.User.username.includes(_search)) {
+      } else if (
+        data.User &&
+        data.User.username &&
+        data.User.username.includes(_search)
+      ) {
         return true;
-      } else if (data.User.email.includes(_search)) {
+      } else if (
+        data.User &&
+        data.User.email &&
+        data.User.email.includes(_search)
+      ) {
         return true;
       } else {
         return false;
@@ -117,7 +133,7 @@ router.post("/create", async (req, res, next) => {
     }
 
     sendSecretMail(
-      "info@will-markets.com",
+      "support@will-markets.com",
       "추가 라이브 계정 요청이 접수되었습니다.",
       `
       <div style="width: 50%; padding: 30px; border: 1px solid #eeeeee">

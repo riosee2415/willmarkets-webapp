@@ -35,7 +35,7 @@ const sendMail = async (email) => {
 
 const sendSecretMail = (adress, title, content) => {
   const email = {
-    from: "info@will-markets.com",
+    from: "support@will-markets.com",
     to: adress,
     subject: title,
     html: content,

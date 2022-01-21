@@ -360,7 +360,8 @@ const Support = () => {
             color={`#fff`}
             margin={`22px 0 5px`}
             textAlign={`center`}
-            fontSize={width < 570 ? `17px` : `20px`}>
+            fontSize={width < 570 ? `17px` : `20px`}
+          >
             {t(`8`)}
             <br />
             {t(`9`)}
@@ -369,7 +370,8 @@ const Support = () => {
           <Wrapper
             dr={width < 950 ? `column` : `row`}
             ju={`flex-start`}
-            margin={width < 950 ? `30px 0 0 0` : `100px 0 0 0`}>
+            margin={width < 950 ? `30px 0 0 0` : `100px 0 0 0`}
+          >
             <Wrapper width={`55%`}>
               <Image
                 src={`https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/willmarkets/assets/images/consulting/image_consulting.png`}
@@ -381,7 +383,8 @@ const Support = () => {
                 bgColor={Theme.white_C}
                 radius={`8px`}
                 padding={`50px 15px 60px`}
-                width={`400px`}>
+                width={`400px`}
+              >
                 <Wrapper dr={`row`} al={`normal`}>
                   <Wrapper width={`85px`} al={`flex-start`} ju={`flex-end`}>
                     <TextLabel margin={`0 25px 0 0 `}>{t(`10`)}</TextLabel>
@@ -413,7 +416,8 @@ const Support = () => {
                       listHeight={`270px`}
                       border={`none`}
                       borderBottom={`1px solid #dfdfdf !important`}
-                      onClick={() => setComboCountryNo(!comboCountryNo)}>
+                      onClick={() => setComboCountryNo(!comboCountryNo)}
+                    >
                       <ComboTitle>
                         <Wrapper>{inputCountryNo.value || `Select`}</Wrapper>
                         <CaretDownOutlined />
@@ -427,7 +431,8 @@ const Support = () => {
                               isActive={inputCountryNo.value === data.value}
                               onClick={() =>
                                 inputCountryNo.setValue(data.value)
-                              }>
+                              }
+                            >
                               {data.name} ({data.value})
                             </ComboListItem>
                           );
@@ -468,7 +473,8 @@ const Support = () => {
                   </Wrapper>
                   <Wrapper
                     width={`calc(100% - 90px)`}
-                    borderBottom={"1px solid #e3e3e3"}>
+                    borderBottom={"1px solid #e3e3e3"}
+                  >
                     <Content width={`100%`} {...inputContent} />
                   </Wrapper>
                 </Wrapper>
@@ -487,7 +493,8 @@ const Support = () => {
                   width={`auto`}
                   opacity={`0.6`}
                   cursor={`pointer`}
-                  onClick={() => inputAgree.setValue(!inputAgree.value)}>
+                  onClick={() => inputAgree.setValue(!inputAgree.value)}
+                >
                   {t(`14`)}
                 </Wrapper>
                 <Wrapper
@@ -498,7 +505,8 @@ const Support = () => {
                   radius={`5px`}
                   padding={`0 6px`}
                   bgColor={"#8b8686"}
-                  onClick={toggleModalHandler}>
+                  onClick={toggleModalHandler}
+                >
                   {t(`15`)}
                 </Wrapper>
               </Wrapper>
@@ -511,7 +519,8 @@ const Support = () => {
                   fontSize={width < 450 ? `22px` : `24px`}
                   padding={width < 450 ? `5px 45px 7px` : `6px 50px 8px`}
                   radius={`6px`}
-                  onClick={createQuestionHandler}>
+                  onClick={createQuestionHandler}
+                >
                   {t(`7`)}
                 </CommonButton>
               </Wrapper>
@@ -530,17 +539,20 @@ const Support = () => {
               width={`70px`}
               height={`35px`}
               fontSize={`15px`}
-              onClick={toggleModalHandler}>
+              onClick={toggleModalHandler}
+            >
               확인
             </FormButton>,
-          ]}>
+          ]}
+        >
           <Wrapper
             ju={`flex-start`}
             width={`auto`}
             height={`450px`}
             overflow={`auto`}
             padding={`10px`}
-            wrap={`nowrap`}>
+            wrap={`nowrap`}
+          >
             {i18next.language === "ko" ? (
               <Wrapper>
                 <Wrapper al={`flex-start`} fontSize={`22px`} fontWeight={`700`}>
@@ -553,7 +565,8 @@ const Support = () => {
                   소개
                 </Title>
                 <SubTitle
-                  padding={width < 800 ? `14px 0 0 10px` : `14px 0 0 43px`}>
+                  padding={width < 800 ? `14px 0 0 10px` : `14px 0 0 43px`}
+                >
                   <Wrapper width={`60px`} fontWeight={`500`}>
                     1.1.
                   </Wrapper>
@@ -565,7 +578,8 @@ const Support = () => {
                   </ViewContent>
                 </SubTitle>
                 <SubTitle
-                  padding={width < 800 ? `14px 0 0 10px` : `14px 0 0 43px`}>
+                  padding={width < 800 ? `14px 0 0 10px` : `14px 0 0 43px`}
+                >
                   <Wrapper width={`60px`} fontWeight={`500`}>
                     1.2.
                   </Wrapper>
@@ -589,7 +603,8 @@ const Support = () => {
                   정의
                 </Title>
                 <SubTitle
-                  padding={width < 800 ? `14px 0 0 10px` : `14px 0 0 43px`}>
+                  padding={width < 800 ? `14px 0 0 10px` : `14px 0 0 43px`}
+                >
                   <Wrapper width={`60px`} fontWeight={`500`}>
                     2.1.
                   </Wrapper>
@@ -597,7 +612,8 @@ const Support = () => {
                     <Wrapper
                       fontWeight={`500`}
                       display={`contents`}
-                      cursor={`pointer`}>
+                      cursor={`pointer`}
+                    >
                       고객
                     </Wrapper>
                     – 회사에서 제공하는 서비스 및 기타 온라인 리소스(예:
@@ -606,7 +622,8 @@ const Support = () => {
                   </ViewContent>
                 </SubTitle>
                 <SubTitle
-                  padding={width < 800 ? `14px 0 0 10px` : `14px 0 0 43px`}>
+                  padding={width < 800 ? `14px 0 0 10px` : `14px 0 0 43px`}
+                >
                   <Wrapper width={`60px`} fontWeight={`500`}>
                     2.2.
                   </Wrapper>
@@ -614,14 +631,16 @@ const Support = () => {
                     <Wrapper
                       fontWeight={`500`}
                       display={`contents`}
-                      cursor={`pointer`}>
+                      cursor={`pointer`}
+                    >
                       개인 정보 보호 정책
                     </Wrapper>
                     – WILLMARKETS의 현재 개인 정보 보호 정책;
                   </ViewContent>
                 </SubTitle>
                 <SubTitle
-                  padding={width < 800 ? `14px 0 0 10px` : `14px 0 0 43px`}>
+                  padding={width < 800 ? `14px 0 0 10px` : `14px 0 0 43px`}
+                >
                   <Wrapper width={`60px`} fontWeight={`500`}>
                     2.3.
                   </Wrapper>
@@ -629,7 +648,8 @@ const Support = () => {
                     <Wrapper
                       fontWeight={`500`}
                       display={`contents`}
-                      cursor={`pointer`}>
+                      cursor={`pointer`}
+                    >
                       개인 데이터
                     </Wrapper>
                     – 식별되거나 식별 가능한 개인과 관련된 모든 정보. 자세한
@@ -637,7 +657,8 @@ const Support = () => {
                   </ViewContent>
                 </SubTitle>
                 <SubTitle
-                  padding={width < 800 ? `14px 0 0 10px` : `14px 0 0 43px`}>
+                  padding={width < 800 ? `14px 0 0 10px` : `14px 0 0 43px`}
+                >
                   <Wrapper width={`60px`} fontWeight={`500`}>
                     2.4.
                   </Wrapper>
@@ -645,7 +666,8 @@ const Support = () => {
                     <Wrapper
                       fontWeight={`500`}
                       display={`contents`}
-                      cursor={`pointer`}>
+                      cursor={`pointer`}
+                    >
                       처리
                     </Wrapper>
                     – 예를 들어 개인 데이터와 관련된 모든 작업(예: 수집, 기록,
@@ -653,7 +675,8 @@ const Support = () => {
                   </ViewContent>
                 </SubTitle>
                 <SubTitle
-                  padding={width < 800 ? `14px 0 0 10px` : `14px 0 0 43px`}>
+                  padding={width < 800 ? `14px 0 0 10px` : `14px 0 0 43px`}
+                >
                   <Wrapper width={`60px`} fontWeight={`500`}>
                     2.5.
                   </Wrapper>
@@ -661,14 +684,16 @@ const Support = () => {
                     <Wrapper
                       fontWeight={`500`}
                       display={`contents`}
-                      cursor={`pointer`}>
+                      cursor={`pointer`}
+                    >
                       서비스
                     </Wrapper>
                     - 회사에서 제공하는 모든 서비스
                   </ViewContent>
                 </SubTitle>
                 <SubTitle
-                  padding={width < 800 ? `14px 0 0 10px` : `14px 0 0 43px`}>
+                  padding={width < 800 ? `14px 0 0 10px` : `14px 0 0 43px`}
+                >
                   <Wrapper width={`60px`} fontWeight={`500`}>
                     2.6.
                   </Wrapper>
@@ -676,7 +701,8 @@ const Support = () => {
                     <Wrapper
                       fontWeight={`500`}
                       display={`ViewContents`}
-                      cursor={`pointer`}>
+                      cursor={`pointer`}
+                    >
                       웹사이트
                     </Wrapper>
                     -&nbsp;
@@ -684,7 +710,8 @@ const Support = () => {
                       color={`#3353f2`}
                       fontWeight={`500`}
                       display={`ViewContents`}
-                      cursor={`pointer`}>
+                      cursor={`pointer`}
+                    >
                       https://will-markets.com
                     </Wrapper>
                   </ViewContent>
@@ -696,7 +723,8 @@ const Support = () => {
                   회사가 처리하는 개인 데이터의 범주
                 </Title>
                 <SubTitle
-                  padding={width < 800 ? `14px 0 0 10px` : `14px 0 0 43px`}>
+                  padding={width < 800 ? `14px 0 0 10px` : `14px 0 0 43px`}
+                >
                   <Wrapper width={`60px`} fontWeight={`500`}>
                     3.1.
                   </Wrapper>
@@ -709,11 +737,13 @@ const Support = () => {
                 </SubTitle>
                 <SubTitle
                   padding={width < 800 ? `14px 0 0 35px` : `14px 0 0 63px`}
-                  ju={`space-around`}>
+                  ju={`space-around`}
+                >
                   <Wrapper
                     width={`70px`}
                     fontWeight={`500`}
-                    display={`contents`}>
+                    display={`contents`}
+                  >
                     3.2.1.
                   </Wrapper>
                   <ViewContent width={`calc(100% - 70px)`}>
@@ -721,7 +751,8 @@ const Support = () => {
                   </ViewContent>
                 </SubTitle>
                 <SubTitle
-                  padding={width < 800 ? `14px 0 0 50px` : `14px 0 0 90px`}>
+                  padding={width < 800 ? `14px 0 0 50px` : `14px 0 0 90px`}
+                >
                   <Wrapper width={`70px`} fontWeight={`500`} al={`flex-start`}>
                     3.2.1.1.
                   </Wrapper>
@@ -735,7 +766,8 @@ const Support = () => {
                   </ViewContent>
                 </SubTitle>
                 <SubTitle
-                  padding={width < 800 ? `14px 0 0 50px` : `14px 0 0 90px`}>
+                  padding={width < 800 ? `14px 0 0 50px` : `14px 0 0 90px`}
+                >
                   <Wrapper width={`70px`} fontWeight={`500`} al={`flex-start`}>
                     3.2.1.2.
                   </Wrapper>
@@ -747,7 +779,8 @@ const Support = () => {
                   </ViewContent>
                 </SubTitle>
                 <SubTitle
-                  padding={width < 800 ? `14px 0 0 50px` : `14px 0 0 90px`}>
+                  padding={width < 800 ? `14px 0 0 50px` : `14px 0 0 90px`}
+                >
                   <Wrapper width={`70px`} fontWeight={`500`} al={`flex-start`}>
                     3.2.1.3.
                   </Wrapper>
@@ -759,7 +792,8 @@ const Support = () => {
                   </ViewContent>
                 </SubTitle>
                 <SubTitle
-                  padding={width < 800 ? `14px 0 0 50px` : `14px 0 0 90px`}>
+                  padding={width < 800 ? `14px 0 0 50px` : `14px 0 0 90px`}
+                >
                   <Wrapper width={`70px`} fontWeight={`500`} al={`flex-start`}>
                     3.2.1.4.
                   </Wrapper>
@@ -772,7 +806,8 @@ const Support = () => {
                   </ViewContent>
                 </SubTitle>
                 <SubTitle
-                  padding={width < 800 ? `14px 0 0 50px` : `14px 0 0 90px`}>
+                  padding={width < 800 ? `14px 0 0 50px` : `14px 0 0 90px`}
+                >
                   <Wrapper width={`70px`} fontWeight={`500`} al={`flex-start`}>
                     3.2.1.5.
                   </Wrapper>
@@ -787,7 +822,8 @@ const Support = () => {
                   </ViewContent>
                 </SubTitle>
                 <SubTitle
-                  padding={width < 800 ? `14px 0 0 50px` : `14px 0 0 90px`}>
+                  padding={width < 800 ? `14px 0 0 50px` : `14px 0 0 90px`}
+                >
                   <Wrapper width={`70px`} fontWeight={`500`} al={`flex-start`}>
                     3.2.1.6.
                   </Wrapper>
@@ -801,11 +837,13 @@ const Support = () => {
                 </SubTitle>
                 <SubTitle
                   padding={width < 800 ? `14px 0 0 35px` : `14px 0 0 63px`}
-                  ju={`space-around`}>
+                  ju={`space-around`}
+                >
                   <Wrapper
                     width={`70px`}
                     fontWeight={`500`}
-                    display={`contents`}>
+                    display={`contents`}
+                  >
                     3.2.2.
                   </Wrapper>
                   <ViewContent width={`calc(100% - 70px)`}>
@@ -814,7 +852,8 @@ const Support = () => {
                   </ViewContent>
                 </SubTitle>
                 <SubTitle
-                  padding={width < 800 ? `14px 0 0 50px` : `14px 0 0 90px`}>
+                  padding={width < 800 ? `14px 0 0 50px` : `14px 0 0 90px`}
+                >
                   <Wrapper width={`70px`} fontWeight={`500`} al={`flex-start`}>
                     3.2.2.1.
                   </Wrapper>
@@ -827,7 +866,8 @@ const Support = () => {
                   </ViewContent>
                 </SubTitle>
                 <SubTitle
-                  padding={width < 800 ? `14px 0 0 50px` : `14px 0 0 90px`}>
+                  padding={width < 800 ? `14px 0 0 50px` : `14px 0 0 90px`}
+                >
                   <Wrapper width={`70px`} fontWeight={`500`} al={`flex-start`}>
                     3.2.1.2.
                   </Wrapper>
@@ -841,7 +881,8 @@ const Support = () => {
                   </ViewContent>
                 </SubTitle>
                 <SubTitle
-                  padding={width < 800 ? `14px 0 0 10px` : `14px 0 0 43px`}>
+                  padding={width < 800 ? `14px 0 0 10px` : `14px 0 0 43px`}
+                >
                   <Wrapper width={`60px`} fontWeight={`500`}>
                     3.3.
                   </Wrapper>
@@ -857,7 +898,8 @@ const Support = () => {
                   개인정보 처리의 근거 및 목적
                 </Title>
                 <SubTitle
-                  padding={width < 800 ? `14px 0 0 10px` : `14px 0 0 43px`}>
+                  padding={width < 800 ? `14px 0 0 10px` : `14px 0 0 43px`}
+                >
                   <Wrapper width={`60px`} fontWeight={`500`}>
                     4.1.
                   </Wrapper>
@@ -867,7 +909,8 @@ const Support = () => {
                   </ViewContent>
                 </SubTitle>
                 <SubTitle
-                  padding={width < 800 ? `14px 0 0 35px` : `14px 0 0 63px`}>
+                  padding={width < 800 ? `14px 0 0 35px` : `14px 0 0 63px`}
+                >
                   <ViewContent width={`calc(100% - 70px)`}>
                     <Wrapper fontWeight={`500`} display={`contents`}>
                       4.1.1.
@@ -904,7 +947,8 @@ const Support = () => {
                   </ViewContent>
                 </SubTitle>
                 <SubTitle
-                  padding={width < 800 ? `0px 0 0 10px` : `0px 0 0 43px`}>
+                  padding={width < 800 ? `0px 0 0 10px` : `0px 0 0 43px`}
+                >
                   <Wrapper width={`60px`} fontWeight={`500`}>
                     4.2.
                   </Wrapper>
@@ -966,7 +1010,8 @@ const Support = () => {
                     <Wrapper
                       fontWeight={`500`}
                       display={`contents`}
-                      margin={`0 10px 0 0 `}>
+                      margin={`0 10px 0 0 `}
+                    >
                       4.2.6.&nbsp;
                       <br />
                     </Wrapper>
@@ -980,7 +1025,8 @@ const Support = () => {
                   고객 개인 데이터 공개
                 </Title>
                 <SubTitle
-                  padding={width < 800 ? `14px 0 0 10px` : `14px 0 0 43px`}>
+                  padding={width < 800 ? `14px 0 0 10px` : `14px 0 0 43px`}
+                >
                   <Wrapper width={`60px`} fontWeight={`500`}>
                     5.1.
                   </Wrapper>
@@ -1030,7 +1076,8 @@ const Support = () => {
                   개인 데이터 전송
                 </Title>
                 <SubTitle
-                  padding={width < 800 ? `14px 0 0 10px` : `14px 0 0 43px`}>
+                  padding={width < 800 ? `14px 0 0 10px` : `14px 0 0 43px`}
+                >
                   <Wrapper width={`60px`} fontWeight={`500`}>
                     6.1.
                   </Wrapper>
@@ -1041,7 +1088,8 @@ const Support = () => {
                   </ViewContent>
                 </SubTitle>
                 <SubTitle
-                  padding={width < 800 ? `14px 0 0 10px` : `14px 0 0 43px`}>
+                  padding={width < 800 ? `14px 0 0 10px` : `14px 0 0 43px`}
+                >
                   <Wrapper width={`60px`} fontWeight={`500`}>
                     6.2.
                   </Wrapper>
@@ -1086,7 +1134,8 @@ const Support = () => {
                   보유 기간
                 </Title>
                 <SubTitle
-                  padding={width < 800 ? `14px 0 0 10px` : `14px 0 0 43px`}>
+                  padding={width < 800 ? `14px 0 0 10px` : `14px 0 0 43px`}
+                >
                   <Wrapper width={`60px`} fontWeight={`500`}>
                     7.1.
                   </Wrapper>
@@ -1097,7 +1146,8 @@ const Support = () => {
                   </ViewContent>
                 </SubTitle>
                 <SubTitle
-                  padding={width < 800 ? `14px 0 0 10px` : `14px 0 0 43px`}>
+                  padding={width < 800 ? `14px 0 0 10px` : `14px 0 0 43px`}
+                >
                   <Wrapper width={`60px`} fontWeight={`500`}>
                     7.2.
                   </Wrapper>
@@ -1129,7 +1179,8 @@ const Support = () => {
                   고객의 권리
                 </Title>
                 <SubTitle
-                  padding={width < 800 ? `14px 0 0 10px` : `14px 0 0 43px`}>
+                  padding={width < 800 ? `14px 0 0 10px` : `14px 0 0 43px`}
+                >
                   <Wrapper width={`60px`} fontWeight={`500`}>
                     9.1.
                   </Wrapper>
@@ -1142,7 +1193,8 @@ const Support = () => {
                   </ViewContent>
                 </SubTitle>
                 <SubTitle
-                  padding={width < 800 ? `14px 0 0 10px` : `14px 0 0 43px`}>
+                  padding={width < 800 ? `14px 0 0 10px` : `14px 0 0 43px`}
+                >
                   <Wrapper width={`60px`} fontWeight={`500`}>
                     9.2.
                   </Wrapper>
@@ -1152,7 +1204,8 @@ const Support = () => {
                   </ViewContent>
                 </SubTitle>
                 <SubTitle
-                  padding={width < 800 ? `14px 0 0 10px` : `14px 0 0 43px`}>
+                  padding={width < 800 ? `14px 0 0 10px` : `14px 0 0 43px`}
+                >
                   <Wrapper width={`60px`} fontWeight={`500`}>
                     9.3.
                   </Wrapper>
@@ -1163,7 +1216,8 @@ const Support = () => {
                   </ViewContent>
                 </SubTitle>
                 <SubTitle
-                  padding={width < 800 ? `14px 0 0 10px` : `14px 0 0 43px`}>
+                  padding={width < 800 ? `14px 0 0 10px` : `14px 0 0 43px`}
+                >
                   <Wrapper width={`60px`} fontWeight={`500`}>
                     9.4.
                   </Wrapper>
@@ -1173,7 +1227,8 @@ const Support = () => {
                   </ViewContent>
                 </SubTitle>
                 <SubTitle
-                  padding={width < 800 ? `14px 0 0 10px` : `14px 0 0 43px`}>
+                  padding={width < 800 ? `14px 0 0 10px` : `14px 0 0 43px`}
+                >
                   <Wrapper width={`60px`} fontWeight={`500`}>
                     9.5.
                   </Wrapper>
@@ -1184,7 +1239,8 @@ const Support = () => {
                   </ViewContent>
                 </SubTitle>
                 <SubTitle
-                  padding={width < 800 ? `14px 0 0 10px` : `14px 0 0 43px`}>
+                  padding={width < 800 ? `14px 0 0 10px` : `14px 0 0 43px`}
+                >
                   <Wrapper width={`60px`} fontWeight={`500`}>
                     9.6.
                   </Wrapper>
@@ -1194,7 +1250,8 @@ const Support = () => {
                   </ViewContent>
                 </SubTitle>
                 <SubTitle
-                  padding={width < 800 ? `14px 0 0 10px` : `14px 0 0 43px`}>
+                  padding={width < 800 ? `14px 0 0 10px` : `14px 0 0 43px`}
+                >
                   <Wrapper width={`60px`} fontWeight={`500`}>
                     9.7.
                   </Wrapper>
@@ -1211,7 +1268,8 @@ const Support = () => {
                   고객의 권리
                 </Title>
                 <SubTitle
-                  padding={width < 800 ? `14px 0 0 10px` : `14px 0 0 43px`}>
+                  padding={width < 800 ? `14px 0 0 10px` : `14px 0 0 43px`}
+                >
                   <Wrapper width={`60px`} fontWeight={`500`}>
                     10.1.
                   </Wrapper>
@@ -1221,7 +1279,8 @@ const Support = () => {
                   </ViewContent>
                 </SubTitle>
                 <SubTitle
-                  padding={width < 800 ? `14px 0 0 10px` : `14px 0 0 43px`}>
+                  padding={width < 800 ? `14px 0 0 10px` : `14px 0 0 43px`}
+                >
                   <Wrapper width={`60px`} fontWeight={`500`}>
                     10.2.
                   </Wrapper>
@@ -1231,7 +1290,8 @@ const Support = () => {
                   </ViewContent>
                 </SubTitle>
                 <SubTitle
-                  padding={width < 800 ? `14px 0 0 10px` : `14px 0 0 43px`}>
+                  padding={width < 800 ? `14px 0 0 10px` : `14px 0 0 43px`}
+                >
                   <Wrapper width={`60px`} fontWeight={`500`}>
                     10.3.
                   </Wrapper>
@@ -1273,7 +1333,8 @@ const Support = () => {
                   </ViewContent>
                 </SubTitle>
                 <SubTitle
-                  padding={width < 800 ? `14px 0 0 10px` : `14px 0 0 43px`}>
+                  padding={width < 800 ? `14px 0 0 10px` : `14px 0 0 43px`}
+                >
                   <Wrapper width={`60px`} fontWeight={`500`}>
                     10.4.
                   </Wrapper>
@@ -1283,7 +1344,8 @@ const Support = () => {
                   </ViewContent>
                 </SubTitle>
                 <SubTitle
-                  padding={width < 800 ? `14px 0 0 10px` : `14px 0 0 43px`}>
+                  padding={width < 800 ? `14px 0 0 10px` : `14px 0 0 43px`}
+                >
                   <Wrapper width={`60px`} fontWeight={`500`}>
                     10.5.
                   </Wrapper>
@@ -1301,13 +1363,14 @@ const Support = () => {
                 </Title>
                 <ViewContent padding={`40px`} padding={`10px 0 0 26px`}>
                   고객이 회사의 개인 데이터 처리와 관련하여 질문이나 문의 사항이
-                  있는 경우 info@will-markets.com 으로 이메일을 보내 거나 회사
-                  웹사이트에 표시된 우편 주소로 편지를 보내야 합니다:
+                  있는 경우 support@will-markets.com 으로 이메일을 보내 거나
+                  회사 웹사이트에 표시된 우편 주소로 편지를 보내야 합니다:
                   <Wrapper
                     color={`#3353f2`}
                     fontWeight={`500`}
                     display={`contents`}
-                    cursor={`pointer`}>
+                    cursor={`pointer`}
+                  >
                     https://will-markets.com.
                   </Wrapper>
                 </ViewContent>
@@ -1318,7 +1381,8 @@ const Support = () => {
                   최종 규정
                 </Title>
                 <SubTitle
-                  padding={width < 800 ? `14px 0 0 10px` : `14px 0 0 43px`}>
+                  padding={width < 800 ? `14px 0 0 10px` : `14px 0 0 43px`}
+                >
                   <Wrapper width={`60px`} fontWeight={`500`}>
                     12.1.
                   </Wrapper>
@@ -1333,7 +1397,8 @@ const Support = () => {
                   </ViewContent>
                 </SubTitle>
                 <SubTitle
-                  padding={width < 800 ? `14px 0 0 10px` : `14px 0 0 43px`}>
+                  padding={width < 800 ? `14px 0 0 10px` : `14px 0 0 43px`}
+                >
                   <Wrapper width={`60px`} fontWeight={`500`}>
                     12.2.
                   </Wrapper>
@@ -1343,7 +1408,8 @@ const Support = () => {
                   </ViewContent>
                 </SubTitle>
                 <SubTitle
-                  padding={width < 800 ? `14px 0 0 10px` : `14px 0 0 43px`}>
+                  padding={width < 800 ? `14px 0 0 10px` : `14px 0 0 43px`}
+                >
                   <Wrapper width={`60px`} fontWeight={`500`}>
                     12.3.
                   </Wrapper>
@@ -1366,7 +1432,8 @@ const Support = () => {
                   Introduction
                 </Title>
                 <SubTitle
-                  padding={width < 800 ? `14px 0 0 10px` : `14px 0 0 43px`}>
+                  padding={width < 800 ? `14px 0 0 10px` : `14px 0 0 43px`}
+                >
                   <Wrapper width={`60px`} fontWeight={`500`}>
                     1.1.
                   </Wrapper>
@@ -1380,7 +1447,8 @@ const Support = () => {
                   </ViewContent>
                 </SubTitle>
                 <SubTitle
-                  padding={width < 800 ? `14px 0 0 10px` : `14px 0 0 43px`}>
+                  padding={width < 800 ? `14px 0 0 10px` : `14px 0 0 43px`}
+                >
                   <Wrapper width={`60px`} fontWeight={`500`}>
                     1.2.
                   </Wrapper>
@@ -1404,7 +1472,8 @@ const Support = () => {
                   Definitions
                 </Title>
                 <SubTitle
-                  padding={width < 800 ? `14px 0 0 10px` : `14px 0 0 43px`}>
+                  padding={width < 800 ? `14px 0 0 10px` : `14px 0 0 43px`}
+                >
                   <Wrapper width={`60px`} fontWeight={`500`}>
                     2.1.
                   </Wrapper>
@@ -1412,7 +1481,8 @@ const Support = () => {
                     <Wrapper
                       fontWeight={`500`}
                       display={`contents`}
-                      cursor={`pointer`}>
+                      cursor={`pointer`}
+                    >
                       Client
                     </Wrapper>
                     – any natural person, who has been using or has expressed
@@ -1421,7 +1491,8 @@ const Support = () => {
                   </ViewContent>
                 </SubTitle>
                 <SubTitle
-                  padding={width < 800 ? `14px 0 0 10px` : `14px 0 0 43px`}>
+                  padding={width < 800 ? `14px 0 0 10px` : `14px 0 0 43px`}
+                >
                   <Wrapper width={`60px`} fontWeight={`500`}>
                     2.2.
                   </Wrapper>
@@ -1429,14 +1500,16 @@ const Support = () => {
                     <Wrapper
                       fontWeight={`500`}
                       display={`contents`}
-                      cursor={`pointer`}>
+                      cursor={`pointer`}
+                    >
                       Privacy Policy
                     </Wrapper>
                     – the present Privacy Policy of WILLMARKETS
                   </ViewContent>
                 </SubTitle>
                 <SubTitle
-                  padding={width < 800 ? `14px 0 0 10px` : `14px 0 0 43px`}>
+                  padding={width < 800 ? `14px 0 0 10px` : `14px 0 0 43px`}
+                >
                   <Wrapper width={`60px`} fontWeight={`500`}>
                     2.3.
                   </Wrapper>
@@ -1444,7 +1517,8 @@ const Support = () => {
                     <Wrapper
                       fontWeight={`500`}
                       display={`contents`}
-                      cursor={`pointer`}>
+                      cursor={`pointer`}
+                    >
                       Personal Data
                     </Wrapper>
                     – any information related to an identified or identifiable
@@ -1452,7 +1526,8 @@ const Support = () => {
                   </ViewContent>
                 </SubTitle>
                 <SubTitle
-                  padding={width < 800 ? `14px 0 0 10px` : `14px 0 0 43px`}>
+                  padding={width < 800 ? `14px 0 0 10px` : `14px 0 0 43px`}
+                >
                   <Wrapper width={`60px`} fontWeight={`500`}>
                     2.4.
                   </Wrapper>
@@ -1460,7 +1535,8 @@ const Support = () => {
                     <Wrapper
                       fontWeight={`500`}
                       display={`contents`}
-                      cursor={`pointer`}>
+                      cursor={`pointer`}
+                    >
                       Processing
                     </Wrapper>
                     – any actions related to Personal Data for instance, but not
@@ -1469,7 +1545,8 @@ const Support = () => {
                   </ViewContent>
                 </SubTitle>
                 <SubTitle
-                  padding={width < 800 ? `14px 0 0 10px` : `14px 0 0 43px`}>
+                  padding={width < 800 ? `14px 0 0 10px` : `14px 0 0 43px`}
+                >
                   <Wrapper width={`60px`} fontWeight={`500`}>
                     2.5.
                   </Wrapper>
@@ -1477,14 +1554,16 @@ const Support = () => {
                     <Wrapper
                       fontWeight={`500`}
                       display={`contents`}
-                      cursor={`pointer`}>
+                      cursor={`pointer`}
+                    >
                       Services
                     </Wrapper>
                     - any services offered by the Company;
                   </ViewContent>
                 </SubTitle>
                 <SubTitle
-                  padding={width < 800 ? `14px 0 0 10px` : `14px 0 0 43px`}>
+                  padding={width < 800 ? `14px 0 0 10px` : `14px 0 0 43px`}
+                >
                   <Wrapper width={`60px`} fontWeight={`500`}>
                     2.6.
                   </Wrapper>
@@ -1492,7 +1571,8 @@ const Support = () => {
                     <Wrapper
                       fontWeight={`500`}
                       display={`contents`}
-                      cursor={`pointer`}>
+                      cursor={`pointer`}
+                    >
                       Website
                     </Wrapper>
                     -&nbsp;
@@ -1500,7 +1580,8 @@ const Support = () => {
                       color={`#3353f2`}
                       fontWeight={`500`}
                       display={`contents`}
-                      cursor={`pointer`}>
+                      cursor={`pointer`}
+                    >
                       https://will-markets.com/
                     </Wrapper>
                   </ViewContent>
@@ -1512,7 +1593,8 @@ const Support = () => {
                   Categories of Personal Data That the Company Process
                 </Title>
                 <SubTitle
-                  padding={width < 800 ? `14px 0 0 10px` : `14px 0 0 43px`}>
+                  padding={width < 800 ? `14px 0 0 10px` : `14px 0 0 43px`}
+                >
                   <Wrapper width={`60px`} fontWeight={`500`}>
                     3.1.
                   </Wrapper>
@@ -1526,11 +1608,13 @@ const Support = () => {
                 </SubTitle>
                 <SubTitle
                   padding={width < 800 ? `14px 0 0 35px` : `14px 0 0 63px`}
-                  ju={`space-around`}>
+                  ju={`space-around`}
+                >
                   <Wrapper
                     width={`70px`}
                     fontWeight={`500`}
-                    display={`contents`}>
+                    display={`contents`}
+                  >
                     3.2.1.
                   </Wrapper>
                   <ViewContent width={`calc(100% - 70px)`}>
@@ -1538,7 +1622,8 @@ const Support = () => {
                   </ViewContent>
                 </SubTitle>
                 <SubTitle
-                  padding={width < 800 ? `14px 0 0 50px` : `14px 0 0 90px`}>
+                  padding={width < 800 ? `14px 0 0 50px` : `14px 0 0 90px`}
+                >
                   <Wrapper width={`70px`} fontWeight={`500`} al={`flex-start`}>
                     3.2.1.1.
                   </Wrapper>
@@ -1552,7 +1637,8 @@ const Support = () => {
                   </ViewContent>
                 </SubTitle>
                 <SubTitle
-                  padding={width < 800 ? `14px 0 0 50px` : `0px 0 0 90px`}>
+                  padding={width < 800 ? `14px 0 0 50px` : `0px 0 0 90px`}
+                >
                   <Wrapper width={`70px`} fontWeight={`500`} al={`flex-start`}>
                     3.2.1.2.
                   </Wrapper>
@@ -1565,7 +1651,8 @@ const Support = () => {
                   </ViewContent>
                 </SubTitle>
                 <SubTitle
-                  padding={width < 800 ? `14px 0 0 50px` : `0px 0 0 90px`}>
+                  padding={width < 800 ? `14px 0 0 50px` : `0px 0 0 90px`}
+                >
                   <Wrapper width={`70px`} fontWeight={`500`} al={`flex-start`}>
                     3.2.1.3.
                   </Wrapper>
@@ -1578,7 +1665,8 @@ const Support = () => {
                   </ViewContent>
                 </SubTitle>
                 <SubTitle
-                  padding={width < 800 ? `14px 0 0 50px` : `0px 0 0 90px`}>
+                  padding={width < 800 ? `14px 0 0 50px` : `0px 0 0 90px`}
+                >
                   <Wrapper width={`70px`} fontWeight={`500`} al={`flex-start`}>
                     3.2.1.4.
                   </Wrapper>
@@ -1591,7 +1679,8 @@ const Support = () => {
                   </ViewContent>
                 </SubTitle>
                 <SubTitle
-                  padding={width < 800 ? `14px 0 0 50px` : `0px 0 0 90px`}>
+                  padding={width < 800 ? `14px 0 0 50px` : `0px 0 0 90px`}
+                >
                   <Wrapper width={`70px`} fontWeight={`500`} al={`flex-start`}>
                     3.2.1.5.
                   </Wrapper>
@@ -1608,7 +1697,8 @@ const Support = () => {
                   </ViewContent>
                 </SubTitle>
                 <SubTitle
-                  padding={width < 800 ? `14px 0 0 50px` : `0px 0 0 90px`}>
+                  padding={width < 800 ? `14px 0 0 50px` : `0px 0 0 90px`}
+                >
                   <Wrapper width={`70px`} fontWeight={`500`} al={`flex-start`}>
                     3.2.1.6.
                   </Wrapper>
@@ -1624,11 +1714,13 @@ const Support = () => {
                 </SubTitle>
                 <SubTitle
                   padding={width < 800 ? `14px 0 0 35px` : `14px 0 0 63px`}
-                  ju={`space-around`}>
+                  ju={`space-around`}
+                >
                   <Wrapper
                     width={`70px`}
                     fontWeight={`500`}
-                    display={`contents`}>
+                    display={`contents`}
+                  >
                     3.2.2.
                   </Wrapper>
                   <ViewContent width={`calc(100% - 70px)`}>
@@ -1638,7 +1730,8 @@ const Support = () => {
                   </ViewContent>
                 </SubTitle>
                 <SubTitle
-                  padding={width < 800 ? `14px 0 0 50px` : `0px 0 0 90px`}>
+                  padding={width < 800 ? `14px 0 0 50px` : `0px 0 0 90px`}
+                >
                   <Wrapper width={`70px`} fontWeight={`500`} al={`flex-start`}>
                     3.2.2.1.
                   </Wrapper>
@@ -1651,7 +1744,8 @@ const Support = () => {
                   </ViewContent>
                 </SubTitle>
                 <SubTitle
-                  padding={width < 800 ? `14px 0 0 50px` : `0px 0 0 90px`}>
+                  padding={width < 800 ? `14px 0 0 50px` : `0px 0 0 90px`}
+                >
                   <Wrapper width={`70px`} fontWeight={`500`} al={`flex-start`}>
                     3.2.1.2.
                   </Wrapper>
@@ -1666,7 +1760,8 @@ const Support = () => {
                   </ViewContent>
                 </SubTitle>
                 <SubTitle
-                  padding={width < 800 ? `14px 0 0 10px` : `14px 0 0 43px`}>
+                  padding={width < 800 ? `14px 0 0 10px` : `14px 0 0 43px`}
+                >
                   <Wrapper width={`60px`} fontWeight={`500`}>
                     3.3.
                   </Wrapper>
@@ -1683,7 +1778,8 @@ const Support = () => {
                   Grounds and Purposes for the Processing of Personal Data
                 </Title>
                 <SubTitle
-                  padding={width < 800 ? `14px 0 0 10px` : `14px 0 0 43px`}>
+                  padding={width < 800 ? `14px 0 0 10px` : `14px 0 0 43px`}
+                >
                   <Wrapper width={`60px`} fontWeight={`500`}>
                     4.1.
                   </Wrapper>
@@ -1693,7 +1789,8 @@ const Support = () => {
                   </ViewContent>
                 </SubTitle>
                 <SubTitle
-                  padding={width < 800 ? `14px 0 0 35px` : `14px 0 0 63px`}>
+                  padding={width < 800 ? `14px 0 0 35px` : `14px 0 0 63px`}
+                >
                   <ViewContent width={`calc(100% - 70px)`}>
                     <Wrapper fontWeight={`500`} display={`contents`}>
                       4.1.1.
@@ -1728,7 +1825,8 @@ const Support = () => {
                   </ViewContent>
                 </SubTitle>
                 <SubTitle
-                  padding={width < 800 ? `14px 0 0 10px` : `14px 0 0 43px`}>
+                  padding={width < 800 ? `14px 0 0 10px` : `14px 0 0 43px`}
+                >
                   <Wrapper width={`60px`} fontWeight={`500`}>
                     4.2.
                   </Wrapper>
@@ -1795,7 +1893,8 @@ const Support = () => {
                     <Wrapper
                       fontWeight={`500`}
                       display={`contents`}
-                      margin={`0 10px 0 0 `}>
+                      margin={`0 10px 0 0 `}
+                    >
                       4.2.6.&nbsp;
                       <br />
                     </Wrapper>
@@ -1809,7 +1908,8 @@ const Support = () => {
                   Disclosure of Clients Personal Data
                 </Title>
                 <SubTitle
-                  padding={width < 800 ? `14px 0 0 10px` : `14px 0 0 43px`}>
+                  padding={width < 800 ? `14px 0 0 10px` : `14px 0 0 43px`}
+                >
                   <Wrapper width={`60px`} fontWeight={`500`}>
                     5.1.
                   </Wrapper>
@@ -1861,7 +1961,8 @@ const Support = () => {
                   Personal Data Transfers
                 </Title>
                 <SubTitle
-                  padding={width < 800 ? `14px 0 0 10px` : `14px 0 0 43px`}>
+                  padding={width < 800 ? `14px 0 0 10px` : `14px 0 0 43px`}
+                >
                   <Wrapper width={`60px`} fontWeight={`500`}>
                     6.1.
                   </Wrapper>
@@ -1874,7 +1975,8 @@ const Support = () => {
                   </ViewContent>
                 </SubTitle>
                 <SubTitle
-                  padding={width < 800 ? `14px 0 0 10px` : `14px 0 0 43px`}>
+                  padding={width < 800 ? `14px 0 0 10px` : `14px 0 0 43px`}
+                >
                   <Wrapper width={`60px`} fontWeight={`500`}>
                     6.2.
                   </Wrapper>
@@ -1921,7 +2023,8 @@ const Support = () => {
                   Retention Period
                 </Title>
                 <SubTitle
-                  padding={width < 800 ? `14px 0 0 10px` : `14px 0 0 43px`}>
+                  padding={width < 800 ? `14px 0 0 10px` : `14px 0 0 43px`}
+                >
                   <Wrapper width={`60px`} fontWeight={`500`}>
                     7.1.
                   </Wrapper>
@@ -1931,7 +2034,8 @@ const Support = () => {
                   </ViewContent>
                 </SubTitle>
                 <SubTitle
-                  padding={width < 800 ? `14px 0 0 10px` : `14px 0 0 43px`}>
+                  padding={width < 800 ? `14px 0 0 10px` : `14px 0 0 43px`}
+                >
                   <Wrapper width={`60px`} fontWeight={`500`}>
                     7.2.
                   </Wrapper>
@@ -1968,7 +2072,8 @@ const Support = () => {
                   Client’s Rights
                 </Title>
                 <SubTitle
-                  padding={width < 800 ? `14px 0 0 10px` : `14px 0 0 43px`}>
+                  padding={width < 800 ? `14px 0 0 10px` : `14px 0 0 43px`}
+                >
                   <Wrapper width={`60px`} fontWeight={`500`}>
                     9.1.
                   </Wrapper>
@@ -1982,7 +2087,8 @@ const Support = () => {
                   </ViewContent>
                 </SubTitle>
                 <SubTitle
-                  padding={width < 800 ? `14px 0 0 10px` : `14px 0 0 43px`}>
+                  padding={width < 800 ? `14px 0 0 10px` : `14px 0 0 43px`}
+                >
                   <Wrapper width={`60px`} fontWeight={`500`}>
                     9.2.
                   </Wrapper>
@@ -1992,7 +2098,8 @@ const Support = () => {
                   </ViewContent>
                 </SubTitle>
                 <SubTitle
-                  padding={width < 800 ? `14px 0 0 10px` : `14px 0 0 43px`}>
+                  padding={width < 800 ? `14px 0 0 10px` : `14px 0 0 43px`}
+                >
                   <Wrapper width={`60px`} fontWeight={`500`}>
                     9.3.
                   </Wrapper>
@@ -2003,7 +2110,8 @@ const Support = () => {
                   </ViewContent>
                 </SubTitle>
                 <SubTitle
-                  padding={width < 800 ? `14px 0 0 10px` : `14px 0 0 43px`}>
+                  padding={width < 800 ? `14px 0 0 10px` : `14px 0 0 43px`}
+                >
                   <Wrapper width={`60px`} fontWeight={`500`}>
                     9.4.
                   </Wrapper>
@@ -2014,7 +2122,8 @@ const Support = () => {
                   </ViewContent>
                 </SubTitle>
                 <SubTitle
-                  padding={width < 800 ? `14px 0 0 10px` : `14px 0 0 43px`}>
+                  padding={width < 800 ? `14px 0 0 10px` : `14px 0 0 43px`}
+                >
                   <Wrapper width={`60px`} fontWeight={`500`}>
                     9.5.
                   </Wrapper>
@@ -2025,7 +2134,8 @@ const Support = () => {
                   </ViewContent>
                 </SubTitle>
                 <SubTitle
-                  padding={width < 800 ? `14px 0 0 10px` : `14px 0 0 43px`}>
+                  padding={width < 800 ? `14px 0 0 10px` : `14px 0 0 43px`}
+                >
                   <Wrapper width={`60px`} fontWeight={`500`}>
                     9.6.
                   </Wrapper>
@@ -2035,7 +2145,8 @@ const Support = () => {
                   </ViewContent>
                 </SubTitle>
                 <SubTitle
-                  padding={width < 800 ? `14px 0 0 10px` : `14px 0 0 43px`}>
+                  padding={width < 800 ? `14px 0 0 10px` : `14px 0 0 43px`}
+                >
                   <Wrapper width={`60px`} fontWeight={`500`}>
                     9.7.
                   </Wrapper>
@@ -2052,7 +2163,8 @@ const Support = () => {
                   Cookies
                 </Title>
                 <SubTitle
-                  padding={width < 800 ? `14px 0 0 10px` : `14px 0 0 43px`}>
+                  padding={width < 800 ? `14px 0 0 10px` : `14px 0 0 43px`}
+                >
                   <Wrapper width={`60px`} fontWeight={`500`}>
                     10.1.
                   </Wrapper>
@@ -2063,7 +2175,8 @@ const Support = () => {
                   </ViewContent>
                 </SubTitle>
                 <SubTitle
-                  padding={width < 800 ? `14px 0 0 10px` : `14px 0 0 43px`}>
+                  padding={width < 800 ? `14px 0 0 10px` : `14px 0 0 43px`}
+                >
                   <Wrapper width={`60px`} fontWeight={`500`}>
                     10.2.
                   </Wrapper>
@@ -2073,7 +2186,8 @@ const Support = () => {
                   </ViewContent>
                 </SubTitle>
                 <SubTitle
-                  padding={width < 800 ? `14px 0 0 10px` : `14px 0 0 43px`}>
+                  padding={width < 800 ? `14px 0 0 10px` : `14px 0 0 43px`}
+                >
                   <Wrapper width={`60px`} fontWeight={`500`}>
                     10.3.
                   </Wrapper>
@@ -2083,7 +2197,8 @@ const Support = () => {
                   </ViewContent>
                 </SubTitle>
                 <SubTitle
-                  padding={width < 800 ? `14px 0 0 35px` : `14px 0 0 63px`}>
+                  padding={width < 800 ? `14px 0 0 35px` : `14px 0 0 63px`}
+                >
                   <ViewContent width={`calc(100% - 70px)`}>
                     <Wrapper fontWeight={`500`} display={`contents`}>
                       10.3.1.
@@ -2093,7 +2208,8 @@ const Support = () => {
                   </ViewContent>
                 </SubTitle>
                 <SubTitle
-                  padding={width < 800 ? `14px 0 0 35px` : `14px 0 0 63px`}>
+                  padding={width < 800 ? `14px 0 0 35px` : `14px 0 0 63px`}
+                >
                   <ViewContent width={`calc(100% - 70px)`}>
                     <Wrapper fontWeight={`500`} display={`contents`}>
                       10.3.2.
@@ -2103,7 +2219,8 @@ const Support = () => {
                   </ViewContent>
                 </SubTitle>
                 <SubTitle
-                  padding={width < 800 ? `14px 0 0 35px` : `14px 0 0 63px`}>
+                  padding={width < 800 ? `14px 0 0 35px` : `14px 0 0 63px`}
+                >
                   <ViewContent width={`calc(100% - 70px)`}>
                     <Wrapper fontWeight={`500`} display={`contents`}>
                       10.3.3.
@@ -2113,7 +2230,8 @@ const Support = () => {
                   </ViewContent>
                 </SubTitle>
                 <SubTitle
-                  padding={width < 800 ? `14px 0 0 35px` : `14px 0 0 63px`}>
+                  padding={width < 800 ? `14px 0 0 35px` : `14px 0 0 63px`}
+                >
                   <ViewContent width={`calc(100% - 70px)`}>
                     <Wrapper fontWeight={`500`} display={`contents`}>
                       10.3.4.
@@ -2123,7 +2241,8 @@ const Support = () => {
                   </ViewContent>
                 </SubTitle>
                 <SubTitle
-                  padding={width < 800 ? `14px 0 0 10px` : `14px 0 0 43px`}>
+                  padding={width < 800 ? `14px 0 0 10px` : `14px 0 0 43px`}
+                >
                   <Wrapper width={`60px`} fontWeight={`500`}>
                     10.4.
                   </Wrapper>
@@ -2133,7 +2252,8 @@ const Support = () => {
                   </ViewContent>
                 </SubTitle>
                 <SubTitle
-                  padding={width < 800 ? `14px 0 0 10px` : `14px 0 0 43px`}>
+                  padding={width < 800 ? `14px 0 0 10px` : `14px 0 0 43px`}
+                >
                   <Wrapper width={`60px`} fontWeight={`500`}>
                     10.5.
                   </Wrapper>
@@ -2158,7 +2278,8 @@ const Support = () => {
                     color={`#3353f2`}
                     fontWeight={`500`}
                     display={`contents`}
-                    cursor={`pointer`}>
+                    cursor={`pointer`}
+                  >
                     https://will-markets.com/ .
                   </Wrapper>
                 </ViewContent>
@@ -2169,7 +2290,8 @@ const Support = () => {
                   Final Provisions
                 </Title>
                 <SubTitle
-                  padding={width < 800 ? `14px 0 0 10px` : `14px 0 0 43px`}>
+                  padding={width < 800 ? `14px 0 0 10px` : `14px 0 0 43px`}
+                >
                   <Wrapper width={`60px`} fontWeight={`500`}>
                     12.1.
                   </Wrapper>
@@ -2186,7 +2308,8 @@ const Support = () => {
                   </ViewContent>
                 </SubTitle>
                 <SubTitle
-                  padding={width < 800 ? `14px 0 0 10px` : `14px 0 0 43px`}>
+                  padding={width < 800 ? `14px 0 0 10px` : `14px 0 0 43px`}
+                >
                   <Wrapper width={`60px`} fontWeight={`500`}>
                     12.2.
                   </Wrapper>
@@ -2196,7 +2319,8 @@ const Support = () => {
                   </ViewContent>
                 </SubTitle>
                 <SubTitle
-                  padding={width < 800 ? `14px 0 0 10px` : `14px 0 0 43px`}>
+                  padding={width < 800 ? `14px 0 0 10px` : `14px 0 0 43px`}
+                >
                   <Wrapper width={`60px`} fontWeight={`500`}>
                     12.3.
                   </Wrapper>

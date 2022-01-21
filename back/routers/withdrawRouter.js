@@ -132,7 +132,7 @@ router.post("/create", async (req, res, next) => {
     }
 
     sendSecretMail(
-      "info@will-markets.com",
+      "support@will-markets.com",
       "출금 요청이 접수되었습니다.",
       `
       <div style="width: 50%; padding: 30px; border: 1px solid #eeeeee">

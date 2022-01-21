@@ -80,7 +80,8 @@ const Privacy = () => {
             <Wrapper
               fontSize={width < 600 ? `30px` : `36px`}
               fontWeight={`700`}
-              textAlign={`center`}>
+              textAlign={`center`}
+            >
               WILLMARKETS 의 개인 정보 보호 정책
             </Wrapper>
             <Title>
@@ -129,7 +130,8 @@ const Privacy = () => {
                 <Wrapper
                   fontWeight={`500`}
                   display={`contents`}
-                  cursor={`pointer`}>
+                  cursor={`pointer`}
+                >
                   고객
                 </Wrapper>
                 – 회사에서 제공하는 서비스 및 기타 온라인 리소스(예: 콘테스트,
@@ -144,7 +146,8 @@ const Privacy = () => {
                 <Wrapper
                   fontWeight={`500`}
                   display={`contents`}
-                  cursor={`pointer`}>
+                  cursor={`pointer`}
+                >
                   개인 정보 보호 정책
                 </Wrapper>
                 – WILLMARKETS의 현재 개인 정보 보호 정책;
@@ -158,7 +161,8 @@ const Privacy = () => {
                 <Wrapper
                   fontWeight={`500`}
                   display={`contents`}
-                  cursor={`pointer`}>
+                  cursor={`pointer`}
+                >
                   개인 데이터
                 </Wrapper>
                 – 식별되거나 식별 가능한 개인과 관련된 모든 정보. 자세한 내용은
@@ -173,7 +177,8 @@ const Privacy = () => {
                 <Wrapper
                   fontWeight={`500`}
                   display={`contents`}
-                  cursor={`pointer`}>
+                  cursor={`pointer`}
+                >
                   처리
                 </Wrapper>
                 – 예를 들어 개인 데이터와 관련된 모든 작업(예: 수집, 기록, 저장,
@@ -188,7 +193,8 @@ const Privacy = () => {
                 <Wrapper
                   fontWeight={`500`}
                   display={`contents`}
-                  cursor={`pointer`}>
+                  cursor={`pointer`}
+                >
                   서비스
                 </Wrapper>
                 - 회사에서 제공하는 모든 서비스
@@ -202,7 +208,8 @@ const Privacy = () => {
                 <Wrapper
                   fontWeight={`500`}
                   display={`contents`}
-                  cursor={`pointer`}>
+                  cursor={`pointer`}
+                >
                   웹사이트
                 </Wrapper>
                 -&nbsp;
@@ -210,7 +217,8 @@ const Privacy = () => {
                   color={`#3353f2`}
                   fontWeight={`500`}
                   display={`contents`}
-                  cursor={`pointer`}>
+                  cursor={`pointer`}
+                >
                   https://will-markets.com
                 </Wrapper>
               </Content>
@@ -234,7 +242,8 @@ const Privacy = () => {
             </SubTitle>
             <SubTitle
               padding={width < 800 ? `14px 0 0 35px` : `14px 0 0 63px`}
-              ju={`space-around`}>
+              ju={`space-around`}
+            >
               <Wrapper width={`70px`} fontWeight={`500`} display={`contents`}>
                 3.2.1.
               </Wrapper>
@@ -316,7 +325,8 @@ const Privacy = () => {
             </SubTitle>
             <SubTitle
               padding={width < 800 ? `14px 0 0 35px` : `14px 0 0 63px`}
-              ju={`space-around`}>
+              ju={`space-around`}
+            >
               <Wrapper width={`70px`} fontWeight={`500`} display={`contents`}>
                 3.2.2.
               </Wrapper>
@@ -470,7 +480,8 @@ const Privacy = () => {
                 <Wrapper
                   fontWeight={`500`}
                   display={`contents`}
-                  margin={`0 10px 0 0 `}>
+                  margin={`0 10px 0 0 `}
+                >
                   4.2.6.&nbsp;
                   <br />
                 </Wrapper>
@@ -784,13 +795,14 @@ const Privacy = () => {
             </Title>
             <Content padding={`40px`} padding={`10px 0 0 26px`}>
               고객이 회사의 개인 데이터 처리와 관련하여 질문이나 문의 사항이
-              있는 경우 info@will-markets.com 으로 이메일을 보내 거나 회사
+              있는 경우 support@will-markets.com 으로 이메일을 보내 거나 회사
               웹사이트에 표시된 우편 주소로 편지를 보내야 합니다:
               <Wrapper
                 color={`#3353f2`}
                 fontWeight={`500`}
                 display={`contents`}
-                cursor={`pointer`}>
+                cursor={`pointer`}
+              >
                 https://will-markets.com.
               </Wrapper>
             </Content>
@@ -838,7 +850,8 @@ const Privacy = () => {
           <RsWrapper padding={width < 1100 ? `50px 100px` : `50px 245px`}>
             <Wrapper
               fontSize={width < 600 ? `30px` : `36px`}
-              fontWeight={`700`}>
+              fontWeight={`700`}
+            >
               PRIVACY POLICY OF WILLMARKET
             </Wrapper>
             <Title>
@@ -890,7 +903,8 @@ const Privacy = () => {
                 <Wrapper
                   fontWeight={`500`}
                   display={`contents`}
-                  cursor={`pointer`}>
+                  cursor={`pointer`}
+                >
                   Client
                 </Wrapper>
                 – any natural person, who has been using or has expressed
@@ -906,7 +920,8 @@ const Privacy = () => {
                 <Wrapper
                   fontWeight={`500`}
                   display={`contents`}
-                  cursor={`pointer`}>
+                  cursor={`pointer`}
+                >
                   Privacy Policy
                 </Wrapper>
                 – the present Privacy Policy of WILLMARKETS
@@ -920,7 +935,8 @@ const Privacy = () => {
                 <Wrapper
                   fontWeight={`500`}
                   display={`contents`}
-                  cursor={`pointer`}>
+                  cursor={`pointer`}
+                >
                   Personal Data
                 </Wrapper>
                 – any information related to an identified or identifiable
@@ -935,7 +951,8 @@ const Privacy = () => {
                 <Wrapper
                   fontWeight={`500`}
                   display={`contents`}
-                  cursor={`pointer`}>
+                  cursor={`pointer`}
+                >
                   Processing
                 </Wrapper>
                 – any actions related to Personal Data for instance, but not
@@ -951,7 +968,8 @@ const Privacy = () => {
                 <Wrapper
                   fontWeight={`500`}
                   display={`contents`}
-                  cursor={`pointer`}>
+                  cursor={`pointer`}
+                >
                   Services
                 </Wrapper>
                 - any services offered by the Company;
@@ -965,7 +983,8 @@ const Privacy = () => {
                 <Wrapper
                   fontWeight={`500`}
                   display={`contents`}
-                  cursor={`pointer`}>
+                  cursor={`pointer`}
+                >
                   Website
                 </Wrapper>
                 -&nbsp;
@@ -973,7 +992,8 @@ const Privacy = () => {
                   color={`#3353f2`}
                   fontWeight={`500`}
                   display={`contents`}
-                  cursor={`pointer`}>
+                  cursor={`pointer`}
+                >
                   https://will-markets.com/
                 </Wrapper>
               </Content>
@@ -998,7 +1018,8 @@ const Privacy = () => {
             </SubTitle>
             <SubTitle
               padding={width < 800 ? `14px 0 0 35px` : `14px 0 0 63px`}
-              ju={`space-around`}>
+              ju={`space-around`}
+            >
               <Wrapper width={`70px`} fontWeight={`500`} display={`contents`}>
                 3.2.1.
               </Wrapper>
@@ -1086,7 +1107,8 @@ const Privacy = () => {
             </SubTitle>
             <SubTitle
               padding={width < 800 ? `14px 0 0 35px` : `14px 0 0 63px`}
-              ju={`space-around`}>
+              ju={`space-around`}
+            >
               <Wrapper width={`70px`} fontWeight={`500`} display={`contents`}>
                 3.2.2.
               </Wrapper>
@@ -1246,7 +1268,8 @@ const Privacy = () => {
                 <Wrapper
                   fontWeight={`500`}
                   display={`contents`}
-                  margin={`0 10px 0 0 `}>
+                  margin={`0 10px 0 0 `}
+                >
                   4.2.6.&nbsp;
                   <br />
                 </Wrapper>
@@ -1584,7 +1607,8 @@ const Privacy = () => {
                 color={`#3353f2`}
                 fontWeight={`500`}
                 display={`contents`}
-                cursor={`pointer`}>
+                cursor={`pointer`}
+              >
                 https://will-markets.com/ .
               </Wrapper>
             </Content>

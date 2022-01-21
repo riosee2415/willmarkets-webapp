@@ -162,7 +162,7 @@ router.post("/create", async (req, res, next) => {
     });
 
     sendSecretMail(
-      `info@will-markets.com`,
+      `support@will-markets.com`,
       `💌 WILLMARKETS 에서 문의사항이 작성되었습니다.`,
       `
     <div style="width: 50%; padding: 30px; border: 1px solid #eeeeee">

@@ -301,6 +301,7 @@ const Live = ({}) => {
           scroll={{ x: 2000 }}
           pagination={{
             pageSize: 10,
+            current: currentPage,
             total: liveLen,
             onChange: (page) => otherPageCall(page),
           }}

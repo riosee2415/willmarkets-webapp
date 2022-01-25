@@ -615,6 +615,7 @@ const UserList = ({}) => {
           pagination={{
             pageSize: 10,
             total: userLen,
+            current: currentPage,
             onChange: (page) => otherPageCall(page),
           }}
         />

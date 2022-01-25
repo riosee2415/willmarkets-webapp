@@ -324,6 +324,7 @@ const Live = ({}) => {
           pagination={{
             pageSize: 10,
             total: demoLen,
+            current: currentPage,
             onChange: (page) => otherPageCall(page),
           }}
         />

@@ -137,6 +137,8 @@ const Deposit = ({}) => {
   );
 
   const searchDataHandler = () => {
+    setCurrentPage(1);
+
     dispatch({
       type: DEPOSIT_LIST_REQUEST,
       data: {
@@ -411,6 +413,7 @@ const Deposit = ({}) => {
           pagination={{
             pageSize: 10,
             total: depositLen,
+            current: currentPage,
             onChange: (page) => otherPageCall(page),
           }}
         />

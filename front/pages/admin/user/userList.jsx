@@ -271,7 +271,9 @@ const UserList = ({}) => {
     [currentPage2]
   );
 
-  const searchDataHandler = () => {
+  const searchDataHandler = useCallback(() => {
+    setCurrentPage(1);
+
     dispatch({
       type: USER_LIST_REQUEST,
       data: {
@@ -281,7 +283,7 @@ const UserList = ({}) => {
         searchComplete: currentTab2 === 1 ? `0` : currentTab2 === 2 ? `1` : ``,
       },
     });
-  };
+  }, [inputSearch.value, currentTab1, currentTab2]);
 
   const updatePriceHandler = () => {
     if (!emptyCheck(inputBankNo2.value)) {
@@ -398,6 +400,7 @@ const UserList = ({}) => {
       fixed: "left",
       render: (data, _, idx) => (
         <Wrapper fontSize={`14px`}>
+          {console.log(userLen, currentPage)}
           {userLen - ((currentPage - 1) * 10 + idx) + ""}
         </Wrapper>
       ),
@@ -510,6 +513,7 @@ const UserList = ({}) => {
       ),
     },
   ];
+  console.log("currentPage : " + currentPage);
 
   const columns2 = [
     {

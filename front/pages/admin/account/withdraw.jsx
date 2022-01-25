@@ -131,6 +131,8 @@ const Withdraw = ({}) => {
   );
 
   const searchDataHandler = () => {
+    setCurrentPage(1);
+
     dispatch({
       type: WITHDRAW_LIST_REQUEST,
       data: {
@@ -325,6 +327,7 @@ const Withdraw = ({}) => {
           pagination={{
             pageSize: 10,
             total: withdrawLen,
+            current: currentPage,
             onChange: (page) => otherPageCall(page),
           }}
         />

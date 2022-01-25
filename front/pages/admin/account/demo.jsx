@@ -137,6 +137,8 @@ const Live = ({}) => {
   );
 
   const searchDataHandler = () => {
+    setCurrentPage(1);
+
     dispatch({
       type: DEMO_ACCOUNT_LIST_REQUEST,
       data: {

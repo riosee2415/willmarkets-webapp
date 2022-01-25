@@ -21,12 +21,8 @@ router.get(["/list/:listType", "/list"], async (req, res, next) => {
     const totalDemo = await DemoAccount.findAll({
       include: {
         model: User,
-        where: {
-          username: {
-            [Op.like]: `%${_search}%`,
-          },
-        },
       },
+      order: [["createdAt", "DESC"]],
     });
 
     const _totalDemo = await totalDemo.filter((data) => {
@@ -35,13 +31,13 @@ router.get(["/list/:listType", "/list"], async (req, res, next) => {
       } else if (
         data.User &&
         data.User.username &&
-        data.User.username.includes(_search)
+        data.User.username.toLowerCase().includes(_search.toLowerCase())
       ) {
         return true;
       } else if (
         data.User &&
         data.User.email &&
-        data.User.email.includes(_search)
+        data.User.email.toLowerCase().includes(_search.toLowerCase())
       ) {
         return true;
       } else {
@@ -54,37 +50,8 @@ router.get(["/list/:listType", "/list"], async (req, res, next) => {
     const lastPage =
       demoLen % LIMIT > 0 ? demoLen / LIMIT + 1 : demoLen / LIMIT;
 
-    const demoAccounts = await DemoAccount.findAll({
-      offset: OFFSET,
-      limit: LIMIT,
-      include: {
-        model: User,
-      },
-      order: [["createdAt", "DESC"]],
-    });
-
-    const _demoAccounts = await demoAccounts.filter((data) => {
-      if (data.bankNo && data.bankNo.includes(_search)) {
-        return true;
-      } else if (
-        data.User &&
-        data.User.username &&
-        data.User.username.includes(_search)
-      ) {
-        return true;
-      } else if (
-        data.User &&
-        data.User.email &&
-        data.User.email.includes(_search)
-      ) {
-        return true;
-      } else {
-        return false;
-      }
-    });
-
     return res.status(200).json({
-      demoAccounts: _demoAccounts,
+      demoAccounts: _totalDemo.slice(OFFSET, OFFSET + LIMIT),
       lastPage: parseInt(lastPage),
       demoLen,
     });

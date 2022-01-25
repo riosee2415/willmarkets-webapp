@@ -22,6 +22,7 @@ router.get(["/list/:listType", "/list"], async (req, res, next) => {
       include: {
         model: User,
       },
+      order: [["createdAt", "DESC"]],
     });
 
     const _totalLive = await totalLive.filter((data) => {
@@ -30,13 +31,13 @@ router.get(["/list/:listType", "/list"], async (req, res, next) => {
       } else if (
         data.User &&
         data.User.username &&
-        data.User.username.includes(_search)
+        data.User.username.toLowerCase().includes(_search.toLowerCase())
       ) {
         return true;
       } else if (
         data.User &&
         data.User.email &&
-        data.User.email.includes(_search)
+        data.User.email.toLowerCase().includes(_search.toLowerCase())
       ) {
         return true;
       } else {
@@ -49,37 +50,8 @@ router.get(["/list/:listType", "/list"], async (req, res, next) => {
     const lastPage =
       liveLen % LIMIT > 0 ? liveLen / LIMIT + 1 : liveLen / LIMIT;
 
-    const liveAccounts = await LiveAccount.findAll({
-      offset: OFFSET,
-      limit: LIMIT,
-      include: {
-        model: User,
-      },
-      order: [["createdAt", "DESC"]],
-    });
-
-    const _liveAccounts = await liveAccounts.filter((data) => {
-      if (data.bankNo && data.bankNo.includes(_search)) {
-        return true;
-      } else if (
-        data.User &&
-        data.User.username &&
-        data.User.username.includes(_search)
-      ) {
-        return true;
-      } else if (
-        data.User &&
-        data.User.email &&
-        data.User.email.includes(_search)
-      ) {
-        return true;
-      } else {
-        return false;
-      }
-    });
-
     return res.status(200).json({
-      liveAccounts: _liveAccounts,
+      liveAccounts: _totalLive.slice(OFFSET, OFFSET + LIMIT),
       lastPage: parseInt(lastPage),
       liveLen,
     });

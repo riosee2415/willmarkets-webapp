@@ -97,7 +97,7 @@ const Pc = () => {
               radius={`10px`}
               onClick={() =>
                 window.open(
-                  `https://download.mql5.com/cdn/web/20135/mt4/willmarkets4setup.exe`
+                  `https://download.mql5.com/cdn/web/20648/mt4/willmarkets4setup.exe`
                 )
               }
             >
@@ -205,7 +205,7 @@ const Pc = () => {
               radius={`10px`}
               onClick={() =>
                 window.open(
-                  `https://apps.apple.com/us/app/metatrader-4/id496212596`
+                  `https://download.mql5.com/cdn/mobile/mt4/ios?server=Willmarkets-Demo,Willmarkets-Live`
                 )
               }
             >

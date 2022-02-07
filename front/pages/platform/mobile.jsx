@@ -204,7 +204,7 @@ const Mobile = () => {
               radius={`10px`}
               onClick={() =>
                 window.open(
-                  `https://apps.apple.com/us/app/metatrader-4/id496212596`
+                  `https://download.mql5.com/cdn/mobile/mt4/ios?server=Willmarkets-Demo,Willmarkets-Live`
                 )
               }
             >

@@ -70,7 +70,7 @@ const AppFooter = () => {
             color={`#fff`}
             margin={width < 900 ? `20px 0` : `0`}
           >
-            Copyright 2021. Willmarkets inc. all rights reserved.
+            The website is owned by Will Markets Ltd
           </Wrapper>
         </RsWrapper>
       </Wrapper>
@@ -88,7 +88,7 @@ const AppFooter = () => {
             fontSize={`inherit`}
             fontWeight={`700`}
           >
-            willmarkets
+            willmarkets Ltd
           </Wrapper>
 
           <Wrapper

@@ -55,5 +55,13 @@
    "54": "Remark",
    "55": "Proofs of the Remittance",
    "56": "My Wallet Address",
-   "57": "Hash Address After Deposit"
+   "57": "Hash Address After Deposit",
+   "58": "OTP code",
+   "59": "Authentication",
+   "60": "Reissue",
+   "61": "Enter the OTP code.",
+   "62": "The OTP code does not match.",
+   "63": "OTP verification is complete.",
+   "64": "Please complete OTP verification.",
+   "65": "E-mail verification is complete."
 }

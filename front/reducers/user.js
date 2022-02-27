@@ -7,6 +7,8 @@ export const initailState = {
   filePath: null,
   fileOriginName: null,
   secretCode: null,
+  otpData: null,
+  otpResult: false,
   currentAdminMenu: [],
   //
   st_userListLoading: false,
@@ -64,6 +66,18 @@ export const initailState = {
   st_userLogoutLoading: false,
   st_userLogoutDone: false,
   st_userLogoutError: null,
+  //
+  st_userGetOtpLoading: false,
+  st_userGetOtpDone: false,
+  st_userGetOtpError: null,
+  //
+  st_userUpdateOtpLoading: false,
+  st_userUpdateOtpDone: false,
+  st_userUpdateOtpError: null,
+  //
+  st_userVerifyOtpLoading: false,
+  st_userVerifyOtpDone: false,
+  st_userVerifyOtpError: null,
   //
   st_loadMyInfoLoading: false,
   st_loadMyInfoDone: false,
@@ -135,6 +149,18 @@ export const USER_LOGOUT_FAILURE = "USER_LOGOUT_FAILURE";
 export const LOAD_MY_INFO_REQUEST = "LOAD_MY_INFO_REQUEST";
 export const LOAD_MY_INFO_SUCCESS = "LOAD_MY_INFO_SUCCESS";
 export const LOAD_MY_INFO_FAILURE = "LOAD_MY_INFO_FAILURE";
+//
+export const USER_GET_OTP_REQUEST = "USER_GET_OTP_REQUEST";
+export const USER_GET_OTP_SUCCESS = "USER_GET_OTP_SUCCESS";
+export const USER_GET_OTP_FAILURE = "USER_GET_OTP_FAILURE";
+//
+export const USER_UPDATE_OTP_REQUEST = "USER_UPDATE_OTP_REQUEST";
+export const USER_UPDATE_OTP_SUCCESS = "USER_UPDATE_OTP_SUCCESS";
+export const USER_UPDATE_OTP_FAILURE = "USER_UPDATE_OTP_FAILURE";
+//
+export const USER_VERIFY_OTP_REQUEST = "USER_VERIFY_OTP_REQUEST";
+export const USER_VERIFY_OTP_SUCCESS = "USER_VERIFY_OTP_SUCCESS";
+export const USER_VERIFY_OTP_FAILURE = "USER_VERIFY_OTP_FAILURE";
 //
 export const INIT_STATE_REQUEST = "INIT_STATE_REQUEST";
 //
@@ -404,6 +430,54 @@ const reducer = (state = initailState, action) =>
         draft.st_loadMyInfoLoading = false;
         draft.st_loadMyInfoDone = false;
         draft.st_loadMyInfoError = action.error;
+        break;
+      //
+      case USER_GET_OTP_REQUEST:
+        draft.st_userGetOtpLoading = true;
+        draft.st_userGetOtpError = null;
+        draft.st_userGetOtpDone = false;
+        break;
+      case USER_GET_OTP_SUCCESS:
+        draft.st_userGetOtpLoading = false;
+        draft.st_userGetOtpDone = true;
+        draft.otpData = action.data.otpData;
+        break;
+      case USER_GET_OTP_FAILURE:
+        draft.st_userGetOtpLoading = false;
+        draft.st_userGetOtpDone = false;
+        draft.st_userGetOtpError = action.error;
+        break;
+      //
+      case USER_UPDATE_OTP_REQUEST:
+        draft.st_userUpdateOtpLoading = true;
+        draft.st_userUpdateOtpError = null;
+        draft.st_userUpdateOtpDone = false;
+        break;
+      case USER_UPDATE_OTP_SUCCESS:
+        draft.st_userUpdateOtpLoading = false;
+        draft.st_userUpdateOtpDone = true;
+        draft.otpData = action.data.otpData;
+        break;
+      case USER_UPDATE_OTP_FAILURE:
+        draft.st_userUpdateOtpLoading = false;
+        draft.st_userUpdateOtpDone = false;
+        draft.st_userUpdateOtpError = action.error;
+        break;
+      //
+      case USER_VERIFY_OTP_REQUEST:
+        draft.st_userVerifyOtpLoading = true;
+        draft.st_userVerifyOtpError = null;
+        draft.st_userVerifyOtpDone = false;
+        break;
+      case USER_VERIFY_OTP_SUCCESS:
+        draft.st_userVerifyOtpLoading = false;
+        draft.st_userVerifyOtpDone = true;
+        draft.otpResult = action.data.result;
+        break;
+      case USER_VERIFY_OTP_FAILURE:
+        draft.st_userVerifyOtpLoading = false;
+        draft.st_userVerifyOtpDone = false;
+        draft.st_userVerifyOtpError = action.error;
         break;
       //
       case INIT_STATE_REQUEST:

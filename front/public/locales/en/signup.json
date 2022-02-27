@@ -62,6 +62,12 @@
   "61": "Select an trading platform.",
   "62": "Select an account type.",
   "63": "Select an leverage.",
-  "64": "Select"
+  "64": "Select",
+  "65": "OTP code",
+  "66": "Authentication",
+  "67": "Enter the OTP code.",
+  "68": "The OTP code does not match.",
+  "69": "OTP verification is complete.",
+  "70": "Please complete OTP verification."
 }
 

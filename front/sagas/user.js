@@ -60,6 +60,18 @@ import {
   LOAD_MY_INFO_REQUEST,
   LOAD_MY_INFO_SUCCESS,
   LOAD_MY_INFO_FAILURE,
+  //
+  USER_GET_OTP_REQUEST,
+  USER_GET_OTP_SUCCESS,
+  USER_GET_OTP_FAILURE,
+  //
+  USER_UPDATE_OTP_REQUEST,
+  USER_UPDATE_OTP_SUCCESS,
+  USER_UPDATE_OTP_FAILURE,
+  //
+  USER_VERIFY_OTP_REQUEST,
+  USER_VERIFY_OTP_SUCCESS,
+  USER_VERIFY_OTP_FAILURE,
 } from "../reducers/user";
 
 // SAGA AREA ********************************************************************************************************
@@ -406,6 +418,71 @@ function* userLogout(action) {
 // ******************************************************************************************************************
 // ******************************************************************************************************************
 
+// SAGA AREA ********************************************************************************************************
+// ******************************************************************************************************************
+function userGetOtpAPI(data) {
+  return axios.post(`/api/user/getOtp`, data);
+}
+
+function* userGetOtp(action) {
+  try {
+    const result = yield call(userGetOtpAPI, action.data);
+    yield put({
+      type: USER_GET_OTP_SUCCESS,
+      data: result.data,
+    });
+  } catch (err) {
+    console.error(err);
+    yield put({
+      type: USER_GET_OTP_FAILURE,
+      error: err.response.data,
+    });
+  }
+}
+
+// SAGA AREA ********************************************************************************************************
+// ******************************************************************************************************************
+function userUpdateOtpAPI(data) {
+  return axios.patch(`/api/user/updateOtp`, data);
+}
+
+function* userUpdateOtp(action) {
+  try {
+    const result = yield call(userUpdateOtpAPI, action.data);
+    yield put({
+      type: USER_UPDATE_OTP_SUCCESS,
+      data: result.data,
+    });
+  } catch (err) {
+    console.error(err);
+    yield put({
+      type: USER_UPDATE_OTP_FAILURE,
+      error: err.response.data,
+    });
+  }
+}
+
+// SAGA AREA ********************************************************************************************************
+// ******************************************************************************************************************
+function userVerifyOtpAPI(data) {
+  return axios.post(`/api/user/verifyOtp`, data);
+}
+
+function* userVerifyOtp(action) {
+  try {
+    const result = yield call(userVerifyOtpAPI, action.data);
+    yield put({
+      type: USER_VERIFY_OTP_SUCCESS,
+      data: result.data,
+    });
+  } catch (err) {
+    console.error(err);
+    yield put({
+      type: USER_VERIFY_OTP_FAILURE,
+      error: err.response.data,
+    });
+  }
+}
 //////////////////////////////////////////////////////////////
 
 function* watchLoadMyInfo() {
@@ -468,6 +545,18 @@ function* watchUserLogout() {
   yield takeLatest(USER_LOGOUT_REQUEST, userLogout);
 }
 
+function* watchUserGetOtp() {
+  yield takeLatest(USER_GET_OTP_REQUEST, userGetOtp);
+}
+
+function* watchUserUpdateOtp() {
+  yield takeLatest(USER_UPDATE_OTP_REQUEST, userUpdateOtp);
+}
+
+function* watchUserVerifyOtp() {
+  yield takeLatest(USER_VERIFY_OTP_REQUEST, userVerifyOtp);
+}
+
 //////////////////////////////////////////////////////////////
 export default function* userSaga() {
   yield all([
@@ -486,5 +575,8 @@ export default function* userSaga() {
     fork(watchUserCheckEmail),
     fork(watchUserSecretEmail),
     fork(watchUserLogout),
+    fork(watchUserGetOtp),
+    fork(watchUserUpdateOtp),
+    fork(watchUserVerifyOtp),
   ]);
 }

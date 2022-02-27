@@ -13,6 +13,8 @@ import axios from "axios";
 import {
   LOAD_MY_INFO_REQUEST,
   USER_FIND_PASSWORD_REQUEST,
+  USER_UPDATE_OTP_REQUEST,
+  USER_VERIFY_OTP_REQUEST,
   INIT_STATE_REQUEST,
 } from "../../reducers/user";
 
@@ -27,6 +29,7 @@ import {
   ComboList,
   ComboListItem,
   CommonButton,
+  Image,
 } from "../../components/commonComponents";
 import UserLayout from "../../components/user/UserLayout";
 import Theme from "../../components/Theme";
@@ -105,10 +108,16 @@ const Withdraw = () => {
 
   const {
     me,
+    otpData,
+    otpResult,
     st_userFindPasswordDone,
     st_userFindPasswordError,
     st_userFindPasswordConfirmDone,
     st_userFindPasswordConfirmError,
+    st_userUpdateOtpDone,
+    st_userUpdateOtpError,
+    st_userVerifyOtpDone,
+    st_userVerifyOtpError,
     secretCode,
   } = useSelector((state) => state.user);
 
@@ -129,6 +138,10 @@ const Withdraw = () => {
   const [isSendEmail, setIsSendEmail] = useState(false);
   const [isConfirmEmail, setIsConfirmEmail] = useState(false);
 
+  const [isSendOtp, setIsSendOtp] = useState(false);
+  const [isReSendOtp, setIsReSendOtp] = useState(false);
+  const [isConfirmOtp, setIsConfirmOtp] = useState(false);
+
   const inputBankName = useInput("");
   const inputBankNo = useInput("");
   const inputSwiftCode = useInput("");
@@ -136,6 +149,7 @@ const Withdraw = () => {
   const inputSelectBank = useInput("");
   const inputPrice = useInput("");
   const inputSecret = useInput("");
+  const inputOtpSecret = useInput("");
 
   const inputPriceType = useInput("");
   const inputWalletAddress = useInput("");
@@ -237,6 +251,14 @@ const Withdraw = () => {
       return;
     }
 
+    if (isSendOtp && !isConfirmOtp) {
+      if (!emptyCheck(inputOtpSecret.value)) {
+        return message.error(t(`42`));
+      }
+
+      return message.error(t(`45`));
+    }
+
     dispatch({
       type: WITHDRAW_CREATE_REQUEST,
       data: {
@@ -260,10 +282,13 @@ const Withdraw = () => {
     inputSelectBank.value,
     inputPrice.value,
     inputSecret.value,
+    inputOtpSecret.value,
     inputPriceType.value,
     inputWalletAddress.value,
     isSendEmail,
     isConfirmEmail,
+    isSendOtp,
+    isConfirmOtp,
     t,
   ]);
 
@@ -276,9 +301,48 @@ const Withdraw = () => {
       return message.error(t(`8`));
     } else {
       setIsConfirmEmail(true);
+      setIsSendOtp(true);
+
       message.success(t(`9`));
+
+      if (!me.otpSecret) {
+        dispatch({
+          type: USER_UPDATE_OTP_REQUEST,
+          data: {
+            language: i18next.language,
+            id: me.id,
+          },
+        });
+      }
     }
-  }, [inputSecret.value, t, secretCode]);
+  }, [t, me, inputSecret.value, secretCode]);
+
+  const resendOtpHandler = useCallback(() => {
+    dispatch({
+      type: USER_UPDATE_OTP_REQUEST,
+      data: {
+        language: i18next.language,
+        id: me.id,
+      },
+    });
+  }, [me]);
+
+  const confirmOtpHandler = useCallback(() => {
+    if (!emptyCheck(inputOtpSecret.value)) {
+      return message.error(t(`42`));
+    }
+
+    setIsReSendOtp(false);
+
+    dispatch({
+      type: USER_VERIFY_OTP_REQUEST,
+      data: {
+        language: i18next.language,
+        otpSecret: me.otpSecret,
+        otpCode: inputOtpSecret.value,
+      },
+    });
+  }, [t, me, inputOtpSecret.value]);
 
   ////// USE EFFECT //////
   useEffect(() => {
@@ -324,6 +388,38 @@ const Withdraw = () => {
       message.error(st_userFindPasswordConfirmError);
     }
   }, [st_userFindPasswordConfirmError]);
+
+  useEffect(() => {
+    if (st_userUpdateOtpDone) {
+      setIsReSendOtp(true);
+    }
+  }, [st_userUpdateOtpDone]);
+
+  useEffect(() => {
+    if (st_userUpdateOtpError) {
+      setIsReSendOtp(false);
+      message.error(st_userUpdateOtpError);
+    }
+  }, [st_userUpdateOtpError]);
+
+  useEffect(() => {
+    if (st_userVerifyOtpDone) {
+      if (otpResult) {
+        setIsConfirmOtp(true);
+        message.success(t(`44`));
+      } else {
+        setIsConfirmOtp(false);
+        message.error(t(`43`));
+      }
+    }
+  }, [st_userVerifyOtpDone]);
+
+  useEffect(() => {
+    if (st_userVerifyOtpError) {
+      setIsConfirmOtp(false);
+      message.error(t(`43`));
+    }
+  }, [st_userVerifyOtpError]);
 
   useEffect(() => {
     if (st_withdrawCreateDone) {
@@ -579,7 +675,11 @@ const Withdraw = () => {
                       </CustomLabel>
 
                       <Wrapper dr={`row`} ju={`flex-start`}>
-                        <CustomInput id={`inp-secret`} {...inputSecret} />
+                        <CustomInput
+                          id={`inp-secret`}
+                          maxLength={`6`}
+                          {...inputSecret}
+                        />
 
                         <CommonButton
                           kindOf={`black`}
@@ -590,6 +690,52 @@ const Withdraw = () => {
                           {t(`23`)}
                         </CommonButton>
                       </Wrapper>
+                    </Wrapper>
+                  )}
+
+                  {isSendOtp && !isConfirmOtp && (
+                    <Wrapper al={`flex-start`}>
+                      <CustomLabel for={`inp-secret`} margin={`40px 0 15px`}>
+                        <Wrapper className={`required`}>*</Wrapper>
+                        {t(`39`)}
+                      </CustomLabel>
+
+                      <Wrapper dr={`row`} ju={`flex-start`}>
+                        <CustomInput
+                          id={`inp-secret`}
+                          maxLength={`6`}
+                          {...inputOtpSecret}
+                        />
+
+                        <CommonButton
+                          kindOf={`black`}
+                          height={`38px`}
+                          margin={`0 0 0 10px`}
+                          onClick={confirmOtpHandler}
+                        >
+                          {t(`40`)}
+                        </CommonButton>
+
+                        <CommonButton
+                          kindOf={`black`}
+                          height={`38px`}
+                          margin={`0 0 0 10px`}
+                          onClick={resendOtpHandler}
+                        >
+                          {t(`41`)}
+                        </CommonButton>
+                      </Wrapper>
+                    </Wrapper>
+                  )}
+
+                  {isReSendOtp && !isConfirmOtp && otpData && (
+                    <Wrapper
+                      al={`flex-start`}
+                      margin={`10px 0 0`}
+                      border={`1px solid #b6b6b6`}
+                      width={`auto`}
+                    >
+                      <Image src={otpData.imageData} width={`100px`} />
                     </Wrapper>
                   )}
                 </Wrapper>

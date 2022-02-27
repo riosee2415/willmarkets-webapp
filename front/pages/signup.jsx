@@ -15,6 +15,8 @@ import {
   USER_CHECK_EMAIL_REQUEST,
   USER_SECRET_EMAIL_REQUEST,
   USER_SIGNUP_REQUEST,
+  USER_GET_OTP_REQUEST,
+  USER_VERIFY_OTP_REQUEST,
   INIT_STATE_REQUEST,
 } from "../reducers/user";
 
@@ -220,6 +222,8 @@ const Signup = () => {
     filePath,
     fileOriginName,
     secretCode,
+    otpData,
+    otpResult,
     st_userIdImageFileLoading,
     st_userIdImageFileDone,
     st_userIdImageFileError,
@@ -229,6 +233,10 @@ const Signup = () => {
     st_userCheckEmailError,
     st_userSignupDone,
     st_userSignupError,
+    st_userGetOtpDone,
+    st_userGetOtpError,
+    st_userVerifyOtpDone,
+    st_userVerifyOtpError,
   } = useSelector((state) => state.user);
 
   const [currentTab, setCurrentTab] = useState(0);
@@ -245,6 +253,8 @@ const Signup = () => {
 
   const [isSendEmail, setIsSendEmail] = useState(true);
   const [isConfirmEmail, setIsConfirmEmail] = useState(true);
+
+  const [isConfirmOtp, setIsConfirmOtp] = useState(false);
 
   const [isModalVisible, setIsModalVisible] = useState(false);
 
@@ -266,6 +276,7 @@ const Signup = () => {
   const inputAddrFilePath = useInput("");
   const inputAddrFileOriginName = useInput("");
   const inputSecret = useInput("");
+  const inputOtpSecret = useInput("");
   const inputAgree = useInput(false);
 
   const inputPlatform = useInput("");
@@ -364,6 +375,21 @@ const Signup = () => {
     });
   }, []);
 
+  const confirmOtpSecretHandler = useCallback(() => {
+    if (!emptyCheck(inputOtpSecret.value)) {
+      return message.error(t(`67`));
+    }
+
+    dispatch({
+      type: USER_VERIFY_OTP_REQUEST,
+      data: {
+        language: i18next.language,
+        otpSecret: otpData.secret,
+        otpCode: inputOtpSecret.value,
+      },
+    });
+  }, [otpData, inputOtpSecret.value]);
+
   const signupUserHandler = useCallback(() => {
     if (currentStep === 0) {
       if (!emptyCheck(inputEmail.value)) {
@@ -414,10 +440,20 @@ const Signup = () => {
       if (currentTab === 0) {
         setCurrentStep(2);
         return;
+      } else {
+        dispatch({
+          type: USER_GET_OTP_REQUEST,
+          data: {
+            language: i18next.language,
+            username: inputUserName.value,
+            email: inputEmail.value,
+          },
+        });
+        return;
       }
     }
 
-    if (currentTab === 0) {
+    if (currentStep === 2) {
       if (!emptyCheck(inputIdType.value)) {
         return message.error(t(`10`));
       }
@@ -444,6 +480,26 @@ const Signup = () => {
 
       if (st_userIdImageFileLoading) {
         return message.error(t(`16`));
+      }
+
+      dispatch({
+        type: USER_GET_OTP_REQUEST,
+        data: {
+          language: i18next.language,
+          username: inputUserName.value,
+          email: inputEmail.value,
+        },
+      });
+      return;
+    }
+
+    if (currentStep === 3) {
+      if (!emptyCheck(inputOtpSecret.value)) {
+        return message.error(t(`67`));
+      }
+
+      if (!isConfirmOtp) {
+        return message.error(t(`70`));
       }
     }
 
@@ -481,6 +537,7 @@ const Signup = () => {
     currentStep,
     isSendEmail,
     isConfirmEmail,
+    isConfirmOtp,
     inputEmail.value,
     inputPassword.value,
     inputUserName.value,
@@ -501,6 +558,7 @@ const Signup = () => {
     inputPlatform.value,
     inputAccountType.value,
     inputLeverage.value,
+    inputOtpSecret.value,
   ]);
 
   ////// USEEFFECT //////
@@ -600,6 +658,36 @@ const Signup = () => {
       message.error(st_userSignupError);
     }
   }, [st_userSignupError]);
+
+  useEffect(() => {
+    if (st_userGetOtpDone) {
+      setCurrentStep(3);
+    }
+  }, [st_userGetOtpDone]);
+
+  useEffect(() => {
+    if (st_userGetOtpError) {
+      message.error(st_userGetOtpError);
+    }
+  }, [st_userGetOtpError]);
+
+  useEffect(() => {
+    if (st_userVerifyOtpDone) {
+      if (otpResult) {
+        setIsConfirmOtp(true);
+        message.success(t(`69`));
+      } else {
+        setIsConfirmOtp(false);
+        message.error(t(`68`));
+      }
+    }
+  }, [st_userVerifyOtpDone]);
+
+  useEffect(() => {
+    if (st_userVerifyOtpError) {
+      message.error(st_userVerifyOtpError);
+    }
+  }, [st_userVerifyOtpError]);
 
   return (
     <ClientLayout>
@@ -738,6 +826,7 @@ const Signup = () => {
                               }
                               {...inputSecret}
                               placeholder={t(`26`)}
+                              maxLength={`6`}
                             />
                             <CommonButton
                               width={
@@ -1523,6 +1612,75 @@ const Signup = () => {
                           />
                         </Wrapper>
                       )}
+                    </Wrapper>
+                  </Wrapper>
+                </Wrapper>
+              )}
+
+              {currentStep === 3 && (
+                <Wrapper>
+                  {otpData && (
+                    <Wrapper border={`1px solid #b6b6b6`} width={`auto`}>
+                      <Image src={otpData.imageData} width={`100px`} />
+                    </Wrapper>
+                  )}
+
+                  <Wrapper dr={`row`} al={`flex-start`}>
+                    <Wrapper
+                      dr={width < 600 ? `column` : `row`}
+                      margin={`10px 0 0`}
+                      al={`flex-start`}
+                    >
+                      <Wrapper al={`flex-start`} width={`100px`}>
+                        <CustomLabel for={`inp-otpSecret`}>
+                          {t(`65`)}
+                        </CustomLabel>
+                      </Wrapper>
+
+                      <Wrapper
+                        dr={`row`}
+                        width={width < 600 ? `100%` : `calc(100% - 100px)`}
+                      >
+                        <Wrapper
+                          dr={width < 600 ? `column` : `row`}
+                          ju={`flex-start`}
+                        >
+                          <CustomInput
+                            id={`inp-otpSecret`}
+                            width={
+                              width < 600
+                                ? `100%`
+                                : i18next.language === `en`
+                                ? `calc(100% - 130px)`
+                                : `calc(100% - 90px)`
+                            }
+                            {...inputOtpSecret}
+                            placeholder={t(`65`)}
+                            maxLength={`6`}
+                          />
+                          <CommonButton
+                            width={
+                              width < 600
+                                ? `100%`
+                                : i18next.language === `en`
+                                ? `120px`
+                                : `80px`
+                            }
+                            height={`38px`}
+                            lineHeight={
+                              i18next.language === `en` ? `1.2` : `34px`
+                            }
+                            margin={width < 600 ? `5px 0 0` : `0 0 0 10px`}
+                            bgColor={`#030303`}
+                            color={`#fff`}
+                            fontWeight={`500`}
+                            radius={`5px`}
+                            onClick={confirmOtpSecretHandler}
+                          >
+                            {t(`66`)}
+                          </CommonButton>
+                        </Wrapper>
+                      </Wrapper>
                     </Wrapper>
                   </Wrapper>
                 </Wrapper>

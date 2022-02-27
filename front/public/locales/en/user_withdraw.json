@@ -36,5 +36,12 @@
   "35": "Cryptocurrency selection",
   "36": "Withdrawable Amount",
   "37": "Commission",
-  "38": "Withdrawal amount is more than my wallet amount"
+  "38": "Withdrawal amount is more than my wallet amount",
+  "39": "OTP code",
+  "40": "Authentication",
+  "41": "Reissue",
+  "42": "Enter the OTP code.",
+  "43": "The OTP code does not match.",
+  "44": "OTP verification is complete.",
+  "45": "Please complete OTP verification."
 }

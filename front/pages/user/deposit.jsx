@@ -14,6 +14,8 @@ import {
   LOAD_MY_INFO_REQUEST,
   USER_FIND_PASSWORD_REQUEST,
   USER_FIND_PASSWORD_CONFIRM_REQUEST,
+  USER_UPDATE_OTP_REQUEST,
+  USER_VERIFY_OTP_REQUEST,
 } from "../../reducers/user";
 import wrapper from "../../store/configureStore";
 import {
@@ -115,10 +117,16 @@ const Deposit = () => {
 
   const {
     me,
+    otpData,
+    otpResult,
     st_userFindPasswordDone,
     st_userFindPasswordError,
     st_userFindPasswordConfirmDone,
     st_userFindPasswordConfirmError,
+    st_userUpdateOtpDone,
+    st_userUpdateOtpError,
+    st_userVerifyOtpDone,
+    st_userVerifyOtpError,
   } = useSelector((state) => state.user);
 
   const {
@@ -144,11 +152,16 @@ const Deposit = () => {
   const [isSendEmail, setIsSendEmail] = useState(false);
   const [isConfirmEmail, setIsConfirmEmail] = useState(false);
 
+  const [isSendOtp, setIsSendOtp] = useState(false);
+  const [isReSendOtp, setIsReSendOtp] = useState(false);
+  const [isConfirmOtp, setIsConfirmOtp] = useState(false);
+
   const inputSelectBank = useInput("");
   const inputPrice = useOnlyNumberInput("");
   const inputFilePath = useInput("");
   const inputFileOriginName = useInput("");
   const inputSecret = useInput("");
+  const inputOtpSecret = useInput("");
 
   const inputPriceType = useInput("");
   const inputWalletAddress = useInput("");
@@ -251,6 +264,31 @@ const Deposit = () => {
       return;
     }
 
+    if (!isSendOtp) {
+      setIsSendOtp(true);
+
+      message.success(t(`65`));
+
+      if (!me.otpSecret) {
+        dispatch({
+          type: USER_UPDATE_OTP_REQUEST,
+          data: {
+            language: i18next.language,
+            id: me.id,
+          },
+        });
+      }
+      return;
+    }
+
+    if (isSendOtp && !isConfirmOtp) {
+      if (!emptyCheck(inputOtpSecret.value)) {
+        return message.error(t(`61`));
+      }
+
+      return message.error(t(`64`));
+    }
+
     dispatch({
       type: DEPOSIT_CREATE_REQUEST,
       data: {
@@ -275,6 +313,7 @@ const Deposit = () => {
     inputPrice.value,
     inputSelectBank.value,
     inputSecret.value,
+    inputOtpSecret.value,
     inputPriceType.value,
     inputFilePath.value,
     inputFileOriginName.value,
@@ -282,7 +321,36 @@ const Deposit = () => {
     inputHashAddress.value,
     isSendEmail,
     isConfirmEmail,
+    isSendOtp,
+    isConfirmOtp,
   ]);
+
+  const resendOtpHandler = useCallback(() => {
+    dispatch({
+      type: USER_UPDATE_OTP_REQUEST,
+      data: {
+        language: i18next.language,
+        id: me.id,
+      },
+    });
+  }, [me]);
+
+  const confirmOtpHandler = useCallback(() => {
+    if (!emptyCheck(inputOtpSecret.value)) {
+      return message.error(t(`61`));
+    }
+
+    setIsReSendOtp(false);
+
+    dispatch({
+      type: USER_VERIFY_OTP_REQUEST,
+      data: {
+        language: i18next.language,
+        otpSecret: me.otpSecret,
+        otpCode: inputOtpSecret.value,
+      },
+    });
+  }, [t, me, inputOtpSecret.value]);
 
   const fileChangeHandler = useCallback((e) => {
     const file = e.target.files[0];
@@ -394,6 +462,38 @@ const Deposit = () => {
       message.error(st_depositCreateError);
     }
   }, [st_depositCreateError]);
+
+  useEffect(() => {
+    if (st_userUpdateOtpDone) {
+      setIsReSendOtp(true);
+    }
+  }, [st_userUpdateOtpDone]);
+
+  useEffect(() => {
+    if (st_userUpdateOtpError) {
+      setIsReSendOtp(false);
+      message.error(st_userUpdateOtpError);
+    }
+  }, [st_userUpdateOtpError]);
+
+  useEffect(() => {
+    if (st_userVerifyOtpDone) {
+      if (otpResult) {
+        setIsConfirmOtp(true);
+        message.success(t(`63`));
+      } else {
+        setIsConfirmOtp(false);
+        message.error(t(`62`));
+      }
+    }
+  }, [st_userVerifyOtpDone]);
+
+  useEffect(() => {
+    if (st_userVerifyOtpError) {
+      setIsConfirmOtp(false);
+      message.error(t(`62`));
+    }
+  }, [st_userVerifyOtpError]);
 
   useEffect(() => {
     if (st_depositImageFileDone) {
@@ -1071,7 +1171,7 @@ const Deposit = () => {
                     />
                   </Wrapper>
 
-                  {isSendEmail && (
+                  {isSendEmail && !isConfirmEmail && (
                     <Wrapper al={`flex-start`}>
                       <CustomLabel for={`inp-secret`} margin={`40px 0 15px`}>
                         <Wrapper className={`required`}>*</Wrapper>
@@ -1082,9 +1182,56 @@ const Deposit = () => {
                         <CustomInput
                           id={`inp-secret`}
                           width={width < 900 ? `170px` : `250px`}
+                          maxLength={`6`}
                           {...inputSecret}
                         />
                       </Wrapper>
+                    </Wrapper>
+                  )}
+
+                  {isSendOtp && !isConfirmOtp && (
+                    <Wrapper al={`flex-start`}>
+                      <CustomLabel for={`inp-secret`} margin={`40px 0 15px`}>
+                        <Wrapper className={`required`}>*</Wrapper>
+                        {t(`58`)}
+                      </CustomLabel>
+
+                      <Wrapper dr={`row`} ju={`flex-start`}>
+                        <CustomInput
+                          id={`inp-secret`}
+                          maxLength={`6`}
+                          {...inputOtpSecret}
+                        />
+
+                        <CommonButton
+                          kindOf={`black`}
+                          height={`38px`}
+                          margin={`0 0 0 10px`}
+                          onClick={confirmOtpHandler}
+                        >
+                          {t(`59`)}
+                        </CommonButton>
+
+                        <CommonButton
+                          kindOf={`black`}
+                          height={`38px`}
+                          margin={`0 0 0 10px`}
+                          onClick={resendOtpHandler}
+                        >
+                          {t(`60`)}
+                        </CommonButton>
+                      </Wrapper>
+                    </Wrapper>
+                  )}
+
+                  {isReSendOtp && !isConfirmOtp && otpData && (
+                    <Wrapper
+                      al={`flex-start`}
+                      margin={`10px 0 0`}
+                      border={`1px solid #b6b6b6`}
+                      width={`auto`}
+                    >
+                      <Image src={otpData.imageData} width={`100px`} />
                     </Wrapper>
                   )}
                 </Wrapper>

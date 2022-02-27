@@ -19,6 +19,8 @@ const AWS = require("aws-sdk");
 const multerS3 = require("multer-s3");
 const multer = require("multer");
 const path = require("path");
+const speakeasy = require("speakeasy");
+const QRCode = require("qrcode");
 
 AWS.config.update({
   accessKeyId: process.env.S3_ACCESS_KEY_Id,
@@ -43,6 +45,38 @@ const upload = multer({
 });
 
 const router = express.Router();
+
+const getQRCodeData = async (user) => {
+  return new Promise((resolve, reject) => {
+    const secret = speakeasy.generateSecret({
+      length: 20,
+      name: user.username,
+      issuer: user.email,
+    });
+
+    const url = speakeasy.otpauthURL({
+      secret: secret.ascii,
+      issuer: user.username,
+      label: user.email,
+      algorithm: "sha512",
+      period: 300,
+    });
+
+    QRCode.toDataURL(url, async (err, imageData) => {
+      console.log({
+        imageData,
+        url,
+        secret: secret.base32,
+      });
+
+      resolve({
+        imageData,
+        url,
+        secret: secret.base32,
+      });
+    });
+  });
+};
 
 router.get("/list", isAdminCheck, async (req, res, next) => {
   const { page, search, searchType, searchComplete } = req.query;
@@ -851,7 +885,7 @@ router.post("/findPass", async (req, res, next) => {
         );
     }
   } catch (error) {
-    console.errofindPassr(error);
+    console.error(error);
     return res
       .status(401)
       .send(
@@ -1183,6 +1217,77 @@ router.get("/logout", function (req, res) {
     res.clearCookie("connect.sid");
     res.redirect("/");
   });
+});
+
+router.post("/getOtp", async (req, res, next) => {
+  const { language, username, email } = req.body;
+
+  try {
+    const QRCodeData = await getQRCodeData({
+      username,
+      email,
+    });
+
+    return res.status(200).json({ result: true, otpData: QRCodeData });
+  } catch (error) {
+    console.error(error);
+    return res
+      .status(401)
+      .send(language === `ko` ? "잘못된 요청 입니다." : "Invalid request.");
+  }
+});
+
+router.patch("/updateOtp", async (req, res, next) => {
+  const { language, id } = req.body;
+
+  try {
+    const exUser = await User.findOne({
+      where: {
+        id: parseInt(id),
+      },
+    });
+
+    const QRCodeData = await getQRCodeData(exUser);
+
+    const updateResult = await User.update(
+      { otpSecret: QRCodeData.secret },
+      {
+        where: { id: parseInt(id) },
+      }
+    );
+
+    if (updateResult[0] > 0) {
+      return res.status(200).json({ result: true, otpData: QRCodeData });
+    } else {
+      return res
+        .status(401)
+        .send(language === `ko` ? "잘못된 요청 입니다." : "Invalid request.");
+    }
+  } catch (error) {
+    console.error(error);
+    return res
+      .status(401)
+      .send(language === `ko` ? "잘못된 요청 입니다." : "Invalid request.");
+  }
+});
+
+router.post("/verifyOtp", async (req, res, next) => {
+  const { language, otpSecret, otpCode } = req.body;
+
+  try {
+    const result = speakeasy.totp.verify({
+      secret: otpSecret,
+      encoding: "base32",
+      token: otpCode,
+    });
+
+    return res.status(200).json({ result });
+  } catch (error) {
+    console.error(error);
+    return res
+      .status(401)
+      .send(language === `ko` ? "잘못된 요청 입니다." : "Invalid request.");
+  }
 });
 
 module.exports = router;

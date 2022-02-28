@@ -135,7 +135,7 @@ router.post("/create", async (req, res, next) => {
       "support@will-markets.com",
       "출금 요청이 접수되었습니다.",
       `
-      <div style="width: 50%; padding: 30px; border: 1px solid #eeeeee">
+      <div style="width: 100%; padding: 30px; border: 1px solid #eeeeee">
             <img src="https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/willmarkets/assets/images/logo/logo_hover.png"
             style="width: auto; height: auto; background-size: cover; padding-bottom: 30px;"
             />
@@ -144,7 +144,7 @@ router.post("/create", async (req, res, next) => {
             height: 45px;
             display: flex;
             background: #3792eb;
-            font-size: 22px;
+            font-size: 20px;
             color: #fff;
             padding: 0 20px;
             line-height: 45px;
@@ -182,7 +182,7 @@ router.post("/create", async (req, res, next) => {
       exUser.email,
       "출금 요청이 접수되었습니다.",
       `
-      <div style="width: 50%; padding: 30px; border: 1px solid #eeeeee">
+      <div style="width: 100%; padding: 30px; border: 1px solid #eeeeee">
             <img src="https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/willmarkets/assets/images/logo/logo_hover.png"
             style="width: auto; height: auto; background-size: cover; padding-bottom: 30px;"
             />
@@ -191,7 +191,7 @@ router.post("/create", async (req, res, next) => {
             height: 45px;
             display: flex;
             background: #3792eb;
-            font-size: 22px;
+            font-size: 20px;
             color: #fff;
             padding: 0 20px;
             line-height: 45px;
@@ -295,7 +295,7 @@ router.patch("/updatePermit", isAdminCheck, async (req, res, next) => {
         exUser.email,
         "출금 신청이 성공적으로 승인되었습니다.",
         `
-      <div style="width: 50%; padding: 30px; border: 1px solid #eeeeee">
+      <div style="width: 100%; padding: 30px; border: 1px solid #eeeeee">
           <img src="https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/willmarkets/assets/images/logo/logo_hover.png"
           style="width: auto; height: auto; background-size: cover; padding-bottom: 30px;"
           />
@@ -304,7 +304,7 @@ router.patch("/updatePermit", isAdminCheck, async (req, res, next) => {
             height: 45px;
             display: flex;
             background: #3792eb;
-            font-size: 22px;
+            font-size: 20px;
             color: #fff;
             padding: 0 20px;
             line-height: 45px;

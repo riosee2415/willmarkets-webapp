@@ -56,7 +56,7 @@ const getQRCodeData = async (user) => {
 
     const url = speakeasy.otpauthURL({
       secret: secret.ascii,
-      issuer: user.username,
+      issuer: "will-markets.com",
       label: user.email,
       algorithm: "sha512",
       period: 300,
@@ -380,7 +380,7 @@ router.post("/signup", async (req, res, next) => {
         "support@will-markets.com",
         "신규 라이브 계정 요청이 접수되었습니다.",
         `
-      <div style="width: 50%; padding: 30px; border: 1px solid #eeeeee">
+      <div style="width: 100%; padding: 30px; border: 1px solid #eeeeee">
             <img src="https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/willmarkets/assets/images/logo/logo_hover.png"
             style="width: auto; height: auto; background-size: cover; padding-bottom: 30px;"
             />
@@ -389,7 +389,7 @@ router.post("/signup", async (req, res, next) => {
             height: 45px;
             display: flex;
             background: #3792eb;
-            font-size: 22px;
+            font-size: 20px;
             color: #fff;
             padding: 0 20px;
             line-height: 45px;
@@ -427,7 +427,7 @@ router.post("/signup", async (req, res, next) => {
         email,
         "신규 라이브 계정 요청이 접수되었습니다.",
         `
-      <div style="width: 50%; padding: 30px; border: 1px solid #eeeeee">
+      <div style="width: 100%; padding: 30px; border: 1px solid #eeeeee">
             <img src="https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/willmarkets/assets/images/logo/logo_hover.png"
             style="width: auto; height: auto; background-size: cover; padding-bottom: 30px;"
             />
@@ -436,7 +436,7 @@ router.post("/signup", async (req, res, next) => {
             height: 45px;
             display: flex;
             background: #3792eb;
-            font-size: 22px;
+            font-size: 20px;
             color: #fff;
             padding: 0 20px;
             line-height: 45px;
@@ -475,7 +475,7 @@ router.post("/signup", async (req, res, next) => {
         "support@will-markets.com",
         "신규 데모 계정 요청이 접수되었습니다.",
         `
-      <div style="width: 50%; padding: 30px; border: 1px solid #eeeeee">
+      <div style="width: 100%; padding: 30px; border: 1px solid #eeeeee">
             <img src="https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/willmarkets/assets/images/logo/logo_hover.png"
             style="width: auto; height: auto; background-size: cover; padding-bottom: 30px;"
             />
@@ -484,7 +484,7 @@ router.post("/signup", async (req, res, next) => {
             height: 45px;
             display: flex;
             background: #3792eb;
-            font-size: 22px;
+            font-size: 20px;
             color: #fff;
             padding: 0 20px;
             line-height: 45px;
@@ -522,7 +522,7 @@ router.post("/signup", async (req, res, next) => {
         email,
         "신규 데모 계정 요청이 접수되었습니다.",
         `
-      <div style="width: 50%; padding: 30px; border: 1px solid #eeeeee">
+      <div style="width: 100%; padding: 30px; border: 1px solid #eeeeee">
             <img src="https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/willmarkets/assets/images/logo/logo_hover.png"
             style="width: auto; height: auto; background-size: cover; padding-bottom: 30px;"
             />
@@ -531,7 +531,7 @@ router.post("/signup", async (req, res, next) => {
             height: 45px;
             display: flex;
             background: #3792eb;
-            font-size: 22px;
+            font-size: 20px;
             color: #fff;
             padding: 0 20px;
             line-height: 45px;
@@ -754,7 +754,7 @@ router.post("/secretEmail", async (req, res, next) => {
       email,
       `🔐 [보안 인증코드 입니다.] WILLMARKETS 에서 보안인증 코드를 발송했습니다.`,
       `
-    <div style="width: 50%; padding: 30px; border: 1px solid #eeeeee">
+    <div style="width: 100%; padding: 30px; border: 1px solid #eeeeee">
         <img src="https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/willmarkets/assets/images/logo/logo_hover.png"
         style="width: auto; height: auto; background-size: cover; padding-bottom: 30px;"
         />
@@ -763,7 +763,7 @@ router.post("/secretEmail", async (req, res, next) => {
           height: 45px;
           display: flex;
           background: #3792eb;
-          font-size: 22px;
+          font-size: 20px;
           color: #fff;
           padding: 0 20px;
           line-height: 45px;
@@ -830,7 +830,7 @@ router.post("/findPass", async (req, res, next) => {
         email,
         `🔐 [보안 인증코드 입니다.] WILLMARKETS 에서 보안인증 코드를 발송했습니다.`,
         `
-      <div style="width: 50%; padding: 30px; border: 1px solid #eeeeee">
+      <div style="width: 100%; padding: 30px; border: 1px solid #eeeeee">
         <img src="https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/willmarkets/assets/images/logo/logo_hover.png"
         style="width: auto; height: auto; background-size: cover; padding-bottom: 30px;"
         />
@@ -839,7 +839,7 @@ router.post("/findPass", async (req, res, next) => {
         height: 45px;
         display: flex;
         background: #3792eb;
-        font-size: 22px;
+        font-size: 20px;
         color: #fff;
         padding: 0 20px;
         line-height: 45px;
@@ -1020,7 +1020,7 @@ router.patch("/updatePermit", isAdminCheck, async (req, res, next) => {
           exUpdatePermit.email,
           "데모 계정이 성공적으로 열렸습니다.",
           `
-        <div style="width: 50%; padding: 30px; border: 1px solid #eeeeee">
+        <div style="width: 100%; padding: 30px; border: 1px solid #eeeeee">
           <img src="https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/willmarkets/assets/images/logo/logo_hover.png"
           style="width: auto; height: auto; background-size: cover; padding-bottom: 30px;"
           />
@@ -1029,7 +1029,7 @@ router.patch("/updatePermit", isAdminCheck, async (req, res, next) => {
           height: 45px;
           display: flex;
           background: #3792eb;
-          font-size: 22px;
+          font-size: 20px;
           color: #fff;
           padding: 0 20px;
           line-height: 45px;
@@ -1092,7 +1092,7 @@ router.patch("/updatePermit", isAdminCheck, async (req, res, next) => {
           exUpdatePermit.email,
           "라이브 계정이 성공적으로 열렸습니다.",
           `
-      <div style="width: 50%; padding: 30px; border: 1px solid #eeeeee">
+      <div style="width: 100%; padding: 30px; border: 1px solid #eeeeee">
             <img src="https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/willmarkets/assets/images/logo/logo_hover.png"
             style="width: auto; height: auto; background-size: cover; padding-bottom: 30px;"
             />
@@ -1101,7 +1101,7 @@ router.patch("/updatePermit", isAdminCheck, async (req, res, next) => {
             height: 45px;
             display: flex;
             background: #3792eb;
-            font-size: 22px;
+            font-size: 20px;
             color: #fff;
             padding: 0 20px;
             line-height: 45px;

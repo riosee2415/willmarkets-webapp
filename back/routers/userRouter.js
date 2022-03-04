@@ -63,12 +63,6 @@ const getQRCodeData = async (user) => {
     });
 
     QRCode.toDataURL(url, async (err, imageData) => {
-      console.log({
-        imageData,
-        url,
-        secret: secret.base32,
-      });
-
       resolve({
         imageData,
         url,

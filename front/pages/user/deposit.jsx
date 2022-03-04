@@ -454,6 +454,9 @@ const Deposit = () => {
       dispatch({
         type: INIT_STATE_REQUEST,
       });
+      dispatch({
+        type: LOAD_MY_INFO_REQUEST,
+      });
     }
   }, [st_depositCreateDone]);
 
@@ -465,6 +468,10 @@ const Deposit = () => {
 
   useEffect(() => {
     if (st_userUpdateOtpDone) {
+      dispatch({
+        type: LOAD_MY_INFO_REQUEST,
+      });
+
       setIsReSendOtp(true);
     }
   }, [st_userUpdateOtpDone]);

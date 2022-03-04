@@ -391,6 +391,10 @@ const Withdraw = () => {
 
   useEffect(() => {
     if (st_userUpdateOtpDone) {
+      dispatch({
+        type: LOAD_MY_INFO_REQUEST,
+      });
+
       setIsReSendOtp(true);
     }
   }, [st_userUpdateOtpDone]);
@@ -426,6 +430,9 @@ const Withdraw = () => {
       setCurrentStep(1);
       dispatch({
         type: INIT_STATE_REQUEST,
+      });
+      dispatch({
+        type: LOAD_MY_INFO_REQUEST,
       });
     }
   }, [st_withdrawCreateDone]);

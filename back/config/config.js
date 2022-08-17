@@ -3,11 +3,12 @@ dotenv.config();
 
 module.exports = {
   development: {
-    username: "root",
+    username: "dev",
     password: process.env.DB_PASSWORD,
     database: "willmarkets",
     host: "3.37.194.65",
     dialect: "mysql",
+    timezone: "Asia/Seoul",
   },
   test: {
     username: "root",
@@ -15,6 +16,7 @@ module.exports = {
     database: "willmarkets",
     host: "127.0.0.1",
     dialect: "mysql",
+    timezone: "Asia/Seoul",
   },
   production: {
     username: "root",
@@ -22,5 +24,6 @@ module.exports = {
     database: "willmarkets",
     host: "127.0.0.1",
     dialect: "mysql",
+    timezone: "Asia/Seoul",
   },
 };

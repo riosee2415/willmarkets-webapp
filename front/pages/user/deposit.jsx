@@ -73,18 +73,10 @@ const Deposit = () => {
   ////// VARIABLES //////
   const bankList = [
     {
-      bankName: "은행명",
-      bankNo: "계좌번호",
-      swiftCode: "Swift Code",
-      willAddress: "윌마켓 주소",
-      bankAddress: "은행 주소",
-    },
-    {
-      bankName: "은행명2",
-      bankNo: "계좌번호2",
-      swiftCode: "Swift Code2",
-      willAddress: "윌마켓 주소2",
-      bankAddress: "은행 주소2",
+      bankName: "Quaint Oak Bank",
+      bankNo: "9867238934",
+      bankAddress: "501 knowles Ave Southampton, PA18966",
+      swiftCode: "FFC 20220216002761/WILL MARKETS LTD",
     },
   ];
 
@@ -356,9 +348,7 @@ const Deposit = () => {
     const file = e.target.files[0];
 
     if (!file) return;
-
     const ext = file.name.slice(file.name.lastIndexOf(".") + 1).toLowerCase();
-
     if (
       !(
         ext === "jpg" ||
@@ -373,8 +363,8 @@ const Deposit = () => {
     }
 
     const formData = new FormData();
-
     formData.append("image", file);
+
     formData.append("language", i18next.language);
 
     dispatch({
@@ -392,7 +382,6 @@ const Deposit = () => {
     if (st_depositImageFileLoading) {
       return message.error(t(`7`));
     }
-
     dispatch({
       type: DEPOSIT_IMAGE_FILE_CREATE_REQUEST,
       data: {
@@ -678,31 +667,6 @@ const Deposit = () => {
                             </Wrapper>
                           </Wrapper>
 
-                          <Wrapper
-                            dr={`row`}
-                            al={`normal`}
-                            ju={`flex-start`}
-                            padding={`0 0 5px`}
-                            margin={`0 0 10px`}
-                            borderBottom={`1px solid #f3f3f3`}
-                          >
-                            <Wrapper
-                              al={`flex-start`}
-                              ju={`flex-start`}
-                              fontSize={`15px`}
-                              fontWeight={`700`}
-                              color={`#a8559e`}
-                            >
-                              {t(`16`)}
-                            </Wrapper>
-
-                            <Wrapper al={`flex-start`} fontSize={`14px`}>
-                              <Text isEllipsis={true} width={`100%`}>
-                                {data.willAddress}
-                              </Text>
-                            </Wrapper>
-                          </Wrapper>
-
                           <Wrapper dr={`row`} al={`normal`} ju={`flex-start`}>
                             <Wrapper
                               al={`flex-start`}
@@ -861,10 +825,10 @@ const Deposit = () => {
                     </Combo>
                   </Wrapper>
 
-                  <CustomLabel for={`inp-price`} margin={`20px 0 15px`}>
+                  {/* <CustomLabel for={`inp-price`} margin={`20px 0 15px`}>
                     <Wrapper className={`required`}>*</Wrapper>
                     {t(`19`)}
-                  </CustomLabel>
+                  </CustomLabel> */}
                   <Wrapper dr={`row`} ju={`flex-start`}>
                     {currentBank && (
                       <SelectBox
@@ -1125,7 +1089,7 @@ const Deposit = () => {
                     </Wrapper>
                   )}
 
-                  <CustomLabel for={`inp-price`} margin={`40px 0 15px`}>
+                  {/* <CustomLabel for={`inp-price`} margin={`40px 0 15px`}>
                     <Wrapper className={`required`}>*</Wrapper>
                     {t(`23`)}
                   </CustomLabel>
@@ -1136,7 +1100,7 @@ const Deposit = () => {
                   <CustomLabel for={`inp-file`} margin={`40px 0 15px`}>
                     <Wrapper className={`required`}>*</Wrapper>
                     {t(`55`)}
-                  </CustomLabel>
+                  </CustomLabel> */}
 
                   <Wrapper dr={`row`} ju={`flex-start`}>
                     <FileInput

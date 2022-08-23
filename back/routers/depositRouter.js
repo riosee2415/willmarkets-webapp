@@ -181,6 +181,7 @@ router.post("/image", async (req, res, next) => {
             ? "첨부 가능한 용량을 초과했습니다."
             : "The attachable capacity has been exceeded"
         );
+      console.log(err);
     } else if (err) {
       return res
         .status(401)

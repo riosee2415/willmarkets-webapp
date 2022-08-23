@@ -6,7 +6,7 @@ module.exports = {
     username: "dev",
     password: process.env.DB_PASSWORD,
     database: "willmarkets",
-    host: "3.37.194.65",
+    host: "18.170.18.180",
     dialect: "mysql",
     timezone: "Asia/Seoul",
   },

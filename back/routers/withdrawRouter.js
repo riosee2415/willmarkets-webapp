@@ -84,12 +84,12 @@ router.post("/create", async (req, res, next) => {
   const {
     language,
     userId,
-    // bankName,
+    bankName,
     price,
-    // swiftCode,
-    // bankAddress,
+    swiftCode,
+    bankAddress,
     selectBank,
-    // bankNo,
+    bankNo,
     priceType,
     walletAddress,
   } = req.body;
@@ -110,12 +110,12 @@ router.post("/create", async (req, res, next) => {
 
     const createResult = await Withdraw.create({
       UserId: parseInt(userId),
-      // bankName,
+      bankName,
       price,
-      // swiftCode,
-      // bankAddress,
+      swiftCode,
+      bankAddress,
       selectBank,
-      // bankNo,
+      bankNo,
       priceType,
       walletAddress,
       isComplete: false,

@@ -208,18 +208,18 @@ const Deposit = () => {
   }, []);
 
   const createDepositHanlder = useCallback(() => {
-    // if (!currentBank) {
-    //   setCurrentStep(0);
-    //   return message.error(t(`1`));
-    // }
+    if (!currentBank) {
+      setCurrentStep(0);
+      return message.error(t(`1`));
+    }
 
     if (!emptyCheck(inputSelectBank.value)) {
       return message.error(t(`2`));
     }
 
-    // if (!emptyCheck(inputPrice.value)) {
-    //   return message.error(t(`3`));
-    // }
+    if (!emptyCheck(inputPrice.value)) {
+      return message.error(t(`3`));
+    }
 
     if (!emptyCheck(inputPriceType.value)) {
       return message.error(t(`44`));
@@ -294,13 +294,13 @@ const Deposit = () => {
       data: {
         language: i18next.language,
         userId: me.id,
-        // bankName: currentBank.bankName,
-        // bankNo: currentBank.bankNo,
-        // swiftCode: currentBank.swiftCode,
-        // willAddress: currentBank.willAddress,
-        // bankAddress: currentBank.bankAddress,
+        bankName: currentBank.bankName,
+        bankNo: currentBank.bankNo,
+        swiftCode: currentBank.swiftCode,
+        willAddress: currentBank.willAddress,
+        bankAddress: currentBank.bankAddress,
         selectBank: inputSelectBank.value,
-        // price: inputPrice.value,
+        price: inputPrice.value,
         priceType: inputPriceType.value,
         filePath: inputFilePath.value,
         fileOriginName: inputFileOriginName.value,
@@ -566,7 +566,7 @@ const Deposit = () => {
 
           {currentTab === 0 && (
             <Wrapper al={`flex-start`}>
-              {/* {currentStep === 0 && (
+              {currentStep === 0 && (
                 <Wrapper al={`flex-start`}>
                   <Wrapper
                     dr={`row`}
@@ -729,7 +729,7 @@ const Deposit = () => {
                     })}
                   </Wrapper>
                 </Wrapper>
-              )} */}
+              )}
 
               {currentStep === 0 && (
                 <Wrapper al={`flex-start`}>
@@ -861,7 +861,7 @@ const Deposit = () => {
                     </Combo>
                   </Wrapper>
 
-                  {/* <CustomLabel for={`inp-price`} margin={`20px 0 15px`}>
+                  <CustomLabel for={`inp-price`} margin={`20px 0 15px`}>
                     <Wrapper className={`required`}>*</Wrapper>
                     {t(`19`)}
                   </CustomLabel>
@@ -873,20 +873,23 @@ const Deposit = () => {
                         padding={`20px`}
                         width={`300px`}
                         height={`335px`}
-                        radius={`8px`}>
+                        radius={`8px`}
+                      >
                         <Wrapper
                           dr={`row`}
                           al={`normal`}
                           ju={`flex-start`}
                           padding={`0 0 5px`}
                           margin={`0 0 10px`}
-                          borderBottom={`1px solid #f3f3f3`}>
+                          borderBottom={`1px solid #f3f3f3`}
+                        >
                           <Wrapper
                             al={`flex-start`}
                             ju={`flex-start`}
                             fontSize={`15px`}
                             fontWeight={`700`}
-                            color={`#a8559e`}>
+                            color={`#a8559e`}
+                          >
                             {t(`14`)}
                           </Wrapper>
 
@@ -903,13 +906,15 @@ const Deposit = () => {
                           ju={`flex-start`}
                           padding={`0 0 5px`}
                           margin={`0 0 10px`}
-                          borderBottom={`1px solid #f3f3f3`}>
+                          borderBottom={`1px solid #f3f3f3`}
+                        >
                           <Wrapper
                             al={`flex-start`}
                             ju={`flex-start`}
                             fontSize={`15px`}
                             fontWeight={`700`}
-                            color={`#a8559e`}>
+                            color={`#a8559e`}
+                          >
                             {t(`15`)}
                           </Wrapper>
 
@@ -926,13 +931,15 @@ const Deposit = () => {
                           ju={`flex-start`}
                           padding={`0 0 5px`}
                           margin={`0 0 10px`}
-                          borderBottom={`1px solid #f3f3f3`}>
+                          borderBottom={`1px solid #f3f3f3`}
+                        >
                           <Wrapper
                             al={`flex-start`}
                             ju={`flex-start`}
                             fontSize={`15px`}
                             fontWeight={`700`}
-                            color={`#a8559e`}>
+                            color={`#a8559e`}
+                          >
                             Swift Code
                           </Wrapper>
 
@@ -949,13 +956,15 @@ const Deposit = () => {
                           ju={`flex-start`}
                           padding={`0 0 5px`}
                           margin={`0 0 10px`}
-                          borderBottom={`1px solid #f3f3f3`}>
+                          borderBottom={`1px solid #f3f3f3`}
+                        >
                           <Wrapper
                             al={`flex-start`}
                             ju={`flex-start`}
                             fontSize={`15px`}
                             fontWeight={`700`}
-                            color={`#a8559e`}>
+                            color={`#a8559e`}
+                          >
                             {t(`16`)}
                           </Wrapper>
 
@@ -972,7 +981,8 @@ const Deposit = () => {
                             ju={`flex-start`}
                             fontSize={`15px`}
                             fontWeight={`700`}
-                            color={`#a8559e`}>
+                            color={`#a8559e`}
+                          >
                             {t(`17`)}
                           </Wrapper>
 
@@ -989,8 +999,6 @@ const Deposit = () => {
                     <Wrapper className={`required`}>*</Wrapper>
                     {t(`20`)}
                   </CustomLabel>
-
-                   */}
 
                   {inputPriceType.value && (
                     <Wrapper al={`flex-start`} width={`auto`}>
@@ -1117,13 +1125,13 @@ const Deposit = () => {
                     </Wrapper>
                   )}
 
-                  {/* <CustomLabel for={`inp-price`} margin={`40px 0 15px`}>
+                  <CustomLabel for={`inp-price`} margin={`40px 0 15px`}>
                     <Wrapper className={`required`}>*</Wrapper>
                     {t(`23`)}
                   </CustomLabel>
                   <Wrapper dr={`row`} ju={`flex-start`}>
                     <CustomInput id={`inp-price`} {...inputPrice} />
-                  </Wrapper> */}
+                  </Wrapper>
 
                   <CustomLabel for={`inp-file`} margin={`40px 0 15px`}>
                     <Wrapper className={`required`}>*</Wrapper>
@@ -1316,7 +1324,7 @@ const Deposit = () => {
                             {t(`40`)}
                           </CommonButton>
 
-                          {/* <CommonButton
+                          <CommonButton
                             key="1"
                             kindOf={`blue`}
                             width={`180px`}
@@ -1326,7 +1334,7 @@ const Deposit = () => {
                             onClick={() => setCurrentTab(1)}
                           >
                             {t(`30`)}
-                          </CommonButton> */}
+                          </CommonButton>
                         </Wrapper>,
                       ]}
                     />

@@ -140,90 +140,90 @@ const Record = () => {
                         >
                           {data.type === t(`10`) && (
                             <Wrapper al={`flex-start`} fontSize={`12px`}>
-                              {/* <Wrapper
-                              dr={`row`}
-                              margin={`2px 0`}
-                              width={`auto`}
-                              fontSize={`inherit`}
-                            >
                               <Wrapper
-                                margin={`0 5px 0 0`}
+                                dr={`row`}
+                                margin={`2px 0`}
                                 width={`auto`}
-                                color={`#8f0a99`}
                                 fontSize={`inherit`}
                               >
-                                {t(`11`)}
+                                <Wrapper
+                                  margin={`0 5px 0 0`}
+                                  width={`auto`}
+                                  color={`#8f0a99`}
+                                  fontSize={`inherit`}
+                                >
+                                  {t(`11`)}
+                                </Wrapper>
+                                : {data.bankName}
                               </Wrapper>
-                              : {data.bankName}
-                            </Wrapper>
 
-                            <Wrapper
-                              dr={`row`}
-                              margin={`2px 0`}
-                              width={`auto`}
-                              fontSize={`inherit`}
-                            >
                               <Wrapper
-                                margin={`0 5px 0 0`}
+                                dr={`row`}
+                                margin={`2px 0`}
                                 width={`auto`}
-                                color={`#8f0a99`}
                                 fontSize={`inherit`}
                               >
-                                {t(`12`)}
+                                <Wrapper
+                                  margin={`0 5px 0 0`}
+                                  width={`auto`}
+                                  color={`#8f0a99`}
+                                  fontSize={`inherit`}
+                                >
+                                  {t(`12`)}
+                                </Wrapper>
+                                : {data.bankNo}
                               </Wrapper>
-                              : {data.bankNo}
-                            </Wrapper>
 
-                            <Wrapper
-                              dr={`row`}
-                              margin={`2px 0`}
-                              width={`auto`}
-                              fontSize={`inherit`}
-                            >
                               <Wrapper
-                                margin={`0 5px 0 0`}
+                                dr={`row`}
+                                margin={`2px 0`}
                                 width={`auto`}
-                                color={`#8f0a99`}
                                 fontSize={`inherit`}
                               >
-                                Swift Code
+                                <Wrapper
+                                  margin={`0 5px 0 0`}
+                                  width={`auto`}
+                                  color={`#8f0a99`}
+                                  fontSize={`inherit`}
+                                >
+                                  Swift Code
+                                </Wrapper>
+                                : {data.swiftCode}
                               </Wrapper>
-                              : {data.swiftCode}
-                            </Wrapper>
 
-                            <Wrapper
-                              dr={`row`}
-                              margin={`2px 0`}
-                              width={`auto`}
-                              fontSize={`inherit`}
-                            >
                               <Wrapper
-                                margin={`0 5px 0 0`}
+                                dr={`row`}
+                                margin={`2px 0`}
                                 width={`auto`}
-                                color={`#8f0a99`}
                                 fontSize={`inherit`}
                               >
-                                {t(`13`)}
+                                <Wrapper
+                                  margin={`0 5px 0 0`}
+                                  width={`auto`}
+                                  color={`#8f0a99`}
+                                  fontSize={`inherit`}
+                                >
+                                  {t(`13`)}
+                                </Wrapper>
+                                : {data.willAddress}
                               </Wrapper>
-                              : {data.willAddress}
-                            </Wrapper>
 
-                            <Wrapper
-                              dr={`row`}
-                              margin={`2px 0`}
-                              width={`auto`}
-                              fontSize={`inherit`}
-                            >
                               <Wrapper
-                                margin={`0 5px 0 0`}
+                                dr={`row`}
+                                margin={`2px 0`}
                                 width={`auto`}
-                                color={`#8f0a99`}
                                 fontSize={`inherit`}
                               >
-                                {t(`14`)}
+                                <Wrapper
+                                  margin={`0 5px 0 0`}
+                                  width={`auto`}
+                                  color={`#8f0a99`}
+                                  fontSize={`inherit`}
+                                >
+                                  {t(`14`)}
+                                </Wrapper>
+                                : {data.bankAddress}
                               </Wrapper>
-                              : {data.bankAddress}
-                            </Wrapper> */}
 
                               <Wrapper
                                 dr={`row`}
@@ -263,73 +263,73 @@ const Record = () => {
 
                           {data.type === t(`16`) && (
                             <Wrapper al={`flex-start`} fontSize={`12px`}>
-                              {/* <Wrapper
-                              dr={`row`}
-                              margin={`2px 0`}
-                              width={`auto`}
-                              fontSize={`inherit`}
-                            >
                               <Wrapper
-                                margin={`0 5px 0 0`}
+                                dr={`row`}
+                                margin={`2px 0`}
                                 width={`auto`}
-                                color={`#8f0a99`}
                                 fontSize={`inherit`}
                               >
-                                {t(`11`)}
+                                <Wrapper
+                                  margin={`0 5px 0 0`}
+                                  width={`auto`}
+                                  color={`#8f0a99`}
+                                  fontSize={`inherit`}
+                                >
+                                  {t(`11`)}
+                                </Wrapper>
+                                : {data.bankName}
                               </Wrapper>
-                              : {data.bankName}
-                            </Wrapper>
 
-                            <Wrapper
-                              dr={`row`}
-                              margin={`2px 0`}
-                              width={`auto`}
-                              fontSize={`inherit`}
-                            >
                               <Wrapper
-                                margin={`0 5px 0 0`}
+                                dr={`row`}
+                                margin={`2px 0`}
                                 width={`auto`}
-                                color={`#8f0a99`}
                                 fontSize={`inherit`}
                               >
-                                {t(`12`)}
+                                <Wrapper
+                                  margin={`0 5px 0 0`}
+                                  width={`auto`}
+                                  color={`#8f0a99`}
+                                  fontSize={`inherit`}
+                                >
+                                  {t(`12`)}
+                                </Wrapper>
+                                : {data.bankNo}
                               </Wrapper>
-                              : {data.bankNo}
-                            </Wrapper>
 
-                            <Wrapper
-                              dr={`row`}
-                              margin={`2px 0`}
-                              width={`auto`}
-                              fontSize={`inherit`}
-                            >
                               <Wrapper
-                                margin={`0 5px 0 0`}
+                                dr={`row`}
+                                margin={`2px 0`}
                                 width={`auto`}
-                                color={`#8f0a99`}
                                 fontSize={`inherit`}
                               >
-                                Swift Code
+                                <Wrapper
+                                  margin={`0 5px 0 0`}
+                                  width={`auto`}
+                                  color={`#8f0a99`}
+                                  fontSize={`inherit`}
+                                >
+                                  Swift Code
+                                </Wrapper>
+                                : {data.swiftCode}
                               </Wrapper>
-                              : {data.swiftCode}
-                            </Wrapper>
 
-                            <Wrapper
-                              dr={`row`}
-                              margin={`2px 0`}
-                              width={`auto`}
-                              fontSize={`inherit`}
-                            >
                               <Wrapper
-                                margin={`0 5px 0 0`}
+                                dr={`row`}
+                                margin={`2px 0`}
                                 width={`auto`}
-                                color={`#8f0a99`}
                                 fontSize={`inherit`}
                               >
-                                {t(`14`)}
+                                <Wrapper
+                                  margin={`0 5px 0 0`}
+                                  width={`auto`}
+                                  color={`#8f0a99`}
+                                  fontSize={`inherit`}
+                                >
+                                  {t(`14`)}
+                                </Wrapper>
+                                : {data.bankAddress}
                               </Wrapper>
-                              : {data.bankAddress}
-                            </Wrapper> */}
 
                               <Wrapper
                                 dr={`row`}

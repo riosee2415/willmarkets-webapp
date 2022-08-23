@@ -203,26 +203,26 @@ const Withdraw = ({}) => {
         >{`${data.User.address} ${data.User.detailAddress}`}</Wrapper>
       ),
     },
-    // {
-    //   width: 80,
-    //   title: <Wrapper fontSize={`14px`}>출금은행</Wrapper>,
-    //   render: (data) => <Wrapper fontSize={`14px`}>{data.bankName}</Wrapper>,
-    // },
-    // {
-    //   width: 80,
-    //   title: <Wrapper fontSize={`14px`}>계좌번호</Wrapper>,
-    //   render: (data) => <Wrapper fontSize={`14px`}>{data.bankNo}</Wrapper>,
-    // },
-    // {
-    //   width: 80,
-    //   title: <Wrapper fontSize={`14px`}>Swift Code</Wrapper>,
-    //   render: (data) => <Wrapper fontSize={`14px`}>{data.swiftCode}</Wrapper>,
-    // },
-    // {
-    //   width: 130,
-    //   title: <Wrapper fontSize={`14px`}>은행 주소</Wrapper>,
-    //   render: (data) => <Wrapper fontSize={`14px`}>{data.bankAddress}</Wrapper>,
-    // },
+    {
+      width: 80,
+      title: <Wrapper fontSize={`14px`}>출금은행</Wrapper>,
+      render: (data) => <Wrapper fontSize={`14px`}>{data.bankName}</Wrapper>,
+    },
+    {
+      width: 80,
+      title: <Wrapper fontSize={`14px`}>계좌번호</Wrapper>,
+      render: (data) => <Wrapper fontSize={`14px`}>{data.bankNo}</Wrapper>,
+    },
+    {
+      width: 80,
+      title: <Wrapper fontSize={`14px`}>Swift Code</Wrapper>,
+      render: (data) => <Wrapper fontSize={`14px`}>{data.swiftCode}</Wrapper>,
+    },
+    {
+      width: 130,
+      title: <Wrapper fontSize={`14px`}>은행 주소</Wrapper>,
+      render: (data) => <Wrapper fontSize={`14px`}>{data.bankAddress}</Wrapper>,
+    },
     {
       width: 120,
       title: <Wrapper fontSize={`14px`}>출금 계좌</Wrapper>,

@@ -28,7 +28,7 @@ const upload = multer({
       );
     },
   }),
-  limits: { fileSize: 5 * 1024 * 1024 }, // 5MB
+  limits: { fileSize: 20 * 1024 * 1024 }, // 5MB
 });
 
 const router = express.Router();
@@ -247,13 +247,13 @@ router.post("/create", async (req, res, next) => {
   const {
     language,
     userId,
-    // bankName,
-    // bankNo,
-    // swiftCode,
-    // willAddress,
-    // bankAddress,
+    bankName,
+    bankNo,
+    swiftCode,
+    willAddress,
+    bankAddress,
     selectBank,
-    // price,
+    price,
     priceType,
     filePath,
     fileOriginName,
@@ -277,13 +277,13 @@ router.post("/create", async (req, res, next) => {
 
     const createResult = await Deposit.create({
       UserId: parseInt(userId),
-      // bankName,
-      // bankNo,
-      // swiftCode,
-      // willAddress,
-      // bankAddress,
+      bankName,
+      bankNo,
+      swiftCode,
+      willAddress,
+      bankAddress,
       selectBank,
-      // price,
+      price,
       priceType,
       filePath,
       fileOriginName,

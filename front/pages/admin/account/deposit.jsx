@@ -212,30 +212,30 @@ const Deposit = ({}) => {
       title: <Wrapper fontSize={`14px`}>이메일</Wrapper>,
       render: (data) => <Wrapper fontSize={`14px`}>{data.User.email}</Wrapper>,
     },
-    // {
-    //   width: 70,
-    //   title: <Wrapper fontSize={`14px`}>은행명</Wrapper>,
-    //   render: (data) => <Wrapper fontSize={`14px`}>{data.bankName}</Wrapper>,
-    // },
-    // {
-    //   width: 70,
-    //   title: <Wrapper fontSize={`14px`}>계좌번호</Wrapper>,
-    //   render: (data) => <Wrapper fontSize={`14px`}>{data.bankNo}</Wrapper>,
-    // },
+    {
+      width: 70,
+      title: <Wrapper fontSize={`14px`}>은행명</Wrapper>,
+      render: (data) => <Wrapper fontSize={`14px`}>{data.bankName}</Wrapper>,
+    },
+    {
+      width: 70,
+      title: <Wrapper fontSize={`14px`}>계좌번호</Wrapper>,
+      render: (data) => <Wrapper fontSize={`14px`}>{data.bankNo}</Wrapper>,
+    },
     {
       width: 70,
       title: <Wrapper fontSize={`14px`}>입금 계좌</Wrapper>,
       render: (data) => <Wrapper fontSize={`14px`}>{data.selectBank}</Wrapper>,
     },
-    // {
-    //   width: 70,
-    //   title: <Wrapper fontSize={`14px`}>입금 금액</Wrapper>,
-    //   render: (data) => (
-    //     <Wrapper fontSize={`14px`}>
-    //       {numberWithCommas(String(data.price || 0))}
-    //     </Wrapper>
-    //   ),
-    // },
+    {
+      width: 70,
+      title: <Wrapper fontSize={`14px`}>입금 금액</Wrapper>,
+      render: (data) => (
+        <Wrapper fontSize={`14px`}>
+          {numberWithCommas(String(data.price || 0))}
+        </Wrapper>
+      ),
+    },
     {
       width: 70,
       title: <Wrapper fontSize={`14px`}>지불 화폐</Wrapper>,
@@ -383,9 +383,9 @@ const Deposit = ({}) => {
             입금정보
           </Tab>
 
-          {/* <Tab isActive={currentTab === 1} onClick={() => setCurrentTab(1)}>
+          <Tab isActive={currentTab === 1} onClick={() => setCurrentTab(1)}>
             입금 영수내역
-          </Tab> */}
+          </Tab>
         </TabWrapper>
 
         <Wrapper dr={`row`} ju={`space-between`} margin={`15px 0 10px`}>

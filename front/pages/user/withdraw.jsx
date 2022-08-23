@@ -162,10 +162,10 @@ const Withdraw = () => {
     router.push(link);
   }, []);
 
-  // const selectBankHandler = useCallback((data) => {
-  //   setCurrentBank(data);
-  //   setCurrentStep(1);
-  // }, []);
+  const selectBankHandler = useCallback((data) => {
+    setCurrentBank(data);
+    setCurrentStep(1);
+  }, []);
 
   const initValueHandler = useCallback(() => {
     setCurrentStep(0);
@@ -188,21 +188,21 @@ const Withdraw = () => {
   }, []);
 
   const createWithdrawHanlder = useCallback(() => {
-    // if (!emptyCheck(inputBankName.value)) {
-    //   return message.error(t(`1`));
-    // }
+    if (!emptyCheck(inputBankName.value)) {
+      return message.error(t(`1`));
+    }
 
-    // if (!emptyCheck(inputBankNo.value)) {
-    //   return message.error(t(`2`));
-    // }
+    if (!emptyCheck(inputBankNo.value)) {
+      return message.error(t(`2`));
+    }
 
-    // if (!emptyCheck(inputSwiftCode.value)) {
-    //   return message.error(t(`3`));
-    // }
+    if (!emptyCheck(inputSwiftCode.value)) {
+      return message.error(t(`3`));
+    }
 
-    // if (!emptyCheck(inputBankAddress.value)) {
-    //   return message.error(t(`4`));
-    // }
+    if (!emptyCheck(inputBankAddress.value)) {
+      return message.error(t(`4`));
+    }
 
     if (!emptyCheck(inputSelectBank.value)) {
       return message.error(t(`5`));
@@ -264,10 +264,10 @@ const Withdraw = () => {
       data: {
         language: i18next.language,
         userId: me.id,
-        // bankName: inputBankName.value,
-        // bankNo: inputBankNo.value,
-        // swiftCode: inputSwiftCode.value,
-        // bankAddress: inputBankAddress.value,
+        bankName: inputBankName.value,
+        bankNo: inputBankNo.value,
+        swiftCode: inputSwiftCode.value,
+        bankAddress: inputBankAddress.value,
         selectBank: inputSelectBank.value,
         price: inputPrice.value,
         priceType: inputPriceType.value,
@@ -502,7 +502,7 @@ const Withdraw = () => {
                     {t(`14`)}
                   </Wrapper>
 
-                  {/* <CustomLabel for={`inp-price`} margin={`40px 0 15px`}>
+                  <CustomLabel for={`inp-price`} margin={`40px 0 15px`}>
                     <Wrapper className={`required`}>*</Wrapper>
                     {t(`15`)}
                   </CustomLabel>
@@ -532,7 +532,7 @@ const Withdraw = () => {
                   </CustomLabel>
                   <Wrapper dr={`row`} ju={`flex-start`}>
                     <CustomInput id={`inp-price`} {...inputBankAddress} />
-                  </Wrapper> */}
+                  </Wrapper>
 
                   <CustomLabel for={`inp-price`} margin={`20px 0 15px`}>
                     <Wrapper className={`required`}>*</Wrapper>
@@ -568,7 +568,7 @@ const Withdraw = () => {
                           {t(`20`)}
                         </ComboListItem>
 
-                        {/* {me &&
+                        {me &&
                           me.LiveAccounts &&
                           me.LiveAccounts.map((data) => {
                             if (!data.isComplete) {
@@ -585,7 +585,7 @@ const Withdraw = () => {
                                 {data.bankNo}
                               </ComboListItem>
                             );
-                          })} */}
+                          })}
                       </ComboList>
                     </Combo>
                   </Wrapper>

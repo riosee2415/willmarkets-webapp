@@ -713,7 +713,7 @@ const Deposit = () => {
                       bgColor={`#aa28c9`}
                       color={`#fff`}
                     >
-                      Step 01
+                      Step 02
                     </Wrapper>
                     {t(`18`)}
                   </Wrapper>

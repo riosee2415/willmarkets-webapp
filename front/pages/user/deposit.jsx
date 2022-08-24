@@ -1171,12 +1171,23 @@ const Deposit = () => {
                     <Wrapper className={`required`}>*</Wrapper>
                     {t(`57`)}
                   </CustomLabel>
+
                   <Wrapper dr={`row`} ju={`flex-start`}>
                     <CustomInput
                       id={`inp-hashAddress`}
                       width={width < 900 ? `170px` : `250px`}
                       {...inputHashAddress}
                     />
+                  </Wrapper>
+                  <Wrapper
+                    al={`flex-start`}
+                    margin={`10px 0 0`}
+                    fontSize={`13px`}
+                    color={`#e91448`}
+                    lineHeight={`1.8`}
+                  >
+                    {t(`67`)}
+                    <br /> {t(`68`)}
                   </Wrapper>
 
                   {isSendEmail && !isConfirmEmail && (

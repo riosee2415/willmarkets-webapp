@@ -672,6 +672,16 @@ const Withdraw = () => {
                     <Wrapper width={`auto`} fontSize={`0.8em`}>
                       {t(`37`)} 20.00
                     </Wrapper>
+                    <Wrapper
+                      al={`flex-start`}
+                      margin={`10px 0 0`}
+                      fontSize={`13px`}
+                      color={`#e91448`}
+                      lineHeight={`1.8`}
+                    >
+                      {t(`67`)}
+                      <br /> {t(`68`)}
+                    </Wrapper>
                   </Wrapper>
 
                   {isSendEmail && !isConfirmEmail && (

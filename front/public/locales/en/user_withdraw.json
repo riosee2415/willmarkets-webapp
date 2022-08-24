@@ -43,5 +43,7 @@
   "42": "Enter the OTP code.",
   "43": "The OTP code does not match.",
   "44": "OTP verification is complete.",
-  "45": "Please complete OTP verification."
+  "45": "Please complete OTP verification.",
+  "67": "Notes on overseas remittance",
+  "68": "* International bank transfer fees are the responsibility of the customer, so please be careful."
 }

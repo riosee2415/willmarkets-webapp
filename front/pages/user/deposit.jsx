@@ -76,7 +76,8 @@ const Deposit = () => {
       bankName: "Quaint Oak Bank",
       bankNo: "9867238934",
       bankAddress: "501 knowles Ave Southampton, PA18966",
-      swiftCode: "FFC 20220216002761/WILL MARKETS LTD",
+      swiftCode: "MANTUS33",
+      reference: "FFC 20220216002761/WILL MARKETS LTD",
     },
   ];
 
@@ -573,7 +574,7 @@ const Deposit = () => {
                       bgColor={`#aa28c9`}
                       color={`#fff`}
                     >
-                      Step 01
+                      Select 01
                     </Wrapper>
                     {t(`13`)}
                   </Wrapper>
@@ -587,8 +588,8 @@ const Deposit = () => {
                           ju={`flex-start`}
                           margin={`0 40px 40px 0`}
                           padding={`20px`}
-                          width={`300px`}
-                          height={`335px`}
+                          width={`335px`}
+                          height={`350px`}
                           radius={`8px`}
                           onClick={() => selectBankHandler(data)}
                         >
@@ -667,7 +668,14 @@ const Deposit = () => {
                             </Wrapper>
                           </Wrapper>
 
-                          <Wrapper dr={`row`} al={`normal`} ju={`flex-start`}>
+                          <Wrapper
+                            dr={`row`}
+                            al={`normal`}
+                            ju={`flex-start`}
+                            padding={`0 0 5px`}
+                            margin={`0 0 10px`}
+                            borderBottom={`1px solid #f3f3f3`}
+                          >
                             <Wrapper
                               al={`flex-start`}
                               ju={`flex-start`}
@@ -678,13 +686,34 @@ const Deposit = () => {
                               {t(`17`)}
                             </Wrapper>
 
-                            <Wrapper
-                              al={`flex-start`}
-                              width={`calc(100% - 90px)`}
-                              fontSize={`14px`}
-                            >
+                            <Wrapper al={`flex-start`} fontSize={`14px`}>
                               <Text isEllipsis={true} width={`100%`}>
                                 {data.bankAddress}
+                              </Text>
+                            </Wrapper>
+                          </Wrapper>
+
+                          <Wrapper
+                            dr={`row`}
+                            al={`normal`}
+                            ju={`flex-start`}
+                            padding={`0 0 5px`}
+                            margin={`0 0 10px`}
+                            borderBottom={`1px solid #f3f3f3`}
+                          >
+                            <Wrapper
+                              al={`flex-start`}
+                              ju={`flex-start`}
+                              fontSize={`15px`}
+                              fontWeight={`700`}
+                              color={`#a8559e`}
+                            >
+                              {t(`66`)}
+                            </Wrapper>
+
+                            <Wrapper al={`flex-start`} fontSize={`14px`}>
+                              <Text isEllipsis={true} width={`100%`}>
+                                {data.reference}
                               </Text>
                             </Wrapper>
                           </Wrapper>
@@ -713,7 +742,7 @@ const Deposit = () => {
                       bgColor={`#aa28c9`}
                       color={`#fff`}
                     >
-                      Step 02
+                      Select 02
                     </Wrapper>
                     {t(`18`)}
                   </Wrapper>

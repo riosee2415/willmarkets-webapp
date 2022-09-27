@@ -77,7 +77,7 @@ const Deposit = () => {
       bankNo: "9867238934",
       bankAddress: "501 knowles Ave Southampton, PA18966",
       swiftCode: "MANTUS33",
-      reference: "FFC 20220216002761/WILL MARKETS LTD",
+      reference: "FFC 20220216002761/WILL MARKETS LTD BNF BK Arival Bank",
     },
   ];
 
@@ -207,18 +207,18 @@ const Deposit = () => {
   }, []);
 
   const createDepositHanlder = useCallback(() => {
-    if (!currentBank) {
-      setCurrentStep(0);
-      return message.error(t(`1`));
-    }
+    // if (!currentBank) {
+    //   setCurrentStep(0);
+    //   return message.error(t(`1`));
+    // }
 
     if (!emptyCheck(inputSelectBank.value)) {
       return message.error(t(`2`));
     }
 
-    if (!emptyCheck(inputPrice.value)) {
-      return message.error(t(`3`));
-    }
+    // if (!emptyCheck(inputPrice.value)) {
+    //   return message.error(t(`3`));
+    // }
 
     if (!emptyCheck(inputPriceType.value)) {
       return message.error(t(`44`));
@@ -293,13 +293,13 @@ const Deposit = () => {
       data: {
         language: i18next.language,
         userId: me.id,
-        bankName: currentBank.bankName,
-        bankNo: currentBank.bankNo,
-        swiftCode: currentBank.swiftCode,
-        willAddress: currentBank.willAddress,
-        bankAddress: currentBank.bankAddress,
+        // bankName: currentBank.bankName,
+        // bankNo: currentBank.bankNo,
+        // swiftCode: currentBank.swiftCode,
+        // willAddress: currentBank.willAddress,
+        // bankAddress: currentBank.bankAddress,
         selectBank: inputSelectBank.value,
-        price: inputPrice.value,
+        // price: inputPrice.value,
         priceType: inputPriceType.value,
         filePath: inputFilePath.value,
         fileOriginName: inputFileOriginName.value,
@@ -400,14 +400,14 @@ const Deposit = () => {
   }, [inputFilePath, inputFileOriginName]);
 
   ////// USEEFFECT //////
-  useEffect(() => {
-    if (!me) {
-      message.error(t(`8`));
-      router.push("/login");
-    } else if (me.userType === `1`) {
-      router.push("/user?access=false");
-    }
-  }, [me]);
+  // useEffect(() => {
+  //   if (!me) {
+  //     message.error(t(`8`));
+  //     router.push("/login");
+  //   } else if (me.userType === `1`) {
+  //     router.push("/user?access=false");
+  //   }
+  // }, [me]);
 
   useEffect(() => {
     initValueHandler();
@@ -583,6 +583,16 @@ const Deposit = () => {
                       Select 01
                     </Wrapper>
                     {t(`13`)}
+                    <Wrapper
+                      al={`flex-start`}
+                      margin={`10px 0 0`}
+                      fontSize={`13px`}
+                      color={`#e91448`}
+                      lineHeight={`1.8`}
+                    >
+                      {t(`67`)}
+                      <br /> {t(`68`)}
+                    </Wrapper>
                   </Wrapper>
 
                   <Wrapper dr={`row`} al={`flex-start`} ju={`flex-start`}>
@@ -594,7 +604,7 @@ const Deposit = () => {
                           ju={`flex-start`}
                           margin={`0 40px 40px 0`}
                           padding={`20px`}
-                          width={`335px`}
+                          width={`455px`}
                           height={`350px`}
                           radius={`8px`}
                           onClick={() => selectBankHandler(data)}
@@ -1185,16 +1195,6 @@ const Deposit = () => {
                       {...inputHashAddress}
                     />
                   </Wrapper>
-                  <Wrapper
-                    al={`flex-start`}
-                    margin={`10px 0 0`}
-                    fontSize={`13px`}
-                    color={`#e91448`}
-                    lineHeight={`1.8`}
-                  >
-                    {t(`67`)}
-                    <br /> {t(`68`)}
-                  </Wrapper>
 
                   {isSendEmail && !isConfirmEmail && (
                     <Wrapper al={`flex-start`}>
@@ -1375,8 +1375,8 @@ const Deposit = () => {
                       color={`#fff`}
                     >
                       Step 01
+                      {t(`31`)}
                     </Wrapper>
-                    {t(`31`)}
                   </Wrapper>
 
                   <CustomLabel for={`inp-price`} margin={`40px 0 15px`}>

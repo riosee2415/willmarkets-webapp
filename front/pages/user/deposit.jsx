@@ -95,6 +95,12 @@ const Deposit = () => {
       "https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/willmarkets/assets/images/user/qr_eth.png",
       "ERC-20",
     ],
+    USTD: [
+      "USTD",
+      "THpf2R15EgZD6J6oFjr3dVjrYNTVPxWzp6",
+      "https://4leaf-s3.s3.ap-northeast-2.amazonaws.com/willmarkets/assets/images/user/qr_ustd.png",
+      "TRC-20",
+    ],
   };
 
   ////// HOOKS //////

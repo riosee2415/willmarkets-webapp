@@ -29,6 +29,7 @@ const User = ({ width }) => {
   ////// HOOKS //////
   const dispatch = useDispatch();
 
+  const { t, i18n } = useTranslation(["user"]);
   const { me } = useSelector((state) => state.user);
 
   const { st_liveAccountCreateDone } = useSelector(
@@ -36,8 +37,6 @@ const User = ({ width }) => {
   );
 
   const router = useRouter();
-
-  const { t, i18n } = useTranslation(["user"]);
 
   ////// TOGGLE //////
 
@@ -49,9 +48,9 @@ const User = ({ width }) => {
   ////// USEEFFECT //////
   useEffect(() => {
     if (!me && t(`11`)) {
-      message.error(t(`11`));
       router.push("/login");
     }
+    message.error(t(`11`));
   }, [me, t]);
 
   useEffect(() => {

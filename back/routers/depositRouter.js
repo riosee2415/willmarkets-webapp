@@ -28,7 +28,7 @@ const upload = multer({
       );
     },
   }),
-  limits: { fileSize: 20 * 1024 * 1024 }, // 5MB
+  limits: { fileSize: 40 * 1024 * 1024 }, // 5MB
 });
 
 const router = express.Router();
@@ -190,6 +190,7 @@ router.post("/image", async (req, res, next) => {
             ? "업로드 중 문제가 발생했습니다."
             : "There was a problem uploading"
         );
+      console.log(err);
     }
 
     return res.json({

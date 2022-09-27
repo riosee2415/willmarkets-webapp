@@ -477,6 +477,15 @@ const Withdraw = () => {
         <Wrapper al={`flex-start`}>
           <Wrapper
             al={`flex-start`}
+            margin={`10px 0 10px 0`}
+            fontSize={`13px`}
+            color={`#e91448`}
+            lineHeight={`1.8`}
+          >
+            {t(`77`)}
+          </Wrapper>
+          <Wrapper
+            al={`flex-start`}
             margin={`0 0 30px`}
             padding={`0 8px 20px`}
             fontSize={`19px`}

@@ -53,5 +53,6 @@
   "73": "Consignee name",
   "74": "Notes on overseas remittance",
   "75": "Minimum withdrawal amount : USD 300",
-  "76": "* International bank transfer fees are the responsibility of the customer"
+  "76": "* International bank transfer fees are the responsibility of the customer",
+  "77": "* For withdrawal method, only one part of select01 or select02 must be filled in."
 }

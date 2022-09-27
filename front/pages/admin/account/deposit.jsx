@@ -352,7 +352,12 @@ const Deposit = ({}) => {
       ),
     },
     {
-      width: 150,
+      width: 300,
+      title: <Wrapper fontSize={`14px`}>입금 계좌</Wrapper>,
+      render: (data) => <Wrapper fontSize={`14px`}>{data.selectBank}</Wrapper>,
+    },
+    {
+      width: 300,
       title: <Wrapper fontSize={`14px`}>첨부파일</Wrapper>,
       render: (data) => (
         <Wrapper dr={`row`} fontSize={`14px`}>

@@ -182,7 +182,7 @@ const Withdraw = ({}) => {
       ),
     },
     {
-      width: 100,
+      width: 200,
       title: <Wrapper fontSize={`14px`}>이름</Wrapper>,
       fixed: "left",
       render: (data) => (
@@ -190,12 +190,12 @@ const Withdraw = ({}) => {
       ),
     },
     {
-      width: 110,
+      width: 200,
       title: <Wrapper fontSize={`14px`}>이메일</Wrapper>,
       render: (data) => <Wrapper fontSize={`14px`}>{data.User.email}</Wrapper>,
     },
     {
-      width: 130,
+      width: 250,
       title: <Wrapper fontSize={`14px`}>주소</Wrapper>,
       render: (data) => (
         <Wrapper

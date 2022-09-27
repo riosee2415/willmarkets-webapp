@@ -13,6 +13,11 @@ module.exports = class DepositImage extends Model {
           type: DataTypes.STRING(300),
           allowNull: true,
         },
+        selectBank: {
+          type: DataTypes.STRING(200),
+          allowNull: true,
+          defaultValue: null,
+        },
       },
       {
         modelName: "DepositImage",

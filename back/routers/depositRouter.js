@@ -201,7 +201,7 @@ router.post("/image", async (req, res, next) => {
 });
 
 router.post("/createImage", async (req, res, next) => {
-  const { language, userId, filePath, fileOriginName } = req.body;
+  const { language, userId, filePath, fileOriginName, selectBank } = req.body;
   try {
     const exUser = await User.findOne({
       where: { id: parseInt(userId) },
@@ -220,6 +220,7 @@ router.post("/createImage", async (req, res, next) => {
       UserId: parseInt(userId),
       filePath,
       fileOriginName,
+      selectBank,
     });
 
     if (!createResult) {

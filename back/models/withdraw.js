@@ -55,6 +55,16 @@ module.exports = class Withdraw extends Model {
           type: DataTypes.DATE,
           allowNull: true,
         },
+        payeeAccount: {
+          type: DataTypes.STRING(200),
+          allowNull: true,
+          defaultValue: null,
+        },
+        payeeName: {
+          type: DataTypes.STRING(200),
+          allowNull: true,
+          defaultValue: null,
+        },
       },
       {
         modelName: "Withdraw",

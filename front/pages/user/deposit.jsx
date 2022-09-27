@@ -395,6 +395,7 @@ const Deposit = () => {
         userId: me.id,
         filePath: inputFilePath.value,
         fileOriginName: inputFileOriginName.value,
+        selectBank: inputSelectBank.value,
       },
     });
   }, [inputFilePath, inputFileOriginName]);
@@ -765,7 +766,7 @@ const Deposit = () => {
 
                   <CustomLabel margin={`20px 0 15px`}>
                     <Wrapper className={`required`}>*</Wrapper>
-                    {t(`20`)}
+                    {t(`19`)}
                   </CustomLabel>
 
                   <Wrapper zIndex={`3`} dr={`row`} ju={`flex-start`}>
@@ -1379,6 +1380,66 @@ const Deposit = () => {
                     </Wrapper>
                   </Wrapper>
 
+                  <CustomLabel margin={`20px 0 15px`}>
+                    <Wrapper className={`required`}>*</Wrapper>
+                    {t(`19`)}
+                  </CustomLabel>
+
+                  <Wrapper zIndex={`3`} dr={`row`} ju={`flex-start`}>
+                    <Combo
+                      isBorder={true}
+                      itemAlign={`flex-start`}
+                      width={width < 900 ? `170px` : `250px`}
+                      height={`40px`}
+                      border={`1px solid #f3e4fa`}
+                      shadow={`0 2px 8px rgb(0 0 0 / 9%)`}
+                      hoverBorder={`1px solid #d7a6ed`}
+                      hoverShadow={`0 3px 8px rgb(0 0 0 / 12%)`}
+                      onClick={() => setComboSelectBank(!comboSelectBank)}
+                    >
+                      <ComboTitle>
+                        <Wrapper>
+                          {inputSelectBank.value || `${t("21")}`}
+                        </Wrapper>
+                        <CaretDownOutlined />
+                      </ComboTitle>
+
+                      <ComboList isView={comboSelectBank}>
+                        <ComboListItem
+                          isActive={!inputSelectBank.value}
+                          onClick={() => inputSelectBank.setValue("")}
+                        >
+                          {t(`21`)}
+                        </ComboListItem>
+
+                        <ComboListItem
+                          onClick={() => inputSelectBank.setValue(t(`22`))}
+                        >
+                          {t(`22`)}
+                        </ComboListItem>
+
+                        {me &&
+                          me.LiveAccounts &&
+                          me.LiveAccounts.map((data) => {
+                            if (!data.isComplete) {
+                              return null;
+                            }
+                            return (
+                              <ComboListItem
+                                key={data.id}
+                                isActive={inputSelectBank.value === data.bankNo}
+                                onClick={() =>
+                                  inputSelectBank.setValue(data.bankNo)
+                                }
+                              >
+                                {data.bankNo}
+                              </ComboListItem>
+                            );
+                          })}
+                      </ComboList>
+                    </Combo>
+                  </Wrapper>
+
                   <CustomLabel for={`inp-price`} margin={`40px 0 15px`}>
                     <Wrapper className={`required`}>*</Wrapper>
                     {t(`32`)}
@@ -1488,7 +1549,7 @@ const Deposit = () => {
                             height={`40px`}
                             margin={`0 5px`}
                             padding={`10px`}
-                            onClick={() => setCurrentTab(1)}
+                            onClick={() => moveLinkHandler("/user")}
                           >
                             {t(`40`)}
                           </CommonButton>

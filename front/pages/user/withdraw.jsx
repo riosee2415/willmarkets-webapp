@@ -98,7 +98,7 @@ const CustomInput = styled(TextInput)`
 
 const Withdraw = () => {
   ////// VARIABLES //////
-  const priceTypeList = ["BTC-BTC", "ETH-ETH"];
+  const priceTypeList = ["BTC-BTC", "ETH-ETH", "USDT-USDT"];
 
   ////// HOOKS //////
 
@@ -154,6 +154,9 @@ const Withdraw = () => {
   const inputPriceType = useInput("");
   const inputWalletAddress = useInput("");
 
+  const inputPayeeAccount = useInput("");
+  const inputPayeeName = useInput("");
+
   ////// TOGGLE //////
 
   ////// HANDLER //////
@@ -185,44 +188,46 @@ const Withdraw = () => {
 
     inputPriceType.setValue("");
     inputWalletAddress.setValue("");
+    inputPayeeAccount.setValue("");
+    inputPayeeName.setValue("");
   }, []);
 
   const createWithdrawHanlder = useCallback(() => {
-    if (!emptyCheck(inputBankName.value)) {
-      return message.error(t(`1`));
-    }
+    // if (!emptyCheck(inputBankName.value)) {
+    //   return message.error(t(`1`));
+    // }
 
-    if (!emptyCheck(inputBankNo.value)) {
-      return message.error(t(`2`));
-    }
+    // if (!emptyCheck(inputBankNo.value)) {
+    //   return message.error(t(`2`));
+    // }
 
-    if (!emptyCheck(inputSwiftCode.value)) {
-      return message.error(t(`3`));
-    }
+    // if (!emptyCheck(inputSwiftCode.value)) {
+    //   return message.error(t(`3`));
+    // }
 
-    if (!emptyCheck(inputBankAddress.value)) {
-      return message.error(t(`4`));
-    }
+    // if (!emptyCheck(inputBankAddress.value)) {
+    //   return message.error(t(`4`));
+    // }
 
-    if (!emptyCheck(inputSelectBank.value)) {
-      return message.error(t(`5`));
-    }
+    // if (!emptyCheck(inputSelectBank.value)) {
+    //   return message.error(t(`5`));
+    // }
 
-    if (!emptyCheck(inputPriceType.value)) {
-      return message.error(t(`33`));
-    }
+    // if (!emptyCheck(inputPriceType.value)) {
+    //   return message.error(t(`33`));
+    // }
 
-    if (!emptyCheck(inputWalletAddress.value)) {
-      return message.error(t(`34`));
-    }
+    // if (!emptyCheck(inputWalletAddress.value)) {
+    //   return message.error(t(`34`));
+    // }
 
-    if (!emptyCheck(inputPrice.value)) {
-      return message.error(t(`6`));
-    }
+    // if (!emptyCheck(inputPrice.value)) {
+    //   return message.error(t(`6`));
+    // }
 
-    if (parseFloat(me.priceWallet) < parseFloat(inputPrice.value)) {
-      return message.error(t(`38`));
-    }
+    // if (parseFloat(me.priceWallet) < parseFloat(inputPrice.value)) {
+    //   return message.error(t(`38`));
+    // }
 
     if (!isSendEmail) {
       dispatch({
@@ -272,6 +277,8 @@ const Withdraw = () => {
         price: inputPrice.value,
         priceType: inputPriceType.value,
         walletAddress: inputWalletAddress.value,
+        payeeAccount: inputPayeeAccount.value,
+        payeeName: inputPayeeName.value,
       },
     });
   }, [
@@ -285,6 +292,8 @@ const Withdraw = () => {
     inputOtpSecret.value,
     inputPriceType.value,
     inputWalletAddress.value,
+    inputPayeeAccount.value,
+    inputPayeeName.value,
     isSendEmail,
     isConfirmEmail,
     isSendOtp,
@@ -497,48 +506,18 @@ const Withdraw = () => {
                       bgColor={`#aa28c9`}
                       color={`#fff`}
                     >
-                      Step 01
+                      {t(`69`)}
                     </Wrapper>
-                    {t(`14`)}
                   </Wrapper>
-
-                  <CustomLabel for={`inp-price`} margin={`40px 0 15px`}>
-                    <Wrapper className={`required`}>*</Wrapper>
-                    {t(`15`)}
-                  </CustomLabel>
-                  <Wrapper dr={`row`} ju={`flex-start`}>
-                    <CustomInput id={`inp-price`} {...inputBankName} />
-                  </Wrapper>
-
-                  <CustomLabel for={`inp-price`} margin={`40px 0 15px`}>
-                    <Wrapper className={`required`}>*</Wrapper>
-                    {t(`16`)}
-                  </CustomLabel>
-                  <Wrapper dr={`row`} ju={`flex-start`}>
-                    <CustomInput id={`inp-price`} {...inputBankNo} />
-                  </Wrapper>
-
-                  <CustomLabel for={`inp-price`} margin={`40px 0 15px`}>
-                    <Wrapper className={`required`}>*</Wrapper>
-                    Swift Code
-                  </CustomLabel>
-                  <Wrapper dr={`row`} ju={`flex-start`}>
-                    <CustomInput id={`inp-price`} {...inputSwiftCode} />
-                  </Wrapper>
-
-                  <CustomLabel for={`inp-price`} margin={`40px 0 15px`}>
-                    <Wrapper className={`required`}>*</Wrapper>
-                    {t(`17`)}
-                  </CustomLabel>
-                  <Wrapper dr={`row`} ju={`flex-start`}>
-                    <CustomInput id={`inp-price`} {...inputBankAddress} />
-                  </Wrapper>
-
-                  <CustomLabel for={`inp-price`} margin={`20px 0 15px`}>
+                  <CustomLabel for={`inp-price`} margin={`10px 0 15px`}>
                     <Wrapper className={`required`}>*</Wrapper>
                     {t(`18`)}
                   </CustomLabel>
-                  <Wrapper dr={`row`} ju={`flex-start`}>
+                  <Wrapper
+                    margin={`0px 0px 30px 0px`}
+                    dr={`row`}
+                    ju={`flex-start`}
+                  >
                     <Combo
                       isBorder={true}
                       itemAlign={`flex-start`}
@@ -588,6 +567,112 @@ const Withdraw = () => {
                           })}
                       </ComboList>
                     </Combo>
+                  </Wrapper>
+
+                  <Wrapper
+                    dr={`row`}
+                    ju={`flex-start`}
+                    margin={`0 0 20px`}
+                    fontSize={`18px`}
+                    fontWeight={`700`}
+                  >
+                    <Wrapper
+                      width={`auto`}
+                      margin={`0 10px 0 0`}
+                      padding={`5px 10px`}
+                      fontSize={`14px`}
+                      fontWeight={`700`}
+                      bgColor={`#aa28c9`}
+                      color={`#fff`}
+                    >
+                      Select 01
+                    </Wrapper>
+                    {t(`70`)}
+                  </Wrapper>
+
+                  <Wrapper
+                    al={`flex-start`}
+                    margin={`10px 0 0`}
+                    fontSize={`13px`}
+                    color={`#e91448`}
+                    lineHeight={`1.8`}
+                  >
+                    {t(`74`)}
+                    <br /> {t(`75`)}
+                    <br /> {t(`76`)}
+                  </Wrapper>
+
+                  <CustomLabel for={`inp-price`} margin={`40px 0 15px`}>
+                    <Wrapper className={`required`}>*</Wrapper>
+                    {t(`15`)}
+                  </CustomLabel>
+                  <Wrapper dr={`row`} ju={`flex-start`}>
+                    <CustomInput id={`inp-price`} {...inputBankName} />
+                  </Wrapper>
+
+                  <CustomLabel for={`inp-price`} margin={`40px 0 15px`}>
+                    <Wrapper className={`required`}>*</Wrapper>
+                    {t(`16`)}
+                  </CustomLabel>
+                  <Wrapper dr={`row`} ju={`flex-start`}>
+                    <CustomInput id={`inp-price`} {...inputBankNo} />
+                  </Wrapper>
+
+                  <CustomLabel for={`inp-price`} margin={`40px 0 15px`}>
+                    <Wrapper className={`required`}>*</Wrapper>
+                    {t(`72`)}
+                  </CustomLabel>
+                  <Wrapper dr={`row`} ju={`flex-start`}>
+                    <CustomInput id={`inp-price`} {...inputPayeeAccount} />
+                  </Wrapper>
+
+                  <CustomLabel for={`inp-price`} margin={`40px 0 15px`}>
+                    <Wrapper className={`required`}>*</Wrapper>
+                    {t(`73`)}
+                  </CustomLabel>
+                  <Wrapper dr={`row`} ju={`flex-start`}>
+                    <CustomInput id={`inp-price`} {...inputPayeeName} />
+                  </Wrapper>
+
+                  <CustomLabel for={`inp-price`} margin={`40px 0 15px`}>
+                    <Wrapper className={`required`}>*</Wrapper>
+                    {t(`17`)}
+                  </CustomLabel>
+                  <Wrapper dr={`row`} ju={`flex-start`}>
+                    <CustomInput id={`inp-price`} {...inputBankAddress} />
+                  </Wrapper>
+
+                  <CustomLabel for={`inp-price`} margin={`40px 0 15px`}>
+                    <Wrapper className={`required`}>*</Wrapper>
+                    Swift Code
+                  </CustomLabel>
+                  <Wrapper dr={`row`} ju={`flex-start`}>
+                    <CustomInput id={`inp-price`} {...inputSwiftCode} />
+                  </Wrapper>
+
+                  {/* /////////////////////////////// */}
+                  {/* 가상화폐 출금 신청파트 */}
+                  {/* /////////////////////////////// */}
+
+                  <Wrapper
+                    dr={`row`}
+                    ju={`flex-start`}
+                    margin={`30px 0 20px`}
+                    fontSize={`18px`}
+                    fontWeight={`700`}
+                  >
+                    <Wrapper
+                      width={`auto`}
+                      margin={`0 10px 0 0`}
+                      padding={`5px 10px`}
+                      fontSize={`14px`}
+                      fontWeight={`700`}
+                      bgColor={`#aa28c9`}
+                      color={`#fff`}
+                    >
+                      Select 02
+                    </Wrapper>
+                    {t(`71`)}
                   </Wrapper>
 
                   <CustomLabel for={`inp-priceType`} margin={`40px 0 15px`}>
@@ -671,16 +756,6 @@ const Withdraw = () => {
 
                     <Wrapper width={`auto`} fontSize={`0.8em`}>
                       {t(`37`)} 20.00
-                    </Wrapper>
-                    <Wrapper
-                      al={`flex-start`}
-                      margin={`10px 0 0`}
-                      fontSize={`13px`}
-                      color={`#e91448`}
-                      lineHeight={`1.8`}
-                    >
-                      {t(`67`)}
-                      <br /> {t(`68`)}
                     </Wrapper>
                   </Wrapper>
 

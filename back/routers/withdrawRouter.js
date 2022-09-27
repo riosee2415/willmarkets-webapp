@@ -92,6 +92,8 @@ router.post("/create", async (req, res, next) => {
     bankNo,
     priceType,
     walletAddress,
+    payeeAccount,
+    payeeName,
   } = req.body;
   try {
     const exUser = await User.findOne({
@@ -118,6 +120,8 @@ router.post("/create", async (req, res, next) => {
       bankNo,
       priceType,
       walletAddress,
+      payeeAccount,
+      payeeName,
       isComplete: false,
     });
 

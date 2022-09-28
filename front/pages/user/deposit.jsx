@@ -1022,7 +1022,7 @@ const Deposit = () => {
                         ju={`flex-start`}
                         wrap={`nowrap`}
                         padding={`20px`}
-                        width={width < 900 ? `290px` : `300px`}
+                        width={width < 900 ? `360px` : `370px`}
                         radius={`8px`}
                       >
                         <Wrapper

@@ -398,7 +398,7 @@ const Deposit = () => {
         selectBank: inputSelectBank.value,
       },
     });
-  }, [inputFilePath, inputFileOriginName]);
+  }, [inputFilePath, inputFileOriginName, inputSelectBank]);
 
   ////// USEEFFECT //////
   // useEffect(() => {

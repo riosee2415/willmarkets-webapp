@@ -1335,7 +1335,7 @@ const Deposit = () => {
                             {t(`40`)}
                           </CommonButton>
 
-                          {/* <CommonButton
+                          <CommonButton
                             key="1"
                             kindOf={`blue`}
                             width={`180px`}
@@ -1345,7 +1345,7 @@ const Deposit = () => {
                             onClick={() => setCurrentTab(1)}
                           >
                             {t(`30`)}
-                          </CommonButton> */}
+                          </CommonButton>
                         </Wrapper>,
                       ]}
                     />

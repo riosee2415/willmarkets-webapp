@@ -100,6 +100,8 @@ const AppFooter = () => {
             {t(`4`)}
             <br />
             {t(`5`)}
+            <br />
+            {t(`11`)}
           </Wrapper>
 
           <Wrapper

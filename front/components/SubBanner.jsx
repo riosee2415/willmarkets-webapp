@@ -40,7 +40,7 @@ const SubBanner = () => {
     },
     {
       menuName: t(`9`),
-      menuLink: "/trading/forex",
+      menuLink: "/trading/ecn",
       subMenu: [
         // {
         //   subMenuName: "Forex",

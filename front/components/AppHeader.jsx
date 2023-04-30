@@ -426,11 +426,11 @@ const AppHeader = ({ children }) => {
                     onMouseOut={() => setToggleMenu02(false)}
                     onClick={() => setToggleMenu02(false)}
                   >
-                    <MenuListItemWrapper
+                    {/* <MenuListItemWrapper
                       onClick={() => moveLinkHandler(`/trading/forex`)}
                     >
                       Forex
-                    </MenuListItemWrapper>
+                    </MenuListItemWrapper> */}
                     <MenuListItemWrapper
                       onClick={() => moveLinkHandler(`/trading/ecn`)}
                     >
@@ -763,7 +763,7 @@ const AppHeader = ({ children }) => {
               </Wrapper>
               {MobileSubMenu2 && (
                 <Wrapper al={`flex-start`} cursor={`pointer`}>
-                  <Wrapper
+                  {/* <Wrapper
                     padding={`5px 0 2px`}
                     width={`auto`}
                     fontSize={`13px`}
@@ -773,7 +773,7 @@ const AppHeader = ({ children }) => {
                     }}
                   >
                     • Forex
-                  </Wrapper>
+                  </Wrapper> */}
                   <Wrapper
                     width={`auto`}
                     padding={`2px`}

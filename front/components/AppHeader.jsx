@@ -417,7 +417,7 @@ const AppHeader = ({ children }) => {
                   }}
                 >
                   <MenuTextWrapper
-                    onClick={() => moveLinkHandler(`/trading/forex`)}
+                    onClick={() => moveLinkHandler(`/trading/ecn`)}
                   >
                     {t(`9`)}
                   </MenuTextWrapper>
